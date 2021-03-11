@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './HeaderComponent';
 
-function CostumerProducts({ text }) {
+function CostumerProducts() {
   return(
     <>
       <Header text="TryBeer"/>
