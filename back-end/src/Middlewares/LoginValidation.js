@@ -6,15 +6,19 @@ const validateEmail = (email) => {
   return mailRegex.test(email);
 };
 
-const LoginValidation = async (req, res, next) => {
+const validateEmailAndPassword = async (req, res) => {
   const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(STATUS_UNAUTHORIZED).json({ message: 'All fields must be filled' });
+  }
+  if (!validateEmail(email) || password.length < 6) {
+    return res.status(STATUS_UNAUTHORIZED).json({ message: 'Incorrect username or password' });
+  }
+};
+
+const LoginValidation = async (req, res, next) => {
   try {
-    if (!email || !password) {
-      return res.status(STATUS_UNAUTHORIZED).json({ message: 'All fields must be filled' });
-    }
-    if (!validateEmail(email) || password.length < 6) {
-      return res.status(STATUS_UNAUTHORIZED).json({ message: 'Incorrect username or password' });
-    }
+    validateEmailAndPassword(req, res);
   } catch (err) {
     return res.status(STATUS_INTERNAL_SERVER_ERROR).json({ err: 'Server Internal Error' });
   }
