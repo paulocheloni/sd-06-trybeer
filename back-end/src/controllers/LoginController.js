@@ -7,12 +7,13 @@ const LoginService = require('../services/LoginService');
 
 // middleware imports
 
-const LoginUsers = async (_req, res) => {
-  const resp = await LoginService();
+const LoginUsers = async (req, res) => {
+  const { email, password } = req.body;
+  const resp = await LoginService(email, password);
 
-  return res.status(resp.status).json(resp.retorno);
+  return res.status(resp.status).json(resp.message);
 };
 
-LoginRouter.get('/', LoginUsers);
+LoginRouter.post('/', LoginUsers);
 
 module.exports = LoginRouter;
