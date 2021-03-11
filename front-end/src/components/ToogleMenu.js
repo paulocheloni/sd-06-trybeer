@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 class ToogleMenu extends React.Component {
@@ -20,8 +21,6 @@ class ToogleMenu extends React.Component {
     } else {
       toogleMenuContainer.style.height = '';
     }
-    // document.querySelector('.tooglemenu-container ').style.height = '100%';
-    // document.querySelector('.buttons-div').style.display = 'flex';
   }
 
   render() {
@@ -32,13 +31,32 @@ class ToogleMenu extends React.Component {
           <i className="fas fa-bars" />
         </button>
         <div className="buttons-div">
-          <button type="button" onClick={ () => history.push('./products') }>Produtos</button>
-          <button type="button" onClick={ () => history.push('./orders') }>Meus Pedidos</button>
-          <button type="button" onClick={ () => history.push('./profile') }>Meu Perfil</button>
+          <button
+            type="button"
+            onClick={ () => history.push('./products') }
+          >
+            Produtos
+          </button>
+          <button
+            type="button"
+            onClick={ () => history.push('./orders') }
+          >
+            Meus Pedidos
+          </button>
+          <button
+            type="button"
+            onClick={ () => history.push('./profile') }
+          >
+            Meu Perfil
+          </button>
         </div>
       </div>
     );
   }
 }
+
+ToogleMenu.propTypes = {
+  history: PropTypes.shape().isRequired,
+};
 
 export default connect(null, null)(ToogleMenu);

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Header } from '../components';
@@ -12,11 +13,15 @@ class Orders extends React.Component {
     const { history } = this.props;
     return (
       <div>
-          <Header history={ history } />
+        <Header history={ history } />
         <p>Orders</p>
       </div>
     );
   }
 }
+
+Orders.propTypes = {
+  history: PropTypes.shape().isRequired,
+};
 
 export default connect(null, null)(Orders);

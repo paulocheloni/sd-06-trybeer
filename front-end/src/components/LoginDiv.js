@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { validEmail, validPassword } from '../actions';
 
@@ -30,20 +31,37 @@ class LoginDiv extends React.Component {
   }
 
   render() {
-    const { validEmail, validPassword, history } = this.props;
+    const { validRegEmail, validRegPassword, history } = this.props;
     return (
       <div className="login-container">
         <div className="input-div">
           <span>Email</span>
-          <input name="email" onChange={ this.handleChange } placeholder="Digite seu Email" />
+          <input
+            name="email"
+            onChange={ this.handleChange }
+            placeholder="Digite seu Email"
+          />
           <span>Senha</span>
-          <input name="password" type="password" placeholder="Digite sua Senha" onChange={ this.handleChange } />
+          <input
+            name="password"
+            type="password"
+            placeholder="Digite sua Senha"
+            onChange={ this.handleChange }
+          />
         </div>
         <div className="button-div">
-          <button type="button" className="btn-login" disabled={ !validEmail || !validPassword }>
+          <button
+            type="button"
+            className="btn-login"
+            disabled={ !validRegEmail || !validRegPassword }
+          >
             ENTRAR
           </button>
-          <button type="button" className="btn-create" onClick={ () => history.push('/register')}>
+          <button
+            type="button"
+            className="btn-create"
+            onClick={ () => history.push('/register') }
+          >
             Ainda não tenho conta
           </button>
         </div>
@@ -52,13 +70,21 @@ class LoginDiv extends React.Component {
   }
 }
 const mapStateToProps = (state) => ({
-  validEmail: state.login.email,
-  validPassword: state.login.password,
+  validRegEmail: state.login.email,
+  validRegPassword: state.login.password,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchEmail: (boolean) => dispatch(validEmail(boolean)),
   dispatchPassword: (boolean) => dispatch(validPassword(boolean)),
 });
+
+LoginDiv.propTypes = {
+  history: PropTypes.shape().isRequired,
+  validRegEmail: PropTypes.bool.isRequired,
+  validRegPassword: PropTypes.bool.isRequired,
+  dispatchEmail: PropTypes.func.isRequired,
+  dispatchPassword: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginDiv);

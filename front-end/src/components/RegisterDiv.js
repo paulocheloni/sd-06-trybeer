@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { validNameReg, validEmailReg, validPassReg } from '../actions';
 
@@ -42,7 +43,7 @@ class RegisterDiv extends React.Component {
   }
 
   render() {
-    const { validRegName, validRegEmail, validRegPass } = this.props;
+    const { validRegName, validRegEmail, validRegPass, history } = this.props;
     return (
       <div className="register-container">
         <div className="register-form">
@@ -51,13 +52,24 @@ class RegisterDiv extends React.Component {
           <span>Email</span>
           <input className="input" name="email" onChange={ this.handleChange } />
           <span>Senha</span>
-          <input className="input" name="password" type="password" onChange={ this.handleChange } />
+          <input
+            className="input"
+            name="password"
+            type="password"
+            onChange={ this.handleChange }
+          />
           <label htmlFor="sell-checkbox">
             <input type="checkbox" id="sell-checkbox" />
             <span>Quero Vender</span>
           </label>
         </div>
-        <button type="button" disabled={ !validRegName || !validRegEmail || !validRegPass }>CADASTRAR</button>
+        <button
+          type="button"
+          disabled={ !validRegName || !validRegEmail || !validRegPass }
+          onClick={ () => history.push('./') }
+        >
+          CADASTRAR
+        </button>
       </div>
     );
   }
@@ -74,5 +86,15 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchRegEmail: (boolean) => dispatch(validEmailReg(boolean)),
   dispatchRegPass: (boolean) => dispatch(validPassReg(boolean)),
 });
+
+RegisterDiv.propTypes = {
+  history: PropTypes.shape().isRequired,
+  validRegEmail: PropTypes.bool.isRequired,
+  validRegName: PropTypes.bool.isRequired,
+  validRegPass: PropTypes.bool.isRequired,
+  dispatchRegName: PropTypes.func.isRequired,
+  dispatchRegPass: PropTypes.func.isRequired,
+  dispatchRegEmail: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterDiv);

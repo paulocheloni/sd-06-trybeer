@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { RegisterDiv } from '../components';
 
@@ -14,5 +15,9 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.shape().isRequired,
+};
 
 export default Login;
