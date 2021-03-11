@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Login() {
@@ -7,16 +7,21 @@ function Login() {
 
   const handleChange = ({ target }) => {
     setUser({...user, [target.name]: target.value});
-    console.log(user.password);
-    if (user.password && user.password.lenght > 6) {
+    console.log(user.password);   
+  };
+
+  useEffect(() => {
+ console.log('nada');
+     if (user.password) {
       console.log('ola');
       isValid();
     }
-  };
+  }, []);
+
 
   const isValid = () => {
     const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
-    const email = emailRegex(user.email);
+    const email = emailRegex.test(user.email);
     const senha = user.password;
     const six = 6
     if(email && senha.length > 5) {
@@ -56,12 +61,12 @@ function Login() {
         data-testid="signin-btn"
         disabled={valid}
         onClick={handleClick}
-      >Entar
+      >ENTRAR
       </button>
       <button
         type="button"
         data-testid="no-account-btn"
-      >Ainda nao tenho conta
+      >Ainda não tenho conta
       </button>
     </div>
   )
