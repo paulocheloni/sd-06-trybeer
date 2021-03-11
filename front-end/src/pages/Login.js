@@ -29,6 +29,7 @@ function Login() {
     <div>
       <form>
         <div>
+          Login
           <input
             id="email-input"
             placeholder="email"
