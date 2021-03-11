@@ -15,6 +15,13 @@ const getAll = async () => {
   return users;
 };
 
+const getUserByEmail = async (email) => {
+  const [users] = await connection.execute('SELECT * FROM Trybeer.users WHERE email=?', [email]);
+
+  return users;
+};
+
 module.exports = {
   getAll,
+  getUserByEmail,
 };
