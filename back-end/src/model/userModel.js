@@ -10,10 +10,10 @@ const getAll = async () => {
   //   return err;
   // } 
 
-  const [ users ] = await connection.execute('SELECT * FROM Trybeer.users');
+  const [users] = await connection.execute('SELECT * FROM Trybeer.users');
 
   return users;
-}
+};
 
 module.exports = {
   getAll,

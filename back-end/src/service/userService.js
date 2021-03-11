@@ -5,7 +5,7 @@ const getAll = async () => {
 
   console.log(result);
   return result;
-}
+};
 
 module.exports = {
   getAll,
