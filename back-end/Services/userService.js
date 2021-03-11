@@ -11,6 +11,6 @@ const loginUser = async (req, res) => {
   const token = jwt.sign({ user }, secret);
   user.token = token;
   return res.status(200).json({ user });
-}
+};
 
 module.exports = { loginUser };

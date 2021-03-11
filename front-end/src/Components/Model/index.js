@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './style';
 
-const model = () => {
+function model() {
   return (
     <S.Container>
       <S.ContainerLeft>
@@ -11,7 +11,7 @@ const model = () => {
         <h1>Container Direita</h1>
       </S.ContainerRight>
     </S.Container>
-  ); 
-}
+  );
+};
 
 export default model;
