@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const UserService = require('../Services/userService');
 
 const UserRouter = new Router();
 

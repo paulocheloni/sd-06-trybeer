@@ -12,6 +12,6 @@ function model() {
       </S.ContainerRight>
     </S.Container>
   );
-};
+}
 
 export default model;
