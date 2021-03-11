@@ -1,0 +1,1 @@
+const RegisterModel = require('../model');
