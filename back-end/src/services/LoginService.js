@@ -3,7 +3,6 @@ const Login = require('../models/Login');
 const SUCESS = 200;
 
 const loginUsers = async () => {
-
   const allUser = await Login.getAllUser();
 
   return {

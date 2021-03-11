@@ -13,7 +13,6 @@ app.use(express.json());
 app.use('/login', rescue(LoginController));
 
 
-
 app.use((error, req, res, _next) => {
   console.log({ error });
   return res.status(ERROR).json({ message: 'Erro Interno!' });
