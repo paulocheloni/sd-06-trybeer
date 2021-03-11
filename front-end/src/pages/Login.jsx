@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import login from '../methods/login';
+import Button from '../components/Button';
+import Input from '../components/Input';
 
 function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  console.log('oi dentro de login');
   return (
     <main>
-      <forms>
-        <label htmlFor="email" className="email-label">
-          email
-          <input 
-          type="email"
-           name="email" data-testid="email-input" className="email-input"/>
-        </label>
-        <label htmlFor="password" className="password">password</label>
-          <input type="password" name="password" data-testid="password-input" className="password-input"/>
-      </forms>
+      <form>
+        <Input type="email" setValue={ setEmail } value={ email } />
+        <Input type="password" setValue={ setPassword } value={ password } />
+        <Button
+          className="loginButton"
+          onClick={ () => login(email, password) }
+        >
+          Entrar
+        </Button>
+        <Button
+          className="semConta"
+          onClick={ () => console.log('faz alguma coisa com isso') }
+        >
+          Ainda não tenho conta
+        </Button>
+      </form>
     </main>
-  )
+  );
 }
 
-export default Login
+export default Login;
