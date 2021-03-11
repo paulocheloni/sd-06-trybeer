@@ -13,6 +13,4 @@ const loginUser = async (req, res) => {
   return res.status(200).json({ user });
 }
 
-const verifyJWT = 
-
 module.exports = { loginUser };
