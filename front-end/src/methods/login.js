@@ -1,6 +1,6 @@
 const urlLogin = 'localhost:3001/login';
 
-function login(email, password) {
+function login({ email, password }) {
   fetch(urlLogin, {
     method: 'POST',
     headers: {
