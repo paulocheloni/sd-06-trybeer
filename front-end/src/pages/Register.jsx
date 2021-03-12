@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import { setConstantValue } from 'typescript';
 import useInput from '../hooks/useInput';
-// import { nameValidation } from '../utils/validations';
+import { nameValidation, passwordValidation, emailValidation } from '../utils/validations';
 
 export default function Register() {
   const [email, setEmail] = useInput('');
@@ -67,6 +67,7 @@ export default function Register() {
           id="signup"
           data-testid="signup-btn"
           type="button"
+          disabled={ !(emailValidation(email) && passwordValidation(password) && nameValidation(name)) }
         >
           Cadastrar
         </button>
