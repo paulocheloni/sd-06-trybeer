@@ -65,7 +65,7 @@ export default function Login() {
         disabled={ !(isEmailValid && isPasswordValid) }
         onClick={ handleClick }
       >
-        <span>ENTRAR</span>
+      ENTRAR
       </button>
       <button
         className="cadastrar"
@@ -73,7 +73,7 @@ export default function Login() {
         data-testid="no-account-btn"
         onClick={ handleNoCount }
       >
-        <span>Ainda não tenho conta!</span>
+      Ainda não tenho conta!
       </button>
     </div>
   );
