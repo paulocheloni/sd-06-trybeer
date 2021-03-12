@@ -18,7 +18,9 @@ const findUserByEmail = async (email) => {
 
 const registerUser = async (user) => {
   const { name, email, password, role } = user;
-  const register = await connection.execute('INSERT INTO Trybeer.users (name, email, password, role) VALUES (?, ?, ?, ?)', [name, email, password, role]);
+  const register = await connection
+    .execute('INSERT INTO Trybeer.users (name, email, password, role) VALUES (?, ?, ?, ?)',
+      [name, email, password, role]);
   return register;
 };
 
