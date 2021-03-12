@@ -24,18 +24,29 @@ export default function Login() {
   };
   return (
     <div>
-      <h1>Página Login</h1>
       <form>
         <fieldset>
-          <label>
+          <label htmlFor="email-input">
             Email
-            <input value={ email } onChange={ setEmail } data-testid="email-input" type="text" />
+            <input
+              id="email-input"
+              value={ email }
+              onChange={ setEmail }
+              data-testid="email-input"
+              type="text"
+            />
           </label>
         </fieldset>
         <fieldset>
-          <label>
+          <label htmlFor="password-input">
             Senha
-            <input value={ password } onChange={ setPassword } data-testid="password-input" type="password" />
+            <input
+              id="password-input"
+              value={ password }
+              onChange={ setPassword }
+              data-testid="password-input"
+              type="password"
+            />
           </label>
         </fieldset>
         <button
@@ -45,6 +56,7 @@ export default function Login() {
           } }
           disabled={ !(isEmailValid && isPasswordValid) }
           data-testid="signin-btn"
+          type="button"
         >
           ENTRAR
         </button>
