@@ -1,4 +1,5 @@
 const userModel = require('../model/User');
+const { NOT_FOUND } = require('../schema/statusSchema');
 
 // Return all Users
 const getAll = async () => {
@@ -18,19 +19,28 @@ const verifyUser = async (email, password) => {
   return user;
 };
 
-// // Update Users
-// const update = async (id, name, quantity) => {
-//   const validationMessage = await validateuserModel('update', name, quantity);
-//   if (validationMessage === 'OK' && validateId(id)) {
-//     const result = await userModel.update(id, name, quantity);
-//     return { status: 'OK', result };
-//   }
-//   return { status: 'NOK', result: validationMessage };
-// };
+// Update name
+const update = async (id, name) => {
+  const user = await userModel.updateName(id, name);
+  return user;
+};
+
+// Verify id
+const verifyId = async (req, res, next) => {
+  const { id } = req.params;
+  const exist = await userModel.findById(id);
+
+  if (!exist) {
+    res.status(NOT_FOUND).json({ message: 'incorreted id' });
+  }
+
+  next();
+};
 
 module.exports = {
   getAll,
   createNewUser,
   verifyUser,
-  // update,
+  update,
+  verifyId,
 };
