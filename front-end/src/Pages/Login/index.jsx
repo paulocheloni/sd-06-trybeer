@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router';
 import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 import AppContext from '../../context/AppContext';
 
 const Login = () => {
+  const history = useHistory();
   const { email, setEmail, validForm, password, setPassword } = useContext(AppContext);
   return (
     <div>
@@ -25,6 +27,12 @@ const Login = () => {
         data-testid="signin-btn"
         onClick={ () => console.log('funcionando') }
       />
+      <Button
+        data-testid="no-account-btn"
+        onClick={ () => history.push('/register') }
+      >
+        Ainda não tenho conta
+      </Button>
     </div>
   );
 };
