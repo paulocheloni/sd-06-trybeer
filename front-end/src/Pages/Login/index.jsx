@@ -44,7 +44,6 @@ const form = ({ setEmail, setPassword, isDisabled, email, password }) => (
       Email
       <Input
         id="email"
-        placeholder="Email"
         width="400px"
         heigth="40px"
         fontSize="16px"
@@ -56,7 +55,6 @@ const form = ({ setEmail, setPassword, isDisabled, email, password }) => (
     Senha
       <Input
         id="senha"
-        placeholder="Senha"
         width="400px"
         heigth="40px"
         fontSize="16px"

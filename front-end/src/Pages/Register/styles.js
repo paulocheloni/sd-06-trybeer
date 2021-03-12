@@ -37,7 +37,7 @@ const Container = styled.div`
       font-weight: 500;
 
       > input {
-        width: 20px;
+        width: 50px;
         height: 20px;
 
         font-size: 16px;
