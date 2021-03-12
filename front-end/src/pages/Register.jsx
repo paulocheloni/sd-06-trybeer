@@ -1,46 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-
-const inputs = (nome, email, senha, tipo, change) => {
-  return (
-    <div>
-      <label>Nome
-      <input type="text" name="nome" value={ nome } minLength="12" onChange={ change } data-testid="signup-name" />
-      </label><br/>
-      <label>Email
-      <input type="email" name="email" value={ email } onChange={ change } data-testid="signup-email" />
-      </label><br/>
-      <label>Senha
-      <input type="password" name="senha" minLength="6" value={ senha } onChange={ change } data-testid="signup-password" />
-      </label><br/>
-      <input type="checkbox" name="tipo" value="admin" onChange={ change } data-testid="signup-seller" />
-      <label>Quero vender</label>
-    </div>
-  );
-};
+import RegisterContext from '../context/RegisterContext';
+import FormRegister from '../components/pageRegister/FormRegister';
 
 function Register({ history }) {
-  const [ newUser, setNewUser ] = useState({ nome: '', email: '', senha: '', tipo: '' })
+  const [newUser, setUser] = useState({ name: '', email: '', senha: '', tipo: 'client' });
+  const [valid, setValid] = useState('true');
+  useEffect(() => {
+    const isValid = () => {
+      const regexEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(newUser.email);
+      const validNome = /^[a-záàâãéèêíïóôõöúçñ ]+$/i.test(newUser.name);
+      const six = 6;
+      const doze = 12;
+      const tam = newUser.name.length >= doze;
+      if (validNome && regexEmail && newUser.senha.length >= six && tam) {
+        setValid(false);
+      } else {
+        setValid(true);
+      }
+    };
+    isValid();
+  }, [newUser.senha, newUser.name, newUser.email]);
 
   const handleChange = ({ target }) => {
-    return setNewUser({ [target.name]: target.value })
+    setUser({ ...newUser, [target.name]: target.value });
   };
 
   const handleClick = (e) => {
     e.preventDefault();
-    localStorage.setItem('newUser', JSON.stringify(newUser));
-    if(newUser.tipo === 'admin') {
-      return history.push('/admin/oders')
+    if (newUser.tipo === 'admin') {
+      history.push('/admin/oders');
     } else {
-      return history.push('/products')
+      history.push('/products');
     }
-  }
+    localStorage.setItem('newUser', JSON.stringify(newUser));
+  };
 
   return (
-    <div>
-      { inputs(newUser.nome, newUser.email, newUser.senha, newUser.tipo ? 'admin' : 'client', handleChange) }
-      <button type="submit" data-testid="signup-btn" onClick={ handleClick }>Cadastrar</button>
-    </div>
+    <RegisterContext.Provider
+      value={ {
+        change: handleChange,
+        click: handleClick,
+        user: newUser,
+        isValid: valid,
+        setNewUser,
+      } }
+    >
+      <FormRegister />
+    </RegisterContext.Provider>
   );
 }
 

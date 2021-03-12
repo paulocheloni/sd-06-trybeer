@@ -38,7 +38,7 @@ function Login({ history }) {
       value={ {
         dataUser: user,
         isDisabled: valid,
-        hadleIputs: handleChange,
+        handleIputs: handleChange,
         handleButton: handleClick,
         router: history,
       } }

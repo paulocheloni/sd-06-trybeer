@@ -6,7 +6,7 @@ import ButtonsForm from './ButtonsForm';
 function FormLogin() {
   const {
     dataUser: user,
-    hadleIputs: handleChange,
+    handleIputs: handleChange,
     handleButton: handleClick,
     isDisabled: valid,
     router: history,
