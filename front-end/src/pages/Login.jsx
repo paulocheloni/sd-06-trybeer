@@ -3,11 +3,14 @@ import history from '../services/history';
 import './Login.css';
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
 
   const handleChangeEmail = (event) => {
     const { value } = event.target;
+    setEmail(value);
     const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
     if (regex.test(value)) {
       setIsEmailValid(true);
@@ -18,6 +21,7 @@ export default function Login() {
 
   const handleChangePassword = (event) => {
     const { value } = event.target;
+    setPassword(value);
     const passwordLength = 6;
 
     if (value.length >= passwordLength) {
@@ -27,8 +31,21 @@ export default function Login() {
     }
   };
 
-  const handleClick = () => {
-    history.push('/products');
+  const handleClick = async () => {
+    const response = await fetch('http://localhost:3001/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((res) => res.json());
+    localStorage.setItem('token', JSON.stringify(response.token));
+    if (response.user.role === 'client') {
+      history.push('/products');
+    } else {
+      history.push('/admin/orders');
+    }
   };
 
   const handleNoCount = () => {
@@ -37,8 +54,9 @@ export default function Login() {
 
   return (
     <div className="login">
+      <h1>Login</h1>
       <label htmlFor="email">
-        <h1>Login</h1>
+        Email
         <input
           className="user"
           placeholder="E-mail"
@@ -49,6 +67,7 @@ export default function Login() {
         />
       </label>
       <label htmlFor="password">
+        Senha
         <input
           className="boxsign"
           placeholder="Senha"
