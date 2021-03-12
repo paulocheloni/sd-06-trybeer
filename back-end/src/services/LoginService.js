@@ -12,12 +12,12 @@ const loginUsers = async (email, password) => {
   if(!user[0] || user[0].password !== password) return { status: unauthorized, dadosInvalidos };
 
   const {
-     password: passwordDB, ...userWithoutPassword 
+     password: passwordDB, id, ...userWithoutPassword 
   } = user[0];
 
   const token = createToken(userWithoutPassword);
 
-  return { status: sucess, message: { token: token } };
+  return { status: sucess, message: { token, ...userWithoutPassword } };
 };
 
 module.exports = loginUsers;
