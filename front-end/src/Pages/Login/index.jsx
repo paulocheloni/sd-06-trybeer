@@ -15,9 +15,8 @@ const Login = () => {
     localStorage.setItem('token', JSON.stringify(data.userLogin.token));
     if (data.userLogin.role === 'client') {
       return history.push('/products');
-    } 
-    history.push('/admin/orders');
-    
+    };
+    return history.push('/admin/orders');
   };
   return (
     <div>
