@@ -1,0 +1,15 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+require('dotenv/config');
+
+const routes = require('./src/routes/main.routes');
+
+const app = express();
+
+const PORT = process.env.PORT || 3001;
+
+app.use(bodyParser.json());
+
+app.use(routes);
+
+app.listen(PORT, () => console.log(`On na port ${PORT}`));
