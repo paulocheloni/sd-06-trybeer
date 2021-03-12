@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import history from '../services/history';
+import './Login.css';
 
 export default function Login() {
   const [isEmailValid, setIsEmailValid] = useState(false);
@@ -37,8 +38,10 @@ export default function Login() {
   return (
     <div className="login">
       <label htmlFor="email">
-        Email
+        <h1>Login</h1>
         <input
+          className="user"
+          placeholder="E-mail"
           type="email"
           id="email"
           data-testid="email-input"
@@ -46,8 +49,9 @@ export default function Login() {
         />
       </label>
       <label htmlFor="password">
-        Senha
         <input
+          className="boxsign"
+          placeholder="Senha"
           type="password"
           id="password"
           data-testid="password-input"
@@ -55,19 +59,21 @@ export default function Login() {
         />
       </label>
       <button
+        className="go"
         type="button"
         data-testid="signin-btn"
         disabled={ !(isEmailValid && isPasswordValid) }
         onClick={ handleClick }
       >
-        ENTRAR
+        <span>ENTRAR</span>
       </button>
       <button
+        className="cadastrar"
         type="button"
         data-testid="no-account-btn"
         onClick={ handleNoCount }
       >
-        Ainda não tenho conta
+        <span>Ainda não tenho conta!</span>
       </button>
     </div>
   );
