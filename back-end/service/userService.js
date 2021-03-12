@@ -7,4 +7,4 @@ const userLogin = async (userEmail, userPassword) => {
 
 module.exports = {
   userLogin,
-}
+};

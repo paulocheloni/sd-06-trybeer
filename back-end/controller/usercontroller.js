@@ -6,10 +6,10 @@ const User = require('../service/userService');
 const userController = Router();
 
 userController.post('/', async (req, res) => {
-  const body = req.body;
-  console.log('body', body);
-  const token = await createToken(body);
-  const role = await User.userLogin(body.email, body.password);
+  const { email, password } = req.body;
+  const payload = { email, password };
+  const token = await createToken(payload);
+  const role = await User.userLogin(email, password);
   res.status(200).json({ userLogin: { role, token } });
 });
 

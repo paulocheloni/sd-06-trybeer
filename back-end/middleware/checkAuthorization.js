@@ -7,7 +7,7 @@ const checkAuthorization = (req, res, next) => {
   if (!token) return res.status(unauthorized).json({ message: 'missing auth token' });
   if (!payload) return res.status(unauthorized).json({ message: 'jwt malformed' });
   req.payload = payload;
-  next()
+  next();
 };
 
 module.exports = {
