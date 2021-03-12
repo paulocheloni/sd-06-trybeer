@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from './api';
 
 export const userValidation = (user, setUser, setEnableButton) => {
   const regexValidation = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{3,6}$/;
@@ -17,10 +17,8 @@ export const userValidation = (user, setUser, setEnableButton) => {
   }
 };
 
-export const handleAxios = (user) => {
-  axios({
-    method: 'POST',
-    url: 'http://localhost:3001/login',
-    data: { user },
-  });
+export const handleAxios = async (user) => {
+  const response = await api.post("login", user)
+
+  console.log(response);
 };
