@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const jwt = require('jsonwebtoken');
 
 const loginServices = require('../services/loginServices');
 
