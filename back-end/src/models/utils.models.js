@@ -8,4 +8,4 @@ const getAll = async (table) => {
 
 module.exports = {
   getAll,
-}
+};
