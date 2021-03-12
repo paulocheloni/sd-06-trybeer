@@ -1,33 +1,33 @@
 const connection = require('./connection');
 
-const getUsers = (userData) => {
-  const { id, name, email, password, role } = userData;
+// const getUsers = (userData) => {
+//   const { id, name, email, password, role } = userData;
 
-  return {
-    id,
-    name,
-    email,
-    password,
-    role
-  }
-}
+//   return {
+//     id,
+//     name,
+//     email,
+//     password,
+//     role,
+//   };
+// };
 
 const getAllUsers = async () => {
   const [users] = await connection.execute(
-    'SELECT * FROM Trybeer.users'
-  )
+    'SELECT * FROM Trybeer.users',
+  );
   return users;
-}
+};
 
 const findUserByEmail = async (userEmail) => {
   const [[user]] = await connection.execute(
-    'SELECT * FROM Trybeer.users WHERE email=?', [userEmail]
+    'SELECT * FROM Trybeer.users WHERE email=?', [userEmail],
   );
     // console.log(user);
     return user;
-}
+};
 
 module.exports = {
   getAllUsers,
-  findUserByEmail
-}
+  findUserByEmail,
+};
