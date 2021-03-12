@@ -8,13 +8,6 @@ const config = {
   database: 'Trybeer',
 };
 
-// const config = {
-//   user: "root",
-//   password: 1234,
-//   host: "localhost,
-//   database: 'Trybeer'
-// };
- 
 const connection = mysql.createPool(config);
 
 module.exports = connection;
