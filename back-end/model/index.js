@@ -1,7 +1,7 @@
 const RegisterModel = require('./RegisterModel');
-// const ClientModel = require('./ClientModel');
+const UserModel = require('./UserModel');
 
 module.exports = {
   RegisterModel,
-  // ClientModel,
+  UserModel,
 };

@@ -1,15 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const { RegisterRoute, LoginRoute } = require('./routes');
+const { error } = require('./middleware');
+
 const app = express();
-const { RegisterRoute } = require('./routes');
 
 app.use(bodyParser.json());
 
-app.use('/login', (req, res) => {
-  res.status(200).json('oi');
-});
+app.use('/login', LoginRoute);
 
 app.use('/register', RegisterRoute);
+
+app.use(error);
 
 module.exports = app;
