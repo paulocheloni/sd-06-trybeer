@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import Input from '../../Components/Input';
+import Button from '../../Components/Button';
 import AppContext from '../../context/AppContext';
 
 const Login = () => {
@@ -19,13 +20,11 @@ const Login = () => {
         name="Senha"
         data-testid="password-input"
       />
-      <button
-        type="button"
+      <Button
         disabled={ !validForm }
         data-testid="signin-btn"
-      >
-        Teste
-      </button>
+        onClick={ () => console.log('funcionando') }
+      />
     </div>
   );
 };
