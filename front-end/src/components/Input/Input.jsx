@@ -7,11 +7,11 @@ import React from 'react'
  * @param {string} testId 
  * @see www.gmail.com
  */
-const Input = ({ title, type, testId, onChange, value }) => {
+const Input = ({ title, type, testId, onChange, value, placeholder }) => {
   return (
       <label htmlFor=''>
         {title}
-        <input type={type} data-testid={testId} onChange={(e) => onChange(title, e.target.value)} value={value} />
+        <input type={type} data-testid={testId} onChange={(e) => onChange(title, e.target.value)} value={value} placeholder={placeholder} />
       </label>
   )
 }

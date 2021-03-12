@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 
+import './Login.css';
+
 import Input from '../../components/Input/Input'
 import Button from '../../components/Button/Button'
 
@@ -50,10 +52,17 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <form>
-        <Input title="Email" type="text" testId="email-input" value={email} onChange={setField}/>
-        <Input title="Senha" type="password" testId="password-input" value={password} onChange={setField} userRole={userRole}/>
+    <div className="loginForm">
+      <form className="loginInput">
+        <Input
+          title="Email"
+          type="text"
+          testId="email-input"
+          value={email}
+          onChange={setField}         
+          placeholder="Informe o email do Usuário"
+        />
+        <Input title="Senha" type="password" testId="password-input" value={password} onChange={setField} userRole={userRole} placeholder="Informe a senha"/>
         <Button title="ENTRAR" testId="signin-btn" isDisabled={isDisabled} onClick={userRedirect}/>
         <Button title="Ainda não tenho conta" testId="no-account-btn" onClick={() => history.push('/register')}/>
       </form>
