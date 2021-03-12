@@ -2,11 +2,13 @@ const UNHANDLED_ERROR = 'Internal Error';
 const UNHANDLED_ERROR_STATUS = 500;
 
 const handleError = (err, _req, res, _next) => {
-  console.log(err.code);
-  if (!err.payload) {
-    res.status(UNHANDLED_ERROR_STATUS)
-      .json({ error: UNHANDLED_ERROR });
+  const { payload, status } = err;
+  console.log(err);
+  if (!payload) {
+    return res.status(UNHANDLED_ERROR_STATUS)
+       .json({ error: UNHANDLED_ERROR });
   }
+  return res.status(status).json(payload);
 };
 
 module.exports = {
