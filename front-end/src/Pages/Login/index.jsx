@@ -3,9 +3,17 @@ import { useHistory } from 'react-router';
 import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 import AppContext from '../../context/AppContext';
+import axios from 'axios';
 
 const Login = () => {
   const history = useHistory();
+  const fetchApi = async () => {
+    const data = await axios.post('http://localhost:3001/login', { data: { "email": "tryber@trybe.com.br",
+    "password":"123456"  } });
+    console.log(data);
+    const response = data.data;
+    console.log(response);
+  }
   const { email, setEmail, validForm, password, setPassword } = useContext(AppContext);
   return (
     <div>
@@ -25,7 +33,7 @@ const Login = () => {
       <Button
         disabled={ !validForm }
         data-testid="signin-btn"
-        onClick={ () => console.log('funcionando') }
+        onClick={ () => fetchApi() }
       />
       <Button
         data-testid="no-account-btn"
