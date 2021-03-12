@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import BeersAppContext from './BeersAppContext';
 
 function Provider({ children }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [user, setUser] = useState({ email: '', password: '' });
+  const [valid, setValid] = useState(true);
 
   const contextValue = {
-    login: {
-      email,
-      setEmail,
-      password,
-      setPassword,
-    }
+    user,
+    setUser,
+    valid,
+    setValid,
   };
 
   return (

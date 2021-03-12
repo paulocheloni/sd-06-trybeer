@@ -1,23 +1,22 @@
 import React from 'react';
 import Header from '../components/HeaderComponent'
 
-function SideBar() {
+function SideBar({ text, id }) {
   return (
     <>
-      <Header text="TryBeer" data-testid="top-title"/>
-      <button 
+      <button
         type="button" 
         data-testid="side-menu-item-products"
       >
         Produtos
       </button>
-      <button 
+      <button
         type="button" 
         data-testid="side-menu-item-my-orders"
       >
         Meus pedidos
       </button>
-      <button 
+      <button
         type="button"
         data-testid="side-menu-item-my-profile"
       >

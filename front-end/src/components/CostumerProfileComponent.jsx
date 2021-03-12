@@ -5,7 +5,7 @@ function CostumerProfile() {
   
   return(
     <>
-      <Header text="Meu Perfil" /* data-testid="top-title" *//>
+      <Header text="Meu Perfil" id="top-title" />
       <p>Nome</p>
       <input 
         type="text"
