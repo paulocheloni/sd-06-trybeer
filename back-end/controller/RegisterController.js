@@ -5,7 +5,7 @@ const registerClient = async (req, res) => {
   
   await RegisterService.registerClient(name, email, password, role);
 
-  res.status(201).json('deu certo');
+  res.status(201).json({ message: 'deu certo' });
 };
 
 module.exports = {
