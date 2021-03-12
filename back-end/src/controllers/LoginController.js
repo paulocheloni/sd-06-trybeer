@@ -6,6 +6,7 @@ const LoginRouter = Router();
 const LoginService = require('../services/LoginService');
 
 // middleware imports
+const { validateLogin, loginValidationRules } = require('../middlewares/validateLogin');
 
 const LoginUsers = async (req, res) => {
   const { email, password } = req.body;
@@ -14,6 +15,6 @@ const LoginUsers = async (req, res) => {
   return res.status(status).json(message);
 };
 
-LoginRouter.post('/', LoginUsers);
+LoginRouter.post('/', loginValidationRules(), validateLogin, LoginUsers);
 
 module.exports = LoginRouter;
