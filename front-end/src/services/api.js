@@ -1,3 +1,11 @@
+export const registerUser = async (user) => fetch('http://localhost:3001/users/register', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(user),
+}).then((response) => response.json());
+
 export const getUserByEmail = async (email) => fetch('http://localhost:3001/users', {
   method: 'POST',
   headers: {

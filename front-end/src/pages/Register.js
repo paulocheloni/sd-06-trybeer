@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { getUserByEmail } from '../services/api';
+import { useHistory } from 'react-router-dom';
+import { getUserByEmail, registerUser } from '../services/api';
 
 function Register() {
   const [nome, setNome] = useState('');
@@ -7,6 +8,9 @@ function Register() {
   const [password, setPassword] = useState('');
   const [btnDisable, setBtnDisable] = useState(true);
   const [emailExist, setEmailExist] = useState(false);
+  const [check, setCheck] = useState(false);
+
+  const history = useHistory();
 
   const validateRegister = (userEmail, userPassword, userNome) => {
     const regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
@@ -29,9 +33,13 @@ function Register() {
   const handleRedirect = async () => {
     const userFound = await getUserByEmail(email);
     if (!userFound.message) {
-      setEmailExist(true);
+      return setEmailExist(true);
     }
-    console.log(userFound);
+    const roleStatus = check ? 'admin' : 'user';
+    const user = { name: nome, email, password, role: roleStatus };
+    registerUser(user);
+    if (roleStatus === 'user') return history.push('/products');
+    history.push('/admin/orders');
   };
 
   const handleChange = async (e) => {
@@ -40,6 +48,8 @@ function Register() {
       setEmail(e.target.value);
     } else if (e.target.type === 'password') {
       setPassword(e.target.value);
+    } else if (e.target.type === 'checkbox') {
+      setCheck(true);
     } else {
       setNome(e.target.value);
     }
@@ -81,6 +91,7 @@ function Register() {
             type="checkbox"
             data-testid="signup-seller"
             name="signup-seller"
+            id="checkbox"
             onChange={ handleChange }
           />
         </label>
