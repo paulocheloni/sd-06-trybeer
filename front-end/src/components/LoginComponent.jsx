@@ -1,15 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import BeersAppContext from '../context/BeersAppContext';
 // import history from '../service/history';
 import { saveState } from '../service/localStorage'
 
 function Login({ history }) {
-  const {
-    user,
-    setUser,
-    valid,
-    setValid,
-  } = useContext(BeersAppContext);
+  const [valid, setValid] = useState(true);
+  const [user, setUser] = useState({ email: '', password: '' });
 
   useEffect(()=> {
     const isValid = async () => {
