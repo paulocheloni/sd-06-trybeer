@@ -2,10 +2,14 @@ const express = require('express');
 const rescue = require('express-rescue');
 const cors = require('cors');
 
+// Componente de repostas https
+const { status, message } = require('./src/util/dataStatus')
+const { erro } = status
+const { erroInterno } = message
+
 const app = express();
 
 const PORT = 3001;
-const ERROR = 500;
 
 const LoginController = require('./src/controllers/LoginController');
 
@@ -16,7 +20,7 @@ app.use('/login', rescue(LoginController));
 
 app.use((error, req, res, _next) => {
   console.log({ error });
-  return res.status(ERROR).json({ message: 'Erro Interno!' });
+  return res.status(erro).json(erroInterno);
 });
 
 app.listen(PORT, () => console.log('Example app listening on port:', PORT));

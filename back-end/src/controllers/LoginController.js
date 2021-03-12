@@ -9,9 +9,9 @@ const LoginService = require('../services/LoginService');
 
 const LoginUsers = async (req, res) => {
   const { email, password } = req.body;
-  const resp = await LoginService(email, password);
+  const { status, message } = await LoginService(email, password);
 
-  return res.status(resp.status).json(resp.message);
+  return res.status(status).json(message);
 };
 
 LoginRouter.post('/', LoginUsers);
