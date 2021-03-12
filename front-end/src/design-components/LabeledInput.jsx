@@ -8,13 +8,12 @@ function LabeledInput({
   name,
   type,
   autoComplete,
-  placeholder,
   testId,
   onChange,
 }) {
   return (
     <div>
-      <label htmlFor={ id } className="sr-only">{ label }</label>
+      <label htmlFor={ id }>{ label }</label>
       <input
         value={ value }
         data-testid={ testId }
@@ -28,7 +27,6 @@ function LabeledInput({
           border-gray-300 placeholder-gray-500 text-gray-900 rounded-md
           focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
           focus:z-10 sm:text-sm"
-        placeholder={ placeholder }
       />
     </div>
   );
@@ -41,7 +39,6 @@ LabeledInput.propTypes = {
   name: PropTypes.string,
   type: PropTypes.string,
   autoComplete: PropTypes.string,
-  palceholder: PropTypes.string,
   testId: PropTypes.string,
   onChange: PropTypes.func,
 }.isRequired;

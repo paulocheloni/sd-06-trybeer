@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Button(props) {
-  const { children, testId, bgColor } = props;
+  const { children, testId, bgColor, isDisabled, onClick } = props;
   return (
     <button
-      type="submit"
+      disabled={ isDisabled }
+      type="button"
+      onClick={ onClick }
       data-testid={ testId }
       className={ `group relative w-full flex justify-center py-2 px-4 border
         border-transparent text-sm font-medium rounded-md text-white bg-${bgColor}
@@ -36,6 +38,9 @@ function Button(props) {
 Button.propTypes = {
   children: PropTypes.node,
   testId: PropTypes.string,
+  onClick: PropTypes.func,
+  bgColor: PropTypes.string,
+  isDisabled: PropTypes.bool,
 }.isRequired;
 
 export default Button;
