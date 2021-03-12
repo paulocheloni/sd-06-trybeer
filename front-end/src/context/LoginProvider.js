@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import TrybeerContext from './TrybeerContext.js';
 
 const LoginProvider = ({ children }) => {
-  const [email, setEmail] = useState(true);
-  const [password, setPassword] = useState('');
-  const providerValue = {
-    email, setEmail, password, setPassword,
-  };
+  const [user, setUser] = useState({ email: '', password: '' });
+
+  const providerValue = { user, setUser };
+
   return (
     <TrybeerContext.Provider value={ providerValue }>
       { children }
