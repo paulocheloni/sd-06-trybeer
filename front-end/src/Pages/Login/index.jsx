@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+
+import { registered } from '../../Services/seachApis';
+
 import Container from './styles';
 
 import Input from '../../Components/Input';
@@ -18,36 +21,81 @@ const Login = () => {
     }
   }, [email, password]);
 
+  const saveLocalStorage = (res) => {
+    localStorage.setItem('user', JSON.stringify(res));
+  };
+
+  // const logout = () => {
+  //   localStorage.removeItem('user');
+  // };
+
+  const userRegistered = () => {
+    window.location.href = '/register';
+  };
+
   const handleRedirect = () => {
-    alert('Funciona');
+    const userRole = localStorage.getItem('user');
+
+    const role = JSON.parse(userRole);
+
+    if (role.role === 'client') {
+      window.location.href = '/';
+    } else {
+      window.location.href = '/';
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const user = await registered(email, password);
+
+    saveLocalStorage(user);
+
+    handleRedirect();
   };
 
   return (
     <Container>
-      <form onSubmit={ handleRedirect }>
+      <form onSubmit={ handleSubmit }>
         <h1>Login</h1>
         <Input
           placeholder="Email"
           width="400px"
           heigth="40px"
+          fontSize="16px"
           onChange={ ({ target }) => setEmail(target.value) }
+          dataTestid="email-input"
         />
         <Input
           placeholder="Senha"
           width="400px"
           heigth="40px"
+          fontSize="16px"
           onChange={ ({ target }) => setPassword(target.value) }
+          dataTestid="password-input"
         />
         <Button
           type="submit"
           width="400px"
           heigth="40px"
-          color="greenyellow"
+          color="green"
+          fontSize="20px"
           disabled={ isDisabled }
+          dataTestid="signin-btn"
         >
           ENTRAR
         </Button>
-        <Button type="submit" width="400px" heigth="40px">Ainda não tenho conta</Button>
+        <Button
+          type="button"
+          width="400px"
+          heigth="40px"
+          fontSize="16px"
+          dataTestid="no-account-btn"
+          onClick={ userRegistered }
+        >
+          Ainda não tenho conta
+        </Button>
       </form>
     </Container>
   );

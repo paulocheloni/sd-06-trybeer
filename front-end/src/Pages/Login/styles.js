@@ -13,8 +13,8 @@ const Container = styled.div`
     width: 500px;
     height: 350px;
 
-    border: 1px solid black;
     border-radius: 5px;
+    box-shadow: 0 0 5px black;
 
     display: flex;
     flex-direction: column;

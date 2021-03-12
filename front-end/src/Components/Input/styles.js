@@ -1,10 +1,12 @@
 import styled, { css } from 'styled-components';
 
 const CompInput = styled.input`
-  ${({ width, heigth }) => css`
+  ${({ width, heigth, fontSize }) => css`
     width: ${width};
     height: ${heigth};
     margin-bottom: 20px; 
+
+    font-size: ${fontSize};
 
     padding-left: 10px;
 
