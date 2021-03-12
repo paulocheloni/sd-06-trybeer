@@ -9,10 +9,3 @@ module.exports = mysql.createPool({
   password: MYSQL_PASSWORD,
   database: 'Trybeer',
 });
-
-// module.exports = mysql.createPool({
-//   host: 'localhost',
-//   user: 'root',
-//   password: 'B@hrein8018',
-//   database: 'Trybeer',
-// });
