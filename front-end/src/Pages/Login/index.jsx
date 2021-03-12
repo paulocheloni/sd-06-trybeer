@@ -40,22 +40,28 @@ const userRegistered = () => {
 const form = ({ setEmail, setPassword, isDisabled, email, password }) => (
   <form onSubmit={ (e) => handleSubmit(e, email, password) }>
     <h1>Login</h1>
-    <label htmlFor="email-input">
+    <label htmlFor="email">
       Email
-      <input
-        id="email-input"
-        type="text"
+      <Input
+        id="email"
+        placeholder="Email"
+        width="400px"
+        heigth="40px"
+        fontSize="16px"
         onChange={ ({ target }) => setEmail(target.value) }
-        data-testid="email-input"
+        dataTestid="email-input"
       />
     </label>
-    <label htmlFor="password-input">
-      Senha
-      <input
-        id="password-input"
-        type="text"
+    <label htmlFor="senha">
+    Senha
+      <Input
+        id="senha"
+        placeholder="Senha"
+        width="400px"
+        heigth="40px"
+        fontSize="16px"
         onChange={ ({ target }) => setPassword(target.value) }
-        data-testid="password-input"
+        dataTestid="password-input"
       />
     </label>
     <Button
