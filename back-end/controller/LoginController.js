@@ -1,9 +1,11 @@
 const { Router } = require('express');
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 // const { validateUserLogin } = require('../middlewares/LoginMiddleware'); 
 
-// const secret = 'mySecretToken';
+const secret = 'senhaSuperSecreta.com';
+
+const userService = require('../service/UserService');
 // const jwtConfig = {
 //   expiresIn: '7d',
 //   algorithm: 'HS256',
@@ -17,12 +19,13 @@ LoginController.get('/', async (req, res) => {
 });
 
 // // Post Login
-// LoginController.post('/', validateUserLogin, (req, res) => {
-//   const { email, password } = req.body;
+LoginController.post('/', async (req, res) => {
+  const { email, password } = req.body;
+  const user = await userService.verifyUser(email, password);
+  const { role } = user[0];
+  const token = jwt.sign({ data: user }, secret);
 
-//   const token = jwt.sign({ data: { email, password } }, secret, jwtConfig);
-
-//   res.status(OK).json({ token });
-// });
+  res.status(OK).json({ token, role });
+});
 
 module.exports = LoginController;

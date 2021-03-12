@@ -12,11 +12,11 @@ const getAll = async () => {
 //   return user;
 // };
 
-// // Return Users by Email
-// const findByEmail = async (email) => {
-//   const user = await userModel.findByEmail(email);
-//   return user;
-// };
+// // Verify user by email and password
+const verifyUser = async (email, password) => {
+  const user = await userModel.verifyUser(email, password);
+  return user;
+};
 
 // Return Users by ID
 // const findById = async (id) => {
@@ -89,7 +89,7 @@ const getAll = async () => {
 module.exports = {
   getAll,
   // create,
-  // findByEmail,
+  verifyUser,
   // findById,
   // update,
   // remove,
