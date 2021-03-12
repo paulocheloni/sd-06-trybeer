@@ -13,4 +13,6 @@ app.use(cors());
 
 app.post('/login', UserService.loginUser);
 
+app.post('/register', UserService.validateEmail, UserService.registerNewUser);
+
 app.listen(PORT);

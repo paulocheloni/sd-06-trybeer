@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { registerUser } from '../../Services/Apis';
+import { registerNewUser } from '../../Services/Apis';
 
 import Container from './styles';
 
@@ -9,9 +9,9 @@ import Button from '../../Components/Button';
 
 const handleRedirect = (user) => {
   if (user.role === 'client') {
-    window.location.href = '/client';
+    window.location.href = '/products';
   } else {
-    window.location.href = '/admin';
+    window.location.href = '/admin/orders';
   }
 };
 
@@ -26,7 +26,9 @@ const handleSubmit = async (event, { name, email, password, isChecked }) => {
     role = 'client';
   }
 
-  const user = await registerUser(name, email, password, role);
+  await registerNewUser(name, email, password, role);
+
+  const user = { name, email, password, role };
 
   handleRedirect(user);
 };
@@ -39,31 +41,40 @@ const form = (params) => {
   return (
     <form onSubmit={ (e) => handleSubmit(e, paramsRegistered) }>
       <h1>Register</h1>
-      <Input
-        placeholder="Nome"
-        heigth="40px"
-        onChange={ ({ target }) => setName(target.value) }
-        dataTestid="signup-name"
-      />
-      <Input
-        placeholder="Email"
-        heigth="40px"
-        onChange={ ({ target }) => setEmail(target.value) }
-        dataTestid="signup-email"
-      />
-      <Input
-        placeholder="Senha"
-        heigth="40px"
-        onChange={ ({ target }) => setPassword(target.value) }
-        dataTestid="signup-password"
-      />
+      <label htmlFor="name-input">
+        Nome
+        <Input
+          id="name-input"
+          heigth="40px"
+          onChange={ ({ target }) => setName(target.value) }
+          dataTestid="signup-name"
+        />
+      </label>
+      <label htmlFor="email-input">
+        Email
+        <Input
+          id="email-input"
+          heigth="40px"
+          onChange={ ({ target }) => setEmail(target.value) }
+          dataTestid="signup-email"
+        />
+      </label>
+      <label htmlFor="password-input">
+        Senha
+        <Input
+          id="password-input"
+          heigth="40px"
+          onChange={ ({ target }) => setPassword(target.value) }
+          dataTestid="signup-password"
+        />
+      </label>
       <label htmlFor="check">
         <input
           id="check"
           type="checkBox"
           checked={ isChecked }
           onChange={ ({ target }) => setIsChecked(target.checked) }
-          dataTestid="signup-seller"
+          data-testid="signup-seller"
         />
         Quero vender
       </label>
@@ -76,7 +87,7 @@ const form = (params) => {
         disabled={ isDisabled }
         dataTestid="signup-btn"
       >
-        CADASTRAR
+        Cadastrar
       </Button>
     </form>
   );
@@ -92,11 +103,14 @@ const Register = () => {
   const twelve = 12;
 
   useEffect(() => {
-    const emailFormat = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+$/.test(email);
+    const emailFormat = /\S+@\S+\.\S+/.test(email);
+    const nameFormat = /^[A-Za-z ]+$/.test(name);
     const six = 6;
     const minPasswordLength = password.length >= six;
-    if (emailFormat && minPasswordLength && name.length > twelve) {
+    if (emailFormat && nameFormat && minPasswordLength && name.length > twelve) {
       setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
     }
   }, [name, email, password]);
 

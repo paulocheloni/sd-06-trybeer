@@ -16,7 +16,7 @@ export const loginUser = async (email, password) => {
   return user;
 };
 
-export const registerUser = async (name, email, password, role) => {
+export const registerNewUser = async (name, email, password, role) => {
   const user = await axios({
     method: 'post',
     url: 'http://localhost:3000/register',
@@ -26,7 +26,7 @@ export const registerUser = async (name, email, password, role) => {
       password,
       role,
     },
-  }).then((res) => res.data.user)
+  }).then((res) => console.log(res, 'registrei o usuario'))
     .catch((err) => {
       console.error(`ops! ocorreu um erro${err}`);
     });

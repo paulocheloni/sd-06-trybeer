@@ -25,9 +25,9 @@ const saveLocalStorage = (res) => {
 
 const handleSubmit = async (event, email, password) => {
   event.preventDefault();
-
+  console.log('entrei na handle submit');
   const user = await loginUser(email, password);
-
+  console.log(user, 'nosso usuario');
   saveLocalStorage(user);
 
   handleRedirect();
@@ -38,7 +38,7 @@ const userRegistered = () => {
 };
 
 const form = ({ setEmail, setPassword, isDisabled, email, password }) => (
-  <form onSubmit={ (e) => handleSubmit(e, email, password) }>
+  <form onSubmit={(e) => handleSubmit(e, email, password)}>
     <h1>Login</h1>
     <label htmlFor="email">
       Email
@@ -48,7 +48,7 @@ const form = ({ setEmail, setPassword, isDisabled, email, password }) => (
         // width="400px"
         // heigth="40px"
         // fontSize="16px"
-        onChange={ ({ target }) => setEmail(target.value) }
+        onChange={({ target }) => setEmail(target.value)}
         data-testid="email-input"
       />
     </label>
@@ -60,7 +60,7 @@ const form = ({ setEmail, setPassword, isDisabled, email, password }) => (
         // width="400px"
         // heigth="40px"
         // fontSize="16px"
-        onChange={ ({ target }) => setPassword(target.value) }
+        onChange={({ target }) => setPassword(target.value)}
         data-testid="password-input"
       />
     </label>
@@ -70,7 +70,7 @@ const form = ({ setEmail, setPassword, isDisabled, email, password }) => (
       heigth="40px"
       color="green"
       fontSize="20px"
-      disabled={ isDisabled }
+      disabled={isDisabled}
       dataTestid="signin-btn"
     >
       ENTRAR
@@ -81,7 +81,7 @@ const form = ({ setEmail, setPassword, isDisabled, email, password }) => (
       heigth="40px"
       fontSize="16px"
       dataTestid="no-account-btn"
-      onClick={ userRegistered }
+      onClick={userRegistered}
     >
       Ainda não tenho conta
     </Button>
