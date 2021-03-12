@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
 
     const token = jwt.sign({ data: user }, secret, jwtConfig);
 
-    return res.status(200).json({ token });
+    return res.status(200).json({ token, user });
   } catch (error) {
     return res.status(500).json({ message: error });
   }
