@@ -1,37 +1,37 @@
 import React from 'react';
-import Button from './Button';
 import { useHistory } from 'react-router-dom';
+import Button from './Button';
 
-function SideBar () {
+function SideBar() {
   const history = useHistory();
 
   return (
-    <div>
+    <div className="side-menu-container">
       <Button
-        title='Produtos'
+        title="Produtos"
         dataTestid="side-menu-item-products"
-        handleClick={() => history.push('/products')}
+        handleClick={ () => history.push('/products') }
         btnDisable={ false }
       />
       <Button
-        title='Meus Pedidos'
+        title="Meus Pedidos"
         dataTestid="side-menu-item-my-orders"
-        handleClick={() => history.push('/orders')}
+        handleClick={ () => history.push('/orders') }
         btnDisable={ false }
       />
       <Button
-        title='Meu Perfil'
+        title="Meu Perfil"
         dataTestid="side-menu-item-my-profile"
-        handleClick={() => history.push('/profile')}
+        handleClick={ () => history.push('/profile') }
         btnDisable={ false }
       />
       <Button
-        title='Sair'
+        title="Sair"
         dataTestid="side-menu-item-logout"
-        handleClick={() => history.push('/login')}
+        handleClick={ () => history.push('/login') }
         btnDisable={ false }
       />
-    </div>   
+    </div>
   );
 }
 

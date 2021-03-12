@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SideBar from './SideBar';
 
-function MenuTop (props) {
+function MenuTop(props) {
   const [showSideBar, setShowSideBar] = useState(false);
   const { title } = props;
 
@@ -9,17 +9,22 @@ function MenuTop (props) {
     <div>
       <nav>
         <i
-          onClick={() => showSideBar ? setShowSideBar(false) : setShowSideBar(true)}
-          class="fas fa-bars"
+          onClick={ () => (showSideBar ? setShowSideBar(false) : setShowSideBar(true)) }
+          aria-hidden="true"
+          className="fas fa-bars"
           data-testid="top-hamburguer"
         />
         <h1 data-testid="top-title">{ title }</h1>
       </nav>
       <aside>
-        {showSideBar && <SideBar className="side-menu-container"/>}      
+        {showSideBar && <SideBar />}
       </aside>
     </div>
   );
 }
+
+MenuTop.propTypes = {
+  title: PropTypes.string.isRequired,
+};
 
 export default MenuTop;

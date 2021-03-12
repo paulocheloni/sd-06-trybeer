@@ -1,12 +1,12 @@
 import React from 'react';
 import MenuTop from '../components/MenuTop';
 
-function ClientProfile() {
+function Orders() {
   return (
     <div>
-      <MenuTop title="TESTE" />
+      <MenuTop title="Cliente - Meus Pedidos" />
     </div>
   );
 }
 
-export default ClientProfile;
+export default Orders;
