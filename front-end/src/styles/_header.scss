@@ -1,0 +1,66 @@
+.globalheader-container {
+  display: flex;
+  color: $darkWhite;
+  background-color: $lightblue;
+  .h1-div {
+    text-align: center;
+    width: 100%;
+    h1 {
+      font-size: 40px;
+      margin-left: 40%;
+      margin: 15px 0;
+    }
+  }
+  .tooglemenu-container {
+    position: absolute;
+    width: 250px;
+    transition: 0.3s;
+    background-color: $lightblue;
+    transition: 1s;
+    .toogle-button {
+      border: none;
+      margin: 0;
+      padding: 0;
+      background: none;
+      color: none;
+      cursor: pointer;
+      &:focus {
+        outline: none;
+      }
+      i {
+        color: $darkWhite;
+        font-size: 60px;
+        margin: 10px 20px 5px 20px;
+      }
+    }
+    .buttons-div {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+      button {
+        color: $lightblue;
+        background-color: $darkWhite;
+        width: 90%;
+        height: 35px;
+        font-size: 20px;
+        font-weight: 900;
+        margin: 10px;
+        border-radius: 7px;
+        border: none;
+        transition: 0.2s;
+        &:hover {
+          transition: 0.3s;
+          box-shadow: 0 0px 10px #9ecaed;
+        }
+        &:focus {
+          outline: none;
+        }
+        &:disabled {
+          background-color: $darkestBlue;
+          box-shadow: 0 0px 0px #9ecaed;
+        }
+      }
+    }
+  }
+}
