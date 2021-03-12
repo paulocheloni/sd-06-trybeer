@@ -10,7 +10,7 @@ function App() {
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />
         <Route path="/products" component={ User } />
-        <Route path="/admin/profile" component={ Admin } />
+        <Route path="/admin/orders" component={ Admin } />
       </Switch>
     </div>
   );

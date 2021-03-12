@@ -1,55 +1,37 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { validateUser } from '../services/users';
+import LoginForm from '../components/LoginForm';
 
 function Login() {
   const [disabled, setDisabled] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  let inputEmail,inputPassword;
+  const history = useHistory();
 
   const handleChange = () => {
-    const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-
-    inputEmail = document.getElementById('emailInput').value;
-    inputPassword = document.getElementById('passwordInput').value.length;
+    const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
     const six = 6;
-
-    console.log(email);
-
-    setDisabled(regex.test(inputEmail) && inputPassword >= six);
+    setDisabled(regex.test(email) && password.length >= six);
   };
 
-  const handleSubmit = (email, password) => {};
+  const handleSubmit = async (userEmail, userPassword) => {
+    const result = await validateUser(userEmail, userPassword);
+    if (result.role === 'administrator') return history.push('/admin/orders');
+    if (result.role === 'client') return history.push('/products');
+  };
 
   return (
-    <div>
-      <label htmlFor="emailInput">
-        Email
-        <input
-          id="emailInput"
-          data-testid="email-input"
-          onChange={ (e) => {
-            handleChange();
-            setEmail(e.target.value);
-          } }
-        />
-      </label>
-      <label htmlFor="passwordInput">
-        Senha
-        <input
-          id="passwordInput"
-          type="password"
-          data-testid="password-input"
-          onChange={ (e) => {
-            handleChange();
-            setPassword(e.target.value);
-          } }
-        />
-      </label>
-      <button disabled={ !disabled } id="signinBtn" data-testid="signin-btn">
-        ENTRAR
-      </button>
-      <button data-testid="no-account-btn">Ainda nao tenho conta</button>
-    </div>
+    <LoginForm
+      handleChange={ handleChange }
+      handleSubmit={ handleSubmit }
+      history={ history }
+      disabled={ disabled }
+      email={ email }
+      setEmail={ setEmail }
+      password={ password }
+      setPassword={ setPassword }
+    />
   );
 }
 
