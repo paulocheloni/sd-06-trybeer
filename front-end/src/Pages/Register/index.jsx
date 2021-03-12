@@ -9,9 +9,9 @@ import Button from '../../Components/Button';
 
 const handleRedirect = (user) => {
   if (user.role === 'client') {
-    window.location.href = '/client';
+    window.location.href = '/products';
   } else {
-    window.location.href = '/admin';
+    window.location.href = '/admin/orders';
   }
 };
 
@@ -92,11 +92,14 @@ const Register = () => {
   const twelve = 12;
 
   useEffect(() => {
-    const emailFormat = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+$/.test(email);
+    const emailFormat = /\S+@\S+\.\S+/.test(email);
+    const nameFormat = /^[A-Za-z]+$/.test(name);
     const six = 6;
     const minPasswordLength = password.length >= six;
-    if (emailFormat && minPasswordLength && name.length > twelve) {
+    if (emailFormat && nameFormat && minPasswordLength && name.length > twelve) {
       setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
     }
   }, [name, email, password]);
 
