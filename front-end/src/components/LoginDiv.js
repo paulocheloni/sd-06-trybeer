@@ -38,14 +38,16 @@ class LoginDiv extends React.Component {
           <span>Email</span>
           <input
             name="email"
-            onChange={ this.handleChange }
             placeholder="Digite seu Email"
+            data-testid="email-input"
+            onChange={ this.handleChange }
           />
           <span>Senha</span>
           <input
             name="password"
             type="password"
             placeholder="Digite sua Senha"
+            data-testid="password-input"
             onChange={ this.handleChange }
           />
         </div>
@@ -53,6 +55,7 @@ class LoginDiv extends React.Component {
           <button
             type="button"
             className="btn-login"
+            data-testid="signin-btn"
             disabled={ !validRegEmail || !validRegPassword }
           >
             ENTRAR
@@ -60,6 +63,7 @@ class LoginDiv extends React.Component {
           <button
             type="button"
             className="btn-create"
+            data-testid="no-account-btn"
             onClick={ () => history.push('/register') }
           >
             Ainda não tenho conta
