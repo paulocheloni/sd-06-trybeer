@@ -7,29 +7,32 @@ import loginSchema from '../validationsSchemas/login';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const handleClick = async (em, pass) => {
+  const [button, setButton] = useState(true);
+  const handleChanges = async () => {
     try {
-      const data = await loginSchema.validate({ email: em, password: pass });
-      login(data);
+      await loginSchema.validate({ email, password });
+      setButton(false);
     } catch (err) {
-      alert(err.message);
+      setButton(true);
     }
   };
-  console.log('oi dentro de login');
+  handleChanges();
   return (
     <main>
       <form>
         <Input type="email" setValue={ setEmail } value={ email } />
         <Input type="password" setValue={ setPassword } value={ password } />
         <Button
-          className="loginButton"
-          onClick={ () => handleClick(email, password) }
+          className="signin-btn"
+          onClick={ () => login(email, password) }
+          disabled={ button }
         >
           Entrar
         </Button>
         <Button
-          className="semConta"
+          className="no-account-btn"
           onClick={ () => console.log('faz alguma coisa com isso') }
+          disabled={ false }
         >
           Ainda não tenho conta
         </Button>
