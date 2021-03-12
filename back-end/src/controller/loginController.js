@@ -6,7 +6,7 @@ const controller = Router();
 controller.get('/', async (req, res, next) => {
   const { email, password: userPass } = req.body;
 
-  const result = await userService.getUserByEmail(email, userPass);
+  const result = await userService.loginUser(email, userPass);
 
   if (result.payload) return next(result);
 
