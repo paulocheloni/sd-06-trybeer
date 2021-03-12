@@ -12,8 +12,9 @@ app.get('/', (_req, res) => res.send('Hello World!'));
 
 app.get('/login', (_req, res) => res.send('Estou na pagina de login'));
 
-app.post('/login', (_req, res) => {
-  console.log('req post chegou');
+app.post('/login', (req, res) => {
+  const { user } = req.body;
+  console.log(user);
   res.status(201).json({ status: 'ok' });
 });
 

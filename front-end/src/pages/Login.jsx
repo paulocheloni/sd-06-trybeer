@@ -24,7 +24,7 @@ function Login() {
         <Input type="password" setValue={ setPassword } value={ password } />
         <Button
           className="signin-btn"
-          onClick={ () => login(email, password) }
+          onClick={ () => login({ email, password }) }
           disabled={ button }
         >
           Entrar
