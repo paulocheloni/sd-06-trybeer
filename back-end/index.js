@@ -8,14 +8,14 @@
  */
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const routerLogin = require('./src/controllers/LoginController');
 const errorMiddleware = require('./src/middlewares/errorMiddleware');
-var cors = require('cors')
 
 const app = express();
 const port = 3001;
 
-app.use(cors()) 
+app.use(cors()); 
 app.use(bodyParser.json());
 
 app.use('/login', routerLogin);

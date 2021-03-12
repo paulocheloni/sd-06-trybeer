@@ -20,13 +20,9 @@ routerLogin.get('/', async (req, res) => {
 });
 
 routerLogin.post('/', async (req, res, next) => {
-  const { email } = req.body;
-  const user = await getEmailService(email);
-  console.log(user);
+  const user = await getEmailService(req.body.email);
   try {
-    if (!user.length) {
-      throw new ThrowError(status.NOT_FOUND, messages.USER_NOT_FOUND);
-    }
+    if (!user.length) throw new ThrowError(status.NOT_FOUND, messages.USER_NOT_FOUND);
     const payload = {
       iss: 'Trybeer',
       aud: 'indentity',
@@ -34,12 +30,7 @@ routerLogin.post('/', async (req, res, next) => {
     };
     const token = jwt.sign(payload, secret, jwtConfig);
     return res.status(status.SUCCESS)
-      .json({ 
-        token,
-        name: user[0].name,
-        email: user[0].email,
-        role: user[0].role,
-      });
+      .json({ token, name: user[0].name, email: user[0].email, role: user[0].role });
   } catch (error) {
     next(error);
   }

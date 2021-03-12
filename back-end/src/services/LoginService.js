@@ -1,5 +1,4 @@
 const { getEmail } = require('../models/LoginModel');
-const { ThrowError } = require('../middlewares/errorHandler/errorHandler');
 
 const getEmailService = async (emailLogin) => {
   const resultService = await getEmail(emailLogin);
@@ -7,5 +6,5 @@ const getEmailService = async (emailLogin) => {
 };
 
 module.exports = {
-  getEmailService
-}
+  getEmailService,
+};
