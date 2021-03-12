@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { saveState } from './services/localStorage';
+import history from './services/history';
 import api from './services/api';
 import './App.css';
 
@@ -10,9 +11,11 @@ function App() {
   const integrationFunc = () => { 
     api.listLogin(email, password)
     .then((response) => {
-      saveState('token', response.data.token);
+      saveState('user', response.data);
+      if (response.data.role === 'administrator') return history.push('/Admin');
+      if (response.data.role === 'client') return history.push('/Cliente');
     }).catch((err) => {
-      console.log(err);
+      console.log(err.response.data);
     });
   }
 
