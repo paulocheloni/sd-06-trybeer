@@ -1,15 +1,16 @@
-const urlLogin = 'localhost:3001/login';
+const urlLogin = 'http://localhost:3001/login';
 
-function login({ email, password }) {
-  fetch(urlLogin, {
+const login = async ({ email, password }) => {
+// function login({ email, password }) {
+  await fetch(urlLogin, {
     method: 'POST',
     headers: {
-      'content-type': 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       email, password,
     }),
   });
-}
+};
 
 export default login;
