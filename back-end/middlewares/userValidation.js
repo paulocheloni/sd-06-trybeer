@@ -21,17 +21,6 @@ function validateEmail(req, res, next) {
   next();
 }
 
-// const userExist = async (req, res, next) => {
-//   const { email, password } = req.body;
-//   const userFound = await userService.findUserByEmail(email);
-//   // console.log('password db', userFound);
-//   // console.log('password body', password);
-//   if (!userFound || userFound.password !== password) {
-//     return res.status(UNPROCESSABLE_ENTITY).json({ message: 'Email or password not found' })
-//   }
-//   next();
-// }
-
 module.exports = {
   validatePassword,
   validateEmail,

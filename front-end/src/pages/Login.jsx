@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import useInput from '../hooks/useInput';
 import fetchUser from '../services/getUser';
+import { emailValidation, passwordValidation } from '../utils/validations';
 // import axios from 'axios';
 // import LoginForm from '../components/LoginForm';
 
@@ -9,9 +10,6 @@ export default function Login() {
   const history = useHistory();
   const [email, setEmail] = useInput('');
   const [password, setPassword] = useInput('');
-  const FIVE = 5;
-  const isEmailValid = /[A-Za-z0-9]+@[A-Za-z]+[A-z]*(\.\w{2,3})+/.test(email);
-  const isPasswordValid = password && password.length > FIVE;
   const handleOnClik = async () => {
     fetchUser(email, password)
       .then((response) => {
@@ -54,7 +52,7 @@ export default function Login() {
             e.preventDefault();
             handleOnClik();
           } }
-          disabled={ !(isEmailValid && isPasswordValid) }
+          disabled={ !(emailValidation(email) && passwordValidation(password)) }
           data-testid="signin-btn"
           type="button"
         >
