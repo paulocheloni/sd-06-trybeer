@@ -4,6 +4,7 @@ import Profile from './Profile';
 import Products from './Products';
 import Checkout from './Checkout';
 import Orders from './Orders';
+import AdminOrders from './AdminOrders';
 
 export {
   Login,
@@ -12,4 +13,5 @@ export {
   Products,
   Checkout,
   Orders,
+  AdminOrders,
 };

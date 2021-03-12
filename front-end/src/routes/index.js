@@ -7,6 +7,7 @@ import {
   Products,
   Checkout,
   Orders,
+  AdminOrders,
 } from '../pages';
 
 function index() {
@@ -18,6 +19,7 @@ function index() {
       <Route path="/products" component={ Products } />
       <Route path="/checkout" component={ Checkout } />
       <Route path="/orders" component={ Orders } />
+      <Route path="/admin/orders" component={ AdminOrders } />
     </Switch>
   );
 }
