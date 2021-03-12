@@ -13,7 +13,8 @@ const login = async (user) => {
 
   const apiRequest = await fetch(urlLogin, postMethod);
   const apiResponse = await apiRequest.json();
-  localStorage.setItem('token', JSON.stringify(apiResponse.token));
+  localStorage.setItem('user', JSON.stringify(apiResponse));
+  return apiResponse;
 };
 
 export default login;

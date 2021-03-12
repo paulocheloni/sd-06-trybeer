@@ -14,4 +14,8 @@ app.get('/', (_req, res) => res.send('Hello World!'));
 
 app.use('/login', routerLogin);
 
+app.use(async (err, _req, res, _next) => {
+  res.status(err.status).json(err.message)
+})
+
 app.listen(port, () => `Running on ${port}`);
