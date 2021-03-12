@@ -1,7 +1,7 @@
 import api from './api';
 
 export const userValidation = (user, setUser, setEnableButton) => {
-  const regexValidation = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{3,6}$/;
+  const regexValidation = /\S+@\S+\.\S+/;
   const minimumCharacters = 6;
   const password = document.getElementById('password-input').value;
   const email = document.getElementById('email-input').value;
@@ -17,8 +17,23 @@ export const userValidation = (user, setUser, setEnableButton) => {
   }
 };
 
-export const handleAxios = async (user) => {
-  const response = await api.post("login", user)
+export const handleUserNotRegistered = (history) => history.push('/register');
 
-  console.log(response);
+export const validateUser = async (user) => {
+  const response = await api.post('login', user);
+
+  return response.data;
+};
+
+export const redirectPath = async (history, user) => {
+  const { role } = await validateUser(user);
+
+  switch (role) {
+  case 'administrator': history.push('/admin/orders');
+    break;
+  case 'client': history.push('/products');
+    break;
+  default:
+    break;
+  }
 };

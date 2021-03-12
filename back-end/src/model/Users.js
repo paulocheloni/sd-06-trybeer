@@ -11,7 +11,7 @@ exports.getByEmail = async (email) => (
 
 exports.create = async ({ email, password, role }) =>
   connection
-    .execute('INSERT INTO users (email, password) VALUES (?)', [
+    .execute('INSERT INTO users (email, password) VALUES (??)', [
       email,
       password,
     ])

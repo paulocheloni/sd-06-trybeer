@@ -1,11 +1,15 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
 
-const { userValidation, handleAxios } = require('../services/loginService');
+const {
+  userValidation, redirectPath, handleUserNotRegistered,
+} = require('../services/loginService');
 
 function Login() {
   const { user, setUser } = useContext(TrybeerContext);
   const [enableButton, setEnableButton] = useState(true);
+  const history = useHistory();
 
   return (
     <form>
@@ -34,14 +38,14 @@ function Login() {
           disabled={ enableButton }
           type="button"
           data-testid="signin-btn"
-          onClick={ () => handleAxios(user) }
+          onClick={ () => redirectPath(history, user) }
         >
           ENTRAR
         </button>
         <button
           type="button"
           data-testid="no-account-btn"
-        // onClick={handleClick}
+          onClick={ () => handleUserNotRegistered(history) }
         >
           Ainda não tenho conta
         </button>
