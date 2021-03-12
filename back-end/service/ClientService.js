@@ -1,1 +1,1 @@
-const RegisterModel = require('../model');
+// const RegisterModel = require('../model');
