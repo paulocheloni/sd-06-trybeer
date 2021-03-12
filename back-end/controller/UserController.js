@@ -18,31 +18,13 @@ UserController.post('/', async (req, res) => {
   res.status(CREATED).json({ message: 'OK' });
 });
 
-// // Update Product
-// UserController.put('/:id', async (req, res) => {
-//   const { id } = req.params;
-//   const { name, quantity } = req.body;
+// Update Product
+UserController.put('/:id', UserService.verifyId, async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
 
-//   const { status, result } = await service.update(id, name, quantity);
-//   if (status === 'NOK') {
-//     return res.status(UNPROCESSABLE_ENTITY).json(responseError(result));
-//   }
-//   res.status(OK).json(result);
-// });
-
-// Delete Product
-// UserController.delete('/:id', async (req, res) => {
-//   const { id } = req.params;
-  
-//   const { status, result } = await service.remove(id);
-//   if (status === 'NOK') {
-//     return res.status(UNPROCESSABLE_ENTITY).json(responseError(result));
-//   }
-//   res.status(OK).json(result);
-// });
-
-// const responseError = (message) => {
-//   return { err: { code: 'invalid_data', message } };
-// };
+  await UserService.update(id, name);
+  res.status(OK).json({ message: 'name updated!' });
+});
 
 module.exports = UserController;
