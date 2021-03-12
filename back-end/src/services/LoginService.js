@@ -2,9 +2,9 @@ const Login = require('../models/Login');
 const createToken = require('../auth/createToken');
 
 // Componente de repostas https
-const { status, message } = require('../util/dataStatus')
+const { status, messages } = require('../util/dataStatus')
 const { sucess, unauthorized } = status
-const { dadosInvalidos } = message
+const { dadosInvalidos } = messages
 
 const loginUsers = async (email, password) => {
   const user = await Login.findByEmail(email);
