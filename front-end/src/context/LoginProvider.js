@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import TrybeerContext from './TrybeerContext.js';
+import TrybeerContext from './TrybeerContext';
 
 const LoginProvider = ({ children }) => {
   const [user, setUser] = useState({ email: '', password: '' });

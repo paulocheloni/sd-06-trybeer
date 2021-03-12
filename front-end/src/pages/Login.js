@@ -1,26 +1,10 @@
 import React, { useState, useContext } from 'react';
 import TrybeerContext from '../context/TrybeerContext';
+import { userValidation, axios } from '../services/loginService';
 
 function Login() {
   const { user, setUser } = useContext(TrybeerContext);
   const [enableButton, setEnableButton] = useState(true);
-
-  function handleChange() {
-    const regexValidation = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{3,6}$/;
-    const minimumCharacters = 6;
-    const password = document.getElementById('password-input').value;
-    const email = document.getElementById('email-input').value;
-
-    if (regexValidation.test(email) && password.length >= minimumCharacters) {
-      setUser({ ...user, email, password });
-
-      setEnableButton(false);
-    } else {
-      setUser({ email: '', password: '' });
-
-      setEnableButton(true);
-    }
-  }
 
   return (
     <form>
@@ -31,7 +15,7 @@ function Login() {
           type="email"
           name="email"
           data-testid="email-input"
-          onChange={handleChange}
+          onChange={ () => userValidation(user, setUser, setEnableButton) }
         />
       </div>
       <div>
@@ -41,22 +25,22 @@ function Login() {
           name="password"
           type="password"
           data-testid="password-input"
-          onChange={handleChange}
+          onChange={ () => userValidation(user, setUser, setEnableButton) }
         />
       </div>
       <div>
         <button
-          disabled={enableButton}
+          disabled={ enableButton }
           type="button"
           data-testid="signin-btn"
-        //onClick={handleClick}
+        onClick={ () => axios(user) }
         >
           ENTRAR
         </button>
         <button
           type="button"
           data-testid="no-account-btn"
-        //onClick={handleClick}
+        // onClick={handleClick}
         >
           Ainda não tenho conta
         </button>
