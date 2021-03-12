@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../components/HeaderComponent'
 
-function SideBar({ text }) {
+function SideBar() {
   return (
     <>
       <Header text="TryBeer" data-testid="top-title"/>

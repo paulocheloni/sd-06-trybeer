@@ -2,7 +2,7 @@ import React from 'react';
 
 function Login() {
   return(
-    <>
+    <div>
       <forms >
         <label htmlFor="email">
           Email
@@ -15,7 +15,7 @@ function Login() {
         <button id="enter" type="button">ENTRAR</button>
         <button id="sign-up" type="button">Ainda não tenho conta</button>
       </forms>
-    </>
+    </div>
   )
 };
 

@@ -1,10 +1,11 @@
 import React from 'react';
+import Header from './HeaderComponent';
 
-function CostumerProfile({ text }) {
+function CostumerProfile() {
   
   return(
     <>
-      <Header text="Meu Perfil" data-testid="top-title"/>
+      <Header text="Meu Perfil" /* data-testid="top-title" *//>
       <p>Nome</p>
       <input 
         type="text"
