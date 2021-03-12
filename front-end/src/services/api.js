@@ -6,6 +6,8 @@ const api = axios.create({
 
 const listLogin = (email, password) => (api.post('/login', {email, password}));
 
+// const testComHeader = (email, password) => (api.post('/login', {email, password}, {headers: { autentication: token}  }));
+
 export default {
   listLogin
 };

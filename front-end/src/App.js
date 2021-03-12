@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { saveState } from './services/localStorage';
 import api from './services/api';
 import './App.css';
 
 function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [token, setToken] = useState('');
 
   const integrationFunc = () => { 
     api.listLogin(email, password)
-    .then((response) => setToken(JSON.stringify(response.data.token))
-    ).catch((err) => {
+    .then((response) => {
+      saveState('token', response.data.token);
+    }).catch((err) => {
       console.log(err);
     });
   }
@@ -20,8 +21,7 @@ function App() {
       <h1>Login</h1>
       <input type='text' placeholder='digite seu Email' onChange={ (e) => setEmail(e.target.value) } />
       <input type='text' placeholder='digite seu Password' onChange={ (e) => setPassword(e.target.value) } />
-      <button onClick={integrationFunc}> Login </button>
-      <p>{`${token}`}</p>
+      <button onClick={ integrationFunc }> Login </button>
     </div>
   );
 }
