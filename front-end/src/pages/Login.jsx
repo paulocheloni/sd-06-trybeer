@@ -3,6 +3,8 @@ import login from '../methods/login';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import loginSchema from '../validationsSchemas/login';
+import { Link } from 'react-router-dom';
+import './Login.css'
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -29,13 +31,13 @@ function Login() {
         >
           Entrar
         </Button>
-        <Button
+        <Link to='/registro'
           className="no-account-btn"
-          onClick={ () => console.log('faz alguma coisa com isso') }
+          // onClick={ () => console.log('faz alguma coisa com isso') }
           disabled={ false }
         >
           Ainda não tenho conta
-        </Button>
+        </Link>
       </form>
     </main>
   );
