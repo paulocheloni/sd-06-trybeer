@@ -30,27 +30,27 @@ function LoginForm({ handleChanges, handleCheck }) {
           />
         </label>
       </div>
-        <label htmlFor="password-input">
-          Senha:
-          <input
-            id="password-input"
-            data-testid="signup-password"
-            type="password"
-            name="password"
-            placeholder="Senha"
-            onChange={ (e) => handleChanges(e) }
-            />
-        </label>
-        <label htmlFor="check-input">
-          <input
+      <label htmlFor="password-input">
+        Senha:
+        <input
+          id="password-input"
+          data-testid="signup-password"
+          type="password"
+          name="password"
+          placeholder="Senha"
+          onChange={ (e) => handleChanges(e) }
+        />
+      </label>
+      <label htmlFor="check-input">
+        <input
           id="check-input"
-            data-testid="signup-seller"
-            type="checkbox"
-            name="seller"
-            onChange={ (e) => handleCheck(e) }
-          />
-          Quero vender
-        </label>
+          data-testid="signup-seller"
+          type="checkbox"
+          name="seller"
+          onChange={ (e) => handleCheck(e) }
+        />
+        Quero vender
+      </label>
     </form>
   );
 }

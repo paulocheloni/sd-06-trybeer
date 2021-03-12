@@ -1,70 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import RegisterForm from '../components/RegisterForm';
 
-function Register() {
+function Register({ history }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isChecked, setIsChecked] = useState(false);
-  const [enableButton, setEnableButton] = useState(false);
+  const [disabled, setDisabled] = useState(true);
+  const NAME_LENGTH = 11;
+  const PASSWORD_LENGTH = 5;
 
-  const checkName = () => {
-    if (name.length < 12) return false;
-    // regex
-    return true;
-  }
+  const enableButton = () => setDisabled(!(name && password && email));
 
-  const checkEmail = () => {
-    if (name.length < 12) return false;
-    return true;
-  }
+  const onChangeName = ({ target: { value } }) => {
+    const NAME_REGEX = RegExp(/^[a-záàâãéèêíïóôõöúçñ ]+$/i);
+    setName((value.length > NAME_LENGTH && NAME_REGEX.test(value)) ? value : '');
+    enableButton();
+  };
 
-  const checkPassword = () => {
-    
-  }
+  const onChangeEmail = ({ target: { value } }) => {
+    const EMAIL_REGEX = RegExp(/^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/);
+    setEmail((EMAIL_REGEX.test(value)) ? value : '');
+    enableButton();
+  };
+
+  const onChangePassword = ({ target: { value } }) => {
+    setPassword(value.length > PASSWORD_LENGTH ? value : '');
+    enableButton();
+  };
+
+  const onCheck = () => setIsChecked(!isChecked);
+
+  useEffect(() => { 
+    enableButton(); 
+  });
 
   return (
     <div>
-      <fieldset>
-        <form action="" method="POST">
-          <input
-            data-testid="signup-name"
-            type="text"
-            name="name"
-            placeholder="Nome"
-            onChange={ (event) => setName(event.target.value) }
-          />
-          <input
-            data-testid="signup-email"
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={ (event) => setEmail(event.target.value) }
-          />
-          <input
-            data-testid="signup-password"
-            type="password"
-            name="password"
-            placeholder="Senha"
-            onChange={ (event) => setPassword(event.target.value) }
-          />
-          <label>
-            <input
-              data-testid="signup-seller"
-              type="checkbox"
-              name="role"
-              onChange={ (event) => setIsChecked(!isChecked) }
-            />
-            Quero vender          
-          </label>
-          <button
-            data-testid="signup-btn"
-            type="submit"
-            desabled={ enableButton }
-          >
-            Cadastrar
-          </button>
-        </form>
-      </fieldset> 
+      <RegisterForm
+        onChangeEmail={ onChangeEmail }
+        onChangeName={ onChangeName }
+        onChangePassword={ onChangePassword }
+        disabled={ disabled }
+        onCheck={ onCheck }
+        isChecked={ isChecked }
+        history={ history }
+      />
     </div>
   );
 }

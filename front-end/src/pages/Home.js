@@ -6,7 +6,7 @@ function Home({ history }) {
       <button
         type="button"
         data-testid="no-account-btn"
-        onClick={ () => history.push('/registernew') }
+        onClick={ () => history.push('/register') }
       >
         Registrar
       </button>

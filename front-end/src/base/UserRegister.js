@@ -34,14 +34,14 @@ class UserRegister extends Component {
       [name]: checked,
     }, () => {
       this.validateInputs();
-    })
+    });
   }
 
   handleSubmit() {
     const { name, email, seller } = this.state;
     const { history } = this.props;
 
-    //setando o localStorage para teste. Será setado mais tarde pela resposta do backend
+    // setando o localStorage para teste. Será setado mais tarde pela resposta do backend
     localStorage.setItem('user', JSON.stringify({ name, email }));
     history.push(seller ? '/admin/orders' : '/products');
   }
@@ -53,18 +53,18 @@ class UserRegister extends Component {
 
     const EMAIL_REGEX = RegExp(/^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/)
       .test(email);
-    
+
     const NAME_REGEX = RegExp(/^[a-záàâãéèêíïóôõöúçñ ]+$/i)
       .test(name);
 
     this.setState({
-      enableButton: (EMAIL_REGEX &&
-        NAME_REGEX &&
-        password.length >= PASS_VALIDATION &&
-        name.length >= NAME_VALIDATION),
+      enableButton: (EMAIL_REGEX
+        && NAME_REGEX
+        && password.length >= PASS_VALIDATION
+        && name.length >= NAME_VALIDATION),
     });
-    
-    seller ? this.setState({ role: 'admin'}) : this.setState({ role: 'client' });
+
+    seller ? this.setState({ role: 'admin' }) : this.setState({ role: 'client' });
   }
 
   render() {
