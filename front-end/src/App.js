@@ -7,6 +7,7 @@ import theme from './Styles/Theme';
 
 import Login from './Pages/Login';
 import Register from './Pages/Register';
+import Profile from './Pages/Profile';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Route exact path="/" />
           <Route path="/login" component={ Login } />
           <Route path="/register" component={ Register } />
-          <Route path="/profile" />
+          <Route path="/profile" component={ Profile } />
           <Route path="/products" />
         </Switch>
       </GlobalProvider>

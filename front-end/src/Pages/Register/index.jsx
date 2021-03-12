@@ -8,14 +8,83 @@ import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 import CheckBox from '../../Components/CheckBox';
 
+const handleRedirect = (user) => {
+  if (user.role === 'client') {
+    window.location.href = '/client';
+  } else {
+    window.location.href = '/admin';
+  }
+};
+
+const handleSubmit = async (event) => {
+  event.preventDefault();
+
+  let role = '';
+
+  isChecked === true ? role = 'admin' : role = 'client';
+
+  const user = await registerUser(name, email, password, role);
+
+  handleRedirect(user);
+};
+
+const form = (params) => {
+  const { setEmail, setPassword, isDisabled, email, password, setName, isChecked, setIsChecked } = params;
+  return (
+    <form onSubmit={ (e) => handleSubmit(e, email, password) }>
+      <h1>Register</h1>
+      <Input
+        placeholder="Nome"
+        width="400px"
+        heigth="40px"
+        onChange={ ({ target }) => setName(target.value) }
+        dataTestid="signup-name"
+      />
+      <Input
+        placeholder="Email"
+        width="400px"
+        heigth="40px"
+        onChange={ ({ target }) => setEmail(target.value) }
+        dataTestid="signup-email"
+      />
+      <Input
+        placeholder="Senha"
+        width="400px"
+        heigth="40px"
+        onChange={ ({ target }) => setPassword(target.value) }
+        dataTestid="signup-password"
+      />
+      <label htmlFor="check">
+        <input
+          id="check"
+          type="checkBox"
+          checked={ isChecked }
+          onChange={ ({ target }) => setIsChecked(target.checked) }
+          dataTestid="signup-seller"
+        />
+        Quero vender
+      </label>
+      <Button
+        type="submit"
+        width="400px"
+        heigth="40px"
+        color="green"
+        fontSize="20px"
+        disabled={ isDisabled }
+        dataTestid="signup-btn"
+      >
+        CADASTRAR
+      </Button>
+    </form>
+  );
+};
+
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
-
-  // console.log(isChecked);
 
   useEffect(() => {
     const emailFormat = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+$/.test(email);
@@ -26,67 +95,20 @@ const Register = () => {
     }
   }, [name, email, password]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    let role = '';
-
-    isChecked === true ? role = 'admin' : role = 'client';
-
-    const user = await registerUser(name, email, password, role);
+  const params = {
+    setEmail,
+    setPassword,
+    isDisabled,
+    email,
+    password,
+    setName,
+    isChecked,
+    setIsChecked,
   };
 
   return (
     <Container>
-      <form onSubmit={ handleSubmit }>
-        <h1>Register</h1>
-        <Input
-          placeholder="Nome"
-          width="400px"
-          heigth="40px"
-          fontSize="16px"
-          onChange={ ({ target }) => setName(target.value) }
-          dataTestid="signup-name"
-        />
-        <Input
-          placeholder="Email"
-          width="400px"
-          heigth="40px"
-          fontSize="16px"
-          onChange={ ({ target }) => setEmail(target.value) }
-          dataTestid="signup-email"
-        />
-        <Input
-          placeholder="Senha"
-          width="400px"
-          heigth="40px"
-          fontSize="16px"
-          onChange={ ({ target }) => setPassword(target.value) }
-          dataTestid="signup-password"
-        />
-        <label>
-          <CheckBox
-            type="checkBox"
-            width="20px"
-            height="20px"
-            checked={ isChecked }
-            onChange={ ({ target }) => setIsChecked(target.checked) }
-            dataTestid="signup-seller"
-          />
-          Quero vender
-        </label>
-        <Button
-          type="submit"
-          width="400px"
-          heigth="40px"
-          color="green"
-          fontSize="20px"
-          // disabled
-          dataTestid="signup-btn"
-        >
-          CADASTRAR
-        </Button>
-      </form>
+      {form(params)}
     </Container>
   );
 };

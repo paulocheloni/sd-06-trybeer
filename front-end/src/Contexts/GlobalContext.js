@@ -3,11 +3,11 @@ import React, { createContext, useState } from 'react';
 export const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
-  const [test, setTest] = useState('test');
+  const [stateSideBar, setStateSideBar] = useState(false);
 
   const context = {
-    test,
-    setTest,
+    stateSideBar,
+    setStateSideBar,
   };
 
   return (

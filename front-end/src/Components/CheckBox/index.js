@@ -3,6 +3,7 @@ import React from 'react';
 import CompCheckBox from './styles';
 
 const CheckBox = ({
+  id,
   type,
   width,
   height,
@@ -11,6 +12,7 @@ const CheckBox = ({
   dataTestid,
 }) => (
   <CompCheckBox
+    id={ id }
     checked={ checked }
     type={ type }
     width={ width }

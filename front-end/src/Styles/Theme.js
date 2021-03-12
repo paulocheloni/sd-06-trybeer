@@ -11,6 +11,7 @@ export default {
     blue: '#5965E0',
     blue_dark: '#4953B8',
     blue_twitter: '#2AA9E0',
+    black: '#000',
   },
   font: {
     family: '\'Inter\', sans-serif',
