@@ -1,18 +1,18 @@
 const { Router } = require('express');
+const rescue = require('express-rescue');
 const userService = require('../service/userService');
-const { validateUserInputs, userExist } = require('../middlewares/userValidation');
+const { validatePassword, validateEmail } = require('../middlewares/userValidation');
 
 const createToken = require('../auth/createToken');
 
 const router = Router();
-const rescue = require('express-rescue');
 
 /* router.get('/', rescue(async (req, res) => {
   const allUsers = await userService.getAllUsers();
   return res.status(200).json(allUsers);
 })); */
 
-router.post('/', validateUserInputs, rescue(async (req, res) => {
+router.post('/', validatePassword, validateEmail, rescue(async (req, res) => {
   const { email, password } = req.body;
   // console.log(email);
   const getUser = await userService.findUserByEmail(email, password);
@@ -24,7 +24,7 @@ router.post('/', validateUserInputs, rescue(async (req, res) => {
     name: getUser.name,
     email: getUser.email,
     role: getUser.role,
-  }
+  };
   // console.log(userDataForFront);
 
   const userToken = createToken(userDataForFront);

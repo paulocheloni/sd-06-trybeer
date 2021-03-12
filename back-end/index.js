@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors')
+const cors = require('cors');
 const userController = require('./controller/userController');
 const unexpectedError = require('./middlewares/unexpectedError');
 require('dotenv').config();

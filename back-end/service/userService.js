@@ -12,13 +12,13 @@ const findUserByEmail = async (userEmail, password) => {
       status: UNPROCESSABLE_ENTITY,
       message: 'Email or password not found',
       isError: true,
-    }
+    };
   }
   // console.log(userFound);
   return userFound;
-}
+};
 
 module.exports = {
   getAllUsers,
-  findUserByEmail
-}
+  findUserByEmail,
+};
