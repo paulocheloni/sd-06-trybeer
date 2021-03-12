@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import LoginContext from '../context/LoginContext';
-import FormLogin from '../components/FormLogin';
+import FormLogin from '../components/pageLogin/FormLogin';
 
 function Login({ history }) {
   const [user, setUser] = useState({ email: '', password: '' });
@@ -51,7 +51,7 @@ function Login({ history }) {
 }
 
 Login.propTypes = {
-  history: PropTypes.func.isRequired,
+  history: PropTypes.objectOf(Object).isRequired,
 };
 
 export default Login;
