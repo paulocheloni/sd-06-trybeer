@@ -10,7 +10,7 @@ const getAll = async () => {
 const create = async (name, email, password, role) => {
   const findByName = await registerModel.findByName(name);
   if (findByName.length !== 0) {
-    return { error: true, code: 'conflict', message: 'Email already in database.' };
+    return { error: true, code: 'conflict', message: 'E-mail already in database.' };
   }
   const users = await registerModel.create(name, email, password, role);
   return users;

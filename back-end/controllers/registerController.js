@@ -17,7 +17,7 @@ registerRouter.post('/', async (req, res) => {
   if (user.code === 'conflict') {
     return res.status(conflict).json({ message: user.message });
   }
-  res.status(200).send(user);
+  res.status(200).send({ name, email, role });
 });
 
 // Delete a user
