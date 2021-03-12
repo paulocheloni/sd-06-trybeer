@@ -9,7 +9,7 @@ import './Login.css';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [button, setButton] = useState(true);
+  const [buttonLogin, setButton] = useState(true);
   const handleChanges = async () => {
     try {
       await loginSchema.validate({ email, password });
@@ -27,14 +27,13 @@ function Login() {
         <Button
           className="signin-btn"
           onClick={ () => login({ email, password }) }
-          disabled={ button }
+          disabled={ buttonLogin }
         >
           Entrar
         </Button>
         <Link
           to="/register"
           className="no-account-btn"
-          disabled={ false }
         >
           Ainda não tenho conta
         </Link>

@@ -23,6 +23,8 @@ routerLogin.post('/', async (req, res) => {
     userData: userWithouPassword,
   };
   const token = jwt.sign(payload, SECRET, jwtConfig);
+
+  // console.log(jwt.verify(token, 'senha1', jwtConfig));
   // console.log('usuario: ', user.email);
   // console.log('senha: ', user.password);
   // console.log('token: ', token);
