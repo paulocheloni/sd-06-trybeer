@@ -4,6 +4,7 @@ import Provider from './context/Provider';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import './App.css';
+import ClientProfile from './pages/ClientProfile';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route exact path="/" component={ Login } />
         <Route exact path="/login" component={ Login } />
         <Route exact path="/register" component={ Register } />
+        <Route exact path="/profile" component={ ClientProfile } />
       </Switch>
     </Provider>
   );
