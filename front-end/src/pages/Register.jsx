@@ -5,7 +5,8 @@ import FormRegister from '../components/pageRegister/FormRegister';
 
 function Register({ history }) {
   const [newUser, setUser] = useState({ name: '', email: '', senha: '', tipo: 'client' });
-  const [valid, setValid] = useState('true');
+  const [valid, setValid] = useState(true);
+
   useEffect(() => {
     const isValid = () => {
       const regexEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(newUser.email);
@@ -13,26 +14,23 @@ function Register({ history }) {
       const six = 6;
       const doze = 12;
       const tam = newUser.name.length >= doze;
-      if (validNome && regexEmail && newUser.senha.length >= six && tam) {
-        setValid(false);
-      } else {
-        setValid(true);
-      }
+      if (validNome && regexEmail && newUser.senha.length >= six && tam) setValid(false);
+      else setValid(true);
     };
     isValid();
   }, [newUser.senha, newUser.name, newUser.email]);
 
   const handleChange = ({ target }) => {
-    setUser({ ...newUser, [target.name]: target.value });
+    if (target.name === 'tipo') {
+      if (target.checked) setUser({ ...newUser, [target.name]: target.value });
+      else setUser({ ...newUser, [target.name]: 'client' });
+    } else { setUser({ ...newUser, [target.name]: target.value }); }
   };
 
   const handleClick = (e) => {
     e.preventDefault();
-    if (newUser.tipo === 'admin') {
-      history.push('/admin/orders');
-    } else {
-      history.push('/products');
-    }
+    if (newUser.tipo === 'admin') history.push('/admin/orders');
+    else history.push('/products');
     localStorage.setItem('newUser', JSON.stringify(newUser));
   };
 
@@ -51,7 +49,7 @@ function Register({ history }) {
 }
 
 Register.propTypes = {
-  history: PropTypes.func.isRequired,
+  history: PropTypes.objectOf(Object).isRequired,
 };
 
 export default Register;
