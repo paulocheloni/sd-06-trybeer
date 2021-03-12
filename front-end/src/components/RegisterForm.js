@@ -13,8 +13,8 @@ const RegisterForm = (props) => {
   } = props;
 
   const onHandleClick = () => {
-    console.log('teste')
-    history.push(isChecked ? '/admin/orders': '/products')
+    console.log('teste');
+    history.push(isChecked ? '/admin/orders' : '/products');
   };
   return (
     <fieldset>
@@ -60,9 +60,14 @@ const RegisterForm = (props) => {
             id="checkbox"
             onChange={ onCheck }
           />
-            Quero vender
+          Quero vender
         </label>
-        <button data-testid="signup-btn" type="button" disabled={ disabled } onClick={ onHandleClick }>
+        <button
+          data-testid="signup-btn"
+          type="button"
+          disabled={ disabled }
+          onClick={ onHandleClick }
+        >
           Cadastrar
         </button>
       </form>
@@ -76,6 +81,8 @@ RegisterForm.propTypes = {
   onChangePassword: PropTypes.func.isRequired,
   onCheck: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
+  isChecked: PropTypes.bool.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };
 
 export default RegisterForm;

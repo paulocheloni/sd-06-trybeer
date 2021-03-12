@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import RegisterForm from '../components/RegisterForm';
 
 function Register({ history }) {
@@ -31,8 +32,8 @@ function Register({ history }) {
 
   const onCheck = () => setIsChecked(!isChecked);
 
-  useEffect(() => { 
-    enableButton(); 
+  useEffect(() => {
+    enableButton();
   });
 
   return (
@@ -49,5 +50,9 @@ function Register({ history }) {
     </div>
   );
 }
+
+Register.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+};
 
 export default Register;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Home({ history }) {
   return (
@@ -13,5 +14,9 @@ function Home({ history }) {
     </div>
   );
 }
+
+Home.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+};
 
 export default Home;
