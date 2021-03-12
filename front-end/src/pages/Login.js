@@ -2,43 +2,42 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
-
-// function verifyEmailAndPassword() {
-//   const magic = 5;
-//   const isValid = email.match(/\S+@\S+\.\S+/);
-// }
-
+import * as api from '../api/api';
 
 function Login() {
-const [password, setPassword] = useState('');
-const [email, setEmail] = useState('');
-const [activeBtn, setActiveBtn] = useState(false);
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [activeBtn, setActiveBtn] = useState(false);
+  const [user, setUser] = useState({});
+
+  const verifyEmailAndPassword = () => {
+    const isValid = email.match(/\S+@\S+\.\S+/);
+    const isNumber = password.match(/^[0-9]{6,50}$/);
+
+    if (isValid && isNumber) {
+      setActiveBtn(true);
+    } else setActiveBtn(false);
+  }
+
+  function handleSubmit() {
+    console.log("event")
+    // api.login(user)
+  }
 
 
-const verifyEmailAndPassword = () => {
-  const minLength = 5;
-  const isValid = email.match(/\S+@\S+\.\S+/);
-  const isNumber = password.match(/^[0-9]{6,50}$/);
+  useEffect(() => {
+    verifyEmailAndPassword();
+    setUser({ email, password })
+    handleSubmit()
+  }, [email, password]);
 
-  if (isValid && isNumber) {
-    setActiveBtn(true);
-  } else setActiveBtn(false);
-}
-
-useEffect(() => {
-  verifyEmailAndPassword();
-}, [email, password]);
-
-
-  return(
+  return (
     <div>
       <span>Email</span>
       <input type="email" data-testid="email-input" onChange={(event) => setEmail(event.target.value)}></input>
       <span>Senha</span>
       <input type="text" data-testid="password-input" onChange={(event) => setPassword(event.target.value)}></input>
-      <Link to='/home'>
-        <button type='button' disabled={ !activeBtn } data-testid="signin-btn">ENTRAR</button>
-      </Link>
+      <button type='submit' onClick={handleSubmit} data-testid="signin-btn">ENTRAR</button>
       <button type='button' data-testid="no-account-btn">
         Ainda não tenho conta
       </button>
