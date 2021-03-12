@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors');
 
 const log = require('./middlewares/log');
 const UserController = require('./controller/UserController');
@@ -10,6 +11,7 @@ const app = express();
 const PORT = parseInt(process.env.PORT, 10) || 3001;
 
 app.use(express.json());
+app.use(cors());
 app.use(log);
 
 app.use('/user', UserController);
