@@ -13,7 +13,7 @@ function Provider({ children }) {
     loginPassword,
     setLoginPassword,
     isDisabled,
-    setIsDisabled
+    setIsDisabled,
   };
 
   return (
