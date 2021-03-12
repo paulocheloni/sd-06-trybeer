@@ -1,28 +1,23 @@
-import React, { useState } from 'react';
-import { saveState } from './services/localStorage';
-import api from './services/api';
+import React from 'react';
+
+import { Login } from './pages';
+
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
+
+import Provider from '../src/Context/Provider';
+
 import './App.css';
 
 function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const integrationFunc = () => { 
-    api.listLogin(email, password)
-    .then((response) => {
-      saveState('token', response.data.token);
-    }).catch((err) => {
-      console.log(err);
-    });
-  }
 
   return (
-    <div className="App">
-      <h1>Login</h1>
-      <input type='text' placeholder='digite seu Email' onChange={ (e) => setEmail(e.target.value) } />
-      <input type='text' placeholder='digite seu Password' onChange={ (e) => setPassword(e.target.value) } />
-      <button onClick={ integrationFunc }> Login </button>
-    </div>
+    <Provider>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Login} />
+        </Switch>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
