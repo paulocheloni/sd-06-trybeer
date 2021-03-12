@@ -1,14 +1,15 @@
 const Login = require('../models/Login');
 const createToken = require('../auth/createToken');
 
-const SUCESS = 200;
-const UNAUTH = 401;
-const message = 'erro no login ou senha!'
+// Componente de repostas https
+const { status, messages } = require('../util/dataStatus')
+const { sucess, unauthorized } = status
+const { dadosInvalidos } = messages
 
 const loginUsers = async (email, password) => {
   const user = await Login.findByEmail(email);
 
-  if(!user[0] || user[0].password !== password) return { status: UNAUTH, message };
+  if(!user[0] || user[0].password !== password) return { status: unauthorized, dadosInvalidos };
 
   const {
      password: passwordDB, id, ...userWithoutPassword 
@@ -16,7 +17,7 @@ const loginUsers = async (email, password) => {
 
   const token = createToken(userWithoutPassword);
 
-  return { status: SUCESS, message: { token, ...userWithoutPassword } };
+  return { status: sucess, message: { token, ...userWithoutPassword } };
 };
 
 module.exports = loginUsers;
