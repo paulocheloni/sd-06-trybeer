@@ -12,8 +12,10 @@ usersRouter.get('/', async (_req, res) => {
 usersRouter.post('/', async (req, res) => {
   const { email } = req.body;
   const userFound = await findUserByEmail(email);
-
-  res.status(200).json(userFound);
+  if (userFound) {
+    return res.status(200).json(userFound);
+  }
+  return res.status(404).send({ message: 'E-mail not found.' });
 });
 
 module.exports = usersRouter;

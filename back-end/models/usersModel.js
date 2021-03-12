@@ -10,8 +10,10 @@ const findUserByEmail = async (email) => {
   const [[
     userFound,
   ]] = await connection.execute('SELECT * FROM Trybeer.users WHERE email = ?', [email]);
-
-  return userFound;
+  if (userFound) {
+    return userFound;
+  }
+  return false;
 };
 
 module.exports = {
