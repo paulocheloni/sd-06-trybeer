@@ -14,24 +14,27 @@ function Login() {
   return (
     <form>
       <div>
-        <input
-          id="email-input"
-          placeholder="email"
-          type="email"
-          name="email"
-          data-testid="email-input"
-          onChange={ () => userValidation(user, setUser, setEnableButton) }
-        />
+        <label htmlFor="email-input">
+          Email
+          <input
+            id="email-input"
+            type="email"
+            name="email"
+            data-testid="email-input"
+            onChange={ () => userValidation(user, setUser, setEnableButton) }
+          />
+        </label>
       </div>
       <div>
-        <input
-          id="password-input"
-          placeholder="password"
-          name="password"
-          type="password"
-          data-testid="password-input"
-          onChange={ () => userValidation(user, setUser, setEnableButton) }
-        />
+        <label htmlFor="password-input">
+          Senha
+          <input
+            id="password-input"
+            type="password"
+            data-testid="password-input"
+            onChange={ () => userValidation(user, setUser, setEnableButton) }
+          />
+        </label>
       </div>
       <div>
         <button
