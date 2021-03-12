@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
+const { getAll, getById } = require('../models/UsersService');
 
 const routerLogin = Router();
 
@@ -10,8 +11,9 @@ const jwtConfig = {
 
 const SECRET = 'senha';
 
-routerLogin.get('/', (_req, res) => {
-  res.send('Estou na pagina de login');
+routerLogin.get('/', async (_req, res) => {
+  const users = await getAll();
+  res.send(users);
 });
 
 routerLogin.post('/', async (req, res) => {
@@ -23,12 +25,13 @@ routerLogin.post('/', async (req, res) => {
     userData: userWithouPassword,
   };
   const token = jwt.sign(payload, SECRET, jwtConfig);
-
-  // console.log(jwt.verify(token, 'senha1', jwtConfig));
-  // console.log('usuario: ', user.email);
-  // console.log('senha: ', user.password);
-  // console.log('token: ', token);
   res.status(201).json({ token });
 });
+
+routerLogin.get('/:id', async (req, res) => {
+  const { id } = req.params;
+  const user = await getById(id);
+  res.json(user);
+  }); 
 
 module.exports = routerLogin;
