@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import { GlobalProvider } from './Contexts/GlobalContext';
 
 import theme from './Styles/Theme';
 
 import Login from './Pages/Login';
-import { GlobalProvider } from './Contexts/GlobalContext';
+import Register from './Pages/Register';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <Switch>
           <Route exact path="/" />
           <Route path="/login" component={ Login } />
-          <Route path="/register" />
+          <Route path="/register" component={ Register } />
           <Route path="/profile" />
           <Route path="/products" />
         </Switch>

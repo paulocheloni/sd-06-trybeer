@@ -24,6 +24,19 @@ const Container = styled.div`
       margin-bottom: 20px; 
     }
 
+    > label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 100%;
+
+      margin-bottom: 20px;
+
+      font-size: 18px;
+      font-weight: 500;
+    }
+
     @media (max-width: 500px) {
       border: none;
 

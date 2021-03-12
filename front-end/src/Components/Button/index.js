@@ -11,6 +11,7 @@ const Button = ({
   disabled,
   onClick,
   fontSize,
+  dataTestid,
 }) => (
   <CompButton
     type={ type }
@@ -20,6 +21,7 @@ const Button = ({
     fontSize={ fontSize }
     disabled={ disabled }
     onClick={ onClick }
+    data-testid={ dataTestid }
   >
     {children}
   </CompButton>

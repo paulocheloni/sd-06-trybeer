@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { registered } from '../../Services/seachApis';
+import { loginUser } from '../../Services/Apis';
 
 import Container from './styles';
 
@@ -48,7 +48,7 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const user = await registered(email, password);
+    const user = await loginUser(email, password);
 
     saveLocalStorage(user);
 
