@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import AppContext from './AppContext';
 
 function Provider({ children }) {
@@ -6,11 +7,12 @@ function Provider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   useEffect(() => {
-    function validateForm(email, password) {
-      const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-      emailRegex.test(email) && password.length > 5
-      ? setValidForm(true)
-      : setValidForm(false);
+    const maxLength = 5;
+    function validateForm(emailInput, passwordInput) {
+      const emailRegex = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g;
+      if (emailRegex.test(emailInput)
+        && passwordInput.length > maxLength) return setValidForm(true);
+      setValidForm(false);
     }
     validateForm(email, password);
   }, [email, password]);
@@ -22,13 +24,15 @@ function Provider({ children }) {
     setEmail,
     password,
     setPassword,
-  }
-  
+  };
+
   return (
     <AppContext.Provider value={ contextValue }>
       { children }
     </AppContext.Provider>
   );
 }
+
+Provider.propTypes = { children: PropTypes.element.isRequired };
 
 export default Provider;
