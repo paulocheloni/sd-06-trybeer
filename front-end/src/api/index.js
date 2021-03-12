@@ -13,3 +13,11 @@ export async function create(name, email, password, role) {
   // .then((response) => console.log(response))
   // .catch(alert => console.log(alert))
 }
+
+export async function validate(email, password) {
+  const result = await axios.post('http://localhost:3001/login', {
+    email, password,
+  })
+    .then((response) => response.data);
+  return result;
+}

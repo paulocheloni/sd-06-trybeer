@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { validEmail, validPassword } from '../actions';
+import { validate } from '../api/index';
 
 class LoginDiv extends React.Component {
   constructor() {
@@ -11,7 +12,7 @@ class LoginDiv extends React.Component {
 
   handleChange({ target: { name, value } }) {
     const { dispatchEmail, dispatchPassword } = this.props;
-    const validator = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{3}$/i;
+    const validator = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
     const maxLength = 5;
     if (name === 'email') {
       const isValid = validator.test(value.toLowerCase());
@@ -27,6 +28,19 @@ class LoginDiv extends React.Component {
       } else {
         dispatchPassword(false);
       }
+    }
+  }
+
+  async handleLogin({ target }) {
+    const { history } = this.props;
+    const email = target.parentNode.parentNode.firstChild.childNodes[1].value;
+    const password = target.parentNode.parentNode.firstChild.childNodes[3].value;
+    const isValid = await validate(email, password);
+    console.log(isValid);
+    if (isValid[0].role === 'administrator') {
+      history.push('/admin/orders');
+    } else {
+      history.push('/products');
     }
   }
 
@@ -57,6 +71,7 @@ class LoginDiv extends React.Component {
             className="btn-login"
             data-testid="signin-btn"
             disabled={ !validRegEmail || !validRegPassword }
+            onClick={ (event) => this.handleLogin(event) }
           >
             ENTRAR
           </button>
