@@ -28,7 +28,7 @@ export function Login() {
         <button
           onClick={() => {
             history.push('/products')
-            console.log('retorno api', fetchUser(email));
+            console.log('retorno api', fetchUser());
           }}
           disabled={!(isEmailValid && isPasswordValid)} data-testid='signin-btn'
         >ENTRAR

@@ -1,13 +1,9 @@
 const path = 'http://localhost:3001/login';
 
-async function fetchUser (email) {
-  await fetch(path, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({email})
-  });
+async function fetchUser () {
+  await fetch(path).then(
+    r => r.json()
+  );
 };
 
 export default fetchUser;
