@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ToogleMenu } from '.';
+import PropTypes from 'prop-types';
+import ToogleMenu from './ToogleMenu';
 
-class ComponentName extends React.Component {
+class Header extends React.Component {
   constructor() {
     super();
     this.state = {};
@@ -21,4 +22,8 @@ class ComponentName extends React.Component {
   }
 }
 
-export default connect(null, null)(ComponentName);
+Header.propTypes = {
+  history: PropTypes.shape().isRequired,
+};
+
+export default connect(null, null)(Header);

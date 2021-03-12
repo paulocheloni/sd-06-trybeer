@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Header } from '../components';
@@ -18,5 +19,9 @@ class Products extends React.Component {
     );
   }
 }
+
+Products.propTypes = {
+  history: PropTypes.shape().isRequired,
+};
 
 export default connect(null, null)(Products);

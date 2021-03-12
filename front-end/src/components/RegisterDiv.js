@@ -1,12 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { validNameReg, validEmailReg, validPassReg } from '../actions';
+import { create } from '../api/index';
 
 class RegisterDiv extends React.Component {
   constructor() {
     super();
     this.state = {};
     this.handleChange = this.handleChange.bind(this);
+    this.signUp = this.signUp.bind(this);
+  }
+
+  signUp({ target }) {
+    const { history } = this.props;
+    const name = target.parentNode.firstChild.childNodes[1].value;
+    const email = target.parentNode.firstChild.childNodes[3].value;
+    const pass = target.parentNode.firstChild.childNodes[5].value;
+    const checked = target.parentNode.firstChild.childNodes[6].firstChild;
+    let role = 'client';
+    if (checked.checked) {
+      role = 'administrator';
+    }
+    create(name, email, pass, role);
+    history.push('./login');
   }
 
   handleChange({ target: { name, value } }) {
@@ -47,17 +64,40 @@ class RegisterDiv extends React.Component {
       <div className="register-container">
         <div className="register-form">
           <span>Nome</span>
-          <input className="input" name="name" onChange={ this.handleChange } />
+          <input
+            name="name"
+            className="input"
+            data-testid="signup-name"
+            onChange={ this.handleChange }
+          />
           <span>Email</span>
-          <input className="input" name="email" onChange={ this.handleChange } />
+          <input
+            name="email"
+            className="input"
+            data-testid="signup-email"
+            onChange={ this.handleChange }
+          />
           <span>Senha</span>
-          <input className="input" name="password" type="password" onChange={ this.handleChange } />
+          <input
+            name="password"
+            type="password"
+            className="input"
+            data-testid="signup-password"
+            onChange={ this.handleChange }
+          />
           <label htmlFor="sell-checkbox">
-            <input type="checkbox" id="sell-checkbox" />
-            <span>Quero Vender</span>
+            <input type="checkbox" id="sell-checkbox" data-testid="signup-seller" />
+            <span>Quero vender</span>
           </label>
         </div>
-        <button type="button" disabled={ !validRegName || !validRegEmail || !validRegPass }>CADASTRAR</button>
+        <button
+          type="button"
+          data-testid="signup-btn"
+          onClick={ (event) => this.signUp(event) }
+          disabled={ !validRegName || !validRegEmail || !validRegPass }
+        >
+          Cadastrar
+        </button>
       </div>
     );
   }
@@ -74,5 +114,15 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchRegEmail: (boolean) => dispatch(validEmailReg(boolean)),
   dispatchRegPass: (boolean) => dispatch(validPassReg(boolean)),
 });
+
+RegisterDiv.propTypes = {
+  history: PropTypes.shape().isRequired,
+  validRegEmail: PropTypes.bool.isRequired,
+  validRegName: PropTypes.bool.isRequired,
+  validRegPass: PropTypes.bool.isRequired,
+  dispatchRegName: PropTypes.func.isRequired,
+  dispatchRegPass: PropTypes.func.isRequired,
+  dispatchRegEmail: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterDiv);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { profileName } from '../actions';
 import { Header } from '../components';
 import defaultProfile from '../img/profile.png';
@@ -24,7 +25,7 @@ class Profile extends React.Component {
   }
 
   render() {
-    const { history, profileName } = this.props;
+    const { history, stateProfileName } = this.props;
     const maxLength = 6;
     return (
       <div className="profile-container">
@@ -33,7 +34,12 @@ class Profile extends React.Component {
           <img src={ defaultProfile } alt="profile" />
           <input name="name" placeholder="Name" onChange={ this.handleChange } />
           <input placeholder="Email - ReadOnly" readOnly />
-          <button type="button" disabled={ profileName.length >= maxLength ? null : true }>Salvar</button>
+          <button
+            type="button"
+            disabled={ stateProfileName.length >= maxLength ? null : true }
+          >
+            Salvar
+          </button>
         </div>
       </div>
     );
@@ -47,5 +53,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatchName: (name) => dispatch(profileName(name)),
 });
+
+Profile.propTypes = {
+  history: PropTypes.shape().isRequired,
+  dispatchName: PropTypes.func.isRequired,
+  stateProfileName: PropTypes.string.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
