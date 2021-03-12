@@ -7,7 +7,7 @@ const SideBar = () => {
   const { stateSideBar } = useContext(GlobalContext);
 
   return (
-    <>
+    <div>
       {stateSideBar && (
         <CompSideBar>
           <a href="/#" data-testid="side-menu-item-products">Produtos</a>
@@ -16,7 +16,7 @@ const SideBar = () => {
           <a href="/#" data-testid="side-menu-item-logout">Sair</a>
         </CompSideBar>
       )}
-    </>
+    </div>
   );
 };
 

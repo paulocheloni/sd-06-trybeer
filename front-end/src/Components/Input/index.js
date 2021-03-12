@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import CompInput from './styles';
 
@@ -15,5 +16,12 @@ const Input = ({
     heigth={ heigth }
   />
 );
+
+Input.propTypes = {
+  placeholder: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  heigth: PropTypes.string.isRequired,
+  dataTestid: PropTypes.string.isRequired,
+};
 
 export default Input;

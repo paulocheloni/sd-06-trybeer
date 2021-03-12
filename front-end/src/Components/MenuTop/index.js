@@ -19,12 +19,13 @@ const MenuTop = () => {
 
   return (
     <CompMenuTop className="side-menu-container">
-      <img
-        src="/images/cardapio.png"
-        alt="Botão MenuTop"
-        onClick={ () => setStateSideBar(!stateSideBar) }
-        data-testid="top-hamburguer"
-      />
+      <button type="button" onClick={ () => setStateSideBar(!stateSideBar) }>
+        <img
+          src="/images/cardapio.png"
+          alt="Botão MenuTop"
+          data-testid="top-hamburguer"
+        />
+      </button>
       <h2 data-testid="top-title">{pathName}</h2>
     </CompMenuTop>
   );

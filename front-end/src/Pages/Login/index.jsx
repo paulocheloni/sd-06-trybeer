@@ -4,7 +4,7 @@ import { loginUser } from '../../Services/Apis';
 
 import Container from './styles';
 
-import Input from '../../Components/Input';
+// import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 
 const handleRedirect = () => {
@@ -42,26 +42,26 @@ const form = ({ setEmail, setPassword, isDisabled, email, password }) => (
     <h1>Login</h1>
     <label htmlFor="email">
       Email
-      <Input
+      <input
         id="email"
         placeholder="Email"
-        width="400px"
-        heigth="40px"
-        fontSize="16px"
+        // width="400px"
+        // heigth="40px"
+        // fontSize="16px"
         onChange={ ({ target }) => setEmail(target.value) }
-        dataTestid="email-input"
+        data-testid="email-input"
       />
     </label>
     <label htmlFor="senha">
-    Senha
-      <Input
+      Senha
+      <input
         id="senha"
         placeholder="Senha"
-        width="400px"
-        heigth="40px"
-        fontSize="16px"
+        // width="400px"
+        // heigth="40px"
+        // fontSize="16px"
         onChange={ ({ target }) => setPassword(target.value) }
-        dataTestid="password-input"
+        data-testid="password-input"
       />
     </label>
     <Button
