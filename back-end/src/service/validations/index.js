@@ -43,9 +43,8 @@ const newUserValidation = async (email) => {
 const tokenValidation = (token) => {
   const secret = 'secretToken';
   if (!token) return wrongTokenInfo;
-  
+
   const validationResult = jwt.decode(token, secret);
-  console.log(validationResult);
   if (validationResult) return true;
   return wrongTokenInfo;
 };
