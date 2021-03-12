@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import TrybeerContext from '../context/TrybeerContext';
-import { userValidation, axios } from '../services/loginService';
+
+const { userValidation, handleAxios } = require('../services/loginService');
 
 function Login() {
   const { user, setUser } = useContext(TrybeerContext);
@@ -33,7 +34,7 @@ function Login() {
           disabled={ enableButton }
           type="button"
           data-testid="signin-btn"
-        onClick={ () => axios(user) }
+          onClick={ () => handleAxios(user) }
         >
           ENTRAR
         </button>

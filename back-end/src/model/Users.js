@@ -13,6 +13,6 @@ exports.create = async ({ email, password, role }) =>
   connection
     .execute('INSERT INTO users (email, password) VALUES (?)', [
       email,
-      password
+      password,
     ])
     .then(([result]) => ({ id: result.insertId, email, password, role }));

@@ -1,16 +1,19 @@
 const { Router } = require('express');
+const rescue = require('express-rescue');
 const UserService = require('../service/UserService');
+const createToken = require('../authentication/createToken');
 
 const router = new Router();
 
 const OK = 200;
 
-router.post('/', async (req, res) => {
-  const { email, password } = req.body;
+router.post('/', rescue(async (req, res) => {
+  const { email } = req.body;
 
-  const user = await UserService.getByEmail(email);
+  const { role } = await UserService.getByEmail(email);
+  const token = await createToken({ email, role });
 
-  return res.status(OK).json(user);
-});
+  return res.status(OK).json({ token, role });
+}));
 
 module.exports = router;
