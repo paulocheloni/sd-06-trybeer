@@ -43,7 +43,6 @@ function Register({ history }) {
         click: handleClick,
         user: newUser,
         isValid: valid,
-        setNewUser,
       } }
     >
       <FormRegister />
