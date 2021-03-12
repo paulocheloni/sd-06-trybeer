@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
+import fetchLogin from '../../services/Login'
 
 import './Login.css';
 
@@ -30,7 +31,7 @@ export default function Login() {
   }
 
   const validateEmail = (email) => {
-    const regexEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+$/
+    const regexEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]{0,2})?$/
 
     return regexEmail.test(email)
   }
@@ -41,10 +42,17 @@ export default function Login() {
     return (regexPassword.test(password) && password.length >= 6)
   }
 
-  const userRedirect = (role) => {
-    if (role === 'admin') {
+  const userRedirect = async () => {
+    const result = await fetchLogin(email, password)
+    console.log(result);
+    
+    if (result.message) return alert(result.message);
+    
+    localStorage.setItem('user', JSON.stringify(result));
+    
+    if (result.role === 'administrator') {
       history.push('/admin/profile')
-    } else if (role === 'client'){
+    } else if (result.role === 'client'){
       history.push('/products')
     } else {
       return null

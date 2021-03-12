@@ -14,7 +14,7 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
-routerLogin.get("/", async (req, res) => {
+routerLogin.get('/', async (req, res) => {
   const allUsers = await getAll();
   return res.status(status.SUCCESS).json(allUsers);
 });
@@ -25,7 +25,7 @@ routerLogin.post('/', async (req, res, next) => {
   console.log(user);
   try {
     if (!user.length) {
-      throw new ThrowError(status.NOT_FOUND, messages.USER_NOT_FOUND)
+      throw new ThrowError(status.NOT_FOUND, messages.USER_NOT_FOUND);
     }
     const payload = {
       iss: 'Trybeer',
@@ -33,9 +33,15 @@ routerLogin.post('/', async (req, res, next) => {
       userData: user,
     };
     const token = jwt.sign(payload, secret, jwtConfig);
-    return res.status(status.SUCCESS).json({ token });
+    return res.status(status.SUCCESS)
+      .json({ 
+        token,
+        name: user[0].name,
+        email: user[0].email,
+        role: user[0].role,
+      });
   } catch (error) {
-    next(error)
+    next(error);
   }
 });
 
