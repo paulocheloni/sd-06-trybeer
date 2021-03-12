@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { setConstantValue } from 'typescript';
+// import { setConstantValue } from 'typescript';
 import useInput from '../hooks/useInput';
-import { nameValidation } from '../utils/validations';
+// import { nameValidation } from '../utils/validations';
 
 export default function Register() {
   const [email, setEmail] = useInput('');
