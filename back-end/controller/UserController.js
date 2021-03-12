@@ -1,10 +1,8 @@
 const { Router } = require('express');
 const UserService = require('../service/UserService');
-// const { validateUser } = require('../middlewares/UserMiddleware'); 
+const { OK, CREATED } = require('../schema/statusSchema');
 
 const UserController = new Router();
-const OK = 200;
-const CREATED = 201;
 
 // Get All Users
 UserController.get('/', async (req, res) => {
