@@ -9,7 +9,7 @@ function Provider({ children }) {
   useEffect(() => {
     const maxLength = 5;
     function validateForm(emailInput, passwordInput) {
-      const emailRegex = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g;
+      const emailRegex = /\S+@\S+\.\S+/;
       if (emailRegex.test(emailInput)
         && passwordInput.length > maxLength) return setValidForm(true);
       setValidForm(false);
