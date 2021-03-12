@@ -23,7 +23,7 @@ class RegisterDiv extends React.Component {
       role = 'administrator';
     }
     create(name, email, pass, role);
-    history.push('./');
+    history.push('./login');
   }
 
   handleChange({ target: { name, value } }) {
