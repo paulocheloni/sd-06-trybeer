@@ -6,6 +6,7 @@ import Checkout from './Checkout';
 import Orders from './Orders';
 import Admin from './Admin';
 import Home from './Home';
+import AdminOrders from './AdminOrders';
 
 export {
   Login,
@@ -16,4 +17,5 @@ export {
   Orders,
   Admin,
   Home,
+  AdminOrders,
 };

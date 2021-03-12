@@ -9,6 +9,7 @@ import {
   Orders,
   Admin,
   Home,
+  AdminOrders,
 } from '../pages';
 
 function index() {
@@ -22,6 +23,7 @@ function index() {
       <Route path="/orders" component={ Orders } />
       <Route path="/admin" component={ Admin } />
       <Route path="/" component={ Home } />
+      <Route path="/admin/orders" component={ AdminOrders } />
     </Switch>
   );
 }
