@@ -9,7 +9,7 @@ const generateNewToken = async (email) => {
     algorithm: 'HS256',
   };
 
-  const token = await jwt.sign({ email, secret, jwtConfig });
+  const token = await jwt.sign({ data: email }, secret, jwtConfig);
 
   return token;
 };
