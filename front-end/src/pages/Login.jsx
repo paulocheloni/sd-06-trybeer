@@ -29,7 +29,7 @@ function Login({ history }) {
     console.log(user.email);
     e.preventDefault();
     if (user.email === 'tryber@trybe.com.br') {
-      history.push('admin/orders');
+      history.push('/admin/orders');
     } else { history.push('/products'); }
     localStorage.setItem('user', JSON.stringify(user.email));
   };
