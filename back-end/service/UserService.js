@@ -6,11 +6,11 @@ const getAll = async () => {
   return users;
 };
 
-// // Add new Users
-// const create = async (name, email, password) => {
-//   const user = await userModel.create(name, email, password);
-//   return user;
-// };
+// Add new Users
+const createNewUser = async (name, email, password, role) => {
+  const user = await userModel.creteUser(name, email, password, role);
+  return user;
+};
 
 // // Verify user by email and password
 const verifyUser = async (email, password) => {
@@ -88,7 +88,7 @@ const verifyUser = async (email, password) => {
 
 module.exports = {
   getAll,
-  // create,
+  createNewUser,
   verifyUser,
   // findById,
   // update,

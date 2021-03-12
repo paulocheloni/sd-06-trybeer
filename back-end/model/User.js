@@ -1,4 +1,3 @@
-// const { ObjectId } = require('mongodb');
 const connection = require('../connection/connection');
 
 // Find All Users
@@ -16,7 +15,16 @@ const verifyUser = async (email, password) => {
   return users;
 };
 
+// Create new user
+const creteUser = async (name, email, password, role) => {
+  const [users] = await connection
+    .execute('INSERT INTO Trybeer.users (name, email, password, role) VALUES (?, ?, ?, ?)', [name, email, password, role]);
+  console.log(users)
+  return users;
+} 
+
 module.exports = {
   getAll,
   verifyUser,
+  creteUser,
 };

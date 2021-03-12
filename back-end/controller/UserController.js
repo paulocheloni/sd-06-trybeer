@@ -4,7 +4,7 @@ const UserService = require('../service/UserService');
 
 const UserController = new Router();
 const OK = 200;
-// const CREATED = 201;
+const CREATED = 201;
 
 // Get All Users
 UserController.get('/', async (req, res) => {
@@ -12,15 +12,13 @@ UserController.get('/', async (req, res) => {
   res.status(OK).json({ Users: users });
 });
 
-// // Create New Product
-// UserController.post('/', validateUser, async (req, res) => {
-//   const { name, email, password } = req.body;
+// Create New User
+UserController.post('/', async (req, res) => {
+  const { name, email, password, role } = req.body;
+  await UserService.createNewUser(name, email, password, role);
 
-//   const user = await service.create(name, email, password);users
-//     return res.status(UNPROCESSABLE_ENTITY).json(responseError(result));
-//   }
-//   res.status(OK).json(result);
-// });
+  res.status(CREATED).json({ message: "OK" });
+});
 
 // // Update Product
 // UserController.put('/:id', async (req, res) => {
