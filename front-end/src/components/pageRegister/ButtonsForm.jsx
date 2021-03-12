@@ -9,7 +9,7 @@ function ButtonsForm(valid, handleClick) {
         onClick={ handleClick }
         data-testid="signup-btn"
       >
-        CADASTRAR
+        Cadastrar
       </button>
     </div>
   );

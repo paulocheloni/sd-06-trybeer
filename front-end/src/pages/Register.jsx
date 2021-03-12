@@ -29,7 +29,7 @@ function Register({ history }) {
   const handleClick = (e) => {
     e.preventDefault();
     if (newUser.tipo === 'admin') {
-      history.push('/admin/oders');
+      history.push('/admin/orders');
     } else {
       history.push('/products');
     }
