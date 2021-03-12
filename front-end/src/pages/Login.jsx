@@ -6,7 +6,6 @@ import FormLogin from '../components/FormLogin';
 function Login({ history }) {
   const [user, setUser] = useState({ email: '', password: '' });
   const [valid, setValid] = useState(true);
-
   useEffect(() => {
     const isValid = async () => {
       const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
