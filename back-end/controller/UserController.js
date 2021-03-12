@@ -17,7 +17,7 @@ UserController.post('/', async (req, res) => {
   const { name, email, password, role } = req.body;
   await UserService.createNewUser(name, email, password, role);
 
-  res.status(CREATED).json({ message: "OK" });
+  res.status(CREATED).json({ message: 'OK' });
 });
 
 // // Update Product

@@ -28,8 +28,8 @@ LoginController.post('/', async (req, res) => {
     const token = jwt.sign({ data: user }, secret);
 
     res.status(OK).json({ token, role });
-  } catch {
-    res.status(Unauthorized).json({ message: "Incorrect email or password" })
+  } catch (e) {
+    res.status(Unauthorized).json({ message: 'Incorrect email or password' });
   }
 });
 

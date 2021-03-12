@@ -18,10 +18,10 @@ const verifyUser = async (email, password) => {
 // Create new user
 const creteUser = async (name, email, password, role) => {
   const [users] = await connection
-    .execute('INSERT INTO Trybeer.users (name, email, password, role) VALUES (?, ?, ?, ?)', [name, email, password, role]);
-  console.log(users)
+    .execute('INSERT INTO Trybeer.users (name, email, password, role) VALUES (?, ?, ?, ?)', 
+    [name, email, password, role]);
   return users;
-} 
+}; 
 
 module.exports = {
   getAll,
