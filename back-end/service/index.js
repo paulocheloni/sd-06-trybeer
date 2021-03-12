@@ -4,4 +4,4 @@ const RegisterService = require('./RegisterService');
 module.exports = {
   RegisterService,
   // ClientService,
-}
+};
