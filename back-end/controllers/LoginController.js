@@ -14,7 +14,7 @@ routerLogin.get('/', (_req, res) => {
   res.send('Estou na pagina de login');
 });
 
-routerLogin.post('/', async (req, _res) => {
+routerLogin.post('/', async (req, res) => {
   const { user } = req.body;
   const { password, ...userWithouPassword } = user;
   const payload = {
@@ -23,9 +23,10 @@ routerLogin.post('/', async (req, _res) => {
     userData: userWithouPassword,
   };
   const token = jwt.sign(payload, SECRET, jwtConfig);
-  console.log('usuario: ', user.email);
-  console.log('senha: ', user.password);
-  console.log('token: ', token);
+  // console.log('usuario: ', user.email);
+  // console.log('senha: ', user.password);
+  // console.log('token: ', token);
+  res.status(201).json({ token });
 });
 
 module.exports = routerLogin;

@@ -1,7 +1,7 @@
 const urlLogin = 'http://localhost:3001/login';
 
 const login = async (user) => {
-  await fetch(urlLogin, {
+  const postMethod = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -9,7 +9,11 @@ const login = async (user) => {
     body: JSON.stringify({
       user,
     }),
-  });
+  };
+
+  const apiRequest = await fetch(urlLogin, postMethod);
+  const apiResponse = await apiRequest.json();
+  localStorage.setItem('token', JSON.stringify(apiResponse.token));
 };
 
 export default login;

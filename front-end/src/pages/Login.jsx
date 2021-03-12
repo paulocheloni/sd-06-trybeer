@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import login from '../methods/login';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import loginSchema from '../validationsSchemas/login';
-import { Link } from 'react-router-dom';
-import './Login.css'
+import './Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -31,9 +31,9 @@ function Login() {
         >
           Entrar
         </Button>
-        <Link to='/registro'
+        <Link
+          to="/register"
           className="no-account-btn"
-          // onClick={ () => console.log('faz alguma coisa com isso') }
           disabled={ false }
         >
           Ainda não tenho conta
