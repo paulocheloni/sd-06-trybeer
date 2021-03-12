@@ -9,7 +9,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/">
-        <Redirect to="/login" />
+          <Redirect to="/login" />
         </Route>
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />
