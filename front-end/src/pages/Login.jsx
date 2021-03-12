@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import useInput from '../hooks/useInput';
+import fetchUser from '../services/getUser';
 
 export function Login() {
   const history = useHistory();
@@ -9,7 +10,7 @@ export function Login() {
 
   const isEmailValid = /[A-Za-z0-9]+@[A-Za-z]+[A-z]*(\.\w{2,3})+/.test(email);
   const isPasswordValid = password && password.length > 5;
-
+  
   return (
     <div>
       <h1>Página Login</h1>
@@ -25,7 +26,10 @@ export function Login() {
           </label>
         </fieldset>
         <button
-          onClick={() => history.push('/products')}
+          onClick={() => {
+            history.push('/products')
+            console.log('retorno api', fetchUser(email));
+          }}
           disabled={!(isEmailValid && isPasswordValid)} data-testid='signin-btn'
         >ENTRAR
         </button>

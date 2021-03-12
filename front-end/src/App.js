@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import { Login } from './pages/Login';
+import { Orders } from './pages/Orders';
 import { Products } from './pages/Products';
 import { Register } from './pages/Register';
 
@@ -12,6 +13,7 @@ function App() {
         <Route path='/login' component={ Login } />
         <Route path='/products' component={ Products } />
         <Route path='/register' component={ Register } />
+        <Route path='/admin/orders' component={ Orders } />
       </Switch>
     </div>
   );
