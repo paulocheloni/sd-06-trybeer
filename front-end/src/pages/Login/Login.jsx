@@ -22,7 +22,7 @@ const userRedirect = async (email, password, history) => {
   const result = await fetchLogin(email, password);
   if (result.message) return console.log(result.message);
   localStorage.setItem('user', JSON.stringify(result));
-  if (result.role === 'administrator') return history.push('/admin/profile');
+  if (result.role === 'administrator') return history.push('/admin/orders');
   if (result.role === 'client') return history.push('/products');
   return null;
 };
