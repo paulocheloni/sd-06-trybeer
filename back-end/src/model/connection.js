@@ -4,6 +4,6 @@ module.exports = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'comments',
+  database: 'Trybeer',
   port: '3306',
 });
