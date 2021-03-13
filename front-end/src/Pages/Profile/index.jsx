@@ -22,7 +22,7 @@ const button = (isDisabled) => (
     heigth="40px"
     color="green"
     fontSize="20px"
-    disabled={isDisabled}
+    disabled={ isDisabled }
     dataTestid="profile-save-btn"
   >
     Salvar
@@ -30,22 +30,22 @@ const button = (isDisabled) => (
 );
 
 const form = ([name, setNameState, email, token, isDisabled]) => (
-  <form onSubmit={(e) => handleSubmit(e, name, email, token)}>
+  <form onSubmit={ (e) => handleSubmit(e, name, email, token) }>
     <h1>Register</h1>
     <label htmlFor="name-input">
       Nome
       <input
-        value={name}
+        value={ name }
         id="name-input"
         heigth="40px"
-        onChange={({ target }) => setNameState(target.value)}
+        onChange={ ({ target }) => setNameState(target.value) }
         data-testid="profile-name-input"
       />
     </label>
     <label htmlFor="email-input">
       Email
       <input
-        value={email}
+        value={ email }
         id="email-input"
         heigth="40px"
         disabled
