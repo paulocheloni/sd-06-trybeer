@@ -7,28 +7,18 @@ import Container from './styles';
 // import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 
-const handleRedirect = (user) => {
-  if (user.role === 'client') {
-    window.location.href = '/products';
-  } else {
-    window.location.href = '/admin/orders';
-  }
-};
-
 const handleSubmit = async (event,
   { name, email, password, isChecked, setEmailAlreadyExists }) => {
   event.preventDefault();
 
-  let role = 'client';
-  if (isChecked) role = 'admin';
+  const role = (isChecked) ? 'admin' : 'client';
 
   const result = await registerNewUser(name, email, password, role);
 
   if (result && result === 'E-mail already in database.') {
     setEmailAlreadyExists(true);
   } else if (result && result === 'OK') {
-    const user = { name, email, password, role };
-    handleRedirect(user);
+    window.location.href = (role === 'client') ? '/products' : '/admin/orders';
   }
 };
 
