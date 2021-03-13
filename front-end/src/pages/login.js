@@ -33,7 +33,7 @@ function Login() {
           history.push('/admin/orders');
         }
         if (response.data.role === 'client') {
-          history.push('/produtos');
+          history.push('/products');
         }
       }).catch((err) => {
         console.log(err.response.data);
