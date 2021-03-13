@@ -21,12 +21,12 @@ const exclude = async (id) => {
 };
 
 // Find a user
-const findByName = async (name) => {
+const findByEmail = async (email) => {
   const [user] = await connection.execute(
-    'SELECT * FROM users WHERE name = ?',
-    [name],
+    'SELECT * FROM users WHERE email = ?',
+    [email],
   );
   return user;
 };
 
-module.exports = { getAll, create, exclude, findByName };
+module.exports = { getAll, create, exclude, findByEmail };
