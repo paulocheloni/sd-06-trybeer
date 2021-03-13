@@ -15,22 +15,21 @@ const handleRedirect = (user) => {
   }
 };
 
-const handleSubmit = async (event, { name, email, password, isChecked }) => {
+const handleSubmit = async (event,
+  { name, email, password, isChecked, setEmailAlreadyExists }) => {
   event.preventDefault();
 
-  let role = '';
+  let role = 'client';
+  if (isChecked) role = 'admin';
 
-  if (isChecked === true) {
-    role = 'admin';
-  } else {
-    role = 'client';
+  const result = await registerNewUser(name, email, password, role);
+
+  if (result && result === 'E-mail already in database.') {
+    setEmailAlreadyExists(true);
+  } else if (result && result === 'OK') {
+    const user = { name, email, password, role };
+    handleRedirect(user);
   }
-
-  await registerNewUser(name, email, password, role);
-
-  const user = { name, email, password, role };
-
-  handleRedirect(user);
 };
 
 const button = (isDisabled) => (
@@ -49,9 +48,10 @@ const button = (isDisabled) => (
 
 const form = (params) => {
   const { name, setEmail,
-    setPassword, isDisabled, email, password, setName, isChecked, setIsChecked,
+    setPassword, isDisabled, email, password, setName,
+    isChecked, setIsChecked, emailAlreadyExists, setEmailAlreadyExists,
   } = params;
-  const paramsRegistered = { name, email, password, isChecked };
+  const paramsRegistered = { name, email, password, isChecked, setEmailAlreadyExists };
   return (
     <form onSubmit={ (e) => handleSubmit(e, paramsRegistered) }>
       <h1>Register</h1>
@@ -61,16 +61,17 @@ const form = (params) => {
           id="name-input"
           heigth="40px"
           onChange={ ({ target }) => setName(target.value) }
-          dataTestid="signup-name"
+          data-testid="signup-name"
         />
       </label>
+      {(emailAlreadyExists) ? <p>E-mail already in database</p> : null}
       <label htmlFor="email-input">
         Email
         <input
           id="email-input"
           heigth="40px"
           onChange={ ({ target }) => setEmail(target.value) }
-          dataTestid="signup-email"
+          data-testid="signup-email"
         />
       </label>
       <label htmlFor="password-input">
@@ -79,7 +80,7 @@ const form = (params) => {
           id="password-input"
           heigth="40px"
           onChange={ ({ target }) => setPassword(target.value) }
-          dataTestid="signup-password"
+          data-testid="signup-password"
         />
       </label>
       <label htmlFor="check">
@@ -103,6 +104,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
+  const [emailAlreadyExists, setEmailAlreadyExists] = useState(false);
 
   const twelve = 12;
 
@@ -116,7 +118,7 @@ const Register = () => {
     } else {
       setIsDisabled(true);
     }
-  }, [name, email, password]);
+  }, [name, email, password, emailAlreadyExists]);
 
   const params = {
     name,
@@ -128,6 +130,8 @@ const Register = () => {
     setName,
     isChecked,
     setIsChecked,
+    emailAlreadyExists,
+    setEmailAlreadyExists,
   };
 
   return (

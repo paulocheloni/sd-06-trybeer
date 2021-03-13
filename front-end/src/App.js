@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { GlobalProvider } from './Contexts/GlobalContext';
 
@@ -14,7 +14,7 @@ function App() {
     <ThemeProvider theme={ theme }>
       <GlobalProvider>
         <Switch>
-          <Route exact path="/" />
+          <Route exact path="/" component={ () => <Redirect to="/login" /> } />
           <Route path="/login" component={ Login } />
           <Route path="/register" component={ Register } />
           <Route path="/profile" component={ Profile } />

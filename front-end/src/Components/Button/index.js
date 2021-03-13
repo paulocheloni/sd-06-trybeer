@@ -28,12 +28,16 @@ const Button = ({
   </CompButton>
 );
 
+Button.defaultProps = {
+  color: '',
+};
+
 Button.propTypes = {
   children: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
   heigth: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
   disabled: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   fontSize: PropTypes.string.isRequired,

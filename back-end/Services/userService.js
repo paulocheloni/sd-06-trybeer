@@ -6,7 +6,8 @@ const secret = 'secretToken';
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
   const user = await UserModel.loginUser(email, password);
-  if (user) res.status(404).json({ message: 'User not found' });
+
+  if (!user) res.status(404).json({ message: 'User not found' });
 
   const token = jwt.sign({ user }, secret);
   user.token = token;
@@ -17,16 +18,15 @@ const loginUser = async (req, res) => {
 const validateEmail = async (req, res, next) => {
   const { email } = req.body;
   const user = await UserModel.findUserByEmail(email);
-  if (user) res.status(409).json({ message: 'email já existe' });
-  console.log('passei pela validação do email');
+
+  if (user) res.status(409).json({ message: 'E-mail already in database.' });
   next();
 };
 
 const registerNewUser = async (req, res) => {
-  console.log('cheguei no register user');
   const { name, email, password, role } = req.body;
   await UserModel.registerNewUser(name, email, password, role);
-  return res.status(201).json({ message: 'E-mail already in database' });
+  return res.status(201).json({ message: 'OK' });
 };
 
 module.exports = {

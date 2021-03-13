@@ -2,8 +2,8 @@ import axios from 'axios';
 
 export const loginUser = async (email, password) => {
   const user = await axios({
-    method: 'post',
-    url: 'http://localhost:3000/login',
+    method: 'POST',
+    url: 'http://localhost:3001/login',
     data: {
       email,
       password,
@@ -19,17 +19,15 @@ export const loginUser = async (email, password) => {
 export const registerNewUser = async (name, email, password, role) => {
   const user = await axios({
     method: 'post',
-    url: 'http://localhost:3000/register',
+    url: 'http://localhost:3001/register',
     data: {
       name,
       email,
       password,
       role,
     },
-  }).then((res) => console.log(res, 'registrei o usuario'))
-    .catch((err) => {
-      console.error(`ops! ocorreu um erro${err}`);
-    });
+  }).then((res) => res.data.message)
+    .catch((err) => err.response.data.message);
 
   return user;
 };
