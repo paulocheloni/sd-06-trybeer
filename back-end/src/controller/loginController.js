@@ -10,7 +10,7 @@ controller.post('/', async (req, res, next) => {
 
   if (result.payload) return next(result);
 
-  return res.status(200).json(result);
+  return res.status(200).json({ token: result });
 });
 
 module.exports = controller;
