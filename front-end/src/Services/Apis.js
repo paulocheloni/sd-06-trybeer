@@ -17,7 +17,7 @@ export const loginUser = async (email, password) => {
 };
 
 export const registerNewUser = async (name, email, password, role) => {
-  const user = await axios({
+  const response = await axios({
     method: 'post',
     url: 'http://localhost:3001/register',
     data: {
@@ -29,5 +29,20 @@ export const registerNewUser = async (name, email, password, role) => {
   }).then((res) => res.data.message)
     .catch((err) => err.response.data.message);
 
-  return user;
+  return response;
+};
+
+export const updateUser = async (name, email, token) => {
+  const response = await axios({
+    method: 'PUT',
+    url: 'http://localhost:3001/profile/edit',
+    data: {
+      name,
+      email,
+      token,
+    },
+  }).then((res) => res.data)
+    .catch((err) => err.response.data);
+
+  return response;
 };
