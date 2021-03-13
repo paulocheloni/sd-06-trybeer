@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+// const images = require('../images.tar.gz');
 
 const { routerLogin } = require('./controllers');
 const { routerProducts } = require('./controllers');
@@ -11,13 +12,15 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use(express.static(`${__dirname}/images`));
+
 app.get('/', (_req, res) => res.send('Hello World!'));
 
 app.use('/login', routerLogin);
 app.use('/products', routerProducts);
 
 app.use(async (err, _req, res, _next) => {
-  res.status(err.status).json(err.message)
-})
+  res.status(err.status).json(err.message);
+});
 
 app.listen(port, () => `Running on ${port}`);
