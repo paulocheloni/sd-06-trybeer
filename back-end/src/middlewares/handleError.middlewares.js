@@ -1,3 +1,4 @@
+const { errorLogger } = require('../utils/logger');
 const ERROR = require('./helpers/error');
 
 const checkForCustomError = (message) => {
@@ -14,7 +15,9 @@ module.exports = (error, _req, res, _next) => {
   const isCustomError = checkForCustomError(error.err.message);
   const errorObject = handleErrorObject(error, isCustomError);
 
-  console.error({ error: errorObject });
+  const log = { error: errorObject };
+  errorLogger.error(log);
+  console.error(log);
 
   const { statusCode, customMessage, customCode } = errorObject;
   const ERR = {
