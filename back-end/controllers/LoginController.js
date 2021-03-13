@@ -1,7 +1,8 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
-const { getAll, getById, createOne, getByEmail } = require('../models/UsersService');
-const validateLogin = require('../middlewares/validateLogin')
+const { getAll, getById } = require('../models/UsersService');
+const validateLogin = require('../middlewares/validateLogin');
+
 const routerLogin = Router();
 
 const jwtConfig = {
@@ -16,7 +17,7 @@ routerLogin.get('/', async (_req, res) => {
   res.send(users);
 });
 
-routerLogin.post('/', validateLogin,async (req, res) => {
+routerLogin.post('/', validateLogin, async (req, res) => {
   const { user } = req.body;
   const { password, ...userWithouPassword } = user;
   const payload = {
@@ -25,10 +26,10 @@ routerLogin.post('/', validateLogin,async (req, res) => {
     userData: userWithouPassword,
   };
   const token = jwt.sign(payload, SECRET, jwtConfig);
-  console.log(res.locals.user)
-  const {name, email, role} = res.locals.user
+  console.log(res.locals.user);
+  const { name, email, role } = res.locals.user;
   res.status(201).json({
-    name, email, token , role    
+    name, email, token, role,    
     });
 });
 
@@ -38,7 +39,5 @@ routerLogin.get('/:id', async (req, res) => {
   const user = await getById(id);
   res.json(user);
   });
-
-  
 
 module.exports = routerLogin;
