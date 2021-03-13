@@ -1,9 +1,9 @@
 const messages = {
     erroInterno: {
-        message: 'Erro Interno!'
+        message: 'Erro Interno!',
     },
     dadosInvalidos: {
-        message: 'Login ou Senha Invalidos'
+        message: 'Login ou Senha Invalidos',
     },
 };
 
