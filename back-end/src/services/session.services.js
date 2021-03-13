@@ -1,12 +1,13 @@
-const { generateToken } = require('../security');
-
 const { users } = require('../models');
+const { generateToken } = require('../security');
+const { authLogin } = require('../schemas');
 
 const login = async ({ email, password }) => {
-  console.log({ email, password });
   const user = await users.queryByEmail(email);
-  // CHECKPOINT
-  // validateLogin(email, password, user);
+  authLogin(email, password, user);
+  const token = generateToken(user.id);
+  const { id, password: _, ...data } = user;
+  return { ...data, token };
 };
 
 module.exports = {
