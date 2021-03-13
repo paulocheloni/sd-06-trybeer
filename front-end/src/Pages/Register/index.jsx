@@ -4,7 +4,7 @@ import { registerNewUser } from '../../Services/Apis';
 
 import Container from './styles';
 
-import Input from '../../Components/Input';
+// import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 
 const handleRedirect = (user) => {
@@ -33,6 +33,20 @@ const handleSubmit = async (event, { name, email, password, isChecked }) => {
   handleRedirect(user);
 };
 
+const button = (isDisabled) => (
+  <Button
+    type="submit"
+    width="400px"
+    heigth="40px"
+    color="green"
+    fontSize="20px"
+    disabled={ isDisabled }
+    dataTestid="signup-btn"
+  >
+    Cadastrar
+  </Button>
+);
+
 const form = (params) => {
   const { name, setEmail,
     setPassword, isDisabled, email, password, setName, isChecked, setIsChecked,
@@ -43,7 +57,7 @@ const form = (params) => {
       <h1>Register</h1>
       <label htmlFor="name-input">
         Nome
-        <Input
+        <input
           id="name-input"
           heigth="40px"
           onChange={ ({ target }) => setName(target.value) }
@@ -52,7 +66,7 @@ const form = (params) => {
       </label>
       <label htmlFor="email-input">
         Email
-        <Input
+        <input
           id="email-input"
           heigth="40px"
           onChange={ ({ target }) => setEmail(target.value) }
@@ -61,7 +75,7 @@ const form = (params) => {
       </label>
       <label htmlFor="password-input">
         Senha
-        <Input
+        <input
           id="password-input"
           heigth="40px"
           onChange={ ({ target }) => setPassword(target.value) }
@@ -78,17 +92,7 @@ const form = (params) => {
         />
         Quero vender
       </label>
-      <Button
-        type="submit"
-        width="400px"
-        heigth="40px"
-        color="green"
-        fontSize="20px"
-        disabled={ isDisabled }
-        dataTestid="signup-btn"
-      >
-        Cadastrar
-      </Button>
+      {button(isDisabled)}
     </form>
   );
 };
