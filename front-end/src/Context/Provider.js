@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import ContextAPI from './ContextAPI';
 
 const TrybeerProvider = ({ children }) => {
-    
   const [email, setEmail] = useState([]);
-
 
   const contextState = {
     email,
