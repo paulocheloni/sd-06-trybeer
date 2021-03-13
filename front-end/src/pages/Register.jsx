@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import useInput from '../hooks/useInput';
 import { nameValidation,
   passwordValidation, emailValidation } from '../utils/validations';
-import fetchAllUsers from '../services/getAllUsers';
+import fetchUser from '../services/getUser';
 
 export default function Register() {
   const history = useHistory();
@@ -12,6 +12,7 @@ export default function Register() {
   const [password, setPassword] = useInput('');
   const [name, setName] = useInput('');
   const [role, setRole] = useState('client');
+  const [emailAlreadyExists, setEmailAlreadyExists] = useState('');
 
   const handleCheckbox = () => {
     const checkBox = document.getElementById('sell');
@@ -20,9 +21,9 @@ export default function Register() {
   };
 
   const handleOnClik = async () => {
-    // console.log(role);
-    fetchAllUsers();
-    console.log(fetchAllUsers());
+    const doesTheEmailExist = await fetchUser(email, password);
+    console.log(doesTheEmailExist);
+    if (doesTheEmailExist) return setEmailAlreadyExists('E-mail already in database.');
     if (role === 'client') {
       history.push('/products');
     } else {
@@ -86,13 +87,13 @@ export default function Register() {
             && passwordValidation(password) && nameValidation(name)) }
           onClick={ (e) => {
             e.preventDefault();
-            // console.log(role);
             handleOnClik();
           } }
         >
           Cadastrar
         </button>
       </fieldset>
+      <span>{ emailAlreadyExists }</span>
     </form>
   );
 }

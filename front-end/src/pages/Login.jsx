@@ -3,8 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import useInput from '../hooks/useInput';
 import fetchUser from '../services/getUser';
 import { emailValidation, passwordValidation } from '../utils/validations';
-// import axios from 'axios';
-// import LoginForm from '../components/LoginForm';
 
 export default function Login() {
   const history = useHistory();
@@ -16,8 +14,7 @@ export default function Login() {
         localStorage.setItem('token', response.data[1]);
         if (response.data[0].role === 'client') {
           history.push('/products');
-        }
-        history.push('/admin/orders');
+        } else history.push('/admin/orders');
       });
   };
   return (
