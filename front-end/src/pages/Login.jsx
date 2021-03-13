@@ -10,7 +10,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [buttonLogin, setButton] = useState(true);
-  const [user, setUser] = useState('') 
+  const [user, setUser] = useState('');
   const handleChanges = async () => {
     try {
       await loginSchema.validate({ email, password });
@@ -21,19 +21,19 @@ function Login() {
   };
   handleChanges();
   if (user.role) {
-    return user.role === 'administrator' 
-    ? <Redirect to="/admin/profile"/> 
-    : <Redirect to="/products" />
+    return user.role === 'administrator'
+      ? <Redirect to="/admin/profile" />
+      : <Redirect to="/products" />;
   }
   return (
-    
+
     <main>
       <form>
         <Input type="email" setValue={ setEmail } value={ email } />
         <Input type="password" setValue={ setPassword } value={ password } />
         <Button
           className="signin-btn"
-          onClick={ async () => setUser( await login({ email, password })) }
+          onClick={ async () => setUser(await login({ email, password })) }
           disabled={ buttonLogin }
         >
           Entrar
