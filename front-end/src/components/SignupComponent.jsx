@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 function Signup({ history }) {
   const [checked, setChecked] = useState(false);
-  // const [admin, setAdmin] = useState(false)
   const [valid, setValid] = useState(true);
   const [user, setUser] = useState({ name: '', email: '', password: '' });
   
@@ -14,7 +13,7 @@ function Signup({ history }) {
     const password = user.password;
     const minLength = 6;
     const nameInput = user.name
-    const nameRegex =  /^[a-zA-Z]$/i;
+    const nameRegex =  /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]+$/g;
     const name = nameRegex.test(user.name);
     const minNameLength = 12;
     if(password.length >= minLength && email && !name && nameInput.length > minNameLength) {
@@ -68,7 +67,7 @@ function Signup({ history }) {
           />
         </label>
         <label htmlFor="password">
-          Password
+          Senha
           <input
             type="password"
             id="password"
@@ -78,12 +77,15 @@ function Signup({ history }) {
             onChange={ handleChange }
           />
         </label>
-        <input
-         type="checkbox"
-         data-testid="signup-seller"
-         defaultChecked={ checked }
-         onChange={ handleCheck }
-        />
+        <label htmlFor="vender">
+          Quero vender
+          <input
+            type="checkbox"
+            data-testid="signup-seller"
+            defaultChecked={ checked }
+            onChange={ handleCheck }
+          />
+        </label>
         <button
           id="sign-up"
           type="button"
@@ -91,7 +93,7 @@ function Signup({ history }) {
           disabled={ valid }
           onClick={ handleClick }
         >
-          CADASTRAR
+          Cadastrar
         </button>
       </forms>
     </>
