@@ -71,7 +71,7 @@ export default function Register() {
       </fieldset>
       <fieldset>
         <label htmlFor="sell">
-          Quero vender
+          Quero Vender
           <input
             id="sell"
             data-testid="signup-seller"
