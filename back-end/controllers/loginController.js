@@ -1,9 +1,9 @@
 const { Router } = require('express');
-const Login = require('./Login');
+const login = require('./login');
 const serviceLogin = require('../services/serviceLogin');
 
 const router = Router();
 
-router.post('/', serviceLogin.validateFieldLogin, Login);
+router.post('/', serviceLogin.validateFieldLogin, login);
 
 module.exports = router;
