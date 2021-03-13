@@ -15,8 +15,14 @@ const registerNewUser = (name, email, password, role) => connection.query(
   [name, email, password, role],
 );
 
+const updateUser = (name, email) => connection.query(
+  'UPDATE Trybeer.users SET name = ? WHERE email = ?',
+  [name, email],
+).then((result) => result[0].affectedRows > 0);
+
 module.exports = {
   loginUser,
   findUserByEmail,
   registerNewUser,
+  updateUser,
 };

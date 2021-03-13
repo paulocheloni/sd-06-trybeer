@@ -1,7 +1,11 @@
 const jwt = require('jsonwebtoken');
 const UserModel = require('../Model/userModel');
+const { throwThisError } = require('../Utils');
 
-const secret = 'secretToken';
+require('dotenv').config();
+
+const secret = process.env.SECRET;
+const NOT_FOUND = 404;
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -29,8 +33,19 @@ const registerNewUser = async (req, res) => {
   return res.status(201).json({ message: 'OK' });
 };
 
+const updateUser = async (req, res) => {
+  const { name, email } = req.body;
+
+  const updated = await UserModel.updateUser(name, email);
+  if (!updated) throwThisError(NOT_FOUND, 'Dados inválidos');
+  
+  req.user.name = name;
+  res.status(200).json(req.user);
+};
+
 module.exports = {
   loginUser,
   validateEmail,
   registerNewUser,
+  updateUser,
 };
