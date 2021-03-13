@@ -1,14 +1,13 @@
 import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 // Provider
-import Provider from '../src/Context/Provider';
+import Provider from './Context/Provider';
 // Pages
-import { Login, Register, Admin, Cliente  } from './pages';
+import { Login, Register, Admin, Cliente } from './pages';
 // CSS
 import './App.css';
 
 function App() {
-
   return (
     <Provider>
       <BrowserRouter>
