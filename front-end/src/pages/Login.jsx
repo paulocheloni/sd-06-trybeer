@@ -11,8 +11,9 @@ export default function Login() {
   const handleOnClik = async () => {
     fetchUser(email, password)
       .then((response) => {
-        localStorage.setItem('token', response.data[1]);
-        if (response.data[0].role === 'client') {
+        console.log(response);
+        localStorage.setItem('token', response[1]);
+        if (response.role === 'client') {
           history.push('/products');
         } else history.push('/admin/orders');
       });
