@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const modelLogin = require('../models/modelLogin');
+const userModel = require('../models/userModel');
 
 const secret = 'dara secret';
 
@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, secret);
-    const user = await modelLogin.findUserByEmail(decoded.data.email);
+    const user = await userModel.findUserByEmail(decoded.data.email);
 
     if (!user) return res.status(401).json({ message: 'erro ao procurar usuário token' });
 

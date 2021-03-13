@@ -1,0 +1,56 @@
+const userModel = require('../models/userModel');
+
+const validateEmail = (email) => {
+  const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+  const emailVerified = regex.test(email);
+  return emailVerified;
+};
+
+const validatePassword = (password) => {
+  const passwordVerified = password.length >= 6;
+  return passwordVerified;
+};
+
+const validateName = (name) => {
+  const regexName = /^[A-Za-z'\s]+$/;
+  const nameLength = name.length >= 12;
+  const nameVerified = regexName.test(name);
+  return nameLength && nameVerified;
+};
+
+const findUserByEmail = (email) => userModel.findUserByEmail(email);
+
+const create = (name, email, password, role) => userModel.createUser(name, email, password, role);
+
+const validateFieldLogin = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  if (!email && !password) return res.status(401).json({ message: 'All fields must be filled' });
+
+  if (!validateEmail(email) && !validatePassword(password)) {
+    return res.status(401).json({ message: 'incorrect' });
+  }
+
+  next();
+};
+
+const validateFieldUser = (req, res, next) => {
+  const { name, email, password } = req.body;
+
+  if (!name && !email && !password) {
+    return res.status(401).json({ message: 'All fields must be filled' });
+  }
+
+  if (!validateEmail(email) && !validatePassword(password) && !validateName(name)) {
+    return res.status(401).json({ message: 'incorrect' });
+  }
+
+  next();
+};
+
+module.exports = {
+  validateFieldLogin,
+  findUserByEmail,
+  validateFieldUser,
+  create,
+};
