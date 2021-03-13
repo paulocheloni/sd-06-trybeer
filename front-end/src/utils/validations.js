@@ -11,7 +11,8 @@ const passwordValidation = (password) => {
 
 const nameValidation = (name) => {
   const MINIMUM_NAME_LENGTH = 11;
-  const isNameValid = name.length > MINIMUM_NAME_LENGTH && name.test(/[a-zA-Z]/);
+  const isNameValid = name.length > MINIMUM_NAME_LENGTH
+    && (/^[A-Za-z'\s]+$/.test(name));
   return isNameValid;
 };
 

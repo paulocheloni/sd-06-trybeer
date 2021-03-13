@@ -1,19 +1,33 @@
 import React, { useState } from 'react';
-// import { setConstantValue } from 'typescript';
+import { useHistory } from 'react-router-dom';
+// import emailExists from '../utils/emailExists';
 import useInput from '../hooks/useInput';
 import { nameValidation,
   passwordValidation, emailValidation } from '../utils/validations';
+import fetchAllUsers from '../services/getAllUsers';
 
 export default function Register() {
+  const history = useHistory();
   const [email, setEmail] = useInput('');
   const [password, setPassword] = useInput('');
   const [name, setName] = useInput('');
-  const [setRole] = useState('client');
+  const [role, setRole] = useState('client');
 
   const handleCheckbox = () => {
     const checkBox = document.getElementById('sell');
     if (checkBox.checked) setRole('administrator');
     else setRole('client');
+  };
+
+  const handleOnClik = async () => {
+    // console.log(role);
+    fetchAllUsers();
+    console.log(fetchAllUsers());
+    if (role === 'client') {
+      history.push('/products');
+    } else {
+      history.push('/admin/orders');
+    }
   };
 
   return (
@@ -70,6 +84,11 @@ export default function Register() {
           type="button"
           disabled={ !(emailValidation(email)
             && passwordValidation(password) && nameValidation(name)) }
+          onClick={ (e) => {
+            e.preventDefault();
+            // console.log(role);
+            handleOnClik();
+          } }
         >
           Cadastrar
         </button>
