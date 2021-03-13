@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const { routerLogin } = require('./controllers');
+const { routerProducts } = require('./controllers');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -13,6 +14,7 @@ app.use(bodyParser.json());
 app.get('/', (_req, res) => res.send('Hello World!'));
 
 app.use('/login', routerLogin);
+app.use('/products', routerProducts);
 
 app.use(async (err, _req, res, _next) => {
   res.status(err.status).json(err.message)
