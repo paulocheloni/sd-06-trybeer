@@ -13,7 +13,7 @@ export default function Login() {
       .then((response) => {
         console.log(response);
         localStorage.setItem('token', response[1]);
-        if (response.role === 'client') {
+        if (response[0].role === 'client') {
           history.push('/products');
         } else history.push('/admin/orders');
       });
