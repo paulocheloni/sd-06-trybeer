@@ -81,7 +81,7 @@ const form = (params) => {
           onChange={ ({ target }) => setIsChecked(target.checked) }
           data-testid="signup-seller"
         />
-        Quero Vender
+        Quero vender
       </label>
       {button(isDisabled)}
     </form>
