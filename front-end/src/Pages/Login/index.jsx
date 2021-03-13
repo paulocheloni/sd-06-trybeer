@@ -6,6 +6,7 @@ import Button from '../../Components/Button';
 import AppContext from '../../context/AppContext';
 
 const Login = () => {
+
   const { email, setEmail, validForm, password, setPassword } = useContext(AppContext);
   const history = useHistory();
   const fetchApi = async () => {
@@ -22,27 +23,27 @@ const Login = () => {
     <div>
       <h1>Login</h1>
       <Input
-        value={ email }
-        onChange={ ({ target }) => setEmail(target.value) }
+        value={email}
+        onChange={({ target }) => setEmail(target.value)}
         dataTestId="email-input"
       />
       <Input
-        value={ password }
+        value={password}
         type="password"
-        onChange={ ({ target }) => setPassword(target.value) }
+        onChange={({ target }) => setPassword(target.value)}
         name="Senha"
         dataTestId="password-input"
       />
       <Button
-        disabled={ !validForm }
+        disabled={!validForm}
         dataTestId="signin-btn"
-        onClick={ () => fetchApi() }
+        onClick={() => fetchApi()}
       >
         ENTRAR
       </Button>
       <Button
         dataTestId="no-account-btn"
-        onClick={ () => history.push('/register') }
+        onClick={() => history.push('/register')}
       >
         Ainda não tenho conta
       </Button>
