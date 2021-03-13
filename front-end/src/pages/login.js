@@ -43,25 +43,31 @@ function Login() {
   return (
     <div className="App">
       <h1>Login</h1>
-      <input
-        type="text"
-        data-testid="email-input"
-        placeholder="digite seu Email"
-        onChange={ (e) => setEmail(e.target.value) }
-      />
-      <input
-        type="text"
-        data-testid="password-input"
-        placeholder="digite seu Password"
-        onChange={ (e) => setPassword(e.target.value) }
-      />
+      <label htmlFor="email-input">
+        Email
+        <input
+          type="text"
+          data-testid="email-input"
+          placeholder="digite seu Email"
+          onChange={ (e) => setEmail(e.target.value) }
+        />
+      </label>
+      <label htmlFor="email-input">
+        Senha
+        <input
+          type="text"
+          data-testid="password-input"
+          placeholder="digite seu Password"
+          onChange={ (e) => setPassword(e.target.value) }
+        />
+      </label>
       <button
         type="button"
         data-testid="signin-btn"
         disabled={ disabled }
         onClick={ InsertUserLocalStorage }
       >
-        Login
+        ENTRAR
       </button>
       <RedirectPage
         rota="/register"
