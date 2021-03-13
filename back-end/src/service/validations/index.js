@@ -61,8 +61,6 @@ const tokenValidation = async (token) => {
     return id;
   });
 
-  console.log(result);
-
   if (!result.payload) {
     const checkUser = await userModel.getById(result);
     const { id: dbId } = checkUser;
