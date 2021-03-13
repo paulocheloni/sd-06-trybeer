@@ -3,9 +3,10 @@ const rescue = require('express-rescue');
 const cors = require('cors');
 
 // Componente de repostas https
-const { status, messages } = require('./src/util/dataStatus')
-const { erro } = status
-const { erroInterno } = messages
+const { status, messages } = require('./src/util/dataStatus');
+
+const { erro } = status;
+const { erroInterno } = messages;
 
 const app = express();
 
