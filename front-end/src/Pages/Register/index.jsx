@@ -64,7 +64,7 @@ const form = (params) => {
           data-testid="signup-name"
         />
       </label>
-      {(emailAlreadyExists) ? <p>E-mail already in database</p> : null}
+      {(emailAlreadyExists) ? <p>E-mail already in database.</p> : null}
       <label htmlFor="email-input">
         Email
         <input
