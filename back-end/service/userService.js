@@ -14,7 +14,6 @@ const findUserByEmail = async (userEmail, password) => {
       isError: true,
     };
   }
-  // console.log(userFound);
   return userFound;
 };
 

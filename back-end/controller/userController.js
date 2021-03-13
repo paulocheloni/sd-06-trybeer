@@ -7,11 +7,6 @@ const createToken = require('../auth/createToken');
 
 const router = Router();
 
-/* router.get('/', rescue(async (req, res) => {
-  const allUsers = await userService.getAllUsers();
-  return res.status(200).json(allUsers);
-})); */
-
 router.post('/', validatePassword, validateEmail, rescue(async (req, res) => {
   const { email, password } = req.body;
   // console.log(email);

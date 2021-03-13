@@ -1,7 +1,4 @@
-// const userService = require('../service/userService');
-
 const BAD_REQUEST = 400;
-// const UNPROCESSABLE_ENTITY = 422;
 
 function validatePassword(req, res, next) {
   const { password } = req.body;

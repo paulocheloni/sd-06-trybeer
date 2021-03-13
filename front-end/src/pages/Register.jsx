@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 // import { setConstantValue } from 'typescript';
 import useInput from '../hooks/useInput';
-import { nameValidation, passwordValidation, emailValidation } from '../utils/validations';
+import { nameValidation,
+  passwordValidation, emailValidation } from '../utils/validations';
 
 export default function Register() {
   const [email, setEmail] = useInput('');
   const [password, setPassword] = useInput('');
   const [name, setName] = useInput('');
-  const [role, setRole] = useState('client');
+  const [setRole] = useState('client');
 
   const handleCheckbox = () => {
-    const role = document.getElementById('sell');
-    if (role.checked) setRole('administrator');
+    const checkBox = document.getElementById('sell');
+    if (checkBox.checked) setRole('administrator');
     else setRole('client');
   };
 
@@ -67,7 +68,8 @@ export default function Register() {
           id="signup"
           data-testid="signup-btn"
           type="button"
-          disabled={ !(emailValidation(email) && passwordValidation(password) && nameValidation(name)) }
+          disabled={ !(emailValidation(email)
+            && passwordValidation(password) && nameValidation(name)) }
         >
           Cadastrar
         </button>
