@@ -93,9 +93,9 @@ const addressValidation = (reqBody) => {
 };
 
 const saleValidation = async (reqBody) => {
-  const { userId, price, date, status } = reqBody;
+  const { userId, price, status } = reqBody;
 
-  if (!userId || !price || !date || !status) return notValidSale;
+  if (!userId || !price || !status) return notValidSale;
   return true;
 };
 
