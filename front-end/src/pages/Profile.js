@@ -47,7 +47,7 @@ class Profile extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  profileName: state.login.profileName,
+  stateProfileName: state.login.profileName,
 });
 
 const mapDispatchToProps = (dispatch) => ({
