@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router";
 // Services
 import { saveState } from '../services/localStorage';
-import history from '../services/history';
 import api from '../services/api';
 import RedirectPage from '../components/redirectPage';
 
@@ -11,15 +10,17 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
-  
 
+  const history = useHistory();
+  
   useEffect(() => {
     validateEmailAndPassword(email, password)
   }, [email, password]);
 
 
   const validateEmailAndPassword = (email, password) => {
-    const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+$/gi;
+    // const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+$/gi;
+    const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.?([a-z]+)?$/i;
 
     if (regex.test(email) && password.length > 5) {
       return setDisabled(false)
@@ -35,11 +36,11 @@ function Login() {
         saveState('user', response.data);
         if (response.data.role === 'administrator') {
           console.log(`admin`)
-          return(<Redirect to="/admin/orders" />)
+          history.push('/admin/orders');
         } 
         if (response.data.role === 'client') {
           console.log(`clientes`)
-          return(<Redirect push to="/produtos" />)
+          history.push('/produtos');
         } 
       }).catch((err) => {
         console.log(err.response.data);
