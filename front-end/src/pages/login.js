@@ -67,6 +67,7 @@ function Login() {
         rota="/register"
         id="no-account-btn"
         conteudo="Ainda não tenho conta"
+        data-testid="no-account-btn"
       />
     </div>
   );
