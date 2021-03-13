@@ -34,16 +34,12 @@ const validateFieldLogin = async (req, res, next) => {
   next();
 };
 
-const validateFieldUser = (req, res, next) => {
-  const { name, email, password } = req.body;
+const validateFieldName = (req, res, next) => {
+  const { name } = req.body;
 
-  if (!name && !email && !password) {
-    return res.status(401).json({ message: 'All fields must be filled' });
-  }
+  if (!name) return res.status(401).json({ message: 'All fields must be filled' });
 
-  if (!validateEmail(email) && !validatePassword(password) && !validateName(name)) {
-    return res.status(401).json({ message: 'incorrect' });
-  }
+  if (!validateName(name)) return res.status(401).json({ message: 'incorrect' });
 
   next();
 };
@@ -51,6 +47,6 @@ const validateFieldUser = (req, res, next) => {
 module.exports = {
   validateFieldLogin,
   findUserByEmail,
-  validateFieldUser,
+  validateFieldName,
   create,
 };
