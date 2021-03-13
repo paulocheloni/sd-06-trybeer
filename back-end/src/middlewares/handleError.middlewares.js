@@ -1,9 +1,26 @@
-module.exports = (err, _req, res, _next) => {
-  console.error({ err });
-  const STATUS = err.statusCode || 500;
+const ERROR = require('./helpers/error');
+
+const checkForCustomError = (message) => {
+  const arr = message.split('_');
+  return arr[0] === 'C' && arr[1] === 'ERR';
+};
+
+const handleErrorObject = (error, boolean) => {
+  if (!boolean) return error;
+  return { ...ERROR[error.err.message], err: error.err.stack };
+};
+
+module.exports = (error, _req, res, _next) => {
+  const isCustomError = checkForCustomError(error.err.message);
+  const errorObject = handleErrorObject(error, isCustomError);
+
+  console.error({ error: errorObject });
+
+  const { statusCode, customMessage, customCode } = errorObject;
   const ERR = {
-    message: err.customMessage || 'Erro interno',
-    code: err.customCode || 'INTERNAL_ERROR',
+    message: customMessage || 'Erro interno',
+    code: customCode || 'INTERNAL_ERROR',
   };
-  res.status(STATUS).json(ERR);
+
+  res.status(statusCode).json(ERR);
 };
