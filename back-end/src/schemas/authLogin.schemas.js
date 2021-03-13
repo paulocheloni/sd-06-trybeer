@@ -6,7 +6,7 @@ const authUser = (email, pass, user) => {
     case isBlank(user): throw new Error('!user não encontrado');
     case isNotEqual(email, user.email): throw new Error('email !== emailFromDb');
     case isNotEqual(pass, user.password): throw new Error('pass !== passFromDb');
-    default: console.log('All good from AuthLogin.');
+    default: return null;
   }
 };
 

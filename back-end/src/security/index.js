@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
 const securityConfig = require('./configs.security');
 
-const generateToken = ({ id }) => {
-  console.log('generateToken ID: %s', id);
+const generateToken = (id) => {
   const payload = {
     iss: 'trybeer-api',
     aud: 'trybeer-api',
