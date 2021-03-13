@@ -25,9 +25,7 @@ const saveLocalStorage = (res) => {
 
 const handleSubmit = async (event, email, password) => {
   event.preventDefault();
-  console.log('entrei na handle submit');
   const user = await loginUser(email, password);
-  console.log(user, 'nosso usuario');
   saveLocalStorage(user);
 
   handleRedirect();

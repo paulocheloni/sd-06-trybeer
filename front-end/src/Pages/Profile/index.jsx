@@ -11,8 +11,6 @@ const handleSubmit = async (event, name, email, token) => {
 
   const updated = await updateUser(name, email, token);
 
-  console.log(updated);
-
   if (updated.message === 'Token Inválido') localStorage.setItem('user', '');
   if (updated.name === name) localStorage.setItem(('user', JSON.stringify(updated)));
 };
@@ -25,7 +23,7 @@ const button = (isDisabled) => (
     color="green"
     fontSize="20px"
     disabled={ isDisabled }
-    dataTestid="signup-btn"
+    dataTestid="profile-save-btn"
   >
     Salvar
   </Button>
@@ -41,7 +39,7 @@ const form = ([name, setNameState, email, token, isDisabled]) => (
         id="name-input"
         heigth="40px"
         onChange={ ({ target }) => setNameState(target.value) }
-        data-testid="signup-name"
+        data-testid="profile-name-input"
       />
     </label>
     <label htmlFor="email-input">
@@ -51,7 +49,7 @@ const form = ([name, setNameState, email, token, isDisabled]) => (
         id="email-input"
         heigth="40px"
         disabled
-        data-testid="signup-email"
+        data-testid="profile-email-input"
         readOnly
       />
     </label>
@@ -86,7 +84,7 @@ const Profile = () => {
   const { token } = JSON.parse(dataStorage);
   return (
     <>
-      <MenuTop />
+      <MenuTop dataTestid="top-title" title="Meu perfil" />
       <SideBar />
       <Container>
         {form([nameState, setNameState, emailState, token, isDisabled])}
