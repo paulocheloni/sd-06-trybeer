@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { loginUser } from '../../Services/Apis';
 
 import Container from './styles';
@@ -8,26 +8,15 @@ import Container from './styles';
 // import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 
-const handleRedirect = (history, setRole) => {
-  const userRole = localStorage.getItem('user');
-
-  const { role } = JSON.parse(userRole);
-  // if (role === 'client') { <Redirect to="/products" />; }
-  setRole(role);
-  // history.push((role === 'client') ? '/products' : '/admin/orders');
-  // window.location.href = (role === 'client') ? '/products' : '/admin/orders';
-};
-
 const saveLocalStorage = (res) => {
   localStorage.setItem('user', JSON.stringify(res));
 };
 
-const handleSubmit = async ([event, email, password, history, setRole]) => {
+const handleSubmit = async ([event, email, password, history]) => {
   event.preventDefault();
   const user = await loginUser(email, password);
   saveLocalStorage(user);
-
-  handleRedirect(history, setRole);
+  history.push((user.role === 'client') ? '/products' : '/admin/orders');
 };
 
 const userRegistered = () => {
@@ -35,18 +24,14 @@ const userRegistered = () => {
 };
 
 const form = (params) => {
-  const { setEmail, setPassword, isDisabled, email, password, history, setRole } = params;
+  const { setEmail, setPassword, isDisabled, email, password, history } = params;
   return (
-    <form onSubmit={ (e) => handleSubmit([e, email, password, history, setRole]) }>
+    <form onSubmit={ (e) => handleSubmit([e, email, password, history]) }>
       <h1>Login</h1>
       <label htmlFor="email">
         Email
         <input
           id="email"
-          placeholder="Email"
-          // width="400px"
-          // heigth="40px"
-          // fontSize="16px"
           onChange={ ({ target }) => setEmail(target.value) }
           data-testid="email-input"
         />
@@ -55,10 +40,6 @@ const form = (params) => {
         Senha
         <input
           id="senha"
-          placeholder="Senha"
-          // width="400px"
-          // heigth="40px"
-          // fontSize="16px"
           onChange={ ({ target }) => setPassword(target.value) }
           data-testid="password-input"
         />
@@ -91,7 +72,6 @@ const form = (params) => {
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const history = useHistory();
 
@@ -99,20 +79,15 @@ const Login = () => {
     const emailFormat = /\S+@\S+\.\S+/.test(email);
     const six = 6;
     const minPasswordLength = password.length >= six;
-    if (emailFormat && minPasswordLength) {
-      setIsDisabled(false);
-    } else {
-      setIsDisabled(true);
-    }
+
+    setIsDisabled(!(emailFormat && minPasswordLength));
   }, [email, password]);
 
   const params = {
-    setEmail, setPassword, isDisabled, email, password, history, setRole,
+    setEmail, setPassword, isDisabled, email, password, history,
   };
-  const path = (role === 'client') ? '/products' : '/admin/orders';
   return (
     <Container>
-      {role && <Redirect to={ path } /> }
       {form(params)}
     </Container>
   );
