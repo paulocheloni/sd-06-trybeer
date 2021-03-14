@@ -66,7 +66,7 @@ class RegisterDiv extends React.Component {
   }
 
   render() {
-    const { validRegName, validRegEmail, validRegPass, emailRegistered } = this.props;
+    const { validRegName, validRegEmail, validRegPass } = this.props;
     return (
       <div className="register-container">
         <div className="register-form">
