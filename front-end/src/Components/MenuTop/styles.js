@@ -17,19 +17,30 @@ const CompMenuTop = styled.header`
 
     display: flex;
     align-items: center;
-    
-    > img {
-      width: 30px;
 
-      padding: 3px 4px;
+    > button {
+      background: none;
+      
+      padding: 3px 5px 0 5px;
 
       border: 1px solid ${theme.colors.white};
       border-radius: 3px;
 
       cursor: pointer;
+
+      transition: filter 0.3s;
+
+      &:hover {
+        filter: brightness(0.8);
+      }
+
+      > img {
+        width: 16px;
+      }
     }
 
     > h2 {
+      font-size: 22px;
       color: ${theme.colors.white};
       position: absolute;
       left: 50%;

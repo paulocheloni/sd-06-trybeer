@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { updateUser } from '../../Services/Apis';
+
 import Button from '../../Components/Button';
 import MenuTop from '../../Components/MenuTop';
 import SideBar from '../../Components/SideBar';
-import { updateUser } from '../../Services/Apis';
+import Input from '../../Components/Input';
 
 import Container from './styles';
 
@@ -32,27 +34,18 @@ const button = (isDisabled) => (
 const form = ([name, setNameState, email, token, isDisabled]) => (
   <form onSubmit={ (e) => handleSubmit(e, name, email, token) }>
     <h1>Register</h1>
-    <label htmlFor="name-input">
-      Nome
-      <input
-        value={ name }
-        id="name-input"
-        heigth="40px"
-        onChange={ ({ target }) => setNameState(target.value) }
-        data-testid="profile-name-input"
-      />
-    </label>
-    <label htmlFor="email-input">
-      Email
-      <input
-        value={ email }
-        id="email-input"
-        heigth="40px"
-        disabled
-        data-testid="profile-email-input"
-        readOnly
-      />
-    </label>
+    <Input
+      id="name-input"
+      label="Nome"
+      dataTestid="profile-name-input"
+      onChange={ ({ target }) => setNameState(target.value) }
+    />
+    <Input
+      id="email-input"
+      label="Email"
+      dataTestid="profile-email-input"
+      readOnly
+    />
 
     {button(isDisabled)}
   </form>

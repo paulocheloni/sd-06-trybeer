@@ -4,24 +4,33 @@ import PropTypes from 'prop-types';
 import CompInput from './styles';
 
 const Input = ({
-  placeholder,
+  readOnly,
   onChange,
-  heigth,
   dataTestid,
+  label,
+  id,
 }) => (
-  <CompInput
-    data-testid={ dataTestid }
-    onChange={ (e) => onChange(e) }
-    placeholder={ placeholder }
-    heigth={ heigth }
-  />
+  <CompInput htmlFor={ id }>
+    {label}
+    <input
+      id={ id }
+      data-testid={ dataTestid }
+      onChange={ (e) => onChange(e) }
+      readOnly={ readOnly }
+    />
+  </CompInput>
 );
 
+Input.defaultProps = {
+  readOnly: false,
+};
+
 Input.propTypes = {
-  placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  heigth: PropTypes.string.isRequired,
   dataTestid: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  readOnly: PropTypes.bool,
 };
 
 export default Input;
