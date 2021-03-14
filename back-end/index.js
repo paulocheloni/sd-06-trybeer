@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const connection = require('./database/connection');
+const LoginController = require('./controllers/LoginController');
 
 require("dotenv").config();
 

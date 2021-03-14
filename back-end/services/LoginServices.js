@@ -12,7 +12,7 @@ if (!email || !password) {
 } 
 
 if (!validateEmail(email)){
-  return res.status(status.UNAUTHORIZED).json({ message: 'Incorrect username or password'); 
+  return res.status(status.UNAUTHORIZED).json({ message: 'Incorrect username or password'}); 
 } 
 
 if (!validatePassword(password)){
