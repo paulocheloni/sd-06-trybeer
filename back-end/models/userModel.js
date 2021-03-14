@@ -8,11 +8,12 @@ const findUserByEmail = async (email) => {
 };
 
 const createUser = async (name, email, password, role) => {
-  const user = await connection.execute(
+  console.log('cheguei antes')
+  await connection.execute(
     'INSERT INTO users (name, email, password, role) VALUES (?,?,?,?)',
     [name, email, password, role],
   );
-  return user;
+  console.log('cheguei dps')
 };
 
 module.exports = {

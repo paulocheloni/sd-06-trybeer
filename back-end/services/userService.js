@@ -20,26 +20,31 @@ const validateName = (name) => {
 
 const findUserByEmail = (email) => userModel.findUserByEmail(email);
 
-const create = (name, email, password, role) => userModel.createUser(name, email, password, role);
+const create = async (name, email, password, role) => {
+  console.log('cheguei cretea')
+  await userModel.createUser(name, email, password, role);
+  const user = { name, email, password, role };
+  console.log(user);
+  return user;
+}
 
 const validateFieldLogin = async (req, res, next) => {
   const { email, password } = req.body;
 
-  if (!email && !password) return res.status(401).json({ message: 'All fields must be filled' });
+  if (!email && !password) return res.status(400).json({ message: 'All fields must be filled' });
 
   if (!validateEmail(email) && !validatePassword(password)) {
-    return res.status(401).json({ message: 'incorrect' });
+    return res.status(400).json({ message: 'incorrect' });
   }
-
   next();
 };
 
 const validateFieldName = (req, res, next) => {
   const { name } = req.body;
 
-  if (!name) return res.status(401).json({ message: 'All fields must be filled' });
+  if (!name) return res.status(400).json({ message: 'All fields must be filled' });
 
-  if (!validateName(name)) return res.status(401).json({ message: 'incorrect' });
+  if (!validateName(name)) return res.status(400).json({ message: 'incorrect' });
 
   next();
 };
