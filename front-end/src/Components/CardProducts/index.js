@@ -2,7 +2,7 @@ import React from 'react';
 
 import S from './styles';
 
-export const CardProducts = () => (
+const CardProducts = () => (
   <S.Container>
     <S.Price>
       <span>R$ 5,50</span>
