@@ -7,6 +7,6 @@ const LoginRouter = Router();
 
 LoginRouter.post('/',
   auth,
-  LoginController.generateNewToken);
+  LoginController.generateToken);
 
 module.exports = LoginRouter;
