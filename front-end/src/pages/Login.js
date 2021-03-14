@@ -1,8 +1,10 @@
 import React from 'react';
+import { Topbar } from '../components';
 
 export default function Login() {
   return (
     <div>
+      <Topbar />
       <form>
         <fieldset>
           <legend>Login</legend>

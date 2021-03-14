@@ -1,8 +1,10 @@
 import React from 'react';
+import { Topbar } from '../components';
 
 export default function Register() {
   return (
     <div>
+      <Topbar />
       <form>
         <fieldset>
           <legend>Registro</legend>
