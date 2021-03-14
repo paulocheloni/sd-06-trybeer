@@ -12,18 +12,32 @@ class RegisterDiv extends React.Component {
     this.signUp = this.signUp.bind(this);
   }
 
-  signUp({ target }) {
+  async signUp({ target }) {
     const { history } = this.props;
     const name = target.parentNode.firstChild.childNodes[1].value;
-    const email = target.parentNode.firstChild.childNodes[3].value;
-    const pass = target.parentNode.firstChild.childNodes[5].value;
-    const checked = target.parentNode.firstChild.childNodes[6].firstChild;
+    const email = target.parentNode.firstChild.childNodes[2].childNodes[1].value;
+    const pass = target.parentNode.firstChild.childNodes[4].value;
+    const checked = target.parentNode.firstChild.childNodes[5].childNodes[0];
+    const spanMaxTime = 10000;
     let role = 'client';
     if (checked.checked) {
       role = 'administrator';
     }
-    create(name, email, pass, role);
-    history.push('./login');
+    const user = await create(name, email, pass, role);
+    if (user.statusText) {
+      const hiddenSpan = document.querySelector('.hidden-span');
+      hiddenSpan.style.display = 'inline-block';
+      hiddenSpan.innerHTML = user.message;
+      setTimeout(() => {
+        document.querySelector('.hidden-span').style.display = 'none';
+      }, spanMaxTime);
+      return null;
+    }
+    if (user.role === 'administrator') {
+      history.push('./admin/orders');
+    } else {
+      history.push('./products');
+    }
   }
 
   handleChange({ target: { name, value } }) {
@@ -70,13 +84,16 @@ class RegisterDiv extends React.Component {
             data-testid="signup-name"
             onChange={ this.handleChange }
           />
-          <span>Email</span>
-          <input
-            name="email"
-            className="input"
-            data-testid="signup-email"
-            onChange={ this.handleChange }
-          />
+          <div className="email-div">
+            <span>Email</span>
+            <input
+              name="email"
+              className="input"
+              data-testid="signup-email"
+              onChange={ this.handleChange }
+            />
+            <span className="hidden-span" />
+          </div>
           <span>Senha</span>
           <input
             name="password"

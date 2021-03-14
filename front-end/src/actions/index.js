@@ -4,6 +4,7 @@ export const REG_NAME = 'REG_NAME';
 export const REG_EMAIL = 'REG_EMAIL';
 export const REG_PASS = 'REG_PASS';
 export const PROFILE_NAME = 'PROFILE_NAME';
+export const USER_INFO = 'USER_INFO';
 
 export const validEmail = (boolean) => ({
   type: EMAIL,
@@ -33,4 +34,9 @@ export const validPassReg = (boolean) => ({
 export const profileName = (name) => ({
   type: PROFILE_NAME,
   name,
+});
+
+export const userInfos = (array) => ({
+  type: USER_INFO,
+  array,
 });

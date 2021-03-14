@@ -8,46 +8,38 @@ class ToogleMenu extends React.Component {
     this.state = {};
   }
 
-  toogleInOut() {
-    const toogleMenuContainer = document.querySelector('.tooglemenu-container');
-    const buttonsDiv = document.querySelector('.buttons-div');
-    if (buttonsDiv.style.display === '') {
-      buttonsDiv.style.display = 'flex';
-    } else {
-      buttonsDiv.style.display = '';
-    }
-    if (toogleMenuContainer.style.height === '') {
-      toogleMenuContainer.style.height = '100%';
-    } else {
-      toogleMenuContainer.style.height = '';
-    }
-  }
-
   render() {
     const { history } = this.props;
     return (
-      <div className="tooglemenu-container">
-        <button type="button" className="toogle-button" onClick={ this.toogleInOut }>
-          <i className="fas fa-bars" />
-        </button>
+      <div className="side-menu-container">
         <div className="buttons-div">
           <button
             type="button"
+            data-testid="side-menu-item-products"
             onClick={ () => history.push('./products') }
           >
             Produtos
           </button>
           <button
             type="button"
+            data-testid="side-menu-item-my-orders"
             onClick={ () => history.push('./orders') }
           >
             Meus Pedidos
           </button>
           <button
             type="button"
+            data-testid="side-menu-item-my-profile"
             onClick={ () => history.push('./profile') }
           >
             Meu Perfil
+          </button>
+          <button
+            type="button"
+            data-testid="side-menu-item-logout"
+            onClick={ () => history.push('./login') }
+          >
+            Sair
           </button>
         </div>
       </div>
