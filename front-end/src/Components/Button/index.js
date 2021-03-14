@@ -13,6 +13,8 @@ const Button = ({
   onClick,
   fontSize,
   dataTestid,
+  position,
+  botton,
 }) => (
   <CompButton
     type={ type }
@@ -23,6 +25,8 @@ const Button = ({
     disabled={ disabled }
     onClick={ onClick }
     data-testid={ dataTestid }
+    position={ position }
+    botton={ botton }
   >
     {children}
   </CompButton>
@@ -32,10 +36,12 @@ Button.defaultProps = {
   color: '',
   onClick: () => {},
   disabled: false,
+  position: '',
+  botton: '',
 };
 
 Button.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   type: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
   heigth: PropTypes.string.isRequired,
@@ -44,6 +50,8 @@ Button.propTypes = {
   onClick: PropTypes.func,
   fontSize: PropTypes.string.isRequired,
   dataTestid: PropTypes.string.isRequired,
+  position: PropTypes.string,
+  botton: PropTypes.string,
 };
 
 export default Button;

@@ -14,8 +14,12 @@ const MenuTop = () => {
       return setPathName('Meu perfil');
     case '/products':
       return setPathName('TryBeer');
+    case '/checkout':
+      return setPathName('Finalizar Pedido');
+    case '/orders':
+      return setPathName('Meus Pedidos');
     default:
-      return '';
+      return setPathName('Detalhes de Pedido');
     }
   }, []);
 

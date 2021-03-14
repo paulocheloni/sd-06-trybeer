@@ -1,9 +1,12 @@
 import styled, { css } from 'styled-components';
 
 const CompButton = styled.button`
-  ${({ theme, width, heigth, color, fontSize }) => css`
+  ${({ theme, width, heigth, color, fontSize, position, botton }) => css`
     width: ${width};
     height: ${heigth};
+
+    position: ${position};
+    bottom: ${botton};
 
     font-size: ${fontSize};
     font-weight: 600;
@@ -26,7 +29,7 @@ const CompButton = styled.button`
     }
 
     @media (max-width: 500px) {
-      width: 100%;
+      width: ${width || '100%'};
     }
   `}
 `;

@@ -19,27 +19,6 @@ const Container = styled.div`
   }
 `;
 
-const ContainerButton = styled.div`
-    width: 100%;
-    padding: 0 19px;
-
-    display: flex;
-    justify-content: center;
-
-    > button {
-      width: 50%;
-    }
-
-  @media (max-width: 500px) {
-    padding: 0 19px;
-
-    > button {
-      width: 92%;
-    }
-  }
-`;
-
 export default {
   Container,
-  ContainerButton,
 };
