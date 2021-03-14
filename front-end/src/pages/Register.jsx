@@ -5,7 +5,8 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [role, setRole] = useState('client');
+  const [check, setCheck] = useState('client');
+  const [userExist, setUserExist] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isNameValid, setIsNameValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
@@ -14,7 +15,8 @@ export default function Register() {
     const { value } = event.target;
     setName(value);
     const regex = /^[A-Za-z'\s]+$/;
-    if (regex.test(value)) {
+    const nameLength = 12;
+    if (regex.test(value) && value.length >= nameLength) {
       setIsNameValid(true);
     } else {
       setIsNameValid(false);
@@ -45,12 +47,12 @@ export default function Register() {
   };
 
   const handleChangeCheckbox = (event) => {
-    // const check = document.getElementById('checkbox');
     const { value } = event.target;
+    setCheck(value);
     if (value.checked) {
-      setRole('administrator');
+      setCheck('administrator');
     } else {
-      setRole('client');
+      setCheck('client');
     };
   };
 
@@ -60,14 +62,21 @@ export default function Register() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name, email, password, role }),
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+        role: (check ? 'administrator' : 'client') }),
     })
       .then((res) => res.json());
+      console.log(response);
+    localStorage.setItem('user', JSON.stringify(response.user));
     if (response.user.role === 'client') {
       history.push('/products');
     } else {
       history.push('/admin/orders');
     }
+    setUserExist(true);
   };
 
   return (
@@ -101,7 +110,7 @@ export default function Register() {
         />
       </label>
       <label htmlFor="checkbox">
-        Quero Vender
+        Quero vender
         <input
           type="checkbox"
           id="checkbox"
@@ -115,8 +124,9 @@ export default function Register() {
         disabled={ !(isEmailValid && isPasswordValid && isNameValid) }
         onClick={ handleClick }
       >
-        CADASTRAR
+        Cadastrar
       </button>
+      { userExist && <p>Esse e-mail já ṕossui cadastro!</p> }
     </div>
   );
 }
