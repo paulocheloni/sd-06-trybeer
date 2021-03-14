@@ -6,6 +6,7 @@ const customConsole = createLogger({
   format: combine(
     timestamp(),
     errors({ stack: true }),
+    format.json(),
   ),
   defaultMeta: { service: 'user-service' },
   transports: [new transports.Console()],
