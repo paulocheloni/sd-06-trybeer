@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './HeaderComponent';
+import Header from '../components/HeaderComponent';
 
 function CostumerProducts() {
   return (

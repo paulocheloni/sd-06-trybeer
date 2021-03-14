@@ -1,6 +1,6 @@
 import React from 'react';
-import { Route, Router, Switch, BrowserRouter } from 'react-router-dom';
-import { Header, Login, Signup, SideBar, CostumerProfile, CostumerProducts } from './components';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import { Login, Signup, CostumerProfile, CostumerProducts } from './pages';
 import Provider from './context/Provider';
 
 function App() {
