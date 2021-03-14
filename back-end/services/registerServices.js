@@ -22,8 +22,18 @@ const exclude = async (id) => {
   return users;
 };
 
+// Check if the email is in database
+const checkEmailRegistered = async (email) => {
+  const users = await registerModel.findByEmail(email);
+  if (users.length) {
+    return { error: true, code: 'conflict', message: 'E-mail already in database.' };
+  }
+  return users;
+}
+
 module.exports = {
   getAll,
   create,
   exclude,
+  checkEmailRegistered,
 };

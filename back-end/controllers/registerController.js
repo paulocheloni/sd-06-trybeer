@@ -27,4 +27,14 @@ registerRouter.delete('/delete-user/:id', async (req, res) => {
   res.status(200).json('Response deleted successfully');
 });
 
+// Check if the email is in database
+registerRouter.get('/check-email-registered/:email', async (req, res) => {
+  const { email } = req.params;
+  const users = await registerService.checkEmailRegistered(email);
+  if (users.code === 'conflict') {
+    return res.status(conflict).json({ message: users.message });
+  }
+  return res.status(200).json(users);
+});
+
 module.exports = registerRouter;

@@ -29,4 +29,13 @@ const findByName = async (name) => {
   return user;
 };
 
-module.exports = { getAll, create, exclude, findByName };
+// Find a user by email 
+const findByEmail = async (email) => {
+  const [user] = await connection.query(
+    'SELECT * FROM users WHERE email = ?',
+    [email],
+  );
+  return user;
+};
+
+module.exports = { getAll, create, exclude, findByName, findByEmail };

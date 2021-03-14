@@ -2,28 +2,35 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { validNameReg, validEmailReg, validPassReg } from '../actions';
-import { create } from '../api/index';
+import { create, validateEmailRegistered } from '../api/index';
 
 class RegisterDiv extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      hasError: ''
+    };
     this.handleChange = this.handleChange.bind(this);
     this.signUp = this.signUp.bind(this);
   }
 
-  signUp({ target }) {
+  async signUp({ target }) {
     const { history } = this.props;
     const name = target.parentNode.firstChild.childNodes[1].value;
     const email = target.parentNode.firstChild.childNodes[3].value;
     const pass = target.parentNode.firstChild.childNodes[5].value;
     const checked = target.parentNode.firstChild.childNodes[6].firstChild;
-    let role = 'client';
-    if (checked.checked) {
-      role = 'administrator';
+    //
+    const isEmailRegistered = await validateEmailRegistered(email);
+    if (isEmailRegistered) {
+      this.setState({
+        hasError: isEmailRegistered
+      })
+    } else {
+      const role = checked.checked ? 'administrator' : 'client';
+      create(name, email, pass, role);
+      history.push(checked.checked ? '/admin/orders' : '/products');
     }
-    create(name, email, pass, role);
-    history.push('./login');
   }
 
   handleChange({ target: { name, value } }) {
@@ -59,7 +66,7 @@ class RegisterDiv extends React.Component {
   }
 
   render() {
-    const { validRegName, validRegEmail, validRegPass } = this.props;
+    const { validRegName, validRegEmail, validRegPass, emailRegistered } = this.props;
     return (
       <div className="register-container">
         <div className="register-form">
@@ -98,6 +105,7 @@ class RegisterDiv extends React.Component {
         >
           Cadastrar
         </button>
+        { this.state.hasError }
       </div>
     );
   }

@@ -21,3 +21,12 @@ export async function validate(email, password) {
     .then((response) => response.data);
   return result;
 }
+
+export async function validateEmailRegistered(email) {
+  return await axios.get(`http://localhost:3001/register/check-email-registered/${email}`)
+    .then(_ => {
+      return '';
+    }).catch(error => {
+      return error.response.data.message;
+    });
+}
