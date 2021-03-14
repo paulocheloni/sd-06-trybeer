@@ -6,7 +6,7 @@ module.exports = async (req, _res, next) => {
     route: req.originalUrl,
   };
 
-  requestsLogger.http(log);
+  requestsLogger.info(log);
   console.warn(log);
   next();
 };

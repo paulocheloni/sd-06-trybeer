@@ -6,7 +6,7 @@ const requestsLogger = createLogger({
   transports: [
     new transports.File({
       filename: './logs/requests.log',
-      level: 'http',
+      level: 'info',
       format: combine(
         timestamp(),
         json(),
