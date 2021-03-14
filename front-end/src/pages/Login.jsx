@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import history from '../services/history';
 import './Login.css';
 
@@ -48,9 +49,9 @@ export default function Login() {
     }
   };
 
-  const handleNoCount = () => {
-    history.push('/register');
-  };
+  // const handleNoCount = () => {
+  //   history.push('/register');
+  // };
 
   return (
     <div className="login">
@@ -86,14 +87,13 @@ export default function Login() {
       >
         <span>ENTRAR</span>
       </button>
-      <button
-        className="cadastrar"
-        type="button"
+      <Link
+        to="/register"
         data-testid="no-account-btn"
-        onClick={ handleNoCount }
+        className="cadastrar"
       >
-        <span>Ainda não tenho conta!</span>
-      </button>
+        Ainda não tenho conta!
+      </Link>
     </div>
   );
 }
