@@ -8,7 +8,7 @@ class RegisterDiv extends React.Component {
   constructor() {
     super();
     this.state = {
-      hasError: ''
+      hasError: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.signUp = this.signUp.bind(this);
@@ -24,8 +24,8 @@ class RegisterDiv extends React.Component {
     const isEmailRegistered = await validateEmailRegistered(email);
     if (isEmailRegistered) {
       this.setState({
-        hasError: isEmailRegistered
-      })
+        hasError: isEmailRegistered,
+      });
     } else {
       const role = checked.checked ? 'administrator' : 'client';
       create(name, email, pass, role);
@@ -67,6 +67,7 @@ class RegisterDiv extends React.Component {
 
   render() {
     const { validRegName, validRegEmail, validRegPass } = this.props;
+    const { hasError } = this.state;
     return (
       <div className="register-container">
         <div className="register-form">
@@ -105,7 +106,7 @@ class RegisterDiv extends React.Component {
         >
           Cadastrar
         </button>
-        { this.state.hasError }
+        { hasError }
       </div>
     );
   }

@@ -23,10 +23,7 @@ export async function validate(email, password) {
 }
 
 export async function validateEmailRegistered(email) {
-  return await axios.get(`http://localhost:3001/register/check-email-registered/${email}`)
-    .then(_ => {
-      return '';
-    }).catch(error => {
-      return error.response.data.message;
-    });
+  const result = await axios.get(`http://localhost:3001/register/check-email-registered/${email}`)
+    .then(() => '').catch((error) => error.response.data.message);
+  return result;
 }

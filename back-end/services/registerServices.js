@@ -29,7 +29,7 @@ const checkEmailRegistered = async (email) => {
     return { error: true, code: 'conflict', message: 'E-mail already in database.' };
   }
   return users;
-}
+};
 
 module.exports = {
   getAll,
