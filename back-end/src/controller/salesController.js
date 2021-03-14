@@ -3,9 +3,22 @@ const salesService = require('../service/salesService');
 
 const controller = Router();
 
-controller.get('/', async (_req, res) => {
-  const result = await salesService.getAll();
+controller.get('/:id', async (req, res, next) => {
+  const { id } = req.params;
+  const { authorization: token } = req.headers;
 
+  const result = await salesService.getSalesByUserId(id, token);
+
+  if (result.payload) return next(result);
+  return res.status(200).json(result);
+});
+
+controller.get('/', async (req, res, next) => {
+  const { authorization: token } = req.headers;
+
+  const result = await salesService.getAll(token);
+  
+  if (result.payload) return next(result);
   return res.status(200).json(result);
 });
 
@@ -16,7 +29,7 @@ controller.post('/', async (req, res, next) => {
   const result = await salesService.createSale(reqBody, token);
   
   if (result.payload) return next(result);
-  return res.status(200).json(result);
+  return res.status(200).json({ message: 'Sale created.' });
 });
 
 module.exports = controller;

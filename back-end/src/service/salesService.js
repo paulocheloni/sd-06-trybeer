@@ -1,9 +1,21 @@
 const salesModel = require('../model/salesModel');
 const Validations = require('./validations');
 
-const getAll = async () => {
+const getAll = async (token) => {
+  const validateToken = await Validations.tokenValidation(token);
+  
+  if (validateToken.payload) return validateToken;
+  
   const result = await salesModel.getAll();
+  return result;
+};
 
+const getSalesByUserId = async (id, token) => {
+  const validateToken = await Validations.tokenValidation(token);
+
+  if (validateToken.payload) return validateToken;
+
+  const result = await salesModel.getSalesByUserId(id);
   return result;
 };
 
@@ -16,12 +28,13 @@ const createSale = async (reqBody, token) => {
   if (validateSale.payload) return validateSale;
   if (validateAddress.payload) return validateAddress;
 
-  await salesModel.createSale(reqBody);
-  const result = await salesModel.getSaleByUserId(reqBody);
+  const result = await salesModel.createSale(reqBody);
+
   return result;
 };
 
 module.exports = {
   createSale,
   getAll,
+  getSalesByUserId,
 };
