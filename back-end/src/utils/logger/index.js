@@ -1,34 +1,12 @@
-const { createLogger, transports, format } = require('winston');
+const buildDevLoggers = require('./dev.logger');
+const buildProdLoggers = require('./prod.logger');
 
-const { combine, timestamp, json } = format;
+let loggers = null;
 
-const requestsLogger = createLogger({
-  transports: [
-    new transports.File({
-      filename: './logs/requests.log',
-      level: 'info',
-      format: combine(
-        timestamp(),
-        json(),
-      ),
-    }),
-  ],
-});
+if (process.env.NODE_ENV === 'development') {
+  loggers = buildDevLoggers();
+} else {
+  loggers = buildProdLoggers();
+}
 
-const errorLogger = createLogger({
-  transports: [
-    new transports.File({
-      filename: './logs/error.log',
-      level: 'error',
-      format: combine(
-        timestamp(),
-        json(),
-      ),
-    }),
-  ],
-});
-
-module.exports = {
-  requestsLogger,
-  errorLogger,
-};
+module.exports = loggers;
