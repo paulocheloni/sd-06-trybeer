@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import { useHistory } from 'react-router-dom';
 import { loginUser } from '../../Services/Apis';
 
 import Container from './styles';
@@ -7,36 +8,32 @@ import Container from './styles';
 // import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 
-const handleRedirect = () => {
+const handleRedirect = (history) => {
   const userRole = localStorage.getItem('user');
 
-  const role = JSON.parse(userRole);
-
-  if (role.role === 'client') {
-    window.location.href = '/products';
-  } else {
-    window.location.href = '/admin/orders';
-  }
+  const { role } = JSON.parse(userRole);
+  history.push((role === 'client') ? '/products' : '/admin/orders');
+  // window.location.href = (role === 'client') ? '/products' : '/admin/orders';
 };
 
 const saveLocalStorage = (res) => {
   localStorage.setItem('user', JSON.stringify(res));
 };
 
-const handleSubmit = async (event, email, password) => {
+const handleSubmit = async ([event, email, password, history]) => {
   event.preventDefault();
   const user = await loginUser(email, password);
   saveLocalStorage(user);
 
-  handleRedirect();
+  handleRedirect(history);
 };
 
 const userRegistered = () => {
   window.location.href = '/register';
 };
 
-const form = ({ setEmail, setPassword, isDisabled, email, password }) => (
-  <form onSubmit={ (e) => handleSubmit(e, email, password) }>
+const form = ({ setEmail, setPassword, isDisabled, email, password, history }) => (
+  <form onSubmit={ (e) => handleSubmit([e, email, password, history]) }>
     <h1>Login</h1>
     <label htmlFor="email">
       Email
@@ -90,6 +87,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     const emailFormat = /\S+@\S+\.\S+/.test(email);
@@ -103,7 +101,7 @@ const Login = () => {
   }, [email, password]);
 
   const params = {
-    setEmail, setPassword, isDisabled, email, password,
+    setEmail, setPassword, isDisabled, email, password, history,
   };
 
   return (
