@@ -31,11 +31,12 @@ const verifyUser = async (req, res) => {
     const { name, email, password, role } = req.body;
 
     const user = await userService.findUserByEmail(email);
-    if (user && user.email === email) return res.status(409).json({ message: 'Email already registered' });
+    if (user 
+      && user.email === email) return res.status(409).json({ message: 'Email already registered' });
 
     const createUser = await userService.create(name, email, password, role);
 
-    return res.status(201).json({ "user": createUser });
+    return res.status(201).json({ user: createUser });
   } catch (error) {
     return res.status(500).json({ message: error });
   }

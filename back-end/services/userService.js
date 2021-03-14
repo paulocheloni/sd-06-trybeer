@@ -21,12 +21,10 @@ const validateName = (name) => {
 const findUserByEmail = (email) => userModel.findUserByEmail(email);
 
 const create = async (name, email, password, role) => {
-  console.log('cheguei cretea')
   await userModel.createUser(name, email, password, role);
   const user = { name, email, password, role };
-  console.log(user);
   return user;
-}
+};
 
 const validateFieldLogin = async (req, res, next) => {
   const { email, password } = req.body;

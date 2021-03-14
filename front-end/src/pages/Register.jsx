@@ -5,7 +5,7 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [check, setCheck] = useState('client');
+  const [check, setCheck] = useState(false);
   const [userExist, setUserExist] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isNameValid, setIsNameValid] = useState(false);
@@ -48,14 +48,14 @@ export default function Register() {
 
   const handleChangeCheckbox = (event) => {
     const { value } = event.target;
-    setCheck(value);
     if (value.checked) {
-      setCheck('administrator');
+      setCheck(true);
     } else {
-      setCheck('client');
-    };
+      setCheck(false);
+    }
   };
 
+  // como pesquisar e-mail no banco do back e ver se existe? a rota para admin tb não funciona corretamente.Precisa salvar no loal storage?
   const handleClick = async () => {
     const response = await fetch('http://localhost:3001/register', {
       method: 'POST',
@@ -69,14 +69,16 @@ export default function Register() {
         role: (check ? 'administrator' : 'client') }),
     })
       .then((res) => res.json());
-      console.log(response);
-    localStorage.setItem('user', JSON.stringify(response.user));
-    if (response.user.role === 'client') {
-      history.push('/products');
+    // localStorage.setItem('user', JSON.stringify(response.user));
+    if (response) {
+      if (check) {
+        history.push('/admin/orders');
+      } else {
+        history.push('/products');
+      }
     } else {
-      history.push('/admin/orders');
+      setUserExist(true);
     }
-    setUserExist(true);
   };
 
   return (
@@ -126,7 +128,7 @@ export default function Register() {
       >
         Cadastrar
       </button>
-      { userExist && <p>Esse e-mail já ṕossui cadastro!</p> }
+      { userExist && <p>Esse e-mail já possui cadastro!</p> }
     </div>
   );
 }
