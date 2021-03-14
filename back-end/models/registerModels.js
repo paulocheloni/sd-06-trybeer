@@ -29,4 +29,13 @@ const findByEmail = async (email) => {
   return user;
 };
 
-module.exports = { getAll, create, exclude, findByEmail };
+// Edit a user
+const edit = async (nextName, prevName) => {
+  const [user] = await connection.execute(
+    'UPDATE users SET name = ? WHERE name = ?',
+    [nextName, prevName],
+  );
+  return user;
+};
+
+module.exports = { getAll, create, exclude, findByEmail, edit };

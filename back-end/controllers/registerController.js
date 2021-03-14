@@ -1,13 +1,13 @@
 const { Router } = require('express');
 const registerService = require('../services/registerServices');
-const { conflict } = require('../utilities/variables');
+const { conflict, ok, created } = require('../utilities/variables');
 
 const registerRouter = Router();
 
 // Get all users
 registerRouter.get('/get-all', async (req, res) => {
     const users = await registerService.getAll();
-    res.status(200).json(users);
+    res.status(ok).json(users);
 });
 
 // Create a user
@@ -17,14 +17,21 @@ registerRouter.post('/', async (req, res) => {
   if (user.code === 'conflict') {
     return res.status(conflict).json({ message: user.message });
   }
-  res.status(200).send({ name, email, role });
+  res.status(created).send({ name, email, role });
 });
 
 // Delete a user
 registerRouter.delete('/delete-user/:id', async (req, res) => {
   const { id } = req.params;
   await registerService.exclude(id);
-  res.status(200).json('Response deleted successfully');
+  res.status(ok).json('Response deleted successfully');
+});
+
+// Edit a user
+registerRouter.put('/edit-user', async (req, res) => {
+  const { prevName, nextName } = req.body;
+  await registerService.edit(prevName, nextName);
+  res.status(ok).send({ message: 'Atualização concluída com sucesso' });
 });
 
 module.exports = registerRouter;

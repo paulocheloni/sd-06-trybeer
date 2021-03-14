@@ -22,8 +22,15 @@ const exclude = async (id) => {
   return users;
 };
 
+// Edit a user
+const edit = async (prevName, nextName) => {
+  const users = await registerModel.edit(nextName, prevName);
+  return users;
+};
+
 module.exports = {
   getAll,
   create,
   exclude,
+  edit,
 };
