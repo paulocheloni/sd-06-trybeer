@@ -54,6 +54,16 @@
         transition: 0.3s;
         opacity: 0.8;
       }
+
+    }
+    .hidden-span {
+      display: none;
+      position: relative;
+      margin-top: 10px;
+      font-weight: 500;
+      font-size: 15px;
+      color: $sucess;
+      padding-left: 10px;
     }
   }
 }

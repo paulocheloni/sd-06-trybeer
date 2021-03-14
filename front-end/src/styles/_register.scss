@@ -39,6 +39,19 @@
       width: 15px;
       height: 15px;
     }
+    .email-div {
+      display: flex;
+      flex-direction: column;
+      .hidden-span {
+        display: none;
+        position: absolute;
+        top: 465px;
+        font-weight: 500;
+        font-size: 15px;
+        color: crimson;
+        padding-left: 10px;
+      }
+    }
   }
 
 
