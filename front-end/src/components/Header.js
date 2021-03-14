@@ -9,6 +9,17 @@ class Header extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    const { history: { location: { pathname } } } = this.props;
+    const header = document.querySelector('.top-title');
+    if (pathname === '/profile') {
+      header.innerText = 'Meu perfil';
+    }
+    if (pathname === '/admin/profile') {
+      header.innerText = 'Admin - Meu Perfil';
+    }
+  }
+
   toogleInOut() {
     const toogleMenuContainer = document.querySelector('.side-menu-container');
     const buttonsDiv = document.querySelector('.buttons-div');
@@ -29,7 +40,7 @@ class Header extends React.Component {
     return (
       <header className="globalheader-container">
         <div className="h1-div">
-          <h1 data-testid="top-title">TryBeer</h1>
+          <h1 data-testid="top-title" className="top-title">TryBeer</h1>
           <button
             type="button"
             className="toogle-button"

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { validEmail, validPassword } from '../actions';
+import { userInfos, validEmail, validPassword } from '../actions';
 import { validate } from '../api/index';
 
 class LoginDiv extends React.Component {
@@ -31,13 +31,14 @@ class LoginDiv extends React.Component {
     }
   }
 
-  async handleLogin({ target }) {
-    const { history } = this.props;
+  async signIn({ target }) {
+    const { history, dispatchUser } = this.props;
     const email = target.parentNode.parentNode.firstChild.childNodes[1].value;
     const password = target.parentNode.parentNode.firstChild.childNodes[3].value;
-    const isValid = await validate(email, password);
-    console.log(isValid);
-    if (isValid[0].role === 'administrator') {
+    const loginUser = await validate(email, password);
+    dispatchUser(loginUser);
+    // isvalid pro Redux
+    if (loginUser[0].role === 'administrator') {
       history.push('/admin/orders');
     } else {
       history.push('/products');
@@ -71,7 +72,7 @@ class LoginDiv extends React.Component {
             className="btn-login"
             data-testid="signin-btn"
             disabled={ !validRegEmail || !validRegPassword }
-            onClick={ (event) => this.handleLogin(event) }
+            onClick={ (event) => this.signIn(event) }
           >
             ENTRAR
           </button>
@@ -96,6 +97,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatchEmail: (boolean) => dispatch(validEmail(boolean)),
   dispatchPassword: (boolean) => dispatch(validPassword(boolean)),
+  dispatchUser: (array) => dispatch(userInfos(array)),
 });
 
 LoginDiv.propTypes = {
@@ -104,6 +106,7 @@ LoginDiv.propTypes = {
   validRegPassword: PropTypes.bool.isRequired,
   dispatchEmail: PropTypes.func.isRequired,
   dispatchPassword: PropTypes.func.isRequired,
+  dispatchUser: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginDiv);

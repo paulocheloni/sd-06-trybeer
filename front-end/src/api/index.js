@@ -30,3 +30,20 @@ export async function validate(email, password) {
     .then((response) => response.data);
   return result;
 }
+
+export async function edit(prevName, nextName) {
+  try {
+    const response = await axios.put('http://localhost:3001/register/edit-user', {
+      prevName, nextName,
+    });
+    return response;
+  } catch (error) {
+    if (error.response) {
+      return {
+        status: error.response.status,
+        statusText: error.response.statusText,
+        message: error.response.data.message,
+      };
+    }
+  }
+}

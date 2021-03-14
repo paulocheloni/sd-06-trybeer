@@ -16,6 +16,7 @@ function App() {
         <Route exact path="/profile" component={ Profile } />
         <Route exact path="/orders" component={ Orders } />
         <Route exact path="/products" component={ Products } />
+        <Route exact path="/admin/profile" component={ AdminOrders } />
         <Route exact path="/admin/orders" component={ AdminOrders } />
       </Switch>
     </div>
