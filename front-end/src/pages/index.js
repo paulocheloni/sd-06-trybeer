@@ -1,5 +1,9 @@
-// import Login from './Login';
+import Login from './Login';
+import Register from './Register';
+import Products from './Products';
 
-// export {
-//   Login,
-// };
+export {
+  Login,
+  Register,
+  Products,
+};
