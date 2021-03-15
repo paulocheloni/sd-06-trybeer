@@ -11,9 +11,10 @@ import './App.css';
 function App() {
   return (
     <BrowserRouter>
-    <div className="App">
-      <Route exact path="/login"><Login/></Route>
-    </div>
+      <div className="App">
+        <Route exact path="/"><Login /></Route>
+        <Route exact path="/login"><Login /></Route>
+      </div>
     </BrowserRouter>
   );
 }

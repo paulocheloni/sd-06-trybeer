@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 // import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import * as api from '../api/api';
@@ -9,28 +9,35 @@ function Login() {
   const [email, setEmail] = useState('');
   const [activeBtn, setActiveBtn] = useState(false);
   const [user, setUser] = useState({});
+  const history = useHistory();
 
   const verifyEmailAndPassword = () => {
-    const isValid = email.match(/\S+@\S+\.\S+/);
-    const isNumber = password.match(/^[0-9]{6,50}$/);
+    const isEmailValid = email.match(/\S+@\S+\.\S+/);
+    const isPasswordValid = password.match(/^[0-9a-zA-Z]{6,50}$/);
 
-    if (isValid && isNumber) {
+    if (isEmailValid && isPasswordValid) {
       setActiveBtn(true);
       setUser({ email, password })
     } else setActiveBtn(false);
   }
 
   const handleSubmit = () => {
-    // event.preventDefault();
-    // console.log("user", user)
     api.login(user)
-  }
+      .then((response) => {
+        const isAdmin = response.data.role === 'administrator';
+        localStorage.setItem('token', response.data.token);
 
+        if (isAdmin) {
+          history.push('admin/orders')
+        } else {
+          history.push('products')
+        }
+      });
+  }
 
   useEffect(() => {
     verifyEmailAndPassword();
     setUser({ email, password })
-    // handleSubmit()
   }, [email, password]);
 
   return (
@@ -39,12 +46,12 @@ function Login() {
       <input type="email" data-testid="email-input" onChange={(event) => setEmail(event.target.value)}></input>
       <span>Senha</span>
       <input type="text" data-testid="password-input" onChange={(event) => setPassword(event.target.value)}></input>
-      {/* <Link> */}
       <button type='submit' disabled={!activeBtn} onClick={() => handleSubmit()} data-testid="signin-btn">ENTRAR</button>
-      {/* </Link> */}
-      <button type='button' data-testid="no-account-btn">
-        Ainda não tenho conta
+      <Link to={'/register'}>
+        <button type='button' data-testid="no-account-btn">
+          Ainda não tenho conta
       </button>
+      </Link>
     </div>
   );
 }
