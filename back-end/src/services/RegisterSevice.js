@@ -1,15 +1,18 @@
 const jwt = require('jsonwebtoken');
-const { findUser } = require('../models/Users');
+const { createUser, findUser } = require('../models/Users');
 const { secret } = require('../Auth/TokenValidation');
 
 const STATUS_OK = 200;
 const STATUS_UNAUTHORIZED = 401;
 const STATUS_INTERNAL_SERVER_ERROR = 500;
 
-const LoginService = async (req, res, _next) => {
+const RegisterService = async (req, res, _next) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, password, role } = req.body;
+    console.log(1);
+    await createUser(name, email, password, role);
     const user = await findUser(email);
+    console.log(user);
     if (!user || password !== user.password) {
       return res.status(STATUS_UNAUTHORIZED).json({ message: 'Incorrect username or password' });
     }
@@ -22,10 +25,11 @@ const LoginService = async (req, res, _next) => {
     const data = { ...payload, token };
     res.status(STATUS_OK).json(data);
   } catch (error) {
+    console.log(error.message);
     return res.status(STATUS_INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });
   }
 };
 
 module.exports = {
-  LoginService,
+  RegisterService,
 };
