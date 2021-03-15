@@ -1,5 +1,4 @@
-const urlLogin = 'http://localhost:3001/login';
-
+const url = 'http://localhost:3001';
 const login = async (user) => {
   const postMethod = {
     method: 'POST',
@@ -11,9 +10,8 @@ const login = async (user) => {
     }),
   };
 
-  const apiRequest = await fetch(urlLogin, postMethod);
+  const apiRequest = await fetch(`${url}/register`, postMethod);
   const apiResponse = await apiRequest.json();
-  localStorage.setItem('user', JSON.stringify(apiResponse));
   return apiResponse;
 };
 

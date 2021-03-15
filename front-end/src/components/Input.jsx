@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function Input({ type, value, setValue }) {
   return (
     <label htmlFor={ type } className={ `${type}-label` }>
-      {`${type}:`}
+      {`${type}`}
       <input
         type={ type }
         name={ type }
