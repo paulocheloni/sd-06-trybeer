@@ -52,7 +52,7 @@ function Login() {
           onChange={ (e) => setEmail(e.target.value) }
         />
       </label>
-      <label htmlFor="email-input">
+      <label htmlFor="password-input">
         Senha
         <input
           type="text"
