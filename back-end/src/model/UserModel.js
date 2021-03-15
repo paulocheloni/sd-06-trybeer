@@ -10,7 +10,7 @@ const connection = require('./connection');
 
 const getUserByEmail = async (email) => {
   const [result] = await connection.execute(
-    'SELECT email, password FROM Trybeer.users WHERE email=?', [email],
+    'SELECT email, password, role FROM Trybeer.users WHERE email=?', [email],
   );
   
   return result;

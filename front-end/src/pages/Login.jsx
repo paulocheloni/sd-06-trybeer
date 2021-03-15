@@ -2,36 +2,32 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import LoginContext from '../context/LoginContext';
 import FormLogin from '../components/pageLogin/FormLogin';
+import visibilityBtnLogin from '../utils/visibilityBtnLogin';
+import api from '../services/api';
 
 function Login({ history }) {
   const [user, setUser] = useState({ email: '', password: '' });
   const [valid, setValid] = useState(true);
   useEffect(() => {
-    const isValid = async () => {
-      const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
-      const email = emailRegex.test(user.email);
-      const senha = user.password;
-      const minLength = 6;
-      if (senha.length >= minLength && email) {
-        setValid(false);
-      } else {
-        setValid(true);
-      }
-    };
-    isValid();
-  }, [user.password, user.email]);
+    visibilityBtnLogin(user, setValid);
+  }, [user]);
 
   const handleChange = ({ target }) => {
     setUser({ ...user, [target.name]: target.value });
   };
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     console.log(user.email);
     e.preventDefault();
-    if (user.email === 'tryber@trybe.com.br') {
+
+    const loginValidate = await api.generateToken(user.email, user.password);
+    console.log(loginValidate);
+    const { token, role } = loginValidate;
+
+    if (role === 'admin') {
       history.push('/admin/orders');
     } else { history.push('/products'); }
-    localStorage.setItem('user', JSON.stringify(user.email));
+    localStorage.setItem('user', JSON.stringify(user.email, token));
   };
   return (
     <LoginContext.Provider
