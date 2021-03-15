@@ -25,7 +25,10 @@ function Products() {
     const items = JSON.parse(localStorage.getItem('items'));
     if (items) {
       const ad = items.map((a) => a.price);
-      if (ad !== []) setCartTotal(ad.reduce((e, f) => +e + +f, 0));
+      if (ad !== []) {
+        setCartTotal(ad.reduce((e, f) => +e + +f, 0))
+        setAsd(items.length)
+      };
     }
   }, [asd]);
 
