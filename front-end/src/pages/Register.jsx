@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-// import history from '../services/history';
-import { Redirect } from 'react-router-dom';
+import history from '../services/history';
 import api from '../services/api';
 
 export default function Register() {
@@ -49,25 +48,23 @@ export default function Register() {
   };
 
   const handleChangeCheckbox = (event) => {
-    const { value } = event.target;
-    if (value.checked) {
+    const { checked } = event.target;
+    if (checked) {
       setCheck(true);
     } else {
       setCheck(false);
     }
   };
 
-  // a rota para admin não passa no teste
   const handleClick = async () => {
     const response = await api.fetchRegister(name, email, password, check);
     localStorage.setItem('user', JSON.stringify(response.user));
 
-    // { check ? <Redirect to="/admin/orders" /> : <Redirect to="/products" /> }
     if (response) {
-      if (response.user.role === 'client') {
-        history.push('/products');
-      } else {
+      if (check) {
         history.push('/admin/orders');
+      } else {
+        history.push('/products');
       }
     } else {
       setUserExist(true);
@@ -110,7 +107,7 @@ export default function Register() {
           type="checkbox"
           id="checkbox"
           data-testid="signup-seller"
-          onClick={ handleChangeCheckbox }
+          onChange={ handleChangeCheckbox }
         />
       </label>
       <button
