@@ -49,7 +49,7 @@ const form = (params) => {
         disabled={ isDisabled }
         dataTestid="signin-btn"
       >
-        ENTRAR
+        Entrar
       </Button>
       <Button
         type="button"
