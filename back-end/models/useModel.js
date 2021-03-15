@@ -22,7 +22,27 @@ const userRegister = async (user) => {
   }
 };
 
+const findUserByEmail = async (email) => {
+  try {
+    const user = await connection
+      .execute('SELECT *  FROM users WHERE email=?', [email]);
+    return user;
+  } catch (e) {
+    return e.message;
+  }
+};
+const userEditByEmail = async (name, email) => {
+  try {
+    await connection.execute('UPDATE users SET name=? WHERE email=?', [name, email]);
+    return true;
+  } catch (e) {
+    return e.message;
+  }
+};
+
 module.exports = {
   userLogin,
   userRegister,
+  findUserByEmail,
+  userEditByEmail,
 };
