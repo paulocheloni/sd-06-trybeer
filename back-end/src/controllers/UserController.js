@@ -15,6 +15,6 @@ const UserCreate = async (req, res) => {
   return res.status(status).json(message);
 };
 
-UserRouter.post('/register', validateRegistration(), registrationValidationRules, UserCreate);
+UserRouter.post('/register', registrationValidationRules(), validateRegistration, UserCreate);
 
 module.exports = UserRouter;

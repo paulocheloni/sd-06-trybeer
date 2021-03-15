@@ -1,10 +1,11 @@
 const connection = require('./connection');
 
 const findByEmail = async (email) => {
-  const email = await connection.execute(
-    'SELECT email FROM users WHERE email = \'?\'', [email]
+  const [ [ foundEmail ] ] = await connection.execute(
+    'SELECT COUNT(*) AS counted FROM users WHERE email = ?', [email]
   );
-  return email;
+  console.log(foundEmail)
+  return foundEmail.counted;
 };
 
 const createUser = async (name, email, password, role) => {
@@ -17,4 +18,5 @@ const createUser = async (name, email, password, role) => {
 
 module.exports = {
   createUser,
+  findByEmail,
 };
