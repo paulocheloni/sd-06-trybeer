@@ -25,11 +25,13 @@ button {
   background-color: black;
   width: 80vw;
   display: flex;
-  color: black;
+  color: white;
   margin-left: 20vw;
   margin-top: 51px;
   height: 110vh;
   overflow-x: hidden;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .side-menu-container {
