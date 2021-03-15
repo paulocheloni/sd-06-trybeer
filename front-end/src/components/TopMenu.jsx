@@ -1,13 +1,11 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import hamburguerIcon from '../icons/hamburguer-icon.png';
-import SideMenu from './SideMenu';
 
 export default function TopMenu({ pageTitle }) {
   return (
     <div className="top-menu-container">
       <header>
-        <SideMenu />
         <button
           className="btn-side-bar"
           src={ hamburguerIcon }
