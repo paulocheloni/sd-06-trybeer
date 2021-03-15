@@ -16,7 +16,7 @@ const renderCards = (allProducts) => allProducts.map((prod, id) => (
       >
         +
       </button>
-      <p>{0}</p>
+      <p>0</p>
       <button
         type="button"
         onClick={ () => {
