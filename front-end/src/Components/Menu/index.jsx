@@ -8,6 +8,10 @@ import * as S from './style';
 const Menu = () => {
   const history = useHistory();
   const [menuOn, setMenuOn] = useState(false);
+  const handleRoute = (path) => {
+    history.push(path);
+    setMenuOn(false);
+  };
   return (
     <S.Container>
       <S.Image
@@ -20,28 +24,28 @@ const Menu = () => {
         <S.WrapperButtons>
           <Button
             dataTestId="side-menu-item-products"
-            onClick={ () => history.push('/products') }
+            onClick={ () => handleRoute('/products') }
           >
             Produtos
 
           </Button>
           <Button
             dataTestId="side-menu-item-my-orders"
-            onClick={ () => history.push('/orders') }
+            onClick={ () => handleRoute('/orders') }
           >
             Meus pedidos
 
           </Button>
           <Button
             dataTestId="side-menu-item-my-profile"
-            onClick={ () => history.push('/profile') }
+            onClick={ () => handleRoute('/profile') }
           >
             Meu Perfil
           </Button>
         </S.WrapperButtons>
         <Button
           dataTestId="side-menu-item-logout"
-          onClick={ () => history.push('/login') }
+          onClick={ () => handleRoute('/') }
         >
           Sair
 
