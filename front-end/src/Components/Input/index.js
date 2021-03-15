@@ -9,11 +9,13 @@ const Input = ({
   dataTestid,
   label,
   id,
+  value,
 }) => (
   <CompInput htmlFor={ id }>
     {label}
     <input
       id={ id }
+      value={ value }
       data-testid={ dataTestid }
       onChange={ (e) => onChange(e) }
       readOnly={ readOnly }
@@ -31,6 +33,7 @@ Input.propTypes = {
   label: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   readOnly: PropTypes.bool,
+  value: PropTypes.string.isRequired,
 };
 
 export default Input;

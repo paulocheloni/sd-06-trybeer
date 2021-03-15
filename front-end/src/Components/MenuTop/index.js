@@ -43,14 +43,18 @@ const MenuTop = () => {
   }, []);
 
   return (
-    <S.CompMenuTop darkTheme={ darkTheme } className="side-menu-container">
-      <button type="button" onClick={ () => setStateSideBar(!stateSideBar) }>
+    <S.CompMenuTop darkTheme={ darkTheme }>
+      <button
+        type="button"
+        data-testid="top-hamburguer"
+        onClick={ () => setStateSideBar(!stateSideBar) }
+      >
         <img
           src="/images/cardapio.png"
           alt="Botão MenuTop"
-          data-testid="top-hamburguer"
         />
       </button>
+
       <h2 data-testid="top-title">{pathName}</h2>
 
       <S.ContainerToggle>

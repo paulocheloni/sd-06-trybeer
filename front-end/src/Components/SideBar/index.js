@@ -9,21 +9,21 @@ const SideBar = () => {
   return (
     <div>
       {stateSideBar && (
-        <S.CompSideBar>
+        <S.CompSideBar className="side-menu-container">
           <S.Navigation
-            href="/#"
+            href="/products"
             data-testid="side-menu-item-products"
           >
             Produtos
           </S.Navigation>
           <S.Navigation
-            href="/#"
+            href="/orders"
             data-testid="side-menu-item-my-orders"
           >
             Meus pedidos
           </S.Navigation>
           <S.Navigation
-            href="/#"
+            href="/profile"
             data-testid="side-menu-item-my-profile"
           >
             Meu Perfil
@@ -31,7 +31,7 @@ const SideBar = () => {
 
           <S.Navigation
             className="get-out"
-            href="/#"
+            href="/login"
             data-testid="side-menu-item-logout"
           >
             Sair
