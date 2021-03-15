@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Register() {
+function Products() {
   return (
     <div>
-      Register
+      Products
     </div>
   );
 }
 
-export default Register;
+export default Products;
