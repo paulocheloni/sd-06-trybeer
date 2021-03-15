@@ -6,9 +6,8 @@ const userLogin = async (userEmail, userPassword) => {
       .execute('SELECT * FROM users WHERE email=? and password=?', [userEmail, userPassword]);
     return (id, name, email, password, role);
   } catch (e) {
-    return null
+    return null;
   }
-
 };
 
 const userRegister = async (user) => {

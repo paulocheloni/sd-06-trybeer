@@ -1,25 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as S from './style';
 
-const Input = ({ type, onChange, name, value, dataTestId }) => (
-  <div>
-    <p>{ name }</p>
-    <input
+const Input = ({ type, onChange, name, value, dataTestId, color }) => (
+  <S.Container type={ type }>
+    <S.Text>{ name }</S.Text>
+    <S.Input
+      color={ color }
       data-testid={ dataTestId }
       value={ value }
       onChange={ onChange }
       name={ name }
       type={ type }
     />
-  </div>
+  </S.Container>
 );
 
 Input.propTypes = {
   type: PropTypes.string,
   onChange: PropTypes.func,
   name: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
   dataTestId: PropTypes.string,
+  color: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -28,6 +34,7 @@ Input.defaultProps = {
   name: 'Email',
   value: '',
   dataTestId: '',
+  color: '#ACADBC',
 };
 
 export default Input;
