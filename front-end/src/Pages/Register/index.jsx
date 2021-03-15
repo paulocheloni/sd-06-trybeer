@@ -14,7 +14,6 @@ const handleSubmit = async (event,
   const role = (isChecked) ? 'admin' : 'client';
 
   const result = await registerNewUser(name, email, password, role);
-    console.log(result);
 
   const newUser = await loginUser(email, password);
 
