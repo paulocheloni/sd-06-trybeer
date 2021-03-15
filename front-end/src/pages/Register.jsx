@@ -56,10 +56,10 @@ export default function Register() {
     }
   };
 
-  // como pesquisar e-mail no banco do back e ver se existe? a rota para admin tb não funciona corretamente.Precisa salvar no loal storage? como foi feito em login
+  // a rota para admin não passa no teste
   const handleClick = async () => {
     const response = await api.fetchRegister(name, email, password, check);
-    // localStorage.setItem('user', JSON.stringify(response.user));
+    localStorage.setItem('user', JSON.stringify(response.user));
     if (response) {
       if (check) {
         history.push('/admin/orders');
@@ -118,7 +118,7 @@ export default function Register() {
       >
         Cadastrar
       </button>
-      { userExist && <p>Esse e-mail já possui cadastro!</p> }
+      { userExist && <p>E-mail already in database.</p> }
     </div>
   );
 }

@@ -2,6 +2,10 @@ const jwt = require('jsonwebtoken');
 const userService = require('../services/userService');
 
 const secret = 'dara secret';
+const jwtConfig = {
+  expiresIn: '7d',
+  algorithm: 'HS256',
+};
 
 const login = async (req, res) => {
   try {
@@ -12,11 +16,6 @@ const login = async (req, res) => {
     if (!user || user.password !== password) {
       return res.status(401).json({ message: 'Usuário não existe ou senha inválida' });
     }
-
-    const jwtConfig = {
-      expiresIn: '7d',
-      algorithm: 'HS256',
-    };
 
     const token = jwt.sign({ data: user }, secret, jwtConfig);
 
@@ -30,11 +29,15 @@ const register = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
 
+    const token = jwt.sign({ data: [email, password] }, secret, jwtConfig);
+
     const user = await userService.findUserByEmail(email);
     if (user 
       && user.email === email) return res.status(409).json({ message: 'Email already registered' });
 
-    const createUser = await userService.create(name, email, password, role);
+    await userService.create(name, email, password, role);
+
+    const createUser = { name, email, token, role };
 
     return res.status(201).json({ user: createUser });
   } catch (error) {
