@@ -30,7 +30,6 @@ const TopMenu = (props) => {
         </i>
       </button>
       <p data-testid="top-title">{ titleMenu }</p>
-      <p />
     </header>
   );
 };
