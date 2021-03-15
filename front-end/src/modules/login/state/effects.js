@@ -43,7 +43,6 @@ export function* handlePostRegister(action) {
     yield put(actions.postRegisterSuccess(data));
 
     const { token } = data;
-    console.log(token);
     const user = { token, email, role, name };
 
     yield localStorage.setItem('user', JSON.stringify(user));

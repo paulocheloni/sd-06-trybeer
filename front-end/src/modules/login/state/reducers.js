@@ -5,7 +5,12 @@ import ActionTypes from './types';
 const initialState = {
   loading: false,
   error: '',
-  data: { token: '' }
+  data: {
+    token: '',
+    role: '',
+    name: '',
+    id: ''
+  }
 };
 
 const postLogin = (state) => (
