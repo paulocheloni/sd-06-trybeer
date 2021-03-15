@@ -36,6 +36,7 @@ export default function Login() {
   const handleClick = async () => {
     const response = await api.fetchLogin(email, password);
     localStorage.setItem('token', JSON.stringify(response.token));
+    console.log(response)
     if (response.user.role === 'client') {
       history.push('/products');
     } else {
