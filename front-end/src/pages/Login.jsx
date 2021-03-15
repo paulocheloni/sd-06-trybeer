@@ -22,7 +22,7 @@ function Login() {
   const [user, setUser] = useState('');
 
   handleChanges(email, password, setButton);
-
+  
   if (user.role) {
     return user.role === 'administrator'
       ? <Redirect to="/admin/profile" />
