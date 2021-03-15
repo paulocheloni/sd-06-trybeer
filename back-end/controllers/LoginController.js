@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
 const { getAll, getById } = require('../models/UsersService');
-const validateLogin = require('../middlewares/validateLogin');
+const { validateLogin } = require('../middlewares');
 
 const routerLogin = Router();
 
@@ -17,16 +17,16 @@ routerLogin.get('/', async (_req, res) => {
   res.send(users);
 });
 
+
 routerLogin.post('/', validateLogin, async (req, res) => {
   const { user } = req.body;
-  const { password, ...userWithouPassword } = user;
+  if (!res.locals.user) return next({ status: 404, message: 'not found' });
   const payload = {
     iss: 'Trybeer',
     aud: 'indentity',
-    userData: userWithouPassword,
+    userData: user.email,
   };
   const token = jwt.sign(payload, SECRET, jwtConfig);
-  console.log(res.locals.user);
   const { name, email, role } = res.locals.user;
   res.status(201).json({
     name, email, token, role,    
