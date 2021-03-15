@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import history from '../services/history';
+import api from '../services/api';
 
 export default function Register() {
   const [email, setEmail] = useState('');
@@ -55,20 +56,9 @@ export default function Register() {
     }
   };
 
-  // como pesquisar e-mail no banco do back e ver se existe? a rota para admin tb não funciona corretamente.Precisa salvar no loal storage?
+  // como pesquisar e-mail no banco do back e ver se existe? a rota para admin tb não funciona corretamente.Precisa salvar no loal storage? como foi feito em login
   const handleClick = async () => {
-    const response = await fetch('http://localhost:3001/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-        role: (check ? 'administrator' : 'client') }),
-    })
-      .then((res) => res.json());
+    const response = await api.fetchRegister(name, email, password, check);
     // localStorage.setItem('user', JSON.stringify(response.user));
     if (response) {
       if (check) {

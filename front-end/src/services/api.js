@@ -7,13 +7,28 @@ const fetchLogin = async (email, password) => {
     body: JSON.stringify({ email, password }),
   }).then((res) => res.json());
 
-  if (response.message) {
-    return false;
-  } else {
-    return response;
-  }
+  if (response.message) return false;
+  return response;
 };
 
-  module.exports = {
-    fetchLogin,
-  }
+const fetchRegister = async (name, email, password, check) => {
+  const response = await fetch('http://localhost:3001/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name,
+      email,
+      password,
+      role: (check ? 'administrator' : 'client') }),
+  }).then((res) => res.json());
+
+  if (response.message) return false;
+  return response;
+};
+
+module.exports = {
+  fetchLogin,
+  fetchRegister,
+};
