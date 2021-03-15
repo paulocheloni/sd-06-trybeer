@@ -1,5 +1,5 @@
 import React from 'react';
-import SidebarMenu from '../components/SideBar';
+import SidebarMenu from '../components/SideBarMenu';
 import TopMenu from '../components/TopMenu';
 
 function Orders() {
@@ -7,7 +7,9 @@ function Orders() {
     <div>
       <TopMenu />
       <SidebarMenu />
-      <p>Order</p>
+      <div className="content-panel">
+        <p>Order</p>
+      </div>
     </div>
   );
 }
