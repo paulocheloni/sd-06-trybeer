@@ -16,11 +16,14 @@ function Login() {
     setIsDisabled,
   } = useContext(ContextBeer);
 
+  // const bePort = process.env.BE_PORT;
+
   useEffect(() => {
     loginValidation(loginEmail, loginPassword, setIsDisabled);
   }, [loginEmail, loginPassword, setIsDisabled]);
+
   const onClick = () => {
-    const token = axios.post('http://localhost:3001/login', { email: loginEmail, password: loginPassword })
+    const token = axios.post(`http://localhost:3001/login`, { email: loginEmail, password: loginPassword })
       .then((response) => {
         localStorage.setItem('user', response.data);
         if (response.data.role === 'administrator') history.push('/admin/orders');
@@ -29,6 +32,7 @@ function Login() {
       .catch((err) => console.error(err));
     return token;
   };
+
   return (
     <div
       className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4
