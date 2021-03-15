@@ -22,6 +22,7 @@ function ClientProfile() {
         />
         <button
           type="button"
+          data-testid="profile-save-btn"
           onClick={ () => console.log('chama a api') }
           disabled={ newName === name }
         >
