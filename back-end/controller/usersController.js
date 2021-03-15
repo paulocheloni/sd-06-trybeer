@@ -1,8 +1,11 @@
 const { Router } = require('express');
+const jwt = require('jsonwebtoken');
 const { getAllUsers, findUserByEmail,
   registerUser, editUser } = require('../models/usersModel');
 
 const usersRouter = new Router();
+
+const SECRET = 'grupo15'
 
 usersRouter.get('/', async (_req, res) => {
   const allUsers = await getAllUsers();
@@ -20,8 +23,20 @@ usersRouter.post('/', async (req, res) => {
 });
 
 usersRouter.post('/register', async (req, res) => {
-  await registerUser(req.body);
-  return res.status(201).send(req.body);
+  const { name, email, password, role } = req.body;
+  
+  const obj = {
+    name,
+    email,
+    password,
+    role,
+  }
+  await registerUser(obj);
+
+  const token = jwt.sign({ obj }, SECRET );
+
+
+  return res.status(201).send({ token });
 });
 
 usersRouter.put('/edit', async (req, res) => {

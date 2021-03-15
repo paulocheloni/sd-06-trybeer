@@ -21,6 +21,7 @@ function Login() {
 
   const handleClick = async () => {
     const userFound = await getUserByEmail(email);
+    console.log(userFound);
 
     if (userFound.role === 'client') {
       const obj = {
