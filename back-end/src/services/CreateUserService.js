@@ -13,7 +13,6 @@ const createUser = async (name, email, password, role) => {
   if (emailExists !== ZERO) {
     return { status: unauthorized, message: emailExistente }
   } else {
-    console.log(name, email, password, role)
     const user = await User.createUser(name, email, password, role);
     return { status: sucess, message: email, user };
   }

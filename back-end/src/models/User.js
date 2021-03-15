@@ -4,7 +4,6 @@ const findByEmail = async (email) => {
   const [ [ foundEmail ] ] = await connection.execute(
     'SELECT COUNT(*) AS counted FROM users WHERE email = ?', [email]
   );
-  console.log(foundEmail)
   return foundEmail.counted;
 };
 
