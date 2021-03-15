@@ -26,9 +26,9 @@ function Products() {
     if (items) {
       const ad = items.map((a) => a.price);
       if (ad !== []) {
-        setCartTotal(ad.reduce((e, f) => +e + +f, 0))
-        setAsd(items.length)
-      };
+        setCartTotal(ad.reduce((e, f) => +e + +f, 0));
+        setAsd(items.length);
+      }
     }
   }, [asd]);
 
