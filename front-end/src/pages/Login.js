@@ -19,21 +19,26 @@ function Login() {
     }
   }, [email, password]);
 
-  const handleClick = async () => {
-    const userFound = await getUserByEmail(email);
-    console.log(userFound);
-
-    if (userFound.role === 'client') {
+  const handleLocalStorage = (user) => {
+    if (user) {
+      const { name, role, token } = user;
       const obj = {
-        name: 'Taylor Swift',
+        name,
         email,
-        token: 'token',
-        role: 'client',
+        token,
+        role,
       };
       const jsonAux = JSON.stringify(obj);
       localStorage.setItem('user', jsonAux);
+    }
+  };
+
+  const handleClick = async () => {
+    const userFound = await getUserByEmail(email);
+    handleLocalStorage(userFound);
+    if (userFound.role === 'client') {
       history.push('/products');
-    } else {
+    } else if (userFound.role === 'administrator') {
       history.push('/admin/orders');
     }
   };
