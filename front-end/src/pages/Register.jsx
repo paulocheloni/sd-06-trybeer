@@ -14,8 +14,8 @@ export default function Register() {
   const [role, setRole] = useState('client');
   const [emailAlreadyExists, setEmailAlreadyExists] = useState('');
 
-  const handleCheckbox = () => {
-    const checkBox = document.getElementById('sell');
+  const handleCheckbox = (e) => {
+    const checkBox = e.target;
     if (checkBox.checked) setRole('administrator');
     else setRole('client');
   };
