@@ -4,6 +4,7 @@ const UserRouter = Router();
 
 // services imports
 const CreateUserService = require('../services/CreateUserService');
+const UpdateUserService = require('../services/UpdateUserService');
 
 // middleware imports
 const { validateLogin, loginValidationRules } = require('../middlewares/validateLogin');
@@ -15,6 +16,14 @@ const UserCreate = async (req, res) => {
   return res.status(status).json(message);
 };
 
+const UserUpdate = async (req, res) => {
+  const { name, email } = req.body;
+  const { status, message } = await UpdateUserService(name, email);
+
+  return res.status(status).json(message);
+};
+
 UserRouter.post('/register', UserCreate);
+UserRouter.put('/update', UserUpdate);
 
 module.exports = UserRouter;
