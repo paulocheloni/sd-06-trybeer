@@ -13,10 +13,9 @@ const createUser = async (name, email, password, role) => {
     (name, email, password, role)
     VALUES (?, ?, ?, ?)`,
     [name, email, password, role]);
-
-}
+};
 
 module.exports = {
   findUser,
-  createUser
+  createUser,
 };

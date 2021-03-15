@@ -9,10 +9,8 @@ const STATUS_INTERNAL_SERVER_ERROR = 500;
 const RegisterService = async (req, res, _next) => {
   try {
     const { name, email, password, role } = req.body;
-    console.log(1);
     await createUser(name, email, password, role);
     const user = await findUser(email);
-    console.log(user);
     if (!user || password !== user.password) {
       return res.status(STATUS_UNAUTHORIZED).json({ message: 'Incorrect username or password' });
     }
@@ -25,7 +23,6 @@ const RegisterService = async (req, res, _next) => {
     const data = { ...payload, token };
     res.status(STATUS_OK).json(data);
   } catch (error) {
-    console.log(error.message);
     return res.status(STATUS_INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });
   }
 };
