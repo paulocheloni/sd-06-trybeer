@@ -1,8 +1,14 @@
+const headerType = { 'Content-Type': 'application/json' };
+
+export const changeName = async (data) => fetch('http://localhost:3001/users/edit', {
+  method: 'PUT',
+  headers: headerType,
+  body: JSON.stringify(data),
+}).then((response) => response.json());
+
 export const registerUser = async (user) => fetch('http://localhost:3001/users/register', {
   method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  headers: headerType,
   body: JSON.stringify(user),
 }).then((response) => response.json());
 
