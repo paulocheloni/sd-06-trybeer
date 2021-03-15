@@ -1,5 +1,5 @@
 body{
-  background-color: black;
+  background-color: white;
 }
 
 header {
@@ -89,4 +89,13 @@ button {
   background-color: black;
   display: flex;
   flex-direction: column;
+}
+
+.product-card {
+  background-color: yellow;
+  margin: 0.2%;
+}
+
+.product-card-image {
+  width: 300px;
 }
