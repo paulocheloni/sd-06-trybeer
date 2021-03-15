@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import GlobalStyle from './Style/GlobalStyle';
 import Login from './Pages/Login';
+import Menu from './Components/Menu';
 import Register from './Pages/Register';
 import Provider from './context/Provider';
 import './App.css';
@@ -9,6 +10,7 @@ import './App.css';
 function App() {
   return (
     <Provider>
+      <Menu />
       <GlobalStyle />
       <Switch>
         <Route exact path="/">
