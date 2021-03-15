@@ -61,10 +61,10 @@ export default function Register() {
     const response = await api.fetchRegister(name, email, password, check);
     localStorage.setItem('user', JSON.stringify(response.user));
     if (response) {
-      if (check) {
-        history.push('/admin/orders');
-      } else {
+      if (response.user.role === 'client') {
         history.push('/products');
+      } else {
+        history.push('/admin/orders');
       }
     } else {
       setUserExist(true);
