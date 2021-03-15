@@ -12,11 +12,8 @@ const handleErrorObject = (error, boolean) => {
 };
 
 const handleLogs = (error, boolean) => {
-  if (!boolean) {
-    errorLogger.error({ error });
-  } else {
-    warningLogger.warn({ error });
-  }
+  if (!boolean) return errorLogger.error({ error });
+  warningLogger.warn({ error });
 };
 
 module.exports = (error, _req, res, _next) => {
