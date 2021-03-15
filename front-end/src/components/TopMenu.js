@@ -8,7 +8,7 @@ const TopMenu = (props) => {
   const {
     titleMenu = 'TryBeer',
   } = props;
-
+  
   const setVisibility = () => {
     setIsVisible(isVisible === 'hidden' ? 'visible' : 'hidden');
     if (isVisible === 'visible') {
@@ -30,6 +30,14 @@ const TopMenu = (props) => {
         </i>
       </button>
       <p data-testid="top-title">{ titleMenu }</p>
+  return (
+    <header>
+      <i data-testid="top-hamburguer">
+        <IconContext.Provider value={ { size: '3em' } }>
+          <GiHamburgerMenu />
+        </IconContext.Provider>
+      </i>
+      <p data-testid="top-title">{titleMenu}</p>
       <p />
     </header>
   );

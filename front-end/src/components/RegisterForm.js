@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import fetchFunctions from '../api/fetchFunctions';
 
 const RegisterForm = (props) => {
+  const [spam, setSpam] = useState(false);
   const {
     onChangeName,
     onChangeEmail,
@@ -10,15 +12,25 @@ const RegisterForm = (props) => {
     disabled,
     history,
     isChecked,
+    name,
+    password,
   } = props;
 
-  const onHandleClick = () => {
-    console.log('teste');
-    history.push(isChecked ? '/admin/orders' : '/products');
+  const onHandleClick = async () => {
+    const role = isChecked ? 'admin' : 'client';
+    const user = {
+      name, email, password, role,
+    };
+
+    const response = await fetchFunctions.post('register', user);
+
+    if (response.message === 'User is already registered') return setSpam(true);
+    return history.push(isChecked ? '/admin/orders' : '/products');
   };
+
   return (
-    <fieldset>
-      <form action="" method="POST">
+    <form action="">
+      <fieldset>
         <label htmlFor="name">
           Nome:
           <input
@@ -70,8 +82,13 @@ const RegisterForm = (props) => {
         >
           Cadastrar
         </button>
-      </form>
-    </fieldset>
+      </fieldset>
+      <fieldset>
+        <span>
+          { spam ? 'E-mail already in database.' : '' }
+        </span>
+      </fieldset>
+    </form>
   );
 };
 
@@ -81,6 +98,9 @@ RegisterForm.propTypes = {
   onChangePassword: PropTypes.func.isRequired,
   onCheck: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
+  email: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
   isChecked: PropTypes.bool.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };
