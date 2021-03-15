@@ -4,9 +4,9 @@ import { useHistory } from 'react-router';
 import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 import AppContext from '../../context/AppContext';
+import * as S from './style';
 
 const Login = () => {
-
   const { email, setEmail, validForm, password, setPassword } = useContext(AppContext);
   const history = useHistory();
   const fetchApi = async () => {
@@ -20,34 +20,36 @@ const Login = () => {
     return history.push('/admin/orders');
   };
   return (
-    <div>
-      <h1>Login</h1>
+    <S.Container>
+      <S.Title>Login</S.Title>
       <Input
-        value={email}
-        onChange={({ target }) => setEmail(target.value)}
+        value={ email }
+        onChange={ ({ target }) => setEmail(target.value) }
         dataTestId="email-input"
       />
       <Input
-        value={password}
+        value={ password }
         type="password"
-        onChange={({ target }) => setPassword(target.value)}
+        onChange={ ({ target }) => setPassword(target.value) }
         name="Senha"
         dataTestId="password-input"
       />
-      <Button
-        disabled={!validForm}
-        dataTestId="signin-btn"
-        onClick={() => fetchApi()}
-      >
-        ENTRAR
-      </Button>
-      <Button
-        dataTestId="no-account-btn"
-        onClick={() => history.push('/register')}
-      >
-        Ainda não tenho conta
-      </Button>
-    </div>
+      <S.Buttons>
+        <Button
+          disabled={ !validForm }
+          dataTestId="signin-btn"
+          onClick={ () => fetchApi() }
+        >
+          ENTRAR
+        </Button>
+        <Button
+          dataTestId="no-account-btn"
+          onClick={ () => history.push('/register') }
+        >
+          Ainda não tenho conta
+        </Button>
+      </S.Buttons>
+    </S.Container>
   );
 };
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import SButton from './style';
 
 const Button = ({ disabled, onClick, children, color, txtColor, dataTestId }) => (
-  <button
+  <SButton
     data-testid={ dataTestId }
     type="button"
     disabled={ disabled }
@@ -10,7 +11,7 @@ const Button = ({ disabled, onClick, children, color, txtColor, dataTestId }) =>
     style={ { backgroundColor: color, color: txtColor } }
   >
     { children }
-  </button>
+  </SButton>
 );
 
 Button.propTypes = {
