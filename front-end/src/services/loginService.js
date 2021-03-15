@@ -25,10 +25,12 @@ export const validateUser = async (user) => {
   return response.data;
 };
 
-export const redirectPath = async (history, user) => {
-  const { role } = await validateUser(user);
+export const redirectPath = async (history, userState) => {
+  const user = await validateUser(userState);
 
-  switch (role) {
+  localStorage.setItem('user', JSON.stringify(user));
+
+  switch (user.role) {
   case 'administrator': history.push('/admin/orders');
     break;
   case 'client': history.push('/products');
