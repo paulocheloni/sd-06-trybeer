@@ -1,6 +1,6 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { Admin, Login, Register, User } from './pages/index';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { Admin, Login, Orders, Profile, Register, Products } from './pages/index';
 import Provider from './hooks/Provider';
 import './App.css';
 
@@ -11,8 +11,11 @@ function App() {
         <Switch>
           <Route path="/login" component={ Login } />
           <Route path="/register" component={ Register } />
-          <Route path="/products" component={ User } />
+          <Route path="/orders" component={ Orders } />
+          <Route path="/products" component={ Products } />
+          <Route path="/profile" component={ Profile } />
           <Route path="/admin/orders" component={ Admin } />
+          <Redirect from="/" to="/login" />
         </Switch>
       </Provider>
     </div>
