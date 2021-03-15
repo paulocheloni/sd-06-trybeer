@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import history from '../services/history';
+// import history from '../services/history';
+import { Redirect } from 'react-router-dom';
 import api from '../services/api';
 
 export default function Register() {
@@ -60,6 +61,8 @@ export default function Register() {
   const handleClick = async () => {
     const response = await api.fetchRegister(name, email, password, check);
     localStorage.setItem('user', JSON.stringify(response.user));
+
+    // { check ? <Redirect to="/admin/orders" /> : <Redirect to="/products" /> }
     if (response) {
       if (response.user.role === 'client') {
         history.push('/products');
