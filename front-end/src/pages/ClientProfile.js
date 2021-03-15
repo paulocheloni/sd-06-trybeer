@@ -30,10 +30,10 @@ function ClientProfile() {
   };
 
   const handleChangeName = async () => {
+    const { token, role } = storage
     const data = { name: newName, email };
-    const { email, token, role } = storage
     const obj = {
-      name:newName,
+      name: data.name,
       email,
       token,
       role,
@@ -46,8 +46,11 @@ function ClientProfile() {
 
   useEffect(() => {
     handleInputValue();
+  },[]);
+
+  useEffect(() => {
     handleDisabled();
-  });
+  },[newName]);
 
   return (
     <div>
