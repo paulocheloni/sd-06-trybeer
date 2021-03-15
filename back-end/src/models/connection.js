@@ -3,7 +3,7 @@ require('dotenv/config');
 
 const connection = mysql.createPool({
   user: 'root',
-  password: 'flowbio',
+  password: '',
   host: 'localhost',
   database: 'Trybeer',
 });

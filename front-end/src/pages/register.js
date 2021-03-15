@@ -13,6 +13,7 @@ function Register() {
   const [password, setPassword] = useState('');
   const [checkbox, setCheckbox] = useState('client');
   const [disabled, setDisabled] = useState(true);
+  const [emailExists, setEmailExists] = useState(false);
 
   const history = useHistory();
 
@@ -42,7 +43,7 @@ function Register() {
           history.push('/products');
         }
       }).catch((err) => {
-        console.log(err.response.data);
+        setEmailExists(true);
       });
   };
 
@@ -89,7 +90,7 @@ function Register() {
           value={ checkbox }
           onChange={ checkboxFunc }
         />
-        Quero Vender
+        Quero vender
       </label>
       <button
         type="button"
@@ -99,6 +100,9 @@ function Register() {
       >
         Cadastrar
       </button>
+      {
+        emailExists && <> E-mail already in database. </>
+      }
     </div>
   );
 }

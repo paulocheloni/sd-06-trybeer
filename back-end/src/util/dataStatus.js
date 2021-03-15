@@ -6,7 +6,7 @@ const messages = {
         message: 'Login ou Senha Invalidos',
     },
     emailExistente: {
-        message: 'Email já existe!',
+        message: 'E-mail already in database.',
     },
 };
 
