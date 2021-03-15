@@ -11,6 +11,8 @@ const handleSubmit = async (event,
   { name, email, password, isChecked, setEmailAlreadyExists }) => {
   event.preventDefault();
 
+  console.log('kkk');
+
   const role = (isChecked) ? 'admin' : 'client';
 
   const result = await registerNewUser(name, email, password, role);
