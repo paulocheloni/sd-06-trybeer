@@ -7,9 +7,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const loginController = require('./controllers/loginController');
+const userController = require('./controllers/userController');
 
-app.use('/login', loginController);
+app.use('/', userController);
 
 const PORT = 3001;
 app.listen(PORT, () => console.log(`Ouvindo na porta ${PORT}`));
