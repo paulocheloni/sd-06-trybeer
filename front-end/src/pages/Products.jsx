@@ -11,16 +11,18 @@ function Products() {
 
   const itemQty = (prod) => {
     const items = JSON.parse(localStorage.getItem('items'));
-    const qty = items.filter((e) => e.id === prod.id);
-    return qty.length;
+    if (items) {
+      const qty = items.filter((e) => e.id === prod.id).length;
+      return qty;
+    }
+    setAsd(0);
+    return 0;
   };
-
   useEffect(() => {
     (async () => {
       setAllProducts(await fetchProducts());
     })();
   }, []);
-
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('items'));
     if (items) {
@@ -31,17 +33,21 @@ function Products() {
       }
     }
   }, [asd]);
-
   return (
     <>
       <h1 style={ { marginLeft: '40px' } }>Products</h1>
       <section className="cards-container">
         {renderCards(allProducts, asd, setAsd, itemQty)}
-        <Link to="/cart" className="cart-link">
-          <button type="button" className="cart-btn" disabled={ asd === 0 }>
+        <Link to="/cart" className="cart-link" data-testid="checkout-bottom-btn">
+          <button
+            data-testid="checkout-bottom-btn-value"
+            type="button"
+            className="cart-btn"
+            disabled={ asd === 0 }
+          >
             Ver Carrinho
             {' '}
-            {cartTotal.toFixed(2)}
+            {cartTotal.toFixed(2).toLocaleString()}
           </button>
         </Link>
       </section>

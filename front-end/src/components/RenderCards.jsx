@@ -5,11 +5,17 @@ const renderCards = (allProducts, asd, setAsd, itemQty) => {
   return allProducts.map(
     (prod, id) => (
       <section className="card-content" key={ id }>
-        <p>{prod.price}</p>
-        <img className="products-img" src={ prod.url_image } alt="Foto do Produto" />
-        <h4>{prod.name}</h4>
+        <p data-testid={ `${id}-product-price` }>{prod.price.toLocaleString('pt-BR')}</p>
+        <img
+          className="products-img"
+          src={ prod.url_image }
+          alt="Foto do Produto"
+          data-testid={ `${id}-product-img` }
+        />
+        <h4 data-testid={ `${id}-product-name` }>{prod.name}</h4>
         <section className="cards-btn">
           <button
+            data-testid={ `${id}-product-plus` }
             type="button"
             onClick={ () => {
               const items = JSON.parse(localStorage.getItem('items')) || [];
@@ -20,8 +26,9 @@ const renderCards = (allProducts, asd, setAsd, itemQty) => {
           >
             +
           </button>
-          <p>{itemQty(prod)}</p>
+          <p data-testid={ `${id}-product-qtd` }>{itemQty(prod)}</p>
           <button
+            data-testid={ `${id}-product-minus` }
             type="button"
             disabled={ disabledBtnQty(prod) }
             onClick={ () => {
