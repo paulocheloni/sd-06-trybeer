@@ -35,7 +35,7 @@ function RegisterForm(props) {
           />
         </label>
         <label htmlFor="signup-seller">
-          Quero Vender
+          Quero vender
           <input
             type="checkbox"
             data-testid="signup-seller"
