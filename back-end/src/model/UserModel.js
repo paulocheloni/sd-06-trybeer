@@ -8,7 +8,7 @@ const connection = require('./connection');
 //   return result;
 // };
 
-const getUser = async (email) => {
+const getUserByEmail = async (email) => {
   const [result] = await connection.execute(
     'SELECT email, password FROM Trybeer.users WHERE email=?', [email],
   );
@@ -18,5 +18,5 @@ const getUser = async (email) => {
 
 module.exports = {
   // getAllUsers,
-  getUser,
+  getUserByEmail,
 };

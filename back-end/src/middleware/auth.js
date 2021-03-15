@@ -3,7 +3,7 @@ const { UserModel } = require('../model');
 module.exports = async (req, res, next) => {
   const { email, password } = req.body;
 
-  const [user] = await UserModel.getUser(email);
+  const [user] = await UserModel.getUserByEmail(email);
 
   if (!user || user.password !== password) {
     return res
