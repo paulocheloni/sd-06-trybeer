@@ -5,6 +5,12 @@ const userLogin = async (userEmail, userPassword) => {
   return useLogin;
 };
 
+const userRegister = async (user) => {
+  const userCreate = await useModel.userRegister(user);
+  return userCreate;
+};
+
 module.exports = {
   userLogin,
+  userRegister,
 };

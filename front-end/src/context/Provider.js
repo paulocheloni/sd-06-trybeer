@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import AppContext from './AppContext';
 
 function Provider({ children }) {
+  const [register, setRegister] = useState({});
   const [validForm, setValidForm] = useState(false);
+  const [validRegister, setValidRegister] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   useEffect(() => {
@@ -17,6 +19,16 @@ function Provider({ children }) {
     validateForm(email, password);
   }, [email, password]);
 
+  const validateRegister = (name, emailInput, passwordInput) => {
+    const emailReg = /\S+@\S+\.\S+/;
+    const nameReg = /^[a-zA-Z ]{2,30}$/;
+    const maxlength = 12;
+    const maxlengthPass = 6;
+    if (name.length >= maxlength && nameReg.test(name) && emailReg.test(emailInput)
+    && passwordInput.length >= maxlengthPass) return setValidRegister(true);
+    setValidRegister(false);
+  };
+
   const contextValue = {
     validForm,
     setValidForm,
@@ -24,6 +36,10 @@ function Provider({ children }) {
     setEmail,
     password,
     setPassword,
+    validateRegister,
+    validRegister,
+    register,
+    setRegister,
   };
 
   return (
@@ -33,6 +49,9 @@ function Provider({ children }) {
   );
 }
 
-Provider.propTypes = { children: PropTypes.element.isRequired };
+Provider.propTypes = { children: PropTypes.oneOfType([
+  PropTypes.element,
+  PropTypes.array,
+]).isRequired };
 
 export default Provider;
