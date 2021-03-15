@@ -9,13 +9,18 @@ const getAll = async () => {
 };
 
 const loginUser = async (email, userPass) => {
-  const result = await Validations.loginValidation(email, userPass);
-  
-  if (result.payload) return result;
-  const { id } = result;
+  const userInfo = await Validations.loginValidation(email, userPass);
+  console.log(userInfo);
+  if (userInfo.payload) return userInfo;
+  const { id, name, role } = userInfo;
   const token = Utils.generateToken(id);
-  
-  return token;
+  const result = {
+    token,
+    id,
+    name,
+    role,
+  }
+  return result;
 };
 
 const createUser = async (name, email, userPass, role) => {

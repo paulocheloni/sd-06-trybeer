@@ -7,7 +7,6 @@ const Login = () => {
   const roleA = 'client'; // From localStorage
   const storage = JSON.parse(localStorage.getItem('user'));
   const existToken = storage ? storage.token : false;
-  console.log(existToken);
 
   return (
     <div className="max-w-sm">
