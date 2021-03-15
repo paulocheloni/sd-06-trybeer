@@ -1,14 +1,23 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Form from '../components/FormRegister';
 import PaperContainer from '../../../design-system/containers/PaperContainer';
 
-const Register = () => (
-  <div className="max-w-sm">
-    <PaperContainer>
-      <p className="text-2xl">Register</p>
-      <Form />
-    </PaperContainer>
-  </div>
-);
+const Register = () => {
+  const roleA = 'client'; // From localStorage
+  const storage = JSON.parse(localStorage.getItem('user'));
+  const existToken = storage ? storage.token : false;
+
+  return (
+    <div className="max-w-sm">
+      { (existToken && roleA === 'client') && <Redirect to="/products" /> }
+      { (existToken && roleA === 'administrator') && <Redirect to="/profile" /> }
+      <PaperContainer>
+        <p className="text-2xl">Register</p>
+        <Form />
+      </PaperContainer>
+    </div>
+  );
+};
 
 export default Register;

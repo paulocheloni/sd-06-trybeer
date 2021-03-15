@@ -24,7 +24,6 @@ const fetchProducts = (state) => (
 );
 
 const fetchProductsSuccess = (state, action) => {
-  console.log(action);
   const { data } = action.payload;
 
   return ({

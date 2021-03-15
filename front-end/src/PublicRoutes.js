@@ -1,8 +1,9 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Login from './modules/login/pages/Login';
 import Register from './modules/login/pages/Register';
 import Products from './modules/products/pages/Products';
+import Profile from './modules/profile/pages/Profile';
 import BodyContainer from './design-system/containers/BodyContainer';
 
 const PublicRoutes = () => (
@@ -11,6 +12,9 @@ const PublicRoutes = () => (
       <Route exact path="/login" component={ Login } />
       <Route exact path="/register" component={ Register } />
       <Route exact path="/products" component={ Products } />
+      <Route exact path="/profile" component={ Profile } />
+      <Redirect path="/" to="/login" />
+
     </Switch>
   </BodyContainer>
 );

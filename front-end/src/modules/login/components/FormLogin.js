@@ -24,9 +24,9 @@ const Form = () => {
 
   const dispatch = useDispatch();
 
-  const login = useCallback(({ email, password }) => dispatch(
-    actions.postLogin({ email, password })
-  ), [dispatch]);
+  const login = useCallback(
+    ({ email, password }) => dispatch(actions.postLogin({ email, password })), [dispatch]
+  );
 
   const handleSubmit = (event) => {
     event.preventDefault();
