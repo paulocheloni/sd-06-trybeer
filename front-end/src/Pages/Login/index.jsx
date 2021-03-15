@@ -15,7 +15,7 @@ const saveLocalStorage = (res) => {
 const handleSubmit = async ([event, email, password, history]) => {
   event.preventDefault();
   const user = await loginUser(email, password);
-  console.log(user);
+  // console.log(user);
   saveLocalStorage(user);
   history.push((user.role === 'client') ? '/products' : '/admin/orders');
 };
