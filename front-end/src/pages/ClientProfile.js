@@ -30,27 +30,27 @@ function ClientProfile() {
   };
 
   const handleChangeName = async () => {
-    const { token, role } = storage
+    const { token, role } = storage;
     const data = { name: newName, email };
     const obj = {
       name: data.name,
       email,
       token,
       role,
-    }
+    };
     const objJson = JSON.stringify(obj);
-    localStorage.setItem('user', objJson)
+    localStorage.setItem('user', objJson);
     changeName(data);
     setSucess(true);
   };
 
   useEffect(() => {
     handleInputValue();
-  },[]);
+  }, [handleInputValue]);
 
   useEffect(() => {
     handleDisabled();
-  },[newName]);
+  }, [handleDisabled, newName]);
 
   return (
     <div>

@@ -13,7 +13,7 @@ function Login() {
 
   const auxFunc = async () => {
     const storageUser = JSON.parse(localStorage.getItem('user'));
-    if(storageUser) {
+    if (storageUser) {
       const user = await getToken(storageUser.token);
       // console.log(user);
       if (user.role === 'client') {
@@ -21,9 +21,8 @@ function Login() {
       } else if (user.role === 'administrator') {
         history.push('/admin/orders');
       }
-
     }
-  }
+  };
 
   useEffect(() => {
     // const storageUser = JSON.parse(localStorage.getItem('user'));
@@ -33,8 +32,8 @@ function Login() {
     //   console.log(user);
     // }
     auxFunc();
-  },[])
-  
+  }, [auxFunc]);
+
   useEffect(() => {
     if (password.length >= minPassword && regex.test(email)) {
       setBtnDisable(false);
