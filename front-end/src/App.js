@@ -1,13 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
+import {
+  BrowserRouter,
+  Route,
+} from 'react-router-dom';
+import Login from './pages/Login';
+
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Route exact path="/"><Login /></Route>
+        <Route exact path="/login"><Login /></Route>
+      </div>
+    </BrowserRouter>
   );
 }
 
