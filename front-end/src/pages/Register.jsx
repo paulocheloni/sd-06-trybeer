@@ -16,6 +16,7 @@ export default function Register() {
 
   const handleCheckbox = (e) => {
     const checkBox = e.target;
+    console.log(checkBox);
     if (checkBox.checked) setRole('administrator');
     else setRole('client');
   };
