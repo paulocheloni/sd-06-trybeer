@@ -1,10 +1,78 @@
+body{
+  background-color: black;
+}
+
 header {
   background-color: black;
   display: flex;
   justify-content: space-between;
   color: white;
   top: 0;
-  /* position: fixed; */
+  position: fixed;
+  width: 100%;
+}
+
+button {
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+  margin: 0.2%;
+  text-align: center;
+  border-radius: 5%;
+}
+
+.content-panel {
+  background-color: black;
+  width: 80vw;
+  display: flex;
+  color: black;
+  margin-left: 20vw;
+  margin-top: 51px;
+  height: 110vh;
+  overflow-x: hidden;
+}
+
+.side-menu-container {
+  width: 20vw;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-around;
+  text-align: center;
+  visibility: hidden;
+  position: fixed;
+}
+
+.side-menu-container button {
+  width: 100%;
+  border-right: none;
+  border-left: none;
+}
+
+.side-menu-main-options {
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.isVisible {
+  visibility: visible;
+}
+
+.isNotVisible {
+  visibility: hidden;
+}
+
+header {
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  top: 0;
+  position: fixed;
   width: 100%;
 }
 
