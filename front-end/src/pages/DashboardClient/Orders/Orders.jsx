@@ -1,9 +1,10 @@
 import React from 'react';
+import Header from '../../../components/Header/Header';
 
 export default function Orders() {
   return (
     <div>
-      <h1>Orders</h1>
+      <Header title="Meus Pedidos" />
     </div>
   );
 }

@@ -1,9 +1,10 @@
 import React from 'react';
+import Header from '../../components/Header/Header';
 
 export default function Products() {
   return (
     <div>
-      <h1>Products</h1>
+      <Header title="TryBeer" />
     </div>
   );
 }
