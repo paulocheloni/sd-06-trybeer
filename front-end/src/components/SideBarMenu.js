@@ -15,7 +15,13 @@ const SidebarMenu = () => (
       </Link>
     </div>
     <Link to="/login" className="justify-at-the-end">
-      <button className="justify-at-the-end" data-testid="side-menu-item-logout" type="button">Sair</button>
+      <button
+        className="justify-at-the-end"
+        data-testid="side-menu-item-logout"
+        type="button"
+      >
+        Sair
+      </button>
     </Link>
   </div>
 );

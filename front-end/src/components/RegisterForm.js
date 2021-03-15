@@ -12,6 +12,7 @@ const RegisterForm = (props) => {
     disabled,
     history,
     isChecked,
+    email,
     name,
     password,
   } = props;
