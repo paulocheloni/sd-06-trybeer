@@ -25,7 +25,7 @@ function Login() {
   const onClick = () => {
     const token = axios.post(`http://localhost:3001/login`, { email: loginEmail, password: loginPassword })
       .then((response) => {
-        localStorage.setItem('user', response.data);
+        localStorage.setItem('user', JSON.stringify(response.data));
         if (response.data.role === 'administrator') history.push('/admin/orders');
         if (response.data.role === 'client') history.push('/products');
       })
