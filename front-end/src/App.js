@@ -8,10 +8,7 @@ function App() {
   return (
     <Switch>
       <Route exact path="/login" component={ Login } />
-      <Route path="/checkout" component={ Checkout } />
-      <Route path="/orders" component={ Orders } />
       <Route path="/" component={ Login } />
-      <Route path="/admin/orders" component={ AdminOrders } />
     </Switch>
   );
 }

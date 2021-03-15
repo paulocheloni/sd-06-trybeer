@@ -3,12 +3,9 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { IconContext } from 'react-icons';
 
 function menuTop() {
-  const isActive = () => {
-
-  };
   return (
     <header>
-      <button type="button" onClick={ isActive }>
+      <button type="button" onClick>
         <i data-testid="top-hamburguer">
           <IconContext.Provider>
             <GiHamburgerMenu />
