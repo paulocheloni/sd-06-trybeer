@@ -47,3 +47,19 @@ export async function edit(prevName, nextName) {
     }
   }
 }
+
+export async function getProducts() {
+  try {
+    const products = await axios.get('http://localhost:3001/products/get-all')
+      .then((response) => response.data);
+    return products;
+  } catch (error) {
+    if (error.response) {
+      return {
+        status: error.response.status,
+        statusText: error.response.statusText,
+        message: error.response.data.message,
+      };
+    }
+  }
+}

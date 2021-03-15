@@ -5,6 +5,8 @@ export const REG_EMAIL = 'REG_EMAIL';
 export const REG_PASS = 'REG_PASS';
 export const PROFILE_NAME = 'PROFILE_NAME';
 export const USER_INFO = 'USER_INFO';
+export const CART_LIST = 'CART_LIST';
+export const PROD_LIST = 'PROD_LIST';
 
 export const validEmail = (boolean) => ({
   type: EMAIL,
@@ -38,5 +40,15 @@ export const profileName = (name) => ({
 
 export const userInfos = (array) => ({
   type: USER_INFO,
+  array,
+});
+
+export const prodList = (array) => ({
+  type: PROD_LIST,
+  array,
+});
+
+export const cartList = (array) => ({
+  type: CART_LIST,
   array,
 });

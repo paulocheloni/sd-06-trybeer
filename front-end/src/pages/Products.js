@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header } from '../components';
+import { Header, ProductsList } from '../components';
 
 class Products extends React.Component {
   constructor() {
@@ -14,7 +14,7 @@ class Products extends React.Component {
     return (
       <div>
         <Header history={ history } />
-        <p>Products</p>
+        <ProductsList history={ history } />
       </div>
     );
   }
