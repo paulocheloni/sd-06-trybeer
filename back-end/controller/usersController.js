@@ -1,5 +1,6 @@
 const { Router } = require('express');
-const { getAllUsers, findUserByEmail, registerUser } = require('../models/usersModel');
+const { getAllUsers, findUserByEmail,
+  registerUser, editUser } = require('../models/usersModel');
 
 const usersRouter = new Router();
 
@@ -20,6 +21,11 @@ usersRouter.post('/', async (req, res) => {
 
 usersRouter.post('/register', async (req, res) => {
   await registerUser(req.body);
+  return res.status(201).send(req.body);
+});
+
+usersRouter.put('/edit', async (req, res) => {
+  await editUser(req.body);
   return res.status(201).send(req.body);
 });
 

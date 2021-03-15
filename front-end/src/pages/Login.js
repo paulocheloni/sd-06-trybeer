@@ -23,6 +23,14 @@ function Login() {
     const userFound = await getUserByEmail(email);
 
     if (userFound.role === 'client') {
+      const obj = {
+        name: 'Taylor Swift',
+        email,
+        token: 'token',
+        role: 'client',
+      };
+      const jsonAux = JSON.stringify(obj);
+      localStorage.setItem('user', jsonAux);
       history.push('/products');
     } else {
       history.push('/admin/orders');

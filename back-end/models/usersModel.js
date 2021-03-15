@@ -24,8 +24,16 @@ const registerUser = async (user) => {
   return register;
 };
 
+const editUser = async (data) => {
+  const { name, email } = data;
+  const edit = await connection
+    .execute('UPDATE Trybeer.users SET name = ? WHERE email = ?', [name, email]);
+    return edit;
+};
+
 module.exports = {
   getAllUsers,
   findUserByEmail,
   registerUser,
+  editUser,
 };
