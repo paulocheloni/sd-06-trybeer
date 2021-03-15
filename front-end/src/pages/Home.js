@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 function Home({ history }) {
@@ -13,5 +14,9 @@ function Home({ history }) {
     </div>
   );
 }
+
+Home.propTypes = {
+  history: PropTypes.objectOf(Object).isRequired,
+};
 
 export default Home;

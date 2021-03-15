@@ -1,9 +1,9 @@
-const { Router } = require('express');
+// const { Router } = require('express');
 
-const { register } = require('../controllers/RegistersController')
+// const { register } = require('../controllers/RegistersController')
 
-const RegisterRouter = Router();
+// const RegisterRouter = Router();
 
-RegisterRouter.put('/', register);
+// RegisterRouter.put('/', register);
 
-module.exports = RegisterRouter;
+// module.exports = RegisterRouter;

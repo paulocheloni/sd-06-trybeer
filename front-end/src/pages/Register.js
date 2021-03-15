@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import RegisterForm from '../components/RegisterForm';
 
@@ -28,11 +29,10 @@ function Register({ history }) {
     setPassword(value.length > PASSWORD_LENGTH ? value : '');
     enableButton();
   };
-
   const onCheck = () => setIsChecked(!isChecked);
 
-  useEffect(() => { 
-    enableButton(); 
+  useEffect(() => {
+    enableButton();
   });
 
   return (
@@ -41,6 +41,9 @@ function Register({ history }) {
         onChangeEmail={ onChangeEmail }
         onChangeName={ onChangeName }
         onChangePassword={ onChangePassword }
+        email={ email }
+        name={ name }
+        password={ password }
         disabled={ disabled }
         onCheck={ onCheck }
         isChecked={ isChecked }
@@ -49,5 +52,9 @@ function Register({ history }) {
     </div>
   );
 }
+
+Register.propTypes = {
+  history: PropTypes.objectOf(Object).isRequired,
+};
 
 export default Register;
