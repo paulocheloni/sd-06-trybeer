@@ -28,9 +28,13 @@ const Products = () => {
   }, [stateSumPrice]);
 
   useEffect(() => {
+    const userToken = JSON.parse(localStorage.getItem('user'));
+
+    if (!userToken) history.push('/login');
+
     findAllProducts()
       .then((res) => setProducts(res));
-  }, []);
+  }, [history]);
 
   return (
     <S.Container>
@@ -53,7 +57,6 @@ const Products = () => {
         <Button
           type="button"
           color="green"
-          dataTestid=""
           fontSize="20px"
           width="91%"
           heigth="40px"
@@ -61,12 +64,15 @@ const Products = () => {
           position="fixed"
           disabled={ isDisabled }
           onClick={ () => history.push('/checkout') }
-          data-testid="checkout-bottom-btn"
+          dataTestid="checkout-bottom-btn"
         >
-          Ver carrinho -
+          Ver Carrinho -
           {' '}
           <span data-testid="checkout-bottom-btn-value">
-            {`R$ ${stateSumPrice.toFixed(2)}`}
+            {localStorage.getItem('total') !== null
+              ? `R$ ${(Number(localStorage.getItem('total'))
+                .toFixed(2)).replace('.', ',')}`
+              : `R$ ${(stateSumPrice.toFixed(2)).replace('.', ',')}`}
           </span>
         </Button>
       </S.ContainerButton>

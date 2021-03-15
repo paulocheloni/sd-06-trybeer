@@ -11,10 +11,14 @@ const handleCounter = (
   if (value === 'plus') {
     setQuantity(quantity + 1);
     setStateSumPrice(stateSumPrice + Number(price));
+
+    localStorage.setItem('total', JSON.stringify(stateSumPrice + Number(price)));
   }
   if (value === 'minus' && quantity > 0) {
     setQuantity(quantity - 1);
     setStateSumPrice(stateSumPrice - Number(price));
+
+    localStorage.setItem('total', JSON.stringify(stateSumPrice - Number(price)));
   }
 };
 
@@ -24,8 +28,6 @@ const CardProducts = ({ product }) => {
   const { stateSumPrice, setStateSumPrice } = useContext(GlobalContext);
 
   const [quantity, setQuantity] = useState(0);
-
-  // console.log(stateSumPrice);
 
   const stateProps = {
     quantity,
@@ -38,21 +40,21 @@ const CardProducts = ({ product }) => {
   return (
     <S.Container>
       <S.Price>
-        <span data-testid={ `${id}-product-price` }>
-          {`R$ ${price}`}
+        <span data-testid={ `${id - 1}-product-price` }>
+          {`R$ ${price.replace('.', ',')}`}
         </span>
       </S.Price>
 
       <S.Image>
         <img
-          data-testid={ `${id}-product-img` }
+          data-testid={ `${id - 1}-product-img` }
           src="/images/image-heineken.png"
           alt={ name }
         />
       </S.Image>
 
       <S.Description>
-        <span data-testid={ `${id}-product-name` }>
+        <span data-testid={ `${id - 1}-product-name` }>
           {name}
         </span>
       </S.Description>
@@ -62,18 +64,18 @@ const CardProducts = ({ product }) => {
           type="button"
           value="minus"
           onClick={ ({ target }) => handleCounter(target, stateProps) }
-          data-testid={ `${id}-product-minus` }
+          data-testid={ `${id - 1}-product-minus` }
         >
           -
         </button>
-        <div data-testid={ `${id}-product-qtd` }>
+        <div data-testid={ `${id - 1}-product-qtd` }>
           {quantity}
         </div>
         <button
           type="button"
           value="plus"
           onClick={ ({ target }) => handleCounter(target, stateProps) }
-          data-testid={ `${id}-product-plus` }
+          data-testid={ `${id - 1}-product-plus` }
         >
           +
         </button>
