@@ -1,9 +1,10 @@
 const { body, validationResult } = require('express-validator');
 
 // Componente de repostas https
-const { status, messages } = require('../util/dataStatus')
-const { unauthorized } = status
-const { dadosInvalidos } = messages
+const { status, messages } = require('../util/dataStatus');
+
+const { unauthorized } = status;
+const { dadosInvalidos } = messages;
 
 const loginValidationRules = () => [
   body('email')
@@ -18,10 +19,9 @@ const loginValidationRules = () => [
     .isLength({ min: 6 }),
 ];
 
-
 const validateLogin = (req, res, next) => {
   const errors = validationResult(req);
-  const errorMsg = dadosInvalidos ;
+  const errorMsg = dadosInvalidos;
 
   if (errors.isEmpty()) return next();
 

@@ -7,7 +7,7 @@ const messages = {
     },
     emailExistente: {
         message: 'Email já existe!',
-    }
+    },
 };
 
 const status = {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
 // Components
-import validateEmailAndPassword from '../components/validateEmailAndPassword'
+import validateEmailAndPassword from '../components/validateEmailAndPassword';
 
 // Services
 import { saveState } from '../services/localStorage';
@@ -16,8 +16,8 @@ function Login() {
 
   const history = useHistory();
 
-  const validates = (email, password) => {
-    if (!validateEmailAndPassword(email, password)) {
+  const validates = (userEmail, userPassword) => {
+    if (!validateEmailAndPassword(userEmail, userPassword)) {
       return setDisabled(false);
     }
     return setDisabled(true);

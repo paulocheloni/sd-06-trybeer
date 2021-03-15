@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 
 // Components
-import validateEmailAndPassword from '../components/validateEmailAndPassword'
+import validateEmailAndPassword from '../components/validateEmailAndPassword';
 
 // Services
 import api from '../services/api';
-import { useHistory } from 'react-router';
 
 function Register() {
   const [name, setName] = useState('');
@@ -16,17 +16,20 @@ function Register() {
 
   const history = useHistory();
 
-  const validates = (email, password, name) => {
-    const nameRegex = /^[a-zA-Z ]{2,30}$/;
-    if (!validateEmailAndPassword(email, password) && nameRegex.test(name) && name.length > 11) {
+  const validates = () => {
+    const regex = /^[a-zA-Z ]{2,30}$/;
+    const eleven = 11;
+    if (!validateEmailAndPassword(email, password)
+    && regex.test(name)
+    && name.length > eleven) {
       return setDisabled(false);
     }
     return setDisabled(true);
   };
 
   useEffect(() => {
-    validates(email, password, name);
-  }, [email, password, name]);
+    validates();
+  }, [email, password, name, validates]);
 
   const registerUser = () => {
     api.createUser(name, email, password, checkbox)
@@ -41,13 +44,13 @@ function Register() {
       }).catch((err) => {
         console.log(err.response.data);
       });
-  }
+  };
 
   const checkboxFunc = (e) => {
     setCheckbox(e.target.value);
     if (checkbox === 'client') return setCheckbox('admin');
     if (checkbox === 'admin') return setCheckbox('client');
-  }
+  };
 
   return (
     <div>
@@ -58,7 +61,7 @@ function Register() {
           type="text"
           data-testid="signup-name"
           placeholder="digite seu Nome"
-          onChange={(e) => setName(e.target.value)}
+          onChange={ (e) => setName(e.target.value) }
         />
       </label>
       <label htmlFor="signup-email">
@@ -67,7 +70,7 @@ function Register() {
           type="text"
           data-testid="signup-email"
           placeholder="digite seu Email"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={ (e) => setEmail(e.target.value) }
         />
       </label>
       <label htmlFor="signup-password">
@@ -76,23 +79,23 @@ function Register() {
           type="text"
           data-testid="signup-password"
           placeholder="digite seu Password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={ (e) => setPassword(e.target.value) }
         />
       </label>
       <label htmlFor="signup-seller">
         <input
           type="checkbox"
           data-testid="signup-seller"
-          value={checkbox}
-          onChange={checkboxFunc}
+          value={ checkbox }
+          onChange={ checkboxFunc }
         />
         Quero Vender
       </label>
       <button
         type="button"
         data-testid="signup-btn"
-        disabled={disabled}
-        onClick={registerUser}
+        disabled={ disabled }
+        onClick={ registerUser }
       >
         Cadastrar
       </button>
