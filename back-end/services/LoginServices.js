@@ -1,8 +1,10 @@
 const status = require('../utils/allStatusCode');
 const { getUserByEmail } = require('../models/UsersModel');
 const { createToken } = require('../utils/createToken');
-const validateEmail = require('../utils/validateEmail');
-const validatePassword = require('../utils/validatePassword');
+const {
+  validateEmail,
+  validatePassword
+} = require('../utils/funcValidations');
 
 const LoginServices = async (req, res) => {
 const { email, password } = req.body;
