@@ -1,13 +1,14 @@
 const connection = require('../database/connection');
 
+const getUserByEmail = async (email) => await connection.execute('SELECT * FROM users WHERE email = ?', [email]);
+
 const createRegister = async (body) => {
   const { name, email, password, role } = body;
-  const [user] = await connection.execute(
-    'INSERT INTO users (name, email, password, role) VALUES (?,?,?,?)',
+  const [result] = await connection.execute(
+    `INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)`,
     [name, email, password, role]
   );
-  console.log(user);
-  return user;
+  return { ...body, id: result.insertId };
 }
 
-module.exports = { createRegister };
+module.exports = { createRegister, getUserByEmail };
