@@ -4,6 +4,7 @@ const controllers = require('../controllers/session');
 
 const session = express.Router();
 
-session.get('/', controllers.login);
+session.post('/', controllers.login);
+// session.get('/', controllers.login);
 
 module.exports = session;
