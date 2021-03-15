@@ -6,7 +6,7 @@ const UserRouter = Router();
 const CreateUserService = require('../services/CreateUserService');
 
 // middleware imports
-const { validateLogin, loginValidationRules } = require('../middlewares/validateLogin');
+const { validateRegistration, registrationValidationRules } = require('../middlewares/validateRegistration');
 
 const UserCreate = async (req, res) => {
   const { name, email, password, role } = req.body;
@@ -15,6 +15,6 @@ const UserCreate = async (req, res) => {
   return res.status(status).json(message);
 };
 
-UserRouter.post('/register', UserCreate);
+UserRouter.post('/register', validateRegistration(), registrationValidationRules, UserCreate);
 
 module.exports = UserRouter;
