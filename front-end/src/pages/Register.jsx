@@ -9,7 +9,7 @@ function Register({ history }) {
 
   useEffect(() => {
     const isValid = () => {
-      const regexEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(newUser.email);
+      const regexEmail = /^[a-z0-9._]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(newUser.email);
       const validNome = /^[a-záàâãéèêíïóôõöúçñ ]+$/i.test(newUser.name);
       const six = 6;
       const doze = 12;

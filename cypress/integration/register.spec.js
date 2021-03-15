@@ -13,13 +13,13 @@ import {
 import { internet } from 'faker';
   
 describe('Crie uma página de registro de usuários', () => {
-  before(() => {
-    createAndInsertsDataBase()
-  });
+  // before(() => {
+  //   createAndInsertsDataBase()
+  // });
 
-  after(() => {
-    dropAndTruncateDataBase();
-  }) 
+  // after(() => {
+  //   dropAndTruncateDataBase();
+  // }) 
 
   beforeEach( () => {
     cy.visit(Cypress.config().baseUrl);
