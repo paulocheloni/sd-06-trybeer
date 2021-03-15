@@ -13,7 +13,7 @@ export const Container = styled.div`
 export const Title = styled.h1`
   margin: 20px 0;
   font-size: 30pt;
-  color: #6665DD; // color
+  color: ${({ color }) => color}; // color
 `;
 
 export const Buttons = styled.div`

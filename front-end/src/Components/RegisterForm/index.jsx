@@ -40,7 +40,7 @@ const Form = () => {
         type="checkbox"
         name="Quero Vender"
         value={ isSeller }
-        onChange={ () => setIsSeller((v) => !v) }
+        onChange={ () => setIsSeller(!isSeller) }
         dataTestId="signup-seller"
       />
     </form>
