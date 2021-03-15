@@ -21,13 +21,11 @@ export const handleUserNotRegistered = (history) => history.push('/register');
 
 export const validateUser = async (user) => {
   const response = await api.post('login', user);
-
+  console.log('Retorno do validate user:', response.data);
   return response.data;
 };
 
-export const redirectPath = async (history, user) => {
-  const { role } = await validateUser(user);
-
+export const routeByRole = (role, history) => {
   switch (role) {
   case 'administrator': history.push('/admin/orders');
     break;
@@ -36,4 +34,9 @@ export const redirectPath = async (history, user) => {
   default:
     break;
   }
+};
+
+export const redirectPath = async (history, user) => {
+  const { role } = await validateUser(user);
+  routeByRole(role, history);
 };

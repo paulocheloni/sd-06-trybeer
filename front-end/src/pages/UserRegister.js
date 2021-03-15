@@ -1,11 +1,87 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import TrybeerContext from '../context/TrybeerContext';
+import { validateNewUser } from '../services/UserRegisterValidations';
+import { checkUser } from '../services/UserRegisterValidations';
+import redirectPath from '../services/loginService';
+
 
 function UserRegister() {
+  const { newUser, setNewUser } = useContext(TrybeerContext);
+  const [enableButton, setEnableButton] = useState(true);
+
+  async function handleButtonClick(event) {
+    event.preventDefault();
+    console.log('Clicou no botão');
+    console.log('Novo usuário', newUser);
+    const userExists = await checkUser(newUser);
+    console.log('Usuário existe:', userExists);
+  }
   return (
     <div>
-      <h1>User Register</h1>
+      <form>
+        <label htmlFor="signup-name">
+          Nome
+          <input
+            id="signup-name"
+            type="text"
+            name="name"
+            data-testid="signup-name"
+            onChange={() => validateNewUser(newUser, setNewUser, setEnableButton)}
+          />
+        </label>
+        <label htmlFor="signup-email">
+          Email
+          <input
+            id="signup-email"
+            type="email"
+            name="email"
+            data-testid="signup-email"
+            onChange={() => validateNewUser(newUser, setNewUser, setEnableButton)}
+          />
+        </label>
+        <label htmlFor="signup-password">
+          Senha
+          <input
+            id="signup-password"
+            type="password"
+            name="password"
+            data-testid="signup-password"
+            onChange={() => validateNewUser(newUser, setNewUser, setEnableButton)}
+          />
+        </label>
+        <label htmlFor="signup-seller">
+          <input
+            type="checkbox"
+            id="signup-seller"
+            name="signup-seller"
+            onChange={() => validateNewUser(newUser, setNewUser, setEnableButton)}
+            data-testid="signup-seller"
+          />
+              Quero vender
+        </label>
+        <button
+          disabled={enableButton}
+          type="button"
+          data-testid="signup-btn"
+          onClick={(event) => handleButtonClick(event)}
+        >
+          Cadastrar
+        </button>
+      </form>
     </div>
   );
 }
 
 export default UserRegister;
+
+/*
+data-testid="signup-name"
+4:09
+data-testid="signup-email"
+4:09
+data-testid="signup-password"
+4:09
+data-testid="signup-seller"
+4:09
+data-testid="signup-btn"
+*/
