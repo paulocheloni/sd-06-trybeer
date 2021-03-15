@@ -1,36 +1,63 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import useInput from '../hooks/useInput';
+import fetchUser from '../services/getUser';
+import { emailValidation, passwordValidation } from '../utils/validations';
 
-export function Login() {
+export default function Login() {
   const history = useHistory();
   const [email, setEmail] = useInput('');
   const [password, setPassword] = useInput('');
-
-  const isEmailValid = /[A-Za-z0-9]+@[A-Za-z]+[A-z]*(\.\w{2,3})+/.test(email);
-  const isPasswordValid = password && password.length > 5;
-
+  const handleOnClik = async () => {
+    fetchUser(email, password)
+      .then((response) => {
+        console.log(response);
+        localStorage.setItem('token', response[1]);
+        if (response[0].role === 'client') {
+          history.push('/products');
+        } else history.push('/admin/orders');
+      });
+  };
   return (
     <div>
-      <h1>Página Login</h1>
       <form>
         <fieldset>
-          <label>Email
-            <input value={email} onChange={setEmail} data-testid='email-input' type='text' />
+          <label htmlFor="email-input">
+            Email
+            <input
+              id="email-input"
+              value={ email }
+              onChange={ setEmail }
+              data-testid="email-input"
+              type="text"
+            />
           </label>
         </fieldset>
         <fieldset>
-          <label>Senha
-            <input value={password} onChange={setPassword} data-testid='password-input' type='password' />
+          <label htmlFor="password-input">
+            Senha
+            <input
+              id="password-input"
+              value={ password }
+              onChange={ setPassword }
+              data-testid="password-input"
+              type="password"
+            />
           </label>
         </fieldset>
         <button
-          onClick={() => history.push('/products')}
-          disabled={!(isEmailValid && isPasswordValid)} data-testid='signin-btn'
-        >ENTRAR
+          onClick={ (e) => {
+            e.preventDefault();
+            handleOnClik();
+          } }
+          disabled={ !(emailValidation(email) && passwordValidation(password)) }
+          data-testid="signin-btn"
+          type="button"
+        >
+          ENTRAR
         </button>
-        <Link to='/register' data-testid="no-account-btn">Ainda não tenho conta</Link>
+        <Link to="/register" data-testid="no-account-btn">Ainda não tenho conta</Link>
       </form>
     </div>
-  )
+  );
 }
