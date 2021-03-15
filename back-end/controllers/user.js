@@ -3,7 +3,7 @@ const userService = require('../services/userService');
 
 const secret = 'dara secret';
 
-const verifyLogin = async (req, res) => {
+const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -26,7 +26,7 @@ const verifyLogin = async (req, res) => {
   }
 };
 
-const verifyUser = async (req, res) => {
+const register = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
 
@@ -43,6 +43,6 @@ const verifyUser = async (req, res) => {
 };
 
 module.exports = {
-  verifyLogin,
-  verifyUser,
+  login,
+  register,
 };
