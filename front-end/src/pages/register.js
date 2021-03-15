@@ -1,15 +1,37 @@
-import React, { useState } from 'react';
-import api from '../services/api';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
+
+// Components
+import validateEmailAndPassword from '../components/validateEmailAndPassword';
+
+// Services
+import api from '../services/api';
 
 function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [checkbox, setCheckbox] = useState('client');
+  const [disabled, setDisabled] = useState(true);
+  const [emailExists, setEmailExists] = useState(false);
 
   const history = useHistory();
-  
+
+  const validates = () => {
+    const regex = /^[a-zA-Z ]{2,30}$/;
+    const eleven = 11;
+    if (!validateEmailAndPassword(email, password)
+    && regex.test(name)
+    && name.length > eleven) {
+      return setDisabled(false);
+    }
+    return setDisabled(true);
+  };
+
+  useEffect(() => {
+    validates();
+  }, [email, password, name, validates]);
+
   const registerUser = () => {
     api.createUser(name, email, password, checkbox)
       .then((response) => {
@@ -21,15 +43,15 @@ function Register() {
           history.push('/products');
         }
       }).catch((err) => {
-        console.log(err.response.data);
+        setEmailExists(true);
       });
-  }
+  };
 
   const checkboxFunc = (e) => {
     setCheckbox(e.target.value);
     if (checkbox === 'client') return setCheckbox('admin');
     if (checkbox === 'admin') return setCheckbox('client');
-  }
+  };
 
   return (
     <div>
@@ -68,15 +90,19 @@ function Register() {
           value={ checkbox }
           onChange={ checkboxFunc }
         />
-        Quero Vender
+        Quero vender
       </label>
       <button
         type="button"
         data-testid="signup-btn"
+        disabled={ disabled }
         onClick={ registerUser }
       >
         Cadastrar
       </button>
+      {
+        emailExists && <> E-mail already in database. </>
+      }
     </div>
   );
 }

@@ -5,10 +5,13 @@ const messages = {
     dadosInvalidos: {
         message: 'Login ou Senha Invalidos',
     },
+    emailExistente: {
+        message: 'E-mail already in database.',
+    },
 };
 
 const status = {
-    sucess: 200, 
+    sucess: 200,
     error: 500,
     unauthorized: 401,
 };
@@ -16,4 +19,4 @@ const status = {
 module.exports = {
     messages,
     status,
-  };
+};

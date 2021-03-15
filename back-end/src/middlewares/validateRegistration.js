@@ -6,26 +6,26 @@ const { status, messages } = require('../util/dataStatus');
 const { unauthorized } = status;
 const { dadosInvalidos } = messages;
 
-const loginValidationRules = () => [
+const registrationValidationRules = () => [
   body('email')
-    .exists(),
-  body('email')
-    .isEmail()
-    .withMessage({
-      dadosInvalidos,
-    }),
+    .exists()
+    .isEmail(),
   body('password')
     .exists()
     .isLength({ min: 6 }),
+  body('name')
+    .exists()
+    .matches(/^[a-zA-Z ]{12,30}$/)
+    .isLength({ min: 12 }),
 ];
 
-const validateLogin = (req, res, next) => {
+const validateRegistration = (req, res, next) => {
   const errors = validationResult(req);
-  const errorMsg = dadosInvalidos;
+  const errorMsg = { message: dadosInvalidos };
 
   if (errors.isEmpty()) return next();
 
   return res.status(unauthorized).json(errorMsg);
 };
 
-module.exports = { loginValidationRules, validateLogin };
+module.exports = { registrationValidationRules, validateRegistration };
