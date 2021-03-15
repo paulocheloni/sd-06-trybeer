@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import LoginContext from '../context/LoginContext';
-import FormLogin from '../components/FormLogin';
+import FormLogin from '../components/pageLogin/FormLogin';
 
 function Login({ history }) {
   const [user, setUser] = useState({ email: '', password: '' });
@@ -29,7 +29,7 @@ function Login({ history }) {
     console.log(user.email);
     e.preventDefault();
     if (user.email === 'tryber@trybe.com.br') {
-      history.push('admin/orders');
+      history.push('/admin/orders');
     } else { history.push('/products'); }
     localStorage.setItem('user', JSON.stringify(user.email));
   };
@@ -38,7 +38,7 @@ function Login({ history }) {
       value={ {
         dataUser: user,
         isDisabled: valid,
-        hadleIputs: handleChange,
+        handleIputs: handleChange,
         handleButton: handleClick,
         router: history,
       } }
@@ -51,7 +51,7 @@ function Login({ history }) {
 }
 
 Login.propTypes = {
-  history: PropTypes.func.isRequired,
+  history: PropTypes.objectOf(Object).isRequired,
 };
 
 export default Login;
