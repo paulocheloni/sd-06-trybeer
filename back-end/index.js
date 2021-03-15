@@ -1,7 +1,7 @@
 const express = require('express');
-const LoginController = require('./src/controllers/LoginController');
-require('dotenv').config();
 const cors = require('cors');
+require('dotenv').config();
+const LoginController = require('./src/controllers/LoginController');
 
 const app = express();
 const port = process.env.PORT;
