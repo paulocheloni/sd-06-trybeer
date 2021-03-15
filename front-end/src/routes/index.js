@@ -8,7 +8,6 @@ import {
   Checkout,
   Orders,
   Admin,
-  // Home,
   AdminOrders,
 } from '../pages';
 
