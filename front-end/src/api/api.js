@@ -9,7 +9,6 @@ const buildAxiosHandler = () => {
 };
 
 export const login = (user) => {
-  console.log("user", user)
   const axios = buildAxiosHandler();
 
   return axios.post('/login', user);

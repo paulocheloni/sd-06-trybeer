@@ -16,19 +16,21 @@ function Login() {
 
     if (isValid && isNumber) {
       setActiveBtn(true);
+      setUser({ email, password })
     } else setActiveBtn(false);
   }
 
-  function handleSubmit() {
-    console.log("event")
-    // api.login(user)
+  const handleSubmit = () => {
+    // event.preventDefault();
+    // console.log("user", user)
+    api.login(user)
   }
 
 
   useEffect(() => {
     verifyEmailAndPassword();
     setUser({ email, password })
-    handleSubmit()
+    // handleSubmit()
   }, [email, password]);
 
   return (
@@ -37,7 +39,9 @@ function Login() {
       <input type="email" data-testid="email-input" onChange={(event) => setEmail(event.target.value)}></input>
       <span>Senha</span>
       <input type="text" data-testid="password-input" onChange={(event) => setPassword(event.target.value)}></input>
-      <button type='submit' onClick={handleSubmit} data-testid="signin-btn">ENTRAR</button>
+      {/* <Link> */}
+      <button type='submit' disabled={!activeBtn} onClick={() => handleSubmit()} data-testid="signin-btn">ENTRAR</button>
+      {/* </Link> */}
       <button type='button' data-testid="no-account-btn">
         Ainda não tenho conta
       </button>
