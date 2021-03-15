@@ -1,11 +1,12 @@
 import React from 'react';
 
+const currencyFormat = (num) => num
+  .toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 const renderCards = (allProducts, asd, setAsd, itemQty) => {
-  const disabledBtnQty = (prod) => itemQty(prod) === 0;
   return allProducts.map(
     (prod, id) => (
       <section className="card-content" key={ id }>
-        <p data-testid={ `${id}-product-price` }>{prod.price.toLocaleString('pt-BR')}</p>
+        <p data-testid={ `${id}-product-price` }>{currencyFormat(+prod.price)}</p>
         <img
           className="products-img"
           src={ prod.url_image }
@@ -22,6 +23,7 @@ const renderCards = (allProducts, asd, setAsd, itemQty) => {
               items.push(prod);
               localStorage.setItem('items', JSON.stringify(items));
               setAsd(asd + 1);
+              console.log(typeof prod.price);
             } }
           >
             +
@@ -30,12 +32,13 @@ const renderCards = (allProducts, asd, setAsd, itemQty) => {
           <button
             data-testid={ `${id}-product-minus` }
             type="button"
-            disabled={ disabledBtnQty(prod) }
             onClick={ () => {
               const items = JSON.parse(localStorage.getItem('items')) || [];
               items.splice(items.indexOf(items.find((e) => e.id === prod.id)), 1);
               localStorage.setItem('items', JSON.stringify(items));
-              setAsd(asd - 1);
+              if (asd > 0) {
+                setAsd(asd - 1);
+              }
             } }
           >
             -

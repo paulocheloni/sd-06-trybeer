@@ -6,6 +6,7 @@ import { Login, Register, Products } from './pages';
 function App() {
   return (
     <Switch>
+      <Route exact path="/" component={ Products } />
       <Route exact path="/login" component={ Login } />
       <Route path="/register" component={ Register } />
       <Route path="/products" component={ Products } />
