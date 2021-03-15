@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import RegisterForm from '../components/RegisterForm';
 
 function Register({ history }) {
@@ -29,6 +29,7 @@ function Register({ history }) {
     setPassword(value.length > PASSWORD_LENGTH ? value : '');
     enableButton();
   };
+
   const onCheck = () => setIsChecked(!isChecked);
 
   useEffect(() => {
@@ -54,7 +55,7 @@ function Register({ history }) {
 }
 
 Register.propTypes = {
-  history: PropTypes.objectOf(Object).isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };
 
 export default Register;

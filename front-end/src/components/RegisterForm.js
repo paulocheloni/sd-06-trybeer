@@ -103,7 +103,7 @@ RegisterForm.propTypes = {
   name: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   isChecked: PropTypes.bool.isRequired,
-  history: PropTypes.objectOf(Object).isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };
 
 export default RegisterForm;
