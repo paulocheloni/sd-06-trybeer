@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { getUserByEmail } from '../services/api';
+import { getToken, getUserByEmail } from '../services/api';
 import LoginForm from '../components/LoginForm';
 import Button from '../components/Button';
 import { regex, minPassword } from '../variables';
@@ -11,6 +11,30 @@ function Login() {
   const [btnDisable, setBtnDisable] = useState(true);
   const history = useHistory();
 
+  const auxFunc = async () => {
+    const storageUser = JSON.parse(localStorage.getItem('user'));
+    if(storageUser) {
+      const user = await getToken(storageUser.token);
+      // console.log(user);
+      if (user.role === 'client') {
+        history.push('/products');
+      } else if (user.role === 'administrator') {
+        history.push('/admin/orders');
+      }
+
+    }
+  }
+
+  useEffect(() => {
+    // const storageUser = JSON.parse(localStorage.getItem('user'));
+    // console.log(storageUser.token);
+    // if(storageUser) {
+    //   const user = getToken(storageUser.token);
+    //   console.log(user);
+    // }
+    auxFunc();
+  },[])
+  
   useEffect(() => {
     if (password.length >= minPassword && regex.test(email)) {
       setBtnDisable(false);

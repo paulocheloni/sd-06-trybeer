@@ -1,5 +1,12 @@
 const headerType = { 'Content-Type': 'application/json' };
 
+export const getToken = async (token) => fetch('http://localhost:3001/users', {
+  method: 'GET',
+  headers: {
+    authorization: token
+  },
+}).then((response) => response.json());
+
 export const changeName = async (data) => fetch('http://localhost:3001/users/edit', {
   method: 'PUT',
   headers: headerType,
