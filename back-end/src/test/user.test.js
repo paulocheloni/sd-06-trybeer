@@ -1,6 +1,10 @@
 const frisby = require('frisby');
 const Utils = require('../service/utils/index');
 require('dotenv/config');
+const {
+  createAndInsertsDataBase,
+  dropAndTruncateDataBase,
+} = require('./helpers');
 
 const BAD_REQUEST = 400;
 const SUCCESS = 200;
@@ -13,14 +17,9 @@ const defaultUser = {
 };
 
 describe('Testing login endpoint', () => {
-  // beforeAll(async () => {
-  //   connection = mysql.createPool({
-  //     user: process.env.MYSQL_USER,
-  //     password: process.env.MYSQL_PASSWORD,
-  //     host: process.env.HOSTNAME,
-  //     database: 'Trybeer',
-  //   });
-  // });
+  beforeEach(async () => {
+    await createAndInsertsDataBase();
+  });
 
   it('Should not be able to login without e-mail', async () => {
     await frisby
