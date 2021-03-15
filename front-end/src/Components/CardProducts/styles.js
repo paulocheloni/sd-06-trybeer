@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components';
 
 const Container = styled.div`
-  ${() => css`
+  ${({ theme }) => css`
+    background: ${theme.colors.primary};
+
     width: 200px;
     height: 250px;
     padding: 10px;
@@ -24,6 +26,9 @@ const Container = styled.div`
 `;
 
 const Price = styled.div`
+  ${({ theme }) => css`
+    color: ${theme.colors.text};
+  `}
   font-weight: 500;
 `;
 
@@ -39,39 +44,51 @@ const Image = styled.div`
 `;
 
 const Description = styled.div`
-  margin-bottom: 10px;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 500;
+  ${({ theme }) => css`
+    color: ${theme.colors.text};
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+  `}
 `;
 
 const Counter = styled.div`
-  width: 100%;
-  height: 35px;
-  flex: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  ${({ theme }) => css`
+    color: ${theme.colors.text};
+    width: 100%;
+    height: 35px;
+    flex: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  `}
 
   > div {
-    font-size: 20px;
-    border: 1px solid black;
-    border-radius: 3px;
-    padding: 1px 5px;
+    ${({ theme }) => css`
+      font-size: 20px;
+      border: 1px solid ${theme.colors.text};
+      border-radius: 3px;
+      padding: 1px 5px;
+    `}
   }
 
   > button {
-    font-size: 40px;
-    background: none;
-    border: none;
+    ${({ theme }) => css`
+      color: ${theme.colors.text};
 
-    cursor: pointer;
+      font-size: 40px;
+      background: none;
+      border: none;
 
-    transition: opacity 0.3s;
+      cursor: pointer;
 
-    &:hover {
-      opacity: 0.8;
-    }
+      transition: opacity 0.3s;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    `}
   }
 `;
 

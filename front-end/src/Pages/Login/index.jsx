@@ -43,7 +43,6 @@ const form = (params) => {
       />
       <Button
         type="submit"
-        width="400px"
         heigth="40px"
         color="green"
         fontSize="20px"
@@ -54,7 +53,6 @@ const form = (params) => {
       </Button>
       <Button
         type="button"
-        width="400px"
         heigth="40px"
         fontSize="16px"
         dataTestid="no-account-btn"

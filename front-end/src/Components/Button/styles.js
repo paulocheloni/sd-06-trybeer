@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 const CompButton = styled.button`
   ${({ theme, width, heigth, color, fontSize, position, botton }) => css`
-    width: ${width};
+    width: ${width || '100%'};
     height: ${heigth};
 
     position: ${position};

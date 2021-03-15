@@ -3,8 +3,6 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { GlobalProvider } from './Contexts/GlobalContext';
 
-import theme from './Styles/Theme';
-
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Profile from './Pages/Profile';
@@ -13,7 +11,11 @@ import Checkout from './Pages/Checkout';
 import MyOrder from './Pages/MyOrder';
 import OrderDetails from './Pages/OrderDetails';
 
+import { useTheme } from './Hooks/theme';
+
 function App() {
+  const { theme } = useTheme();
+
   return (
     <ThemeProvider theme={ theme }>
       <GlobalProvider>

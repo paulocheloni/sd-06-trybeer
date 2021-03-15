@@ -15,7 +15,7 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
 
-  const { stateSumPrice } = useContext(GlobalContext);
+  const { stateSumPrice, stateSideBar } = useContext(GlobalContext);
 
   const history = useHistory();
 
@@ -38,7 +38,7 @@ const Products = () => {
 
       <SideBar />
 
-      <section>
+      <S.ContainerCards stateSideBar={ stateSideBar }>
         {products && (
           products.map((product) => (
             <CardProducts
@@ -47,7 +47,7 @@ const Products = () => {
             />
           ))
         )}
-      </section>
+      </S.ContainerCards>
 
       <S.ContainerButton>
         <Button

@@ -25,7 +25,6 @@ const handleSubmit = async (event,
 const button = (isDisabled) => (
   <Button
     type="submit"
-    width="400px"
     heigth="40px"
     color="green"
     fontSize="20px"

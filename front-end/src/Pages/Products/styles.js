@@ -1,9 +1,18 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Container = styled.div`
-  width: 100%;
+  ${({ theme }) => css`
+    width: 100%;
 
-  > section {
+    background: ${theme.colors.secondary};
+  `}
+`;
+
+const ContainerCards = styled.section`
+  ${({ stateSideBar }) => css`
+
+    opacity: ${stateSideBar && '0.2'};
+
     width: 100%;
     height: 100%;
 
@@ -16,7 +25,7 @@ const Container = styled.div`
     @media (max-width: 500px) {
       padding: 70px 20px 60px 20px;
     }
-  }
+  `} 
 `;
 
 const ContainerButton = styled.div`
@@ -42,4 +51,5 @@ const ContainerButton = styled.div`
 export default {
   Container,
   ContainerButton,
+  ContainerCards,
 };
