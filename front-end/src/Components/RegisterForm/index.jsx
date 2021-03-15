@@ -38,7 +38,7 @@ const Form = () => {
       />
       <Input
         type="checkbox"
-        name="Quero vender"
+        name="Quero Vender"
         value={ isSeller }
         onChange={ () => setIsSeller((v) => !v) }
         dataTestId="signup-seller"
