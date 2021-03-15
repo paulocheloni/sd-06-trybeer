@@ -9,7 +9,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const routerLogin = require('./src/controllers/LoginController');
+const userRouter = require('./src/controllers/UserController');
 const errorMiddleware = require('./src/middlewares/errorMiddleware');
 
 const app = express();
@@ -18,6 +18,6 @@ const port = 3001;
 app.use(cors()); 
 app.use(bodyParser.json());
 
-app.use('/login', routerLogin);
+app.use('/user', userRouter);
 app.use(errorMiddleware);
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

@@ -10,7 +10,15 @@ const getEmail = async (emailLogin) => {
   return result;
 };
 
+const registerUser = async ({ name, email, password, role }) => {
+  const [responsePayload] = await connection
+    .execute('INSERT INTO users(name, email, password, role) VALUES(?, ?, ?, ?)',
+      [name, email, password, role]);
+  return responsePayload;
+};
+
 module.exports = {
   getAll,
   getEmail,
+  registerUser,
 };
