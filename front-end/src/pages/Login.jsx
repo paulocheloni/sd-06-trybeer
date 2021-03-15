@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import history from '../services/history';
 import './Login.css';
 
+import api from '../services/api';
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,16 +34,29 @@ export default function Login() {
     }
   };
 
+  // const handleClick = async () => {
+  //   const response = await fetch('http://localhost:3001/login', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ email, password }),
+  //   })
+  //     .then((res) => res.json());
+  //   localStorage.setItem('token', JSON.stringify(response.token));
+  //   if (response.user.role === 'client') {
+  //     history.push('/products');
+  //   } else {
+  //     history.push('/admin/orders');
+  //   }
+  // };
+
   const handleClick = async () => {
-    const response = await fetch('http://localhost:3001/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    })
-      .then((res) => res.json());
+    const response = await api.fetchLogin(email, password);
+    console.log(response);
+  
     localStorage.setItem('token', JSON.stringify(response.token));
+  
     if (response.user.role === 'client') {
       history.push('/products');
     } else {
