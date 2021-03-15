@@ -10,6 +10,7 @@ const Container = styled.div`
   justify-content: center;
 
   > form {
+
     padding: 20px 30px 10px 30px;
 
     border-radius: 5px;
