@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import useInput from '../hooks/useInput';
 import { nameValidation,
   passwordValidation, emailValidation } from '../utils/validations';
-import fetchUser from '../services/getUser';
+import fetches from '../services/fetches'
 
 export default function Register() {
   const history = useHistory();
@@ -16,13 +16,13 @@ export default function Register() {
 
   const handleCheckbox = (e) => {
     const checkBox = e.target;
-    console.log(checkBox);
+    // console.log(checkBox);
     if (checkBox.checked) setRole('administrator');
     else setRole('client');
   };
 
   const handleOnClik = async () => {
-    const doesTheEmailExist = await fetchUser(email, password);
+    const doesTheEmailExist = await fetches.fetchUserByEmail (email, password);
     console.log(doesTheEmailExist);
     if (doesTheEmailExist) return setEmailAlreadyExists('E-mail already in database.');
     if (role === 'client') {
@@ -72,7 +72,7 @@ export default function Register() {
       </fieldset>
       <fieldset>
         <label htmlFor="sell">
-          Quero Vender
+          Quero vender
           <input
             id="sell"
             data-testid="signup-seller"

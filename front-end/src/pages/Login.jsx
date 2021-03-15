@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import useInput from '../hooks/useInput';
-import fetchUser from '../services/getUser';
+import fetches from '../services/fetches'
 import { emailValidation, passwordValidation } from '../utils/validations';
 
 export default function Login() {
@@ -9,9 +9,12 @@ export default function Login() {
   const [email, setEmail] = useInput('');
   const [password, setPassword] = useInput('');
   const handleOnClik = async () => {
-    fetchUser(email, password)
+    fetches.fetchUserByEmail(email, password)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
+        if (!response){
+          return;
+        }
         localStorage.setItem('token', response[1]);
         if (response[0].role === 'client') {
           history.push('/products');
