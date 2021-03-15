@@ -6,19 +6,21 @@ import isLogged from '../components/isLogged';
 import './Products.css';
 
 const currencyFormat = (num) => num
-  .toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+  .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+
+const itemQty = (prod) => {
+  const items = JSON.parse(localStorage.getItem('items'));
+  if (items) {
+    const qty = items.filter((e) => e.id === prod.id);
+    return qty.length;
+  }
+  return 0;
+};
+
 function Products() {
   const [allProducts, setAllProducts] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const [asd, setAsd] = useState(0);
-  const itemQty = (prod) => {
-    const items = JSON.parse(localStorage.getItem('items'));
-    if (items) {
-      const qty = items.filter((e) => e.id === prod.id);
-      return qty.length;
-    }
-    return 0;
-  };
   useEffect(() => {
     (async () => {
       setAllProducts(await fetchProducts());
