@@ -1,32 +1,43 @@
 const frisby = require('frisby');
 const Utils = require('../service/utils/index');
+const validations = require('../service/validations/index');
 require('dotenv/config');
+const {
+  createAndInsertsDataBase,
+  dropAndTruncateDataBase,
+} = require('./helpers');
 
 const BAD_REQUEST = 400;
 const SUCCESS = 200;
-const loginUrl = 'http://localhost:3001/login';
-const productsUrl = 'http://localhost:3001/products';
-const salesUrl = 'http://localhost:3001/sales';
+const apiUrl = 'http://localhost:3001';
+const loginEndpoint = '/login';
+const productsEndpoint = '/products';
+const salesEndpoint = '/sales';
+
 const defaultUser = {
-  email: 'novo@gmail.com',
+  email: 'tryber@trybe.com.br',
   password: '123456',
+  userId: 1,
 };
 
 describe('Testing login endpoint', () => {
-  // beforeAll(async () => {
-  //   connection = mysql.createPool({
-  //     user: process.env.MYSQL_USER,
-  //     password: process.env.MYSQL_PASSWORD,
-  //     host: process.env.HOSTNAME,
-  //     database: 'Trybeer',
-  //   });
-  // });
+  beforeEach(async () => {
+    await createAndInsertsDataBase();
+  });
+
+  afterEach(async () => {
+    await dropAndTruncateDataBase();
+  });
+
+  afterAll(async () => {
+    await createAndInsertsDataBase();
+  });
 
   it('Should not be able to login without e-mail', async () => {
     await frisby
-        .post(loginUrl,
+        .post(`${ apiUrl }${ loginEndpoint }`,
         {
-          password: '123456',
+          password: defaultUser.password,
         })
       .expect('status', BAD_REQUEST)
       .then((response) => {
@@ -38,9 +49,9 @@ describe('Testing login endpoint', () => {
 
   it('Should not be able to login without password', async () => {
     await frisby
-      .post(loginUrl,
+      .post(`${ apiUrl }${ loginEndpoint }`,
         { 
-          email: 'tryber@trybe.com.br',
+          email: defaultUser.email,
         })
       .expect('status', BAD_REQUEST)
       .then((response) => {
@@ -52,16 +63,17 @@ describe('Testing login endpoint', () => {
 
   it('Should receive a token if login succeed', async () => {
     await frisby
-      .post(loginUrl,
+      .post(`${ apiUrl }${ loginEndpoint }`,
         { 
-          email: 'tryber@trybe.com.br',
-          password: '123456',
+          email: defaultUser.email,
+          password: defaultUser.password,
         })
       .expect('status', SUCCESS)
-      .then((response) => {
+      .then(async (response) => {
         const { body } = response;
         const result = JSON.parse(body);
-        expect(result.token).not.toBeNull();
+        const tokenValidation = await validations.tokenValidation(result.token);
+        expect(tokenValidation).toEqual(defaultUser.userId);
       });
   });
 });
@@ -69,7 +81,7 @@ describe('Testing login endpoint', () => {
 describe('Testing products endpoint', () => {
   it('Should be able to get a list of all products', async () => {
     await frisby
-        .get(productsUrl)
+        .get(`${ apiUrl }${ productsEndpoint }`)
       .expect('status', SUCCESS)
       .then((response) => {
         const { body } = response;
@@ -84,16 +96,16 @@ describe('Testing sales endpoint', () => {
     frisby.globalSetup({
       request: {
         headers: {
-          'Authorization': Utils.generateToken(1),
+          'Authorization': Utils.generateToken(defaultUser.userId),
           'Content-Type': 'application/json',
         }
       }
     });
   })
 
-  it('Should be able to get a sale by userId', async () => {
+  it('Should be able to create a sale', async () => {
     await frisby
-        .post(salesUrl, {
+        .post(`${ apiUrl }${ salesEndpoint }`, {
           products: [
             {
                 productId: '1', 'quantity': 10
@@ -116,9 +128,9 @@ describe('Testing sales endpoint', () => {
       });
   });
 
-  it('Should be able to create a sale', async () => {
+  it('Should be able to get a sale by userId', async () => {
     await frisby
-        .get(`${salesUrl}/1`)
+        .get(`${ apiUrl }${ salesEndpoint }/${defaultUser.userId}`)
       .expect('status', SUCCESS)
       .then((response) => {
         const { body } = response;
