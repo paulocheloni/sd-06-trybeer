@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { registerNewUser } from '../../Services/Apis';
+import { loginUser, registerNewUser } from '../../Services/Apis';
 
 import Container from './styles';
 
@@ -11,16 +11,18 @@ const handleSubmit = async (event,
   { name, email, password, isChecked, setEmailAlreadyExists }) => {
   event.preventDefault();
 
-  console.log('kkk');
-
   const role = (isChecked) ? 'admin' : 'client';
 
   const result = await registerNewUser(name, email, password, role);
+    console.log(result);
+
+  const newUser = await loginUser(email, password);
 
   if (result && result === 'E-mail already in database.') {
     setEmailAlreadyExists(true);
   } else if (result && result === 'OK') {
-    window.location.href = (role === 'client') ? '/products' : '/admin/orders';
+    localStorage.setItem('user', JSON.stringify(newUser));
+    window.location.href = (newUser.role === 'client') ? '/products' : '/admin/orders';
   }
 };
 
