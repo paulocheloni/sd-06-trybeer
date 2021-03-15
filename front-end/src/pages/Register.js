@@ -42,6 +42,9 @@ function Register({ history }) {
         onChangeEmail={ onChangeEmail }
         onChangeName={ onChangeName }
         onChangePassword={ onChangePassword }
+        email={ email }
+        name={ name }
+        password={ password }
         disabled={ disabled }
         onCheck={ onCheck }
         isChecked={ isChecked }
