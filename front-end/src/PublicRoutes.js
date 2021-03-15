@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Login from './modules/login/pages/Login';
 import Register from './modules/login/pages/Register';
 import Products from './modules/products/pages/Products';
-import Profile from './modules/profile/pages/Profile';
+import Profile from './modules/profileX/pages/Profile';
 import BodyContainer from './design-system/containers/BodyContainer';
 
 const PublicRoutes = () => (

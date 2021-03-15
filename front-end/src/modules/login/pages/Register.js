@@ -4,14 +4,14 @@ import Form from '../components/FormRegister';
 import PaperContainer from '../../../design-system/containers/PaperContainer';
 
 const Register = () => {
-  const roleA = 'client'; // From localStorage
   const storage = JSON.parse(localStorage.getItem('user'));
+  const role = storage ? storage.role : '';
   const existToken = storage ? storage.token : false;
 
   return (
     <div className="max-w-sm">
-      { (existToken && roleA === 'client') && <Redirect to="/products" /> }
-      { (existToken && roleA === 'administrator') && <Redirect to="/profile" /> }
+      { (existToken && role === 'client') && <Redirect to="/products" /> }
+      { (existToken && role === 'administrator') && <Redirect to="/profile" /> }
       <PaperContainer>
         <p className="text-2xl">Register</p>
         <Form />
