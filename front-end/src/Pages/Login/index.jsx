@@ -14,14 +14,14 @@ const Login = () => {
     const response = await axios.post('http://localhost:3001/login', body); // headers apos ,
     const data = await response.data;
     localStorage.setItem('token', JSON.stringify(data.userLogin.token));
-    if (data.userLogin.role === 'client') {
-      return history.push('/products');
-    }
-    return history.push('/admin/orders');
+    if (data.userLogin.role === 'client') return history.push('/products');
+    if (data.userLogin.role === 'admin') return history.push('/admin/orders');
+    alert('E-mail ou senha incorreta');
+    localStorage.removeItem('token');
   };
   return (
     <S.Container>
-      <S.Title>Login</S.Title>
+      <S.Title color="#6665DD">Login</S.Title>
       <Input
         value={ email }
         onChange={ ({ target }) => setEmail(target.value) }
