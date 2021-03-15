@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
+
+// Components
+import validateEmailAndPassword from '../components/validateEmailAndPassword'
+
 // Services
 import { saveState } from '../services/localStorage';
 import api from '../services/api';
@@ -12,17 +16,15 @@ function Login() {
 
   const history = useHistory();
 
-  const validateEmailAndPassword = (userEmail, pass) => {
-    const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.?([a-z]+)?$/i;
-    const passLength = 5;
-    if (regex.test(userEmail) && pass.length > passLength) {
+  const validates = (email, password) => {
+    if (!validateEmailAndPassword(email, password)) {
       return setDisabled(false);
     }
     return setDisabled(true);
   };
 
   useEffect(() => {
-    validateEmailAndPassword(email, password);
+    validates(email, password);
   }, [email, password]);
 
   const InsertUserLocalStorage = () => {
