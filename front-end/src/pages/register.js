@@ -1,4 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
+
+// Components
+import validateEmailAndPassword from '../components/validateEmailAndPassword'
+
+// Services
 import api from '../services/api';
 import { useHistory } from 'react-router';
 
@@ -7,9 +12,22 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [checkbox, setCheckbox] = useState('client');
+  const [disabled, setDisabled] = useState(true);
 
   const history = useHistory();
-  
+
+  const validates = (email, password, name) => {
+    const nameRegex = /^[a-zA-Z ]{2,30}$/;
+    if (!validateEmailAndPassword(email, password) && nameRegex.test(name) && name.length > 11) {
+      return setDisabled(false);
+    }
+    return setDisabled(true);
+  };
+
+  useEffect(() => {
+    validates(email, password, name);
+  }, [email, password, name]);
+
   const registerUser = () => {
     api.createUser(name, email, password, checkbox)
       .then((response) => {
@@ -40,7 +58,7 @@ function Register() {
           type="text"
           data-testid="signup-name"
           placeholder="digite seu Nome"
-          onChange={ (e) => setName(e.target.value) }
+          onChange={(e) => setName(e.target.value)}
         />
       </label>
       <label htmlFor="signup-email">
@@ -49,7 +67,7 @@ function Register() {
           type="text"
           data-testid="signup-email"
           placeholder="digite seu Email"
-          onChange={ (e) => setEmail(e.target.value) }
+          onChange={(e) => setEmail(e.target.value)}
         />
       </label>
       <label htmlFor="signup-password">
@@ -58,22 +76,23 @@ function Register() {
           type="text"
           data-testid="signup-password"
           placeholder="digite seu Password"
-          onChange={ (e) => setPassword(e.target.value) }
+          onChange={(e) => setPassword(e.target.value)}
         />
       </label>
       <label htmlFor="signup-seller">
         <input
           type="checkbox"
           data-testid="signup-seller"
-          value={ checkbox }
-          onChange={ checkboxFunc }
+          value={checkbox}
+          onChange={checkboxFunc}
         />
         Quero Vender
       </label>
       <button
         type="button"
         data-testid="signup-btn"
-        onClick={ registerUser }
+        disabled={disabled}
+        onClick={registerUser}
       >
         Cadastrar
       </button>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
+
 // Provider
 import Provider from './Context/Provider';
 // Pages

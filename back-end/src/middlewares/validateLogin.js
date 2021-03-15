@@ -1,5 +1,9 @@
 const { body, validationResult } = require('express-validator');
-const { messages } = require('../util/dataStatus');
+
+// Componente de repostas https
+const { status, messages } = require('../util/dataStatus')
+const { unauthorized } = status
+const { dadosInvalidos } = messages
 
 const loginValidationRules = () => [
   body('email')
@@ -7,22 +11,21 @@ const loginValidationRules = () => [
   body('email')
     .isEmail()
     .withMessage({
-      message: messages.dadosInvalidos,
+      dadosInvalidos,
     }),
   body('password')
     .exists()
     .isLength({ min: 6 }),
 ];
 
-const UNAUTHORIZED = 401;
 
 const validateLogin = (req, res, next) => {
   const errors = validationResult(req);
-  const errorMsg = { message: messages.dadosInvalidos };
+  const errorMsg = dadosInvalidos ;
 
   if (errors.isEmpty()) return next();
 
-  return res.status(UNAUTHORIZED).json(errorMsg);
+  return res.status(unauthorized).json(errorMsg);
 };
 
 module.exports = { loginValidationRules, validateLogin };

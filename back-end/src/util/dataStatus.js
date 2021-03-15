@@ -5,6 +5,9 @@ const messages = {
     dadosInvalidos: {
         message: 'Login ou Senha Invalidos',
     },
+    EmailExistente: {
+        message: 'Email já existe!',
+    }
 };
 
 const status = {
