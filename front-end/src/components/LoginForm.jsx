@@ -1,22 +1,27 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import UserContext from '../hooks/UseContext';
+import { validateUser } from '../services/users';
 
-function LoginForm(props) {
+function LoginForm() {
   const {
     email,
     setEmail,
     password,
     setPassword,
-    setIsDisabled,
-  } = useContext(UseContext);
+  } = useContext(UserContext);
+
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const history = useHistory();
 
-  const handleChange = () => {
-    const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  useEffect(() => {
+    const regex = /\S+@\S+\.\S+/;
     const six = 6;
+
     setIsDisabled(regex.test(email) && password.length >= six);
-  };
+  }, [email, password]);
 
   const handleSubmit = async (userEmail, userPassword) => {
     const result = await validateUser(userEmail, userPassword);
@@ -31,10 +36,7 @@ function LoginForm(props) {
         <input
           id="emailInput"
           data-testid="email-input"
-          onChange={ (e) => {
-            handleChange();
-            setEmail(e.target.value);
-          } }
+          onChange={ (e) => setEmail(e.target.value) }
         />
       </label>
       <label htmlFor="passwordInput">
@@ -43,15 +45,12 @@ function LoginForm(props) {
           id="passwordInput"
           type="password"
           data-testid="password-input"
-          onChange={ (e) => {
-            handleChange();
-            setPassword(e.target.value);
-          } }
+          onChange={ (e) => setPassword(e.target.value) }
         />
       </label>
       <button
         type="button"
-        disabled={ !disabled }
+        disabled={ !isDisabled }
         id="signinBtn"
         data-testid="signin-btn"
         onClick={ () => handleSubmit(email, password) }
