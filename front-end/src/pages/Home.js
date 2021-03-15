@@ -7,16 +7,12 @@ import React from 'react';
 //   const isValid = email.match(/\S+@\S+\.\S+/);
 // }
 
-
-
 function Login() {
-  return(
+  return (
     <div>
-        Home
+      Home
     </div>
   );
 }
 
 export default Login;
-
-
