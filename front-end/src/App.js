@@ -1,27 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { GlobalProvider } from './Contexts/GlobalContext';
+
+import theme from './Styles/Theme';
+
+import Login from './Pages/Login';
+import Register from './Pages/Register';
+import Profile from './Pages/Profile';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>
-          Edit
-          <code>src/App.js</code>
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Main Group
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={ theme }>
+      <GlobalProvider>
+        <Switch>
+          <Route exact path="/" component={ () => <Redirect to="/login" /> } />
+          <Route path="/login" component={ Login } />
+          <Route path="/register" component={ Register } />
+          <Route path="/profile" component={ Profile } />
+          <Route path="/products" />
+        </Switch>
+      </GlobalProvider>
+    </ThemeProvider>
   );
 }
 
