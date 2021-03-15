@@ -1,9 +1,10 @@
 import React from 'react';
+import TopMenu from '../components/TopMenu';
 
 export default function Orders() {
   return (
     <div>
-      <h1>Página pedidos - Home admin</h1>
+      <TopMenu pageTitle="Meus pedidos" />
     </div>
   );
 }

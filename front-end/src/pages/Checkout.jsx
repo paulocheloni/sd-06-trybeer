@@ -4,7 +4,7 @@ import TopMenu from '../components/TopMenu';
 export default function Products() {
   return (
     <div>
-      <TopMenu pageTitle="Trybeer" />
+      <TopMenu pageTitle="Finalizar Pedido" />
     </div>
   );
 }

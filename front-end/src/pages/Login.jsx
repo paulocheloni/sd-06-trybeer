@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import useInput from '../hooks/useInput';
-import fetches from '../services/fetches'
+import fetches from '../services/fetches';
 import { emailValidation, passwordValidation } from '../utils/validations';
 
 export default function Login() {
@@ -12,7 +12,7 @@ export default function Login() {
     fetches.fetchUserByEmail(email, password)
       .then((response) => {
         // console.log(response);
-        if (!response){
+        if (!response) {
           return;
         }
         localStorage.setItem('token', response[1]);

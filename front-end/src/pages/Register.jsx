@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// import emailExists from '../utils/emailExists';
 import useInput from '../hooks/useInput';
 import { nameValidation,
   passwordValidation, emailValidation } from '../utils/validations';
-import fetches from '../services/fetches'
+import fetches from '../services/fetches';
 
 export default function Register() {
   const history = useHistory();
@@ -22,7 +21,7 @@ export default function Register() {
   };
 
   const handleOnClik = async () => {
-    const doesTheEmailExist = await fetches.fetchUserByEmail (email, password);
+    const doesTheEmailExist = await fetches.fetchUserByEmail(email, password);
     console.log(doesTheEmailExist);
     if (doesTheEmailExist) return setEmailAlreadyExists('E-mail already in database.');
     if (role === 'client') {
