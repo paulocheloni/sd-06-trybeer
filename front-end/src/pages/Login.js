@@ -5,6 +5,14 @@ import LoginForm from '../components/LoginForm';
 import Button from '../components/Button';
 import { regex, minPassword } from '../variables';
 
+const redirect = (userFound, history) => {
+  if (userFound.role === 'client') {
+    history.push('/products');
+  } else if (userFound.role === 'admin' || userFound.role === 'administrator') {
+    history.push('/admin/orders');
+  }
+};
+
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,39 +38,31 @@ function Login() {
 
   useEffect(() => {
     if (password.length >= minPassword && regex.test(email)) {
-      setBtnDisable(false);
-    } else {
-      setBtnDisable(true);
+      return setBtnDisable(false);
     }
+    setBtnDisable(true);
   }, [email, password]);
 
   const handleLocalStorage = (user) => {
-    if (user) {
-      const { name, role, token } = user;
-      const obj = {
-        name,
-        email,
-        token,
-        role,
-      };
-      const jsonAux = JSON.stringify(obj);
-      localStorage.setItem('user', jsonAux);
-    }
+    const { name, role, token } = user;
+    const obj = {
+      name,
+      email,
+      token,
+      role,
+    };
+    const jsonAux = JSON.stringify(obj);
+    localStorage.setItem('user', jsonAux);
   };
 
   const handleClick = async () => {
     const userFound = await getUserByEmail(email);
-    if (!userFound.message && userFound.password.toString() === password.toString()) {
-      setLoginSucess(true);
-      handleLocalStorage(userFound);
-      if (userFound.role === 'client') {
-        history.push('/products');
-      } else if (userFound.role === 'admin' || userFound.role === 'administrator') {
-        history.push('/admin/orders');
-      }
-    } else {
-      setLoginSucess(false);
+    if (userFound.message || userFound.password.toString() !== password.toString()) {
+      return setLoginSucess(false);
     }
+    setLoginSucess(true);
+    handleLocalStorage(userFound);
+    redirect(userFound, history);
   };
 
   return (
