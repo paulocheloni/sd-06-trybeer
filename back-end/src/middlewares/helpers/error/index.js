@@ -29,4 +29,9 @@ module.exports = {
     customCode: 'C_ERR_EMAIL_REQ',
     customMessage: 'Email field is required.',
   },
+  C_ERR_NO_TOKEN: {
+    statusCode: 401,
+    customCode: 'C_ERR_NO_TOKEN',
+    customMessage: 'Authentication token is missing.',
+  },
 };

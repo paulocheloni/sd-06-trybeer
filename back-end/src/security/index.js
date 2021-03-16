@@ -12,7 +12,11 @@ const generateToken = (id) => {
 };
 
 const verifyToken = (token) => {
-  console.log('verifyToken ID: %s', token);
+  try {
+    return jwt.verify(token, securityConfig.jwt.secret);
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 
 module.exports = {
