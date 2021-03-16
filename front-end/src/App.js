@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { Admin, Login, Register, User } from './pages/index';
 import Provider from './hooks/Provider';
 import './App.css';
@@ -13,6 +13,7 @@ function App() {
           <Route path="/register" component={ Register } />
           <Route path="/products" component={ User } />
           <Route path="/admin/orders" component={ Admin } />
+          <Redirect from="/" to="/login" />
         </Switch>
       </Provider>
     </div>

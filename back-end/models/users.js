@@ -17,14 +17,18 @@ const getUser = async (email, password) => {
 };
 
 const addUser = async (name, email, password, role) => {
-  await connection.execute(
-    `INSERT INTO Trybeer.${coll} (name, email, password, role) VALUES(?, ?, ?, ?);`,
-    [name, email, password, role],
-  );
-
-  const user = await getUser(email, password);
-
-  return user;
+  try {
+    await connection.execute(
+      `INSERT INTO Trybeer.${coll} (name, email, password, role) VALUES(?, ?, ?, ?);`,
+      [name, email, password, role],
+    );
+  
+    const user = await getUser(email, password);
+  
+    return user;
+  } catch (error) {
+    return undefined;
+  }
 };
 
 module.exports = {
