@@ -7,7 +7,7 @@ const fetchUserByEmail = async (email, password) => {
     const user = await axios.post(`${path}/login`, { email, password });
     return user.data;
   } catch (error) {
-    alert('Usuário não encontrado!');
+    console.error(error);
   }
 };
 
@@ -15,15 +15,11 @@ const fetchAllProducts = async () => {
   console.log('teste');
   try {
     const products = await axios.get(`${path}/products`);
+    console.log(products);
     return products;
   } catch (error) {
-    alert('Erro');
+    console.error(error);
   }
-/*   await axios
-    .get(`${path}/products`).then((response) => {
-      console.log(response.data);
-      return response.data;
-    }); */
 };
 
 const updateUserName = async (email, name) => {
