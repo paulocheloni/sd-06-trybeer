@@ -6,13 +6,14 @@ import editUserName from '../methods/editUserName';
 
 function ClientProfile() {
   const user = JSON.parse(localStorage.getItem('user'));
+  const [profile, setProfile] = useState('');
   try {
     const [newName, setNewName] = useState(user.name);
     const { name, email } = user;
     return (
       <div>
         <h1 data-testid="top-title">
-          Cliente - Meu Perfil
+        Meu perfil
         </h1>
         <InputProfileName
           setValue={ setNewName }
@@ -24,11 +25,12 @@ function ClientProfile() {
         <button
           type="button"
           data-testid="profile-save-btn"
-          onClick={ async () => editUserName({ name, newName }) }
+          onClick={ async () => setProfile(await editUserName({ name, newName })) }
           disabled={ newName === name }
         >
           Salvar
         </button>
+        {profile && <p>Atualização concluída com sucesso</p>}
       </div>
     );
   } catch (err) {

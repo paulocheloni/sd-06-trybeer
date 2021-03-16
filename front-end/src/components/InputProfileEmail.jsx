@@ -12,7 +12,7 @@ function InputProfileEmail({ value }) {
         className="profile-email-input"
         data-testid="profile-email-input"
         defaultValue={ value }
-        readOnly={ false }
+        readOnly
       />
     </label>
   );
