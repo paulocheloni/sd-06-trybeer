@@ -11,8 +11,10 @@ function App() {
         <Route exact path="/">
           <Redirect from="/" to="/login" />
         </Route>
+        <Route path="/admin/orders" />
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />
+        <Route path="/products" />
       </Switch>
     </Router>
   );

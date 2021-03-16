@@ -25,15 +25,12 @@ function Login({ history }) {
     const { token, role } = loginValidate.response;
     if (loginValidate.result) {
       setErrMsg(false);
-      console.log('successfully logged in');
-      if (role === 'administrator') history.push('/admin/orders');
-      else history.push('/products');
       localStorage.setItem('user', JSON.stringify({ email: user.email, token }));
-    } else {
-      console.log(loginValidate.response);
-      setDisplayErr(true);
-      setErrMsg(loginValidate.response.message);
+      if (role === 'administrator') return history.push('/admin/orders');
+      return history.push('/products');
     }
+    setDisplayErr(true);
+    setErrMsg(loginValidate.response.message);
   };
 
   return (
