@@ -2,18 +2,17 @@ const { Router } = require('express');
 const jwt = require('jsonwebtoken');
 const { validateToken, SECRET } = require('../middlewares/helpers');
 const { findUserByEmail,
-  registerUser, editUser, getAllUsers } = require('../models/usersModel');
+  registerUser, editUser } = require('../models/usersModel');
 
 const usersRouter = new Router();
 
 // const SECRET = 'grupo15';
 
-usersRouter.get('/', async (req, res) => {
-  // const { email } = req.user;
-  // const user = await findUserByEmail(email);
-  const allUsers = await getAllUsers();
+usersRouter.get('/', validateToken, async (req, res) => {
+  const { email } = req.user;
+  const user = await findUserByEmail(email);
 
-  res.status(200).json(allUsers);
+  res.status(200).json(user);
 });
 
 usersRouter.post('/', async (req, res) => {
