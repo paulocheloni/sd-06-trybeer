@@ -9,7 +9,10 @@ function Profile() {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    if (userName !== name) setIsDisabled(false);
+    const nameRegex = /^[a-záàâãéèêíïóôõöúçñ ]+$/gi;
+    const nameIsValid = nameRegex.test(userName);
+
+    if (userName !== name && nameIsValid) setIsDisabled(false);
     else setIsDisabled(true);
   }, [name, userName]);
 
