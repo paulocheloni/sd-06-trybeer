@@ -12,9 +12,7 @@ const getAll = async () => {
 const verifyAuth = async (req, res, next) => {
   const { authorization } = req.headers;
   
-  if (!authorization) {
-    res.status(UNAUTHORIZED).json({ message: 'jwt is missing' });
-  }
+  if (!authorization) return res.status(UNAUTHORIZED).json({ message: 'jwt is missing' });
 
   jwt.verify(authorization, process.env.SECRET, (err) => {
     if (err) return res.status(UNAUTHORIZED).json({ message: 'failed to auth token' });
