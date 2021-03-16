@@ -6,8 +6,6 @@ const { findUserByEmail,
 
 const usersRouter = new Router();
 
-// const SECRET = 'grupo15';
-
 usersRouter.get('/', validateToken, async (req, res) => {
   const { email } = req.user;
   const user = await findUserByEmail(email);
