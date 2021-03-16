@@ -1,7 +1,7 @@
 const session = require('./session.services');
-const profile = require('./profile.services');
+const users = require('./users.services');
 
 module.exports = {
   session,
-  profile,
+  users,
 };

@@ -4,6 +4,6 @@ const controllers = require('../controllers/profile');
 
 const profile = express.Router();
 
-profile.post('/', controllers.profile);
+profile.put('/', controllers.profile);
 
 module.exports = profile;
