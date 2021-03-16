@@ -9,30 +9,24 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [btnDisable, setBtnDisable] = useState(true);
+  const [loginSucess, setLoginSucess] = useState(true);
   const history = useHistory();
 
   const auxFunc = async () => {
     const storageUser = JSON.parse(localStorage.getItem('user'));
     if (storageUser) {
       const user = await getToken(storageUser.token);
-      // console.log(user);
       if (user.role === 'client') {
         history.push('/products');
-      } else if (user.role === 'administrator') {
+      } else if (user.role === 'admin' || user.role === 'administrator') {
         history.push('/admin/orders');
       }
     }
   };
 
   useEffect(() => {
-    // const storageUser = JSON.parse(localStorage.getItem('user'));
-    // console.log(storageUser.token);
-    // if(storageUser) {
-    //   const user = getToken(storageUser.token);
-    //   console.log(user);
-    // }
     auxFunc();
-  }, [auxFunc]);
+  }, []);
 
   useEffect(() => {
     if (password.length >= minPassword && regex.test(email)) {
@@ -58,11 +52,16 @@ function Login() {
 
   const handleClick = async () => {
     const userFound = await getUserByEmail(email);
-    handleLocalStorage(userFound);
-    if (userFound.role === 'client') {
-      history.push('/products');
-    } else if (userFound.role === 'administrator') {
-      history.push('/admin/orders');
+    if (!userFound.message && userFound.password.toString() === password.toString()) {
+      setLoginSucess(true);
+      handleLocalStorage(userFound);
+      if (userFound.role === 'client') {
+        history.push('/products');
+      } else if (userFound.role === 'admin' || userFound.role === 'administrator') {
+        history.push('/admin/orders');
+      }
+    } else {
+      setLoginSucess(false);
     }
   };
 
@@ -81,6 +80,7 @@ function Login() {
         handleClick={ () => history.push('/register') }
         btnDisable={ false }
       />
+      {!loginSucess ? <p>Email ou senha incorretos.</p> : null}
     </div>
   );
 }

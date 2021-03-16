@@ -9,13 +9,13 @@ export const getToken = async (token) => fetch(URL_USERS, {
   },
 }).then((response) => response.json());
 
-export const changeName = async (data) => fetch('http://localhost:3001/users/edit', {
+export const changeName = async (data) => fetch(`${URL_USERS}/edit`, {
   method: 'PUT',
   headers: headerType,
   body: JSON.stringify(data),
 }).then((response) => response.json());
 
-export const registerUser = async (user) => fetch('http://localhost:3001/users/register', {
+export const registerUser = async (user) => fetch(`${URL_USERS}/register`, {
   method: 'POST',
   headers: headerType,
   body: JSON.stringify(user),
