@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useInput from '../hooks/useInput';
-import { nameValidation, passwordValidation, emailValidation } from '../utils/validations';
+import { nameValidation,
+  passwordValidation,
+  emailValidation } from '../utils/validations';
 import fetches from '../services/fetches';
 
 export default function Register() {
@@ -88,7 +90,9 @@ export default function Register() {
             data-testid="signup-btn"
             type="button"
             disabled={
-              !(emailValidation(email) && passwordValidation(password) && nameValidation(name))
+              !(emailValidation(email)
+              && passwordValidation(password)
+              && nameValidation(name))
             }
             onClick={ (e) => {
               e.preventDefault();
