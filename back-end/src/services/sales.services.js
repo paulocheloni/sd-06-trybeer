@@ -1,6 +1,10 @@
 const { utils } = require('../models');
 
-const getById = async (id) => utils.getByFilter('sales', 'user_id', id);
+const getById = async (userId) => utils.getByFilter({
+  table: 'sales',
+  filter: 'user_id',
+  value: userId,
+});
 
 module.exports = {
   getById,
