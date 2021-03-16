@@ -5,65 +5,64 @@ import LoginForm from '../components/LoginForm';
 import Button from '../components/Button';
 import { regex, minPassword } from '../variables';
 
+const redirect = (userFound, history) => {
+  if (userFound.role === 'client') {
+    history.push('/products');
+  } else if (userFound.role === 'admin' || userFound.role === 'administrator') {
+    history.push('/admin/orders');
+  }
+};
+
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [btnDisable, setBtnDisable] = useState(true);
+  const [loginSucess, setLoginSucess] = useState(true);
   const history = useHistory();
 
   const auxFunc = async () => {
     const storageUser = JSON.parse(localStorage.getItem('user'));
     if (storageUser) {
       const user = await getToken(storageUser.token);
-      // console.log(user);
       if (user.role === 'client') {
         history.push('/products');
-      } else if (user.role === 'administrator') {
+      } else if (user.role === 'admin' || user.role === 'administrator') {
         history.push('/admin/orders');
       }
     }
   };
 
   useEffect(() => {
-    // const storageUser = JSON.parse(localStorage.getItem('user'));
-    // console.log(storageUser.token);
-    // if(storageUser) {
-    //   const user = getToken(storageUser.token);
-    //   console.log(user);
-    // }
     auxFunc();
-  }, [auxFunc]);
+  }, []);
 
   useEffect(() => {
     if (password.length >= minPassword && regex.test(email)) {
-      setBtnDisable(false);
-    } else {
-      setBtnDisable(true);
+      return setBtnDisable(false);
     }
+    setBtnDisable(true);
   }, [email, password]);
 
   const handleLocalStorage = (user) => {
-    if (user) {
-      const { name, role, token } = user;
-      const obj = {
-        name,
-        email,
-        token,
-        role,
-      };
-      const jsonAux = JSON.stringify(obj);
-      localStorage.setItem('user', jsonAux);
-    }
+    const { name, role, token } = user;
+    const obj = {
+      name,
+      email,
+      token,
+      role,
+    };
+    const jsonAux = JSON.stringify(obj);
+    localStorage.setItem('user', jsonAux);
   };
 
   const handleClick = async () => {
     const userFound = await getUserByEmail(email);
-    handleLocalStorage(userFound);
-    if (userFound.role === 'client') {
-      history.push('/products');
-    } else if (userFound.role === 'administrator') {
-      history.push('/admin/orders');
+    if (userFound.message || userFound.password.toString() !== password.toString()) {
+      return setLoginSucess(false);
     }
+    setLoginSucess(true);
+    handleLocalStorage(userFound);
+    redirect(userFound, history);
   };
 
   return (
@@ -81,6 +80,7 @@ function Login() {
         handleClick={ () => history.push('/register') }
         btnDisable={ false }
       />
+      {!loginSucess ? <p>Email ou senha incorretos.</p> : null}
     </div>
   );
 }

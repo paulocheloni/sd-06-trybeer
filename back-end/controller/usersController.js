@@ -6,8 +6,6 @@ const { findUserByEmail,
 
 const usersRouter = new Router();
 
-// const SECRET = 'grupo15';
-
 usersRouter.get('/', validateToken, async (req, res) => {
   const { email } = req.user;
   const user = await findUserByEmail(email);
@@ -19,10 +17,10 @@ usersRouter.post('/', async (req, res) => {
   const { email } = req.body;
   const userFound = await findUserByEmail(email);
   if (userFound) {
-    const { name, role } = userFound;
+    const { name, password, role } = userFound;
     const jwtConfig = { expiresIn: '7d', algorithm: 'HS256' };
     const token = jwt.sign({ data: { email, role } }, SECRET, jwtConfig);
-    return res.status(200).json({ name, role, token });
+    return res.status(200).json({ name, password, role, token });
   }
   return res.status(404).send({ message: 'E-mail not found.' });
 });
