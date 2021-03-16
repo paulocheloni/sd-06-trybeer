@@ -4,16 +4,16 @@ import TrybeerContext from '../context/TrybeerContext';
 
 const ProductCard = ({ index, name, price, url_image: urlImage }) => {
   const [quantity, setQuantity] = useState(0);
-  const { cart, setCart } = useContext(TrybeerContext);
+  const { setCart } = useContext(TrybeerContext);
 
   const formatedPrice = price.replace('.', ',');
-  
+
   const handleClick = (param, value) => {
     const floatedPrice = parseFloat(value);
     const localCart = JSON.parse(localStorage.getItem('userCart'));
 
     if (param === 'plus') {
-      setQuantity(() => parseInt(quantity + 1));
+      setQuantity(() => parseInt((quantity + 1), 10));
       if (localCart) {
         const newValue = parseFloat(localCart) + floatedPrice;
         localStorage.setItem('userCart', JSON.stringify(newValue));
@@ -22,20 +22,18 @@ const ProductCard = ({ index, name, price, url_image: urlImage }) => {
         localStorage.setItem('userCart', JSON.stringify(value));
         setCart(value);
       }
-    } else {
-      if (quantity !== 0) {
-        setQuantity(() => parseInt(quantity - 1));
-        if (localCart) {
-          const newValue = parseFloat(localCart) - floatedPrice;
-          localStorage.setItem('userCart', JSON.stringify(newValue));
-          setCart(newValue);
-        } else {
-          localStorage.setItem('userCart', JSON.stringify(value));
-          setCart(value);
-        }
+    } else if (quantity !== 0) {
+      setQuantity(() => parseInt((quantity - 1), 10));
+      if (localCart) {
+        const newValue = parseFloat(localCart) - floatedPrice;
+        localStorage.setItem('userCart', JSON.stringify(newValue));
+        setCart(newValue);
+      } else {
+        localStorage.setItem('userCart', JSON.stringify(value));
+        setCart(value);
       }
     }
-  }
+  };
 
   return (
     <div className="product-card">

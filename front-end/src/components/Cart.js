@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
 
 const Cart = () => {
@@ -21,19 +21,20 @@ const Cart = () => {
   }, [cart]);
 
   return (
-  <div>
-    <button
-      data-testid="checkout-bottom-btn"
-      type="button"
-      onClick={ () => history.push('/checkout') }
-      disabled={ disabledButton }
+    <div>
+      <button
+        data-testid="checkout-bottom-btn"
+        type="button"
+        onClick={ () => history.push('/checkout') }
+        disabled={ disabledButton }
       >
         Ver Carrinho
       </button>
       <p data-testid="checkout-bottom-btn-value">
-        { preco() ? preco() : `R$ 0,00` }
+        { preco() ? preco() : 'R$ 0,00' }
       </p>
-  </div>
-)};
+    </div>
+  );
+};
 
 export default Cart;
