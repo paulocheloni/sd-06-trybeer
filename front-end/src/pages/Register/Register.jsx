@@ -40,7 +40,7 @@ const registerRedirect = async ({ name, email, password, isSeller, history }) =>
 
 const setStateSwitch = ({ field, value, setEmail, setPassword, setName }) => {
   if (field === 'Email') return setEmail(value);
-  if (field === 'Name') return setName(value);
+  if (field === 'Nome') return setName(value);
   return setPassword(value);
 };
 
