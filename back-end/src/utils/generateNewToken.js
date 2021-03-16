@@ -8,6 +8,5 @@ module.exports = (email) => {
   };
 
   const token = jwt.sign({ data: email }, process.env.TOKEN_SECRET, jwtConfig);
-
   return token;
 };
