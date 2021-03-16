@@ -19,10 +19,10 @@ const create = async (body) => {
 
 const updateName = async ({ name }, id) => {
   validateUserName(name);
-  return await users.updateNameByEmail(name, id);
-}
+  return users.updateNameByEmail(name, id);
+};
 
 module.exports = {
   create,
-  updateName
+  updateName,
 };

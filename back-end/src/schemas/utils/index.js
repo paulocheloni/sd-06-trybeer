@@ -2,7 +2,7 @@ const {
   isUserNameValid,
   isEmailValid,
   isBlank,
-  isLessThan
+  isLessThan,
 } = require('../helpers');
 
 const error = {
