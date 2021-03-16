@@ -7,9 +7,8 @@ module.exports = async (req, res, next) => {
 
   if (emailAlreadyExists === undefined) {
     return next();
-  } else {
+  } 
     return res
     .status(409)
     .json({ message: 'Email Already Exists' });
-  }
 };

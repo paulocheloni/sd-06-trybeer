@@ -10,4 +10,4 @@ const userRole = async (email) => {
 
 module.exports = {
   userRole,
-}
+};
