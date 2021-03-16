@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { loadState } from '../services/localStorage';
 import api from '../services/api';
+import NavBar from '../components/menuNavBar';
 
 function Profile() {
   const [name, setName] = useState('');
@@ -40,6 +41,7 @@ function Profile() {
 
   return (
     <div>
+      <NavBar />
       <h1>Profile</h1>
       <label htmlFor="signup-name">
         Nome

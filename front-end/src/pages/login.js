@@ -69,7 +69,7 @@ function Login() {
         disabled={ disabled }
         onClick={ InsertUserLocalStorage }
       >
-        ENTRAR
+        Entrar
       </button>
       <RedirectPage
         rota="/register"
