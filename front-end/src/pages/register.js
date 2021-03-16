@@ -36,7 +36,7 @@ function Register() {
     api.createUser(name, email, password, checkbox)
       .then((response) => {
         console.log(`usuario ${response.data} criado com sucesso!`);
-        if (checkbox === 'admin') {
+        if (checkbox === 'administrator') {
           history.push('/admin/orders');
         }
         if (checkbox === 'client') {
@@ -49,8 +49,8 @@ function Register() {
 
   const checkboxFunc = (e) => {
     setCheckbox(e.target.value);
-    if (checkbox === 'client') return setCheckbox('admin');
-    if (checkbox === 'admin') return setCheckbox('client');
+    if (checkbox === 'client') return setCheckbox('administrator');
+    if (checkbox === 'administrator') return setCheckbox('client');
   };
 
   return (
