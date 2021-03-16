@@ -13,6 +13,9 @@ const SButton = styled.button`
   border-radius: 8px;
   text-align: center;
   margin: 2% 0;
+  &:hover {
+    filter: grayscale(40%);
+  }
 `;
 
 export default SButton;

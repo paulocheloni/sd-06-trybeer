@@ -1,15 +1,16 @@
 import Axios from 'axios';
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router';
-import Button from '../../Components/Button';
-import Form from '../../Components/RegisterForm';
 import AppContext from '../../context/AppContext';
 import * as S from './style';
+import RegisterForm from '../../Components/RegisterForm';
+import Button from '../../Components/Button';
 
 const handleClick = async (name, email, password, isSeller) => {
   try {
     const role = (isSeller) ? 'admin' : 'client';
     const data = await Axios.post('http://localhost:3001/register', { name, email, password, role });
+    console.log(data);
     if (typeof data.data === 'string') throw new Error();
     const getToken = await Axios.post('http://localhost:3001/login', { email, password });
     const token = await getToken.data;
@@ -43,7 +44,7 @@ const Register = () => {
     <S.Container>
       <S.Title>Registrar</S.Title>
       <S.Status status={ status }>{ status }</S.Status>
-      <Form />
+      <RegisterForm />
       <S.Buttons>
         <Button
           dataTestId="signup-btn"
