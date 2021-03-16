@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import history from '../services/history';
+import { useHistory } from 'react-router-dom';
 import api from '../services/api';
 
 export default function Register() {
@@ -11,6 +11,8 @@ export default function Register() {
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isNameValid, setIsNameValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
+
+  const history = useHistory();
 
   const handleChangeName = (event) => {
     const { value } = event.target;
