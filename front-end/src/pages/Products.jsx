@@ -5,15 +5,15 @@ export default function Products() {
   return (
     <div>
       <MenuTop title="TryBeer" />
-      tr uma tabela com os Produtos
+      <Cards />
+    tr uma tabela com os Produtos
         td os produtos em cards
           foto
           nome
           preço
           quant atual no carrinho
-          botao de + e -
-          botão ver carrinho
-          
+          botao de   + e -
+
     </div>
   );
 }
