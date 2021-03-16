@@ -27,7 +27,21 @@ const fetchRegister = async (name, email, password, check) => {
   return response;
 };
 
+const fetchProducts = async (products) => {
+  const response = await fetch('http://localhost:3001/products', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ products }),
+  }).then((res) => res.json());
+
+  if (response.message) return false;;
+  return response;
+};
+
 module.exports = {
   fetchLogin,
   fetchRegister,
+  fetchProducts,
 };
