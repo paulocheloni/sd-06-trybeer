@@ -1,5 +1,5 @@
-const productsModel = require('../model/Products');
 const jwt = require('jsonwebtoken');
+const productsModel = require('../model/Products');
 const { UNAUTHORIZED } = require('../schema/statusSchema');
 
 // Return all products
@@ -14,7 +14,7 @@ const verifyAuth = async (req, res, next) => {
   
   if (!authorization) {
     res.status(UNAUTHORIZED).json({ message: 'jwt is missing' });
-  };
+  }
 
   jwt.verify(authorization, process.env.SECRET, (err) => {
     if (err) return res.status(UNAUTHORIZED).json({ message: 'failed to auth token' });
