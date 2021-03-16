@@ -5,6 +5,6 @@ const { authToken } = require('../middlewares');
 
 const sales = express.Router();
 
-sales.get('/:id', authToken, controllers.sales);
+sales.get('/', authToken, controllers.sales);
 
 module.exports = sales;
