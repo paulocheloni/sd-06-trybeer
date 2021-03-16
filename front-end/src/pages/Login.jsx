@@ -22,9 +22,10 @@ function Login({ history }) {
   const handleClick = async (e) => {
     e.preventDefault();
     const loginValidate = await api.generateToken(user.email, user.password);
-    const { token, role } = loginValidate.response;
     if (loginValidate.result) {
+      const { token, role } = loginValidate.response;
       setErrMsg(false);
+      console.log(token, '', role, loginValidate);
       localStorage.setItem('user', JSON.stringify({ email: user.email, token }));
       if (role === 'administrator') history.push('/admin/orders');
       else history.push('/products');
