@@ -34,7 +34,7 @@ function Login() {
 
   useEffect(() => {
     auxFunc();
-  }, []);
+  }, [auxFunc]);
 
   useEffect(() => {
     if (password.length >= minPassword && regex.test(email)) {

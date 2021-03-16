@@ -7,6 +7,7 @@ import './App.css';
 import ClientProfile from './pages/ClientProfile';
 import Products from './pages/Products';
 import Orders from './pages/Orders';
+import Cart from './pages/Cart';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/register" component={ Register } />
         <Route exact path="/profile" component={ ClientProfile } />
         <Route exact path="/products" component={ Products } />
+        <Route exact path="/checkout" component={ Cart } />
         <Route exact path="/orders" component={ Orders } />
       </Switch>
     </Provider>

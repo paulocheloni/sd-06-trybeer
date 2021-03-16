@@ -46,11 +46,11 @@ function ClientProfile() {
 
   useEffect(() => {
     handleInputValue();
-  }, []);
+  }, [handleInputValue]);
 
   useEffect(() => {
     handleDisabled();
-  }, [newName]);
+  }, [handleDisabled, newName]);
 
   return (
     <div>

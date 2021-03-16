@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import context from './Context';
 
 function Provider({ children }) {
-  const [a, setA] = useState('');
+  const [totalCart, setTotalCart] = useState(0);
 
   const contextValues = {
-    a,
-    setA,
+    totalCart,
+    setTotalCart,
   };
 
   return (
