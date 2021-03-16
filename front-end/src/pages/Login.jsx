@@ -18,12 +18,12 @@ function Login({ history }) {
   };
 
   const handleClick = async (e) => {
-    console.log(user.email);
     e.preventDefault();
 
-    const loginValidate = await api.generateToken(user.email, user.password);
-    console.log(loginValidate);
-    const { token, role } = loginValidate;
+    const token = await api.generateToken(user.email, user.password);
+    const role = await api.isUserAdmin(user.email);
+    console.log('token:', token);
+    console.log('role:', role);
 
     if (role === 'administrator') {
       history.push('/admin/orders');
