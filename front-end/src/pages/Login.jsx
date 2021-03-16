@@ -22,7 +22,6 @@ function Login() {
   const [user, setUser] = useState('');
 
   handleChanges(email, password, setButton);
-
   if (user.role) {
     return user.role === 'administrator'
       ? <Redirect to="/admin/profile" />
@@ -31,7 +30,6 @@ function Login() {
   return (
 
     <main>
-
       <form>
         <Input type="email" setValue={ setEmail } value={ email } />
         <Input type="password" setValue={ setPassword } value={ password } />

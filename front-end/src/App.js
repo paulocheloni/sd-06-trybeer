@@ -3,6 +3,7 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import { Login, Register, Products, ClientProfile } from './pages';
 
+
 function App() {
   return (
     <Switch>
