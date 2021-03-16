@@ -4,9 +4,9 @@ const allProducts = async () => {
   const [products] = await connection.execute(
     'SELECT * FROM products',
   );
-  return products.map(({ id, name, price, url_image }) => ({ id, name, price, url_image}) );
-}
+  return products;
+};
 
 module.exports = {
-  allProducts
-}
+  allProducts,
+};
