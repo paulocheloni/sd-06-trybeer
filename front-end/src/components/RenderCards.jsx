@@ -5,7 +5,6 @@ const currencyFormat = (num) => num
 const renderCards = (allProducts, asd, setAsd, itemQty) => allProducts.map(
   (prod, id) => (
     <section className="card-content" key={ id }>
-      <p data-testid={ `${id}-product-price` }>{currencyFormat(+prod.price)}</p>
       <img
         className="products-img"
         src={ prod.url_image }
@@ -13,21 +12,8 @@ const renderCards = (allProducts, asd, setAsd, itemQty) => allProducts.map(
         data-testid={ `${id}-product-img` }
       />
       <h4 data-testid={ `${id}-product-name` }>{prod.name}</h4>
+      <p data-testid={ `${id}-product-price` }>{currencyFormat(+prod.price)}</p>
       <section className="cards-btn">
-        <button
-          data-testid={ `${id}-product-plus` }
-          type="button"
-          onClick={ () => {
-            const items = JSON.parse(localStorage.getItem('items')) || [];
-            items.push(prod);
-            localStorage.setItem('items', JSON.stringify(items));
-            setAsd(asd + 1);
-            console.log(typeof prod.price);
-          } }
-        >
-          +
-        </button>
-        <p data-testid={ `${id}-product-qtd` }>{itemQty(prod)}</p>
         <button
           data-testid={ `${id}-product-minus` }
           type="button"
@@ -41,6 +27,20 @@ const renderCards = (allProducts, asd, setAsd, itemQty) => allProducts.map(
           } }
         >
           -
+        </button>
+        <p data-testid={ `${id}-product-qtd` }>{itemQty(prod)}</p>
+        <button
+          data-testid={ `${id}-product-plus` }
+          type="button"
+          onClick={ () => {
+            const items = JSON.parse(localStorage.getItem('items')) || [];
+            items.push(prod);
+            localStorage.setItem('items', JSON.stringify(items));
+            setAsd(asd + 1);
+            console.log(typeof prod.price);
+          } }
+        >
+          +
         </button>
       </section>
     </section>
