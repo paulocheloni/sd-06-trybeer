@@ -9,4 +9,8 @@ LoginRouter.post('/',
   auth,
   LoginController.generateToken);
 
+LoginRouter.post('/role',
+  auth,
+  LoginController.isUserAdmin);
+
 module.exports = LoginRouter;
