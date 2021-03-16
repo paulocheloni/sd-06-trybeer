@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import InputProfileName from '../components/InputProfileName';
 import InputProfileEmail from '../components/InputProfileEmail';
+import editUserName from '../methods/editUserName';
 
 function ClientProfile() {
-  const myLocalStorage = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user'));
   try {
-    const [newName, setNewName] = useState(myLocalStorage.name);
-    const { name, email } = myLocalStorage;
+    const [newName, setNewName] = useState(user.name);
+    const { name, email } = user;
     return (
       <div>
         <h1 data-testid="top-title">
@@ -23,7 +24,7 @@ function ClientProfile() {
         <button
           type="button"
           data-testid="profile-save-btn"
-          onClick={ () => console.log('chama a api') }
+          onClick={ async () => editUserName({ name, newName }) }
           disabled={ newName === name }
         >
           Salvar

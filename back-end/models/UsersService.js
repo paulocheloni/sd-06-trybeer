@@ -36,10 +36,28 @@ const createOne = async (name, email, password, role) => {
   return insertId;
 };
 
+const getByName = async (name) => {
+  const [user] = await connection.execute(
+    'SELECT id, name, email, role FROM users WHERE name = ?', [name],
+  );
+  return user;
+};
+
+const updateName = async (oldName, newName) => {
+  await connection.execute(
+    'UPDATE users SET name = REPLACE(name, ?, ?)',
+    [oldName, newName],
+  );
+  const user = await getByName(newName);
+  return user;
+};
+
 module.exports = {
   getAll,
   getById,
   createOne,
   getByEmail,
   getPassword,
+  updateName,
+  getByName,
 };
