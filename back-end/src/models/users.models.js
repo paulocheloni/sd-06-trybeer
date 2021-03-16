@@ -6,6 +6,13 @@ const queryByEmail = async (email) => {
   return user;
 };
 
+const insertNewUser = async ({ name, email, password, role }) => {
+  const QUERY = 'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)';
+  const [{ insertId }] = await connection.query(QUERY, [name, email, password, role]);
+  return insertId;
+};
+
 module.exports = {
   queryByEmail,
+  insertNewUser,
 };
