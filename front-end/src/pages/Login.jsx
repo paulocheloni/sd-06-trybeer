@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import history from '../services/history';
+import { Link, useHistory } from 'react-router-dom';
 import './Login.css';
 import api from '../services/api';
+// import { useHistory } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
+
+  const history = useHistory();
 
   const handleChangeEmail = (event) => {
     const { value } = event.target;

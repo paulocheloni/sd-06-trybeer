@@ -6,8 +6,7 @@ const fetchLogin = async (email, password) => {
     },
     body: JSON.stringify({ email, password }),
   }).then((res) => res.json());
-  console.log(response);
-  if (response.message) return false;
+  // if (response.message) return false;
   return response;
 };
 
