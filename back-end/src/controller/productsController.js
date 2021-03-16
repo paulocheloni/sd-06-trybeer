@@ -8,13 +8,13 @@ controller.get('/', async (req, res) => {
   const q = req.query.q ? req.query.q : '';
 
   const result = await productsService.getAll({
-    limit: parseInt(limit),
-    page: parseInt(page),
+    limit: parseInt(limit, 10),
+    page: parseInt(page, 10),
     sort,
-    q
+    q,
   });
   
-  console.log(result)
+  console.log(result);
 
   return res.status(200).json(result);
 });

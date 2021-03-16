@@ -9,6 +9,6 @@ const config = {
 };
 
 const connection = mysql.createPool(config);
-console.log('Database connection established')
+console.log('Database connection established');
 
 module.exports = connection;
