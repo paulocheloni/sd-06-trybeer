@@ -10,9 +10,9 @@ const validatePassword = (password) => {
 };
 
 const validateName = (name) => {
-  const regexName = /[a-zA-Z ]+/;
+  const regexName = /[^a-zA-Z ]+/;
   const minLength = 12;
-  return (regexName.test(name) && name.length >= minLength);
+  return ((!regexName.test(name)) && name.length >= minLength);
 };
 
 module.exports = {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
+import Checkbox from '../../components/checkbox/Checkbox';
 import { register } from '../../services/Users';
 import { validateEmail, validatePassword, validateName } from '../../utils/validations';
 import './Register.css';
@@ -27,11 +28,13 @@ const inputComponents = [
   },
 ];
 
-const registerRedirect = async ({ name, email, password, isSeller, history }) => {
+const registerRedirect = async (
+  { name, email, password, isSeller, history },
+  setFetchEmail) => {
   const role = isSeller ? 'administrator' : 'client';
   const result = await register(name, email, password, role);
-  console.log(result);
-  if (result.message) return console.log(result.message);
+  // console.log(result);
+  if (result.message) return setFetchEmail(result.message);
   localStorage.setItem('user', JSON.stringify(result));
   if (result.role === 'administrator') return history.push('/admin/orders');
   if (result.role === 'client') return history.push('/products');
@@ -50,6 +53,7 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [isSeller, setIsSeller] = useState(false);
+  const [fetchEmail, setFetchEmail] = useState('');
   const history = useHistory();
   useEffect(() => {
     if (validateEmail(email) && validatePassword(password) && validateName(name)) {
@@ -61,36 +65,29 @@ export default function Register() {
   };
   const inputValues = [name, email, password];
   return (
-    <div className="container">
-      <form className="inputs">
-        {inputComponents.map((component, index) => (
-          <Input
-            key={ index }
-            title={ component.title }
-            type={ component.type }
-            testId={ component.testId }
-            placeholder={ component.placeholder }
-            value={ inputValues[index] }
-            onChange={ setField }
-          />
-        ))}
-        <label htmlFor="check">
-          Quero vender
-          <input
-            type="checkbox"
-            data-testid="signup-seller"
-            checked={ isSeller }
-            onClick={ () => setIsSeller(!isSeller) }
-            id="check"
-          />
-        </label>
-        <Button
-          title="Cadastrar"
-          testId="signup-btn"
-          isDisabled={ isDisabled }
-          onClick={ () => registerRedirect({ name, email, password, isSeller, history }) }
+    <form className="inputs">
+      {inputComponents.map((component, index) => (
+        <Input
+          key={ index }
+          title={ component.title }
+          type={ component.type }
+          testId={ component.testId }
+          placeholder={ component.placeholder }
+          value={ inputValues[index] }
+          onChange={ setField }
         />
-      </form>
-    </div>
+      ))}
+      <Checkbox isSeller={ isSeller } setIsSeller={ setIsSeller } />
+      <Button
+        title="Cadastrar"
+        testId="signup-btn"
+        isDisabled={ isDisabled }
+        onClick={ () => registerRedirect(
+          { name, email, password, isSeller, history },
+          setFetchEmail,
+        ) }
+      />
+      {fetchEmail && (<div>{fetchEmail}</div>)}
+    </form>
   );
 }

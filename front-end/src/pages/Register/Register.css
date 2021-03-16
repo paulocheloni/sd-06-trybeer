@@ -1,12 +1,6 @@
-.container {
-  display: flex;
-}
-
 .inputs {
-  /* border: 1px solid; */
   display: flex;
   flex-direction: column;
-  /* background-color: red; */
   width: 50%;
   margin: 0 auto;
 }

@@ -39,8 +39,12 @@ userRouter.post('/login', async (req, res, next) => {
 userRouter.post('/register', async (req, res, next) => {
   const { body: user, body: { name, email, role } } = req;
   const resultRegister = await registerUserService(user);
-  console.log(resultRegister);
+  
   try {
+    if (!resultRegister) {
+      throw new ThrowError(status.CONFLICT, messages.EMAIL_EXISTS);
+    }
+    
     if (!resultRegister.affectedRows) {
       throw new ThrowError(status.INTERNAL_ERROR, messages.DEFAULT_ERROR);
     }

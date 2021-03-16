@@ -1,3 +1,4 @@
+const { verify } = require('jsonwebtoken');
 const { getEmail, registerUser } = require('../models/UserModel');
 
 const getEmailService = async (emailLogin) => {
@@ -6,6 +7,9 @@ const getEmailService = async (emailLogin) => {
 };
 
 const registerUserService = async (body) => {
+  const verifyEmail = await getEmail(body.email);
+  if (verifyEmail.length) return false;
+  
   const resultService = await registerUser(body);
   return resultService;
 };
