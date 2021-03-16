@@ -7,12 +7,17 @@ import Cart from '../components/Cart';
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const [quantity, setQuantity] =useState(0);
 
   useEffect(async () => {
     await fetchFunctions.get('products').then((productsArray) => {
       setProducts(productsArray);
     });
   }, []);
+
+  const increaseQuantity = () => {
+    setQuantity(() => quantity + 1);
+  }
 
   return (
     <div>
@@ -25,6 +30,8 @@ function Products() {
           price={ price }
           url_image={ urlImage }
           index={ index }
+          quantity={quantity}
+          increaseQuantity={increaseQuantity}
         />
       ))}
       Products!!

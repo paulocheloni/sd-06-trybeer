@@ -3,19 +3,15 @@ import PropTypes from 'prop-types';
 import TrybeerContext from '../context/TrybeerContext';
 
 function TrybeerProvider({ children }) {
-  const [products, setProducts] = useState({
-    name: 'products',
-    quantity: '58',
-    unitPrice: '6,50',
-  });
+  const [cart, setCart] = useState(0);
 
   const contextValue = {
-    products,
-    setProducts,
+    cart,
+    setCart,
   };
   return (
     <TrybeerContext.Provider value={ contextValue }>
-      {children}
+      { children }
     </TrybeerContext.Provider>
   );
 }

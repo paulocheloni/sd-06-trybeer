@@ -1,8 +1,68 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import TrybeerContext from '../context/TrybeerContext';
 
 const ProductCard = ({ index, name, price, url_image: urlImage }) => {
+  const [quantity, setQuantity] = useState(0);
+  // const [disabledButton, setDisabledButton] = useState(false);
+  const { cart, setCart } = useContext(TrybeerContext);
+
   const formatedPrice = price.replace('.', ',');
+  
+  const handleClick = (param, value) => {
+    const floatedPrice = parseFloat(value);
+    const localCart = JSON.parse(localStorage.getItem('userCart'));
+
+    if (param === 'plus') {
+      setQuantity(() => parseInt(quantity + 1));
+      if (localCart) {
+        const newValue = parseFloat(localCart) + floatedPrice;
+        localStorage.setItem('userCart', JSON.stringify(newValue));
+        setCart(newValue);
+      } else {
+        localStorage.setItem('userCart', JSON.stringify(value));
+        setCart(value);
+      }
+    } else {
+      if (quantity !== 0) {
+        setQuantity(() => parseInt(quantity - 1));
+        if (localCart) {
+          const newValue = parseFloat(localCart) - floatedPrice;
+          localStorage.setItem('userCart', JSON.stringify(newValue));
+          setCart(newValue);
+        } else {
+          localStorage.setItem('userCart', JSON.stringify(value));
+          setCart(value);
+        }
+      }
+    }
+  }
+
+
+    // console.log(localCart);
+    // if (localCart) {
+    //   if (param === 'plus') {
+    //     const oldValue = parseFloat(localCart);
+    //     const newValue = oldValue + value;
+    //     localStorage.setItem('userCart', JSON.stringify(newValue));
+    //     setQuantity(() => parseInt(quantity + 1));
+    //     // setCart(() => parseFloat(cart + floatedPrice));
+  
+    //   } else {
+    //     if (quantity !== 0) {
+    //       const oldValue = parseFloat(localCart);
+    //       const newValue = oldValue - value;
+    //       localStorage.setItem('userCart', JSON.stringify(newValue));
+    //       setQuantity(() => parseInt(quantity - 1));
+    //       // setCart(() => parseFloat(cart - floatedPrice));
+    //     }
+    //   }
+    // }
+
+  // useEffect(() => {
+  //   // if (quantity !== '') setDisabledButton(false);
+  //   if (quantity === 0) setDisabledButton(true);
+  // }, [quantity]);
 
   return (
     <div className="product-card">
@@ -14,9 +74,21 @@ const ProductCard = ({ index, name, price, url_image: urlImage }) => {
       />
       <p data-testid={ `${index}-product-name` }>{name}</p>
       <p data-testid={ `${index}-product-price` }>{`R$ ${formatedPrice}`}</p>
-      <button data-testid={ `${index}-product-plus` } type="button">+</button>
-      <p data-testid={ `${index}-product-qtd` }>0</p>
-      <button data-testid={ `${index}-product-minus` } type="button">-</button>
+      <button
+        onClick={ () => handleClick('plus', price) }
+        data-testid={ `${index}-product-plus` }
+        type="button"
+      >
+        +
+      </button>
+      <p data-testid={ `${index}-product-qtd` }>{quantity}</p>
+      <button
+        onClick={ () => handleClick('minus', price) }
+        data-testid={ `${index}-product-minus` }
+        type="button"
+      >
+        -
+      </button>
     </div>
   );
 };
