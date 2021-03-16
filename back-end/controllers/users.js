@@ -11,7 +11,9 @@ usersRouter.post('/', async (req, res) => {
 
   if (user) {
     const token = createToken({ email });
-    return res.status(200).json({ token, role: user.role });
+    const { name, email: userEmail, role } = user;
+
+    return res.status(200).json({ name, email: userEmail, token, role });
   }
 
   return res.status(404).json({ message: 'user not found' });
