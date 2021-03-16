@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import fetchProducts from '../methods/products';
 import renderCards from '../components/RenderCards';
 import isLogged from '../components/isLogged';
+import MenuTop from '../components/menuTop';
 import './Products.css';
 
 function Products() {
@@ -36,7 +37,7 @@ function Products() {
   if (isLogged()) return <Redirect to="/login" />;
   return (
     <>
-      <h1 style={ { marginLeft: '40px' } }>Products</h1>
+      <MenuTop title="TryBeer" />
       <section className="cards-container">
         {renderCards(allProducts, asd, setAsd, itemQty)}
         <Link to="/cart" className="cart-link" data-testid="checkout-bottom-btn">

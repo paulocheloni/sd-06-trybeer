@@ -1,0 +1,11 @@
+
+.top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100vw;
+  background-color: green;
+  color: white;
+  border: 7px groove gray;
+  padding: 0.5rem;
+}

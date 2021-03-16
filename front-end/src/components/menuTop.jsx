@@ -1,20 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IconContext } from 'react-icons';
+import './menuTop.css';
+import PropTypes from 'prop-types';
+import MenuSide from './menuSide';
 
-function menuTop() {
+function MenuTop({ title }) {
+  const [open, setOpen] = useState(true);
   return (
-    <header>
-      <button type="button" onClick>
+    <div className="top">
+      <button
+        type="button"
+        onClick={ () => setOpen(!open) }
+      >
         <i data-testid="top-hamburguer">
           <IconContext.Provider>
             <GiHamburgerMenu />
           </IconContext.Provider>
         </i>
       </button>
-      <h1 data-testid="top-title"> TryBeer </h1>
-    </header>
+      <h1 className="title" data-testid="top-title">
+        { title }
+      </h1>
+      <MenuSide hidden={ open } />
+    </div>
   );
 }
 
-export default menuTop;
+export default MenuTop;
+MenuTop.propTypes = {
+  title: PropTypes.string.isRequired,
+};

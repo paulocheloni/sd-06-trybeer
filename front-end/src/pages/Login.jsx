@@ -3,8 +3,6 @@ import { Link, Redirect } from 'react-router-dom';
 import login from '../methods/login';
 import Button from '../components/Button';
 import Input from '../components/Input';
-import menuSide from '../components/menuSide';
-import menuTop from '../components/menuTop';
 import { loginSchema } from '../validationsSchemas/login';
 import './Login.css';
 
@@ -32,10 +30,7 @@ function Login() {
   return (
 
     <main>
-
       <form>
-        <menuSide />
-        <menuTop />
         <Input type="email" setValue={ setEmail } value={ email } />
         <Input type="password" setValue={ setPassword } value={ password } />
         <Button
