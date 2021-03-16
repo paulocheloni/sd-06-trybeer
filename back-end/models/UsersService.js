@@ -38,7 +38,7 @@ const createOne = async (name, email, password, role) => {
 
 const getByName = async (name) => {
   const [user] = await connection.execute(
-    'SELECT id, name, email, role FROM users WHERE name = ?', [name],
+    'SELECT name, email, role FROM users WHERE name = ?', [name],
   );
   return user;
 };
