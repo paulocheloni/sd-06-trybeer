@@ -14,13 +14,15 @@ function Profile() {
   }, [name, userName]);
 
   const handleSubmit = async () => {
+    const visibleInterval = 1500;
+
     await updateUser(userName, email);
 
     localStorage.setItem('user', JSON.stringify({ name: userName, email, token, role }));
 
     setIsVisible(false);
 
-    setTimeout(() => setIsVisible(true), 1500)
+    setTimeout(() => setIsVisible(true), visibleInterval);
   };
 
   return (
@@ -52,7 +54,7 @@ function Profile() {
       >
         Salvar
       </button>
-      <div hidden={isVisible}>Atualização concluída com sucesso</div>
+      <div hidden={ isVisible }>Atualização concluída com sucesso</div>
     </div>
   );
 }
