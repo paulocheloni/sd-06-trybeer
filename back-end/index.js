@@ -1,11 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 const LoginController = require('./src/controllers/LoginController');
 const RegisterController = require('./src/controllers/RegisterController');
 require('dotenv').config();
-const cors = require('cors');
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3001;
 
 app.use(cors());
 

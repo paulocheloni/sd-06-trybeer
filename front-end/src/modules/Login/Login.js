@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../axios/api';
 import Button from '../../design-components/Button';
 import LoginInputs from './components/LoginInputs';
 import Logo from '../../assets/images/Logo.png';
@@ -16,15 +16,13 @@ function Login() {
     setIsDisabled,
   } = useContext(ContextBeer);
 
-  const baseUrl = process.env.REACT_APP_BASE_URL;
-
   useEffect(() => {
     loginValidation(loginEmail, loginPassword, setIsDisabled);
   }, [loginEmail, loginPassword, setIsDisabled]);
 
   const onClick = () => {
-    const token = axios
-      .post(`${baseUrl}/login`, { email: loginEmail, password: loginPassword })
+    const token = api
+      .post('/login', { email: loginEmail, password: loginPassword })
       .then((response) => {
         localStorage.setItem('user', JSON.stringify(response.data));
         if (response.data.role === 'administrator') history.push('/admin/orders');
@@ -50,7 +48,7 @@ function Login() {
             bgColor="indigo-600"
             testId="signin-btn"
           >
-            ENTRAR
+            Entrar
           </Button>
           <Link to="/register">
             <Button bgColor="indigo-400" testId="no-account-btn">
