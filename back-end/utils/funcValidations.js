@@ -4,14 +4,14 @@ const validateEmail = (email) => {
 };
 
 const validateName = (name) => {
-  const nameRegex = /^[a-zA-Z]{12,}/;
-  return nameRegex.test(name);
+  const nameRegex = /^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+$/;
+  if (nameRegex.test(name)) {
+    return (name.length >= 12) ? true : false;
+  }
+  return false;
 };
 
-const validatePassword = (password) => {
-  const mailRegex = /[A-Za-z0-9]{6,}/;
-  return mailRegex.test(password);
-};
+const validatePassword = (password) => (password.length >= 6) ? true : false;
 
 module.exports = {
   validateEmail,

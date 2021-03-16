@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 import { Login, Signup, CostumerProfile, CostumerProducts } from './pages';
 import Provider from './context/Provider';
 
@@ -13,7 +13,8 @@ function App() {
             <Route path="/register" component={ Signup } />
             <Route path="/profile" component={ CostumerProfile } />
             <Route path="/products" component={ CostumerProducts } />
-            <Route path="/" component={ Login } />
+            <Route path="/admin/orders" component={ () => <h1>/admin/orders</h1> } />
+            <Route path="/"><Redirect to="/login" /></Route>
           </Switch>
         </Provider>
       </BrowserRouter>

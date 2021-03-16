@@ -1,10 +1,11 @@
 import React from 'react';
 import Header from '../components/HeaderComponent';
+import '../style/CostumerProfile.css';
 
 function CostumerProfile() {
   
   return(
-    <>
+    <div className='costumer_profile'>
       <Header text="Meu Perfil" id="top-title" />
       <p>Nome</p>
       <input 
@@ -24,10 +25,11 @@ function CostumerProfile() {
       <button
         type="button"
         data-testid="profile-save-btn"
+        className='bttn_costumer_profile'
       >
         Salvar
       </button>
-    </>
+    </div>
   )
 };
 

@@ -8,11 +8,11 @@ const UsersServices = async (req, res) => {
   const validEmail = validateEmail(email);
  
   if (!name || !email || !validEmail || !password) {
-    return res.status(status.BAD_REQUEST).json({ message: 'Invalid entries. Try again.' });
+    return res.status(status.BAD_REQUEST).json({ err: 'Invalid entries. Try again.' });
   }
 
   if (await getUserByEmail(email)) {
-    return res.status(status.CONFLICT).json({ message: 'Email already registered' });
+    return res.status(status.CONFLICT).json({ err: 'Email already registered' });
   }
 
   const user = await create(name, email, password);

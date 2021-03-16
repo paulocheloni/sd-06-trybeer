@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
 const connection = require('./database/connection');
 const LoginController = require('./controllers/LoginController');
 const RegisterController = require( './controllers/RegisterController' );
@@ -9,6 +11,8 @@ require("dotenv").config();
 const app = express();
 
 const PORT = 3001;
+
+app.use(cors());
 
 app.use((req, _res, next) => {
   console.log({

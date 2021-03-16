@@ -13,6 +13,7 @@ const RegisterValidation = async (body) => {
 
   const [retorno] = await getUserByEmail(email);
 
+  console.log('body', body)
   switch (false) {
     case validateEmail(email):
     case validatePassword(password):
@@ -20,7 +21,7 @@ const RegisterValidation = async (body) => {
     case role:
       return { message: 'All fields must be filled', status: BAD_REQUEST };
     case retorno.length === 0:
-      return { message: 'Email already registered', status: BAD_REQUEST };
+      return { message: 'E-mail already in database.', status: BAD_REQUEST };
     default: return null;
   } 
 }
@@ -32,7 +33,7 @@ const RegisterServices = async (req, res) => {
   const error = await RegisterValidation(body);
   if (error) {
     const { message, status } = error;
-    return res.status(status).json({ message });
+    return res.status(status).json({ err: message });
   }
 
   const user = await createRegister(body);
