@@ -1,4 +1,4 @@
-import {validateUser} from './loginService.js';
+import { validateUser } from './loginService.js';
 
 export function validateNewUser(newUser, setNewUser, setEnableButton) {
   const name = document.getElementById('signup-name').value;
@@ -31,10 +31,6 @@ export function validateNewUser(newUser, setNewUser, setEnableButton) {
 export async function checkUser(user) {
   console.log('Usuário para cadastrar:', user);
   console.log('Email do user pra cadastrar',user.email);
-  const retrievedUser = await validateUser(user.email);
-  console.log(retrievedUser);
-  if (retrievedUser) {
-    return retrievedUser;
-  }
-  return false;
+  const retrievedUser = await validateUser(user);
+  console.log('Buscado por email:', retrievedUser);
 }

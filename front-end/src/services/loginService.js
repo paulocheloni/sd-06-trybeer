@@ -22,6 +22,7 @@ export const handleUserNotRegistered = (history) => history.push('/register');
 export const validateUser = async (user) => {
   const response = await api.post('login', user);
   console.log('Retorno do validate user:', response.data);
+  console.log(response);
   return response.data;
 };
 
