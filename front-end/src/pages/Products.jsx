@@ -5,6 +5,7 @@ export default function Products() {
   return (
     <div>
       <MenuTop title="TryBeer" />
+      Bota fé!
     </div>
   );
 }
