@@ -29,6 +29,7 @@ const addUser = async (name, email, password, role) => {
   } catch (error) {
     return undefined;
   }
+};
 
 const updateUser = async (name, email) => {
   await connection.execute(
