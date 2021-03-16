@@ -49,10 +49,14 @@ export default function Sidebar({ user }) {
   return (
     <aside className="side-menu-container">
       <ul>
-        {options.map((option) => (
-          <li key={ option.name }>
-            <button type="button" onClick={ () => history.push(`${option.redirect}`) } data-testid={option.testId}>
-              {option.name}
+        {options.map(({ name, redirect, testId }) => (
+          <li key={ name }>
+            <button
+              type="button"
+              onClick={ () => history.push(`${redirect}`) }
+              data-testid={ testId }
+            >
+              {name}
             </button>
           </li>
         ))}
