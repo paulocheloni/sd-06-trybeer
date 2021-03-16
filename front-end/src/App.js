@@ -6,6 +6,7 @@ import Register from './Pages/Register';
 import Profile from './Pages/Profile';
 import Provider from './context/Provider';
 import './App.css';
+import Products from './Pages/Products';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/login" component={ Login } />
         <Route exact path="/register" component={ Register } />
         <Route exact path="/profile" component={ Profile } />
+        <Route exact path="/products" component={ Products } />
       </Switch>
     </Provider>
   );
