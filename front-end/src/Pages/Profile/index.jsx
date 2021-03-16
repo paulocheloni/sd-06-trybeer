@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import { updateUser } from '../../Services/Apis';
+
 import Button from '../../Components/Button';
 import MenuTop from '../../Components/MenuTop';
 import SideBar from '../../Components/SideBar';
-import { updateUser } from '../../Services/Apis';
+import Input from '../../Components/Input';
 
 import Container from './styles';
 
-const handleSubmit = async (event, name, email, token) => {
+const handleSubmit = async (event, { name, email }, token, setUpdateMessage) => {
   event.preventDefault();
 
   const updated = await updateUser(name, email, token);
 
+  // console.log(updated);
+
   if (updated.message === 'Token Inválido') localStorage.setItem('user', '{}');
   if (updated.name === name) localStorage.setItem('user', JSON.stringify(updated));
+
+  setUpdateMessage(true);
 };
 
 const button = (isDisabled) => (
   <Button
     type="submit"
-    width="400px"
     heigth="40px"
     color="green"
     fontSize="20px"
@@ -29,39 +34,47 @@ const button = (isDisabled) => (
   </Button>
 );
 
-const form = ([name, setNameState, email, token, isDisabled]) => (
-  <form onSubmit={ (e) => handleSubmit(e, name, email, token) }>
-    <h1>Register</h1>
-    <label htmlFor="name-input">
-      Nome
-      <input
-        value={ name }
+const form = ([
+  name,
+  setNameState,
+  email,
+  token,
+  isDisabled,
+  updateMessage,
+  setUpdateMessage,
+]) => {
+  const user = { name, email };
+
+  return (
+    <form onSubmit={ (e) => handleSubmit(e, user, token, setUpdateMessage) }>
+      <h1 data-testid="top-title">Meu perfil</h1>
+      <Input
         id="name-input"
-        heigth="40px"
+        value={ name }
+        label="Nome"
+        dataTestid="profile-name-input"
         onChange={ ({ target }) => setNameState(target.value) }
-        data-testid="profile-name-input"
       />
-    </label>
-    <label htmlFor="email-input">
-      Email
-      <input
-        value={ email }
+      <Input
         id="email-input"
-        heigth="40px"
-        disabled
-        data-testid="profile-email-input"
+        value={ email }
+        label="Email"
+        dataTestid="profile-email-input"
         readOnly
       />
-    </label>
 
-    {button(isDisabled)}
-  </form>
-);
+      {button(isDisabled)}
+
+      {(updateMessage) ? <p>Atualização concluída com sucesso</p> : null}
+    </form>
+  );
+};
 
 const Profile = () => {
   const [nameState, setNameState] = useState('');
   const [emailState, setEmailState] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
+  const [updateMessage, setUpdateMessage] = useState(false);
 
   useEffect(() => {
     const dataStorage = localStorage.getItem('user');
@@ -87,7 +100,15 @@ const Profile = () => {
       <MenuTop dataTestid="top-title" title="Meu perfil" />
       <SideBar />
       <Container>
-        {form([nameState, setNameState, emailState, token, isDisabled])}
+        {form([
+          nameState,
+          setNameState,
+          emailState,
+          token,
+          isDisabled,
+          updateMessage,
+          setUpdateMessage,
+        ])}
       </Container>
     </>
   );

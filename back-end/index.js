@@ -10,6 +10,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const rescue = require('express-rescue');
 const UserService = require('./Services/userService');
+const ProductsService = require('./Services/productService');
 const Utils = require('./Utils');
 
 app.use(bodyParser.json());
@@ -25,7 +26,9 @@ app.put('/profile/edit',
   rescue(Utils.verifyToken), 
   rescue(UserService.updateUser));
 
-app.use((err, req, res, _next) => {
+app.get('/products', ProductsService.findAllProducts);
+
+app.use((err, _req, res, _next) => {
   const codeStatus = (err.codeStatus) ? err.codeStatus : 500;
   res.status(codeStatus).json({ message: err.message });
 });

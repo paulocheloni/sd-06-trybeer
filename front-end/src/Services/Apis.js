@@ -46,3 +46,14 @@ export const updateUser = async (name, email, token) => {
 
   return response;
 };
+
+export const findAllProducts = async () => {
+  const products = await axios({
+    url: 'http://localhost:3001/products',
+  }).then((res) => res.data)
+    .catch(() => {
+      console.error('ops! products not found');
+    });
+
+  return products;
+};

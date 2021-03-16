@@ -5,7 +5,7 @@ import { loginUser } from '../../Services/Apis';
 
 import Container from './styles';
 
-// import Input from '../../Components/Input';
+import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 
 const saveLocalStorage = (res) => {
@@ -15,6 +15,7 @@ const saveLocalStorage = (res) => {
 const handleSubmit = async ([event, email, password, history]) => {
   event.preventDefault();
   const user = await loginUser(email, password);
+  // console.log(user);
   saveLocalStorage(user);
   history.push((user.role === 'client') ? '/products' : '/admin/orders');
 };
@@ -28,36 +29,30 @@ const form = (params) => {
   return (
     <form onSubmit={ (e) => handleSubmit([e, email, password, history]) }>
       <h1>Login</h1>
-      <label htmlFor="email">
-        Email
-        <input
-          id="email"
-          onChange={ ({ target }) => setEmail(target.value) }
-          data-testid="email-input"
-        />
-      </label>
-      <label htmlFor="senha">
-        Senha
-        <input
-          id="senha"
-          onChange={ ({ target }) => setPassword(target.value) }
-          data-testid="password-input"
-        />
-      </label>
+      <Input
+        id="email"
+        label="Email"
+        dataTestid="email-input"
+        onChange={ ({ target }) => setEmail(target.value) }
+      />
+      <Input
+        id="senha"
+        label="Senha"
+        dataTestid="password-input"
+        onChange={ ({ target }) => setPassword(target.value) }
+      />
       <Button
         type="submit"
-        width="400px"
         heigth="40px"
         color="green"
         fontSize="20px"
         disabled={ isDisabled }
         dataTestid="signin-btn"
       >
-        ENTRAR
+        Entrar
       </Button>
       <Button
         type="button"
-        width="400px"
         heigth="40px"
         fontSize="16px"
         dataTestid="no-account-btn"
