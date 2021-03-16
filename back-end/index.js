@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
+const path = require('path')
 
 const loginController = require('./controllers/loginControllers');
 const registerController = require('./controllers/registerController');
@@ -20,6 +21,8 @@ app.use('/login', loginController);
 app.use('/register', registerController);
 
 app.use('/products', productsController);
+
+app.use('/images', express.static(path.resolve(__dirname, 'images')));
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

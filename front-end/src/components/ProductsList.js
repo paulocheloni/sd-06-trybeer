@@ -15,7 +15,7 @@ class ProductsList extends React.Component {
     const products = await getProducts();
     dispatchProducts(products);
   }
-
+ 
   render() {
     const { stateProducts } = this.props;
     return (
@@ -23,9 +23,42 @@ class ProductsList extends React.Component {
         { stateProducts
           && stateProducts.map((product) => (
             <div className="" key={ product.id }>
-              <img src={ product.url_image } alt={ product.name } />
+              <div data-testid={`${product.id - 1}-product-price`}>{`R$ ${product.price.replace('.',',')}`}</div>
+              <img
+                data-testid={`${product.id - 1}-product-img`}
+                src={product.url_image}
+                alt={product.name}
+              />
+              <div data-testid={`${product.id - 1}-product-name`}>{product.name}</div>
+              <button
+                type="button"
+                data-testid={`${product.id - 1}-product-minus`}
+              >
+                -
+              </button>
+              <span 
+                data-testid={`${product.id - 1}-product-qtd`}>{'0'}
+              </span>
+              <button
+                type="button"
+                data-testid={`${product.id - 1}-product-plus`}
+                onClick={ () => console.log(this.handleIncreaseQuantity()) }
+              >
+                +
+              </button>
             </div>
           ))}
+        <button
+          type="button"
+          data-testid="checkout-bottom-btn"
+        >
+          Ver carrinho
+        </button>
+        <span 
+          data-testid="checkout-bottom-btn-value"
+          >
+          {' R$: 0,0 '}
+        </span>
       </div>
     );
   }
