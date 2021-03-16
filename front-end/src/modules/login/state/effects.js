@@ -25,7 +25,9 @@ export function* handlePostLogin(action) {
     const existToken = storage.token;
 
     if (existToken && storage.role === 'client') history.push('/products', Products);
-    if (existToken && storage.role === 'administrator') history.push('/profile', Profile);
+    if (existToken && storage.role === 'administrator') {
+      history.push('/admin/orders', Profile);
+    }
   } catch (error) {
     yield put(actions.postLoginError(error));
   }
@@ -37,6 +39,8 @@ export function* handlePostRegister(action) {
 
     const response = yield API.post('/users', { email, password, name, role });
     const { data } = response;
+
+    if (data.message) return yield put(actions.postRegisterError(data.message));
 
     yield put(actions.postRegisterSuccess(data));
 
@@ -50,9 +54,13 @@ export function* handlePostRegister(action) {
     const storage = yield JSON.parse(localStorage.getItem('user'));
     const existToken = storage.token;
 
-    if (existToken && role === 'client') history.push('/products', Products);
-    if (existToken && storage.role === 'administrator') history.push('/profile', Profile);
+    if (existToken && storage.role === 'client') history.push('/products', Products);
+    if (existToken && storage.role === 'administrator') {
+      history.push('/admin/orders', Profile);
+    }
   } catch (error) {
+    console.log(error);
+
     yield put(actions.postRegisterError(error));
   }
 }

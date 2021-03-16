@@ -10,7 +10,7 @@ const getAll = async () => {
 
 const loginUser = async (email, userPass) => {
   const userInfo = await Validations.loginValidation(email, userPass);
-  console.log(userInfo);
+
   if (userInfo.payload) return userInfo;
   const { id, name, role } = userInfo;
   const token = Utils.generateToken(id);
