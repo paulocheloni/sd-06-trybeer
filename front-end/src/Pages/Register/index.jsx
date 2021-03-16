@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { BiUser } from 'react-icons/bi';
 import { FiMail, FiLock } from 'react-icons/fi';
 
-import { registerNewUser } from '../../Services/Apis';
+import { loginUser, registerNewUser } from '../../Services/Apis';
 
 import Container from './styles';
 
@@ -18,10 +18,13 @@ const handleSubmit = async (event,
 
   const result = await registerNewUser(name, email, password, role);
 
+  const newUser = await loginUser(email, password);
+
   if (result && result === 'E-mail already in database.') {
     setEmailAlreadyExists(true);
   } else if (result && result === 'OK') {
-    window.location.href = (role === 'client') ? '/products' : '/admin/orders';
+    localStorage.setItem('user', JSON.stringify(newUser));
+    window.location.href = (newUser.role === 'client') ? '/products' : '/admin/orders';
   }
 };
 
