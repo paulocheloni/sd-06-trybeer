@@ -9,12 +9,14 @@ function ClientProfile() {
   const [newName, setNewName] = useState('');
   const [disable, setDisable] = useState(true);
   const [sucess, setSucess] = useState(false);
+  const [storage, setStorage] = useState('');
   const history = useHistory();
 
   const handleInputValue = () => {
     const userLocal = localStorage.getItem('user');
     if (userLocal === null) return history.push('/login');
     const user = JSON.parse(userLocal);
+    setStorage(user);
     setName(user.name);
     setEmail(user.email);
   };
@@ -28,15 +30,27 @@ function ClientProfile() {
   };
 
   const handleChangeName = async () => {
+    const { token, role } = storage;
     const data = { name: newName, email };
+    const obj = {
+      name: data.name,
+      email,
+      token,
+      role,
+    };
+    const objJson = JSON.stringify(obj);
+    localStorage.setItem('user', objJson);
     changeName(data);
     setSucess(true);
   };
 
   useEffect(() => {
     handleInputValue();
+  }, []);
+
+  useEffect(() => {
     handleDisabled();
-  });
+  }, [newName]);
 
   return (
     <div>

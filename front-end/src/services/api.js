@@ -1,5 +1,14 @@
 const headerType = { 'Content-Type': 'application/json' };
 
+const URL_USERS = 'http://localhost:3001/users';
+
+export const getToken = async (token) => fetch(URL_USERS, {
+  method: 'GET',
+  headers: {
+    authorization: token,
+  },
+}).then((response) => response.json());
+
 export const changeName = async (data) => fetch('http://localhost:3001/users/edit', {
   method: 'PUT',
   headers: headerType,
@@ -12,7 +21,7 @@ export const registerUser = async (user) => fetch('http://localhost:3001/users/r
   body: JSON.stringify(user),
 }).then((response) => response.json());
 
-export const getUserByEmail = async (email) => fetch('http://localhost:3001/users', {
+export const getUserByEmail = async (email) => fetch(URL_USERS, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -20,5 +29,5 @@ export const getUserByEmail = async (email) => fetch('http://localhost:3001/user
   body: JSON.stringify({ email }),
 }).then((response) => response.json());
 
-export const getAllUsers = () => fetch('http://localhost:3001/users')
+export const getAllUsers = () => fetch(URL_USERS)
   .then((response) => response.json());

@@ -23,13 +23,26 @@ function Register() {
     }
   }, [name, email, password]);
 
+  const handleLocalStorage = (tokenobj, role) => {
+    const { token } = tokenobj;
+    const obj = {
+      name,
+      email,
+      token,
+      role,
+    };
+    const jsonAux = JSON.stringify(obj);
+    localStorage.setItem('user', jsonAux);
+  };
+
   const handleRedirect = async () => {
     const userFound = await getUserByEmail(email);
     if (!userFound.message) return setEmailExist(true);
-    const roleStatus = check ? 'admin' : 'user';
+    const roleStatus = check ? 'admin' : 'client';
     const user = { name, email, password, role: roleStatus };
-    registerUser(user);
-    if (roleStatus === 'user') return history.push('/products');
+    const register = await registerUser(user);
+    handleLocalStorage(register, roleStatus);
+    if (roleStatus === 'client') return history.push('/products');
     history.push('/admin/orders');
   };
 
