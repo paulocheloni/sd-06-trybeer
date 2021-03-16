@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import '../login.css';
 import useInput from '../hooks/useInput';
-import fetchUser from '../services/getUser';
+import fetches from '../services/fetches';
 import { emailValidation, passwordValidation } from '../utils/validations';
 
 export default function Login() {
@@ -9,9 +10,12 @@ export default function Login() {
   const [email, setEmail] = useInput('');
   const [password, setPassword] = useInput('');
   const handleOnClik = async () => {
-    fetchUser(email, password)
+    fetches.fetchUserByEmail(email, password)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
+        if (!response) {
+          return;
+        }
         localStorage.setItem('token', response[1]);
         if (response[0].role === 'client') {
           history.push('/products');
@@ -19,12 +23,13 @@ export default function Login() {
       });
   };
   return (
-    <div>
+    <div className="main-container">
       <form>
-        <fieldset>
+        <fieldset className="form-group">
           <label htmlFor="email-input">
             Email
             <input
+              className="form-control"
               id="email-input"
               value={ email }
               onChange={ setEmail }
@@ -33,10 +38,11 @@ export default function Login() {
             />
           </label>
         </fieldset>
-        <fieldset>
+        <fieldset className="form-group">
           <label htmlFor="password-input">
             Senha
             <input
+              className="form-control"
               id="password-input"
               value={ password }
               onChange={ setPassword }
@@ -46,6 +52,7 @@ export default function Login() {
           </label>
         </fieldset>
         <button
+          className="btn btn-secondary"
           onClick={ (e) => {
             e.preventDefault();
             handleOnClik();
@@ -54,9 +61,11 @@ export default function Login() {
           data-testid="signin-btn"
           type="button"
         >
-          ENTRAR
+          Entrar
         </button>
-        <Link to="/register" data-testid="no-account-btn">Ainda não tenho conta</Link>
+        <div>
+          <Link to="/register" data-testid="no-account-btn">Ainda não tenho conta</Link>
+        </div>
       </form>
     </div>
   );
