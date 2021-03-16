@@ -140,6 +140,7 @@ const Form = () => {
           disabled={ !emailIsValid || !passwordIsValid }
         >
           <p className="hidden">ENTRAR</p>
+          <p className="hidden">Entrar</p>
           <p>Sign In</p>
         </button>
         <Link
