@@ -23,15 +23,14 @@ function Login({ history }) {
     e.preventDefault();
     const loginValidate = await api.generateToken(user.email, user.password);
     if (loginValidate.result) {
-      const { token, role } = loginValidate.response;
+      const { token } = loginValidate.response;
       setErrMsg(false);
-      console.log(token, '', role, loginValidate);
+      history.push('/admin/orders');
       localStorage.setItem('user', JSON.stringify({ email: user.email, token }));
-      if (role === 'administrator') history.push('/admin/orders');
-      else history.push('/products');
+    } else {
+      setDisplayErr(true);
+      setErrMsg(loginValidate.response.message);
     }
-    setDisplayErr(true);
-    setErrMsg(loginValidate.response.message);
   };
 
   return (
