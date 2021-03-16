@@ -2,6 +2,7 @@ const User = require('../models/User');
 
 // Componente de repostas https
 const { status } = require('../util/dataStatus');
+
 const { sucess } = status;
 
 const updateUser = async (name, email) => {

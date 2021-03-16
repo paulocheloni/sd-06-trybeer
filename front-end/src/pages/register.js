@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import NavBar from '../components/menuNavBar';
 
 // Components
 import validateEmailAndPassword from '../components/validateEmailAndPassword';
@@ -21,8 +22,8 @@ function Register() {
     const regex = /^[a-zA-Z ]{2,30}$/;
     const eleven = 11;
     if (!validateEmailAndPassword(email, password)
-    && regex.test(name)
-    && name.length > eleven) {
+      && regex.test(name)
+      && name.length > eleven) {
       return setDisabled(false);
     }
     return setDisabled(true);
@@ -42,7 +43,7 @@ function Register() {
         if (checkbox === 'client') {
           history.push('/products');
         }
-      }).catch((err) => {
+      }).catch(() => {
         setEmailExists(true);
       });
   };
@@ -55,6 +56,7 @@ function Register() {
 
   return (
     <div>
+      <NavBar />
       <h1>Register</h1>
       <label htmlFor="signup-name">
         Nome
