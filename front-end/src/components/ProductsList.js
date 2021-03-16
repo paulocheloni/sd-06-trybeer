@@ -15,9 +15,11 @@ class ProductsList extends React.Component {
   }
 
   async componentDidMount() {
-    const { dispatchProducts } = this.props;
+    const { dispatchProducts, dispatchPrice } = this.props;
     const products = await getProducts();
     dispatchProducts(products);
+    const local = Number(localStorage.getItem('price'));
+    dispatchPrice(local);
   }
 
   removeItem(id) {
@@ -32,17 +34,18 @@ class ProductsList extends React.Component {
     const { dispatchQtd, stateQuantity, dispatchPrice, statePrice } = this.props;
     const productPrice = Number(target.parentNode.parentNode
       .nextSibling.childNodes[0].innerText.split(' ')[1].replace(',', '.'));
-    const reajustedPrice = Number((statePrice + productPrice).toFixed(2));
+    const reajustedPrice = Number((statePrice + productPrice));
     dispatchQtd(stateQuantity[id] + 1, id);
     this.sendToCart(target, id);
     dispatchPrice(reajustedPrice);
+    localStorage.setItem('price', reajustedPrice);
   }
 
   decreaseQuantity({ target }, id) {
     const { dispatchQtd, stateQuantity, statePrice, dispatchPrice } = this.props;
     const productPrice = Number(target.parentNode.parentNode
       .nextSibling.childNodes[0].innerText.split(' ')[1].replace(',', '.'));
-    const reajustedPrice = Number((statePrice - productPrice).toFixed(2));
+    const reajustedPrice = Number((statePrice - productPrice));
     if (statePrice !== 0) dispatchPrice(reajustedPrice);
     if (stateQuantity[id]) {
       dispatchQtd(stateQuantity[id] - 1, id);
@@ -51,6 +54,7 @@ class ProductsList extends React.Component {
         this.removeItem(id);
       }
     }
+    localStorage.setItem('price', reajustedPrice);
   }
 
   sendToCart(target, id) {
@@ -67,8 +71,13 @@ class ProductsList extends React.Component {
     }
   }
 
+  handleLocalStorage(statePrice) {
+    localStorage.setItem('PRICE', statePrice);
+  }
+
   render() {
     const { stateProducts, stateQuantity, statePrice, history, stateCart } = this.props;
+
     return (
       <div className="prodlist-container">
         <div className="products-container">
@@ -120,8 +129,7 @@ class ProductsList extends React.Component {
             Ver Carrinho
           </button>
           <span data-testid="checkout-bottom-btn-value">
-            { statePrice === 0 ? 'R$ 0,00'
-              : `R$ ${statePrice.toString().replace('.', ',')}` }
+            { statePrice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
           </span>
         </div>
       </div>
