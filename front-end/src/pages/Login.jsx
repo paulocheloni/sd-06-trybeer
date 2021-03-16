@@ -22,8 +22,7 @@ function Login({ history }) {
   const handleClick = async (e) => {
     e.preventDefault();
     const loginValidate = await api.generateToken(user.email, user.password);
-    const result = true;
-    if (result) {
+    if (loginValidate.result) {
       const { token } = loginValidate.response;
       setErrMsg(false);
       history.push('/admin/orders');
