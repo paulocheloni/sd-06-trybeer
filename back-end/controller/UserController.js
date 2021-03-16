@@ -11,7 +11,7 @@ UserController.get('/', async (req, res) => {
 });
 
 // Create New User
-UserController.post('/', async (req, res) => {
+UserController.post('/', UserService.verifyEmail, async (req, res) => {
   const { name, email, password, role } = req.body;
   await UserService.createNewUser(name, email, password, role);
 
