@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components';
 
 const CompInput = styled.label`
-  ${() => css`
+  ${({ theme, themeStorage }) => css`
+    color: ${theme.colors.text};
+
     width: 100%;
 
     display: flex;
@@ -11,6 +13,9 @@ const CompInput = styled.label`
     font-weight: 450;
 
     > input {
+      background: ${theme.colors.backgroundInput};
+      color: ${theme.colors.text};
+
       width: 400px;
       height: 40px;
 
@@ -19,10 +24,8 @@ const CompInput = styled.label`
 
       margin: 5px 0 20px 0;
 
-      border: none;
+      border: ${themeStorage === 'light' ? '1px solid #CCCCCC' : '1px solid #353535'};
       border-radius: 5px;
-
-      box-shadow: 0 0 2px 0;
 
       @media (max-width: 500px) {
         width: 100%;

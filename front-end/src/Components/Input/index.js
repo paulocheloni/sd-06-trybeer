@@ -10,8 +10,9 @@ const Input = ({
   label,
   id,
   value,
+  themeStorage,
 }) => (
-  <CompInput htmlFor={ id }>
+  <CompInput htmlFor={ id } themeStorage={ themeStorage }>
     {label}
     <input
       id={ id }
@@ -25,15 +26,19 @@ const Input = ({
 
 Input.defaultProps = {
   readOnly: false,
+  themeStorage: '',
+  value: undefined,
+  onChange: () => {},
 };
 
 Input.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   dataTestid: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   readOnly: PropTypes.bool,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  themeStorage: PropTypes.string,
 };
 
 export default Input;

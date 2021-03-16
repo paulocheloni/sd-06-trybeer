@@ -38,12 +38,13 @@ Button.defaultProps = {
   disabled: false,
   position: '',
   botton: '',
+  width: '',
 };
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
   type: PropTypes.string.isRequired,
-  width: PropTypes.string.isRequired,
+  width: PropTypes.string,
   heigth: PropTypes.string.isRequired,
   color: PropTypes.string,
   disabled: PropTypes.bool,

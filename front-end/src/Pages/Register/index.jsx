@@ -11,8 +11,6 @@ const handleSubmit = async (event,
   { name, email, password, isChecked, setEmailAlreadyExists }) => {
   event.preventDefault();
 
-  console.log('kkk');
-
   const role = (isChecked) ? 'admin' : 'client';
 
   const result = await registerNewUser(name, email, password, role);
@@ -43,6 +41,7 @@ const form = (params) => {
     isChecked, setIsChecked, emailAlreadyExists, setEmailAlreadyExists,
   } = params;
   const paramsRegistered = { name, email, password, isChecked, setEmailAlreadyExists };
+  const theme = JSON.parse(localStorage.getItem('@trybeer:theme'));
   return (
     <form onSubmit={ (e) => handleSubmit(e, paramsRegistered) }>
       <h1>Register</h1>
@@ -51,6 +50,7 @@ const form = (params) => {
         label="Nome"
         dataTestid="signup-name"
         onChange={ ({ target }) => setName(target.value) }
+        themeStorage={ theme.title }
       />
       {(emailAlreadyExists) ? <p>E-mail already in database.</p> : null}
       <Input
@@ -58,12 +58,14 @@ const form = (params) => {
         label="Email"
         dataTestid="signup-email"
         onChange={ ({ target }) => setEmail(target.value) }
+        themeStorage={ theme.title }
       />
       <Input
         id="password-input"
         label="Senha"
         dataTestid="signup-password"
         onChange={ ({ target }) => setPassword(target.value) }
+        themeStorage={ theme.title }
       />
       <label
         htmlFor="check"
