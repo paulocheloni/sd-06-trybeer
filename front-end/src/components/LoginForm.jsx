@@ -25,6 +25,9 @@ function LoginForm() {
 
   const handleSubmit = async (userEmail, userPassword) => {
     const result = await validateUser(userEmail, userPassword);
+
+    localStorage.setItem('user', JSON.stringify(result));
+
     if (result.role === 'administrator') return history.push('/admin/orders');
     if (result.role === 'client') return history.push('/products');
   };
