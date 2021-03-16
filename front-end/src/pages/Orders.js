@@ -2,13 +2,13 @@ import React from 'react';
 
 import TopBar from '../components/TopBar';
 
-function Products() {
+function Orders() {
   return (
     <div>
       <TopBar />
-      <h1>Products</h1>
+      Orders
     </div>
   );
 }
 
-export default Products;
+export default Orders;

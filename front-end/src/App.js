@@ -5,6 +5,8 @@ import Login from './pages/Login';
 import Products from './pages/Products';
 import AdminOrders from './pages/AdminOrders';
 import UserRegister from './pages/UserRegister';
+import Profile from './pages/Profile';
+import Orders from './pages/Orders';
 import './App.css';
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
           <Route exact path="/products" component={ Products } />
           <Route exact path="/admin/orders" component={ AdminOrders } />
           <Route exact path="/register" component={ UserRegister } />
+          <Route exact path="/profile" component={ Profile } />
+          <Route exact path="/orders" component={ Orders } />
         </Switch>
       </BrowserRouter>
     </LoginProvider>

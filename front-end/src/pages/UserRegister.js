@@ -8,6 +8,8 @@ import {
 import Input from '../components/Register/Input';
 import AlreadyRegisterdMessage from '../components/Register/AlreadyRegisterdMessage';
 
+import TopBar from '../components/TopBar';
+
 function UserRegister() {
   const { newUser, setNewUser } = useContext(TrybeerContext);
   const [enableButton, setEnableButton] = useState(true);
