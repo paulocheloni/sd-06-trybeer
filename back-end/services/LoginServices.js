@@ -3,7 +3,7 @@ const { getUserByEmail } = require('../models/RegisterModel');
 const { createToken } = require('../utils/createToken');
 const {
   validateEmail,
-  validatePassword
+  validatePassword,
 } = require('../utils/funcValidations');
 
 const LoginServices = async (req, res) => {
@@ -13,11 +13,11 @@ const LoginServices = async (req, res) => {
     return res.status(status.UNAUTHORIZED).json({ err: 'All fields must be filled' }); 
   }
 
-  if (!validateEmail(email)){
-    return res.status(status.UNAUTHORIZED).json({ err: 'Incorrect username or password'}); 
+  if (!validateEmail(email)) {
+    return res.status(status.UNAUTHORIZED).json({ err: 'Incorrect username or password' }); 
   }
 
-  if (!validatePassword(password)){
+  if (!validatePassword(password)) {
     return res.status(status.UNAUTHORIZED).json({ err: 'Incorrect username or password' }); 
   }
 
@@ -27,7 +27,7 @@ const LoginServices = async (req, res) => {
     return res.status(status.UNAUTHORIZED).json({ err: 'Incorrect username or password' }); 
   }
   const { password: _password, ...userWithoutPassword } = user;
-  const { id: _id, ...userWithoutId} = userWithoutPassword;
+  const { id: _id, ...userWithoutId } = userWithoutPassword;
   const token = createToken(userWithoutPassword);
   return res.status(status.OK).json({ ...userWithoutId, token });
 };

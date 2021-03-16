@@ -1,9 +1,8 @@
-const status = require('../utils/allStatusCode');
-const{ createRegister, getUserByEmail } = require('../models/RegisterModel');
+const { createRegister, getUserByEmail } = require('../models/RegisterModel');
 const {
   validateEmail,
   validateName,
-  validatePassword
+  validatePassword,
 } = require('../utils/funcValidations');
 const { OK, BAD_REQUEST } = require('../utils/allStatusCode');
 const { createToken } = require('../utils/createToken');
@@ -13,7 +12,7 @@ const RegisterValidation = async (body) => {
 
   const [retorno] = await getUserByEmail(email);
 
-  console.log('body', body)
+  console.log('body', body); // Retirar
   switch (false) {
     case validateEmail(email):
     case validatePassword(password):
@@ -24,10 +23,9 @@ const RegisterValidation = async (body) => {
       return { message: 'E-mail already in database.', status: BAD_REQUEST };
     default: return null;
   } 
-}
+};
 
 const RegisterServices = async (req, res) => {
-  // const { name, email, password, salerOption } = req.body;
   const { body } = req;
   
   const error = await RegisterValidation(body);
@@ -38,8 +36,8 @@ const RegisterServices = async (req, res) => {
 
   const user = await createRegister(body);
 
-  const { password: _password, ...userWithoutPassword } = user;
-  const { id: _id, ...userWithoutId} = userWithoutPassword;
+  const { password, name, ...userWithoutPassword } = user;
+  const { id, ...userWithoutId } = userWithoutPassword;
   const token = createToken(userWithoutPassword);
 
   res.status(OK).json({ ...userWithoutId, token });
