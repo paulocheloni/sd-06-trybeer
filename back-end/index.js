@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
-const path = require('path')
+const path = require('path');
 
 const loginController = require('./controllers/loginControllers');
 const registerController = require('./controllers/registerController');
