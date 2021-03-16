@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router';
 
 // Components
@@ -17,7 +17,7 @@ function Register() {
 
   const history = useHistory();
 
-  const validates = () => {
+  const validates = useCallback(() => {
     const regex = /^[a-zA-Z ]{2,30}$/;
     const eleven = 11;
     if (!validateEmailAndPassword(email, password)
@@ -26,7 +26,7 @@ function Register() {
       return setDisabled(false);
     }
     return setDisabled(true);
-  };
+  }, [email, password, name]);
 
   useEffect(() => {
     validates();

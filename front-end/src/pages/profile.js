@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useHistory } from 'react-router';
 import { loadState } from '../services/localStorage';
 import api from '../services/api';
@@ -11,7 +11,7 @@ function Profile() {
   const [attSucess, setAttSucess] = useState(false);
   const history = useHistory();
 
-  const validates = () => {
+  const validates = useCallback(() => {
     const regex = /^[a-zA-Z ]{2,30}$/;
     const eleven = 11;
 
@@ -20,7 +20,7 @@ function Profile() {
       return setDisabled(false);
     }
     return setDisabled(true);
-  };
+  }, [name]);
 
   useEffect(() => {
     const logon = loadState('user');
@@ -30,7 +30,7 @@ function Profile() {
 
   useEffect(() => {
     validates();
-  }, [name, validates]);
+  }, [validates]);
 
   const updateUserName = () => {
     api.updateUser(name, email)
