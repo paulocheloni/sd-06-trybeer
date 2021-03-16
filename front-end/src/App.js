@@ -6,7 +6,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import {
   Login,
-  Register,
+  // Register,
   Products,
   AdminOrdersDetail,
   AdminProfile,
@@ -17,11 +17,14 @@ import {
   ClientOrders,
 } from './pages';
 
+import Register from './pages/Register/Register';
+
+
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" component={ Login } />
+        {/* <Route path="/" component={ Login } /> */}
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />
         <Route path="/profile" component={ ClientProfile } />

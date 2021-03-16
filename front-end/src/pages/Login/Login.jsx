@@ -53,7 +53,7 @@ export default function Login() {
           placeholder="Informe a senha"
         />
         <Button
-          title="ENTRAR"
+          title="Entrar"
           testId="signin-btn"
           isDisabled={ isDisabled }
           onClick={ () => userRedirect(email, password, history) }

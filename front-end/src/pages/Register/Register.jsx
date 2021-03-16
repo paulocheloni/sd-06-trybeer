@@ -4,10 +4,11 @@ import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import { register } from '../../services/Users';
 import { validateEmail, validatePassword, validateName } from '../../utils/validations';
+import "./Register.css";
 
 const inputComponents = [
   {
-    title: 'Name',
+    title: 'Nome',
     type: 'text',
     testId: 'signup-name',
     placeholder: 'Seu nome',
@@ -44,6 +45,7 @@ const setStateSwitch = ({ field, value, setEmail, setPassword, setName }) => {
 };
 
 export default function Register() {
+  console.log("oi");
   const [isDisabled, setIsDisabled] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -60,8 +62,8 @@ export default function Register() {
   };
   const inputValues = [name, email, password];
   return (
-    <div>
-      <form>
+    <div className="container">
+      <form className="inputs">
         {inputComponents.map((component, index) => (
           <Input
             key={ index }
