@@ -134,6 +134,7 @@ describe('Testing sales endpoint', () => {
       .expect('status', SUCCESS)
       .then((response) => {
         const { body } = response;
+        console.log(response)
         const result = JSON.parse(body);
         expect(result.length).toBeGreaterThanOrEqual(1);
       });
