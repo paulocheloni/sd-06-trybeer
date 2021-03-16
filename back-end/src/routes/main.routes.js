@@ -11,8 +11,8 @@ const routes = express.Router();
 routes.use(log);
 
 routes.use('/login', sessionRouter);
-routes.use('/register', usersRouter);
 routes.use('/products', productsRouter);
+routes.use('/user', usersRouter);
 
 routes.use(handleError);
 
