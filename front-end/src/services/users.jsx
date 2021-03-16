@@ -1,12 +1,11 @@
 const url = 'http://localhost:3001/users';
+const contentType = { 'Content-Type': 'application/json' };
 
 const validateUser = async (email, password) => {
   const validation = await fetch(`${url}`,
     {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: contentType,
       body: JSON.stringify({ email, password }),
     })
     .then((response) => response.json());
@@ -14,13 +13,25 @@ const validateUser = async (email, password) => {
   return validation;
 };
 
+const registerUser = async (name, email, password, seller) => {
+  const role = (seller === true) ? 'administrator' : 'client';
+
+  const registeredUser = await fetch(`${url}/register`,
+    {
+      method: 'POST',
+      headers: contentType,
+      body: JSON.stringify({ name, email, password, role }),
+    })
+    .then((response) => response.json());
+
+  return registeredUser;
+};
+
 const updateUser = async (name, email) => {
   const update = await fetch(`${url}/profile`,
     {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: contentType,
       body: JSON.stringify({ name, email }),
     });
 
@@ -29,5 +40,6 @@ const updateUser = async (name, email) => {
 
 module.exports = {
   validateUser,
+  registerUser,
   updateUser,
 };

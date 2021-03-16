@@ -16,6 +16,21 @@ const getUser = async (email, password) => {
   return user;
 };
 
+const addUser = async (name, email, password, role) => {
+  try {
+    await connection.execute(
+      `INSERT INTO Trybeer.${coll} (name, email, password, role) VALUES(?, ?, ?, ?);`,
+      [name, email, password, role],
+    );
+  
+    const user = await getUser(email, password);
+  
+    return user;
+  } catch (error) {
+    return undefined;
+  }
+};
+
 const updateUser = async (name, email) => {
   await connection.execute(
     'UPDATE Trybeer.users SET name = ? WHERE email = ?', [name, email],
@@ -25,5 +40,6 @@ const updateUser = async (name, email) => {
 module.exports = {
   getAll,
   getUser,
+  addUser,
   updateUser,
 };
