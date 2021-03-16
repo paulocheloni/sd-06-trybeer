@@ -1,3 +1,10 @@
-// const connection = require('./connection');
+const utils = require('./utils.models');
 
-module.exports = {};
+const getAll = async () => {
+  const results = await utils.getAll('products');
+  return results;
+};
+
+module.exports = {
+  getAll,
+};
