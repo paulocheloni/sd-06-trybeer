@@ -1,4 +1,4 @@
-import { login } from '../api';
+import { login, register } from '../api';
 
 const verifyEmailAndPassword = (email, password, setActiveBtn, setUser) => {
   const isEmailValid = email.match(/\S+@\S+\.\S+/);
@@ -35,9 +35,11 @@ const handleSubmitRegister = (name, email, password, checked, setUser, history) 
   if(checked) {
     setUser({ name, email, password, role: 'administrator' })
     history.push('admin/orders')
+    register({ name, email, password, role: 'administrator' })
   } else {
     setUser({ name, email, password, role: 'client' })
     history.push('products')
+    register({ name, email, password, role: 'client' })
   }
 };
 
