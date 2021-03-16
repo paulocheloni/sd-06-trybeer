@@ -1,10 +1,6 @@
-const { utils } = require('../models');
+const { sales } = require('../models');
 
-const getById = async (userId) => utils.getByFilter({
-  table: 'sales',
-  filter: 'user_id',
-  value: userId,
-});
+const getById = async (userId) => sales.getById(userId);
 
 module.exports = {
   getById,
