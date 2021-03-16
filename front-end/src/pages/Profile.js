@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import SidebarMenu from '../components/SideBarMenu';
 import TopMenu from '../components/TopMenu';
 import fetchFunctions from '../api/fetchFunctions';
 
 function Profile(props) {
-  const [ name, setName ] = useState('');
-  const [ email, setEmail ] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [disabled, setDisabled] = useState(true);
-  const [ isUpdated, setIsUpdated ] = useState(false);
+  const [isUpdated, setIsUpdated] = useState(false);
+  const TIME_TO_REDIRECT = 3000;
 
   const setConfig = async () => {
     const user = await JSON.parse(localStorage.getItem('user'));
@@ -25,13 +27,13 @@ function Profile(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetchFunctions.put('register', { name: e.target.form[0].value, email })
+    await fetchFunctions.put('register', { name: e.target.form[0].value, email });
     const { history } = props;
     setIsUpdated(true);
-    setTimeout(() => history.push('/login'), 3000);
-  }
+    setTimeout(() => history.push('/login'), TIME_TO_REDIRECT);
+  };
 
-  useEffect(() => {setConfig()}, [isUpdated]);
+  useEffect(() => { setConfig(); }, [isUpdated]);
 
   return (
     <div>
@@ -68,7 +70,7 @@ function Profile(props) {
             data-testid="profile-save-btn"
             type="submit"
             disabled={ disabled }
-            onClick={ handleSubmit } 
+            onClick={ handleSubmit }
           >
             Salvar
           </button>
@@ -80,5 +82,9 @@ function Profile(props) {
     </div>
   );
 }
+
+Profile.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+};
 
 export default Profile;
