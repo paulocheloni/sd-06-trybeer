@@ -2,9 +2,9 @@ import React, { useContext, useState } from 'react';
 import productsContext from '../context/productsContext';
 
 export default function ProductsCard() {
-  const { products, setProducts } = useContext(productsContext);
-  const [totalValue, setTotalValue] = useState(0);
-  const [quantity, setQuantity] = useState({});
+  const { products } = useContext(productsContext);
+  const [totalValue] = useState(0);
+  const [quantity] = useState({});
 
   return (
     <div>
