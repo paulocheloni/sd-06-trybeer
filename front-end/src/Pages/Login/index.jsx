@@ -15,7 +15,7 @@ const Login = () => {
     const data = await response.data;
     localStorage.setItem('token', JSON.stringify(data.userLogin.token));
     if (data.userLogin.role === 'client') return history.push('/products');
-    if (data.userLogin.role === 'admin') return history.push('/admin/orders');
+    if (data.userLogin.role === 'administrator') return history.push('/admin/orders');
     alert('E-mail ou senha incorreta');
     localStorage.removeItem('token');
   };
