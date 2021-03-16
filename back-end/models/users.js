@@ -29,10 +29,16 @@ const addUser = async (name, email, password, role) => {
   } catch (error) {
     return undefined;
   }
+
+const updateUser = async (name, email) => {
+  await connection.execute(
+    'UPDATE Trybeer.users SET name = ? WHERE email = ?', [name, email],
+  );
 };
 
 module.exports = {
   getAll,
   getUser,
   addUser,
+  updateUser,
 };

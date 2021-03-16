@@ -1,5 +1,4 @@
 const url = 'http://localhost:3001/users';
-const registerURL = 'http://localhost:3001/users/register';
 
 const validateUser = async (email, password) => {
   const validation = await fetch(`${url}`,
@@ -18,7 +17,7 @@ const validateUser = async (email, password) => {
 const registerUser = async (name, email, password, seller) => {
   const role = (seller === true) ? 'administrator' : 'client';
 
-  const registeredUser = await fetch(`${registerURL}`,
+  const registeredUser = await fetch(`${url}/register`,
     {
       method: 'POST',
       headers: {
@@ -31,7 +30,21 @@ const registerUser = async (name, email, password, seller) => {
   return registeredUser;
 };
 
+const updateUser = async (name, email) => {
+  const update = await fetch(`${url}/profile`,
+    {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email }),
+    });
+
+  return update;
+};
+
 module.exports = {
   validateUser,
   registerUser,
+  updateUser,
 };

@@ -58,7 +58,7 @@ function LoginForm() {
         data-testid="signin-btn"
         onClick={ () => handleSubmit(email, password) }
       >
-        ENTRAR
+        Entrar
       </button>
       <button
         type="button"
