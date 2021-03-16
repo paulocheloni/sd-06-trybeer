@@ -8,6 +8,7 @@ import api from '../services/api';
 function Login({ history }) {
   const [user, setUser] = useState({ email: '', password: '' });
   const [valid, setValid] = useState(true);
+
   useEffect(() => {
     visibilityBtnLogin(user, setValid);
   }, [user]);
@@ -17,14 +18,14 @@ function Login({ history }) {
   };
 
   const handleClick = async (e) => {
-    console.log(user.email);
     e.preventDefault();
 
-    const loginValidate = await api.generateToken(user.email, user.password);
-    console.log(loginValidate);
-    const { token, role } = loginValidate;
+    const token = await api.generateToken(user.email, user.password);
+    const role = await api.isUserAdmin(user.email);
+    console.log('token:', token);
+    console.log('role:', role);
 
-    if (role === 'admin') {
+    if (role === 'administrator') {
       history.push('/admin/orders');
     } else { history.push('/products'); }
     localStorage.setItem('user', JSON.stringify(user.email, token));

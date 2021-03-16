@@ -1,5 +1,5 @@
-const UserModel = require('./UserModel');
 const LoginModel = require('./LoginModel');
+const UserModel = require('./UserModel');
 
 module.exports = {
   LoginModel,
