@@ -12,5 +12,5 @@ const profileError = {
 
 module.exports = {
   registerError,
-  profileError
+  profileError,
 };

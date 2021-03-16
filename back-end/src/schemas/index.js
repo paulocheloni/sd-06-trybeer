@@ -5,5 +5,5 @@ const utils = require('./utils');
 module.exports = {
   authLogin,
   authRegisterUser,
-  utils
+  utils,
 };

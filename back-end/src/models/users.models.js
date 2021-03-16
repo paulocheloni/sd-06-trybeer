@@ -14,11 +14,11 @@ const insertNewUser = async ({ name, email, password, role }) => {
 
 const updateNameByEmail = async (name, id) => {
   const QUERY = 'UPDATE users SET name = ? WHERE id = ?';
-  return await connection.execute(QUERY, [name, id]);
+  return connection.query(QUERY, [name, id]);
 };
 
 module.exports = {
   queryByEmail,
   insertNewUser,
-  updateNameByEmail
+  updateNameByEmail,
 };

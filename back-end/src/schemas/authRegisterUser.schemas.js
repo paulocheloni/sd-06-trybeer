@@ -1,7 +1,7 @@
 const {
   validateUserName,
   validateEmailField,
-  validatePasswordField
+  validatePasswordField,
 } = require('./utils');
 
 const error = {

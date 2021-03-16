@@ -3,5 +3,5 @@ const profile = require('./profile.controllers');
 
 module.exports = {
   register,
-  profile
+  profile,
 };
