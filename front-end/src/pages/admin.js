@@ -4,7 +4,7 @@ import NavBar from '../components/menuNavBar';
 function Admin() {
   return (
     <div>
-      <NavBar />
+      <NavBar content="Trybeer" />
       <h1>Admin</h1>
     </div>
   );

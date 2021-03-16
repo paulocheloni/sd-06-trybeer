@@ -8,6 +8,7 @@ function Profile() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const [attSucess, setAttSucess] = useState(false);
   const history = useHistory();
 
   const validates = () => {
@@ -34,14 +35,17 @@ function Profile() {
   const updateUserName = () => {
     api.updateUser(name, email)
       .then((response) => {
-        if (response.data === 1) console.log('Nome alterado com sucesso!');
+        if (response.data === 1) {
+          console.log('Nome alterado com sucesso!');
+          setAttSucess(true);
+        }
       })
       .catch((err) => console.log(err));
   };
 
   return (
     <div>
-      <NavBar />
+      <NavBar content="Meu perfil" />
       <h1>Profile</h1>
       <label htmlFor="signup-name">
         Nome
@@ -69,6 +73,9 @@ function Profile() {
       >
         Salvar
       </button>
+      {
+        attSucess && <> Atualização concluída com sucesso </>
+      }
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -19,12 +20,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar({ content }) {
   const classes = useStyles();
 
   return (
-    // <div className="side-menu-container">
-    <div className={ classes.root }>
+    <div className={ classes.root } data-testid="top-title">
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -35,12 +35,15 @@ export default function ButtonAppBar() {
           >
             <Hamburguer />
           </IconButton>
-          <Typography data-testid="top-title" variant="h4" className={ classes.title }>
-            TryBeer
+          <Typography variant="h4" className={ classes.title }>
+            {content}
           </Typography>
         </Toolbar>
       </AppBar>
     </div>
-    // </div>
   );
 }
+
+ButtonAppBar.propTypes = {
+  content: PropTypes.string.isRequired,
+};
