@@ -14,12 +14,12 @@ function App() {
             <Route path="/profile" component={ CostumerProfile } />
             <Route path="/products" component={ CostumerProducts } />
             <Route path="/admin/orders" component={ () => <h1>/admin/orders</h1> } />
-            <Route path="/"><Redirect to="/login" /></Route>
+            <Route path="/" component={ () => <Redirect to="/login" /> } />
           </Switch>
         </Provider>
       </BrowserRouter>
     </div>
   );
-};
+}
 
 export default App;
