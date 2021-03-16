@@ -8,6 +8,7 @@ import api from '../services/api';
 function Login({ history }) {
   const [user, setUser] = useState({ email: '', password: '' });
   const [valid, setValid] = useState(true);
+
   useEffect(() => {
     visibilityBtnLogin(user, setValid);
   }, [user]);
@@ -24,7 +25,7 @@ function Login({ history }) {
     console.log(loginValidate);
     const { token, role } = loginValidate;
 
-    if (role === 'admin') {
+    if (role === 'administrator') {
       history.push('/admin/orders');
     } else { history.push('/products'); }
     localStorage.setItem('user', JSON.stringify(user.email, token));

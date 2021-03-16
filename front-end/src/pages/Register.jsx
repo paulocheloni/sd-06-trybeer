@@ -28,7 +28,7 @@ function Register({ history }) {
 
     const registerUser = await api.registerUser(name, email, senha, tipo);
     console.log(registerUser.message);
-    if (newUser.tipo === 'admin') history.push('/admin/orders');
+    if (newUser.tipo === 'administrator') history.push('/admin/orders');
     else history.push('/products');
     localStorage.setItem('newUser', JSON.stringify(newUser));
   };
