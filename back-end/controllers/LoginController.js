@@ -17,8 +17,7 @@ routerLogin.get('/', async (_req, res) => {
   res.send(users);
 });
 
-
-routerLogin.post('/', validateLogin, async (req, res) => {
+routerLogin.post('/', validateLogin, async (req, res, next) => {
   const { user } = req.body;
   if (!res.locals.user) return next({ status: 404, message: 'not found' });
   const payload = {
