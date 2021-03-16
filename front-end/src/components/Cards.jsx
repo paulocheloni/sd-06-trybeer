@@ -15,8 +15,13 @@ export default function Cards() {
 
   return (
     <div>
-      {products.map((product) => (
-        <div>{product.name}</div>
+      {products.map((product, index) => (
+        <div key={product.id} >
+          <h4 data-testid={`${index}-product-name`}>{product.name}</h4>
+          <h5>{product.price}</h5>
+          <img src={product.url_image}/>
+          {console.log(product.url_image)}
+        </div>
       ))}
     </div>
   )
