@@ -17,7 +17,12 @@ const findUserByEmail = async (userEmail, password) => {
   return userFound;
 };
 
+const updateUserNameByEmail = async (userEmail, updatedName) => {
+  await userModel.updateUserNameByEmail(userEmail, updatedName);
+};
+
 module.exports = {
   getAllUsers,
   findUserByEmail,
+  updateUserNameByEmail,
 };

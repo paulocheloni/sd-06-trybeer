@@ -9,15 +9,6 @@ const router = Router();
 
 router.get('/', rescue(async (_req, res) => {
   const allUsers = await userService.getAllUsers();
-  
-  // allUsers.map((user) => {
-  //   const allUsersForFront = {
-  //     name: user.name,
-  //     email: user.email,
-  //     role: user.role,
-  //   };
-  //   return allUsersForFront;
-  // });
 
   return res.status(200).json(allUsers);
 }));
@@ -35,13 +26,19 @@ router.post('/', validatePassword, validateEmail, rescue(async (req, res) => {
     email: getUser.email,
     role: getUser.role,
   };
-  // console.log(userDataForFront);
 
   const userToken = createToken(userDataForFront);
   console.log(userToken);
 
   return res.status(200).json([userDataForFront, userToken]);
-  // return res.status(200).json(getUser);
+}));
+
+router.put('/', rescue(async (req, res) => {
+  const { email, name } = req.body;
+
+  await userService.updateUserNameByEmail(email, name);
+
+  return res.status(201).json({ message: 'Name has been successfully updated.' });
 }));
 
 module.exports = router;

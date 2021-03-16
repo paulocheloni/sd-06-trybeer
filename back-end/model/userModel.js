@@ -14,7 +14,15 @@ const findUserByEmail = async (userEmail) => {
     return user;
 };
 
+const updateUserNameByEmail = async (userEmail, updatedName) => {
+  await connection.execute(
+    'UPDATE Trybeer.users SET Trybeer.users.name=? WHERE Trybeer.users.email=?', 
+    [updatedName, userEmail],
+  );
+};
+
 module.exports = {
   getAllUsers,
   findUserByEmail,
+  updateUserNameByEmail,
 };

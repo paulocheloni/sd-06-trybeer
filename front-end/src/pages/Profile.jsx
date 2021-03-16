@@ -62,11 +62,11 @@ export default function Profile() {
         disabled={ !(nameValidation(name) && isTheNewNameDifferent(oldName, name)) }
         onClick={ () => handleUpdateInfo(tokenDecoded.email) }
       >
+        <div>
+          { newInfo }
+        </div>
         Salvar
       </button>
-      <div>
-        { newInfo }
-      </div>
     </div>
   );
 }
