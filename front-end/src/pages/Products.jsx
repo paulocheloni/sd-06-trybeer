@@ -3,11 +3,11 @@ import { Link, Redirect } from 'react-router-dom';
 import fetchProducts from '../methods/products';
 import renderCards from '../components/RenderCards';
 import isLogged from '../components/isLogged';
+import MenuTop from '../components/menuTop';
 import './Products.css';
 
 const currencyFormat = (num) => num
   .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
-
 const itemQty = (prod) => {
   const items = JSON.parse(localStorage.getItem('items'));
   if (items) {
@@ -21,6 +21,14 @@ function Products() {
   const [allProducts, setAllProducts] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const [asd, setAsd] = useState(0);
+  const itemQty = (prod) => {
+    const items = JSON.parse(localStorage.getItem('items'));
+    if (items) {
+      const qty = items.filter((e) => e.id === prod.id);
+      return qty.length;
+    }
+    return 0;
+  };
   useEffect(() => {
     (async () => {
       setAllProducts(await fetchProducts());
@@ -36,6 +44,14 @@ function Products() {
       }
     }
   }, [asd]);
+  console.log(isLogged());
+  if (isLogged()) return <Redirect to="/login" />;
+  return (
+    <>
+      <MenuTop title="TryBeer" />
+      <section className="cards-container">
+        {renderCards(allProducts, asd, setAsd, itemQty)}
+        <Link to="/cart" className="cart-link" data-testid="checkout-bottom-btn">
   if (isLogged()) return <Redirect to="/login" />;
   return (
     <>
@@ -47,6 +63,11 @@ function Products() {
             type="button"
             className="cart-btn"
             disabled={ asd === 0 }
+            data-testid="checkout-bottom-btn-value"
+          >
+            Ver Carrinho
+            {' '}
+            {cartTotal.toFixed(2).toLocaleString()}
             data-testid="checkout-bottom-btn"
           >
             <p data-testid="checkout-bottom-btn-value">
