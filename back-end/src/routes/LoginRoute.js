@@ -5,8 +5,6 @@ const { auth } = require('../middleware');
 
 const LoginRouter = Router();
 
-LoginRouter.get('/', 
-  LoginController.userRole);
 LoginRouter.post('/',
   auth,
   LoginController.generateToken);

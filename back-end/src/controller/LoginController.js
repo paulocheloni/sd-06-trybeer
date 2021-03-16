@@ -14,16 +14,6 @@ const generateToken = rescue(async (req, res) => {
   return res.status(200).json({ token, role });
 });
 
-const userRole = rescue(async (req, res) => {
-  const { email } = req.body;
-
-  const [user] = await LoginService.userRole(email);
-
-
-  return res.status(200).json(user);
-});
-
 module.exports = {
   generateToken,
-  userRole,
 };
