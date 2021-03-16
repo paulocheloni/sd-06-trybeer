@@ -4,7 +4,7 @@ import Header from '../../../components/Header/Header';
 export default function Orders() {
   return (
     <div>
-      <Header title="Meus Pedidos" />
+      <Header title="Meus Pedidos" user="client" />
     </div>
   );
 }
