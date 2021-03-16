@@ -17,41 +17,47 @@ function UserRegister() {
   const history = useHistory();
 
   return (
-    <form>
-      <Input
-        title="Nome"
-        id="signup-name"
-        type="text"
-        callback={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
-      />
-      <Input
-        title="Email"
-        id="signup-email"
-        type="email"
-        callback={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
-      />
-      <Input
-        title="Senha"
-        id="signup-password"
-        type="password"
-        callback={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
-      />
-      <Input
-        title="Quero vender"
-        id="signup-seller"
-        type="checkbox"
-        callback={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
-      />
-      <button
-        disabled={ enableButton }
-        type="button"
-        data-testid="signup-btn"
-        onClick={ () => registerNewUSer(history, newUser, setAlreadyRegistered) }
-      >
-        Cadastrar
-      </button>
-      { alreadyRegistered ? <AlreadyRegisterdMessage /> : null }
-    </form>
+    <div>
+      <div>
+        <TopBar />
+        <h1>User Register</h1>
+      </div>
+      <form>
+        <Input
+          title="Nome"
+          id="signup-name"
+          type="text"
+          callback={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
+        />
+        <Input
+          title="Email"
+          id="signup-email"
+          type="email"
+          callback={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
+        />
+        <Input
+          title="Senha"
+          id="signup-password"
+          type="password"
+          callback={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
+        />
+        <Input
+          title="Quero vender"
+          id="signup-seller"
+          type="checkbox"
+          callback={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
+        />
+        <button
+          disabled={ enableButton }
+          type="button"
+          data-testid="signup-btn"
+          onClick={ () => registerNewUSer(history, newUser, setAlreadyRegistered) }
+        >
+          Cadastrar
+        </button>
+        { alreadyRegistered ? <AlreadyRegisterdMessage /> : null }
+      </form>
+    </div>
   );
 }
 
