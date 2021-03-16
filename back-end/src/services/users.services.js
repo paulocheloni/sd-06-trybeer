@@ -1,6 +1,6 @@
 const { users } = require('../models');
 const { generateToken } = require('../security');
-const { authRegisterUser } = require('../schemas');
+const { authRegisterUser, authProfileUser } = require('../schemas');
 
 const create = async (body) => {
   const data = body;
@@ -17,8 +17,10 @@ const create = async (body) => {
   return { name, email, token, role };
 };
 
-const updateName = async ({ name, email }) =>
-  await users.updateNameByEmail(name, email);
+const updateName = async ({ name, email }) => {
+  authProfileUser(name, email);
+  return await users.updateNameByEmail(name, email);
+}
 
 module.exports = {
   create,

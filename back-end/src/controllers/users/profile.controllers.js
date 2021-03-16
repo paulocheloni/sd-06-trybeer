@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
   try {
     const { body } = req;
     await users.updateName(body);
-    return res.status(StatusCodes.OK).end();
+    return res.status(StatusCodes.OK).json({ message: 'Name updated successfully.' });
   } catch (err) {
     return next({ ...profileError, err });
   }
