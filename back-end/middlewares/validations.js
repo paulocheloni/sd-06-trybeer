@@ -8,17 +8,23 @@ const validateEmail = async (req, res, next) => {
   next();
 };
 
+const validEmail = (email) => /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/.test(email);
+// const validEmail = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+const validDatas = (email, password, user) => email && password && user;
+
+// if (!email || !password || !user) {
+//   return res.status(401).json({ message: 'Invalid entries. Try again.' });
+// }
+
 const validateLogin = async (req, res, next) => {
   const { email, password } = req.body;
   const [user] = await userService.findByEmail(email);
 
-  const validEmail = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
-
-  if (!email || !password || !user) {
+  if (!validDatas(email, password, user)) {
     return res.status(401).json({ message: 'Invalid entries. Try again.' });
   }
 
-  if (!validEmail.test(email) || password.length < 6 || user.password !== password) {
+  if (!validEmail(email) || password.length < 6 || user.password !== password) {
     return res.status(401).json({ message: 'Invalid entries. Try again.' });
   }
 
