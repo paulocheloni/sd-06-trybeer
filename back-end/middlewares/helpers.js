@@ -1,5 +1,5 @@
-const { findUserByEmail } = require('../models/usersModel');
 const jwt = require('jsonwebtoken');
+const { findUserByEmail } = require('../models/usersModel');
 
 const SECRET = 'grupo15';
 
@@ -19,6 +19,6 @@ const validateToken = async (req, res, next) => {
   }
 
   next();
-}
+};
 
 module.exports = { validateToken, SECRET };
