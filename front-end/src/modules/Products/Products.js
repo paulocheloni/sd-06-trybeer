@@ -1,9 +1,10 @@
 import React from 'react';
+import TopBar from '../../design-components/TopBar';
 
 function Products() {
   return (
     <div>
-      Products
+      <TopBar title="TryBeer" />
     </div>
   );
 }
