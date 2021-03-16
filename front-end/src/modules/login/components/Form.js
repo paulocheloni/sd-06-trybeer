@@ -1,68 +1,60 @@
 import React, { useState } from 'react';
-import * as API from '../../../utils'
+import { useHistory } from 'react-router-dom';
+import * as API from '../../../utils';
 
-const Form = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState(true);
-  const [passwordError, setPasswordError] = useState(true);
-  const [errorMsg, setErrorMsg] = useState('')
+const patternEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+const patternPassword = /^[0-9]{6,}$/;
 
-  const handleChangeEmail = (emailInput) => {
-    setEmail(emailInput)
-    const patternEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
-    const validation = patternEmail.test(emailInput)
+const patterns = { email: patternEmail, password: patternPassword };
 
-    setEmailError(!validation);
-  }
+function Form() {
+  const [form, setForm] = useState({ email: '', password: '' });
+  const [errorForm, setErrorForm] = useState({ email: '', password: '' });
+  const [errorMsg, setErrorMsg] = useState('');
+  const history = useHistory();
 
-  const handleChangePassword= (passwordInput) => {
-    setPassword(passwordInput)
-    const patternPassword = /^[0-9]{6,}$/;
-    const validation = patternPassword.test(passwordInput);
-
-    setPasswordError(!validation);
-  }
+  const handleChangeInput = ({ target }) => {
+    const { name, value } = target;
+    const validation = patterns[name].test(value);
+    setForm((prev) => ({ ...prev, [name]: value }));
+    setErrorForm((prev) => ({ ...prev, [name]: !validation }));
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await API.post('/login', { email, password });
+    const response = await API.post('/login', form);
+    if (response.message) return setErrorMsg(response.message);
+    localStorage.setItem('user', JSON.stringify(response));
+    const { role } = response;
+    history.push(role === 'client' ? '/products' : '/admin/orders');
+  };
 
-    if (response.token) {
-      localStorage.setItem('user', JSON.stringify(response));
-    } else {
-      setErrorMsg(response.message);
-    }
-  }
-
-  return(
-    <div>
-      Formulario
-      <p>{errorMsg}</p>
-      <form onSubmit={handleSubmit}>
-        <input
-          data-test-id="email-input"
-          type="text"
-          value={email}
-          onChange={ ({ target }) => handleChangeEmail(target.value) }
-        />
-        <input
-          data-test-id="password-input"
-          type="text"
-          value={password}
-          onChange={ ({ target }) => handleChangePassword(target.value) }
-        />
-        <button
-          data-test-id="signin-btn"
-          type="submit"
-          disabled={ emailError || passwordError  }
-        >
-          <p>Entrar</p>
-          <p>ENTRAR</p>
-          <p>Sign In</p>
-        </button>
-      </form>
-    </div>
+  return (
+    <form onSubmit={ handleSubmit }>
+      <input
+        data-test-id="email-input"
+        name="email"
+        type="text"
+        value={ form.email }
+        onChange={ handleChangeInput }
+      />
+      <input
+        data-test-id="password-input"
+        name="password"
+        type="text"
+        value={ form.password }
+        onChange={ handleChangeInput }
+      />
+      <p>{ errorMsg }</p>
+      <button
+        data-test-id="signin-btn"
+        type="submit"
+        disabled={ errorForm.email || errorForm.password }
+      >
+        <p>Entrar ENTRAR (esconder)</p>
+        <p>Sign In</p>
+      </button>
+    </form>
   );
 }
 
