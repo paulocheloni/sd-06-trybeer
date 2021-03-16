@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Button from '../Button';
 import menuClosed from '../../images/menu.svg';
 import menuOpened from '../../images/beer.svg';
 import * as S from './style';
 
-const Menu = () => {
+const Menu = ({ children }) => {
   const history = useHistory();
   const [menuOn, setMenuOn] = useState(false);
   const handleRoute = (path) => {
@@ -19,7 +20,7 @@ const Menu = () => {
         onClick={ () => setMenuOn(!menuOn) }
         data-testid="top-hamburguer"
       />
-      <S.Title data-testid="top-title">TryBeer</S.Title>
+      <S.Title data-testid="top-title">{ children }</S.Title>
       <S.Modal state={ menuOn } className={ menuOn ? 'side-menu-container' : '' }>
         <S.WrapperButtons>
           <Button
@@ -55,4 +56,7 @@ const Menu = () => {
   );
 };
 
+Menu.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 export default Menu;
