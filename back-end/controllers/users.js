@@ -19,6 +19,14 @@ usersRouter.post('/', async (req, res) => {
   return res.status(404).json({ message: 'user not found' });
 });
 
+usersRouter.put('/profile', async (req, res) => {
+  const { name, email } = req.body;
+
+  await services.updateUser(name, email);
+
+  return res.status(200).json({ message: 'Atualização concluída com sucesso' });
+});
+
 module.exports = {
   usersRouter,
 };
