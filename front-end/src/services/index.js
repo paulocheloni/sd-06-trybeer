@@ -17,7 +17,7 @@ const handleSubmit = (history, user) => {
       localStorage.setItem('token', response.data.token);
 
       if (isAdmin) history.push('admin/orders');
-      else history.push('products');
+      else history.push('/products');
     });
 };
 

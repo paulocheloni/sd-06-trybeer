@@ -34,7 +34,7 @@ function Login() {
         onClick={ () => handleSubmit(history, user) }
         data-testid="signin-btn"
       >
-        ENTRAR
+        Entrar
       </button>
       <Link to="/register">
         <button type="button" data-testid="no-account-btn">
