@@ -16,8 +16,14 @@ const nameValidation = (name) => {
   return isNameValid;
 };
 
+const isTheNewNameDifferent = (oldName, newName) => {
+  if (oldName === newName) return false;
+  return true;
+};
+
 module.exports = {
   emailValidation,
   passwordValidation,
   nameValidation,
+  isTheNewNameDifferent,
 };

@@ -1,10 +1,10 @@
 import React from 'react';
 import TopMenu from '../components/TopMenu';
 
-export default function Orders() {
+export default function Products() {
   return (
     <div>
-      <TopMenu pageTitle="Meus pedidos" />
+      <TopMenu pageTitle="Finalizar Pedido" />
     </div>
   );
 }

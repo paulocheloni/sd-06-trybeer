@@ -13,6 +13,8 @@ app.get('/', (req, res) => res.send('ok'));
 
 app.use('/login', userController);
 
+app.use('/profile', userController);
+
 app.use(unexpectedError);
 
 app.listen(PORT, () => console.log(`Example app listening on ${PORT}!`));

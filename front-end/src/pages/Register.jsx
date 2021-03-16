@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// import emailExists from '../utils/emailExists';
 import useInput from '../hooks/useInput';
 import { nameValidation, passwordValidation, emailValidation } from '../utils/validations';
 import fetches from '../services/fetches';
@@ -15,7 +14,6 @@ export default function Register() {
 
   const handleCheckbox = (e) => {
     const checkBox = e.target;
-    // console.log(checkBox);
     if (checkBox.checked) setRole('administrator');
     else setRole('client');
   };
