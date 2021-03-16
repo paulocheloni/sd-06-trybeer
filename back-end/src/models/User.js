@@ -16,15 +16,15 @@ const createUser = async (name, email, password, role) => {
 };
 
 const updateUser = async (name, email) => {
-  const [{changedRows}] = await connection.execute(
+  const [{ changedRows }] = await connection.execute(
     'UPDATE users SET name = ? WHERE email = ?',
-    [name, email]
+    [name, email],
   );
 
   if (changedRows === 0) return null;
 
   return changedRows;
-}
+};
 
 module.exports = {
   createUser,

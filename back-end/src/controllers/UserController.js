@@ -10,6 +10,9 @@ const UpdateUserService = require('../services/UpdateUserService');
 const {
   validateRegistration, registrationValidationRules,
 } = require('../middlewares/validateRegistration');
+const {
+  updateValidationRules, validateUpdate,
+} = require('../middlewares/validateUpdate');
 
 const UserCreate = async (req, res) => {
   const { name, email, password, role } = req.body;
@@ -31,6 +34,6 @@ UserRouter.post(
   validateRegistration,
   UserCreate,
 );
-UserRouter.put('/update', UserUpdate);
+UserRouter.put('/update', updateValidationRules(), validateUpdate, UserUpdate);
 
 module.exports = UserRouter;

@@ -1,26 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { loadState } from '../services/localStorage';
 import { useHistory } from 'react-router';
+import { loadState } from '../services/localStorage';
 import api from '../services/api';
 
 function Profile() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [disabled, setDisabled] = useState(true);
   const history = useHistory();
+
+  const validates = () => {
+    const regex = /^[a-zA-Z ]{2,30}$/;
+    const eleven = 11;
+
+    if (regex.test(name)
+    && name.length > eleven) {
+      return setDisabled(false);
+    }
+    return setDisabled(true);
+  };
 
   useEffect(() => {
     const logon = loadState('user');
-    if(!logon) return history.push('/login');
+    if (!logon) return history.push('/login');
     setEmail(logon.email);
-  }, []);
+  }, [history]);
+
+  useEffect(() => {
+    validates();
+  }, [name, validates]);
 
   const updateUserName = () => {
     api.updateUser(name, email)
-    .then((response) => {
-      if(response.data === 1) console.log('Nome alterado com sucesso!');
-    })
-    .catch((err) => console.log(err));
-  }
+      .then((response) => {
+        if (response.data === 1) console.log('Nome alterado com sucesso!');
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
@@ -43,7 +59,14 @@ function Profile() {
           readOnly
         />
       </label>
-      <button type="button" onClick={updateUserName} data-testid="profile-save-btn">Salvar</button>
+      <button
+        type="button"
+        disabled={ disabled }
+        onClick={ updateUserName }
+        data-testid="profile-save-btn"
+      >
+        Salvar
+      </button>
     </div>
   );
 }

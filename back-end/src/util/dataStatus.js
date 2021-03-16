@@ -8,6 +8,9 @@ const messages = {
     emailExistente: {
         message: 'E-mail already in database.',
     },
+    nomeInvalido: {
+        message: 'Nome inválido',
+    },
 };
 
 const status = {

@@ -44,6 +44,7 @@ function Register() {
         }
       }).catch((err) => {
         setEmailExists(true);
+        console.log(err);
       });
   };
 
