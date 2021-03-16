@@ -26,8 +26,8 @@ function Login({ history }) {
     if (loginValidate.result) {
       setErrMsg(false);
       localStorage.setItem('user', JSON.stringify({ email: user.email, token }));
-      if (role === 'administrator') return history.push('/admin/orders');
-      return history.push('/products');
+      if (role === 'administrator') history.push('/admin/orders');
+      else history.push('/products');
     }
     setDisplayErr(true);
     setErrMsg(loginValidate.response.message);
