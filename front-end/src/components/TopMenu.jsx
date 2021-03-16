@@ -1,23 +1,94 @@
-import React from 'react';
+import React, { useState } from 'react';
 import propTypes from 'prop-types';
-import hamburguerIcon from '../icons/hamburguer-icon.png';
+import './TopMenu.css';
+import { useHistory } from 'react-router-dom';
 
 export default function TopMenu({ pageTitle }) {
+  const history = useHistory();
+
+  const [asideClass, setasideClass] = useState('aside-menu-off');
+
+  const handleOnClickHamburguerButton = () => {
+    console.log('click');
+    const asideOn = 'aside-menu-on';
+    const asideOff = 'aside-menu-off';
+    if (asideClass === asideOn) {
+      setasideClass(asideOff);
+    }
+    if (asideClass === asideOff) {
+      setasideClass(asideOn);
+    }
+  };
+
+  const handleOnClickAsideButton = (e) => {
+    console.log(e.target.value);
+    if (e.target.value === 'Produtos') { history.push('/products'); }
+    if (e.target.value === 'Meus Pedidos') { history.push('/orders'); }
+    if (e.target.value === 'Meu Perfil') { history.push('/profile'); }
+    if (e.target.value === 'Sair') {
+      localStorage.setItem('token', '');
+      history.push('/login');
+    }
+  };
+
   return (
-    <div className="top-menu-container">
-      <header>
+    <header className="nav-main">
+      <div className="title-burguer-div">
         <button
-          className="btn-side-bar"
-          src={ hamburguerIcon }
           type="button"
           data-testid="top-hamburguer"
-          width="200px"
+          className="btn-toggle-nav"
+          onClick={ handleOnClickHamburguerButton }
         >
-          <img alt="side-bar menu" />
+          &nbsp;
         </button>
         <h1 data-testid="top-title" className="page-title">{ pageTitle }</h1>
-      </header>
-    </div>
+        {/* <div className="side-menu-container"> */}
+        <aside id="aside" className={ asideClass }>
+          <div className="side-menu-container">
+            <button
+              type="button"
+              data-testid="side-menu-item-products"
+              onClick={ handleOnClickAsideButton }
+              value="Produtos"
+            >
+              Produtos
+            </button>
+          </div>
+          <div className="side-menu-container">
+            <button
+              type="button"
+              data-testid="side-menu-item-my-orders"
+              onClick={ handleOnClickAsideButton }
+              value="Meus Pedidos"
+            >
+              Meus pedidos
+            </button>
+          </div>
+          <div className="side-menu-container">
+            <button
+              type="button"
+              data-testid="side-menu-item-my-profile"
+              onClick={ handleOnClickAsideButton }
+              value="Meu Perfil"
+            >
+              Meu Perfil
+            </button>
+          </div>
+          <div className="side-menu-container">
+            <button
+              type="button"
+              data-testid="side-menu-item-logout"
+              onClick={ handleOnClickAsideButton }
+              value="Sair"
+            >
+              Sair
+            </button>
+          </div>
+        </aside>
+      </div>
+      {/* </div> */}
+    </header>
   );
 }
 
