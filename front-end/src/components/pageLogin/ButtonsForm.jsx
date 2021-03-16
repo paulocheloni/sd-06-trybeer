@@ -10,7 +10,7 @@ function ButtonsForm(valid, handleClick, history) {
           disabled={ valid }
           onClick={ handleClick }
         >
-          ENTRAR
+          Entrar
         </button>
       </div>
       <div>

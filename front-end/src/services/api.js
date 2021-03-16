@@ -20,10 +20,10 @@ const registerUser = async (name, email, password, role) => axios
     password,
     role,
   })
-  .then((res) => res.data)
+  .then((res) => ({ response: res.data, result: true }))
   .catch((error) => {
     if (error.response) {
-      return error.response.data;
+      return { response: error.response.data, result: false };
     }
   });
 

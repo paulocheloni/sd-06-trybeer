@@ -10,5 +10,5 @@ module.exports = async (req, res, next) => {
   } 
     return res
     .status(409)
-    .json({ message: 'Email Already Exists' });
+    .json({ message: 'E-mail already in database.' });
 };
