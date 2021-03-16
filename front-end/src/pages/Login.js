@@ -59,7 +59,7 @@ function Login() {
           type="submit"
           disabled={ isDisabled }
         >
-          ENTRAR
+          Entrar
         </button>
       </form>
       <button
