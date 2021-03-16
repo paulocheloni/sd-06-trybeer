@@ -14,6 +14,20 @@ const validateUser = async (email, password) => {
   return validation;
 };
 
+const updateUser = async (name, email) => {
+  const update = await fetch(`${url}/profile`,
+    {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email }),
+    });
+
+  return update;
+};
+
 module.exports = {
   validateUser,
+  updateUser,
 };
