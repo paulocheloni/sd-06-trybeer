@@ -25,6 +25,7 @@ function Login() {
       .post('/login', { email: loginEmail, password: loginPassword })
       .then((response) => {
         localStorage.setItem('user', JSON.stringify(response.data));
+        
         if (response.data.role === 'administrator') history.push('/admin/orders');
         if (response.data.role === 'client') history.push('/products');
       })
@@ -48,7 +49,7 @@ function Login() {
             bgColor="indigo-600"
             testId="signin-btn"
           >
-            ENTRAR
+            Entrar
           </Button>
           <Link to="/register">
             <Button bgColor="indigo-400" testId="no-account-btn">
