@@ -4,7 +4,7 @@ import TrybeerContext from './TrybeerContext';
 
 const LoginProvider = ({ children }) => {
   const [user, setUser] = useState({ email: '', password: '' });
-  const [newUser, setNewUser ] = useState({
+  const [newUser, setNewUser] = useState({
     name: '',
     email: '',
     password: '',

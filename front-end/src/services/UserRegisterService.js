@@ -11,17 +11,16 @@ export function validateNewUser(newUser, setNewUser, setEnableButton) {
   const minPasswordLength = 6;
 
   if (
-    userNamePattern.test(name) &&
-    password.length >= minPasswordLength &&
-    emailPattern.test(email)
+    userNamePattern.test(name)
+    && password.length >= minPasswordLength
+    && emailPattern.test(email)
   ) {
-
     setNewUser({
       ...newUser,
       name,
       password,
       email,
-      role: isSeller ? 'administrador' : 'cliente',
+      role: isSeller ? 'administrator' : 'client',
     });
 
     return setEnableButton(false);
@@ -30,10 +29,12 @@ export function validateNewUser(newUser, setNewUser, setEnableButton) {
   setEnableButton(true);
 }
 
-export async function registerNewUSer(history, user) {
+export async function registerNewUSer(history, user, registered) {
   const createdUser = await createNewUSer(user);
 
-  if (createdUser === '200') {
+  if (createdUser.message === 'User Created') {
+    registered(false);
     await redirectPath(history, user);
   }
+  registered(true);
 }

@@ -5,7 +5,7 @@ const LoginService = require('../service/LoginService');
 
 const router = new Router();
 
-// const OK = 200;
+const OK = 200;
 const BAD_REQUEST = 404;
 
 router.post('/', rescue(async (req, res) => {

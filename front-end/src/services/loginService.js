@@ -32,6 +32,5 @@ export const routeByRole = (role, history) => {
 
 export const redirectPath = async (history, user) => {
   const fetchedUser = await getUserByEmail(user);
-
   routeByRole(fetchedUser.role, history);
 };

@@ -5,18 +5,17 @@ const api = axios.create({
 });
 
 export const getUserByEmail = async (user) => {
-  const response = await api.post('login', user)
+  const requestResponse = await api.post('login', user)
     .then((response) => response.data)
-    .catch((error) => error.response.data);
+    .catch((error) => (error.response.data));
 
-  return response;
+  return requestResponse;
 };
 
 export const createNewUSer = async (user) => {
-  const response = await api.post('register', user)
+  const requestResponse = await api.post('register', user)
     .then((response) => response.data)
     .catch((error) => error.response.data);
 
-  console.log(response)
-  return response;
+  return requestResponse;
 };
