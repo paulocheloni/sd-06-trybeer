@@ -8,12 +8,12 @@ const router = new Router();
 const OK = 200;
 
 router.post('/', rescue(async (req, res) => {
-  const { email } = req.body;
+  const { email: requestEmail } = req.body;
 
-  const { role } = await UserService.getByEmail(email);
-  const token = await createToken({ email, role });
+  const { role, email, name } = await UserService.getByEmail(requestEmail);
+  const token = await createToken({ requestEmail, role });
 
-  return res.status(OK).json({ token, role });
+  return res.status(OK).json({ token, role, name, email });
 }));
 
 module.exports = router;
