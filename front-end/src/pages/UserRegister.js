@@ -1,31 +1,32 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
-import { validateNewUser } from '../services/UserRegisterValidations';
-import { checkUser } from '../services/UserRegisterValidations';
-import redirectPath from '../services/loginService';
+import { validateNewUser } from '../services/UserRegisterService';
+import { registerNewUSer } from '../services/UserRegisterService';
 
 
 function UserRegister() {
   const { newUser, setNewUser } = useContext(TrybeerContext);
   const [enableButton, setEnableButton] = useState(true);
-  const [userAlreadyRegistered, setUserAlreadyRegistered] = useState(false);
+  // const [userAlreadyRegistered, setUserAlreadyRegistered] = useState(false);
+  const history = useHistory();
 
-  async function checkExistingUser(user) {
-    const userExists = await checkUser(newUser);
-    console.log('Usuário existe:', userExists);
-    if (userExists) {
-      setUserAlreadyRegistered(true);
-      return null;
-    }
-  }
-  async function handleButtonClick(event) {
-    event.preventDefault();
-    console.log('Clicou no botão');
-    console.log('Novo usuário', newUser);
-    if (checkExistingUser(newUser)) return true;
-    console.log('Não deve aparecer se usario existe');
-    // setup de salvar usuário (rota, controller, etc)
-  }
+  // async function checkExistingUser(user) {
+  //   const userExists = await checkUser(newUser);
+  //   console.log('Usuário existe:', userExists);
+  //   if (userExists) {
+  //     setUserAlreadyRegistered(true);
+  //     return null;
+  //   }
+  // }
+  // async function handleButtonClick(event) {
+  //   event.preventDefault();
+  //   console.log('Clicou no botão');
+  //   console.log('Novo usuário', newUser);
+  //   if (checkExistingUser(newUser)) return true;
+  //   console.log('Não deve aparecer se usario existe');
+  //   // setup de salvar usuário (rota, controller, etc)
+  // }
   return (
     <div>
       <form>
@@ -36,7 +37,7 @@ function UserRegister() {
             type="text"
             name="name"
             data-testid="signup-name"
-            onChange={() => validateNewUser(newUser, setNewUser, setEnableButton)}
+            onChange={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
           />
         </label>
         <label htmlFor="signup-email">
@@ -46,7 +47,7 @@ function UserRegister() {
             type="email"
             name="email"
             data-testid="signup-email"
-            onChange={() => validateNewUser(newUser, setNewUser, setEnableButton)}
+            onChange={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
           />
         </label>
         <label htmlFor="signup-password">
@@ -56,7 +57,7 @@ function UserRegister() {
             type="password"
             name="password"
             data-testid="signup-password"
-            onChange={() => validateNewUser(newUser, setNewUser, setEnableButton)}
+            onChange={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
           />
         </label>
         <label htmlFor="signup-seller">
@@ -64,7 +65,7 @@ function UserRegister() {
             type="checkbox"
             id="signup-seller"
             name="signup-seller"
-            onChange={() => validateNewUser(newUser, setNewUser, setEnableButton)}
+            onChange={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
             data-testid="signup-seller"
           />
               Quero vender
@@ -73,7 +74,7 @@ function UserRegister() {
           disabled={enableButton}
           type="button"
           data-testid="signup-btn"
-          onClick={(event) => handleButtonClick(event)}
+          onClick={ () => registerNewUSer(history, newUser) }
         >
           Cadastrar
         </button>
@@ -83,15 +84,3 @@ function UserRegister() {
 }
 
 export default UserRegister;
-
-/*
-data-testid="signup-name"
-4:09
-data-testid="signup-email"
-4:09
-data-testid="signup-password"
-4:09
-data-testid="signup-seller"
-4:09
-data-testid="signup-btn"
-*/

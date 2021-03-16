@@ -1,4 +1,5 @@
-import { validateUser } from './loginService.js';
+import { createNewUSer } from './api';
+import { redirectPath } from './loginService';
 
 export function validateNewUser(newUser, setNewUser, setEnableButton) {
   const name = document.getElementById('signup-name').value;
@@ -14,7 +15,7 @@ export function validateNewUser(newUser, setNewUser, setEnableButton) {
     password.length >= minPasswordLength &&
     emailPattern.test(email)
   ) {
-    console.log('Habilitou botão');
+
     setNewUser({
       ...newUser,
       name,
@@ -25,11 +26,14 @@ export function validateNewUser(newUser, setNewUser, setEnableButton) {
 
     return setEnableButton(false);
   }
+
   setEnableButton(true);
 }
 
-export async function checkUser(user) {
-  const retrievedUser = await validateUser(user);
-  if (retrievedUser) return true;
-  return false;
+export async function registerNewUSer(history, user) {
+  const createdUser = await createNewUSer(user);
+
+  if (createdUser === '200') {
+    await redirectPath(history, user);
+  }
 }

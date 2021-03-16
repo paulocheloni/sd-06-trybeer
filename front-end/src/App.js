@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import LoginProvider from './context/LoginProvider';
 import Login from './pages/Login';
 import Products from './pages/Products';
@@ -12,6 +12,9 @@ function App() {
     <LoginProvider>
       <BrowserRouter>
         <Switch>
+          <Route exact path="/">
+            <Redirect from="/" to="/login" />
+          </Route>
           <Route exact path="/login" component={ Login } />
           <Route exact path="/products" component={ Products } />
           <Route exact path="/admin/orders" component={ AdminOrders } />

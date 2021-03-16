@@ -1,4 +1,4 @@
-import api from './api';
+import { getUserByEmail } from './api';
 
 export const userValidation = (user, setUser, setEnableButton) => {
   const regexValidation = /\S+@\S+\.\S+/;
@@ -19,12 +19,6 @@ export const userValidation = (user, setUser, setEnableButton) => {
 
 export const handleUserNotRegistered = (history) => history.push('/register');
 
-export const validateUser = async (user) => {
-  const response = await api.post('login', user);
-  console.log('Retorno do validate user:', response.data);
-  return response.data;
-};
-
 export const routeByRole = (role, history) => {
   switch (role) {
   case 'administrator': history.push('/admin/orders');
@@ -37,6 +31,7 @@ export const routeByRole = (role, history) => {
 };
 
 export const redirectPath = async (history, user) => {
-  const { role } = await validateUser(user);
-  routeByRole(role, history);
+  const fetchedUser = await getUserByEmail(user);
+
+  routeByRole(fetchedUser.role, history);
 };
