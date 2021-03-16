@@ -5,7 +5,7 @@ const { OK } = require('../schema/statusSchema');
 const ProductsController = new Router();
 
 // Get All products
-ProductsController.get('/', async (req, res) => {
+ProductsController.get('/', ProductsService.verifyAuth ,async (req, res) => {
   const products = await ProductsService.getAll();
   res.status(OK).json(products);
 });
