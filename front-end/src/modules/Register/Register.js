@@ -1,11 +1,14 @@
-import React, { useContext, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 import Button from '../../design-components/Button';
 import RegisterInputs from './components/RegisterInputs';
 import ContextBeer from '../../context/ContextBeer';
 import registerValidation from '../../utils/registerValidation';
 
 function Register() {
+  const history = useHistory();
+  const [ duplicated, setDuplicated ] = useState('');
   const {
     registerName,
     registerEmail,
@@ -21,12 +24,29 @@ function Register() {
   function isChecked() {
     if (document.getElementById('wannasell').checked) {
       console.log('será admin');
+      return true;
     }
   }
 
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+
   const signUpOnClick = () => {
-    isChecked();
-    console.log('cadastro com sucesso!');
+    let whatSTheRole;
+    isChecked() ? whatSTheRole = 'administrator' : whatSTheRole = 'client';
+    const token = axios
+    .post(`${baseUrl}/register`, {name: registerName, email: registerEmail, password: registerPassword, role: whatSTheRole })
+    .then((response) => {
+      localStorage.setItem('user', JSON.stringify(response.data));
+      if (response.data.role === 'administrator') history.push('/admin/orders');
+      if (response.data.role === 'client') history.push('/products');
+    })
+    .catch((err) => {
+      console.log(err.response)
+      if (err.response.status === 409) {
+        setDuplicated(err.response.data.message);
+      }
+    });
+  return token;
   };
 
   return (
@@ -42,12 +62,14 @@ function Register() {
             onClick={ () => signUpOnClick() }
             isDisabled={ isDisabled }
             bgColor="green-600"
-            data-testid="signup-btn"
+            testId="signup-btn"
           >
             Cadastrar
           </Button>
+          {duplicated && <p className="my-10">{duplicated}</p>}
           <label htmlFor="wannasell">
             <input
+              className="mt-5"
               name="email"
               type="checkbox"
               data-testid="signup-seller"
