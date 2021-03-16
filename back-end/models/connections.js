@@ -7,6 +7,5 @@ const connection = mysql.createPool({
   host: process.env.HOSTNAME,
   database: 'Trybeer',
 });
-console.log('connection', process.env.MYSQL_PASSWORD);
 
 module.exports = connection;

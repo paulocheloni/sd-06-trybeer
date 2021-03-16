@@ -25,7 +25,8 @@ const userRegister = async (user) => {
 const findUserByEmail = async (email) => {
   try {
     const user = await connection
-      .execute('SELECT *  FROM users WHERE email=?', [email]);
+      .execute('SELECT *  FROM Trybeer.users WHERE email=?', [email]);
+    //  console.log('model', user);
     return user;
   } catch (e) {
     return e.message;
