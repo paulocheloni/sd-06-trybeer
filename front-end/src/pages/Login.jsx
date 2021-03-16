@@ -57,7 +57,7 @@ export default function Login() {
           data-testid="signin-btn"
           type="button"
         >
-          ENTRAR
+          Entrar
         </button>
         <Link to="/register" data-testid="no-account-btn">Ainda não tenho conta</Link>
       </form>

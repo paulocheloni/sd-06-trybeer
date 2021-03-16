@@ -15,7 +15,6 @@ export default function Register() {
 
   const handleCheckbox = (e) => {
     const checkBox = e.target;
-    // console.log(checkBox);
     if (checkBox.checked) setRole('administrator');
     else setRole('client');
   };
@@ -63,7 +62,7 @@ export default function Register() {
           <input
             id="password"
             data-testid="signup-password"
-            type="text"
+            type="password"
             value={ password }
             onChange={ setPassword }
           />
