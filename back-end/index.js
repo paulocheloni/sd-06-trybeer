@@ -3,9 +3,10 @@ require('dotenv').config();
 const cors = require('cors');
 
 const log = require('./middlewares/log');
+const { NOT_FOUND } = require('./schema/statusSchema');
 const UserController = require('./controller/UserController');
 const LoginController = require('./controller/LoginController');
-const { NOT_FOUND } = require('./schema/statusSchema');
+const ProductsController = require('./controller/ProductsController');
 
 const app = express();
 const PORT = parseInt(process.env.PORT, 10) || 3001;
@@ -16,6 +17,7 @@ app.use(log);
 
 app.use('/user', UserController);
 app.use('/login', LoginController);
+app.use('/products', ProductsController);
 
 app.all('*', (req, res) => res.status(NOT_FOUND).json({ message: 'Route not found' }));
 
