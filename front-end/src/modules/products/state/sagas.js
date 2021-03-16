@@ -1,5 +1,3 @@
-/* eslint comma-dangle: ["error", "never"] */
-
 import { takeLatest, fork, all } from 'redux-saga/effects';
 import ActionTypes from './types';
 import handleFetchProducts from './effects';
@@ -14,6 +12,6 @@ function* watchFetchRequest() {
 
 export default function* productsSaga() {
   yield all([
-    fork(watchFetchRequest)
+    fork(watchFetchRequest),
   ]);
 }

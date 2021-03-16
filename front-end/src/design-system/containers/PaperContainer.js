@@ -1,6 +1,7 @@
 import React from 'react';
+import proptypes from 'prop-types';
 
-const PaperContainer = (props: ReactChild) => {
+const PaperContainer = (props) => {
   const { children } = props;
   return (
     <div
@@ -13,6 +14,10 @@ const PaperContainer = (props: ReactChild) => {
       </div>
     </div>
   );
+};
+
+PaperContainer.propTypes = {
+  children: proptypes.node.isRequired,
 };
 
 export default PaperContainer;

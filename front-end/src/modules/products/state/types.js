@@ -1,5 +1,3 @@
-/* eslint comma-dangle: ["error", "never"] */
-
 const ActionTypes = {
   FETCH_PRODUCTS: 'FETCH_PRODUCTS',
   FETCH_PRODUCTS_SUCCESS: 'FETCH_PRODUCTS_SUCCESS',
@@ -8,7 +6,7 @@ const ActionTypes = {
   SET_LIMIT: 'SET_LIMIT_PRODUCTS',
   SET_SORT: 'SET_SORT_PRODUCTS',
   SET_ORDENATION: 'SET_ORDENATION_PRODUCTS',
-  SET_SEARCH_TEXT: 'SET_SEARCH_TEXT_PRODUCTS'
+  SET_SEARCH_TEXT: 'SET_SEARCH_TEXT_PRODUCTS',
 };
 
 export default ActionTypes;

@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-/* eslint comma-dangle: ["error", "never"] */
-
 const Gallery = () => {
   const products = useSelector((state) => state.products.data.rows);
   const loading = useSelector((state) => state.products.loading);

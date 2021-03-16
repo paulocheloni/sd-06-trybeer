@@ -25,9 +25,11 @@ function* rootSaga() {
 const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware();
   const middleware = applyMiddleware(sagaMiddleware);
-  /* eslint-disable no-underscore-dangle */
+
+  const includeReduxDevTools = '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__';
+
   const composeEnhancers = process.env.NODE_ENV === 'development'
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null;
+    ? window[includeReduxDevTools] : null;
 
   const store = createStore(
     rootReducer,

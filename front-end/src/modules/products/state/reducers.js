@@ -1,5 +1,3 @@
-/* eslint comma-dangle: ["error", "never"] */
-
 import ActionTypes from './types';
 
 const initialState = {
@@ -7,19 +5,19 @@ const initialState = {
   error: '',
   data: {
     rows: [],
-    count: ''
+    count: '',
   },
   page: 1,
   limit: 12,
   sort: 'name',
   sortAsc: true,
-  searchText: ''
+  searchText: '',
 };
 
 const fetchProducts = (state) => (
   {
     ...state,
-    loading: true
+    loading: true,
   }
 );
 
@@ -29,7 +27,7 @@ const fetchProductsSuccess = (state, action) => {
   return ({
     ...state,
     loading: false,
-    data
+    data,
   });
 };
 
@@ -39,7 +37,7 @@ const fetchProductsError = (state, action) => {
   return ({
     ...state,
     loading: false,
-    error
+    error,
   });
 };
 
@@ -47,7 +45,7 @@ const setPage = (state, action) => {
   const { page } = action.payload;
   return ({
     ...state,
-    page
+    page,
   });
 };
 
@@ -57,7 +55,7 @@ const setLimit = (state, action) => {
     ...state,
     limit,
     loading: true,
-    page: 1
+    page: 1,
   });
 };
 
@@ -67,7 +65,7 @@ const setSort = (state, action) => {
     ...state,
     sort,
     sortAsc,
-    loading: true
+    loading: true,
   });
 };
 
@@ -77,7 +75,7 @@ const setSearchText = (state, action) => {
     ...state,
     searchText,
     loading: true,
-    page: 1
+    page: 1,
   });
 };
 

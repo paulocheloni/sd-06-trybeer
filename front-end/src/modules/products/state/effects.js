@@ -1,5 +1,3 @@
-/* eslint comma-dangle: ["error", "never"] */
-
 import { put, select } from 'redux-saga/effects';
 import * as actions from './actions';
 import API from '../../../axios';

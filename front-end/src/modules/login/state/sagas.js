@@ -1,5 +1,3 @@
-/* eslint comma-dangle: ["error", "never"] */
-
 import { takeLatest, fork, all } from 'redux-saga/effects';
 import ActionTypes from './types';
 import { handlePostLogin, handlePostRegister } from './effects';
@@ -11,6 +9,6 @@ function* watchPostRequest() {
 
 export default function* loginSaga() {
   yield all([
-    fork(watchPostRequest)
+    fork(watchPostRequest),
   ]);
 }

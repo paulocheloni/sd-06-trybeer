@@ -3,8 +3,6 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as actions from '../state/actions';
 
-/* eslint comma-dangle: ["error", "never"] */
-
 const Form = () => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [seePassword, setSeePassword] = useState(false);
@@ -18,14 +16,14 @@ const Form = () => {
 
     setForm((prevForm) => ({
       ...prevForm,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const dispatch = useDispatch();
 
   const login = useCallback(
-    ({ email, password }) => dispatch(actions.postLogin({ email, password })), [dispatch]
+    ({ email, password }) => dispatch(actions.postLogin({ email, password })), [dispatch],
   );
 
   const handleSubmit = (event) => {
@@ -40,34 +38,30 @@ const Form = () => {
     >
       <div className="flex flex-col space-y-4">
         <div className="flex flex-col space-y-2">
-          <label htmlFor="email-ipt">
-            { /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            Email*
+          <label htmlFor="email-ipt" className="flex flex-col space-y-2">
+            <p>Email*</p>
+            <input
+              id="email-ipt"
+              type="text"
+              name="email"
+              data-testid="email-input"
+              value={ form.email }
+              onChange={ (target) => handleChange(target) }
+              className="border rounded-md p-2 focus:outline-none
+              focus:border-secondary-dark"
+              pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+              placeholder="Enter your email..."
+              required
+              onInvalid={ () => setEmailIsValid(false) }
+              onKeyUp={ () => setEmailIsValid(true) }
+            />
           </label>
-          <input
-            id="email-ipt"
-            type="text"
-            name="email"
-            data-testid="email-input"
-            value={ form.email }
-            onChange={ (target) => handleChange(target) }
-            className="border rounded-md p-2 focus:outline-none
-            focus:border-secondary-dark"
-            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-            placeholder="Enter your email..."
-            required
-            onInvalid={ () => setEmailIsValid(false) }
-            onKeyUp={ () => setEmailIsValid(true) }
-          />
           <p className={ !emailIsValid ? 'text-xs text-red-500' : 'hidden' }>
             Email should be like name@domain.com
           </p>
         </div>
-        <div className="flex flex-col space-y-2">
-          <label htmlFor="password-ipt">
-            { /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            Secret*
-          </label>
+        <label htmlFor="password-ipt" className="flex flex-col space-y-2">
+          <p>Secret*</p>
           <div className="flex space-x-2 items-center">
             <input
               id="password-ipt"
@@ -91,35 +85,35 @@ const Form = () => {
               Icone
             </button>
           </div>
-          <ul className={ !passwordIsValid ? 'text-xs text-red-500' : 'hidden' }>
-            <li
-              className={ /[A-Za-z\d@$!%*?&]{8,}/.test(form.password)
-                ? validColor : '' }
-            >
-              Minimun of 8 characters
-            </li>
-            <li
-              className={ /(?=.*[A-Z])/.test(form.password) ? validColor : '' }
-            >
-              At least 1 uppercase letter
-            </li>
-            <li
-              className={ /(?=.*[a-z])/.test(form.password) ? validColor : '' }
-            >
-              At least 1 lowercase letter
-            </li>
-            <li
-              className={ /(?=.*\d)/.test(form.password) ? validColor : '' }
-            >
-              At least 1 number
-            </li>
-            <li
-              className={ /(?=.*[@$!%*?&])/.test(form.password) ? validColor : '' }
-            >
-              At least 1 special character
-            </li>
-          </ul>
-        </div>
+        </label>
+        <ul className={ !passwordIsValid ? 'text-xs text-red-500' : 'hidden' }>
+          <li
+            className={ /[A-Za-z\d@$!%*?&]{8,}/.test(form.password)
+              ? validColor : '' }
+          >
+            Minimun of 8 characters
+          </li>
+          <li
+            className={ /(?=.*[A-Z])/.test(form.password) ? validColor : '' }
+          >
+            At least 1 uppercase letter
+          </li>
+          <li
+            className={ /(?=.*[a-z])/.test(form.password) ? validColor : '' }
+          >
+            At least 1 lowercase letter
+          </li>
+          <li
+            className={ /(?=.*\d)/.test(form.password) ? validColor : '' }
+          >
+            At least 1 number
+          </li>
+          <li
+            className={ /(?=.*[@$!%*?&])/.test(form.password) ? validColor : '' }
+          >
+            At least 1 special character
+          </li>
+        </ul>
       </div>
       <div className="w-full mt-10 flex flex-col space-y-2">
         <input

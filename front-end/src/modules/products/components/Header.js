@@ -2,9 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../state/actions';
 
-/* eslint-disable-next-line react-hooks/exhaustive-deps */
-/* eslint comma-dangle: ["error", "never"] */
-
 const Header = () => {
   const useDebounce = (value, delay) => {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -19,7 +16,7 @@ const Header = () => {
           clearTimeout(handler);
         };
       },
-      [value, delay]
+      [value, delay],
     );
 
     return debouncedValue;
@@ -39,25 +36,25 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const setSearchText = useCallback(
-    (search) => dispatch(actions.setSearchText(search)), [dispatch]
+    (search) => dispatch(actions.setSearchText(search)), [dispatch],
   );
 
   const setSort = useCallback(
     (sortInput, sortAscInput) => dispatch(actions
-      .setSort({ sort: sortInput, sortAsc: sortAscInput })), [dispatch]
+      .setSort({ sort: sortInput, sortAsc: sortAscInput })), [dispatch],
   );
 
   useEffect(() => {
     setText(searchText);
     setOrderByOption(sort);
     setOrdenationOption(sortAsc);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [searchText, sort, sortAsc]);
 
   useEffect(() => {
     if (text !== undefined) {
       setSearchText(text);
     }
-  }, [debounceValue]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [debounceValue, setSearchText, text]);
 
   const handleOrderByOption = ({ target }) => {
     if (target.id === 'orderby-ipt') {
@@ -81,11 +78,8 @@ const Header = () => {
           className="border rounded-md p-2 focus:outline-none
           focus:border-secondary-dark"
         />
-        <div className="flex items-center space-x-2">
-          <label htmlFor="orderby-ipt">
-            { /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            Order By:
-          </label>
+        <label htmlFor="orderby-ipt" className="flex items-center space-x-2">
+          <p>Order By:</p>
           <select
             id="orderby-ipt"
             value={ orderByOption }
@@ -96,7 +90,7 @@ const Header = () => {
             <option value="name">Name</option>
             <option value="price">Price</option>
           </select>
-        </div>
+        </label>
         <select
           id="ordenation-ipt"
           value={ ordenationOption }

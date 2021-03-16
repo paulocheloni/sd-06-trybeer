@@ -1,5 +1,3 @@
-/* eslint comma-dangle: ["error", "never"] */
-
 import ActionTypes from './types';
 
 const initialState = {
@@ -9,14 +7,14 @@ const initialState = {
     token: '',
     role: '',
     name: '',
-    id: ''
-  }
+    id: '',
+  },
 };
 
 const postLogin = (state) => (
   {
     ...state,
-    loading: true
+    loading: true,
   }
 );
 
@@ -26,7 +24,7 @@ const postLoginSuccess = (state, action) => {
   return ({
     ...state,
     loading: false,
-    data
+    data,
   });
 };
 
@@ -36,14 +34,14 @@ const postLoginError = (state, action) => {
   return ({
     ...state,
     loading: false,
-    error
+    error,
   });
 };
 
 const postRegister = (state) => (
   {
     ...state,
-    loading: true
+    loading: true,
   }
 );
 
@@ -53,7 +51,7 @@ const postRegisterSuccess = (state, action) => {
   return ({
     ...state,
     data,
-    loading: false
+    loading: false,
   });
 };
 
@@ -62,7 +60,7 @@ const postRegisterError = (state, action) => {
   return ({
     ...state,
     error,
-    loading: false
+    loading: false,
   });
 };
 

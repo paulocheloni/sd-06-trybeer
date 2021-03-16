@@ -1,5 +1,3 @@
-/* eslint comma-dangle: ["error", "never"] */
-
 import { put } from 'redux-saga/effects';
 import { createBrowserHistory } from 'history';
 import * as actions from './actions';
