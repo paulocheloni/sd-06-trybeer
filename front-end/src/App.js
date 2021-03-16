@@ -6,7 +6,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import {
   Login,
-  // Register,
+  Register,
   Products,
   AdminOrdersDetail,
   AdminProfile,
@@ -16,9 +16,6 @@ import {
   ClientProfile,
   ClientOrders,
 } from './pages';
-
-import Register from './pages/Register/Register';
-
 
 function App() {
   return (
