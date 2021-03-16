@@ -29,8 +29,7 @@ export function validateNewUser(newUser, setNewUser, setEnableButton) {
 }
 
 export async function checkUser(user) {
-  console.log('Usuário para cadastrar:', user);
-  console.log('Email do user pra cadastrar',user.email);
   const retrievedUser = await validateUser(user);
-  console.log('Buscado por email:', retrievedUser);
+  if (retrievedUser) return true;
+  return false;
 }

@@ -8,13 +8,23 @@ import redirectPath from '../services/loginService';
 function UserRegister() {
   const { newUser, setNewUser } = useContext(TrybeerContext);
   const [enableButton, setEnableButton] = useState(true);
+  const [userAlreadyRegistered, setUserAlreadyRegistered] = useState(false);
 
+  async function checkExistingUser(user) {
+    const userExists = await checkUser(newUser);
+    console.log('Usuário existe:', userExists);
+    if (userExists) {
+      setUserAlreadyRegistered(true);
+      return null;
+    }
+  }
   async function handleButtonClick(event) {
     event.preventDefault();
     console.log('Clicou no botão');
     console.log('Novo usuário', newUser);
-    const userExists = await checkUser(newUser);
-    console.log('Usuário existe:', userExists);
+    if (checkExistingUser(newUser)) return true;
+    console.log('Não deve aparecer se usario existe');
+    // setup de salvar usuário (rota, controller, etc)
   }
   return (
     <div>
