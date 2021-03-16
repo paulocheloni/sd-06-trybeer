@@ -6,47 +6,55 @@ import RegisterInputs from './components/RegisterInputs';
 import ContextBeer from '../../context/ContextBeer';
 import registerValidation from '../../utils/registerValidation';
 
+const STATUS_CONFLICT = 409;
+
 function Register() {
   const history = useHistory();
-  const [ duplicated, setDuplicated ] = useState('');
+  const [duplicated, setDuplicated] = useState('');
+  const [whatSTheRole, setWhatSTheRole] = useState('client');
+  const [isChecked, setIsChecked] = useState(false);
   const {
     registerName,
     registerEmail,
     registerPassword,
-    isDisabled,
-    setIsDisabled,
+    registerIsDisabled,
+    setregisterIsDisabled,
   } = useContext(ContextBeer);
 
   useEffect(() => {
-    registerValidation(registerName, registerEmail, registerPassword, setIsDisabled);
-  }, [registerName, registerEmail, registerPassword, setIsDisabled]);
+    registerValidation(
+      registerName, registerEmail, registerPassword, setregisterIsDisabled,
+    );
+  }, [registerName, registerEmail, registerPassword, setregisterIsDisabled]);
 
-  function isChecked() {
-    if (document.getElementById('wannasell').checked) {
-      console.log('será admin');
-      return true;
-    }
-  }
+  // const isChecked = () => {
+  //   if (document.getElementById('wannasell').checked) return true;
+  // };
 
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
   const signUpOnClick = () => {
-    let whatSTheRole;
-    isChecked() ? whatSTheRole = 'administrator' : whatSTheRole = 'client';
-    const token = axios
-    .post(`${baseUrl}/register`, {name: registerName, email: registerEmail, password: registerPassword, role: whatSTheRole })
-    .then((response) => {
-      localStorage.setItem('user', JSON.stringify(response.data));
-      if (response.data.role === 'administrator') history.push('/admin/orders');
-      if (response.data.role === 'client') history.push('/products');
-    })
-    .catch((err) => {
-      console.log(err.response)
-      if (err.response.status === 409) {
-        setDuplicated(err.response.data.message);
-      }
-    });
-  return token;
+    if (isChecked) {
+      setWhatSTheRole('administrator');
+    }
+    axios
+      .post(`${baseUrl}/register`, {
+        name: registerName,
+        email: registerEmail,
+        password: registerPassword,
+        role: whatSTheRole,
+      })
+      .then((response) => {
+        localStorage.setItem('user', JSON.stringify(response.data));
+        if (response.data.role === 'administrator') history.push('/admin/orders');
+        if (response.data.role === 'client') history.push('/products');
+      })
+      .catch((err) => {
+        console.log(err.response);
+        if (err.response.status === STATUS_CONFLICT) {
+          setDuplicated(err.response.data.message);
+        }
+      });
   };
 
   return (
@@ -60,7 +68,7 @@ function Register() {
           <RegisterInputs />
           <Button
             onClick={ () => signUpOnClick() }
-            isDisabled={ isDisabled }
+            isDisabled={ registerIsDisabled }
             bgColor="green-600"
             testId="signup-btn"
           >
@@ -76,6 +84,8 @@ function Register() {
               id="wannasell"
               label="Quero vender"
               value="wannasell"
+              checked={ isChecked }
+              onChange={ () => setIsChecked(!isChecked) }
             />
             Quero vender
           </label>

@@ -9,6 +9,7 @@ function Provider({ children }) {
   const [registerName, setRegisterName] = useState('');
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
+  const [registerIsDisabled, setregisterIsDisabled] = useState('');
 
   const contextData = {
     loginEmail,
@@ -23,6 +24,8 @@ function Provider({ children }) {
     setRegisterEmail,
     registerPassword,
     setRegisterPassword,
+    registerIsDisabled,
+    setregisterIsDisabled,
 
   };
 
