@@ -40,7 +40,6 @@ export default function Login() {
     localStorage.setItem('token', JSON.stringify(response.token));
     localStorage.setItem('user', JSON.stringify(response.user));
     if (response.user.role === 'client') {
-      console.log('client')
       history.push('/products');
     } else {
       history.push('/admin/orders');
