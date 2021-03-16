@@ -4,7 +4,6 @@ import TrybeerContext from '../context/TrybeerContext';
 
 const ProductCard = ({ index, name, price, url_image: urlImage }) => {
   const [quantity, setQuantity] = useState(0);
-  // const [disabledButton, setDisabledButton] = useState(false);
   const { cart, setCart } = useContext(TrybeerContext);
 
   const formatedPrice = price.replace('.', ',');
@@ -37,32 +36,6 @@ const ProductCard = ({ index, name, price, url_image: urlImage }) => {
       }
     }
   }
-
-
-    // console.log(localCart);
-    // if (localCart) {
-    //   if (param === 'plus') {
-    //     const oldValue = parseFloat(localCart);
-    //     const newValue = oldValue + value;
-    //     localStorage.setItem('userCart', JSON.stringify(newValue));
-    //     setQuantity(() => parseInt(quantity + 1));
-    //     // setCart(() => parseFloat(cart + floatedPrice));
-  
-    //   } else {
-    //     if (quantity !== 0) {
-    //       const oldValue = parseFloat(localCart);
-    //       const newValue = oldValue - value;
-    //       localStorage.setItem('userCart', JSON.stringify(newValue));
-    //       setQuantity(() => parseInt(quantity - 1));
-    //       // setCart(() => parseFloat(cart - floatedPrice));
-    //     }
-    //   }
-    // }
-
-  // useEffect(() => {
-  //   // if (quantity !== '') setDisabledButton(false);
-  //   if (quantity === 0) setDisabledButton(true);
-  // }, [quantity]);
 
   return (
     <div className="product-card">

@@ -6,10 +6,6 @@ const Cart = () => {
   const { cart } = useContext(TrybeerContext);
   const history = useHistory();
 
-  
-  // const formatedPrice = JSON.stringify(`R$ ${cart.toFixed(2)}`).replace('.', ',');
-  // const preco = JSON.parse(localStorage.getItem('userCart')).toFixed(2);
-  // let prod;
   const preco = () => {
     const prod = JSON.parse(localStorage.getItem('userCart'));
     if (prod) {
