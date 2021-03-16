@@ -50,7 +50,7 @@ const form = (params) => {
         label="Nome"
         dataTestid="signup-name"
         onChange={ ({ target }) => setName(target.value) }
-        themeStorage={ theme.title }
+        themeStorage={ theme && theme.title }
       />
       {(emailAlreadyExists) ? <p>E-mail already in database.</p> : null}
       <Input
@@ -58,14 +58,14 @@ const form = (params) => {
         label="Email"
         dataTestid="signup-email"
         onChange={ ({ target }) => setEmail(target.value) }
-        themeStorage={ theme.title }
+        themeStorage={ theme && theme.title }
       />
       <Input
         id="password-input"
         label="Senha"
         dataTestid="signup-password"
         onChange={ ({ target }) => setPassword(target.value) }
-        themeStorage={ theme.title }
+        themeStorage={ theme && theme.title }
       />
       <label
         htmlFor="check"

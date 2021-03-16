@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { useHistory } from 'react-router-dom';
+import { FiMail, FiLock } from 'react-icons/fi';
 import { loginUser } from '../../Services/Apis';
 
 import Container from './styles';
@@ -37,14 +38,16 @@ const form = (params) => {
         label="Email"
         dataTestid="email-input"
         onChange={ ({ target }) => setEmail(target.value) }
-        themeStorage={ theme.title }
+        themeStorage={ theme && theme.title }
+        icon={ FiMail }
       />
       <Input
         id="senha"
         label="Senha"
         dataTestid="password-input"
         onChange={ ({ target }) => setPassword(target.value) }
-        themeStorage={ theme.title }
+        themeStorage={ theme && theme.title }
+        icon={ FiLock }
       />
       <Button
         type="submit"
