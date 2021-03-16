@@ -6,18 +6,19 @@ const Cart = () => {
   const { cart } = useContext(TrybeerContext);
   const history = useHistory();
 
-  const preco = () => {
-    const prod = JSON.parse(localStorage.getItem('userCart'));
-    if (prod) {
-      return JSON.stringify(`R$ ${prod}`).replace('.', ',');
+  const totalCart = () => {
+    const localStorageCart = JSON.parse(localStorage.getItem('cart'));
+    if (localStorageCart) {
+      const parsedCart = parseFloat(localStorageCart).toFixed(2);
+      return JSON.stringify(`R$ ${parsedCart}`).replace('.', ',');
     }
     return null;
   };
 
-  const disabledButton = preco() === null || preco() === 0;
+  const disabledButton = totalCart() === null || totalCart() === 0;
 
   useEffect(() => {
-    preco();
+    totalCart();
   }, [cart]);
 
   return (
@@ -31,7 +32,7 @@ const Cart = () => {
         Ver Carrinho
       </button>
       <p data-testid="checkout-bottom-btn-value">
-        { preco() ? preco() : 'R$ 0,00' }
+        { totalCart() ? totalCart() : 'R$ 0,00' }
       </p>
     </div>
   );

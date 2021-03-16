@@ -10,26 +10,26 @@ const ProductCard = ({ index, name, price, url_image: urlImage }) => {
 
   const handleClick = (param, value) => {
     const floatedPrice = parseFloat(value);
-    const localCart = JSON.parse(localStorage.getItem('userCart'));
+    const localCart = JSON.parse(localStorage.getItem('cart'));
 
     if (param === 'plus') {
       setQuantity(() => parseInt((quantity + 1), 10));
       if (localCart) {
         const newValue = parseFloat(localCart) + floatedPrice;
-        localStorage.setItem('userCart', JSON.stringify(newValue));
+        localStorage.setItem('cart', JSON.stringify(newValue));
         setCart(newValue);
       } else {
-        localStorage.setItem('userCart', JSON.stringify(value));
+        localStorage.setItem('cart', JSON.stringify(value));
         setCart(value);
       }
     } else if (quantity !== 0) {
       setQuantity(() => parseInt((quantity - 1), 10));
       if (localCart) {
         const newValue = parseFloat(localCart) - floatedPrice;
-        localStorage.setItem('userCart', JSON.stringify(newValue));
+        localStorage.setItem('cart', JSON.stringify(newValue));
         setCart(newValue);
       } else {
-        localStorage.setItem('userCart', JSON.stringify(value));
+        localStorage.setItem('cart', JSON.stringify(value));
         setCart(value);
       }
     }
