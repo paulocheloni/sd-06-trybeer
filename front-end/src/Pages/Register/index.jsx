@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
+import { BiUser } from 'react-icons/bi';
+import { FiMail, FiLock } from 'react-icons/fi';
+
 import { registerNewUser } from '../../Services/Apis';
 
 import Container from './styles';
@@ -51,6 +54,7 @@ const form = (params) => {
         dataTestid="signup-name"
         onChange={ ({ target }) => setName(target.value) }
         themeStorage={ theme && theme.title }
+        icon={ BiUser }
       />
       {(emailAlreadyExists) ? <p>E-mail already in database.</p> : null}
       <Input
@@ -59,6 +63,7 @@ const form = (params) => {
         dataTestid="signup-email"
         onChange={ ({ target }) => setEmail(target.value) }
         themeStorage={ theme && theme.title }
+        icon={ FiMail }
       />
       <Input
         id="password-input"
@@ -66,6 +71,7 @@ const form = (params) => {
         dataTestid="signup-password"
         onChange={ ({ target }) => setPassword(target.value) }
         themeStorage={ theme && theme.title }
+        icon={ FiLock }
       />
       <label
         htmlFor="check"

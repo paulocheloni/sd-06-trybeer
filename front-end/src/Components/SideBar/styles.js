@@ -31,7 +31,7 @@ const CompSideBar = styled.div`
     padding-top: 100px;
 
     border-right: 3px solid ${theme.colors.green};
-    background: ${theme.colors.secondary};
+    background: ${theme.colors.secondary}cc;
 
     display: flex;
     flex-direction: column;
@@ -53,18 +53,26 @@ const Navigation = styled.a`
   ${({ theme }) => css`
     width: 100%;
 
-    padding: 10px 0;
+    padding: 10px 60px;
 
     display: flex;
-    justify-content: center;
+    align-items: center;
 
     margin-bottom: 20px;
     text-decoration: none;
 
     color: ${theme.colors.text};
 
-    border-top: 1px solid ${theme.colors.border};
-    border-bottom: 1px solid ${theme.colors.text};
+    font-size: 20px;
+    font-weight: 500;
+
+    .icon {
+      margin-right: 15px;
+    }
+
+    /* background: #DAE8C3; */
+    /* border-top: 1px solid ${theme.colors.border};
+    border-bottom: 1px solid ${theme.colors.text}; */
 
     transition: background  0.3s;
 

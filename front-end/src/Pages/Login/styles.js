@@ -44,11 +44,11 @@ const Container = styled.div`
 
       @media (max-width: 500px) {
         border: none;
+        border-radius: 0;
+
+        background: ${theme.colors.secondaryMobile};
 
         width: 100%;
-        height: 100%;
-
-        padding: 2rem;
       }
     }
   `}

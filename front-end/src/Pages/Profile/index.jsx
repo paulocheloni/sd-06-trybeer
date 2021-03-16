@@ -55,7 +55,7 @@ const form = ([
         label="Nome"
         dataTestid="profile-name-input"
         onChange={ ({ target }) => setNameState(target.value) }
-        themeStorage={ theme.title }
+        themeStorage={ theme && theme.title }
       />
       <Input
         id="email-input"
@@ -63,7 +63,7 @@ const form = ([
         label="Email"
         dataTestid="profile-email-input"
         readOnly
-        themeStorage={ theme.title }
+        themeStorage={ theme && theme.title }
       />
 
       {button(isDisabled)}

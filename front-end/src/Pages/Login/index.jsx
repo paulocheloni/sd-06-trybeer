@@ -9,6 +9,7 @@ import Container from './styles';
 import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 import LoadingBeer from '../../Components/LoadingBeer';
+import LogoTryBeer from '../../Components/LogoTryBeer';
 
 const saveLocalStorage = (res) => {
   localStorage.setItem('user', JSON.stringify(res));
@@ -77,7 +78,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const history = useHistory();
 
@@ -106,6 +107,7 @@ const Login = () => {
         <LoadingBeer />
       ) : (
         <Container>
+          <LogoTryBeer />
           {form(params)}
         </Container>
       )}
