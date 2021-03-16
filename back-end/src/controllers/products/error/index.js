@@ -1,7 +1,7 @@
 const productsError = {
   statusCode: 500,
   customCode: 'ERROR_SERVER',
-  customMessage: 'Error in server. Please, contact support.',
+  customMessage: 'Server error. Please, contact support or try again later.',
 };
 
 module.exports = {
