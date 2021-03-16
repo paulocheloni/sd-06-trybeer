@@ -17,4 +17,9 @@ const post = async (endpoint, user) => fetch(`${urlBase}/${endpoint}`,
   .then((e) => e.json())
   .catch((e) => console.log(e.message));
 
-module.exports = { get, post };
+const put = async (endpoint, user) => fetch(`${urlBase}/${endpoint}`,
+  options('PUT', user))
+  .then((e) => console.log(user))
+  .catch((e) => console.log(e.message));
+
+module.exports = { get, post, put };

@@ -8,8 +8,11 @@ const getAll = async () => userModel.getAll();
 
 const findByEmail = async (email) => userModel.findByEmail(email);
 
+const changeName = async (name, email) => userModel.update(name, email);
+
 module.exports = {
   createUserService,
   getAll,
   findByEmail,
+  changeName,
 };
