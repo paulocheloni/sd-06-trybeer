@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
 
-const secret = 'senhaSuperSecreta.com';
 const jwtConfig = {
   expiresIn: '7d',
   algorithm: 'HS256',
@@ -22,7 +21,7 @@ LoginController.post('/', async (req, res) => {
     const { email, password } = req.body;
     const user = await userService.verifyUser(email, password);
     const { role } = user[0];
-    const token = jwt.sign({ data: user }, secret, jwtConfig);
+    const token = jwt.sign({ data: user }, process.env.SECRET, jwtConfig);
 
     res.status(OK).json({ token, role });
   } catch (e) {
