@@ -23,7 +23,6 @@ const RegisterService = async (req, res, _next) => {
     const data = { ...payload, token };
     res.status(STATUS_OK).json(data);
   } catch (error) {
-    console.log(error);
     return res.status(STATUS_INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });
   }
 };
