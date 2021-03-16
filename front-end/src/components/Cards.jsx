@@ -1,19 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import api from '../services/api'
 
-function Cards() {
+export default function Cards() {
+  const [ products, setProducts ] = useState([]);
+
+  const featchApiProduct = async() => {
+    const allProducts = await api.fetchProducts();
+    setProducts(allProducts);
+  }
+
+  useEffect(() => {
+    featchApiProduct();
+  }, []);
+
   return (
     <div>
-      <table>
-      tr uma tabela com os Produtos
-        td os produtos em cards
-          foto
-          nome
-          preço
-          quant atual no carrinho
-          botao de   + e -
-      </table>
+      {products.map((product) => (
+        <div>{product.name}</div>
+      ))}
     </div>
   )
 }
-
-export default Cards;
