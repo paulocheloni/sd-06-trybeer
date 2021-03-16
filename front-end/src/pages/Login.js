@@ -70,7 +70,7 @@ function Login() {
     <div>
       <LoginForm setEmail={ setEmail } setPassword={ setPassword } />
       <Button
-        title="ENTRAR"
+        title="Entrar"
         dataTestid="signin-btn"
         handleClick={ handleClick }
         btnDisable={ btnDisable }

@@ -5,6 +5,11 @@ import Button from './Button';
 function SideBar() {
   const history = useHistory();
 
+  const handleClickSair = () => {
+    localStorage.removeItem('user');
+    history.push('/login');
+  };
+
   return (
     <div className="side-menu-container">
       <Button
@@ -28,7 +33,7 @@ function SideBar() {
       <Button
         title="Sair"
         dataTestid="side-menu-item-logout"
-        handleClick={ () => history.push('/login') }
+        handleClick={ handleClickSair }
         btnDisable={ false }
       />
     </div>
