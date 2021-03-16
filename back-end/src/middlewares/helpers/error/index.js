@@ -49,4 +49,9 @@ module.exports = {
     customCode: 'C_ERR_EMAIL_UNAVAIBLE',
     customMessage: 'This email is already in use.',
   },
+  C_ERR_NO_TOKEN: {
+    statusCode: 401,
+    customCode: 'C_ERR_NO_TOKEN',
+    customMessage: 'Authentication token is missing.',
+  },
 };
