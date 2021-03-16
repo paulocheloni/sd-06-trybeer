@@ -6,13 +6,7 @@ export default function Products() {
     <div>
       <MenuTop title="TryBeer" />
       <Cards />
-    tr uma tabela com os Produtos
-        td os produtos em cards
-          foto
-          nome
-          preço
-          quant atual no carrinho
-          botao de   + e -
+    
 
     </div>
   );
