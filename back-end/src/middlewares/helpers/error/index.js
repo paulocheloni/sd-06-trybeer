@@ -29,6 +29,26 @@ module.exports = {
     customCode: 'C_ERR_EMAIL_REQ',
     customMessage: 'Email field is required.',
   },
+  C_ERR_NAME_REQ: {
+    statusCode: 400,
+    customCode: 'C_ERR_NAME_REQ',
+    customMessage: 'Name field is required.',
+  },
+  C_ERR_NAME_INVALID: {
+    statusCode: 400,
+    customCode: 'C_ERR_NAME_INVALID',
+    customMessage: 'Name must be at least 12 characters in a valid format. Example: Gabi Dal Silv',
+  },
+  C_ERR_ISVENDOR_INVALID: {
+    statusCode: 400,
+    customCode: 'C_ERR_ISVENDOR_INVALID',
+    customMessage: 'isValid field must be a boolean.',
+  },
+  C_ERR_EMAIL_UNAVAIBLE: {
+    statusCode: 400,
+    customCode: 'C_ERR_EMAIL_UNAVAIBLE',
+    customMessage: 'This email is already in use.',
+  },
   C_ERR_NO_TOKEN: {
     statusCode: 401,
     customCode: 'C_ERR_NO_TOKEN',
