@@ -6,6 +6,17 @@ import isLogged from '../components/isLogged';
 import MenuTop from '../components/menuTop';
 import './Products.css';
 
+const currencyFormat = (num) => num
+  .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+const itemQty = (prod) => {
+  const items = JSON.parse(localStorage.getItem('items'));
+  if (items) {
+    const qty = items.filter((e) => e.id === prod.id);
+    return qty.length;
+  }
+  return 0;
+};
+
 function Products() {
   const [allProducts, setAllProducts] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
@@ -41,6 +52,13 @@ function Products() {
       <section className="cards-container">
         {renderCards(allProducts, asd, setAsd, itemQty)}
         <Link to="/cart" className="cart-link" data-testid="checkout-bottom-btn">
+  if (isLogged()) return <Redirect to="/login" />;
+  return (
+    <>
+      <h1 style={ { marginLeft: '40px' } }>Products</h1>
+      <section className="cards-container">
+        {renderCards(allProducts, asd, setAsd, itemQty)}
+        <Link to="/checkout" className="cart-link">
           <button
             type="button"
             className="cart-btn"
@@ -50,6 +68,13 @@ function Products() {
             Ver Carrinho
             {' '}
             {cartTotal.toFixed(2).toLocaleString()}
+            data-testid="checkout-bottom-btn"
+          >
+            <p data-testid="checkout-bottom-btn-value">
+              Ver Carrinho
+              {' '}
+              {currencyFormat(cartTotal)}
+            </p>
           </button>
         </Link>
       </section>

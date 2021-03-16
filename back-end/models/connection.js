@@ -10,4 +10,4 @@ const config = {
 // console.log('user:', config.user, 'pw:', config.password, 'host', config.host);
 const connection = mysql.createPool(config);
 
-module.exports = connection;
+module.exports = connection; 
