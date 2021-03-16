@@ -6,6 +6,13 @@ const getAll = async (table) => {
   return results;
 };
 
+const getByFilter = async (table, column, value) => {
+  const QUERY = 'SELECT * FROM ?? WHERE ?? = ?';
+  const [results] = await connection.query(QUERY, [table, column, value]);
+  return results;
+};
+
 module.exports = {
   getAll,
+  getByFilter,
 };

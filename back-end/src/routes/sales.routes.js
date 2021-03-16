@@ -1,9 +1,9 @@
 const express = require('express');
 
-// const controllers = require('../controllers/products');
+const controllers = require('../controllers/sales');
 
 const sales = express.Router();
 
-// products.get('/', controllers.products);
+sales.get('/:id', controllers.sales);
 
 module.exports = sales;
