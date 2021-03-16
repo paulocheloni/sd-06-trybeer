@@ -5,10 +5,12 @@ const { auth } = require('../middleware');
 
 const LoginRouter = Router();
 
-LoginRouter.get('/', 
-  LoginController.userRole);
 LoginRouter.post('/',
   auth,
   LoginController.generateToken);
+
+LoginRouter.post('/role',
+  auth,
+  LoginController.isUserAdmin);
 
 module.exports = LoginRouter;

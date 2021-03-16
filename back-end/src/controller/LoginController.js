@@ -1,5 +1,4 @@
 const rescue = require('express-rescue');
-const { UserModel } = require('../model');
 
 const { LoginService } = require('../service');
 
@@ -7,23 +6,21 @@ const generateToken = rescue(async (req, res) => {
   const { email } = req.body;
 
   const token = await LoginService.generateToken(email);
-  const [user] = await UserModel.getUserByEmail(email);
-  
-  const { role } = user;
 
-  return res.status(200).json({ token, role });
+  return res.status(200).json({ token });
 });
 
-const userRole = rescue(async (req, res) => {
+const isUserAdmin = rescue(async (req, res) => {
   const { email } = req.body;
 
-  const [user] = await LoginService.userRole(email);
+  const [role] = await LoginService.isUserAdmin(email);
 
-
-  return res.status(200).json(user);
+  return res
+    .status(200)
+    .json(role);
 });
 
 module.exports = {
   generateToken,
-  userRole,
+  isUserAdmin,
 };
