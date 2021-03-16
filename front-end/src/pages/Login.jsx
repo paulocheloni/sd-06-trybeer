@@ -38,7 +38,9 @@ export default function Login() {
   const handleClick = async () => {
     const response = await api.fetchLogin(email, password);
     localStorage.setItem('token', JSON.stringify(response.token));
+    localStorage.setItem('user', JSON.stringify(response.user));
     if (response.user.role === 'client') {
+      console.log('client')
       history.push('/products');
     } else {
       history.push('/admin/orders');
@@ -77,7 +79,7 @@ export default function Login() {
         disabled={ !(isEmailValid && isPasswordValid) }
         onClick={ handleClick }
       >
-        <span>ENTRAR</span>
+        <span>Entrar</span>
       </button>
       <Link
         to="/register"

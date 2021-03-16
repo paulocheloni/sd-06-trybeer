@@ -1,9 +1,11 @@
+const contentType = {
+  'Content-Type': 'application/json',
+};
+
 const fetchLogin = async (email, password) => {
   const response = await fetch('http://localhost:3001/login', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: contentType,
     body: JSON.stringify({ email, password }),
   }).then((res) => res.json());
   // if (response.message) return false;
@@ -13,9 +15,7 @@ const fetchLogin = async (email, password) => {
 const fetchRegister = async (name, email, password, check) => {
   const response = await fetch('http://localhost:3001/register', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: contentType,
     body: JSON.stringify({
       name,
       email,
@@ -27,7 +27,19 @@ const fetchRegister = async (name, email, password, check) => {
   return response;
 };
 
+const fetchChangeName = async (name, email) => {
+  await fetch('http://localhost:3001/changeName', {
+    method: 'PUT',
+    headers: contentType,
+    body: JSON.stringify({
+      name,
+      email,
+    }),
+  });
+};
+
 module.exports = {
   fetchLogin,
   fetchRegister,
+  fetchChangeName,
 };
