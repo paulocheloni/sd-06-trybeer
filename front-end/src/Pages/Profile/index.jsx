@@ -44,6 +44,7 @@ const form = ([
   setUpdateMessage,
 ]) => {
   const user = { name, email };
+  const theme = JSON.parse(localStorage.getItem('@trybeer:theme'));
 
   return (
     <form onSubmit={ (e) => handleSubmit(e, user, token, setUpdateMessage) }>
@@ -54,6 +55,7 @@ const form = ([
         label="Nome"
         dataTestid="profile-name-input"
         onChange={ ({ target }) => setNameState(target.value) }
+        themeStorage={ theme && theme.title }
       />
       <Input
         id="email-input"
@@ -61,6 +63,7 @@ const form = ([
         label="Email"
         dataTestid="profile-email-input"
         readOnly
+        themeStorage={ theme && theme.title }
       />
 
       {button(isDisabled)}

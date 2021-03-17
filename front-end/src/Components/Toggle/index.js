@@ -23,9 +23,14 @@ const Toggle = ({
 
 export default Toggle;
 
+Toggle.defaultProps = {
+  labelLeft: '',
+  labelRight: '',
+};
+
 Toggle.propTypes = {
-  labelLeft: PropTypes.string.isRequired,
-  labelRight: PropTypes.string.isRequired,
+  labelLeft: PropTypes.string,
+  labelRight: PropTypes.string,
   checked: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
 };
