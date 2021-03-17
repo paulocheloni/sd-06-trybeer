@@ -6,5 +6,6 @@ const middlewares = require('../middlewares');
 const sales = express.Router();
 
 sales.post('/create', middlewares.authToken, controllers.create);
+sales.get('/', middlewares.authToken, controllers.sales);
 
 module.exports = sales;
