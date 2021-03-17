@@ -4,7 +4,7 @@ import MenuTop from '../components/menuTop';
 function Admin() {
   return (
     <div>
-      <MenuTop />
+      <MenuTop urlRoute={""} title={"Trybeer"}/>
     </div>
   );
 }
