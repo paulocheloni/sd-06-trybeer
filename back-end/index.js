@@ -9,6 +9,7 @@ const app = express();
 const port = 3001;
 
 app.use(cors());
+app.use(express.static(__dirname + '/'));
 app.use(bodyParser.json());
 app.use('/', Rescue(routes));
 app.use(handleError);
