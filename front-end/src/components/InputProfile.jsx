@@ -11,9 +11,10 @@ function InputProfile({ value, text, data }) {
         autoComplete={ `current-profile-${data}` }
         className={`profile-${data}-input`}
         data-testid={`profile-${data}`}
-        defaultValue={ value }
+        value={ value }
         readOnly
       />
+      {value}
     </label>
   );
 }
@@ -21,7 +22,7 @@ function InputProfile({ value, text, data }) {
 export default InputProfile;
 
 InputProfile.propTypes = {
-  defaultValue: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   data: PropTypes.string.isRequired,
 };
