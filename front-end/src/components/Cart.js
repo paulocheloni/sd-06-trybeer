@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
 

@@ -1,19 +1,31 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TrybeerContext from '../context/TrybeerContext';
 
 const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
   const [quantity, setQuantity] = useState(0);
-  const { updateProductQuantity } = useContext(TrybeerContext);
+  const { cart, updateProductQuantity } = useContext(TrybeerContext);
   const formatedPrice = price.replace('.', ',');
 
-  const handleClick = (param) => {
-    if (param === 'plus') {
-      setQuantity(quantity + 1);
-    } else if (quantity !== 0) {
-      setQuantity(quantity - 1);
+  useEffect(() => {
+    const productById = cart.find((item) => item.id === id);
+    if (productById !== undefined) {
+      setQuantity(productById.quantity);
     }
-    updateProductQuantity(id, quantity, price);
+  }, [cart, id]);
+
+  const increaseQuantity = () => {
+    const result = quantity + 1;
+    setQuantity(result);
+    updateProductQuantity(id, result, price);
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity !== 0) {
+      const result = quantity - 1;
+      setQuantity(result);
+      updateProductQuantity(id, result, price);
+    }
   };
 
   return (
@@ -27,7 +39,7 @@ const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
       <p data-testid={ `${index}-product-name` }>{name}</p>
       <p data-testid={ `${index}-product-price` }>{`R$ ${formatedPrice}`}</p>
       <button
-        onClick={ () => handleClick('plus') }
+        onClick={ increaseQuantity }
         data-testid={ `${index}-product-plus` }
         type="button"
       >
@@ -35,7 +47,7 @@ const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
       </button>
       <p data-testid={ `${index}-product-qtd` }>{quantity}</p>
       <button
-        onClick={ () => handleClick('minus') }
+        onClick={ decreaseQuantity }
         data-testid={ `${index}-product-minus` }
         type="button"
       >
