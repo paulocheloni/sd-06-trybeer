@@ -38,7 +38,7 @@ class LoginDiv extends React.Component {
     const loginUser = await validate(email, password);
     dispatchUser(loginUser);
     // isvalid pro Redux
-    if (loginUser[0].role === 'administrator') {
+    if (loginUser.role === 'administrator') {
       history.push('/admin/orders');
     } else {
       history.push('/products');

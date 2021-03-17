@@ -15,11 +15,15 @@ class ProductsList extends React.Component {
   }
 
   async componentDidMount() {
-    const { dispatchProducts, dispatchPrice } = this.props;
+    const { dispatchProducts, dispatchPrice, history } = this.props;
     const products = await getProducts();
-    dispatchProducts(products);
-    const local = Number(localStorage.getItem('price'));
-    dispatchPrice(local);
+    if (products.message) {
+      history.replace('/login');
+    } else {
+      dispatchProducts(products);
+      const local = Number(localStorage.getItem('price'));
+      dispatchPrice(local);
+    }
   }
 
   removeItem(id) {
@@ -77,47 +81,46 @@ class ProductsList extends React.Component {
 
   render() {
     const { stateProducts, stateQuantity, statePrice, history, stateCart } = this.props;
-
     return (
       <div className="prodlist-container">
         <div className="products-container">
           { stateProducts
-            && stateProducts.map((product, index) => (
-              <div id={ `${index}` } className="product" key={ product.id }>
-                <img
-                  data-testid={ `${product.id - 1}-product-img` }
-                  src={ product.url_image }
-                  alt={ product.name }
-                />
-                <div data-testid={ `${product.id - 1}-product-name` }>
-                  <h4>{product.name}</h4>
+              && stateProducts.map((product, index) => (
+                <div id={ `${index}` } className="product" key={ product.id }>
+                  <img
+                    data-testid={ `${product.id - 1}-product-img` }
+                    src={ product.url_image }
+                    alt={ product.name }
+                  />
+                  <div data-testid={ `${product.id - 1}-product-name` }>
+                    <h4>{product.name}</h4>
+                  </div>
+                  <div className="quantity-div">
+                    <button
+                      type="button"
+                      id="minus"
+                      data-testid={ `${product.id - 1}-product-minus` }
+                      onClick={ (event) => this.decreaseQuantity(event, product.id) }
+                    >
+                      <i className="fas fa-minus" />
+                    </button>
+                    <span data-testid={ `${product.id - 1}-product-qtd` }>
+                      { stateQuantity[product.id] }
+                    </span>
+                    <button
+                      type="button"
+                      id="plus"
+                      data-testid={ `${product.id - 1}-product-plus` }
+                      onClick={ (event) => this.increaseQuantity(event, product.id) }
+                    >
+                      <i className="fas fa-plus" />
+                    </button>
+                  </div>
+                  <div data-testid={ `${product.id - 1}-product-price` }>
+                    <h3>{`R$ ${product.price.replace('.', ',')}`}</h3>
+                  </div>
                 </div>
-                <div className="quantity-div">
-                  <button
-                    type="button"
-                    id="minus"
-                    data-testid={ `${product.id - 1}-product-minus` }
-                    onClick={ (event) => this.decreaseQuantity(event, product.id) }
-                  >
-                    <i className="fas fa-minus" />
-                  </button>
-                  <span data-testid={ `${product.id - 1}-product-qtd` }>
-                    { stateQuantity[product.id] }
-                  </span>
-                  <button
-                    type="button"
-                    id="plus"
-                    data-testid={ `${product.id - 1}-product-plus` }
-                    onClick={ (event) => this.increaseQuantity(event, product.id) }
-                  >
-                    <i className="fas fa-plus" />
-                  </button>
-                </div>
-                <div data-testid={ `${product.id - 1}-product-price` }>
-                  <h3>{`R$ ${product.price.replace('.', ',')}`}</h3>
-                </div>
-              </div>
-            ))}
+              ))}
         </div>
         <div className="shoppingcart-div">
           <button
