@@ -15,6 +15,7 @@ function LabeledInput({
     <div>
       <label htmlFor={ id }>{ label }</label>
       <input
+        readOnly
         value={ value }
         data-testid={ testId }
         id={ id }

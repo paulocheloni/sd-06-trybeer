@@ -11,6 +11,17 @@ function Provider({ children }) {
   const [registerPassword, setRegisterPassword] = useState('');
   const [registerIsDisabled, setregisterIsDisabled] = useState('');
 
+  const getUser = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user;
+  };
+
+  const setUser = (data) => {
+    const user = localStorage.setItem('user', JSON.stringify(data));
+    console.log(getUser());
+    return user;
+  };
+
   const contextData = {
     loginEmail,
     setLoginEmail,
@@ -26,7 +37,8 @@ function Provider({ children }) {
     setRegisterPassword,
     registerIsDisabled,
     setregisterIsDisabled,
-
+    getUser,
+    setUser,
   };
 
   return (
