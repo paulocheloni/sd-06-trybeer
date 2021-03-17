@@ -15,7 +15,6 @@ RegisterRouter.get('/', async (_req, res) => {
   res.status(200).json(users);
 });
 
-
 RegisterRouter.put('/', async (req, res) => {
   const { name, email } = req.body;
   const newUser = await userService.changeName(name, email);
