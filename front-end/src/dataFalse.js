@@ -65,6 +65,6 @@ const objProducts = [
     price: "3.49",
     url_image: "http://localhost:3001/images/Stella Artois 275ml.jpg"
   },
-]
+];
 
 module.exports = objProducts;

@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/HeaderComponent';
 import '../style/CostumerProfile.css';
 
 function CostumerProfile() {
+  const [valid, setValid] = useState(false);
+
+  const isValid = async () => {
+    const input = funcValidations.validateEmail(inputValues.email);
+    if (password && email) {
+      setValid(false);
+    } else {
+      setValid(true);
+    }
+  };
+
+  useEffect(() => {
+    isValid();
+  }, [inputValues.password, inputValues.emai]);l
+
   return (
     <div className="costumer_profile">
       <Header text="Meu Perfil" id="top-title" />
