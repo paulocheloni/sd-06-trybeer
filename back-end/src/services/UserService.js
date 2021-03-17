@@ -1,4 +1,3 @@
-const { verify } = require('jsonwebtoken');
 const { getEmail, registerUser } = require('../models/UserModel');
 
 const getEmailService = async (emailLogin) => {

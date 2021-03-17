@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Checkbox = ({ isSeller, setIsSeller }) => (
   <label htmlFor="check">
@@ -12,5 +13,10 @@ const Checkbox = ({ isSeller, setIsSeller }) => (
     />
   </label>
 );
+
+Checkbox.propTypes = {
+  isSeller: PropTypes.bool.isRequired,
+  setIsSeller: PropTypes.func.isRequired,
+};
 
 export default Checkbox;

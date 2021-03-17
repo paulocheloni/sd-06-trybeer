@@ -14,6 +14,12 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
+const createJWTPayload = (user) => ({
+    iss: 'Trybeer',
+    aud: 'indentity',
+    userData: user,
+    });
+
 userRouter.get('/', async (req, res) => {
   const allUsers = await getAll();
   return res.status(status.SUCCESS).json(allUsers);
@@ -23,11 +29,8 @@ userRouter.post('/login', async (req, res, next) => {
   const user = await getEmailService(req.body.email);
   try {
     if (!user.length) throw new ThrowError(status.NOT_FOUND, messages.USER_NOT_FOUND);
-    const payload = {
-      iss: 'Trybeer',
-      aud: 'indentity',
-      userData: user,
-    };
+    const payload = createJWTPayload(user);
+    
     const token = jwt.sign(payload, secret, jwtConfig);
     return res.status(status.SUCCESS)
       .json({ token, name: user[0].name, email: user[0].email, role: user[0].role });
@@ -39,20 +42,16 @@ userRouter.post('/login', async (req, res, next) => {
 userRouter.post('/register', async (req, res, next) => {
   const { body: user, body: { name, email, role } } = req;
   const resultRegister = await registerUserService(user);
-  
   try {
     if (!resultRegister) {
       throw new ThrowError(status.CONFLICT, messages.EMAIL_EXISTS);
     }
     
+    const payload = createJWTPayload(user);
+    
     if (!resultRegister.affectedRows) {
       throw new ThrowError(status.INTERNAL_ERROR, messages.DEFAULT_ERROR);
     }
-    const payload = {
-      iss: 'Trybeer',
-      aud: 'indentity',
-      userData: user,
-    };
     const token = jwt.sign(payload, secret, jwtConfig);
     return res.status(status.CREATED)
       .json({ token, name, email, role });
