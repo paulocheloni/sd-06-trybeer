@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import fetchProducts from '../methods/products';
 import renderCards from '../components/RenderCards';
 import isLogged from '../components/isLogged';
@@ -19,6 +19,7 @@ const itemQty = (prod) => {
 };
 
 function Products() {
+  const route = useHistory();
   const [allProducts, setAllProducts] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const [asd, setAsd] = useState(0);
@@ -40,23 +41,23 @@ function Products() {
   if (isLogged()) return <Redirect to="/login" />;
   return (
     <>
-      <MenuTop />
+      {/* <MenuTop /> */}
       <section className="cards-container">
         {renderCards(allProducts, asd, setAsd, itemQty)}
-        <Link to="/checkout" className="cart-link">
+        <section className="checkout-container">
+          <p data-testid="checkout-bottom-btn-value" className="checkout-value">
+            {currencyFormat(cartTotal)}
+          </p>
           <button
             type="button"
-            className="cart-btn"
+            className="checkout-btn"
             disabled={ asd === 0 }
             data-testid="checkout-bottom-btn"
+            onClick={ () => route.push('/checkout') }
           >
-            <p data-testid="checkout-bottom-btn-value">
-              Ver Carrinho
-              {' '}
-              {currencyFormat(cartTotal)}
-            </p>
+            Ver Carrinho
           </button>
-        </Link>
+        </section>
       </section>
     </>
   );

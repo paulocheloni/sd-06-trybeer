@@ -11,10 +11,13 @@ const renderCards = (allProducts, asd, setAsd, itemQty) => allProducts.map(
         alt="Foto do Produto"
         data-testid={ `${id}-product-img` }
       />
+      <p data-testid={ `${id}-product-price` } className="price">
+        {currencyFormat(+prod.price)}
+      </p>
       <h4 data-testid={ `${id}-product-name` }>{prod.name}</h4>
-      <p data-testid={ `${id}-product-price` }>{currencyFormat(+prod.price)}</p>
       <section className="cards-btn">
         <button
+          className="qty-btn"
           data-testid={ `${id}-product-minus` }
           type="button"
           onClick={ () => {
@@ -28,8 +31,9 @@ const renderCards = (allProducts, asd, setAsd, itemQty) => allProducts.map(
         >
           -
         </button>
-        <p data-testid={ `${id}-product-qtd` }>{itemQty(prod)}</p>
+        <p data-testid={ `${id}-product-qtd` } className="p-qty">{itemQty(prod)}</p>
         <button
+          className="qty-btn"
           data-testid={ `${id}-product-plus` }
           type="button"
           onClick={ () => {
