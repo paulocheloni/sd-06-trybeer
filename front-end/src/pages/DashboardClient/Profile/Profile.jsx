@@ -5,18 +5,20 @@ import Input from '../../../components/Input/Input';
 import { updateUser } from '../../../services/Users';
 import { updateName } from '../../../utils/localStorageHandler';
 
-const handleSaveButton = async (name, email, setUserNameInStorage) => {
+const handleSaveButton = async (name, email, setUserNameInStorage, setIsUpdated) => {
   const storage = JSON.parse(localStorage.getItem('user'));
   const { token } = storage;
   await updateUser(name, email, token);
   updateName(name);
   setUserNameInStorage(name);
+  setIsUpdated(true)
 };
 
 export default function Profile() {
   const [userName, setUserName] = useState();
   const [userEmail, setUserEmail] = useState();
   const [userNameInStorage, setUserNameInStorage] = useState();
+  const [isUpdated, setIsUpdated] = useState(false)
   const history = useHistory();
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export default function Profile() {
 
   return (
     <div>
-      <Header title="Meu Perfil" user="client" />
+      <Header title="Meu perfil" user="client" />
       <form>
         <Input
           title="Name"
@@ -52,10 +54,11 @@ export default function Profile() {
           data-testid="profile-save-btn"
           type="button"
           disabled={ userName === userNameInStorage }
-          onClick={ () => handleSaveButton(userName, userEmail, setUserNameInStorage) }
+          onClick={ () => handleSaveButton(userName, userEmail, setUserNameInStorage, setIsUpdated) }
         >
           Salvar
         </button>
+        {isUpdated && 'Atualização concluída com sucesso'}
       </form>
     </div>
   );
