@@ -31,15 +31,15 @@ const verifyRegister = (user, setActiveBtn) => {
   } else setActiveBtn(false);
 };
 
-const handleSubmitRegister = (user, checked, setUser, history) => {
+const handleSubmitRegister = async (user, checked, setUser, history) => {
   if (checked) {
     setUser({ ...user, role: 'administrator' });
-    history.push('admin/orders');
-    register({ ...user, role: 'administrator' });
+    await register({ ...user, role: 'administrator' })
+      .then((result) => (!result ? console.log('é isso') : history.push('admin/orders')));
   } else {
     setUser({ ...user, role: 'client' });
-    history.push('products');
-    register({ ...user, role: 'client' });
+    register({ ...user, role: 'client' })
+      .then((result) => (!result ? console.log('é isso 2') : history.push('products')));
   }
 };
 

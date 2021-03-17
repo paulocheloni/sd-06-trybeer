@@ -16,7 +16,18 @@ function login(user) {
 
 function register(user) {
   const axios = buildAxiosHandler();
-  return axios.post('/user', user);
+  const result = axios.post('/user', user)
+    .catch((err) => {
+      if (err.response) {
+        const time = 3000;
+        const elem = document.createElement('h3');
+        elem.innerHTML = err.response.data.message;
+        document.querySelector('.test').append(elem);
+        setTimeout(() => elem.remove(elem), time);
+      }
+    });
+
+  return result;
 }
 
 export {

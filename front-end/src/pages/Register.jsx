@@ -13,7 +13,7 @@ function Register() {
   }, [checked, user]);
 
   return (
-    <div>
+    <div className="test">
       <span>Nome</span>
       <input
         data-testid="signup-name"
