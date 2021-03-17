@@ -77,7 +77,7 @@ export default function Login() {
         disabled={ !(isEmailValid && isPasswordValid) }
         onClick={ handleClick }
       >
-        <span>ENTRAR</span>
+        <span>Entrar</span>
       </button>
       <Link
         to="/register"
