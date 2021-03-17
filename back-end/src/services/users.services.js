@@ -1,6 +1,6 @@
 const { users } = require('../models');
 const { generateToken } = require('../security');
-const { authRegisterUser } = require('../schemas');
+const { authRegisterUser, utils: { validateUserName } } = require('../schemas');
 
 const create = async (body) => {
   const data = body;
@@ -17,6 +17,12 @@ const create = async (body) => {
   return { name, email, token, role };
 };
 
+const updateName = async ({ name }, id) => {
+  validateUserName(name);
+  return users.updateNameByEmail(name, id);
+};
+
 module.exports = {
   create,
+  updateName,
 };

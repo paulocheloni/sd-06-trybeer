@@ -6,6 +6,13 @@ const getAll = async (table) => {
   return results;
 };
 
+const queryById = async (table, id) => {
+  const QUERY = 'SELECT * FROM ?? WHERE id = ?';
+  const [[result]] = await connection.query(QUERY, [table, id]);
+  return result;
+};
+
 module.exports = {
   getAll,
+  queryById,
 };
