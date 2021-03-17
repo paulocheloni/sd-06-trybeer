@@ -30,7 +30,12 @@ export const routeByRole = (role, history) => {
   }
 };
 
+function saveInLocalStorage(user) {
+  localStorage.setItem('user', JSON.stringify(user));
+}
+
 export const redirectPath = async (history, user) => {
   const fetchedUser = await getUserByEmail(user);
+  saveInLocalStorage(fetchedUser);
   routeByRole(fetchedUser.role, history);
 };
