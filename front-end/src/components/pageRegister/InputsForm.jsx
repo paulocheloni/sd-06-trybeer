@@ -41,7 +41,7 @@ function InputsForm(user, handleChange) {
         <input
           type="checkbox"
           name="tipo"
-          value="admin"
+          value="administrator"
           onChange={ handleChange }
           data-testid="signup-seller"
         />

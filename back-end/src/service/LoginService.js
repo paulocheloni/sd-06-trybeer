@@ -1,13 +1,15 @@
-const { LoginModel, UserModel } = require('../model');
+const { LoginModel } = require('../model');
 const { generateNewToken } = require('../utils');
 
-const generateToken = (email) => generateNewToken(email);
+const generateToken = async (email) => {
+  const [user] = await LoginModel.generateToken(email);
 
-const userRole = async (email) => {
-  UserModel.getUserByEmail
+  const token = generateNewToken(email);
+  const result = { ...user, token };
+
+  return result;
 };
 
 module.exports = {
   generateToken,
-  userRole,
 };
