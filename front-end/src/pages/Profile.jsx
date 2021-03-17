@@ -3,6 +3,8 @@ import { useHistory } from 'react-router';
 
 import MenuTop from '../components/menu/MenuTop';
 
+import api from '../services/api';
+
 function Profile() {
   const { name: userName, email } = JSON.parse(localStorage.user);
   const [name, setName] = useState(userName);
@@ -20,6 +22,7 @@ function Profile() {
   const handleClick = () => {
     const updateUser = { ...JSON.parse(localStorage.user), name };
     localStorage.user = JSON.stringify(updateUser);
+    api.updateNameOfUser(updateUser);
     setUpdateName(true);
   };
 
