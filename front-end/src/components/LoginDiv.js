@@ -36,18 +36,16 @@ class LoginDiv extends React.Component {
     const email = target.parentNode.parentNode.firstChild.childNodes[1].value;
     const password = target.parentNode.parentNode.firstChild.childNodes[3].value;
     const loginUser = await validate(email, password);
-    console.log(loginUser)
+    console.log(loginUser);
     dispatchUser(loginUser);
-  
+
     if (loginUser.role === 'administrator') {
-      
       history.push('/admin/orders');
     } else if (loginUser.role === 'client') {
       history.push('/products');
     } else {
-      history.push('/register')
+      history.push('/register');
     }
-
   }
 
   render() {
@@ -79,7 +77,7 @@ class LoginDiv extends React.Component {
             disabled={ !validRegEmail || !validRegPassword }
             onClick={ (event) => this.signIn(event) }
           >
-          Entrar
+            Entrar
           </button>
           <button
             type="button"

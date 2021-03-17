@@ -66,7 +66,7 @@ class Profile extends React.Component {
             data-testid="profile-save-btn"
             disabled={ stateProfileName.length >= maxLength ? null : true }
             onClick={ this.editUser }
-            >
+          >
             Salvar
           </button>
         </div>

@@ -33,7 +33,6 @@ export async function validate(email, password) {
     })
       .then((response) => response.data);
     localStorage.setItem('token', JSON.stringify(result.token));
-    
     return result;
   } catch (error) {
     if (error.response) {
@@ -42,9 +41,8 @@ export async function validate(email, password) {
         statusText: error.response.statusText,
         message: error.response.data.message,
       };
-
+    }
   }
-}
 }
 
 export async function edit(prevName, nextName) {
@@ -54,7 +52,7 @@ export async function edit(prevName, nextName) {
     });
     console.log(response);
     return response;
-  } catch (error) { 
+  } catch (error) {
     if (error.response) {
       return {
         status: error.response.status,
@@ -90,4 +88,3 @@ export async function getProducts() {
     }
   }
 }
-

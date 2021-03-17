@@ -10,7 +10,6 @@ const generateToken = (user) => {
 
 const validateLogin = async (email, password) => {
   const [user] = await loginModels.validateLogin(email, password);
-  console.log(user)
   if (!user) return { error: true, code: 'not_found', message: 'User not found.' };
 
   const token = generateToken(email);
