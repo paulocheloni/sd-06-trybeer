@@ -19,7 +19,8 @@ const loginUser = async (email, userPass) => {
     id,
     name,
     role,
-  }
+  };
+  
   return result;
 };
 
