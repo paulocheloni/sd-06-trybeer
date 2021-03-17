@@ -40,15 +40,17 @@ function Login({ history }) {
 
   return (
     <LoginContext.Provider
-      value={{
-        dataUser: user,
-        isDisabled: valid,
-        handleIputs: handleChange,
-        handleButton: handleClick,
-        router: history,
-        messageError: errMsg,
-        displayError: displayErr,
-      }}
+      value={
+        {
+          dataUser: user,
+          isDisabled: valid,
+          handleIputs: handleChange,
+          handleButton: handleClick,
+          router: history,
+          messageError: errMsg,
+          displayError: displayErr,
+        }
+      }
     >
       <div>
         <FormLogin />
