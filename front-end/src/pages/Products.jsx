@@ -40,7 +40,7 @@ function Products() {
   if (isLogged()) return <Redirect to="/login" />;
   return (
     <>
-      <MenuTop title="Trybeer"/>
+      <MenuTop title="TryBeer"/>
       <section className="cards-container">
         {renderCards(allProducts, asd, setAsd, itemQty)}
         <Link to="/checkout" className="cart-link">
