@@ -1,5 +1,5 @@
 const userModel = require('../model/User');
-const { NOT_FOUND } = require('../schema/statusSchema');
+const { NOT_FOUND, CONFLICT } = require('../schema/statusSchema');
 
 // Return all Users
 const getAll = async () => {
@@ -25,6 +25,18 @@ const update = async (id, name) => {
   return user;
 };
 
+// Verify Email
+const verifyEmail = async (req, res, next) => {
+  const { email } = req.body;
+  const [exist] = await userModel.findByEmail(email);
+
+  if (exist) {
+    res.status(CONFLICT).json({ message: 'this email is already registered' });
+  }
+
+  next();
+};
+
 // Verify id
 const verifyId = async (req, res, next) => {
   const { id } = req.params;
@@ -41,6 +53,7 @@ module.exports = {
   getAll,
   createNewUser,
   verifyUser,
+  verifyEmail,
   update,
   verifyId,
 };
