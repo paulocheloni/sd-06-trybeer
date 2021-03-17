@@ -6,6 +6,7 @@ import Profile from './modules/Profile/Profile';
 import Orders from './modules/Orders/Orders';
 import Products from './modules/Products/Products';
 import AdminOrders from './modules/Admin/Orders/AdminOrders';
+import Checkout from './modules/Checkout/Checkout';
 
 function Routes() {
   return (
@@ -17,6 +18,7 @@ function Routes() {
         <Route path="/register" component={ Register } />
         <Route path="/profile" component={ Profile } />
         <Route path="/orders" component={ Orders } />
+        <Route path="/checkout" component={ Checkout } />
         <Redirect from="/" to="/login" />
       </Switch>
     </Router>

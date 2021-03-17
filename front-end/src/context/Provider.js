@@ -10,6 +10,12 @@ function Provider({ children }) {
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [registerIsDisabled, setregisterIsDisabled] = useState('');
+  const [sale, setSale] = useState(
+    {
+      products: [],
+      total: '',
+    },
+  );
 
   const contextData = {
     loginEmail,
@@ -26,7 +32,8 @@ function Provider({ children }) {
     setRegisterPassword,
     registerIsDisabled,
     setregisterIsDisabled,
-
+    sale,
+    setSale,
   };
 
   return (
