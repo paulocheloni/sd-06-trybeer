@@ -92,11 +92,11 @@ code {
 }
 
 .bars-button {
-  width: 45px;
+  width: 44px;
   height: 50px;
   margin-left: 2vh;
-  border: 0px;
   border-style: none;
+  padding: 22px;
   background-image: url("./bars-solid.svg");
 }
 
@@ -108,7 +108,7 @@ code {
   left: 0px;
   background-color: rgb(224, 224, 224);
   z-index: 3;
-  border-right: #157347 2px;
+  border-right: #157347 1px;
   border-right-style: solid;
 }
 
@@ -122,12 +122,16 @@ code {
   z-index: 1;
 }
 
+.checkout-price{
+  font-size: 5vh;
+}
+
 .width-med {
   width: 25vh;
 }
 
 .margin-med {
-  margin: 2vh 1vh 0vh 2vh;
+  margin: 4vh 1vh 1vh 2vh;
 }
 
 .align-bot {
@@ -152,4 +156,5 @@ code {
 .quantity-card {
   font-size: 22px;
   margin: 0px 18px;
+  line-height: 40px;
 }

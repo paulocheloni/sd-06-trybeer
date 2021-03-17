@@ -50,7 +50,7 @@ function Products() {
         onClick={ () => history.push('/checkout') }
       >
         Ver Carrinho
-        <p data-testid="checkout-bottom-btn-value">
+        <p className="checkout-price" data-testid="checkout-bottom-btn-value">
           {`R$ ${totalCart.toFixed(2).replace('.', ',')}`}
         </p>
       </button>
