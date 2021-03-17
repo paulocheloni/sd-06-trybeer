@@ -3,8 +3,11 @@ import { useHistory } from 'react-router-dom';
 
 import BeersAppContext from '../context/BeersAppContext';
 import fetchApiJsonBody from '../service/fetchApi';
+import funcValidations from '../service/funcValidations';
 
 import '../style/LoginRegister.css';
+
+const logo = require('../images/logo_provisorio.png');
 
 function Login() {
   const {
@@ -17,46 +20,44 @@ function Login() {
 
   const history = useHistory();
 
-  useEffect(()=> {
-    const isValid = async () => {
-      const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
-      const email = emailRegex.test(inputValues.email);
-      const password = inputValues.password;
-      const minLength = 6;
-      if(password.length >= minLength && email) {
-        setValid(false)
-      } else {
-        setValid(true)
-      }
-    };
+  const isValid = async () => {
+    const email = funcValidations.validateEmail(inputValues.email);
+    const password = funcValidations.validatePassword(inputValues.password);
+    if (password && email) {
+      setValid(false);
+    } else {
+      setValid(true);
+    }
+  };
+
+  useEffect(() => {
     isValid();
-  }, [inputValues.password, inputValues.email]);
+  }, [inputValues.password, inputValues.emai]);
 
   const handleChange = ({ target }) => {
-    setInputValues({ ...inputValues, [target.name]: target.value});
+    setInputValues({ ...inputValues, [target.name]: target.value });
   };
 
   const handleClick = async () => {
     const ola = await fetchApiJsonBody('/login', inputValues);
-    console.log('ola', ola)
-    if(ola.err) {
-      console.log('entrou no erro')
+    if (ola.err) {
+      console.log('entrou no erro');
       setErrMessage(ola.err);
       return;
     }
-    setUser(ola)
-    if(ola.role === 'administrator') {
-      console.log('entrou no admin')
+    setUser(ola);
+    if (ola.role === 'administrator') {
+      console.log('entrou no admin');
       history.push('/admin/orders');
-    } else if(ola.role === 'client') {
-      console.log('entrou no client')
+    } else if (ola.role === 'client') {
+      console.log('entrou no client');
       history.push('products');
     }
   };
 
-  return(
-    <div className='login-register'>
-      <img src={require('../images/logo_provisorio.png')} className='img-logo-login' />
+  return (
+    <div className="login-register">
+      <img src={ logo } className="img-logo-login" alt="logo" />
       <form>
         <label htmlFor="email">
           Email
@@ -84,12 +85,12 @@ function Login() {
           />
         </label>
         <br />
-        <span>{errMessage}</span>
+        <span>{ errMessage }</span>
         <button
           data-testid="signin-btn"
           id="enter"
           type="button"
-          disabled = { valid }
+          disabled={ valid }
           onClick={ handleClick }
         >
           ENTRAR
@@ -100,13 +101,13 @@ function Login() {
           id="sign-up"
           type="button"
           onClick={ () => history.push('/register') }
-          className='bttn-text'
+          className="bttn-text"
         >
           Ainda não tenho conta
         </button>
       </form>
     </div>
-  )
-};
+  );
+}
 
 export default Login;

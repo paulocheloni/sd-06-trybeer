@@ -1,6 +1,7 @@
 const connection = require('../database/connection');
 
-const getUserByEmail = async (email) => await connection.execute('SELECT * FROM users WHERE email = ?', [email]);
+const getUserByEmail = async (email) => await connection
+  .execute('SELECT * FROM users WHERE email = ?', [email]);
 
 const createRegister = async (body) => {
   const { name, email, password, role } = body;
