@@ -72,7 +72,8 @@ function Profile() {
         name="email"
         type="email"
         autoComplete="email"
-        readonly
+        onChange={ profileEmail }
+        readOnly
       />
       <Button
         onClick={ () => saveOnClick() }

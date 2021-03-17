@@ -10,12 +10,13 @@ function LabeledInput({
   autoComplete,
   testId,
   onChange,
+  readOnly,
 }) {
   return (
     <div>
       <label htmlFor={ id }>{ label }</label>
       <input
-        readOnly
+        readOnly={ readOnly }
         value={ value }
         data-testid={ testId }
         id={ id }
