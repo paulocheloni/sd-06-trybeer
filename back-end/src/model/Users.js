@@ -16,3 +16,8 @@ exports.create = async ({ email, password, role }) =>
       password,
     ])
     .then(([result]) => ({ id: result.insertId, email, password, role }));
+
+    // exports.update = async((newName) => {
+    //   connection
+    //     .execute('UPDATE users SET ')
+    // })

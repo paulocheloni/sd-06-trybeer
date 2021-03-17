@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const UserController = require('./src/controller/UsersControler');
+const ProfileController = require('./src/controller/ProfileController');
 
 const app = express();
 
@@ -10,6 +11,8 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/login', UserController);
+
+app.use('/profile', ProfileController);
 
 app.use((err, _req, res, _next) => {
   res.status(err.status || 500).json(err.message);
