@@ -19,7 +19,19 @@ const register = (name, email, password, role) => fetch(`${endpoint}/user/regist
 })
   .then((response) => response.json());
 
+
+const updateUser = (name, email, token) => fetch(`${endpoint}/user/update`, {
+  method: 'put',
+  headers: {
+    'Content-type': 'application/json',
+    'authorization': token
+  },
+  body: JSON.stringify({ name, email }),
+}).then((response) => response.json());
+
+
 module.exports = {
   login,
   register,
+  updateUser
 };
