@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+
+import { BiUser } from 'react-icons/bi';
+import { FiMail } from 'react-icons/fi';
 import { updateUser } from '../../Services/Apis';
 
 import Button from '../../Components/Button';
@@ -56,6 +59,7 @@ const form = ([
         dataTestid="profile-name-input"
         onChange={ ({ target }) => setNameState(target.value) }
         themeStorage={ theme && theme.title }
+        icon={ BiUser }
       />
       <Input
         id="email-input"
@@ -64,6 +68,7 @@ const form = ([
         dataTestid="profile-email-input"
         readOnly
         themeStorage={ theme && theme.title }
+        icon={ FiMail }
       />
 
       {button(isDisabled)}

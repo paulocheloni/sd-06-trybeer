@@ -77,7 +77,7 @@ const Navigation = styled.a`
     transition: background  0.3s;
 
     &:hover {
-      background: ${theme.colors.green};
+      background: #397330;
     }
   `}
 `;

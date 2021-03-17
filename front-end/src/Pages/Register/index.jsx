@@ -5,10 +5,11 @@ import { FiMail, FiLock } from 'react-icons/fi';
 
 import { registerNewUser } from '../../Services/Apis';
 
-import Container from './styles';
+import S from './styles';
 
 import Input from '../../Components/Input';
 import Button from '../../Components/Button';
+import LogoTryBeer from '../../Components/LogoTryBeer';
 
 const handleSubmit = async (event,
   { name, email, password, isChecked, setEmailAlreadyExists }) => {
@@ -46,7 +47,7 @@ const form = (params) => {
   const paramsRegistered = { name, email, password, isChecked, setEmailAlreadyExists };
   const theme = JSON.parse(localStorage.getItem('@trybeer:theme'));
   return (
-    <form onSubmit={ (e) => handleSubmit(e, paramsRegistered) }>
+    <S.Form onSubmit={ (e) => handleSubmit(e, paramsRegistered) }>
       <h1>Register</h1>
       <Input
         id="name-input"
@@ -88,7 +89,7 @@ const form = (params) => {
         Quero vender
       </label>
       {button(isDisabled)}
-    </form>
+    </S.Form>
   );
 };
 
@@ -129,9 +130,10 @@ const Register = () => {
   };
 
   return (
-    <Container>
+    <S.Container>
+      <LogoTryBeer />
       {form(params)}
-    </Container>
+    </S.Container>
   );
 };
 

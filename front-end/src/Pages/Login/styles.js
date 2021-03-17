@@ -1,16 +1,5 @@
 import styled, { css } from 'styled-components';
 
-// const animate = keyframes`
-//   from {
-//     opacity: 0;
-//     transform: translate3d(-50px);
-//   }
-//   to {
-//     opacity: 1;
-//     transform: translatex(0);
-//   }
-// `;
-
 const Container = styled.div`
   ${({ theme }) => css`
     width: 100%;
@@ -22,6 +11,13 @@ const Container = styled.div`
     justify-content: center;
 
     background: ${theme.colors.secondary};
+
+    @media (max-width: 500px) {
+      background-image: linear-gradient(
+        ${theme.colors.secondary} 50%,
+        ${theme.colors.primary} 50%
+      );
+    }
 
     > form {
 
@@ -45,6 +41,7 @@ const Container = styled.div`
       @media (max-width: 500px) {
         border: none;
         border-radius: 0;
+        box-shadow: 0 -5px 5px 0 ${theme.colors.shadowMobile};
 
         background: ${theme.colors.secondaryMobile};
 

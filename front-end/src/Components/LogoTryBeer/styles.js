@@ -2,13 +2,13 @@ import styled, { css } from 'styled-components';
 
 const Container = styled.div`
   ${() => css`
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     position: relative;
     display: flex;
 
     > h1 {
       font-family: 'Typoslab';
-      font-size: 60px;
+      font-size: 55px;
       color:  #397330;
 
       > span {
@@ -17,10 +17,10 @@ const Container = styled.div`
     }
 
     > img {
-      width: 80px;
+      width: 70px;
       position: absolute;
-      bottom: 45px;
-      left: 185px;
+      bottom: 42px;
+      left: 172px;
     }
   `}
 `;

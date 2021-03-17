@@ -9,6 +9,7 @@ export default {
     backgroundInput: '#191919',
     grayButton: '#E5E5E5',
     secondaryMobile: '#232323',
+    shadowMobile: 'black',
 
     title: '#fff',
     white: '#fff',

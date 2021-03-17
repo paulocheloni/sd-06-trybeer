@@ -8,6 +8,7 @@ export default {
     border: '#000',
     backgroundInput: '#E5E5E5',
     grayButton: '#E5E5E5',
+    shadowMobile: '#E5E5E5',
 
     white: '#fff',
     background: '#f2f3f5',
