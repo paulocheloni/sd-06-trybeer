@@ -9,7 +9,7 @@ import * as S from './style';
 const Profile = () => {
   const history = useHistory();
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [email] = useState('');
   useEffect(() => {
     if (!localStorage.token || localStorage.token === '') history.push('/');
   }, [history]);
