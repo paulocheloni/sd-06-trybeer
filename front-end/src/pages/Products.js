@@ -23,6 +23,8 @@ function Products({ history }) {
     }
   };
 
+  verifyIfUserIsLogged();
+
   useEffect(() => {
     fetchProducts();
   }, []);
