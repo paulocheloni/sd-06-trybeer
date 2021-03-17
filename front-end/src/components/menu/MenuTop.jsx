@@ -12,7 +12,7 @@ function MenuTop({ name }) {
   };
 
   return (
-    <div>
+    <header>
       <div className="menuTop">
         <button
           type="button"
@@ -25,7 +25,7 @@ function MenuTop({ name }) {
         <span data-testid="top-title">{ name }</span>
         {showSideBar && <MenuSideBar />}
       </div>
-    </div>
+    </header>
   );
 }
 
