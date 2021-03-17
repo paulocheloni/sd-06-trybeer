@@ -24,10 +24,10 @@ function Login({ history }) {
     const loginValidate = await api.generateToken(user.email, user.password);
     console.log(loginValidate.result);
     if (loginValidate.sucess) {
-      // const { token } = loginValidate.response;
+      const { token } = loginValidate.response;
       setErrMsg(false);
       history.push('/admin/orders');
-      localStorage.setItem('user', JSON.stringify({ email: user.email }));
+      localStorage.setItem('user', JSON.stringify({ email: user.email, token }));
     } else {
       setDisplayErr(true);
       setErrMsg(loginValidate.response.message);
