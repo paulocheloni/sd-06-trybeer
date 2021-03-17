@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
-import { Login, Register, Products, ClientProfile } from './pages';
+import { Login, Register, Products, ClientProfile, Checkout} from './pages';
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
       <Route path="/products" component={ Products } />
       <Route path="/admin/orders" component={ Register } />
       <Route path="/profile" component={ ClientProfile } />
+      <Route path="/checkout" component={ Checkout } />
     </Switch>
   );
 }
