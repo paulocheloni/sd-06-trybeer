@@ -2,8 +2,6 @@ const userModel = require('../model/userModel');
 
 const UNPROCESSABLE_ENTITY = 422;
 
-const getAllUsers = async () => userModel.getAllUsers();
-
 const findUserByEmail = async (userEmail, password) => {
   const userFound = await userModel.findUserByEmail(userEmail);  
 
@@ -22,7 +20,6 @@ const updateUserNameByEmail = async (userEmail, updatedName) => {
 };
 
 module.exports = {
-  getAllUsers,
   findUserByEmail,
   updateUserNameByEmail,
 };
