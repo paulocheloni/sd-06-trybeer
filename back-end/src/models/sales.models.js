@@ -9,8 +9,10 @@ const handleItermediateTable = async (saleId, products) => {
 
 const insertNewSale = async ({ delivery, salePrice, sale }, userId) => {
   const { address, number } = delivery;
-  const QUERY_COL = '(user_id, total_price, delivery_address, delivery_number, sale_date, status)';
-  const QUERY = 'INSERT INTO sales ' + QUERY_COL + ' VALUES (?, ?, ?, ?, now(), "Pendente")';
+  const QUERY_CMD = 'INSERT INTO sales ';
+  const QUERY_COL = '(user_id, total_price, delivery_address, delivery_number, sale_date, status) ';
+  const QUERY_VALUES = 'VALUES (?, ?, ?, ?, now(), "Pendente")';
+  const QUERY = QUERY_CMD + QUERY_COL + QUERY_VALUES;
   const [{ insertId }] = await connection.query(QUERY, [
     userId,
     salePrice,
