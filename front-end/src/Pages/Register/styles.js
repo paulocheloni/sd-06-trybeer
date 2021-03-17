@@ -11,10 +11,7 @@ const Container = styled.div`
     justify-content: center;
 
     @media (max-width: 500px) {
-      background-image: linear-gradient(
-        ${theme.colors.secondary} 50%,
-        ${theme.colors.primary} 50%
-      );
+      background: ${theme.colors.primary};
     }
   `}
 `;
@@ -33,37 +30,51 @@ const Form = styled.form`
     > h1 {
       margin-bottom: 20px;
       color: ${theme.colors.text};
-    }
 
-    .label-checkBox {
-      color: ${theme.colors.text};
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      margin-bottom: 20px;
-      font-size: 18px;
-      font-weight: 500;
-
-      .input-checkBox {
-        width: 20px;
-        height: 20px;
-        font-size: 16px;
-        margin-right: 10px;
-        border: none;
-        border-radius: 5px;
-        box-shadow: 0 0 2px 0;
+      @media (max-width: 500px) {
+        font-size: 26px;
       }
     }
-
+    
     @media (max-width: 500px) {
       border: none;
       padding-bottom: 0;
       border-radius: 0;
-      box-shadow: 0 -5px 5px 0 black;
+      box-shadow: none;
       background: ${theme.colors.secondaryMobile};
-      box-shadow: 0 -5px 5px 0 ${theme.colors.shadowMobile};
       width: 100%;
+    }
+  `}
+`;
+
+const Label = styled.label`
+  ${({ theme }) => css`
+    color: ${theme.colors.text};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 500;
+
+    @media (max-width: 500px) {
+      font-size: 16px;
+    }
+
+    .input-checkBox {
+      width: 20px;
+      height: 20px;
+      font-size: 16px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 0 2px 0;
+
+      @media (max-width: 500px) {
+        width: 17px;
+        height: 17px;
+      }
     }
   `}
 `;
@@ -71,4 +82,5 @@ const Form = styled.form`
 export default {
   Container,
   Form,
+  Label,
 };

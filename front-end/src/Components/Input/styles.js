@@ -12,6 +12,10 @@ const CompInput = styled.label`
     font-size: 20px;
     font-weight: 450;
 
+    @media (max-width: 500px) {
+      font-size: 18px;
+    }
+
     > div {
     display: flex;
 

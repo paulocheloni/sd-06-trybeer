@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 import { BiUser } from 'react-icons/bi';
 import { FiMail } from 'react-icons/fi';
+import { GlobalContext } from '../../Contexts/GlobalContext';
 import { updateUser } from '../../Services/Apis';
 
 import Button from '../../Components/Button';
 import MenuTop from '../../Components/MenuTop';
 import SideBar from '../../Components/SideBar';
 import Input from '../../Components/Input';
+import LogoTryBeer from '../../Components/LogoTryBeer';
 
 import Container from './styles';
 
@@ -84,6 +86,8 @@ const Profile = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [updateMessage, setUpdateMessage] = useState(false);
 
+  const { stateSideBar } = useContext(GlobalContext);
+
   useEffect(() => {
     const dataStorage = localStorage.getItem('user');
     const { name, email } = JSON.parse(dataStorage);
@@ -107,7 +111,8 @@ const Profile = () => {
     <>
       <MenuTop dataTestid="top-title" title="Meu perfil" />
       <SideBar />
-      <Container>
+      <Container stateSideBar={ stateSideBar }>
+        <LogoTryBeer />
         {form([
           nameState,
           setNameState,

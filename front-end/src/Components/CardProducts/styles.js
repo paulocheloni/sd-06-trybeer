@@ -28,8 +28,8 @@ const Container = styled.div`
 const Price = styled.div`
   ${({ theme }) => css`
     color: ${theme.colors.text};
+    font-weight: 500;
   `}
-  font-weight: 500;
 `;
 
 const Image = styled.div`

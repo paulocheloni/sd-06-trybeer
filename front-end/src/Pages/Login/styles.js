@@ -13,10 +13,7 @@ const Container = styled.div`
     background: ${theme.colors.secondary};
 
     @media (max-width: 500px) {
-      background-image: linear-gradient(
-        ${theme.colors.secondary} 50%,
-        ${theme.colors.primary} 50%
-      );
+      background: ${theme.colors.primary};
     }
 
     > form {
@@ -36,15 +33,16 @@ const Container = styled.div`
       > h1 {
         margin-bottom: 20px;
         color: ${theme.colors.text};
+
+        @media (max-width: 500px) {
+          font-size: 26px;
+        }
       }
 
       @media (max-width: 500px) {
         border: none;
         border-radius: 0;
-        box-shadow: 0 -5px 5px 0 ${theme.colors.shadowMobile};
-
-        background: ${theme.colors.secondaryMobile};
-
+        box-shadow: none;
         width: 100%;
       }
     }

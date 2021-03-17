@@ -74,10 +74,7 @@ const form = (params) => {
         themeStorage={ theme && theme.title }
         icon={ FiLock }
       />
-      <label
-        htmlFor="check"
-        className="label-checkBox"
-      >
+      <S.Label htmlFor="check">
         <input
           className="input-checkBox"
           id="check"
@@ -87,7 +84,7 @@ const form = (params) => {
           data-testid="signup-seller"
         />
         Quero vender
-      </label>
+      </S.Label>
       {button(isDisabled)}
     </S.Form>
   );

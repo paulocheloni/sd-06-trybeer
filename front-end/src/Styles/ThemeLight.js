@@ -2,7 +2,8 @@ export default {
   title: 'light',
 
   colors: {
-    primary: '#EFEFEF',
+    // primary: '#EFEFEF',
+    primary: '#F3F8EC',
     secondary: '#F3F8EC',
     text: '#000',
     border: '#000',

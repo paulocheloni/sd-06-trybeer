@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { GlobalContext } from '../../Contexts/GlobalContext';
 
 import CompButton from './styles';
 
@@ -15,22 +16,27 @@ const Button = ({
   dataTestid,
   position,
   botton,
-}) => (
-  <CompButton
-    type={ type }
-    color={ color }
-    width={ width }
-    heigth={ heigth }
-    fontSize={ fontSize }
-    disabled={ disabled }
-    onClick={ onClick }
-    data-testid={ dataTestid }
-    position={ position }
-    botton={ botton }
-  >
-    {children}
-  </CompButton>
-);
+}) => {
+  const { stateSideBar } = useContext(GlobalContext);
+
+  return (
+    <CompButton
+      type={ type }
+      color={ color }
+      width={ width }
+      heigth={ heigth }
+      fontSize={ fontSize }
+      disabled={ disabled }
+      onClick={ onClick }
+      data-testid={ dataTestid }
+      position={ position }
+      botton={ botton }
+      stateSideBar={ stateSideBar }
+    >
+      {children}
+    </CompButton>
+  );
+};
 
 Button.defaultProps = {
   color: '',
