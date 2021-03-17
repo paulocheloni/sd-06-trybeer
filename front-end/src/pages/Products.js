@@ -28,7 +28,7 @@ function Products({ history }) {
   useEffect(() => {
     fetchProducts();
     verifyIfUserIsLogged();
-  }, []);
+  }, [verifyIfUserIsLogged]);
 
   return (
     <div>
