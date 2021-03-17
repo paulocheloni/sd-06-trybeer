@@ -3,7 +3,7 @@ const messages = {
   DEFAULT_ERROR: 'Erro interno. tentar novamente mais tarde',
   CREATED_USER: 'Usuário cadastrado com sucesso!',
   EMAIL_EXISTS: 'E-mail already in database.',
-  UNAUTHORIZED: 'Usuário não registrado em nosso banco'
+  UNAUTHORIZED: 'Usuário não registrado em nosso banco',
 };
 
 module.exports = messages;

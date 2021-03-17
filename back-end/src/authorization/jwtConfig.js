@@ -2,9 +2,9 @@ const jwt = require('jsonwebtoken');
 
 const secret = 'Secret token';
 
-const jwtSign = (payload, secret, jwtConfig) => (
-  jwt.sign(payload, secret, jwtConfig)
-)
+const jwtSign = (payload, jwtSecret, jwtConfig) => (
+  jwt.sign(payload, jwtSecret, jwtConfig)
+);
 
 const jwtConfig = {
   expiresIn: '150m',
@@ -21,5 +21,5 @@ module.exports = {
   secret,
   jwtConfig,
   createJWTPayload,
-  jwtSign
-}
+  jwtSign,
+};

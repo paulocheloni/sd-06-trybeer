@@ -30,12 +30,12 @@ Input.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  isReadOnly: PropTypes.bool
+  isReadOnly: PropTypes.bool,
 };
 
 Input.defaultProps = {
   onChange: () => {},
-  isReadOnly: false
+  isReadOnly: false,
 };
 
 export default Input;

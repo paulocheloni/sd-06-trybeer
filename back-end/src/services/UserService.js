@@ -14,10 +14,10 @@ const registerUserService = async (body) => {
 };
 
 const updateUserName = async (newUserName, email) => {
-  const updatedUser = await updateName(newUserName, email)
+  const updatedUser = await updateName(newUserName, email);
 
-  return updatedUser
-}
+  return updatedUser;
+};
 
 module.exports = {
   getEmailService,

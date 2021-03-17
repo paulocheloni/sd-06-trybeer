@@ -1,11 +1,11 @@
 const { Router } = require('express');
 const { getAll } = require('../models/UserModel');
 const { getEmailService, registerUserService, updateUserName } = require('../services/UserService');
-const tokenValidator = require('../middlewares/tokenValidator')
+const tokenValidator = require('../middlewares/tokenValidator');
 const status = require('../utils/statusDictionary');
 const messages = require('../utils/messageDictionary');
 const { ThrowError } = require('../middlewares/errorHandler/errorHandler');
-const { secret, jwtConfig, jwtSign, createJWTPayload } = require('../authorization/jwtConfig')
+const { secret, jwtConfig, jwtSign, createJWTPayload } = require('../authorization/jwtConfig');
 
 const userRouter = new Router();
 
@@ -49,12 +49,11 @@ userRouter.post('/register', async (req, res, next) => {
   }
 });
 
-userRouter.put('/update', tokenValidator, async (req, res, next) => {
-  console.log(req.body)
+userRouter.put('/update', tokenValidator, async (req, res) => {
   const { name: newUserName } = req.body;
   const { email } = req.user;
-  const updatedUser = await updateUserName(newUserName, email)
-  res.status(200);
-})
+  await updateUserName(newUserName, email);
+  res.status(status.NO_CONTENT).send({ status: 'ok' });
+});
 
 module.exports = userRouter;

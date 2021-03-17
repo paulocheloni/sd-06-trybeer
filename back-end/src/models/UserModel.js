@@ -19,9 +19,9 @@ const registerUser = async ({ name, email, password, role }) => {
 
 const updateName = async (newUserName, email) => {
   const [updatedUser] = await connection
-    .execute('UPDATE users SET name=? WHERE email=?', [newUserName, email])
-  return updatedUser
-}
+    .execute('UPDATE users SET name=? WHERE email=?', [newUserName, email]);
+  return updatedUser;
+};
 
 module.exports = {
   getAll,
