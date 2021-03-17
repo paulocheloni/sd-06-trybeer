@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Button from '../Button';
 import menuClosed from '../../images/menu.svg';
 import menuOpened from '../../images/beer.svg';
 import * as S from './style';
 
-const Menu = () => {
+const Menu = ({ children }) => {
   const history = useHistory();
   const [menuOn, setMenuOn] = useState(false);
+  const handleRoute = (path) => {
+    history.push(path);
+    setMenuOn(false);
+  };
   return (
     <S.Container>
       <S.Image
@@ -15,33 +20,33 @@ const Menu = () => {
         onClick={ () => setMenuOn(!menuOn) }
         data-testid="top-hamburguer"
       />
-      <S.Title data-testid="top-title">TryBeer</S.Title>
+      <S.Title data-testid="top-title">{ children }</S.Title>
       <S.Modal state={ menuOn } className={ menuOn ? 'side-menu-container' : '' }>
         <S.WrapperButtons>
           <Button
             dataTestId="side-menu-item-products"
-            onClick={ () => history.push('/products') }
+            onClick={ () => handleRoute('/products') }
           >
             Produtos
 
           </Button>
           <Button
             dataTestId="side-menu-item-my-orders"
-            onClick={ () => history.push('/orders') }
+            onClick={ () => handleRoute('/orders') }
           >
             Meus pedidos
 
           </Button>
           <Button
             dataTestId="side-menu-item-my-profile"
-            onClick={ () => history.push('/profile') }
+            onClick={ () => handleRoute('/profile') }
           >
             Meu Perfil
           </Button>
         </S.WrapperButtons>
         <Button
           dataTestId="side-menu-item-logout"
-          onClick={ () => history.push('/login') }
+          onClick={ () => handleRoute('/') }
         >
           Sair
 
@@ -51,4 +56,7 @@ const Menu = () => {
   );
 };
 
+Menu.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 export default Menu;

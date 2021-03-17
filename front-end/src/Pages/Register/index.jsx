@@ -14,7 +14,7 @@ const handleClick = async (name, email, password, isSeller) => {
     if (typeof data.data === 'string') throw new Error();
     const getToken = await Axios.post('http://localhost:3001/login', { email, password });
     const token = await getToken.data;
-    localStorage.setItem('token', JSON.stringify(token.userLogin.token));
+    localStorage.setItem('token', token.userLogin.token);
     return role;
   } catch (err) {
     console.log();
