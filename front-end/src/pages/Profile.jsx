@@ -4,8 +4,11 @@ import { useHistory } from 'react-router';
 import MenuTop from '../components/menu/MenuTop';
 
 function Profile() {
-  const [name, setName] = useState('fulano');
+  const { name: userName, email } = JSON.parse(localStorage.user);
+  const [name, setName] = useState(userName);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [updateName, setUpdateName] = useState(false);
+
   const history = useHistory();
 
   useEffect(() => {
@@ -14,12 +17,10 @@ function Profile() {
     }
   }, [history]);
 
-  // const { email, name: storageName } = localStorage.user;
-  const email = localStorage.user;
-
   const handleClick = () => {
-    // localStorage.setItem('user', JSON.stringify(name));
-    // localStorage.user = JSON.stringify(name);
+    const updateUser = { ...JSON.parse(localStorage.user), name };
+    localStorage.user = JSON.stringify(updateUser);
+    setUpdateName(true);
   };
 
   const handleChange = ({ target }) => {
@@ -54,6 +55,7 @@ function Profile() {
       >
         Salvar
       </button>
+      { (updateName) && <span>Atualização concluída com sucesso</span> }
     </div>
   );
 }
