@@ -1,22 +1,24 @@
-import React, { useEffect, useContext } from 'react';
-import GetProducts from '../../services/GetProducts';
+import React, { useState, useEffect } from 'react';
 import Button from '../Button';
-import AppContext from '../../context/AppContext';
+import GetProducts from '../../services/GetProducts';
+import * as S from './style';
 
 const buttonSeeCar = (
   <div>
-    <Button
-      data-testid="checkout-bottom-btn"
-      onClick={ () => console.log('ver carrinho') }
-    >
-      Ver Carrinho
-    </Button>
+    <S.Buttons>
+      <Button
+        dataTestId="checkout-bottom-btn"
+        onClick={ () => console.log('ver carrinho') }
+      >
+        Ver Carrinho
+      </Button>
+    </S.Buttons>
   </div>
 );
 
 const CardProduct = () => {
-  const { products } = useContext(AppContext);
-  useEffect(() => GetProducts(), []);
+  const [products, setProducts] = useState([]);
+  useEffect(() => GetProducts(setProducts), []);
 
   return (
     <div>
@@ -33,18 +35,20 @@ const CardProduct = () => {
           <span data-testid={ `${index}-product-name` }>
             {item.name}
           </span>
-          <Button
-            data-testid={ `${index}-product-plus` }
-            onClick={ () => console.log('somando') }
-          >
-            +
-          </Button>
-          <Button
-            data-testid={ `${index}-product-minus` }
-            onClick={ () => console.log('subtraindo') }
-          >
-            -
-          </Button>
+          <S.Buttons>
+            <Button
+              dataTestId={ `${index}-product-plus` }
+              onClick={ () => console.log('somando') }
+            >
+              +
+            </Button>
+            <Button
+              dataTestId={ `${index}-product-minus` }
+              onClick={ () => console.log('subtraindo') }
+            >
+              -
+            </Button>
+          </S.Buttons>
           { buttonSeeCar }
           <span data-testid="checkout-bottom-btn-value">
             Valor total:
