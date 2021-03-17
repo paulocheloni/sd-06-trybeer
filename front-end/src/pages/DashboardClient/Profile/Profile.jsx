@@ -5,9 +5,10 @@ import Input from '../../../components/Input/Input';
 import { updateUser } from '../../../services/Users'
 
 const handleSaveButton = async (name, email) => {
+  console.log('clicou no botão')
   const storage = JSON.parse(localStorage.getItem('user'))
   const { token } = storage
-  const apiResponse = updateUser(name, email, token)
+  const apiResponse = await updateUser(name, email, token)
   console.log(apiResponse)
 }
 

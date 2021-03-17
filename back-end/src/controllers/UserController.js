@@ -1,24 +1,13 @@
 const { Router } = require('express');
-const jwt = require('jsonwebtoken');
 const { getAll } = require('../models/UserModel');
-const { getEmailService, registerUserService } = require('../services/UserService');
+const { getEmailService, registerUserService, updateUserName } = require('../services/UserService');
+const tokenValidator = require('../middlewares/tokenValidator')
 const status = require('../utils/statusDictionary');
 const messages = require('../utils/messageDictionary');
 const { ThrowError } = require('../middlewares/errorHandler/errorHandler');
+const { secret, jwtConfig, jwtSign, createJWTPayload } = require('../authorization/jwtConfig')
 
 const userRouter = new Router();
-const secret = 'Secret token';
-
-const jwtConfig = {
-  expiresIn: '150m',
-  algorithm: 'HS256',
-};
-
-const createJWTPayload = (user) => ({
-    iss: 'Trybeer',
-    aud: 'indentity',
-    userData: user,
-    });
 
 userRouter.get('/', async (req, res) => {
   const allUsers = await getAll();
@@ -31,7 +20,7 @@ userRouter.post('/login', async (req, res, next) => {
     if (!user.length) throw new ThrowError(status.NOT_FOUND, messages.USER_NOT_FOUND);
     const payload = createJWTPayload(user);
     
-    const token = jwt.sign(payload, secret, jwtConfig);
+    const token = jwtSign(payload, secret, jwtConfig);
     return res.status(status.SUCCESS)
       .json({ token, name: user[0].name, email: user[0].email, role: user[0].role });
   } catch (error) {
@@ -52,12 +41,20 @@ userRouter.post('/register', async (req, res, next) => {
     if (!resultRegister.affectedRows) {
       throw new ThrowError(status.INTERNAL_ERROR, messages.DEFAULT_ERROR);
     }
-    const token = jwt.sign(payload, secret, jwtConfig);
+    const token = jwtSign(payload, secret, jwtConfig);
     return res.status(status.CREATED)
       .json({ token, name, email, role });
   } catch (error) {
     next(error);
   }
 });
+
+userRouter.put('/update', tokenValidator, async (req, res, next) => {
+  console.log(req.body)
+  const { name: newUserName } = req.body;
+  const { email } = req.user;
+  const updatedUser = await updateUserName(newUserName, email)
+  res.status(200);
+})
 
 module.exports = userRouter;
