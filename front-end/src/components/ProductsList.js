@@ -26,6 +26,10 @@ class ProductsList extends React.Component {
     }
   }
 
+  handleLocalStorage(statePrice) {
+    localStorage.setItem('PRICE', statePrice);
+  }
+
   removeItem(id) {
     const { dispatchRemoved, stateCart, stateID } = this.props;
     const newCart = stateCart.filter((element) => element.id !== id);
@@ -73,10 +77,6 @@ class ProductsList extends React.Component {
       dispatchCart(cartItem);
       dispatchID(id);
     }
-  }
-
-  handleLocalStorage(statePrice) {
-    localStorage.setItem('PRICE', statePrice);
   }
 
   render() {
