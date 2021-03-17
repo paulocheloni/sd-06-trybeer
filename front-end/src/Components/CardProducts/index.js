@@ -6,18 +6,27 @@ import { GlobalContext } from '../../Contexts/GlobalContext';
 import S from './styles';
 
 const handleCounter = (
-  { value }, { quantity, setQuantity, stateSumPrice, setStateSumPrice, price },
-) => {
+  { value }, {
+    quantity,
+    setQuantity,
+    stateSumPrice,
+    setStateSumPrice,
+    price,
+    id,
+    cartList,
+    setCartList,
+  },
+  ) => {
   if (value === 'plus') {
     setQuantity(quantity + 1);
     setStateSumPrice(stateSumPrice + Number(price));
-
+    setCartList(() => (if )[...cartList, { id, price, quantiy: quantity + 1 }]);
     localStorage.setItem('total', JSON.stringify(stateSumPrice + Number(price)));
   }
   if (value === 'minus' && quantity > 0) {
     setQuantity(quantity - 1);
     setStateSumPrice(stateSumPrice - Number(price));
-
+    setCartList([...cartList, { id, price, quantity: quantity - 1 }]);
     localStorage.setItem('total', JSON.stringify(stateSumPrice - Number(price)));
   }
 };
@@ -25,7 +34,7 @@ const handleCounter = (
 const CardProducts = ({ product }) => {
   const { id, price, name } = product;
 
-  const { stateSumPrice, setStateSumPrice } = useContext(GlobalContext);
+  const { stateSumPrice, setStateSumPrice, cartList, setCartList } = useContext(GlobalContext);
 
   const [quantity, setQuantity] = useState(0);
 
@@ -35,10 +44,13 @@ const CardProducts = ({ product }) => {
     stateSumPrice,
     setStateSumPrice,
     price,
+    id,
+    cartList,
+    setCartList,
   };
 
   return (
-    <S.Container>
+    <S.Container id={`${id - 1}-product-container`}>
       <S.Price>
         <span data-testid={ `${id - 1}-product-price` }>
           {`R$ ${price.replace('.', ',')}`}
