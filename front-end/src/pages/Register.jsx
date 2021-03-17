@@ -30,7 +30,7 @@ function Register({ history }) {
       setDisplayErr(false);
       if (newUser.tipo === 'administrator') history.push('/admin/orders');
       else history.push('/products');
-      localStorage.setItem('newUser', JSON.stringify(newUser));
+      localStorage.user = JSON.stringify(registerUser.response);
     } else {
       setErrMsg(registerUser.response.message);
       setDisplayErr(true);

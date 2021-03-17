@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import '../../Menu.css';
-import { FiMenu } from 'react-icons/fi'
+import { FiMenu } from 'react-icons/fi';
 import MenuSideBar from './MenuSideBar';
 
 function MenuTop({ name }) {
@@ -8,17 +9,28 @@ function MenuTop({ name }) {
 
   const handleClick = () => {
     setShowSideBar(!showSideBar);
-  }
+  };
 
   return (
-    <div>
+    <header>
       <div className="menuTop">
-        <span data-testid="top-hamburguer" className="menuIcon" onClick={handleClick}><FiMenu /></span>
-        <span data-testid="top-title">{name}</span>
+        <button
+          type="button"
+          data-testid="top-hamburguer"
+          className="menuIcon"
+          onClick={ handleClick }
+        >
+          <FiMenu />
+        </button>
+        <span data-testid="top-title">{ name }</span>
         {showSideBar && <MenuSideBar />}
       </div>
-    </div>
+    </header>
   );
 }
+
+MenuTop.propTypes = {
+  name: PropTypes.string.isRequired,
+};
 
 export default MenuTop;
