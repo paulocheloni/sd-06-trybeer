@@ -35,11 +35,15 @@ const handleSubmitRegister = async (user, checked, setUser, history) => {
   if (checked) {
     setUser({ ...user, role: 'administrator' });
     await register({ ...user, role: 'administrator' })
-      .then((result) => (!result ? console.log('é isso') : history.push('admin/orders')));
+      .then((result) => {
+        if (result) history.push('admin/orders');
+      });
   } else {
     setUser({ ...user, role: 'client' });
     register({ ...user, role: 'client' })
-      .then((result) => (!result ? console.log('é isso 2') : history.push('products')));
+      .then((result) => {
+        if (result) history.push('products');
+      });
   }
 };
 
