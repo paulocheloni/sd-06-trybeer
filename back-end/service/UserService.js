@@ -31,7 +31,7 @@ const verifyEmail = async (req, res, next) => {
   const [exist] = await userModel.findByEmail(email);
 
   if (exist) {
-    res.status(CONFLICT).json({ message: 'this email is already registered' });
+    res.status(CONFLICT).json({ message: 'E-mail already in database.' });
   }
 
   next();

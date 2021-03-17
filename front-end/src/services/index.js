@@ -24,7 +24,7 @@ const handleSubmit = (history, user) => {
 const verifyRegister = (user, setActiveBtn) => {
   const isEmailValid = user.email.match(/\S+@\S+\.\S+/);
   const isPasswordValid = user.password.match(/^[0-9a-zA-Z]{6,50}$/);
-  const isNameValid = user.name.match(/^[a-zA-Z]{12,50}$/);
+  const isNameValid = user.name.match(/^[a-zA-Z ]{12,50}$/);
 
   if (isEmailValid && isPasswordValid && isNameValid) {
     setActiveBtn(true);
