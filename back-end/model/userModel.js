@@ -14,7 +14,16 @@ const updateUserNameByEmail = async (userEmail, updatedName) => {
   );
 };
 
+const createUser = async (name, email, password, role) => {
+  await connection.execute(
+    'INSERT INTO Trybeer.users (name, email, password, role) VALUE (?,?,?,?)',
+    [name, email, password, role],
+  );  
+};
+
 module.exports = {
   findUserByEmail,
   updateUserNameByEmail,
+  createUser, 
+
 };

@@ -14,7 +14,7 @@ app.use('/images', express.static(`${__dirname}/images`));
 
 app.get('/', (req, res) => res.send('ok'));
 
-app.use('/login', userController);
+app.use('/', userController);
 
 app.use('/profile', userController);
 
