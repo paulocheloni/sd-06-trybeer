@@ -2,17 +2,29 @@ import React, { useContext, useState } from 'react';
 import productsContext from '../context/productsContext';
 
 export default function ProductsCard() {
-  const { products } = useContext(productsContext);
+  const { products, cartProducts, setCartProducts } = useContext(productsContext);
   const [totalValue, setTotalValue] = useState(0);
-  const [quantity, setQuantity] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const [quantity, setQuantity] = useState([]);
 
-  // quantity = 0,1...10;
-  // quantity = [0] = 7, [1]= 0, ... [10] = 0;
-  // quantity[index] = quantity + 1;
-  // como o quantity apenas não atualiza a página com o valor novo, chamamos a array com os valores pelo setQuantity que ai autaliza a página.
-  // setQuantity([...quantity]);
+  const handlePlusButton = (event) => {
+    const productId = event.target.id;
+    if (!cartProducts.length) {
+      setCartProducts([{
+        id: productId,
+        name: products[productId].name,
+        price: products[productId].price,
+        url: products[productId].url_image,
+        quantityItem: 1,
+        subTotal: products[productId].price,
+      }]);
+    }
+    const productExists = cartProducts.some((product) => product.id === productId);
+    if(productExists) {
+      setCartProducts(cartProducts.map(()))
+    }
+  };
 
-  const handleOnClickPlusMinusButton = (e) => {
+  /* const handleOnClickPlusMinusButton = (e) => {
     const buttonValuePlusOrMinus = e.target.value;
     const index = e.target.id;
     // console.log('Nosso quantity', quantity);
@@ -30,7 +42,7 @@ export default function ProductsCard() {
       setQuantity([quantity[index]]);
       setTotalValue(((products[index].price) * quantity[index]).toFixed(2));
     }
-  };
+  }; */
 
   return (
     <div>
@@ -53,7 +65,7 @@ export default function ProductsCard() {
           <button
             type="button"
             data-testid={ `${index}-product-plus` }
-            onClick={ handleOnClickPlusMinusButton }
+            onClick={ handlePlusButton }
             value="Plus"
             id={ index }
           >
@@ -66,7 +78,7 @@ export default function ProductsCard() {
           <button
             type="button"
             data-testid={ `${index}-product-minus` }
-            onClick={ handleOnClickPlusMinusButton }
+            onClick={ handlePlusButton }
             value="Minus"
             id={ index }
           >

@@ -4,10 +4,13 @@ import productsContext from './productsContext';
 
 export default function ProductsProvider({ children }) {
   const [products, setProducts] = useState([]);
+  const [cartProducts, setCartProducts] = useState([]);
 
   const context = {
     products,
     setProducts,
+    cartProducts,
+    setCartProducts,
   };
 
   return (
