@@ -5,8 +5,6 @@ import MenuTop from '../components/MenuTop';
 import getAllProducts from '../services/productsServices';
 import context from '../context/Context';
 
-// import { getToken, getUserByEmail } from '../services/api';
-
 function Products() {
   const [products, setProducts] = useState([]);
   const { totalCart, setTotalCart } = useContext(context);
@@ -25,24 +23,17 @@ function Products() {
     if (!storageUser) {
       history.push('/login');
     }
-    // if (storageUser) {
-    //  const user = await getToken(storageUser.token);
-    //   if (user.role === 'client') {
-    //     history.push('/products');
-    //   } else if (user.role === 'admin' || user.role === 'administrator') {
-    //     history.push('/admin/orders');
-    //   }
-    // }
   };
 
   useEffect(() => {
     const storageTotalCart = parseFloat(localStorage.getItem('totalCart'));
-    // console.log(storageTotalCart);
     if (storageTotalCart) {
       setTotalCart(storageTotalCart);
     }
     findAllProducts();
     auxFunc();
+    if (!localStorage.getItem('cart')) localStorage.setItem('cart', '[]');
+    console.log(localStorage.getItem('cart'));
   }, []);
 
   useEffect(() => {
@@ -51,7 +42,7 @@ function Products() {
     } else {
       setBtnDisable(true);
     }
-    localStorage.setItem('totalCart', totalCart);
+    localStorage.setItem('totalCart', totalCart.toFixed(2));
   }, [totalCart]);
 
   return (
