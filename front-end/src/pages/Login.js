@@ -35,7 +35,8 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="login-form">
+      <h1>TRYBEER</h1>
       <form onSubmit={ handleSignUp }>
         <p>Email</p>
         <input

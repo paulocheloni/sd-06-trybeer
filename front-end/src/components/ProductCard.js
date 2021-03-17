@@ -38,21 +38,23 @@ const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
       />
       <p data-testid={ `${index}-product-name` }>{name}</p>
       <p data-testid={ `${index}-product-price` }>{`R$ ${formatedPrice}`}</p>
-      <button
-        onClick={ increaseQuantity }
-        data-testid={ `${index}-product-plus` }
-        type="button"
-      >
-        +
-      </button>
-      <p data-testid={ `${index}-product-qtd` }>{quantity}</p>
-      <button
-        onClick={ decreaseQuantity }
-        data-testid={ `${index}-product-minus` }
-        type="button"
-      >
-        -
-      </button>
+      <div className="quantity-controller">
+        <button
+          onClick={ decreaseQuantity }
+          data-testid={ `${index}-product-minus` }
+          type="button"
+        >
+          -
+        </button>
+        <p data-testid={ `${index}-product-qtd` }>{quantity}</p>
+        <button
+          onClick={ increaseQuantity }
+          data-testid={ `${index}-product-plus` }
+          type="button"
+        >
+          +
+        </button>
+      </div>
     </div>
   );
 };

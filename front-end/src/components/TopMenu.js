@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { IoBeerOutline } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
 
 const TopMenu = ({ titleMenu }) => {
@@ -27,6 +28,9 @@ const TopMenu = ({ titleMenu }) => {
         </i>
       </button>
       <p data-testid="top-title">{ titleMenu }</p>
+      <IconContext.Provider value={ { size: '3em' } }>
+        <IoBeerOutline />
+      </IconContext.Provider>
     </header>
   );
 };

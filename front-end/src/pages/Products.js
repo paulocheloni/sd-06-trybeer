@@ -18,31 +18,31 @@ function Products({ history }) {
   };
 
   const verifyIfUserIsLogged = () => {
-    if (user === {}) {
+    if (!user) {
       return history.push('/login');
     }
   };
 
   useEffect(() => {
     fetchProducts();
-    verifyIfUserIsLogged();
-  }, [verifyIfUserIsLogged]);
+  }, []);
 
   return (
     <div>
       <TopMenu />
       <SidebarMenu />
-      {products.map(({ id, name, price, url_image: urlImage }, index) => (
-        <ProductCard
-          id={ id }
-          key={ index }
-          name={ name }
-          price={ price }
-          url_image={ urlImage }
-          index={ index }
-        />
-      ))}
-      Products!!
+      <div className="products-container">
+        {products.map(({ id, name, price, url_image: urlImage }, index) => (
+          <ProductCard
+            id={ id }
+            key={ index }
+            name={ name }
+            price={ price }
+            url_image={ urlImage }
+            index={ index }
+          />
+        ))}
+      </div>
       <Cart />
     </div>
   );
