@@ -3,12 +3,14 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const userController = require('./controller/usercontroller');
 const registerController = require('./controller/registerController');
+const productsController = require('./controller/productsController');
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/login', userController);
 app.use('/register', registerController);
+app.use('/products', productsController);
 
 const port = 3001;
 
