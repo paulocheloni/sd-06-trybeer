@@ -1,22 +1,18 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import Form from '../components/Form';
 import PaperContainer from '../../../design-system/containers/PaperContainer';
 
-const Login = () => {
+const Products = () => {
   const storage = JSON.parse(localStorage.getItem('user'));
-  const role = storage ? storage.role : '';
   const existToken = storage ? storage.token : false;
 
   return (
     <div>
-      { (existToken && role === 'client') && <Redirect to="/products" /> }
-      { (existToken && role === 'administrator') && <Redirect to="/admin/orders" /> }
+      { !existToken && <Redirect to="/login" /> }
       <PaperContainer>
-        <p>Login</p>
-        <Form />
+        <p>Produtos</p>
       </PaperContainer>
     </div>
   );
 };
-export default Login;
+export default Products;
