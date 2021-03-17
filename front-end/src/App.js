@@ -31,6 +31,7 @@ function App() {
         <Route exact path="/admin/profile" component={ AdminProfile } />
         <Route exact path="/admin/orders/:id" component={ AdminOrdersDetail } />
         <Route exact path="/admin/orders" component={ AdminOrders } />
+        <Route exact path="/" component={ Login } />
       </Switch>
     </BrowserRouter>
   );

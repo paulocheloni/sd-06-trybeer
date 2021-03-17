@@ -1,25 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import fetchLogin from '../../services/Login';
+import { login } from '../../services/Users';
 
 import './Login.css';
 
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
-
-const validateEmail = (email) => {
-  const regexEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]{0,2})?$/;
-  return regexEmail.test(email);
-};
-
-const validatePassword = (password) => {
-  const regexPassword = /[a-z0-9]+/;
-  const minLength = 6;
-  return (regexPassword.test(password) && password.length >= minLength);
-};
+import { validateEmail, validatePassword } from '../../utils/validations';
 
 const userRedirect = async (email, password, history) => {
-  const result = await fetchLogin(email, password);
+  const result = await login(email, password);
   if (result.message) return console.log(result.message);
   localStorage.setItem('user', JSON.stringify(result));
   if (result.role === 'administrator') return history.push('/admin/orders');
@@ -63,7 +53,7 @@ export default function Login() {
           placeholder="Informe a senha"
         />
         <Button
-          title="ENTRAR"
+          title="Entrar"
           testId="signin-btn"
           isDisabled={ isDisabled }
           onClick={ () => userRedirect(email, password, history) }

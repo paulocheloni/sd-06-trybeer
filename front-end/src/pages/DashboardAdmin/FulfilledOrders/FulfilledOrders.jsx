@@ -1,9 +1,10 @@
 import React from 'react';
+import Header from '../../../components/Header/Header';
 
 export default function FulfilledOrders() {
   return (
     <div>
-      <h1>FulfilledOrders</h1>
+      <Header title="TryBeer" user="admin" />
     </div>
   );
 }
