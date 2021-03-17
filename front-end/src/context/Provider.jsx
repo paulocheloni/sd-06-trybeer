@@ -14,7 +14,8 @@ function Provider({ children }) {
     const maxLength = 5;
     function validateForm(emailInput, passwordInput) {
       // const emailRegex = /\S+@\S+\.\S+/;
-      if (validator.isEmail(emailInput) && passwordInput.length > maxLength) return setValidForm(true);
+      if (validator.isEmail(emailInput)
+      && passwordInput.length > maxLength) return setValidForm(true);
       // if (emailRegex.test(emailInput) && passwordInput.length > maxLength) return setValidForm(true);
       setValidForm(false);
     }
@@ -26,7 +27,8 @@ function Provider({ children }) {
     const nameReg = /^[A-Za-z ]{2,30}$/;
     const maxlength = 12;
     const maxlengthPass = 6;
-    if (name.length >= maxlength && nameReg.test(name) && validator.isEmail(emailInput)
+    if (name.length >= maxlength && nameReg.test(name)
+    && validator.isEmail(emailInput)
     // if (name.length >= maxlength && nameReg.test(name) && emailReg(emailInput)
     && passwordInput.length >= maxlengthPass) return setValidRegister(true);
     setValidRegister(false);
