@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
+import { BiUser } from 'react-icons/bi';
+import { FiMail, FiLock } from 'react-icons/fi';
+
 import { loginUser, registerNewUser } from '../../Services/Apis';
 
 import Container from './styles';
@@ -44,6 +47,7 @@ const form = (params) => {
     isChecked, setIsChecked, emailAlreadyExists, setEmailAlreadyExists,
   } = params;
   const paramsRegistered = { name, email, password, isChecked, setEmailAlreadyExists };
+  const theme = JSON.parse(localStorage.getItem('@trybeer:theme'));
   return (
     <form onSubmit={ (e) => handleSubmit(e, paramsRegistered) }>
       <h1>Register</h1>
@@ -52,6 +56,8 @@ const form = (params) => {
         label="Nome"
         dataTestid="signup-name"
         onChange={ ({ target }) => setName(target.value) }
+        themeStorage={ theme && theme.title }
+        icon={ BiUser }
       />
       {(emailAlreadyExists) ? <p>E-mail already in database.</p> : null}
       <Input
@@ -59,12 +65,16 @@ const form = (params) => {
         label="Email"
         dataTestid="signup-email"
         onChange={ ({ target }) => setEmail(target.value) }
+        themeStorage={ theme && theme.title }
+        icon={ FiMail }
       />
       <Input
         id="password-input"
         label="Senha"
         dataTestid="signup-password"
         onChange={ ({ target }) => setPassword(target.value) }
+        themeStorage={ theme && theme.title }
+        icon={ FiLock }
       />
       <label
         htmlFor="check"

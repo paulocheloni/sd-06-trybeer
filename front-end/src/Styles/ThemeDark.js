@@ -4,8 +4,11 @@ export default {
   colors: {
     primary: '#232323',
     secondary: '#191919',
-    text: '#EFEFEF',
+    text: '#EAEAEA',
     border: '#EFEFEF',
+    backgroundInput: '#191919',
+    grayButton: '#E5E5E5',
+    secondaryMobile: '#232323',
 
     title: '#fff',
     white: '#fff',
