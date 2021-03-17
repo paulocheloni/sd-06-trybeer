@@ -5,22 +5,13 @@ const { LoginService } = require('../service');
 const generateToken = rescue(async (req, res) => {
   const { email } = req.body;
 
-  const token = await LoginService.generateToken(email);
-
-  return res.status(200).json({ token });
-});
-
-const isUserAdmin = rescue(async (req, res) => {
-  const { email } = req.body;
-
-  const [role] = await LoginService.isUserAdmin(email);
+  const user = await LoginService.generateToken(email);
 
   return res
     .status(200)
-    .json(role);
+    .json(user);
 });
 
 module.exports = {
   generateToken,
-  isUserAdmin,
 };
