@@ -1,13 +1,13 @@
 const connection = require('./connection');
 
-const isUserAdmin = async (email) => {
+const generateToken = async (email) => {
   const [result] = await connection.execute(
-    'SELECT role FROM Trybeer.users WHERE email=?', [email],
+    'SELECT id, name, email, role FROM Trybeer.users WHERE email=?', [email],
   );
 
   return result;
 };
 
 module.exports = {
-  isUserAdmin,
+  generateToken,
 };

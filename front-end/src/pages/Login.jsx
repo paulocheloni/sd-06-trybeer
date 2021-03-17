@@ -8,6 +8,8 @@ import api from '../services/api';
 function Login({ history }) {
   const [user, setUser] = useState({ email: '', password: '' });
   const [valid, setValid] = useState(true);
+  const [errMsg, setErrMsg] = useState('');
+  const [displayErr, setDisplayErr] = useState(false);
 
   useEffect(() => {
     visibilityBtnLogin(user, setValid);
@@ -19,17 +21,23 @@ function Login({ history }) {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    const userData = await api.generateToken(user.email, user.password);
 
-    const token = await api.generateToken(user.email, user.password);
-    const role = await api.isUserAdmin(user.email);
-    console.log('token:', token);
-    console.log('role:', role);
-
-    if (role === 'administrator') {
-      history.push('/admin/orders');
-    } else { history.push('/products'); }
-    localStorage.setItem('user', JSON.stringify(user.email, token));
+    if (userData.result) {
+      const { role } = userData.response;
+      setErrMsg(false);
+      if (role === 'administrator') {
+        history.push('/admin/orders');
+      } else {
+        history.push('/products');
+      }
+      localStorage.user = JSON.stringify(userData.response);
+    } else {
+      setDisplayErr(true);
+      setErrMsg(userData.response.message);
+    }
   };
+
   return (
     <LoginContext.Provider
       value={ {
@@ -38,6 +46,8 @@ function Login({ history }) {
         handleIputs: handleChange,
         handleButton: handleClick,
         router: history,
+        messageError: errMsg,
+        displayError: displayErr,
       } }
     >
       <div>
