@@ -45,7 +45,7 @@ function Login() {
           disabled={ buttonLogin }
 
         >
-          ENTRAR
+          Entrar
         </Button>
         <Link
           to="/register"
