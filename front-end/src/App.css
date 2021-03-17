@@ -145,6 +145,7 @@ button {
 }
 
 .cart-container {
+  right: 0;
   height: 30px;
   align-items: center;
   justify-content: space-around;
