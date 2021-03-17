@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router';
 import CartItem from '../components/CartItem';
 import MenuTop from '../components/MenuTop';
+import context from '../context/Context';
 
 function Checkout() {
   const [cart, setCart] = useState([]);
-  const [totalValue, setTotalValue] = useState(0);
   const [disabled, setDisabled] = useState(true);
   const [street, setStreet] = useState('');
   const [houseNR, setHouseNR] = useState(0);
+  const [success, setSuccess] = useState(false);
+  const { totalCart, setTotalCart } = useContext(context);
 
   const history = useHistory();
 
@@ -22,7 +24,7 @@ function Checkout() {
   };
 
   const handleDisabled = () => {
-    if (street !== '' && houseNR !== 0 && totalValue !== 0) {
+    if (street !== '' && houseNR !== 0 && totalCart !== 0) {
       return setDisabled(false);
     }
     setDisabled(true);
@@ -30,7 +32,7 @@ function Checkout() {
 
   const getLocalStorage = () => {
     setCart(JSON.parse(localStorage.getItem('cart')));
-    setTotalValue(JSON.parse(localStorage.getItem('totalCart')));
+    setTotalCart(JSON.parse(localStorage.getItem('totalCart')));
   };
 
   useEffect(() => {
@@ -42,20 +44,36 @@ function Checkout() {
     handleDisabled();
   }, [street, houseNR]);
 
+  const handleDelay = () => {
+    setSuccess(false);
+    history.push('/products');
+  };
+
+  const handleClick = () => {
+    const twothousand = 2000;
+    setSuccess(true);
+    setTimeout(() => handleDelay(), twothousand);
+  };
+
   return (
     <div>
       <MenuTop title="Finalizar Pedido" />
       <div>
-        {cart.map((item, index) => (
+        {!cart[0] ? <p>Não há produtos no carrinho</p> : cart.map((item, index) => (
           <CartItem
             key={ index }
+            setCart={ setCart }
             index={ index }
             name={ item.name }
             quantity={ item.quantity }
             price={ item.price }
           />))}
       </div>
-      <p data-testid="order-total-value">{`Total: R$ ${totalValue}`}</p>
+      <p
+        data-testid="order-total-value"
+      >
+        {`Total: R$ ${totalCart.toFixed(2).replace('.', ',')}`}
+      </p>
       <form>
         <h2>Endereço</h2>
         <label htmlFor="street">
@@ -80,10 +98,12 @@ function Checkout() {
           disabled={ disabled }
           type="button"
           data-testid="checkout-finish-btn"
+          onClick={ handleClick }
         >
           Finalizar Pedido
         </button>
       </form>
+      {success ? <p>Compra realizada com sucesso!</p> : null}
     </div>
   );
 }

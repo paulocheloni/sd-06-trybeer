@@ -12,9 +12,11 @@ function Card(props) {
 
   const handleQuantity = () => {
     const productLocal = JSON.parse(localStorage.getItem('cart'));
-    const prodIndex = productLocal.findIndex((prod) => prod.name === name);
-    if (prodIndex !== MINUSONE) {
-      setQuantity(productLocal[prodIndex].quantity);
+    if (productLocal) {
+      const prodIndex = productLocal.findIndex((prod) => prod.name === name);
+      if (prodIndex !== MINUSONE) {
+        setQuantity(productLocal[prodIndex].quantity);
+      }
     }
   };
 
