@@ -13,10 +13,20 @@ const port = 3001;
 const bodyParser = require('body-parser');
 
 const usersRouter = require('./controller/usersController');
+const productsRouter = require('./controller/productsController');
+
+// app.use((req, res, next) => {
+//   console.log(req.path);
+//   console.log(res.path);
+//   next();
+// });
+
+app.use(express.static(`${__dirname}/images`));
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.use('/users', usersRouter);
+app.use('/products', productsRouter);
 
 app.listen(port, () => console.log(`Listening to port ${port}`));
