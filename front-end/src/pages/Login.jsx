@@ -8,6 +8,8 @@ import api from '../services/api';
 function Login({ history }) {
   const [user, setUser] = useState({ email: '', password: '' });
   const [valid, setValid] = useState(true);
+  const [errMsg, setErrMsg] = useState('');
+  const [displayErr, setDisplayErr] = useState(false);
 
   useEffect(() => {
     visibilityBtnLogin(user, setValid);
@@ -19,26 +21,30 @@ function Login({ history }) {
 
   const handleClick = async (e) => {
     e.preventDefault();
-
-    const token = await api.generateToken(user.email, user.password);
-    const role = await api.isUserAdmin(user.email);
-    console.log('token:', token);
-    console.log('role:', role);
-
-    if (role === 'administrator') {
-      history.push('/admin/orders');
-    } else { history.push('/products'); }
-    localStorage.setItem('user', JSON.stringify(user.email, token));
+    const loginValidate = await api.generateToken(user.email, user.password);
+    if (loginValidate.result) {
+      const { token, role } = loginValidate.response;
+      setErrMsg(false);
+      console.log(token, '', role, loginValidate);
+      localStorage.setItem('user', JSON.stringify({ email: user.email, token }));
+      if (role === 'administrator') history.push('/admin/orders');
+      else history.push('/products');
+    }
+    setDisplayErr(true);
+    setErrMsg(loginValidate.response.message);
   };
+
   return (
     <LoginContext.Provider
-      value={ {
+      value={{
         dataUser: user,
         isDisabled: valid,
         handleIputs: handleChange,
         handleButton: handleClick,
         router: history,
-      } }
+        messageError: errMsg,
+        displayError: displayErr,
+      }}
     >
       <div>
         <FormLogin />

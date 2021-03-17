@@ -2,20 +2,16 @@ const axios = require('axios');
 
 const url = 'http://localhost:3001';
 
-const generateToken = async (email, password) => axios
-  .post(`${url}/login`, {
-    email,
-    password,
-  })
-  .then((res) => res.data)
-  .catch((err) => err.response.data);
-
-const isUserAdmin = async (email) => axios
-  .post(`${url}/login/role`, {
-    email,
-  })
-  .then((res) => res.data)
-  .catch((err) => err.response.data);
+const generateToken = async (email, password) => axios.post(`${url}/login`, {
+  email,
+  password,
+})
+  .then((res) => ({ response: res.data, result: true }))
+  .catch((err) => {
+    if (err.response) {
+      return { response: err.response.data, result: false };
+    }
+  });
 
 const registerUser = async (name, email, password, role) => axios
   .post(`${url}/register`, {
@@ -24,11 +20,15 @@ const registerUser = async (name, email, password, role) => axios
     password,
     role,
   })
-  .then((res) => res.data)
-  .catch((err) => err.response.data);
+  .then((res) => ({ response: res.data, result: true }))
+  .catch((error) => {
+    if (error.response) {
+      return { response: error.response.data, result: false };
+    }
+  });
 
 module.exports = {
   generateToken,
   registerUser,
-  isUserAdmin,
+  // isUserAdmin,
 };

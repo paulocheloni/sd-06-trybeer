@@ -10,4 +10,5 @@ const isUserAdmin = async (email) => {
 
 module.exports = {
   isUserAdmin,
+  // userRole,
 };

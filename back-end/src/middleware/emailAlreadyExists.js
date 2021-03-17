@@ -5,11 +5,10 @@ module.exports = async (req, res, next) => {
 
   const [emailAlreadyExists] = await UserModel.getUserByEmail(email);
 
-  if (emailAlreadyExists !== undefined) {
+  if (emailAlreadyExists === undefined) {
+    return next();
+  } 
     return res
     .status(409)
-    .json({ message: 'Email Already Exists' });
-  }
-
-  next();
+    .json({ message: 'E-mail already in database.' });
 };
