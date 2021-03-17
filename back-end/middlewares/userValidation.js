@@ -18,7 +18,20 @@ function validateEmail(req, res, next) {
   next();
 }
 
+function nameValidation(req, res, next) {
+  const { name } = req.body;
+  const MINIMUM_NAME_LENGTH = 11;
+  const isNameValid = name.length > MINIMUM_NAME_LENGTH
+    && (/^[A-Za-z'\s]+$/.test(name));
+    if (!isNameValid) {
+      return res.status(BAD_REQUEST).json({ message: 'Invalid name.' });
+    }
+    next();
+}
+
 module.exports = {
   validatePassword,
   validateEmail,
+  nameValidation,
+
 };

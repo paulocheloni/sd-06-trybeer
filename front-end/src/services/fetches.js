@@ -26,8 +26,15 @@ const updateUserName = async (email, name) => {
   await axios.put(`${path}/profile`, { email, name });
 };
 
+const createUser = async (email, name, password, role) => {
+  const newUserToken = await axios
+    .post(`${path}/register`, { email, name, password, role });
+  return newUserToken.data;
+};
+
 export default {
   fetchUserByEmail,
   updateUserName,
   fetchAllProducts,
+  createUser,
 };

@@ -19,7 +19,20 @@ const updateUserNameByEmail = async (userEmail, updatedName) => {
   await userModel.updateUserNameByEmail(userEmail, updatedName);
 };
 
+const createUser = async (name, email, password, role) => {
+  const userFound = await userModel.findUserByEmail(email);  
+  if (userFound) {
+    return {
+      status: UNPROCESSABLE_ENTITY,
+      message: 'Email alredy exists ',
+      isError: true,
+    };
+  }
+  await userModel.createUser(name, email, password, role);
+};
+
 module.exports = {
   findUserByEmail,
   updateUserNameByEmail,
+  createUser,
 };

@@ -25,18 +25,13 @@ export default function Register() {
     const doesTheEmailExist = await fetches.fetchUserByEmail(email, password);
     console.log(doesTheEmailExist);
     if (doesTheEmailExist) return setEmailAlreadyExists('E-mail already in database.');
-
-    //     const userDataRegister = {
-    //   email,
-    //   name,
-    //   role,
-    // };
-    // const userToken = createToken(userDataRegister);
+    const newUser = await fetches.createUser(email, name, password, role);
+    console.log('newUser', newUser);
     if (role === 'client') {
-      // localStorage.setItem('token', userToken);
+      localStorage.setItem('token', newUser.userToken);
       history.push('/products');
     } else {
-      // localStorage.setItem('token', userToken);
+      localStorage.setItem('token', newUser.userToken);
       history.push('/admin/orders');
     }
   };
