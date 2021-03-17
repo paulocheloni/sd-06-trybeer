@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-// import GetProducts from '../../services/GetProducts';
+import React, { useEffect, useContext } from 'react';
+import GetProducts from '../../services/GetProducts';
 import Button from '../Button';
-// import GetProducts from '../../services/GetProducts';
-// import mockProduct from '../../Mocks/mocksProduct';
+import AppContext from '../../context/AppContext';
 
 const buttonSeeCar = (
   <div>
@@ -17,12 +15,7 @@ const buttonSeeCar = (
 );
 
 const CardProduct = () => {
-  const [products, setProducts] = useState([]);
-  const GetProducts = async () => {
-    const response = await axios.get('http://localhost:3001/products');
-    console.log('resposta axius:', response.data);
-    setProducts(response.data);
-  };
+  const { products } = useContext(AppContext);
   useEffect(() => GetProducts(), []);
 
   return (
