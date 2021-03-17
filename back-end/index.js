@@ -1,12 +1,21 @@
 const express = require('express');
 const cors = require('cors');
 <<<<<<< HEAD
+<<<<<<< HEAD
 const UserController = require('./src/controller/UsersControler');
 const ProfileController = require('./src/controller/ProfileController');
 =======
 const LoginController = require('./src/controller/LoginControler');
 const UsersController = require('./src/controller/UsersController');
 >>>>>>> b04a57646c8acd03b1533cc996acc137afb3ec2c
+=======
+
+const UserController = require('./src/controller/UsersControler');
+const ProfileController = require('./src/controller/ProfileController');
+
+const LoginController = require('./src/controller/LoginControler');
+const UsersController = require('./src/controller/UsersController');
+>>>>>>> d52de752d8d865aaf7ff00a39f6b2173c297bf9f
 
 const app = express();
 
