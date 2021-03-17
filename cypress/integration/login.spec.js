@@ -11,13 +11,13 @@ import {
 } from '../actions/actionBase';
   
 describe('Crie uma página de login', () => {
-  // before(() => {
-  //   createAndInsertsDataBase();
-  // });
+  before(() => {
+    createAndInsertsDataBase();
+  });
 
-  // after(() => {
-  //   dropAndTruncateDataBase();
-  // });
+  after(() => {
+    dropAndTruncateDataBase();
+  });
 
   beforeEach(() => {
     cy.visit(`${Cypress.config().baseUrl}/login`);
@@ -32,7 +32,7 @@ describe('Crie uma página de login', () => {
     verifyElementVisible('[data-testid="email-input"]');
     verifyContainsText('Senha');
     verifyElementVisible('[data-testid="password-input"]');
-    verifyContainsText('ENTRAR');
+    verifyContainsText('Entrar');
     verifyElementVisible('[data-testid="signin-btn"]');
     verifyContainsText('Ainda não tenho conta');
     verifyElementVisible('[data-testid="no-account-btn"]');
