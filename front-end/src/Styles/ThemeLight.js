@@ -11,6 +11,7 @@ export default {
     grayButton: '#E5E5E5',
     shadowMobile: '#E5E5E5',
     shadowCards: '#AAAAAA',
+    backgroundMouseOver: ' #DAE8C3',
 
     white: '#fff',
     background: '#f2f3f5',
