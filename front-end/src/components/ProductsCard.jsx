@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import './ProductCard.css';
 import productsContext from '../context/productsContext';
 
 export default function ProductsCard() {
@@ -33,48 +34,56 @@ export default function ProductsCard() {
   };
 
   return (
-    <div>
+    <div className="products-container">
       { products.length && products.map((product, index) => (
         <div
+          className="product-card"
           key={ index }
         >
-          <span data-testid={ `${index}-product-price` }>
-            { product.price }
-          </span>
-          <img
-            data-testid={ `${index}-product-img` }
-            src={ product.url_image }
-            alt="Imagem do produto"
-            width="50px"
-          />
-          <span data-testid={ `${index}-product-name` }>
-            { product.name }
-          </span>
-          <button
-            type="button"
-            data-testid={ `${index}-product-plus` }
-            onClick={ handleOnClickPlusMinusButton }
-            value="Plus"
-            id={ index }
-          >
-            +
-          </button>
-          <span>
-            { quantity[index] }
-            {/* { quantity } */}
-          </span>
-          <button
-            type="button"
-            data-testid={ `${index}-product-minus` }
-            onClick={ handleOnClickPlusMinusButton }
-            value="Minus"
-            id={ index }
-          >
-            -
-          </button>
+          <div className="card-body">
+            <p data-testid={ `${index}-product-price` }>
+              { product.price }
+            </p>
+            <img
+              data-testid={ `${index}-product-img` }
+              src={ product.url_image }
+              alt="Imagem do produto"
+              width="50px"
+            />
+            <h5 className="card-title" data-testid={ `${index}-product-name` }>
+              { product.name }
+            </h5>
+            <div className="quantity-control">
+              <button
+                className="button"
+                type="button"
+                data-testid={ `${index}-product-plus` }
+                onClick={ handleOnClickPlusMinusButton }
+                value="Plus"
+                id={ index }
+              >
+                +
+              </button>
+              <span>
+                { quantity[index] }
+                {/* { quantity } */}
+              </span>
+              <button
+                className="button"
+                type="button"
+                data-testid={ `${index}-product-minus` }
+                onClick={ handleOnClickPlusMinusButton }
+                value="Minus"
+                id={ index }
+              >
+                -
+              </button>
+            </div>
+          </div>
         </div>))}
       <div>
         <button
+          className="btn btn-primary"
           type="button"
           data-testid="checkout-bottom-btn"
         >
