@@ -12,15 +12,16 @@ const Container = styled.div`
     margin-right: 10px;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 0 5px black;
+    box-shadow: 0 0 5px ${theme.colors.shadowCards};
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     @media (max-width: 500px) {
-      width: 47.5%;
+      width: 48.5%;
       margin-left: 0;
       margin-right: 0;
+      margin-bottom: 10px;
     }
   `}
 `;
@@ -28,8 +29,8 @@ const Container = styled.div`
 const Price = styled.div`
   ${({ theme }) => css`
     color: ${theme.colors.text};
+    font-weight: 500;
   `}
-  font-weight: 500;
 `;
 
 const Image = styled.div`

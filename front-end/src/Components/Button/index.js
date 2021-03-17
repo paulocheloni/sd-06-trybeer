@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { GlobalContext } from '../../Contexts/GlobalContext';
 
 import CompButton from './styles';
 
@@ -15,22 +16,29 @@ const Button = ({
   dataTestid,
   position,
   botton,
-}) => (
-  <CompButton
-    type={ type }
-    color={ color }
-    width={ width }
-    heigth={ heigth }
-    fontSize={ fontSize }
-    disabled={ disabled }
-    onClick={ onClick }
-    data-testid={ dataTestid }
-    position={ position }
-    botton={ botton }
-  >
-    {children}
-  </CompButton>
-);
+  marginBottom,
+}) => {
+  const { stateSideBar } = useContext(GlobalContext);
+
+  return (
+    <CompButton
+      type={ type }
+      color={ color }
+      width={ width }
+      heigth={ heigth }
+      fontSize={ fontSize }
+      disabled={ disabled }
+      onClick={ onClick }
+      data-testid={ dataTestid }
+      position={ position }
+      botton={ botton }
+      marginBottom={ marginBottom }
+      stateSideBar={ stateSideBar }
+    >
+      {children}
+    </CompButton>
+  );
+};
 
 Button.defaultProps = {
   color: '',
@@ -39,6 +47,7 @@ Button.defaultProps = {
   position: '',
   botton: '',
   width: '',
+  marginBottom: '20px',
 };
 
 Button.propTypes = {
@@ -53,6 +62,7 @@ Button.propTypes = {
   dataTestid: PropTypes.string.isRequired,
   position: PropTypes.string,
   botton: PropTypes.string,
+  marginBottom: PropTypes.string,
 };
 
 export default Button;

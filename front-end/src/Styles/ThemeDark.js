@@ -9,6 +9,9 @@ export default {
     backgroundInput: '#191919',
     grayButton: '#E5E5E5',
     secondaryMobile: '#232323',
+    shadowMobile: 'black',
+    shadowCards: 'black',
+    backgroundMouseOver: '#232323',
 
     title: '#fff',
     white: '#fff',
