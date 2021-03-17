@@ -6,7 +6,7 @@ import Orders from './pages/Orders';
 import Products from './pages/Products';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
-import Provider from './Context/Provider'
+import Provider from './Context/Provider';
 
 function App() {
   return (
