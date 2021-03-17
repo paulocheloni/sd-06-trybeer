@@ -9,18 +9,16 @@ import TrybeerContext from '../context/TrybeerContext';
 
 function Products({ history }) {
   const [products, setProducts] = useState([]);
-  const { email, password } = useContext(TrybeerContext);
+  const { user } = useContext(TrybeerContext);
+
   const fetchProducts = async () => {
     await fetchFunctions.get('products').then((productsArray) => {
       setProducts(productsArray);
     });
   };
 
-  const verifyIfUserIsLogged = async () => {
-    const loggedUser = await fetchFunctions.post('login', { email, password });
-    const savedUser = JSON.parse(localStorage.getItem('user'));
-
-    if ((!savedUser) && (Object.keys(loggedUser).length === 1)) {
+  const verifyIfUserIsLogged = () => {
+    if (user === {}) {
       return history.push('/login');
     }
   };

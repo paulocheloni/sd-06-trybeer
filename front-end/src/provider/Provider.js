@@ -4,15 +4,25 @@ import TrybeerContext from '../context/TrybeerContext';
 
 function TrybeerProvider({ children }) {
   const [cart, setCart] = useState([]);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [user, setUser] = useState({});
 
   useEffect(() => {
-    const localCart = JSON.parse(localStorage.getItem('cart'));
-    if (localCart) {
-      setCart(localCart);
-    }
+    const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart'));
+    const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
+
+    if (cartFromLocalStorage) setCart(cartFromLocalStorage);
+    if (userFromLocalStorage) setUser(userFromLocalStorage);
   }, []);
+
+  // const updateUserName = (name) => {
+  //   const user = [...user, name];
+  //   localStorage.setItem('user', JSON.stringify(user));
+  // }
+
+  const setUserLogged = (userData) => {
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+  };
 
   const updateProductQuantity = (id, quantity, price) => {
     const product = { id, quantity, price };
@@ -26,10 +36,10 @@ function TrybeerProvider({ children }) {
     cart,
     setCart,
     updateProductQuantity,
-    email,
-    setEmail,
-    password,
-    setPassword,
+    // updateUserName,
+    user,
+    setUser,
+    setUserLogged,
   };
 
   return (
