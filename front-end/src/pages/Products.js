@@ -30,8 +30,9 @@ function Products() {
   }, [totalCart]);
 
   return (
-    <div>
+    <div className="product-page">
       <MenuTop title="TryBeer" />
+      <div className="card-container">
       { products.map((product, index) => (
         <Card
           key={ index }
@@ -40,7 +41,9 @@ function Products() {
           urlImage={ product.url_image }
           price={ product.price }
         />)) }
+      </div>
       <button
+        className="checkout-btn-bottom btn-success"
         type="button"
         data-testid="checkout-bottom-btn"
         disabled={ btnDisable }

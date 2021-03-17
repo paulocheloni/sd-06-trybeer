@@ -6,10 +6,12 @@ function RegisterForm(props) {
 
   return (
     <div>
+      <h2 className="login-title">Cadastrar Conta</h2>
       <form>
         <label htmlFor="signup-name">
           Nome
           <input
+            className="form-control imput-login"
             type="name"
             data-testid="signup-name"
             name="signup-name"
@@ -19,6 +21,7 @@ function RegisterForm(props) {
         <label htmlFor="signup-email">
           Email
           <input
+            className="form-control imput-login"
             type="email"
             data-testid="signup-email"
             name="signup-email"
@@ -28,6 +31,7 @@ function RegisterForm(props) {
         <label htmlFor="signup-password">
           Senha
           <input
+            className="form-control imput-login"
             type="password"
             data-testid="signup-password"
             name="signup-password"
@@ -35,14 +39,15 @@ function RegisterForm(props) {
           />
         </label>
         <label htmlFor="signup-seller">
-          Quero vender
           <input
+            className="form-check-input"
             type="checkbox"
             data-testid="signup-seller"
             name="signup-seller"
             id="checkbox"
             onChange={ ({ target }) => setCheck(target.value) }
           />
+          Quero vender 
         </label>
       </form>
     </div>
