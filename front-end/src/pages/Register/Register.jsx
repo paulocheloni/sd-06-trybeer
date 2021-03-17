@@ -6,6 +6,8 @@ import Checkbox from '../../components/checkbox/Checkbox';
 import { register } from '../../services/Users';
 import { validateEmail, validatePassword, validateName } from '../../utils/validations';
 import './Register.css';
+import { internet } from 'faker';
+
 
 const inputComponents = [
   {
@@ -27,6 +29,8 @@ const inputComponents = [
     placeholder: 'Informe a senha',
   },
 ];
+
+console.log(internet.email())
 
 const registerRedirect = async (
   { name, email, password, isSeller, history },
@@ -56,6 +60,7 @@ export default function Register() {
   const [fetchEmail, setFetchEmail] = useState('');
   const history = useHistory();
   useEffect(() => {
+    console.log('entrou no user effect')
     if (validateEmail(email) && validatePassword(password) && validateName(name)) {
       setIsDisabled(false);
     }
