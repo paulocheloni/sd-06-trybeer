@@ -3,6 +3,7 @@ import api from '../services/api'
 
 export default function Cards() {
   const [ products, setProducts ] = useState([]);
+  const [ quantProd, setQuantProd ] = useState([]);
 
   const featchApiProduct = async() => {
     const allProducts = await api.fetchProducts();
@@ -10,15 +11,21 @@ export default function Cards() {
   };
 
   const somarQtd = (index) => {
-    const qtd = document.getElementById(index);
-    const numero = qtd.innerText;
-    console.log(qtd);
-    numero += 1;
-    qtd.innerText = numero;
+    // const qtd = document.getElementById(index);
+    // const numero = qtd.innerText;
+    // console.log(qtd);
+    // numero += 1;
+    // qtd.innerText = numero;
+    // ...quantProd, index : qtd de index
+  }
+
+  const preenchendoONumerodeQtd = () => {
+    setQuantProd( ...quantProd, )
   }
 
   useEffect(() => {
     featchApiProduct();
+    preenchendoONumerodeQtd();
   }, []);
 
   return (
@@ -36,13 +43,12 @@ export default function Cards() {
           >
             -
           </button>
-          <span data-testid={`${index}-product-qtd`} id={index} >0</span>
-          {console.log(document.getElementById(index))}
+          <span data-testid={`${index}-product-qtd`} id={index} >{quantProd}</span>
           <button
             id={`${index}-plus`}
             data-testid={`${index}-product-plus`}
             type="button"
-            onClick={(index) => somarQtd(index)}
+            // onClick={(index) => somarQtd(index)}
           >
             +
           </button>
