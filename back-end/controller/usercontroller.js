@@ -21,9 +21,9 @@ userController.put('/profile', async (req, res) => {
 });
 userController.get('/profile', checkAuthorization, async (req, res) => {
   const { email } = req.payload;
-
+  console.log('foi');
   const [[user]] = await findUserByEmail(email);
-  res.status(200).json({ 'usuário logado': { name: user.name, email } });
+  res.status(200).json({ name: user.name, email });
 });
 
 module.exports = userController;
