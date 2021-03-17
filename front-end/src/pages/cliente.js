@@ -5,6 +5,7 @@ import { loadState } from '../services/localStorage';
 import api from '../services/api';
 import context from '../Context/ContextAPI';
 import ButtonAdd from '../components/buttonAdd';
+import ButtonSub from '../components/buttonSub';
 
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
@@ -52,6 +53,12 @@ function Cliente() {
 
   const classes = useStyles();
 
+  const prodQty = (tile) => {
+    const idx = cart.findIndex((elem) => elem.name === tile.name);
+    if (idx === -1) return '0';
+    return `${cart[idx].quantity}`;
+  };
+
   return (
     <div>
       <NavBar content="TryBeer" />
@@ -71,8 +78,13 @@ function Cliente() {
               title={tile.name}
               subtitle={<span>price: {tile.price}</span>}
               actionIcon={
-                <ButtonAdd product={tile} aria-label={`info about ${tile.name}`} className={classes.icon}>
-                </ButtonAdd>
+                <>
+                  <ButtonAdd product={ tile } />
+                  <span>
+                    {prodQty(tile)}
+                  </span>
+                  <ButtonSub product={ tile } />
+                </>
               }
             />
           </GridListTile>

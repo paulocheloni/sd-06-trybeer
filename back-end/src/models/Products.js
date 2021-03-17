@@ -1,7 +1,7 @@
 const connection = require('./connection');
 
 const getAllProducts = async () => {
-  const [products] = await connection.execute('SELECT * FROM trybeer.products');
+  const [products] = await connection.execute('SELECT * FROM Trybeer.products');
   return products;
 };
 

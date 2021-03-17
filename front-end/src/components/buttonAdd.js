@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import context from '../Context/ContextAPI';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import icon from '../resources/Add_Circle.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,17 +22,17 @@ function ButtonAdd({product}) {
       return setCart([...cart, {quantity: 1, totalPrice: product.price, ...product}]);
     }
     const isIndex = cart.findIndex((prod) => prod.name === product.name)
-    const newCart = cart;
+    const newCart = [...cart];
     newCart[isIndex].quantity = newCart[isIndex].quantity + 1;
-    newCart[isIndex].totalPrice = (newCart[isIndex].totalPrice + product.price).toFixed(2);
-
+    newCart[isIndex].totalPrice = (newCart[isIndex].quantity * product.price).toFixed(2);
+    console.log(newCart[isIndex].totalPrice)
     setCart(newCart);
   }
 
   return (
     <div className={classes.root}>
       <IconButton color="primary" aria-label="add to shopping cart" onClick={addButtonOnCart}>
-        <AddShoppingCartIcon />
+        <img src={icon} />
       </IconButton>
     </div>
   );
