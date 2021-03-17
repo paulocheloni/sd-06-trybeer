@@ -2,80 +2,72 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import BeersAppContext from '../context/BeersAppContext';
 import fetchApiJsonBody from '../service/fetchApi';
-import funcValidations from '../service/funcValidations'
+import funcValidations from '../service/funcValidations';
 
 import '../style/LoginRegister.css';
 
+const logo = require('../images/logo_provisorio.png');
+
 function Signup({ history }) {
-  const {
-    setUser,
-  } = useContext(BeersAppContext);
+  const { setUser } = useContext(BeersAppContext);
 
   const [checked, setChecked] = useState(false);
   const [valid, setValid] = useState(true);
-  const [inputValues, setInputValues] = useState({ name: '', email: '', password: '', role: 'client' });
+  const [inputValues, setInputValues] = useState({
+    name: '',
+    email: '',
+    password: '',
+    role: 'client',
+  });
   const [errMessage, setErrMessage] = useState('');
-  
   const handleCheck = () => setChecked(!checked);
 
   useEffect(() => {
     if (checked) {
-      setInputValues({ ...inputValues, role: 'administrator' })
+      setInputValues({ ...inputValues, role: 'administrator' });
     } else {
-      setInputValues({ ...inputValues, role: 'client' })
+      setInputValues({ ...inputValues, role: 'client' });
     }
-  }, [checked])
-  
+  }, [checked]);
+
   const isValid = () => {
     const email = funcValidations.validateEmail(inputValues.email);
     const password = funcValidations.validatePassword(inputValues.password);
     const name = funcValidations.validateName(inputValues.name);
-    if(email && name && password) {
+    if (email && name && password) {
       setValid(false);
     } else {
       setValid(true);
     }
   };
-  
-  useEffect(()=> {
-    isValid();
-  }, [inputValues.name, inputValues.password, inputValues.email]);
+
+  useEffect(() => isValid(),
+    [inputValues.name, inputValues.password, inputValues.email]);
 
   const handleChange = ({ target }) => {
-    setInputValues({ ...inputValues, [target.name]: target.value});
+    setInputValues({ ...inputValues, [target.name]: target.value });
   };
 
   const handleClick = async () => {
     const ola = await fetchApiJsonBody('/register', inputValues);
-    console.log('ola', ola)
-    if(ola.err) {
-      console.log('entrou no erro')
+    if (ola.err) {
       setErrMessage(ola.err);
       return;
     }
-    setUser(ola)
-    if(ola.role === 'administrator') {
-      console.log('entrou no admin')
+    setUser(ola);
+    if (ola.role === 'administrator') {
       history.push('/admin/orders');
-    } else if(ola.role === 'client') {
-      console.log('entrou no client')
+    } else if (ola.role === 'client') {
       history.push('products');
     }
-
-    // if(checked === true) {
-    //   history.push('admin/Home');
-    // } else {
-    //   history.push('/products');
-    // };
   };
 
-  return(
-    <div className='login-register'>
-      {console.log('inputValues', inputValues)}
+  return (
+    <div className="login-register">
+      <img src={ logo } className="img-logo-login" alt="logo" />
       <form>
         <label htmlFor="name">
           Nome
-          <br />
           <input
             type="text"
             id="name"
@@ -85,10 +77,8 @@ function Signup({ history }) {
             onChange={ handleChange }
           />
         </label>
-        <br />
         <label htmlFor="email">
           Email
-          <br />
           <input
             type="email"
             id="email"
@@ -98,10 +88,8 @@ function Signup({ history }) {
             onChange={ handleChange }
           />
         </label>
-        <br />
         <label htmlFor="password">
           Senha
-          <br />
           <input
             type="password"
             id="password"
@@ -111,7 +99,6 @@ function Signup({ history }) {
             onChange={ handleChange }
           />
         </label>
-        <br />
         <label htmlFor="vender">
           Quero vender
           <input
@@ -121,7 +108,6 @@ function Signup({ history }) {
             onChange={ handleCheck }
           />
         </label>
-        <br />
         <span>{errMessage}</span>
         <button
           id="sign-up"
@@ -134,7 +120,7 @@ function Signup({ history }) {
         </button>
       </form>
     </div>
-  )
-};
+  );
+}
 
 export default Signup;

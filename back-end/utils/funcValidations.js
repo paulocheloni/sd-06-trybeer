@@ -6,15 +6,15 @@ const validateEmail = (email) => {
 const validateName = (name) => {
   const nameRegex = /^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+$/;
   if (nameRegex.test(name)) {
-    return (name.length >= 12) ? true : false;
+    return (name.length >= 12);
   }
   return false;
 };
 
-const validatePassword = (password) => (password.length >= 6) ? true : false;
+const validatePassword = (password) => password.length >= 6;
 
 module.exports = {
   validateEmail,
   validateName,
-  validatePassword
-}
+  validatePassword,
+};
