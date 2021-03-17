@@ -34,7 +34,12 @@ function Login() {
 
       <form>
         <Input type="email" setValue={ setEmail } value={ email } label="Email" />
-        <Input type="password" setValue={ setPassword } value={ password } label="Senha" />
+        <Input
+          type="password"
+          setValue={ setPassword }
+          value={ password }
+          label="Senha"
+        />
         <Button
           className="signin-btn"
           onClick={ async () => setUser(await login({ email, password })) }

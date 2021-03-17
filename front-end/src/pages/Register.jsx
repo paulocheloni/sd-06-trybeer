@@ -46,7 +46,8 @@ function Register() {
 
   return (
     <RegisterForm
-      state={ { name, email, password, seller, formValidated, messageError, responseError } }
+      state={ {
+        name, email, password, seller, formValidated, messageError, responseError } }
       setState={ { setName, setEmail, setPassword, setSeller, setMessageError } }
       handleClick={ handleClick }
     />

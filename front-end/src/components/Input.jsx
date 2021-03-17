@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function Input({ type, value, setValue, label }) {
   return (
     <label htmlFor={ type } className={ `${type}-label` }>
-      {`${label || type}`}
+      {`${label}`}
       <input
         type={ type }
         name={ type }
@@ -24,4 +24,5 @@ Input.propTypes = {
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   setValue: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired,
 };
