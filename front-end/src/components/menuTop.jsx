@@ -14,9 +14,7 @@ function MenuTop({ title }) {
         onClick={ () => setOpen(!open) }
       >
         <i data-testid="top-hamburguer">
-          <IconContext.Provider>
             <GiHamburgerMenu />
-          </IconContext.Provider>
         </i>
       </button>
       <h1 className="title" data-testid="top-title">
