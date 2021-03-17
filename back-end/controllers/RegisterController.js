@@ -1,18 +1,34 @@
 const { Router } = require('express');
-// const { createOne } = require('../models/UsersService');
+const jwt = require('jsonwebtoken');
+const { createOne } = require('../models/UsersService');
 
 const routerRegister = Router();
 
-// routerRegister.post('/', async (req, res, next) => {
-//   const { name, email, password, seller } = req.body;
-//   const role = seller ? 'administrator' : 'client';
-//   // try {    
-//   //   const response = await createOne(name, email, password, role);
-//   // } catch (err) {
+const jwtConfig = {
+  expiresIn: '3h',
+  algorithm: 'HS256',
+};
 
-//   // }
-//   // console.log(response);
-//   return res.status(200).json({ message: 'test' });
-// });
+const SECRET = 'senha';
+
+routerRegister.post('/', async (req, res, next) => {
+  const { name, email, password, seller } = req.body.user;
+  console.log(name, email, password, seller);
+  const role = seller ? 'administrator' : 'client';  
+  
+    try {    
+    await createOne(name, email, password, role);
+    console.log('after');
+    const payload = {
+      iss: 'Trybeer',
+      aud: 'indentity',
+      userData: email,
+    };
+    const token = jwt.sign(payload, SECRET, jwtConfig);
+    return res.status(200).json({ user: { name, email, role, token } });
+  } catch (err) {
+    return next({ status: 400, message: 'E-mail already in database.' });
+  }
+});
 
 module.exports = routerRegister;

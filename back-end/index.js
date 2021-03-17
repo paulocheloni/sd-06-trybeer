@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 // const images = require('../images.tar.gz');
 const { routerLogin, routerRegister, routerProducts, routerProfile } = require('./controllers');
+
 const app = express();
 const port = process.env.PORT || 3001;
 
@@ -19,7 +20,7 @@ app.use('/profile', routerProfile);
 app.use('/register', routerRegister);
 
 app.use(async (err, _req, res, _next) => {
-  res.status(err.status).json(err.message);
+  res.status(err.status).json({ message: err.message });
 });
 
 app.listen(port, () => `Running on ${port}`);

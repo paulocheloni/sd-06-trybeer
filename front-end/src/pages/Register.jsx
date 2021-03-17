@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import InputRegister from '../components/InputRegister';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import RegisterForm from '../components/RegisterForm';
 import register from '../methods/register';
 import { RegisterSchema } from '../validationsSchemas/register';
 
@@ -8,49 +9,48 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [seller, setSeller] = useState(false);
+  const [formValidated, setFormValidated] = useState(false);
+  const [messageError, setMessageError] = useState('');
+  const [responseError, setResponseError] = useState('');
+  const url = useHistory();
+
+  useEffect(() => {
+    const handleChange = async () => {
+      try {
+        await RegisterSchema.validate({ name, email, password });
+        setFormValidated(true);
+        setMessageError('');
+      } catch (err) {
+        setMessageError(err.message);
+        console.log(err.message, messageError);
+      }
+    };
+    handleChange();
+  }, [name, email, password, messageError]);
 
   const handleClick = async () => {
     try {
-      await RegisterSchema.validate({ name, email, password });
-      const response = await register(name, email, password, seller);
-      console.log(response);
+      const response = await register({ name, email, password, seller });
+      if (response.message) throw response;
+      setResponseError('');
+      if (seller) {
+        url.push('/admin/orders');
+      } else {
+        url.push('/products');
+      }
     } catch (err) {
-      console.warn(err);
+      console.log(err.message);
+      setResponseError(err.message);
     }
   };
 
   return (
-    <>
-      <h1>Pagina de Registro</h1>
-      <InputRegister
-        name="name"
-        setValue={ setName }
-        value={ name }
-        label="Nome"
-      />
-      <InputRegister
-        name="email"
-        setValue={ setEmail }
-        value={ email }
-        label="Email"
-        type="email"
-      />
-      <InputRegister
-        name="password"
-        setValue={ setPassword }
-        value={ password }
-        label="Senha"
-        type="password"
-      />
-      <InputRegister
-        name="seller"
-        setValue={ setSeller }
-        checked={ seller }
-        label="Quero vender"
-        type="checkbox"
-      />
-      <button type="button" onClick={ async () => handleClick() }>registrar</button>
-    </>
+    <RegisterForm
+      state={ {
+        name, email, password, seller, formValidated, messageError, responseError } }
+      setState={ { setName, setEmail, setPassword, setSeller, setMessageError } }
+      handleClick={ handleClick }
+    />
   );
 }
 
