@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 function MenuSide() {
   const route = useHistory();
   return (
-    <div className="side-menu">
+    <div className="side-menu-container">
       <button
         data-testid="side-menu-item-products"
         type="button"

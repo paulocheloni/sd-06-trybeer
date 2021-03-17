@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import MenuSide from './menuSide';
 
 function MenuTop({ title }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   return (
     <div className="top">
       <button
@@ -19,7 +19,7 @@ function MenuTop({ title }) {
       <h1 className="title" data-testid="top-title">
         { title }
       </h1>
-      <MenuSide hidden={ open } />
+      {open && <MenuSide />}
     </div>
   );
 }
