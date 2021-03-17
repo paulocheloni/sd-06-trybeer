@@ -1,10 +1,9 @@
 const { Router } = require('express');
-const ProfileService = require('../services/ProfileService');
-const ProfileUpdateService = require('../services/ProfileUpdateService');
+const { ProfileAuthorization, ProfileUpdateService } = require('../services/ProfileService');
 
 const ProfileController = new Router();
 
-ProfileController.post('/', ProfileService);
+ProfileController.post('/', ProfileAuthorization);
 ProfileController.put('/:id', ProfileUpdateService);
 
 module.exports = ProfileController;

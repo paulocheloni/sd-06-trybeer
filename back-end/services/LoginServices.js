@@ -6,7 +6,7 @@ const {
   validatePassword,
 } = require('../utils/funcValidations');
 
-const objErr = (err, status) => ({ err, status });
+const objErr = (err, statusCode) => ({ err, statusCode });
 
 const emailAndPasswordIsExists = (email, password) => {
   switch (false) {
