@@ -6,44 +6,35 @@ import RegisterInputs from './components/RegisterInputs';
 import ContextBeer from '../../context/ContextBeer';
 import registerValidation from '../../utils/registerValidation';
 
-const STATUS_CONFLICT = 409;
-
 function Register() {
   const history = useHistory();
   const [duplicated, setDuplicated] = useState('');
-  const [whatSTheRole, setWhatSTheRole] = useState('client');
-  const [isChecked, setIsChecked] = useState(false);
   const {
     registerName,
     registerEmail,
     registerPassword,
-    registerIsDisabled,
-    setregisterIsDisabled,
+    isDisabled,
+    setIsDisabled,
   } = useContext(ContextBeer);
 
   useEffect(() => {
-    registerValidation(
-      registerName, registerEmail, registerPassword, setregisterIsDisabled,
-    );
-  }, [registerName, registerEmail, registerPassword, setregisterIsDisabled]);
+    registerValidation(registerName, registerEmail, registerPassword, setIsDisabled);
+  }, [registerName, registerEmail, registerPassword, setIsDisabled]);
 
-  // const isChecked = () => {
-  //   if (document.getElementById('wannasell').checked) return true;
-  // };
+  const isChecked = () => (document.getElementById('wannasell').checked);
 
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
+  const STATUS_CONFLICT = 409;
+
   const signUpOnClick = () => {
-    if (isChecked) {
-      setWhatSTheRole('administrator');
-    }
-    axios
+    const whatSTheRole = isChecked() ? 'administrator' : 'client';
+    const token = axios
       .post(`${baseUrl}/register`, {
         name: registerName,
         email: registerEmail,
         password: registerPassword,
-        role: whatSTheRole,
-      })
+        role: whatSTheRole })
       .then((response) => {
         localStorage.setItem('user', JSON.stringify(response.data));
         if (response.data.role === 'administrator') history.push('/admin/orders');
@@ -55,6 +46,7 @@ function Register() {
           setDuplicated(err.response.data.message);
         }
       });
+    return token;
   };
 
   return (
@@ -68,7 +60,7 @@ function Register() {
           <RegisterInputs />
           <Button
             onClick={ () => signUpOnClick() }
-            isDisabled={ registerIsDisabled }
+            isDisabled={ isDisabled }
             bgColor="green-600"
             testId="signup-btn"
           >
@@ -84,8 +76,6 @@ function Register() {
               id="wannasell"
               label="Quero vender"
               value="wannasell"
-              checked={ isChecked }
-              onChange={ () => setIsChecked(!isChecked) }
             />
             Quero vender
           </label>
