@@ -39,16 +39,14 @@ function Register({ history }) {
 
   return (
     <RegisterContext.Provider
-      value={
-        {
-          change: handleChange,
-          click: handleClick,
-          user: newUser,
-          isValid: valid,
-          messageError: errMsg,
-          displayError: displayErr,
-        }
-      }
+      value={ {
+        change: handleChange,
+        click: handleClick,
+        user: newUser,
+        isValid: valid,
+        messageError: errMsg,
+        displayError: displayErr,
+      } }
     >
       <FormRegister />
     </RegisterContext.Provider>

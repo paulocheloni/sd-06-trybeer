@@ -22,15 +22,11 @@ function Login({ history }) {
   const handleClick = async (e) => {
     e.preventDefault();
     const userData = await api.generateToken(user.email, user.password);
-
     if (userData.result) {
       const { role } = userData.response;
       setErrMsg(false);
-      if (role === 'administrator') {
-        history.push('/admin/orders');
-      } else {
-        history.push('/products');
-      }
+      if (role === 'administrator') history.push('/admin/orders');
+      else history.push('/products');
       localStorage.user = JSON.stringify(userData.response);
     } else {
       setDisplayErr(true);
@@ -40,17 +36,15 @@ function Login({ history }) {
 
   return (
     <LoginContext.Provider
-      value={
-        {
-          dataUser: user,
-          isDisabled: valid,
-          handleIputs: handleChange,
-          handleButton: handleClick,
-          router: history,
-          messageError: errMsg,
-          displayError: displayErr,
-        }
-      }
+      value={ {
+        dataUser: user,
+        isDisabled: valid,
+        handleIputs: handleChange,
+        handleButton: handleClick,
+        router: history,
+        messageError: errMsg,
+        displayError: displayErr,
+      } }
     >
       <div>
         <FormLogin />
