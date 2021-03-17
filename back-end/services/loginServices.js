@@ -10,8 +10,8 @@ const generateToken = (user) => {
 
 const validateLogin = async (email, password) => {
   const [user] = await loginModels.validateLogin(email, password);
-  
-  if (user.length === 0) throw Error('Usuário não cadastrado');
+  console.log(user)
+  if (!user) return { error: true, code: 'not_found', message: 'User not found.' };
 
   const token = generateToken(email);
   const loggedInUser = {
@@ -19,6 +19,8 @@ const validateLogin = async (email, password) => {
     name: user.name,
     email: user.email,
     token,
+    role: user.role,
+    
   };
 
   return loggedInUser;

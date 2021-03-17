@@ -33,10 +33,18 @@ export async function validate(email, password) {
     })
       .then((response) => response.data);
     localStorage.setItem('token', JSON.stringify(result.token));
+    
     return result;
   } catch (error) {
-    console.log(error);
+    if (error.response) {
+      return {
+        status: error.response.status,
+        statusText: error.response.statusText,
+        message: error.response.data.message,
+      };
+
   }
+}
 }
 
 export async function edit(prevName, nextName) {
@@ -81,3 +89,4 @@ export async function getProducts() {
     }
   }
 }
+
