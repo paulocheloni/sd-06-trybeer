@@ -25,4 +25,4 @@ const products = [
   },
 ];
 
-export default
+export default products;

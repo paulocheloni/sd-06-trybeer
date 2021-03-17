@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import AppContext from '../../context/AppContext';
 import Button from '../Button';
-import mokProduct from '../../Mocks/mocksProduct';
+import mocksProduct from '../../Mocks/mocksProduct';
 
 const CardProduct = () => {
-  const { products, setProducts } = useContext(AppContext);
-  useEffect(() => setProducts(mokProduct), []);
+  const { products } = useContext(AppContext);
+  // useEffect(() => setProducts(mocksProduct), []);
   return (
     <div>
       {products.map((item, index) => (
