@@ -4,7 +4,7 @@ import ControllerHeader from '../components/ControllerHeader';
 function Products() {
   return (
     <div>
-      <ControllerHeader/>
+      <ControllerHeader />
       Produtos
     </div>
   );

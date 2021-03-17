@@ -16,7 +16,7 @@ function App() {
         <Route exact path="/"><Login /></Route>
         <Route exact path="/login"><Login /></Route>
         <Route exact path="/register"><Register /></Route>
-        <Route exact path="/products"><Products/></Route>
+        <Route exact path="/products"><Products /></Route>
       </div>
     </BrowserRouter>
   );
