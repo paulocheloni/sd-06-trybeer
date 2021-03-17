@@ -13,6 +13,7 @@ function App() {
             <Route path="/register" component={ Signup } />
             <Route path="/profile" component={ CostumerProfile } />
             <Route path="/products" component={ CostumerProducts } />
+            <Route path="/orders" component={ () => <h1>/cliente/meuspedidos</h1> } />
             <Route path="/admin/orders" component={ () => <h1>/admin/orders</h1> } />
             <Route path="/" component={ () => <Redirect to="/login" /> } />
           </Switch>
