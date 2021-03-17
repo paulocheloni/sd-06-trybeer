@@ -7,7 +7,7 @@ const registerController = require('./controller/registerController');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/login', userController);
+app.use('/', userController);
 app.use('/register', registerController);
 
 const port = 3001;

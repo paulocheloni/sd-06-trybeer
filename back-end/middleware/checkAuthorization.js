@@ -6,7 +6,7 @@ const checkAuthorization = (req, res, next) => {
   const payload = validateToken(token);
   if (!token) return res.status(unauthorized).json({ message: 'missing auth token' });
   if (!payload) return res.status(unauthorized).json({ message: 'jwt malformed' });
-  req.payload = payload;
+  req.payload = payload; // deixa valor do payload no req.
   next();
 };
 
