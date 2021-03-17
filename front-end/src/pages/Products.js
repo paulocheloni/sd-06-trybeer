@@ -5,9 +5,11 @@ import MenuTop from '../components/MenuTop';
 import getAllProducts from '../services/productsServices';
 import context from '../context/Context';
 
+// import { getToken, getUserByEmail } from '../services/api';
+
 function Products() {
   const [products, setProducts] = useState([]);
-  const { totalCart } = useContext(context);
+  const { totalCart, setTotalCart } = useContext(context);
   const [btnDisable, setBtnDisable] = useState(true);
   const history = useHistory();
 
@@ -16,10 +18,32 @@ function Products() {
     setProducts(allProducts);
   };
 
+  const auxFunc = async () => {
+    const storageUser = JSON.parse(localStorage.getItem('user'));
+    console.log(storageUser);
+
+    if (!storageUser) {
+      history.push('/login');
+    }
+    // if (storageUser) {
+    //  const user = await getToken(storageUser.token);
+    //   if (user.role === 'client') {
+    //     history.push('/products');
+    //   } else if (user.role === 'admin' || user.role === 'administrator') {
+    //     history.push('/admin/orders');
+    //   }
+    // }
+  };
+
   useEffect(() => {
+    const storageTotalCart = parseFloat(localStorage.getItem('totalCart'));
+    // console.log(storageTotalCart);
+    if (storageTotalCart) {
+      setTotalCart(storageTotalCart);
+    }
     findAllProducts();
-    console.log(btnDisable);
-  }, [btnDisable]);
+    auxFunc();
+  }, []);
 
   useEffect(() => {
     if (totalCart !== 0) {
@@ -27,6 +51,7 @@ function Products() {
     } else {
       setBtnDisable(true);
     }
+    localStorage.setItem('totalCart', totalCart);
   }, [totalCart]);
 
   return (

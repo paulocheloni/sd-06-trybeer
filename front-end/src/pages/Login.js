@@ -24,6 +24,7 @@ function Login() {
     const storageUser = JSON.parse(localStorage.getItem('user'));
     if (storageUser) {
       const user = await getToken(storageUser.token);
+      console.log(user);
       if (user.role === 'client') {
         history.push('/products');
       } else if (user.role === 'admin' || user.role === 'administrator') {
@@ -34,7 +35,7 @@ function Login() {
 
   useEffect(() => {
     auxFunc();
-  }, [auxFunc]);
+  }, []);
 
   useEffect(() => {
     if (password.length >= minPassword && regex.test(email)) {
