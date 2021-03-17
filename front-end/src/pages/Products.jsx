@@ -6,6 +6,8 @@ export default function Products() {
     <div>
       <MenuTop title="TryBeer" />
       <Cards />
+      <button data-testid="checkout-bottom-btn">Ver Carrinho</button>
+      <span data-testid="checkout-bottom-btn-value"> Valor Total: X</span>
     </div>
   );
 }
