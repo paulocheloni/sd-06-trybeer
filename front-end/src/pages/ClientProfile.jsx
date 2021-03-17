@@ -13,7 +13,7 @@ function ClientProfile() {
     return (
       <div>
         <h1 data-testid="top-title">
-        Meu perfil
+          Meu perfil
         </h1>
         <InputProfileName
           setValue={ setNewName }
