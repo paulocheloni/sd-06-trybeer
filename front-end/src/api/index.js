@@ -52,8 +52,9 @@ export async function edit(prevName, nextName) {
     const response = await axios.put(`${URL_BASE}register/edit-user`, {
       prevName, nextName,
     });
+    console.log(response);
     return response;
-  } catch (error) {
+  } catch (error) { 
     if (error.response) {
       return {
         status: error.response.status,
