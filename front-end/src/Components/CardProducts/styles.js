@@ -18,9 +18,10 @@ const Container = styled.div`
     justify-content: space-between;
 
     @media (max-width: 500px) {
-      width: 47.5%;
+      width: 48.5%;
       margin-left: 0;
       margin-right: 0;
+      margin-bottom: 10px;
     }
   `}
 `;

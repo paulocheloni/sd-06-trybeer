@@ -16,6 +16,7 @@ const Button = ({
   dataTestid,
   position,
   botton,
+  marginBottom,
 }) => {
   const { stateSideBar } = useContext(GlobalContext);
 
@@ -31,6 +32,7 @@ const Button = ({
       data-testid={ dataTestid }
       position={ position }
       botton={ botton }
+      marginBottom={ marginBottom }
       stateSideBar={ stateSideBar }
     >
       {children}
@@ -45,6 +47,7 @@ Button.defaultProps = {
   position: '',
   botton: '',
   width: '',
+  marginBottom: '20px',
 };
 
 Button.propTypes = {
@@ -59,6 +62,7 @@ Button.propTypes = {
   dataTestid: PropTypes.string.isRequired,
   position: PropTypes.string,
   botton: PropTypes.string,
+  marginBottom: PropTypes.string,
 };
 
 export default Button;
