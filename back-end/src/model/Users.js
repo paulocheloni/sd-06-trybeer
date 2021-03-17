@@ -9,10 +9,12 @@ exports.getByEmail = async (email) => (
     .then(([[user]]) => user || null)
 );
 
-exports.create = async ({ email, password, role }) =>
+exports.create = async ({ name, email, password, role }) =>
   connection
-    .execute('INSERT INTO users (email, password) VALUES (??)', [
+    .execute('INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)', [
+      name,
       email,
       password,
+      role,
     ])
     .then(([result]) => ({ id: result.insertId, email, password, role }));
