@@ -50,7 +50,7 @@ function ClientProfile() {
 
   useEffect(() => {
     handleDisabled();
-  }, [, newName]);
+  }, [newName]);
 
   return (
     <div>
