@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Input({ type, value, setValue }) {
+function Input({ type, value, setValue, label }) {
   return (
     <label htmlFor={ type } className={ `${type}-label` }>
-      {`${type}`}
+      {`${label || type}`}
       <input
         type={ type }
         name={ type }

@@ -10,7 +10,7 @@ const mergeSchema = (...schemas) => {
 };
 
 export const nameSchema = yup.object().shape({
-  name: yup.string()
+  name: yup.string().matches(/^[a-zA-Z\s]*$/)
     .min(minNameLength,
       'deve conter, no mínimo, 12 letras, sem números ou caracteres especiais'),
 });

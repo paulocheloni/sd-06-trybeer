@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InputRegister from '../components/InputRegister';
+import {Redirect, useHistory} from 'react-router-dom';
 import register from '../methods/register';
 import { RegisterSchema } from '../validationsSchemas/register';
 
@@ -8,16 +9,47 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [seller, setSeller] = useState(false);
+  const [formValidated, setFormValidated] = useState(false)
+  const [messageError, setMessageError] = useState('');
+  const url = useHistory()
 
-  const handleClick = async () => {
+  const handleChange = async () => {
     try {
       await RegisterSchema.validate({ name, email, password });
-      const response = await register(name, email, password, seller);
-      console.log(response);
+      setFormValidated(true);      
+      setMessageError('')
     } catch (err) {
-      console.warn(err);
+      setMessageError(err.message);
+      console.log(err.message, messageError)
+    }
+  }
+
+  useEffect(() => {
+    handleChange()
+
+  }, [name, email, password])
+
+  
+
+
+  
+
+  const handleClick = async () => {
+    try {      
+      const response = await register({ name, email, password, seller });
+      if (response.message) throw response
+      if (seller) {
+        url.push('/admin/orders')
+      } else {
+        url.push('/products')
+      }
+    } catch (err) {
+      console.log(err.message)
+      setMessageError(err.message)
     }
   };
+
+  
 
   return (
     <>
@@ -49,7 +81,8 @@ function Register() {
         label="Quero vender"
         type="checkbox"
       />
-      <button type="button" onClick={ async () => handleClick() }>registrar</button>
+      <p>{messageError !== '' ? messageError : null}</p>
+      <button type="button" disabled={!formValidated} data-testid="signup-btn" onClick={ async () => handleClick() }>Cadastrar</button>
     </>
   );
 }

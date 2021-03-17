@@ -21,7 +21,7 @@ app.use('/products', routerProducts);
 app.use('/register', routerRegister);
 
 app.use(async (err, _req, res, _next) => {
-  res.status(err.status).json(err.message);
+  res.status(err.status).json({ message: err.message });
 });
 
 app.listen(port, () => `Running on ${port}`);

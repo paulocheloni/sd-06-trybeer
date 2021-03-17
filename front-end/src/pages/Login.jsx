@@ -25,7 +25,7 @@ function Login() {
 
   if (user.role) {
     return user.role === 'administrator'
-      ? <Redirect to="/admin/profile" />
+      ? <Redirect to="/admin/orders" />
       : <Redirect to="/products" />;
   }
   return (
@@ -33,19 +33,20 @@ function Login() {
     <main>
 
       <form>
-        <Input type="email" setValue={ setEmail } value={ email } />
-        <Input type="password" setValue={ setPassword } value={ password } />
+        <Input type="email" setValue={ setEmail } value={ email } label="Email" />
+        <Input type="password" setValue={ setPassword } value={ password } label="Senha" />
         <Button
           className="signin-btn"
           onClick={ async () => setUser(await login({ email, password })) }
           disabled={ buttonLogin }
 
         >
-          Entrar
+          ENTRAR
         </Button>
         <Link
           to="/register"
           className="no-account-btn"
+          data-testid="no-account-btn"
         >
           Ainda não tenho conta
         </Link>
