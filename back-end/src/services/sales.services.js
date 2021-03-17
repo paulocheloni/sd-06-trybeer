@@ -1,7 +1,9 @@
 const { sales } = require('../models');
 
-const getById = async (userId) => sales.getById(userId);
+const getByUser = async (userId) => sales.getByUser(userId);
+const getById = async (saleId) => sales.getById(saleId);
 
 module.exports = {
+  getByUser,
   getById,
 };
