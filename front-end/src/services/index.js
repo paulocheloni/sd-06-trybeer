@@ -50,10 +50,15 @@ const handleCheckbox = (checked, setChecked, setUser, user) => {
   setChecked(!checked);
 };
 
+const redirectMenuBar = (history, payloadUrl) => {
+  history.push(payloadUrl);
+};
+
 export {
   verifyEmailAndPassword,
   handleSubmit,
   verifyRegister,
   handleCheckbox,
   handleSubmitRegister,
+  redirectMenuBar,
 };

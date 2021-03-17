@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { verifyEmailAndPassword, handleSubmit } from '../services';
+import ControllerHeader from '../components/ControllerHeader';
 
 function Login() {
   const [password, setPassword] = useState('');
@@ -16,6 +17,7 @@ function Login() {
 
   return (
     <div>
+      <ControllerHeader />
       <span>Email</span>
       <input
         type="email"
