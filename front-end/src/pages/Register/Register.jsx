@@ -28,14 +28,11 @@ const inputComponents = [
   },
 ];
 
-console.log(internet.email());
-
 const registerRedirect = async (
   { name, email, password, isSeller, history },
   setFetchEmail) => {
   const role = isSeller ? 'administrator' : 'client';
   const result = await register(name, email, password, role);
-  // console.log(result);
   if (result.message) return setFetchEmail(result.message);
   localStorage.setItem('user', JSON.stringify(result));
   if (result.role === 'administrator') return history.push('/admin/orders');
