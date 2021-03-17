@@ -12,7 +12,14 @@ const getByFilter = async ({ table, filter, value }) => {
   return results;
 };
 
+const queryById = async (table, id) => {
+  const QUERY = 'SELECT * FROM ?? WHERE id = ?';
+  const [[result]] = await connection.query(QUERY, [table, id]);
+  return result;
+};
+
 module.exports = {
   getAll,
   getByFilter,
+  queryById,
 };
