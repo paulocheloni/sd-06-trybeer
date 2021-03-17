@@ -3,20 +3,21 @@ import { Link, useHistory } from 'react-router-dom';
 import { verifyEmailAndPassword, handleSubmit } from '../services';
 import logo from '../img/trybe.png';
 import '../css/Login.css';
+import ControllerHeader from '../components/ControllerHeader';
 
 function Login() {
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
   const [activeBtn, setActiveBtn] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({ email: '', password: '' });
   const history = useHistory();
 
   useEffect(() => {
-    verifyEmailAndPassword(email, password, setActiveBtn, setUser);
-    setUser({ email, password });
-  }, [email, password]);
+    const { email, password } = user;
+    verifyEmailAndPassword(email, password, setActiveBtn);
+  }, [user]);
+
   return (
     <div className="login-page">
+      <ControllerHeader />
       <div className="login-container">
         <img src={ logo } alt="logo" className="logo" />
         <div className="form-container">
@@ -26,14 +27,14 @@ function Login() {
             type="email"
             data-testid="email-input"
             className="input-form-login"
-            onChange={ (event) => setEmail(event.target.value) }
+            onChange={ ({ target }) => setUser({ ...user, email: target.value }) }
           />
           <span>Senha</span>
           <input
             type="text"
             data-testid="password-input"
             className="input-form-login"
-            onChange={ (event) => setPassword(event.target.value) }
+            onChange={ ({ target }) => setUser({ ...user, password: target.value }) }
           />
           <button
             type="submit"

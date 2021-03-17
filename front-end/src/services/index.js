@@ -1,12 +1,11 @@
 import { login, register } from '../api';
 
-const verifyEmailAndPassword = (email, password, setActiveBtn, setUser) => {
+const verifyEmailAndPassword = (email, password, setActiveBtn) => {
   const isEmailValid = email.match(/\S+@\S+\.\S+/);
   const isPasswordValid = password.match(/^[0-9a-zA-Z]{6,50}$/);
 
   if (isEmailValid && isPasswordValid) {
     setActiveBtn(true);
-    setUser({ email, password });
   } else setActiveBtn(false);
 };
 
@@ -54,10 +53,15 @@ const handleCheckbox = (checked, setChecked, setUser, user) => {
   setChecked(!checked);
 };
 
+const redirectMenuBar = (history, payloadUrl) => {
+  history.push(payloadUrl);
+};
+
 export {
   verifyEmailAndPassword,
   handleSubmit,
   verifyRegister,
   handleCheckbox,
   handleSubmitRegister,
+  redirectMenuBar,
 };
