@@ -15,7 +15,7 @@ function login(user) {
 }
 
 function register(user) {
-  const axios = buildAxiosHandler(); 
+  const axios = buildAxiosHandler();
   return axios.post('/user', user);
 }
 
