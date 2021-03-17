@@ -4,6 +4,7 @@ const api = axios.create({
   baseURL: 'http://localhost:3001',
 });
 
+<<<<<<< HEAD
 // axios.get('/api/updatecart', {
 //   params: {
 //   product: this.product
@@ -31,3 +32,20 @@ const api = axios.create({
 //   });
 
 export default api;
+=======
+export const getUserByEmail = async (user) => {
+  const requestResponse = await api.post('login', user)
+    .then((response) => response.data)
+    .catch((error) => (error.response.data));
+
+  return requestResponse;
+};
+
+export const createNewUSer = async (user) => {
+  const requestResponse = await api.post('register', user)
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+
+  return requestResponse;
+};
+>>>>>>> b04a57646c8acd03b1533cc996acc137afb3ec2c
