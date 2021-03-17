@@ -10,6 +10,7 @@ export default {
     grayButton: '#E5E5E5',
     secondaryMobile: '#232323',
     shadowMobile: 'black',
+    shadowCards: 'black',
 
     title: '#fff',
     white: '#fff',

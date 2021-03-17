@@ -12,7 +12,7 @@ const Container = styled.div`
     margin-right: 10px;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 0 5px black;
+    box-shadow: 0 0 5px ${theme.colors.shadowCards};
     display: flex;
     flex-direction: column;
     justify-content: space-between;

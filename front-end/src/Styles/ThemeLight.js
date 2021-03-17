@@ -10,6 +10,7 @@ export default {
     backgroundInput: '#E5E5E5',
     grayButton: '#E5E5E5',
     shadowMobile: '#E5E5E5',
+    shadowCards: '#AAAAAA',
 
     white: '#fff',
     background: '#f2f3f5',
