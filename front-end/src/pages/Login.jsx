@@ -23,7 +23,7 @@ function Login({ history }) {
     e.preventDefault();
     const loginValidate = await api.generateToken(user.email, user.password);
     console.log(loginValidate.result);
-    if (loginValidate.result === true) {
+    if (loginValidate.sucess) {
       // const { token } = loginValidate.response;
       setErrMsg(false);
       history.push('/admin/orders');
