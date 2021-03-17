@@ -16,12 +16,11 @@ function MenuTop({ name }) {
       <div className="menuTop">
         <button
           type="button"
+          data-testid="top-hamburguer"
           className="menuIcon"
           onClick={ handleClick }
         >
-          <FiMenu
-            data-testid="top-hamburguer"
-          />
+          <FiMenu />
         </button>
         <span data-testid="top-title">{ name }</span>
         {showSideBar && <MenuSideBar />}
