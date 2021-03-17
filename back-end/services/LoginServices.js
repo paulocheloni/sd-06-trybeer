@@ -6,26 +6,47 @@ const {
   validatePassword,
 } = require('../utils/funcValidations');
 
+const objErr = (err, status) => ({ err, status });
+
+const emailAndPasswordIsExists = (email, password) => {
+  switch (false) {
+    case email:
+    case password:
+      return objErr('All fields must be filled', status.UNAUTHORIZED);
+    default: return null;
+  }
+};
+
+const emailAndPasswordCheckContent = (email, password) => {
+  switch (false) {
+    case validateEmail(email):
+    case validatePassword(password):
+      return objErr('Incorrect username or password', status.UNAUTHORIZED);
+    default: return null;
+  }
+};
+
+const checkUserRegister = (email, password, user) => {
+  if (!user || email !== user.email || password !== user.password) {
+    return objErr('Incorrect username or password', status.UNAUTHORIZED); 
+  }
+  return null;
+};
+
 const LoginServices = async (req, res) => {
   const { email, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(status.UNAUTHORIZED).json({ err: 'All fields must be filled' }); 
-  }
+  const error = emailAndPasswordIsExists(email, password);
+  if (error) return res.status(error.status).json({ err: error.err });
 
-  if (!validateEmail(email)) {
-    return res.status(status.UNAUTHORIZED).json({ err: 'Incorrect username or password' }); 
-  }
-
-  if (!validatePassword(password)) {
-    return res.status(status.UNAUTHORIZED).json({ err: 'Incorrect username or password' }); 
-  }
+  const error2 = emailAndPasswordCheckContent(email, password);
+  if (error2) return res.status(error2.status).json({ err: error2.err });
 
   const [[user]] = await getUserByEmail(email);
 
-  if (!user || email !== user.email || password !== user.password) {
-    return res.status(status.UNAUTHORIZED).json({ err: 'Incorrect username or password' }); 
-  }
+  const error3 = checkUserRegister(email, password, user);
+  if (error3) return res.status(error3.status).json({ err: error3.err });
+
   const { password: _password, ...userWithoutPassword } = user;
   const { id: _id, ...userWithoutId } = userWithoutPassword;
   const token = createToken(userWithoutPassword);

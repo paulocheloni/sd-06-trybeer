@@ -6,6 +6,7 @@ const LoginController = require('./controllers/LoginController');
 const RegisterController = require('./controllers/RegisterController');
 const ProfileController = require('./controllers/ProfileController');
 const VerifyAuthorization = require('./middlewares/VerifyAuthotization');
+const connection = require('./database/connection');
 
 require('dotenv').config();
 
@@ -25,6 +26,11 @@ app.use((req, _res, next) => {
 });
 
 app.use(bodyParser.json());
+
+app.get('/eai', async (_req, res) => {
+  const [retornoSql] = await connection.execute('SELECT * FROM products');
+  res.json(retornoSql);
+});
 
 app.use('/login', LoginController);
 
