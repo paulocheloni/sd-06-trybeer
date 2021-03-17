@@ -1,6 +1,6 @@
 const isLogged = () => {
   const user = JSON.parse(localStorage.getItem('user'));
-  if (user) return false;
+  if (user && user.token) return false;
   return true;
 };
 
