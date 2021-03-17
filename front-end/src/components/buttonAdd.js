@@ -25,7 +25,7 @@ function ButtonAdd({product}) {
     const newCart = [...cart];
     newCart[isIndex].quantity = newCart[isIndex].quantity + 1;
     newCart[isIndex].totalPrice = (newCart[isIndex].quantity * product.price).toFixed(2);
-    console.log(newCart[isIndex].totalPrice)
+
     setCart(newCart);
   }
 

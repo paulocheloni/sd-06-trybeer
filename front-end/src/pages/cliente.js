@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import NavBar from '../components/menuNavBar';
-import { loadState } from '../services/localStorage';
 import api from '../services/api';
 import context from '../Context/ContextAPI';
 import ButtonAdd from '../components/buttonAdd';
 import ButtonSub from '../components/buttonSub';
+import { loadState, saveState } from '../services/localStorage';
 
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
@@ -34,8 +34,20 @@ const useStyles = makeStyles((theme) => ({
 
 function Cliente() {
   const [products, setProducts] = useState([]);
-  const { cart, setCart } = useContext(context);
+  const { cart, setCart, totalPrice, setTotalPrice } = useContext(context);
   const history = useHistory();
+
+  useEffect(() => {
+    const { email } = loadState('user');
+
+    const storageCart = loadState(`${email}`);
+    storageCart ? setCart(storageCart) : saveState(`${email}`, []);
+  }, []);
+
+  useEffect(() => {
+    const { email } = loadState('user');
+    saveState(`${email}`, cart);
+  }, [cart]);
 
   useEffect(() => {
     const logon = loadState('user');
@@ -75,8 +87,9 @@ function Cliente() {
           <GridListTile key={link_img} key={index}>
             <img src={link_img} alt={tile.name} />
             <GridListTileBar
+              data-testid={`${index}-product-name`}
               title={tile.name}
-              subtitle={<span>price: {tile.price}</span>}
+              subtitle={<span data-testid={`${index}-product-price`}>price: {tile.price}</span>}
               actionIcon={
                 <>
                   <ButtonAdd product={ tile } />
