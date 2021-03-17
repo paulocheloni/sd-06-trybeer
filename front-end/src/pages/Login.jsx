@@ -21,11 +21,11 @@ function Login({ history }) {
     e.preventDefault();
 
     const token = await api.generateToken(user.email, user.password);
-    const role = await api.isUserAdmin(user.email);
+    const role = await api.isUserAdmin(user.email, user.password);
     console.log('token:', token);
     console.log('role:', role);
 
-    if (role === 'administrator') {
+    if (role.role === 'administrator') {
       history.push('/admin/orders');
     } else { history.push('/products'); }
     localStorage.setItem('user', JSON.stringify(user.email, token));

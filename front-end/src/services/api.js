@@ -10,9 +10,10 @@ const generateToken = async (email, password) => axios
   .then((res) => res.data)
   .catch((err) => err.response.data);
 
-const isUserAdmin = async (email) => axios
+const isUserAdmin = async (email, password) => axios
   .post(`${url}/login/role`, {
     email,
+    password,
   })
   .then((res) => res.data)
   .catch((err) => err.response.data);

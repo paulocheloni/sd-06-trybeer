@@ -17,12 +17,17 @@ const getUserByEmail = async (email) => {
 };
 
 const registerUser = async (name, email, password, role) => {
-  const result = await connection.execute(
+  const [{ insertId }] = await connection.execute(
     'INSERT INTO Trybeer.users (name, email, password, role) VALUES (?,?,?,?)',
     [name, email, password, role],
   );
-    
-  return result;
+
+  return {
+    id: insertId,
+    name,
+    email,
+    role,
+  };
 };
 
 module.exports = {
