@@ -22,7 +22,12 @@ const updateName = async ({ name }, id) => {
   return users.updateNameByEmail(name, id);
 };
 
+const getAdmin = async (id) => {
+  return users.queryUserById(id);
+};
+
 module.exports = {
   create,
   updateName,
+  getAdmin,
 };

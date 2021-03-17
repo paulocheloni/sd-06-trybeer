@@ -10,7 +10,14 @@ const profileError = {
   customMessage: 'Update profile failed. Please, contact support or try again later.',
 };
 
+const adminProfileError = {
+  statusCode: 500,
+  customCode: 'ERROR_USER_ADMIN_PROFILE',
+  customMessage: 'Admin profile failed. Please, contact support or try again later.',
+};
+
 module.exports = {
   registerError,
   profileError,
+  adminProfileError,
 };

@@ -7,5 +7,6 @@ const users = express.Router();
 
 users.put('/edit', middlewares.authToken, controllers.profile);
 users.post('/register', controllers.register);
+users.get('/admin/profile', middlewares.authToken, controllers.adminProfile);
 
 module.exports = users;

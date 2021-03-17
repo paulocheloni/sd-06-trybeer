@@ -17,8 +17,14 @@ const updateNameByEmail = async (name, id) => {
   return connection.query(QUERY, [name, id]);
 };
 
+const queryUserById = async (id) => {
+  const QUERY = 'SELECT name, email FROM users WHERE id = ?';
+  return await connection.query(QUERY, [id]);
+}
+
 module.exports = {
   queryByEmail,
   insertNewUser,
   updateNameByEmail,
+  queryUserById,
 };
