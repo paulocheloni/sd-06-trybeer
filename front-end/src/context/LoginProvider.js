@@ -10,12 +10,18 @@ const LoginProvider = ({ children }) => {
     password: '',
     role: '',
   });
-
+  const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+  
   const providerValue = {
     user,
     setUser,
     newUser,
     setNewUser,
+    products,
+    setProducts,
+    cart,
+    setCart,
   };
 
   return (
