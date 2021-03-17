@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
+
 // Provider
 import Provider from './Context/Provider';
 // Pages
-import { Login, Register, Admin, Cliente } from './pages';
+import { Login, Register, Admin, Cliente, Profile } from './pages';
 // CSS
 import './App.css';
 
@@ -16,6 +17,7 @@ function App() {
             <Redirect to="/login" />
           </Route>
           <Route exact path="/login" component={ Login } />
+          <Route exact path="/profile" component={ Profile } />
           <Route exact path="/register" component={ Register } />
           <Route exact path="/admin/orders" component={ Admin } />
           <Route exact path="/products" component={ Cliente } />

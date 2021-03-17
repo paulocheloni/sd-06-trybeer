@@ -13,11 +13,13 @@ const app = express();
 const PORT = 3001;
 
 const LoginController = require('./src/controllers/LoginController');
+const UserController = require('./src/controllers/UserController');
 
 app.use(express.json());
 app.use(cors());
 
 app.use('/login', rescue(LoginController));
+app.use('/user', rescue(UserController));
 
 app.use((error, req, res, _next) => {
   console.log({ error });
