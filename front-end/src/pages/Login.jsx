@@ -31,7 +31,6 @@ function Login() {
   return (
 
     <main>
-
       <form>
         <Input type="email" setValue={ setEmail } value={ email } label="Email" />
         <Input
