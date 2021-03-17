@@ -34,8 +34,9 @@ function Products({ history }) {
     <div>
       <TopMenu />
       <SidebarMenu />
-      {products.map(({ name, price, url_image: urlImage }, index) => (
+      {products.map(({ id, name, price, url_image: urlImage }, index) => (
         <ProductCard
+          id={ id }
           key={ index }
           name={ name }
           price={ price }

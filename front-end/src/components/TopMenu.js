@@ -3,11 +3,8 @@ import PropTypes from 'prop-types';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IconContext } from 'react-icons';
 
-const TopMenu = (props) => {
+const TopMenu = ({ titleMenu }) => {
   const [isVisible, setIsVisible] = useState('hidden');
-  const {
-    titleMenu = 'TryBeer',
-  } = props;
 
   const setVisibility = () => {
     setIsVisible(isVisible === 'hidden' ? 'visible' : 'hidden');
@@ -35,7 +32,11 @@ const TopMenu = (props) => {
 };
 
 TopMenu.propTypes = {
-  titleMenu: PropTypes.string.isRequired,
+  titleMenu: PropTypes.string,
+};
+
+TopMenu.defaultProps = {
+  titleMenu: 'TryBeer',
 };
 
 export default TopMenu;

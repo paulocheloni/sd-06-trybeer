@@ -1,37 +1,30 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TrybeerContext from '../context/TrybeerContext';
 
-const ProductCard = ({ index, name, price, url_image: urlImage }) => {
+const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
   const [quantity, setQuantity] = useState(0);
-  const { setCart } = useContext(TrybeerContext);
-
+  const { cart, updateProductQuantity } = useContext(TrybeerContext);
   const formatedPrice = price.replace('.', ',');
 
-  const handleClick = (param, value) => {
-    const floatedPrice = parseFloat(value);
-    const localCart = JSON.parse(localStorage.getItem('cart'));
+  useEffect(() => {
+    const productById = cart.find((item) => item.id === id);
+    if (productById !== undefined) {
+      setQuantity(productById.quantity);
+    }
+  }, [cart, id]);
 
-    if (param === 'plus') {
-      setQuantity(() => parseInt((quantity + 1), 10));
-      if (localCart) {
-        const newValue = parseFloat(localCart) + floatedPrice;
-        localStorage.setItem('cart', JSON.stringify(newValue));
-        setCart(newValue);
-      } else {
-        localStorage.setItem('cart', JSON.stringify(value));
-        setCart(value);
-      }
-    } else if (quantity !== 0) {
-      setQuantity(() => parseInt((quantity - 1), 10));
-      if (localCart) {
-        const newValue = parseFloat(localCart) - floatedPrice;
-        localStorage.setItem('cart', JSON.stringify(newValue));
-        setCart(newValue);
-      } else {
-        localStorage.setItem('cart', JSON.stringify(value));
-        setCart(value);
-      }
+  const increaseQuantity = () => {
+    const result = quantity + 1;
+    setQuantity(result);
+    updateProductQuantity(id, result, price);
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity !== 0) {
+      const result = quantity - 1;
+      setQuantity(result);
+      updateProductQuantity(id, result, price);
     }
   };
 
@@ -46,7 +39,7 @@ const ProductCard = ({ index, name, price, url_image: urlImage }) => {
       <p data-testid={ `${index}-product-name` }>{name}</p>
       <p data-testid={ `${index}-product-price` }>{`R$ ${formatedPrice}`}</p>
       <button
-        onClick={ () => handleClick('plus', price) }
+        onClick={ increaseQuantity }
         data-testid={ `${index}-product-plus` }
         type="button"
       >
@@ -54,7 +47,7 @@ const ProductCard = ({ index, name, price, url_image: urlImage }) => {
       </button>
       <p data-testid={ `${index}-product-qtd` }>{quantity}</p>
       <button
-        onClick={ () => handleClick('minus', price) }
+        onClick={ decreaseQuantity }
         data-testid={ `${index}-product-minus` }
         type="button"
       >
@@ -66,6 +59,7 @@ const ProductCard = ({ index, name, price, url_image: urlImage }) => {
 
 ProductCard.propTypes = {
   index: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   url_image: PropTypes.string.isRequired,
