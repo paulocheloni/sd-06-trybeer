@@ -31,7 +31,7 @@ function Buttons(errorMsg, errorForm) {
         <p className="hidden">Ainda não tenho conta</p>
       </Link>
       <p
-        className="text-xs"
+        className="text-xs text-gray-600"
       >
         Forgot your passsword?
       </p>
