@@ -1,35 +1,42 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import GetProducts from '../../services/GetProducts';
-import axios from 'axios';
 import Button from '../Button';
-import AppContext from '../../context/AppContext';
+import * as S from './style';
 
 const buttonSeeCar = (
   <div>
-    <Button
-      data-testid="checkout-bottom-btn"
-      onClick={ () => console.log('ver carrinho') }
-    >
-      Ver Carrinho
-    </Button>
+    <S.Buttons>
+      <Button
+        dataTestId="checkout-bottom-btn"
+        onClick={ () => console.log('ver carrinho') }
+      >
+        Ver Carrinho
+      </Button>
+    </S.Buttons>
   </div>
 );
 
 const CardProduct = () => {
 
-  const { products, setProducts } = useContext(AppContext);
-  useEffect(async () => {
-    const response = await axios.get('http://localhost:3001/products');
-    console.log('resposta axius:', response);
-    return setProducts(response.data);
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    if (localStorage.products && JSON.parse(localStorage.products) !== []) {
+      return setProducts(JSON.parse(localStorage.products))
+    }
+    return GetProducts(setProducts);
   }, []);
 
+  useEffect(() => {
+    localStorage.products = JSON.stringify(products)
+  }, [products]);
+
+  
   return (
     <div>
       {products.length < 1 ? <div>Loading...</div> : products.map((item, index) => (
         <div key={ index }>
           <span data-testid={ `${index}-product-price` }>
-            {item.price}
+            R$ {item.price.replace(/\./g, ',')}
           </span>
           <img
             data-testid={ `${index}-product-img` }
@@ -39,24 +46,45 @@ const CardProduct = () => {
           <span data-testid={ `${index}-product-name` }>
             {item.name}
           </span>
-          <Button
-            data-testid={ `${index}-product-plus` }
-            onClick={ () => console.log('somando') }
-          >
-            +
-          </Button>
-          <Button
-            data-testid={ `${index}-product-minus` }
-            onClick={ () => console.log('subtraindo') }
-          >
-            -
-          </Button>
+          <S.Buttons>
+            <Button
+              dataTestId={ `${index}-product-plus` }
+              onClick={ () => {
+                const it = products.map(el => {
+                  if (el.id === index + 1) {
+                    
+                    return {...el, productQuantity: el.productQuantity + 1}
+                  }
+                  return el
+                })
+                setProducts(it)
+              } }
+            >
+              +
+            </Button>
+            <Button
+              dataTestId={ `${index}-product-minus` }
+              onClick={ () => {
+                const it = products.map(el => {
+                  if (el.id === index + 1 && el.productQuantity > 0) {
+                    return {...el, productQuantity: el.productQuantity - 1}
+                  }
+                  return el
+                })
+                setProducts(it)
+              } }
+            >
+              -
+            </Button>
+          </S.Buttons>
           { buttonSeeCar }
+          Valor total: 
           <span data-testid="checkout-bottom-btn-value">
-            Valor total:
+            R$ { (item.price * item.productQuantity).toFixed(2).replace(/\./g, ',') }
           </span>
+          <br></br>
           <span data-testid={ `${index}-product-qtd` }>
-            Quantidade:
+            { item.productQuantity }
           </span>
         </div>
       ))}

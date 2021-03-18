@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export default Buttons = styled.div`
+export const images = styled.div`
+  width: 300 px;
+`;
+
+export const Buttons = styled.div`
   margin-top: 35px;
   display: flex;
   flex-direction: column;
