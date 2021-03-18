@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 
 const Container = styled.div`
-  ${({ theme }) => css`
+  ${({ theme, stateSideBar }) => css`
+
     background: ${theme.colors.secondary};
   
     width: 100%;
@@ -12,14 +13,16 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
 
-    > form {
+    @media (max-width: 500px) {
       background: ${theme.colors.primary};
+    }
 
+    > form {
+      opacity: ${stateSideBar && '0.2'};
+      background: ${theme.colors.primary};
       padding: 20px 30px 10px 30px;
-
       border-radius: 5px;
       box-shadow: 0 0 5px black;
-
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -27,7 +30,12 @@ const Container = styled.div`
 
       > h1 {
         color: ${theme.colors.text};
-        margin-bottom: 20px; 
+        margin-bottom: 20px;
+        display: none;
+
+        @media (max-width: 500px) {
+          display: none;
+        }
       }
 
       > p {
@@ -36,12 +44,9 @@ const Container = styled.div`
 
       @media (max-width: 500px) {
         border: none;
-
+        border-radius: 0;
+        box-shadow: none;
         width: 100%;
-        height: 100%;
-
-        padding: 2rem;
-
       }
     }
   `}

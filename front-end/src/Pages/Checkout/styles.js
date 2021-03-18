@@ -56,7 +56,6 @@ const ContainerAddress = styled.div`
 const ContainerButton = styled.div`
     width: 100%;
     padding: 0 19px;
-
     display: flex;
     justify-content: center;
 

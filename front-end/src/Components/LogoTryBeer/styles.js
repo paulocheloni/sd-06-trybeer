@@ -1,15 +1,26 @@
 import styled, { css } from 'styled-components';
 
 const Container = styled.div`
-  ${() => css`
-    margin-bottom: 50px;
+  ${({ stateSideBar }) => css`
+    opacity: ${stateSideBar && '0.2'};
+
     position: relative;
     display: flex;
 
+    margin-bottom: 50px;
+
+    @media (max-width: 500px) {
+      margin-bottom: 30px;
+    }
+
     > h1 {
       font-family: 'Typoslab';
-      font-size: 60px;
+      font-size: 55px;
       color:  #397330;
+
+      @media (max-width: 500px) {
+        font-size: 50px;
+      }
 
       > span {
         color: #cf8d2e;
@@ -17,10 +28,15 @@ const Container = styled.div`
     }
 
     > img {
-      width: 80px;
+      width: 70px;
       position: absolute;
-      bottom: 45px;
-      left: 185px;
+      bottom: 40px;
+      left: 170px;
+
+      @media (max-width: 500px) {
+        bottom: 35px;
+        left: 150px;
+      }
     }
   `}
 `;

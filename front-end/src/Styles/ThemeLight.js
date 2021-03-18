@@ -2,12 +2,16 @@ export default {
   title: 'light',
 
   colors: {
-    primary: '#EFEFEF',
+    // primary: '#EFEFEF',
+    primary: '#F3F8EC',
     secondary: '#F3F8EC',
     text: '#000',
     border: '#000',
     backgroundInput: '#E5E5E5',
     grayButton: '#E5E5E5',
+    shadowMobile: '#E5E5E5',
+    shadowCards: '#AAAAAA',
+    backgroundMouseOver: ' #DAE8C3',
 
     white: '#fff',
     background: '#f2f3f5',

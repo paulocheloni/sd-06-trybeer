@@ -38,7 +38,6 @@ const Products = () => {
 
   return (
     <S.Container>
-      {console.log(products)}
       <MenuTop />
 
       <SideBar />
@@ -59,10 +58,11 @@ const Products = () => {
           type="button"
           color="green"
           fontSize="20px"
-          width="91%"
+          width="93%"
           heigth="40px"
           botton="0"
           position="fixed"
+          marginBottom="10px"
           disabled={ isDisabled }
           onClick={ () => history.push('/checkout') }
           dataTestid="checkout-bottom-btn"
