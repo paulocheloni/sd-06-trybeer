@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 
 const { log, handleError } = require('../middlewares');
 
@@ -18,6 +19,7 @@ routes.use('/sales', salesRouter);
 routes.use('/user', usersRouter);
 routes.use('/admin', adminRouter);
 
+routes.use('/images', express.static(path.join(__dirname, '../images')));
 routes.use(handleError);
 
 module.exports = routes;
