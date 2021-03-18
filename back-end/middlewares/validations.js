@@ -35,9 +35,7 @@ const validateLogin = async (req, res, next) => {
 
 const isUserLoggedIn = async (req, res, next) => {
   const { authorization } = req.headers;
-  console.log(authorization);
   const loggedIn = validateToken(authorization);
-  console.log(loggedIn);
   if (!loggedIn) return res.status(401).json({ message: 'Operation not authorized' });
   next();
 };

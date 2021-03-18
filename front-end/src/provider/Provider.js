@@ -9,7 +9,7 @@ function TrybeerProvider({ children }) {
   useEffect(() => {
     const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart'));
     const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
-
+    console.log(cartFromLocalStorage)
     if (cartFromLocalStorage) setCart(cartFromLocalStorage);
     if (userFromLocalStorage) setUser(userFromLocalStorage);
   }, []);
@@ -25,6 +25,7 @@ function TrybeerProvider({ children }) {
   };
 
   const updateProductQuantity = (id, quantity, price) => {
+    console.log(cart)
     const product = { id, quantity, price };
     const cartWithoutProduct = cart.filter((item) => item.id !== id && quantity === 0);
     const newCart = [...cartWithoutProduct, product];

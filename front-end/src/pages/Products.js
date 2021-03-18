@@ -10,9 +10,9 @@ import { verifyToken } from '../utils/verifications';
 
 function Products({ history }) {
   const [products, setProducts] = useState([]);
-  const { user, getFromLocalStorage } = useContext(TrybeerContext);
+  const { getFromLocalStorage } = useContext(TrybeerContext);
   const recoveredUser = getFromLocalStorage('user');
-  console.log(user);
+
   const fetchProducts = async () => {
     await fetchFunctions.get('products').then((productsArray) => {
       setProducts(productsArray);
@@ -22,7 +22,7 @@ function Products({ history }) {
   useEffect(() => {
     verifyToken('products', recoveredUser, history);
     fetchProducts();
-  }, [history, recoveredUser]);
+  }, []);
 
   return (
     <div>

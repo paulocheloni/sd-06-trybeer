@@ -4,7 +4,7 @@ const { isUserLoggedIn } = require('../middlewares/validations');
 
 const ProductsRouter = new Router();
 
-ProductsRouter.get('/', isUserLoggedIn, async (_req, res, next) => {
+ProductsRouter.get('/', async (_req, res, next) => {
   try {
     const products = await productsModel.getAll();
     res.status(200).json(products);
