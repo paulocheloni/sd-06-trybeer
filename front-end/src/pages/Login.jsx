@@ -20,6 +20,8 @@ function Login({ history }) {
   };
 
   const handleClick = async (e) => {
+    const list = await api.listProducts();
+    console.log(list.response);
     e.preventDefault();
     const userData = await api.generateToken(user.email, user.password);
     if (userData.result) {

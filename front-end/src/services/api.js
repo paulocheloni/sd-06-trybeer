@@ -28,8 +28,14 @@ const updateNameOfUser = async (name, email) => axios
   .then((res) => ({ response: res.data, result: true }))
   .catch((err) => err.response.data);
 
+const listProducts = async () => axios
+  .get(`${url}/products`)
+  .then((res) => ({ response: res.data, result: true }))
+  .catch((err) => err.response.data);
+
 module.exports = {
   generateToken,
   registerUser,
   updateNameOfUser,
+  listProducts,
 };
