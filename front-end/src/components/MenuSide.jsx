@@ -15,28 +15,28 @@ function MenuSide() {
     }
     return (
       <div className="side-menu-container">
-        {isClient && 
-        <button
-          data-testid="side-menu-item-products"
-          type="button"
-          onClick={ () => route.push('/products') }
-        >
-          Produtos
-        </button>
+        {
+          isClient && <button
+            data-testid="side-menu-item-products"
+            type="button"
+            onClick={ () => route.push('/products') }
+          >
+            Produtos
+          </button>
         }
         <button
           data-testid={ `side-menu-item${modifyId}orders` }
           type="button"
           onClick={ () => route.push(`${urlRoute}/orders`) }
         >
-          {isClient? `Meus Pedidos` : `Pedidos`}
+          {isClient ? 'Meus Pedidos' : 'Pedidos'}
         </button>
         <button
           data-testid={ `side-menu-item${modifyId}profile` }
           type="button"
           onClick={ () => route.push(`${urlRoute}/profile`) }
         >
-          {isClient? `Meu Perfil` : `Perfil`}
+          {isClient ? 'Meu Perfil' : 'Perfil'}
         </button>
         <button
           data-testid="side-menu-item-logout"
