@@ -35,6 +35,7 @@ function Cliente() {
   const history = useHistory();
 
   useEffect(() => {
+    if (!loadState('user')) return history.push('/login');
     const { email } = loadState('user');
 
     const storageCart = loadState(`${email}`);
@@ -42,6 +43,7 @@ function Cliente() {
   }, []);
 
   useEffect(() => {
+    if (!loadState('user')) return history.push('/login');
     const { email } = loadState('user');
     saveState(`${email}`, cart);
   }, [cart]);

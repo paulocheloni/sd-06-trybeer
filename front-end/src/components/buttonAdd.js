@@ -2,10 +2,9 @@ import React, { useContext } from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import ExposurePlus1Icon from '@material-ui/icons/ExposurePlus1';
 import context from '../Context/ContextAPI';
-import attTotalPrice from '../resources/addTotalPrice';
 
 function ButtonAdd({ product,dataIndex }) {
-  const { cart, setCart, setPrice } = useContext(context);
+  const { cart, setCart } = useContext(context);
 
   const addButtonOnCart = () => {
     const isCart = cart.some((prod) => prod.name === product.name);
@@ -17,8 +16,6 @@ function ButtonAdd({ product,dataIndex }) {
     newCart[isIndex].quantity = newCart[isIndex].quantity + 1;
     newCart[isIndex].totalPrice = (newCart[isIndex].quantity * product.price).toFixed(2);
     setCart(newCart);
-
-    attTotalPrice(cart, setPrice);
   };
 
   return (
