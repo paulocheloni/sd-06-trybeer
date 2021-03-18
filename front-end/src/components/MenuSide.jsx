@@ -5,14 +5,17 @@ function MenuSide() {
   const route = useHistory();
   const user = JSON.parse(localStorage.getItem('user'));
   try {
-    let modify = '-my-';
+    let modifyId = '-my-';
     let urlRoute = '';
+    let isClient = true;
     if (user.role && user.role === 'administrator') {
       urlRoute = '/admin';
-      modify = '-';
+      modifyId = '-';
+      isClient = false;
     }
     return (
       <div className="side-menu-container">
+        {isClient && 
         <button
           data-testid="side-menu-item-products"
           type="button"
@@ -20,19 +23,20 @@ function MenuSide() {
         >
           Produtos
         </button>
+        }
         <button
-          data-testid={ `side-menu-item${modify}orders` }
+          data-testid={ `side-menu-item${modifyId}orders` }
           type="button"
           onClick={ () => route.push(`${urlRoute}/orders`) }
         >
-          Meus Pedidos
+          {isClient? `Meus Pedidos` : `Pedidos`}
         </button>
         <button
-          data-testid={ `side-menu-item${modify}profile` }
+          data-testid={ `side-menu-item${modifyId}profile` }
           type="button"
           onClick={ () => route.push(`${urlRoute}/profile`) }
         >
-          Meu Perfil
+          {isClient? `Meu Perfil` : `Perfil`}
         </button>
         <button
           data-testid="side-menu-item-logout"

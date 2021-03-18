@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import ElementProfile from '../components/ElementProfile';
+import MenuTop from '../components/MenuTop';
 
 function AdminProfile() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -8,6 +9,7 @@ function AdminProfile() {
     const { name, email } = user;
     return (
       <div>
+        <MenuTop />
         <h1 data-testid="top-title">
           Perfil
         </h1>

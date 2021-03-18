@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import fetchProducts from '../methods/products';
 import renderCards from '../components/RenderCards';
 import isLogged from '../components/isLogged';
-import MenuTop from '../components/menuTop';
+import MenuTop from '../components/MenuTop';
 import './Products.css';
 
 const currencyFormat = (num) => num
