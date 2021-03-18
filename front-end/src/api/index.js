@@ -14,11 +14,12 @@ function login(user) {
   return axios.post('/login', user);
 }
 
-function test() {
-  return '';
+function register(user) {
+  const axios = buildAxiosHandler();
+  return axios.post('/user', user);
 }
 
 export {
   login,
-  test,
+  register,
 };

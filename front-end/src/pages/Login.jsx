@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { verifyEmailAndPassword, handleSubmit } from '../services';
 import logo from '../img/trybe.png';
 import '../css/Login.css';
+import ControllerHeader from '../components/ControllerHeader';
 
 function Login() {
   const [password, setPassword] = useState('');
@@ -17,10 +18,12 @@ function Login() {
   }, [email, password]);
   return (
     <div className="login-page">
+      <ControllerHeader />
       <div className="login-container">
         <img src={ logo } alt="logo" className="logo" />
-        <form className="form-container">
+        <div className="form-container">
           <h3 className="login-title">PROJECT - TRYBEER</h3>
+          <span>Email</span>
           <input
             type="email"
             className="input-form-login"
@@ -28,6 +31,7 @@ function Login() {
             placeholder="Informe o e-mail"
             onChange={ (event) => setEmail(event.target.value) }
           />
+          <span>Senha</span>
           <input
             type="text"
             className="input-form-login"
@@ -42,14 +46,14 @@ function Login() {
             onClick={ () => handleSubmit(history, user) }
             data-testid="signin-btn"
           >
-            ENTRAR
+            Entrar
           </button>
           <Link to="/register">
             <button type="button" data-testid="no-account-btn" className="link-button">
               Ainda não tenho conta
             </button>
           </Link>
-        </form>
+        </div>
       </div>
     </div>
   );
