@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
 const securityConfig = require('./configs.security');
 
-const generateToken = (id) => {
+const generateToken = (id, role) => {
   const payload = {
     iss: 'trybeer-api',
     aud: 'trybeer-api',
     sub: id,
+    role,
   };
 
   return jwt.sign(payload, securityConfig.jwt.secret, securityConfig.jwt.options);
