@@ -7,11 +7,13 @@ export default {
     secondary: '#F3F8EC',
     text: '#000',
     border: '#000',
+    borderInput: '#CCCCCC',
     backgroundInput: '#E5E5E5',
     grayButton: '#E5E5E5',
     shadowMobile: '#E5E5E5',
     shadowCards: '#AAAAAA',
     backgroundMouseOver: ' #DAE8C3',
+    backgroundDiv: '#CCCCCC',
 
     white: '#fff',
     background: '#f2f3f5',

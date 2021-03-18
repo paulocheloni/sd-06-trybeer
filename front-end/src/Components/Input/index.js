@@ -11,6 +11,7 @@ const Input = ({
   id,
   value,
   themeStorage,
+  widthDivLabel,
   icon: Icon,
 }) => {
   let trueOrFalse = false;
@@ -20,7 +21,11 @@ const Input = ({
   }
 
   return (
-    <S.CompInput htmlFor={ id } themeStorage={ themeStorage }>
+    <S.CompInput
+      htmlFor={ id }
+      themeStorage={ themeStorage }
+      widthDivLabel={ widthDivLabel }
+    >
       {label}
 
       {Icon ? (
@@ -60,6 +65,7 @@ Input.defaultProps = {
   value: undefined,
   onChange: () => {},
   icon: undefined,
+  widthDivLabel: '100%',
 };
 
 Input.propTypes = {
@@ -71,6 +77,7 @@ Input.propTypes = {
   value: PropTypes.string,
   themeStorage: PropTypes.string,
   icon: PropTypes.elementType,
+  widthDivLabel: PropTypes.string,
 };
 
 export default Input;

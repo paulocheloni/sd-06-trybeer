@@ -11,11 +11,17 @@ import Button from '../../Components/Button';
 
 import S from './styles';
 
+const saveCart = (cartList, history) => {
+  localStorage.setItem('infosCheckout', JSON.stringify(cartList));
+
+  history.push('/checkout');
+};
+
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
 
-  const { stateSumPrice, stateSideBar } = useContext(GlobalContext);
+  const { stateSumPrice, stateSideBar, cartList } = useContext(GlobalContext);
 
   const history = useHistory();
 
@@ -38,6 +44,7 @@ const Products = () => {
 
   return (
     <S.Container>
+
       <MenuTop />
 
       <SideBar />
@@ -64,7 +71,7 @@ const Products = () => {
           position="fixed"
           marginBottom="10px"
           disabled={ isDisabled }
-          onClick={ () => history.push('/checkout') }
+          onClick={ () => saveCart(cartList, history) }
           dataTestid="checkout-bottom-btn"
         >
           Ver Carrinho -
