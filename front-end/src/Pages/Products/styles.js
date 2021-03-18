@@ -13,6 +13,8 @@ const ContainerCards = styled.section`
 
     opacity: ${stateSideBar && '0.2'};
 
+    /* overflow: auto; */
+
     width: 100%;
     height: 100%;
 
