@@ -1,14 +1,29 @@
 import styled, { css } from 'styled-components';
 
 const CompButton = styled.button`
-  ${({ theme, width, heigth, color, fontSize }) => css`
-    width: ${width};
+  ${({
+    theme,
+    width,
+    heigth,
+    color,
+    fontSize,
+    position,
+    botton,
+    stateSideBar,
+    marginBottom,
+  }) => css`
+    width: ${width || '100%'};
     height: ${heigth};
+
+    opacity: ${stateSideBar && '0.2'};
+
+    position: ${position};
+    bottom: ${botton};
 
     font-size: ${fontSize};
     font-weight: 600;
 
-    margin-bottom: 20px;
+    margin-bottom: ${marginBottom};
 
     background: ${theme.colors[color]};
 
@@ -26,7 +41,7 @@ const CompButton = styled.button`
     }
 
     @media (max-width: 500px) {
-      width: 100%;
+      width: ${width || '100%'};
     }
   `}
 `;

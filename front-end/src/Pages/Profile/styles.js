@@ -1,39 +1,55 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Container = styled.div`
-  width: 100%;
-  height: 100vh;
+  ${({ theme, stateSideBar }) => css`
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  > form {
-    padding: 20px 30px 10px 30px;
-
-    border-radius: 5px;
-    box-shadow: 0 0 5px black;
+    background: ${theme.colors.secondary};
+  
+    width: 100%;
+    height: 100vh;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    > h1 {
-      margin-bottom: 20px; 
-    }
-
     @media (max-width: 500px) {
-      border: none;
-
-      width: 100%;
-      height: 100%;
-
-      padding: 2rem;
-
+      background: ${theme.colors.primary};
     }
-  }
+
+    > form {
+      opacity: ${stateSideBar && '0.2'};
+      background: ${theme.colors.primary};
+      padding: 20px 30px 10px 30px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      > h1 {
+        color: ${theme.colors.text};
+        margin-bottom: 20px;
+        display: none;
+
+        @media (max-width: 500px) {
+          display: none;
+        }
+      }
+
+      > p {
+        color: ${theme.colors.text};
+      }
+
+      @media (max-width: 500px) {
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        width: 100%;
+      }
+    }
+  `}
 `;
 
 export default Container;

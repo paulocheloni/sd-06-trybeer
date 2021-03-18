@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { GlobalContext } from '../../Contexts/GlobalContext';
 
 import CompButton from './styles';
 
@@ -13,37 +14,55 @@ const Button = ({
   onClick,
   fontSize,
   dataTestid,
-}) => (
-  <CompButton
-    type={ type }
-    color={ color }
-    width={ width }
-    heigth={ heigth }
-    fontSize={ fontSize }
-    disabled={ disabled }
-    onClick={ onClick }
-    data-testid={ dataTestid }
-  >
-    {children}
-  </CompButton>
-);
+  position,
+  botton,
+  marginBottom,
+}) => {
+  const { stateSideBar } = useContext(GlobalContext);
+
+  return (
+    <CompButton
+      type={ type }
+      color={ color }
+      width={ width }
+      heigth={ heigth }
+      fontSize={ fontSize }
+      disabled={ disabled }
+      onClick={ onClick }
+      data-testid={ dataTestid }
+      position={ position }
+      botton={ botton }
+      marginBottom={ marginBottom }
+      stateSideBar={ stateSideBar }
+    >
+      {children}
+    </CompButton>
+  );
+};
 
 Button.defaultProps = {
   color: '',
   onClick: () => {},
   disabled: false,
+  position: '',
+  botton: '',
+  width: '',
+  marginBottom: '20px',
 };
 
 Button.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   type: PropTypes.string.isRequired,
-  width: PropTypes.string.isRequired,
+  width: PropTypes.string,
   heigth: PropTypes.string.isRequired,
   color: PropTypes.string,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   fontSize: PropTypes.string.isRequired,
   dataTestid: PropTypes.string.isRequired,
+  position: PropTypes.string,
+  botton: PropTypes.string,
+  marginBottom: PropTypes.string,
 };
 
 export default Button;

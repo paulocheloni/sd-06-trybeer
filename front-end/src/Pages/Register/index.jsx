@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
-import { registerNewUser } from '../../Services/Apis';
+import { BiUser } from 'react-icons/bi';
+import { FiMail, FiLock } from 'react-icons/fi';
 
-import Container from './styles';
+import { loginUser, registerNewUser } from '../../Services/Apis';
+
+import S from './styles';
 
 import Input from '../../Components/Input';
 import Button from '../../Components/Button';
+import LogoTryBeer from '../../Components/LogoTryBeer';
 
 const handleSubmit = async (event,
   { name, email, password, isChecked, setEmailAlreadyExists }) => {
@@ -15,17 +19,19 @@ const handleSubmit = async (event,
 
   const result = await registerNewUser(name, email, password, role);
 
+  const newUser = await loginUser(email, password);
+
   if (result && result === 'E-mail already in database.') {
     setEmailAlreadyExists(true);
   } else if (result && result === 'OK') {
-    window.location.href = (role === 'client') ? '/products' : '/admin/orders';
+    localStorage.setItem('user', JSON.stringify(newUser));
+    window.location.href = (newUser.role === 'client') ? '/products' : '/admin/orders';
   }
 };
 
 const button = (isDisabled) => (
   <Button
     type="submit"
-    width="400px"
     heigth="40px"
     color="green"
     fontSize="20px"
@@ -42,14 +48,17 @@ const form = (params) => {
     isChecked, setIsChecked, emailAlreadyExists, setEmailAlreadyExists,
   } = params;
   const paramsRegistered = { name, email, password, isChecked, setEmailAlreadyExists };
+  const theme = JSON.parse(localStorage.getItem('@trybeer:theme'));
   return (
-    <form onSubmit={ (e) => handleSubmit(e, paramsRegistered) }>
+    <S.Form onSubmit={ (e) => handleSubmit(e, paramsRegistered) }>
       <h1>Register</h1>
       <Input
         id="name-input"
         label="Nome"
         dataTestid="signup-name"
         onChange={ ({ target }) => setName(target.value) }
+        themeStorage={ theme && theme.title }
+        icon={ BiUser }
       />
       {(emailAlreadyExists) ? <p>E-mail already in database.</p> : null}
       <Input
@@ -57,17 +66,18 @@ const form = (params) => {
         label="Email"
         dataTestid="signup-email"
         onChange={ ({ target }) => setEmail(target.value) }
+        themeStorage={ theme && theme.title }
+        icon={ FiMail }
       />
       <Input
         id="password-input"
         label="Senha"
         dataTestid="signup-password"
         onChange={ ({ target }) => setPassword(target.value) }
+        themeStorage={ theme && theme.title }
+        icon={ FiLock }
       />
-      <label
-        htmlFor="check"
-        className="label-checkBox"
-      >
+      <S.Label htmlFor="check">
         <input
           className="input-checkBox"
           id="check"
@@ -77,9 +87,9 @@ const form = (params) => {
           data-testid="signup-seller"
         />
         Quero vender
-      </label>
+      </S.Label>
       {button(isDisabled)}
-    </form>
+    </S.Form>
   );
 };
 
@@ -120,9 +130,10 @@ const Register = () => {
   };
 
   return (
-    <Container>
+    <S.Container>
+      <LogoTryBeer />
       {form(params)}
-    </Container>
+    </S.Container>
   );
 };
 
