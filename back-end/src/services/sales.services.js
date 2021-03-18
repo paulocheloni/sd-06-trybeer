@@ -1,6 +1,12 @@
 const { utils, sales } = require('../models');
 const { authNewSale } = require('../schemas');
 
+const getById = async (userId) => utils.getByFilter({
+  table: 'sales',
+  filter: 'user_id',
+  value: userId,
+});
+
 const validateTotalPrice = async (sale, salePrice) => {
   const promise = sale.map(async (prod) => utils.queryById('products', prod.productId));
   const products = await Promise.all(promise);
@@ -20,4 +26,5 @@ const create = async (body, userId) => {
 
 module.exports = {
   create,
+  getById,
 };

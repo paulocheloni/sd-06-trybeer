@@ -10,7 +10,7 @@ const create = async (body) => {
   authRegisterUser(data, isEmailAvaible);
 
   data.role = (data.isVendor) ? 'administrator' : 'client';
-  const newUserId = users.insertNewUser(data);
+  const newUserId = await users.insertNewUser(data);
 
   const token = generateToken(newUserId);
   const { role } = data;
