@@ -21,6 +21,7 @@ function MenuTop({ title }) {
         ?  urlRoute='/admin'
         :  urlRoute='';
     }
+    console.log(urlRoute)
   return (
     <div className="top">
       <button

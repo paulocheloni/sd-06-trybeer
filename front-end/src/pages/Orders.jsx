@@ -11,6 +11,7 @@ function Orders() {
         ?  urlRoute='/admin'
         :  urlRoute='';
     }
+    console.log(urlRoute)
   return (
     <div>
       <MenuTop title={"Trybeer"}/>

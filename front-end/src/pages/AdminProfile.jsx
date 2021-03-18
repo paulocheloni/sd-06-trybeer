@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import InputProfile from '../components/InputProfile';
+import ElementProfile from '../components/ElementProfile';
 
 function AdminProfile() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -11,12 +11,12 @@ function AdminProfile() {
         <h1 data-testid="top-title">
           Perfil
         </h1>
-        <InputProfile
+        <ElementProfile
           text={ `Nome:` }
           data="name"
           value={ name }
         />
-        <InputProfile
+        <ElementProfile
           text={ `Email:` }
           data="email"
           value={ email }
