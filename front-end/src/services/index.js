@@ -1,12 +1,11 @@
 import { login, register } from '../api';
 
-const verifyEmailAndPassword = (email, password, setActiveBtn, setUser) => {
+const verifyEmailAndPassword = (email, password, setActiveBtn) => {
   const isEmailValid = email.match(/\S+@\S+\.\S+/);
   const isPasswordValid = password.match(/^[0-9a-zA-Z]{6,50}$/);
 
   if (isEmailValid && isPasswordValid) {
     setActiveBtn(true);
-    setUser({ email, password });
   } else setActiveBtn(false);
 };
 
@@ -33,15 +32,19 @@ const verifyRegister = (user, setActiveBtn) => {
   } else setActiveBtn(false);
 };
 
-const handleSubmitRegister = (user, checked, setUser, history) => {
+const handleSubmitRegister = async (user, checked, setUser, history) => {
   if (checked) {
     setUser({ ...user, role: 'administrator' });
-    history.push('admin/orders');
-    register({ ...user, role: 'administrator' });
+    await register({ ...user, role: 'administrator' })
+      .then((result) => {
+        if (result) history.push('admin/orders');
+      });
   } else {
     setUser({ ...user, role: 'client' });
-    history.push('products');
-    register({ ...user, role: 'client' });
+    register({ ...user, role: 'client' })
+      .then((result) => {
+        if (result) history.push('products');
+      });
   }
 };
 

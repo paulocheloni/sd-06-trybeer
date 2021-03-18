@@ -9,12 +9,10 @@ function Register() {
   const [checked, setChecked] = useState(false);
   const history = useHistory();
 
-  useEffect(() => {
-    verifyRegister(user, setActiveBtn);
-  }, [checked, user]);
+  useEffect(() => verifyRegister(user, setActiveBtn), [checked, user]);
 
   return (
-    <div>
+    <div className="test">
       <ControllerHeader />
       <span>Nome</span>
       <input
