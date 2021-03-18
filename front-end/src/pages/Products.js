@@ -48,15 +48,15 @@ function Products() {
     <div className="product-page">
       <MenuTop title="TryBeer" />
       <div className="card-container">
-      { products.map((product, index) => (
-        <Card
-          id={ product.id }
-          key={ index }
-          index={ index }
-          name={ product.name }
-          urlImage={ product.url_image }
-          price={ product.price }
-        />)) }
+        { products.map((product, index) => (
+          <Card
+            id={ product.id }
+            key={ index }
+            index={ index }
+            name={ product.name }
+            urlImage={ product.url_image }
+            price={ product.price }
+          />)) }
       </div>
       <button
         className="checkout-btn-bottom btn-success"

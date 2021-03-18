@@ -9,12 +9,12 @@ function MenuTop(props) {
   return (
     <div>
       <nav className="top-bar">
-      <i
-        onClick={ () => (showSideBar ? setShowSideBar(false) : setShowSideBar(true)) }
-        aria-hidden="true"
-        className="fas fa-bars"
-        data-testid="top-hamburguer"
-      /> 
+        <i
+          onClick={ () => (showSideBar ? setShowSideBar(false) : setShowSideBar(true)) }
+          aria-hidden="true"
+          className="fas fa-bars"
+          data-testid="top-hamburguer"
+        />
         <h1 data-testid="top-title">{ title }</h1>
       </nav>
       <aside>

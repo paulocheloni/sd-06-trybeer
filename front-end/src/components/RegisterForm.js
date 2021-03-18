@@ -47,7 +47,7 @@ function RegisterForm(props) {
             id="checkbox"
             onChange={ ({ target }) => setCheck(target.value) }
           />
-          Quero vender 
+          Quero vender
         </label>
       </form>
     </div>
