@@ -20,5 +20,5 @@ export default {
   listLogin,
   createUser,
   updateUser,
-  listProducts
+  listProducts,
 };

@@ -1,24 +1,16 @@
 import React, { useContext } from 'react';
+import IconButton from '@material-ui/core/IconButton';
+import ExposureNeg1Icon from '@material-ui/icons/ExposureNeg1';
 import context from '../Context/ContextAPI';
-import { makeStyles } from '@material-ui/core/styles';
-import icon from '../resources/Remove_Circle.png';
+import attTotalPrice from './addTotalPrice';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-}));
-
-function ButtonSub({product}) {
-  const { cart, setCart } = useContext(context);
-  const classes = useStyles();
+function ButtonSub({ product }) {
+  const { cart, setCart, setPrice } = useContext(context);
 
   const subButtonOnCart = () => {
-    const isCart = cart.some((prod) => prod.name === product.name)
+    const isCart = cart.some((prod) => prod.name === product.name);
     if (isCart) {
-      const isIndex = cart.findIndex((prod) => prod.name === product.name)
+      const isIndex = cart.findIndex((prod) => prod.name === product.name);
       const newCart = [...cart];
       if (cart[isIndex].quantity > 1) {
         newCart[isIndex].quantity = newCart[isIndex].quantity - 1;
@@ -30,13 +22,13 @@ function ButtonSub({product}) {
         return setCart(newerCart);
       }
     }
-    return;
-  }
+    attTotalPrice(cart, setPrice);
+  };
 
   return (
-    <div className={classes.root}>
-      <img src={icon} onClick={subButtonOnCart} />
-    </div>
+    <IconButton color="primary" aria-label="add to shopping cart" onClick={ subButtonOnCart }>
+      <ExposureNeg1Icon />
+    </IconButton>
   );
 }
 

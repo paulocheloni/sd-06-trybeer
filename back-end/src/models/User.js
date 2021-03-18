@@ -26,6 +26,7 @@ const updateUser = async (name, email) => {
   return changedRows;
 };
 
+
 module.exports = {
   createUser,
   updateUser,
