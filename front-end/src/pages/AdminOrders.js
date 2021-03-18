@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header } from '../components';
+// import { Header } from '../components';
+import SideBarAdmin from '../components/SideBarAdmin';
 
 class AdminOrders extends React.Component {
   constructor() {
@@ -13,7 +14,8 @@ class AdminOrders extends React.Component {
     const { history } = this.props;
     return (
       <div>
-        <Header history={ history } />
+        {/* <Header history={ history } /> */}
+        <SideBarAdmin history={ history } />
         <p>Orders</p>
       </div>
     );
