@@ -12,7 +12,7 @@ require('dotenv').config();
 
 const app = express();
 
-const PORT = 3000;
+const PORT = 3001;
 
 app.use(cors());
 
@@ -40,7 +40,7 @@ app.use('/profile', VerifyAuthorization, ProfileController);
 
 app.use((err, _req, res, _next) => {
   console.error({ err });
-  res.status(500).json({ erro: 'erro interno' });
+  res.status(500).json({ err: 'erro interno' });
 });
 
 app.listen(PORT, () => console.log('running port', PORT));

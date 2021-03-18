@@ -5,6 +5,6 @@ const ProfileUpdateService = require('../services/ProfileUpdateService');
 const ProfileController = new Router();
 
 ProfileController.post('/', ProfileService);
-ProfileController.put('/:id', ProfileUpdateService);
+ProfileController.put('/update/name', ProfileUpdateService);
 
 module.exports = ProfileController;
