@@ -22,7 +22,10 @@ const Cart = () => {
   }, [cart, totalCart]);
 
   return (
-    <div>
+    <div className="cart-container">
+      <p data-testid="checkout-bottom-btn-value">
+        { `R$ ${totalCart().toFixed(2).replace('.', ',')}` }
+      </p>
       <button
         data-testid="checkout-bottom-btn"
         type="button"
@@ -31,9 +34,6 @@ const Cart = () => {
       >
         Ver Carrinho
       </button>
-      <p data-testid="checkout-bottom-btn-value">
-        { `R$ ${totalCart().toFixed(2).replace('.', ',')}` }
-      </p>
     </div>
   );
 };

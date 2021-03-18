@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import verifyEmailAndPassword from '../utils/verifyEmailAndPassword';
+import { verifyEmailAndPassword } from '../utils/verifications';
 import fetchFunctions from '../api/fetchFunctions';
 import TrybeerContext from '../context/TrybeerContext';
 
 function Login() {
   const history = useHistory();
-  const { email, setEmail, password, setPassword } = useContext(TrybeerContext);
+  const { setUserLogged } = useContext(TrybeerContext);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [isInvalidUser, setIsInvalidUser] = useState(false);
 
@@ -17,11 +19,10 @@ function Login() {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
-
     const loggedUser = await fetchFunctions.post('login', { email, password });
 
-    if (Object.keys(loggedUser).length !== 1) {
-      localStorage.setItem('user', JSON.stringify(loggedUser));
+    if (loggedUser.token) {
+      await setUserLogged(loggedUser);
       if (loggedUser.role === 'administrator') return history.push('/admin/orders');
       return history.push('/products');
     }
@@ -34,7 +35,8 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="login-form">
+      <h1>TRYBEER</h1>
       <form onSubmit={ handleSignUp }>
         <p>Email</p>
         <input
@@ -69,9 +71,9 @@ function Login() {
       >
         Ainda não tenho conta
       </button>
-      <spam>
+      <p>
         { isInvalidUser ? 'Invalid entries. Try again.' : '' }
-      </spam>
+      </p>
     </div>
   );
 }

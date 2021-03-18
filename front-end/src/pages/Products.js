@@ -6,45 +6,40 @@ import fetchFunctions from '../api/fetchFunctions';
 import ProductCard from '../components/ProductCard';
 import Cart from '../components/Cart';
 import TrybeerContext from '../context/TrybeerContext';
+import { verifyToken } from '../utils/verifications';
 
 function Products({ history }) {
   const [products, setProducts] = useState([]);
-  const { email, password } = useContext(TrybeerContext);
+  const { user, getFromLocalStorage } = useContext(TrybeerContext);
+  const recoveredUser = getFromLocalStorage('user');
+  console.log(user);
   const fetchProducts = async () => {
     await fetchFunctions.get('products').then((productsArray) => {
       setProducts(productsArray);
     });
   };
 
-  const verifyIfUserIsLogged = async () => {
-    const loggedUser = await fetchFunctions.post('login', { email, password });
-    const savedUser = JSON.parse(localStorage.getItem('user'));
-
-    if ((!savedUser) && (Object.keys(loggedUser).length === 1)) {
-      return history.push('/login');
-    }
-  };
-
   useEffect(() => {
+    verifyToken('products', recoveredUser, history);
     fetchProducts();
-    verifyIfUserIsLogged();
-  }, [verifyIfUserIsLogged]);
+  }, [history, recoveredUser]);
 
   return (
     <div>
       <TopMenu />
       <SidebarMenu />
-      {products.map(({ id, name, price, url_image: urlImage }, index) => (
-        <ProductCard
-          id={ id }
-          key={ index }
-          name={ name }
-          price={ price }
-          url_image={ urlImage }
-          index={ index }
-        />
-      ))}
-      Products!!
+      <div className="products-container">
+        {products.map(({ id, name, price, url_image: urlImage }, index) => (
+          <ProductCard
+            id={ id }
+            key={ index }
+            name={ name }
+            price={ price }
+            url_image={ urlImage }
+            index={ index }
+          />
+        ))}
+      </div>
       <Cart />
     </div>
   );

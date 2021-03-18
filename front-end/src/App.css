@@ -2,6 +2,26 @@ body{
   background-color: white;
 }
 
+input {
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 5%;
+  width: 100%;
+}
+
+.login-form {
+  margin: auto;
+  width: 30%;
+  margin-top: 20%;
+  flex-direction: column;
+  display: flex;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 5%;
+}
+
 header {
   background-color: black;
   display: flex;
@@ -9,6 +29,7 @@ header {
   color: white;
   top: 0;
   position: fixed;
+  height: 50px;
   width: 100%;
 }
 
@@ -59,7 +80,6 @@ button {
   justify-content: space-between;
 }
 
-
 .isVisible {
   visibility: visible;
 }
@@ -93,11 +113,46 @@ button {
   flex-direction: column;
 }
 
+.products-container {
+  justify-content: center;
+  margin-top: 10%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 5%;
+}
+
 .product-card {
-  background-color: yellow;
+  width: 300px;
+  padding: 0.3%;
+  border: 1px solid black;
   margin: 0.2%;
 }
 
+.quantity-controller {
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-around;
+}
+
+.quantity-controller button{
+  width: 15%;
+  border-radius: 50%;
+  background-color:black;
+}
+
 .product-card-image {
-  width: 300px;
+  height: 300px;
+}
+
+.cart-container {
+  right: 0;
+  height: 30px;
+  align-items: center;
+  justify-content: space-around;
+  width: 200px;
+  display: flex;
+  background-color: black;
+  color: white;
+  bottom: 0;
+  position: fixed;
 }

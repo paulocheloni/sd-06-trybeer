@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import SidebarMenu from '../components/SideBarMenu';
 import TopMenu from '../components/TopMenu';
 import fetchFunctions from '../api/fetchFunctions';
+import TrybeerContext from '../context/TrybeerContext';
 
 function Profile(props) {
+  const { user } = useContext(TrybeerContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [isUpdated, setIsUpdated] = useState(false);
   const TIME_TO_REDIRECT = 3000;
 
-  const setConfig = async () => {
-    const user = await JSON.parse(localStorage.getItem('user'));
+  const setConfig = () => {
     setEmail(user.email);
     setName(user.name);
   };
@@ -33,7 +34,7 @@ function Profile(props) {
     setTimeout(() => history.push('/login'), TIME_TO_REDIRECT);
   };
 
-  useEffect(() => { setConfig(); }, [isUpdated]);
+  useEffect(() => { setConfig(); }, [isUpdated, setConfig]);
 
   return (
     <div>
@@ -51,6 +52,7 @@ function Profile(props) {
               name="name"
               placeholder="Nome"
               id="name"
+              value={ name }
               onChange={ onChangeName }
             />
           </label>

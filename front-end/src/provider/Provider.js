@@ -4,19 +4,29 @@ import TrybeerContext from '../context/TrybeerContext';
 
 function TrybeerProvider({ children }) {
   const [cart, setCart] = useState([]);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [user, setUser] = useState({});
 
   useEffect(() => {
-    const localCart = JSON.parse(localStorage.getItem('cart'));
-    if (localCart) {
-      setCart(localCart);
-    }
+    const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart'));
+    const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
+
+    if (cartFromLocalStorage) setCart(cartFromLocalStorage);
+    if (userFromLocalStorage) setUser(userFromLocalStorage);
   }, []);
+
+  const setUserLogged = (userData) => {
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+  };
+
+  const getFromLocalStorage = (key) => {
+    const keyFromLocalStorage = JSON.parse(localStorage.getItem(key));
+    return keyFromLocalStorage;
+  };
 
   const updateProductQuantity = (id, quantity, price) => {
     const product = { id, quantity, price };
-    const cartWithoutProduct = cart.filter((item) => item.id !== id);
+    const cartWithoutProduct = cart.filter((item) => item.id !== id && quantity === 0);
     const newCart = [...cartWithoutProduct, product];
     setCart(newCart);
     localStorage.setItem('cart', JSON.stringify(newCart));
@@ -26,10 +36,10 @@ function TrybeerProvider({ children }) {
     cart,
     setCart,
     updateProductQuantity,
-    email,
-    setEmail,
-    password,
-    setPassword,
+    getFromLocalStorage,
+    user,
+    setUser,
+    setUserLogged,
   };
 
   return (
