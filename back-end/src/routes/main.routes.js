@@ -22,4 +22,6 @@ routes.use('/admin', adminRouter);
 routes.use('/images', express.static(path.join(__dirname, '../images')));
 routes.use(handleError);
 
+routes.use('*', (_req, res) => res.status(404).json({ message: 'Not Found 404' }));
+
 module.exports = routes;
