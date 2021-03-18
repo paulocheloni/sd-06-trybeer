@@ -64,4 +64,29 @@ module.exports = {
     customCode: 'C_ERR_NOT_FOUND',
     customMessage: 'Not found.',
   },
+  C_ERR_NO_PRODS: {
+    statusCode: 400,
+    customCode: 'C_ERR_NO_PRODS',
+    customMessage: 'There are no products in this sale.',
+  },
+  C_ERR_INVALID_PRODS: {
+    statusCode: 400,
+    customCode: 'C_ERR_INVALID_PRODS',
+    customMessage: 'Invalid products id or quantity',
+  },
+  C_ERR_INVALID_DELV: {
+    statusCode: 400,
+    customCode: 'C_ERR_INVALID_DELV',
+    customMessage: 'Invalid delivery adress or number',
+  },
+  C_ERR_NO_USER_TOKEN: {
+    statusCode: 500,
+    customCode: 'C_ERR_NO_USER_TOKEN',
+    customMessage: 'Unexpected token error',
+  },
+  C_ERR_PRICE: {
+    statusCode: 400,
+    customCode: 'C_ERR_PRICE',
+    customMessage: 'price inconsistency',
+  },
 };
