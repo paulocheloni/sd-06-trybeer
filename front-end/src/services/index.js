@@ -62,6 +62,20 @@ const handleUpdate = (name) => {
   updateName(name);
 };
 
+const addProduct = (quantity, setQuantity, cerveja) => {
+  const total = quantity + 1;
+  localStorage.setItem(`${cerveja}`, total);
+  setQuantity(total);
+}
+
+const reduceProduct = (quantity, setQuantity, cerveja) => {
+  if(quantity > 0) {
+    const total = quantity - 1;
+    localStorage.setItem(`${cerveja}`, total);
+    setQuantity(total);
+  }
+}
+
 export {
   verifyEmailAndPassword,
   handleSubmit,
@@ -70,4 +84,6 @@ export {
   handleSubmitRegister,
   redirectMenuBar,
   handleUpdate,
+  addProduct,
+  reduceProduct
 };

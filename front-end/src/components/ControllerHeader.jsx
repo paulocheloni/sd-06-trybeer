@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import SideBar from './SideBar';
 import Header from './Header';
+import '../css/ControllerHeader.css';
 
 function ControllerHeader(props) {
   const [viewMenu, setViewMenu] = useState(false);
   return (
-    <div>
+    <div className="controllerheader">
       <button
         data-testid="top-hamburguer"
         type="button"
@@ -14,7 +15,7 @@ function ControllerHeader(props) {
         ☰
       </button>
       <Header title={ props.title } />
-      { viewMenu && <SideBar setViewMenu={ setViewMenu } /> }
+      { viewMenu && <SideBar/> }
     </div>
   );
 }
