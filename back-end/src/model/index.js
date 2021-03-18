@@ -1,9 +1,9 @@
 const LoginModel = require('./LoginModel');
 const UserModel = require('./UserModel');
-const ProfileModel = require('./ProfileModel');
+const ProductsModel = require('./ProductsModel');
 
 module.exports = {
   LoginModel,
   UserModel,
-  ProfileModel,
+  ProductsModel,
 };

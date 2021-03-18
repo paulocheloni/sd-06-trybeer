@@ -18,7 +18,6 @@ function App() {
         <Route path="/register" component={ Register } />
         <Route path="/products" component={ Products } />
         <Route path="/profile" component={ Profile } />
-
       </Switch>
     </Router>
   );

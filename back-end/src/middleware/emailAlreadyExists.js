@@ -10,6 +10,5 @@ module.exports = async (req, res, next) => {
     .status(409)
     .json({ message: 'E-mail already in database.' });
   }
-
   next();
 };
