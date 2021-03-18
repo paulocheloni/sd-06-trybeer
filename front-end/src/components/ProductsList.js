@@ -57,7 +57,7 @@ class ProductsList extends React.Component {
   }
 
   toCheckout() {
-    const { history, dispatchRemoved } = this.props;
+    const { history } = this.props;
     const cart = JSON.parse(localStorage.getItem(('stateCart')));
     const qtd = JSON.parse(localStorage.getItem('stateQuantity'));
     for (let index = 0; index < cart.length; index += 1) {
