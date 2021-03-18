@@ -21,6 +21,9 @@ const checkOutRedirect = (setCheckOut, history) => {
   setTimeout(() => {
     history.push('/products');
   }, time);
+
+  localStorage.removeItem('infosCheckout');
+  localStorage.removeItem('total');
 };
 
 const form = (params) => {
@@ -28,10 +31,11 @@ const form = (params) => {
     valueTotal,
     setStreet,
     setNumberHouse,
-    theme,
     cardsProductsValues,
     checkOut,
   } = params;
+
+  const theme = JSON.parse(localStorage.getItem('@trybeer:theme'));
 
   return (
     <div>
@@ -41,11 +45,11 @@ const form = (params) => {
         <S.ContainerProducts>
           <h1>Produtos</h1>
           {cardsProductsValues}
-          <S.SpanTotal data-testid="order-total-value">
+          <S.Total data-testid="order-total-value">
             Total: R$
             {' '}
             {(valueTotal).toFixed(2).replace('.', ',')}
-          </S.SpanTotal>
+          </S.Total>
           <S.ContainerAddress>
             <h1>Endereço</h1>
             <Input
@@ -79,12 +83,8 @@ const Checkout = () => {
   const [street, setStreet] = useState('');
   const [numberHouse, setNumberHouse] = useState('');
   const [checkOut, setCheckOut] = useState(false);
-
-  const history = useHistory();
-
   const { setCartList } = useContext(GlobalContext);
-
-  const theme = JSON.parse(localStorage.getItem('@trybeer:theme'));
+  const history = useHistory();
 
   const cartListLocalStorage = JSON.parse(localStorage.getItem('infosCheckout'));
 
@@ -136,15 +136,16 @@ const Checkout = () => {
               (R$
               {' '}
               {(infos.price).replace('.', ',')}
-              )
+              {' '}
+              un)
             </p>
-            <button
+            <S.ButtonForm
               type="button"
               onClick={ () => removeItem(infos.id) }
               data-testid={ `${index}-removal-button` }
             >
               X
-            </button>
+            </S.ButtonForm>
           </S.ContainerInfos>
         ))
       ) : (
@@ -159,7 +160,6 @@ const Checkout = () => {
     valueTotal,
     setStreet,
     setNumberHouse,
-    theme,
     cardsProductsValues,
     checkOut,
   };

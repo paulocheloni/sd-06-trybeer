@@ -57,10 +57,11 @@ const ContainerEmptyCart = styled.div`
   `}
 `;
 
-const SpanTotal = styled.span`
+const Total = styled.p`
   ${({ theme }) => css`
     color: ${theme.colors.text};
     margin-top: 15px;
+    text-align: right;
   `}
 `;
 
@@ -76,7 +77,7 @@ const ContainerInfos = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    background: ${theme.colors.secondary};
+    background: ${theme.colors.backgroundInput};
     color: ${theme.colors.text};
     border: 1px solid ${theme.colors.borderInput};
 
@@ -96,24 +97,33 @@ const ContainerInfos = styled.div`
     > p {
       font-size: 10px;
     }
-    > button {
-      height: 100%;
-      width: 30px;
-
-      border: none;
-      border-radius: 0 5px 5px 0;
-      background: ${theme.colors.backgroundDiv};
-      color: ${theme.colors.text};
-
-      cursor: pointer;
-
-      transition: filter 0.3s;
-
-      &:hover {
-        filter: brightness(0.9);
-      }
-    }
   `}
+`;
+
+const ButtonForm = styled.button`
+  ${({ theme }) => css`
+    height: 100%;
+    width: 30px;
+
+    border: none;
+    border-radius: 0 5px 5px 0;
+    background: ${theme.colors.backgroundDiv};
+    color: ${theme.colors.text};
+
+    cursor: pointer;
+
+    transition: filter 0.3s;
+
+    &:hover {
+      filter: brightness(0.9);
+    }> span {
+
+width: 50%;
+background: red;
+  `}
+`;
+
+const NameProduct = styled.div`
 `;
 
 const ContainerAddress = styled.div`
@@ -175,6 +185,8 @@ export default {
   ContainerButton,
   ContainerInfos,
   ContainerEmptyCart,
-  SpanTotal,
+  Total,
   CompletedSale,
+  ButtonForm,
+  NameProduct,
 };

@@ -9,7 +9,6 @@ const verifyQuantityZero = (cartList, setCartList) => {
   const productQuantity = cartList.filter((item) => item.quantity !== 0);
 
   setCartList(productQuantity);
-  localStorage.setItem('infosCheckout', JSON.stringify(productQuantity));
 };
 
 const handleCartList = ({ id, price, quantity, value, name }, cartList, setCartList) => {
@@ -23,17 +22,10 @@ const handleCartList = ({ id, price, quantity, value, name }, cartList, setCartL
 
   if (!product || product === undefined) {
     setCartList([...cartList, { id, name, price, quantity }]);
-
-    localStorage.setItem('infosCheckout', JSON.stringify(
-      [...cartList, { id, name, price, quantity }],
-    ));
   } else if (product && product.id === id) {
     product.quantity = quantity;
   } else {
     setCartList([...cartList, product]);
-    localStorage.setItem('infosCheckout', JSON.stringify(
-      [...cartList, product],
-    ));
   }
 
   const productZeroQuantity = cartList.find((item) => item.quantity === 0);

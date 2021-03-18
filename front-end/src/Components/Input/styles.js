@@ -25,7 +25,8 @@ const CompInput = styled.label`
       width: 45px;
       height: 40px;
       margin-top: 5px;
-      background: ${themeStorage === 'light' ? '#CCCCCC' : '#353535'};
+      /* background: ${themeStorage === 'light' ? '#CCCCCC' : '#353535'}; */
+      background: ${theme.colors.borderInput};
       border-radius: 5px 0 0 5px;
 
       display: flex;
@@ -54,7 +55,8 @@ const Input = styled.input`
 
     margin: 5px 0 20px 0;
 
-    border: ${themeStorage === 'light' ? '1px solid #CCCCCC' : '1px solid #353535'};
+    /* border: ${themeStorage === 'light' ? '1px solid #CCCCCC' : '1px solid #353535'}; */
+    border: 1px solid ${theme.colors.borderInput};
     border-radius: ${isIcon ? '0 5px 5px 0' : '5px'};
 
     @media (max-width: 500px) {
