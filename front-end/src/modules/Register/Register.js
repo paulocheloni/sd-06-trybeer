@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../axios/api';
 import Button from '../../design-components/Button';
 import RegisterInputs from './components/RegisterInputs';
 import ContextBeer from '../../context/ContextBeer';
 import registerValidation from '../../utils/registerValidation';
 
 function Register() {
+
+  const STATUS_CONFLICT = 409;
   const history = useHistory();
   const [duplicated, setDuplicated] = useState('');
   const {
@@ -41,12 +43,17 @@ function Register() {
         if (response.data.role === 'client') history.push('/products');
       })
       .catch((err) => {
-        console.log(err.response);
         if (err.response.status === STATUS_CONFLICT) {
           setDuplicated(err.response.data.message);
         }
       });
     return token;
+  };
+
+  const handleChecked = (checked) => {
+    console.log('checked in handle: ', checked);
+    setIsChecked(checked);
+    console.log('isChecked in handle: ', isChecked);
   };
 
   return (
@@ -70,12 +77,17 @@ function Register() {
           <label htmlFor="wannasell">
             <input
               className="mt-5"
-              name="email"
+              name="wannasell"
               type="checkbox"
               data-testid="signup-seller"
               id="wannasell"
               label="Quero vender"
               value="wannasell"
+<<<<<<< Updated upstream
+=======
+              checked={ isChecked }
+              onChange={ ({ target }) => handleChecked(target.checked) }
+>>>>>>> Stashed changes
             />
             Quero vender
           </label>
