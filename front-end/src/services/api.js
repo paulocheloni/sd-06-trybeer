@@ -36,10 +36,21 @@ const fetchProducts = async () => {
 
   if (response.message) return false;
   return response;
+
+  const fetchChangeName = async (name, email) => {
+  await fetch('http://localhost:3001/changeName', {
+    method: 'PUT',
+    headers: contentType,
+    body: JSON.stringify({
+      name,
+      email,
+    }),
+  });
 };
 
 module.exports = {
   fetchLogin,
   fetchRegister,
   fetchProducts,
+  fetchChangeName,
 };
