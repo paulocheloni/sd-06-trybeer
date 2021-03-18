@@ -5,7 +5,7 @@ import TopBar from '../components/TopBar';
 function Products() {
   return (
     <div>
-      <TopBar title="Trybeer" />
+      <TopBar title="TryBeer" />
       <h1>Products</h1>
     </div>
   );

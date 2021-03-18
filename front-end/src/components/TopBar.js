@@ -23,7 +23,7 @@ function TopBar({ title }) {
         >
           <GoThreeBars size={ 40 } />
         </button>
-        <h1 className="title" data-testid="top-title">{title}</h1>
+        <h1 className="title" data-testid="top-title">{title || 'TryBeer'}</h1>
       </header>
       { activeButton === true ? <SideBarClient /> : null }
     </div>
