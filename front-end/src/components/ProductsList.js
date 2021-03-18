@@ -66,6 +66,7 @@ class ProductsList extends React.Component {
     // dispatchRemoved(cart);
     localStorage.setItem('stateCart', JSON.stringify(cart));
     history.push('/checkout');
+    history.go(0);
   }
 
   removeItem(id) {

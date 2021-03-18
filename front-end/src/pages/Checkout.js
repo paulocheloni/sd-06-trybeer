@@ -60,11 +60,13 @@ class Home extends React.Component {
 
   async exclude(id) {
     const { dispatchRemoved, stateCart, stateID } = this.props;
+    console.log(stateCart);
     const newCart = stateCart.filter((element) => element.id !== id);
     await dispatchRemoved(newCart);
     localStorage.setItem('stateCart', JSON.stringify(newCart));
     const indexToBeRemoved = stateID.indexOf(id);
     stateID.splice(indexToBeRemoved, 1);
+    const newPrice = stateCart.filter((e) => e.price).
   }
 
   render() {
