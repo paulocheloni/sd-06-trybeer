@@ -18,7 +18,7 @@ function App() {
         <Route exact path="/login"><Login /></Route>
         <Route exact path="/register"><Register /></Route>
         <Route exact path="/products"><Products /></Route>
-        <Route exact path="/profile/:id"><ProfileClient /></Route>
+        <Route exact path="/profile"><ProfileClient /></Route>
       </div>
     </BrowserRouter>
   );

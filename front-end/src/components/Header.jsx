@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 function Header(props) {
-  // const arrayTitles = ['TryBeer', 'Meus Pedidos', 'Detalhes de Pedido',
-  //   'Meu perfil', 'Finalizar Pedido'];
+  const [title, setTitle] = useState('');
+  const location = useLocation();
+
+  const chooseTitle = () => {
+    const { pathname } = location;
+
+    switch(pathname) {
+      case '/profile':
+        setTitle('Meu perfil');
+        break;
+      case '/products':
+        setTitle('TryBeer');
+        break;
+      default: 
+        setTitle('Erro');
+        break;
+    }
+  };
+
+  useEffect(() => {
+    chooseTitle();
+  }, []);
+
   return (
     <div>
       <h1 data-testid="top-title">
-        {(props.title) ? props.title : 'Trybeer'}
+        { title }
       </h1>
     </div>
   );
