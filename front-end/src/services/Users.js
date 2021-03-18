@@ -1,9 +1,11 @@
 const { endpoint } = require('./utils');
 
+const applicationJsonContent = 'application/json';
+
 const login = (email, password) => fetch(`${endpoint}/user/login`, {
   method: 'post',
   headers: {
-    'Content-type': 'application/json',
+    'Content-type': applicationJsonContent,
   },
   body: JSON.stringify({ email, password }),
 })
@@ -13,13 +15,23 @@ const login = (email, password) => fetch(`${endpoint}/user/login`, {
 const register = (name, email, password, role) => fetch(`${endpoint}/user/register`, {
   method: 'post',
   headers: {
-    'Content-type': 'application/json',
+    'Content-type': applicationJsonContent,
   },
   body: JSON.stringify({ name, email, password, role }),
 })
   .then((response) => response.json());
 
+const updateUser = (name, email, token) => fetch(`${endpoint}/user/update`, {
+  method: 'put',
+  headers: {
+    'Content-type': applicationJsonContent,
+    authorization: token,
+  },
+  body: JSON.stringify({ name, email }),
+}).then((response) => response);
+
 module.exports = {
   login,
   register,
+  updateUser,
 };

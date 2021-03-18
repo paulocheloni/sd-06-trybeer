@@ -17,8 +17,19 @@ const registerUser = async ({ name, email, password, role }) => {
   return responsePayload;
 };
 
+const updateName = async (newUserName, email) => {
+  console.log(newUserName);
+  console.log(email);
+
+  await connection
+    .execute('UPDATE users SET name=? WHERE email=?', [newUserName, email]);
+  // console.log(updatedUser)
+  return null;
+};
+
 module.exports = {
   getAll,
   getEmail,
   registerUser,
+  updateName,
 };

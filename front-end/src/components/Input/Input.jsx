@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  * @param {string} testId
  * @see www.gmail.com
  */
-const Input = ({ title, type, testId, onChange, value, placeholder }) => (
+const Input = ({ title, type, testId, onChange, value, placeholder, isReadOnly }) => (
   <label htmlFor={ title }>
     {title}
     <input
@@ -17,6 +17,7 @@ const Input = ({ title, type, testId, onChange, value, placeholder }) => (
       data-testid={ testId }
       onChange={ (e) => onChange(title, e.target.value) }
       value={ value }
+      readOnly={ isReadOnly }
       placeholder={ placeholder }
     />
   </label>
@@ -29,10 +30,12 @@ Input.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
+  isReadOnly: PropTypes.bool,
 };
 
 Input.defaultProps = {
   onChange: () => {},
+  isReadOnly: false,
 };
 
 export default Input;
