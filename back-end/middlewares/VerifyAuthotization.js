@@ -5,13 +5,13 @@ const VerifyAuthotization = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization) {
-    return res.status(status.UNAUTHORIZED).json({ message: 'missing auth token' });
+    return res.status(status.UNAUTHORIZED).json({ err: 'missing auth token' });
   }
   
   const payload = tokenValidation(authorization);
   req.user = payload;
   
-  if (!payload) return res.status(status.UNAUTHORIZED).json({ message: 'jwt malformed' }); 
+  if (!payload) return res.status(status.UNAUTHORIZED).json({ err: 'jwt malformed' }); 
 
   next();
 };

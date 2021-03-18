@@ -5,7 +5,7 @@ const profileById = async (id) => connection.execute('SELECT * FROM users WHERE 
 const updateProfile = async (id, name) => connection
   .execute('UPDATE users SET name = ? WHERE id = ?', [name, id]);
 
-  module.exports = {
-    updateProfile,
-    profileById,
-  };
+module.exports = {
+  updateProfile,
+  profileById,
+};

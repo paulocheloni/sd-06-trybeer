@@ -24,9 +24,11 @@ function CostumerProfile() {
   }, [inputName]);
 
   const onClickSave = async () => {
-    await fetchApiJsonBody('/profile', { name: inputName }, 'PUT', token);
+    console.log('inputName', inputName)
+    const rs = await fetchApiJsonBody('/profile', { name: inputName }, 'PUT', token);
+    if (rs.err) return alert(rs.err);
     console.log('foi');
-    setUser({ ...user, name: inputName });
+    setUser({ ...user, name: rs.name });
   };
 
   return (

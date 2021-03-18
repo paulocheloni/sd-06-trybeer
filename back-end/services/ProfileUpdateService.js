@@ -14,9 +14,10 @@ const ProfileUpdateService = async (req, res) => {
   // console.log('id', id)
 
   await updateProfile(obj.id, name);
+  // console.log('seila', seila)
   // const [[updatedProfile]] = await profileById(id);
   // return res.status(OK).json(updatedProfile);
-  return res.status(OK).end();
+  return res.status(OK).json({ name });
 };
 
 module.exports = ProfileUpdateService;
