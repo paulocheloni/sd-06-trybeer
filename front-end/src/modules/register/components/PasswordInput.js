@@ -41,7 +41,7 @@ function PasswordInput(setError, setInputValue, inputValue) {
         <div className="flex space-x-2 items-center">
           <input
             id="password-ipt"
-            data-testid="password-input"
+            data-testid="signup-password"
             name="password"
             type={ !seePassword ? 'password' : 'text' }
             value={ inputValue }

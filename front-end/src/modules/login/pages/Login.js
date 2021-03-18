@@ -1,17 +1,24 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Form from '../components/Form';
 import PaperContainer from '../../../design-system/containers/PaperContainer';
 
 const Login = () => {
+  const history = useHistory();
+
   const storage = JSON.parse(localStorage.getItem('user'));
   const role = storage ? storage.role : '';
   const existToken = storage ? storage.token : false;
 
+  const timeout = 2000;
+
+  setTimeout(() => {
+    if (existToken && role === 'client') history.push('/products');
+    if (existToken && role === 'administrator') history.push('/admin/orders');
+  }, timeout);
+
   return (
     <div>
-      { (existToken && role === 'client') && <Redirect to="/products" /> }
-      { (existToken && role === 'administrator') && <Redirect to="/admin/orders" /> }
       <PaperContainer>
         <p>Login</p>
         <Form />
