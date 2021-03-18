@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Topbar } from '../components';
+import AppContext from '../context/app.context';
 
 export default function Login() {
+  const { test } = useContext(AppContext);
   return (
     <div>
       <Topbar />
+      <div>{test}</div>
       <form>
         <fieldset>
           <legend>Login</legend>
