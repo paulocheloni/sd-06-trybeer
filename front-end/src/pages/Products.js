@@ -5,8 +5,6 @@ import MenuTop from '../components/MenuTop';
 import getAllProducts from '../services/productsServices';
 import context from '../context/Context';
 
-// import { getToken, getUserByEmail } from '../services/api';
-
 function Products() {
   const [products, setProducts] = useState([]);
   const { totalCart, setTotalCart } = useContext(context);

@@ -24,7 +24,7 @@ function Card(props) {
     <div>
       <p data-testid={ `${index}-product-price` }>{`R$ ${price.replace('.', ',')}`}</p>
       <img
-        width="80px"
+        width="100px"
         data-testid={ `${index}-product-img` }
         src={ fixedUrl }
         alt="product"
@@ -54,7 +54,6 @@ Card.propTypes = {
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   urlImage: PropTypes.string.isRequired,
-  // [urlImage]replace: PropTypes.function.isRequired,
 };
 
 export default Card;
