@@ -14,7 +14,7 @@ const createNewUser = async (name, email, password, role) => {
   return user;
 };
 
-// // Verify user by email and password
+// Verify user by email and password
 const verifyUser = async (email, password) => {
   const user = await userModel.verifyUser(email, password);
   return user;
@@ -70,5 +70,5 @@ module.exports = {
   verifyEmail,
   update,
   verifyId,
-  verifyAuth
+  verifyAuth,
 };

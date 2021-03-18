@@ -1,5 +1,12 @@
 const { Router } = require('express');
-const { getAll, verifyEmail, createNewUser, verifyId, update, verifyAuth} = require('../service/UserService');
+const {
+  getAll,
+  verifyEmail,
+  createNewUser,
+  verifyId,
+  update,
+  verifyAuth
+} = require('../service/UserService');
 const { OK, CREATED } = require('../schema/statusSchema');
 
 const UserController = new Router();
