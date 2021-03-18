@@ -24,7 +24,7 @@ function AdminProfile() {
       </div>
     );
   } catch (err) {
-    return <Redirect to="/login" />;
+    return <Redirect to="/login"/>;
   }
 }
 

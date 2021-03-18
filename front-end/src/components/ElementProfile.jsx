@@ -5,9 +5,10 @@ function ElementProfile({ value, text, data }) {
   return (
     <label htmlFor={ data } className={ `${data}-label` }>
       { text }
-      <p 
+      <p
         className={ `profile-${data}-p` }
-        data-testid={ `profile-${data}` }>
+        data-testid={ `profile-${data}` }
+      >
         { value }
       </p>
     </label>

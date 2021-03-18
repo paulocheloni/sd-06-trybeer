@@ -8,11 +8,11 @@ import MenuSide from './menuSide';
 function MenuTop({ title }) {
   const user = JSON.parse(localStorage.getItem('user'));
   let isAdmin = false;
-    if (user.role && user.role === 'administrator') {
-      isAdmin = true
-    }
+  if (user.role && user.role === 'administrator') {
+    isAdmin = true;
+  }
   try {
-    const [open, setOpen] = useState(isAdmin); //true para passar no adminprofile
+    const [open, setOpen] = useState(isAdmin);// true para passar no adminprofile
     return (
       <div className="top">
         <button
@@ -26,14 +26,13 @@ function MenuTop({ title }) {
         <h1 className="title" data-testid="top-title">
           { title }
         </h1>
-        {open && <MenuSide title={"Trybeer"}/>}
+        { open && <MenuSide title="Trybeer" /> }
       </div>
     );
   } catch (err) {
     return <Redirect to="/login" />;
   }
 }
-
 
 export default MenuTop;
 

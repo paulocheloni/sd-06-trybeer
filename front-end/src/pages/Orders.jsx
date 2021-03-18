@@ -1,17 +1,18 @@
 import React from 'react';
-import MenuTop from '../components/menuTop';
 import { Redirect } from 'react-router-dom';
+import MenuTop from '../components/menuTop';
 
 function Orders() {
   try {
     const user = JSON.parse(localStorage.getItem('user'));
-  return (
-    <div>
-      <MenuTop title={"Trybeer"}/>
-    </div>
-  )
+    console.log(user);
+    return (
+      <div>
+        <MenuTop title="Trybeer" />
+      </div>
+    )
   } catch (err) {
-    return <Redirect to="/login" />;
+    return <Redirect to="/login" />
   }
 }
 

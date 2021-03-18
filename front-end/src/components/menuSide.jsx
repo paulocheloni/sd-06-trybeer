@@ -1,6 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 function MenuSide() {
   const route = useHistory();
@@ -17,19 +16,19 @@ function MenuSide() {
         <button
           data-testid="side-menu-item-products"
           type="button"
-          onClick={ () => route.push(`/products`) }
+          onClick={ () => route.push('/products') }
         >
           Produtos
         </button>
         <button
-          data-testid={`side-menu-item${modify}orders`}
+          data-testid={`side-menu-item${ modify }orders`}
           type="button"
           onClick={ () => route.push(`${urlRoute}/orders`) }
         >
           Meus Pedidos
         </button>
         <button
-          data-testid={`side-menu-item${modify}profile`}
+          data-testid={`side-menu-item${ modify }profile`}
           type="button"
           onClick={ () => route.push(`${urlRoute}/profile`) }
         >
