@@ -30,5 +30,4 @@ AdminProfile.propTypes = {
   history: PropTypes.shape().isRequired,
 };
 
-
 export default (AdminProfile);
