@@ -10,15 +10,15 @@ class Profile extends React.Component {
   }
 
   render() {
-    // const { history } = this.props;
+    const { history } = this.props;
     return (
       <div className="profile-container">
         {/* <Header history={ history } /> */}
-        <SideBarAdmin />
+        <SideBarAdmin history={ history } />
         <div className="inputs-div">
           <img src={ defaultProfile } alt="profile" />
-          <h2 data-testid="profile-name"></h2>
-          <h2 data-testid="profile-email"></h2>
+          <h2 data-testid="profile-name">Name</h2>
+          <h2 data-testid="profile-email">Email</h2>
         </div>
       </div>
     );

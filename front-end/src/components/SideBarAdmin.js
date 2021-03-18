@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class SideBarAdmin extends React.Component {
   constructor() {
@@ -7,8 +8,8 @@ class SideBarAdmin extends React.Component {
   }
 
   render() {
-    // não consegui usar o history.push pois acrescenta rota na que eu já estou e precisava substituir, não consegui com o history.replace()
-    // const { history } = this.props;
+    const { history } = this.props;
+    console.log(history);
     return (
       <header className="sidebar-container">
         <h1>TryBeer</h1>
@@ -17,14 +18,14 @@ class SideBarAdmin extends React.Component {
             <button
               type="button"
               data-testid="side-menu-item-orders"
-              onClick={ () => (window.location.href = '/admin/orders') }
+              onClick={ () => history.replace('./orders') }
             >
               Pedidos
             </button>
             <button
               type="button"
               data-testid="side-menu-item-profile"
-              onClick={ () => (window.location.href = '/admin/profile') }
+              onClick={ () => history.replace('./profile') }
             >
               Perfil
             </button>
@@ -33,7 +34,7 @@ class SideBarAdmin extends React.Component {
             <button
               type="button"
               data-testid="side-menu-item-logout"
-              onClick={ () => (window.location.href = '/login') }
+              onClick={ () => history.go(-5) }
             >
               Sair
             </button>
@@ -44,4 +45,8 @@ class SideBarAdmin extends React.Component {
   }
 }
 
-export default SideBarAdmin;
+SideBarAdmin.propTypes = {
+  history: PropTypes.shape().isRequired,
+};
+
+export default (SideBarAdmin);
