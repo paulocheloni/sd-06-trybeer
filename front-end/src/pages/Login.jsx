@@ -39,7 +39,6 @@ export default function Login() {
     const response = await api.fetchLogin(email, password);
     localStorage.setItem('token', JSON.stringify(response.token));
     localStorage.setItem('user', JSON.stringify(response.user));
-    console.log(response.user)
     if (response.user.role === 'client') {
       history.push('/products');
     } else {
