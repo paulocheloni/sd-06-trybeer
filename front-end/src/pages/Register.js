@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '../components/Button';
 import RegisterForm from '../components/RegisterForm';
-import { getUserByEmail, registerUser } from '../services/api';
+import { getUserByEmail, registerUser } from '../services/usersServices';
 import { regex, regexUser, minUser, minPassword } from '../variables';
 
 function Register() {
@@ -24,8 +24,9 @@ function Register() {
   }, [name, email, password]);
 
   const handleLocalStorage = (tokenobj, role) => {
-    const { token } = tokenobj;
+    const { token, insertId } = tokenobj;
     const obj = {
+      id: insertId,
       name,
       email,
       token,

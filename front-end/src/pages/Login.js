@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { getToken, getUserByEmail } from '../services/api';
+import { getToken, getUserByEmail } from '../services/usersServices';
 import LoginForm from '../components/LoginForm';
 import Button from '../components/Button';
 import { regex, minPassword } from '../variables';
@@ -45,8 +45,9 @@ function Login() {
   }, [email, password]);
 
   const handleLocalStorage = (user) => {
-    const { name, role, token } = user;
+    const { id, name, role, token } = user;
     const obj = {
+      id,
       name,
       email,
       token,

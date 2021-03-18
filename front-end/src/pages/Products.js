@@ -18,7 +18,6 @@ function Products() {
 
   const auxFunc = async () => {
     const storageUser = JSON.parse(localStorage.getItem('user'));
-    console.log(storageUser);
 
     if (!storageUser) {
       history.push('/login');
@@ -50,6 +49,7 @@ function Products() {
       <MenuTop title="TryBeer" />
       { products.map((product, index) => (
         <Card
+          id={ product.id }
           key={ index }
           index={ index }
           name={ product.name }

@@ -7,6 +7,8 @@ function SideBar() {
 
   const handleClickSair = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('cart');
+    localStorage.removeItem('totalCart');
     history.push('/login');
   };
 

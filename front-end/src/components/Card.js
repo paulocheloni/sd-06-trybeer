@@ -5,7 +5,7 @@ import context from '../context/Context';
 function Card(props) {
   const [quantity, setQuantity] = useState(0);
   const { totalCart, setTotalCart } = useContext(context);
-  const { index, name, price, urlImage } = props;
+  const { id, index, name, price, urlImage } = props;
   const fixedUrl = urlImage.replace('images/', '');
 
   const MINUSONE = -1;
@@ -34,7 +34,7 @@ function Card(props) {
       productLocal.splice(prodIndex, 1);
       localStorage.setItem('cart', JSON.stringify(productLocal));
     } else {
-      const obj = { name, quantity: qtd, price };
+      const obj = { id, name, quantity: qtd, price };
       productLocal.push(obj);
       localStorage.setItem('cart', JSON.stringify(productLocal));
     }
@@ -85,6 +85,7 @@ function Card(props) {
 
 Card.propTypes = {
   index: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   urlImage: PropTypes.string.isRequired,
