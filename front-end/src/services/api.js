@@ -33,6 +33,7 @@ const fetchProducts = async () => {
     headers: contentType,
     body: JSON.stringify(),
   }).then((res) => res.json());
+}
 
   if (response.message) return false;
   return response;

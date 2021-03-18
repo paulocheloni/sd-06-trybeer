@@ -50,7 +50,7 @@ export default function Products() {
           {
             ((productsCart && productsCart.length > 0
               ? productsCart.reduce(sumOfCart, 0) : 0))
-                .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+              .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
           }
         </span>
       </button>

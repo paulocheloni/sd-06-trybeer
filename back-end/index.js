@@ -4,15 +4,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const userController = require('./controllers/userController');
 const changeNameController = require('./controllers/changeNameController');
+const productController = require('./controllers/productController');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const productController = require('./controllers/productController');
-
 app.use('/', userController, changeNameController);
-
 
 app.use('/', productController);
 app.use(bodyParser.urlencoded({ extended: false }));
