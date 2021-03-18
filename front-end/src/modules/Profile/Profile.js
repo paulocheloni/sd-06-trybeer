@@ -15,7 +15,7 @@ function Profile() {
     setUser,
   } = useContext(ContextBeer);
 
-  const baseUrl = process.env.REACT_APP_BASE_URL;
+  const baseUrl = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
 
   function saveOnClick() {
     axios.put(`${baseUrl}/profile`, {
