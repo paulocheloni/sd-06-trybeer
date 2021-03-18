@@ -7,6 +7,7 @@ const routerSales = Router();
 routerSales.post('/', validateToken, async (req, res) => {
   const { price, address, number, status } = req.body;
   const { userId } = res.locals;
+  console.log(userId, price, address, number, status);
   const insertId = await createOne({ userId, price, address, number, status });
   res.status(201).json({ insertId });
 });
