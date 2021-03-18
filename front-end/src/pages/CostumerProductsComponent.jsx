@@ -6,7 +6,7 @@ import '../style/CostumerProducts.css';
 const dataFalse = require('../dataFalse');
 
 function CostumerProducts() {
-  const [amount, setAmount] = useState(0.00);
+  // const [amount, setAmount] = useState(0.00);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function CostumerProducts() {
           </div>
         ))}
       </div>
-{/* 
+      {/*
       <button
         type="button"
         onClick={ clickRedirect }
@@ -43,7 +43,8 @@ function CostumerProducts() {
       >
         Ver Carrinho
       </button>
-      <p data-testid="checkout-bottom-btn-value">{ `R$: ${amount}` }</p> */}
+      <p data-testid="checkout-bottom-btn-value">{ `R$: ${amount}` }</p>
+      */}
     </div>
   );
 }

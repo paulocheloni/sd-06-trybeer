@@ -55,7 +55,7 @@ function Login() {
     }
   };
 
-  return(
+  return (
     <div className="login-register">
       <img src={ logo } className="img-logo-login" alt="logo" />
       <form>

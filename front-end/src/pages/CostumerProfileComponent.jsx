@@ -3,10 +3,10 @@ import Header from '../components/HeaderComponent';
 import '../style/CostumerProfile.css';
 
 function CostumerProfile() {
-  const [valid, setValid] = useState(false);
+  const [/* valid */, setValid] = useState(false);
 
   const isValid = async () => {
-    const input = funcValidations.validateEmail(inputValues.email);
+    // const input = funcValidations.validateEmail(inputValues.email);
     if (password && email) {
       setValid(false);
     } else {
@@ -16,7 +16,7 @@ function CostumerProfile() {
 
   useEffect(() => {
     isValid();
-  }, [inputValues.password, inputValues.emai]);l
+  }, [inputValues.password, inputValues.emai]);
 
   return (
     <div className="costumer_profile">

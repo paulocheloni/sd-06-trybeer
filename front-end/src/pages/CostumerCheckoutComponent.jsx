@@ -7,16 +7,21 @@ function CostumerCheckoutComponent() {
       <Header text="Finalizar Pedido" id="top-title" />
       <h1>Produtos</h1>
       <p>CARD COM OS ITENS ESCOLHIDOS</p>
-      <p>Total: { amount }</p>
+      <p>
+        Total:
+        { amount }
+      </p>
 
       Endereço
       <form>
         <label htmlFor="street">
           Rua:
-        <input type="text" />
+          <input type="text" />
+        </label>
         <label htmlFor="number">
           Número da casa:
-        <input type="number" />
+          <input type="number" />
+        </label>
       </form>
       <button type="button" data-testid="top-title">Finalizar Pedido</button>
     </div>

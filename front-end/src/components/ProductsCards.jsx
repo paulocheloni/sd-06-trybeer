@@ -19,7 +19,7 @@ function ProductsCard({ element, index }) {
     saveStorage('productQuantity', [...des, { id: element.id, qnt }]);
   }, [qnt]);
 
-  const { name, url_image, price } = element;
+  const { name, urlImage, price } = element;
 
   const clickPlus = () => {
     setQnt(qnt + 1);
@@ -32,10 +32,12 @@ function ProductsCard({ element, index }) {
   };
 
   return (
-    <>
-     {/* <img src={ url_image }
-      alt="fotoProduto"
-      data-testid={ `${index}-product-img` } /> */}
+    <div>
+      <img
+        src={ urlImage }
+        alt="fotoProduto"
+        data-testid={ `${index}-product-img` }
+      />
       <p data-testid={ `${index}-product-name` }>{ name }</p>
       <p>{ price }</p>
       <button
@@ -53,7 +55,7 @@ function ProductsCard({ element, index }) {
       >
         -
       </button>
-    </>
+    </div>
   );
 }
 
