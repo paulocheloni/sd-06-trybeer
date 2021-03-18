@@ -13,12 +13,12 @@ function MenuSideBar() {
 
   return (
     <div className="side-menu-container menuSideBar">
-      <nav
+      <span
         data-testid="top-hamburguer"
         className="menuIcon"
       >
         <FiMenu />
-      </nav>
+      </span>
 
       <button
         type="button"
