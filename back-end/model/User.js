@@ -23,6 +23,14 @@ const verifyUser = async (email, password) => {
   return users;
 };
 
+// find email
+const findByEmail = async (email) => {
+  const [users] = await connection
+  .execute('SELECT * FROM Trybeer.users WHERE email = ?', [email]);
+
+  return users;
+};
+
 // Create new user
 const createUser = async (name, email, password, role) => {
   const [users] = await connection
@@ -44,5 +52,6 @@ module.exports = {
   findById,
   verifyUser,
   createUser,
+  findByEmail,
   updateName,
 };
