@@ -1,7 +1,5 @@
 import fetchFunctions from '../api/fetchFunctions';
 
-const messageError = 'Unauthorized access';
-
 export const verifyEmailAndPassword = (email, password) => {
   const emailFormat = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email);
   const passwordMinLength = 6;
@@ -9,6 +7,7 @@ export const verifyEmailAndPassword = (email, password) => {
   return isEmailAndPasswordValid;
 };
 
+const messageError = 'Unauthorized access';
 const invalidMessage = (message) => message.message === messageError;
 
 export const verifyToken = async (endpoint, dataFromLocalStorage, history) => {

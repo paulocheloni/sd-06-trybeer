@@ -38,8 +38,9 @@ function TrybeerProvider({ children }) {
     const product = { id, quantity, price };
     const cartWithoutProduct = cart.filter((item) => item.id !== id);
     const newCart = [...cartWithoutProduct, product];
-    setCart(newCart);
-    localStorage.setItem('cart', JSON.stringify(newCart));
+    const cartBiggerThanZero = newCart.filter((item) => item.quantity > 0);
+    setCart(cartBiggerThanZero);
+    localStorage.setItem('cart', JSON.stringify(cartBiggerThanZero));
   };
 
   const contextValue = {
