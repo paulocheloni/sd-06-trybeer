@@ -7,7 +7,6 @@ import ContextBeer from '../../context/ContextBeer';
 import registerValidation from '../../utils/registerValidation';
 
 function Register() {
-
   const STATUS_CONFLICT = 409;
   const history = useHistory();
   const [duplicated, setDuplicated] = useState('');
@@ -25,12 +24,10 @@ function Register() {
 
   const isChecked = () => (document.getElementById('wannasell').checked);
 
-  const baseUrl = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
-
   const signUpOnClick = () => {
     const whatSTheRole = isChecked() ? 'administrator' : 'client';
-    const token = axios
-      .post(`${baseUrl}/register`, {
+    const token = api
+      .post('/register', {
         name: registerName,
         email: registerEmail,
         password: registerPassword,
@@ -46,12 +43,6 @@ function Register() {
         }
       });
     return token;
-  };
-
-  const handleChecked = (checked) => {
-    console.log('checked in handle: ', checked);
-    setIsChecked(checked);
-    console.log('isChecked in handle: ', isChecked);
   };
 
   return (
