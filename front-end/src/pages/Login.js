@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { getToken, getUserByEmail } from '../services/api';
+import { getToken, getUserByEmail } from '../services/usersServices';
 import LoginForm from '../components/LoginForm';
 import Button from '../components/Button';
 import { regex, minPassword } from '../variables';
@@ -45,8 +45,9 @@ function Login() {
   }, [email, password]);
 
   const handleLocalStorage = (user) => {
-    const { name, role, token } = user;
+    const { id, name, role, token } = user;
     const obj = {
+      id,
       name,
       email,
       token,
@@ -67,15 +68,17 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="login-container d-grid gap-2">
       <LoginForm setEmail={ setEmail } setPassword={ setPassword } />
       <Button
+        className="btn-login btn btn-success"
         title="Entrar"
         dataTestid="signin-btn"
         handleClick={ handleClick }
         btnDisable={ btnDisable }
       />
       <Button
+        className="btn-login btn btn-success"
         title="Ainda não tenho conta"
         dataTestid="no-account-btn"
         handleClick={ () => history.push('/register') }

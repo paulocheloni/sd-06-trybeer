@@ -14,6 +14,7 @@ const bodyParser = require('body-parser');
 
 const usersRouter = require('./controller/usersController');
 const productsRouter = require('./controller/productsController');
+const salesRouter = require('./controller/salesController');
 
 // app.use((req, res, next) => {
 //   console.log(req.path);
@@ -28,5 +29,6 @@ app.use(bodyParser.json());
 
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
+app.use('/sales', salesRouter);
 
 app.listen(port, () => console.log(`Listening to port ${port}`));

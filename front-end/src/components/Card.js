@@ -5,7 +5,7 @@ import context from '../context/Context';
 function Card(props) {
   const [quantity, setQuantity] = useState(0);
   const { totalCart, setTotalCart } = useContext(context);
-  const { index, name, price, urlImage } = props;
+  const { id, index, name, price, urlImage } = props;
   const fixedUrl = urlImage.replace('images/', '');
 
   const MINUSONE = -1;
@@ -34,7 +34,7 @@ function Card(props) {
       productLocal.splice(prodIndex, 1);
       localStorage.setItem('cart', JSON.stringify(productLocal));
     } else {
-      const obj = { name, quantity: qtd, price };
+      const obj = { id, name, quantity: qtd, price };
       productLocal.push(obj);
       localStorage.setItem('cart', JSON.stringify(productLocal));
     }
@@ -55,16 +55,17 @@ function Card(props) {
   };
 
   return (
-    <div>
+    <div className="card">
       <p data-testid={ `${index}-product-price` }>{`R$ ${price.replace('.', ',')}`}</p>
       <img
-        width="80px"
+        width="111px"
         data-testid={ `${index}-product-img` }
         src={ fixedUrl }
         alt="product"
       />
       <h4 data-testid={ `${index}-product-name` }>{ name }</h4>
       <button
+        className="btn-success btn-card"
         type="button"
         onClick={ handleClickMinus }
         data-testid={ `${index}-product-minus` }
@@ -73,6 +74,7 @@ function Card(props) {
       </button>
       <span data-testid={ `${index}-product-qtd` }>{ quantity }</span>
       <button
+        className="btn-success btn-card"
         type="button"
         onClick={ handleClickPlus }
         data-testid={ `${index}-product-plus` }
@@ -85,10 +87,10 @@ function Card(props) {
 
 Card.propTypes = {
   index: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   urlImage: PropTypes.string.isRequired,
-  // [urlImage]replace: PropTypes.function.isRequired,
 };
 
 export default Card;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import MenuTop from '../components/MenuTop';
-import { changeName } from '../services/api';
+import { changeName } from '../services/usersServices';
 
 function ClientProfile() {
   const [email, setEmail] = useState('');

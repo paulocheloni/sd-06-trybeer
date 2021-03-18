@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import CartItem from '../components/CartItem';
 import MenuTop from '../components/MenuTop';
 import context from '../context/Context';
+import { createNewProduct, createNewSale } from '../services/salesServices';
 
 function Checkout() {
   const [cart, setCart] = useState([]);
@@ -49,10 +50,37 @@ function Checkout() {
     history.push('/products');
   };
 
+  const registerProducts = (saleId) => {
+    cart.forEach((product) => {
+      const newProduct = {
+        saleId,
+        productId: product.id,
+        quantity: product.quantity,
+      };
+      createNewProduct(newProduct);
+    });
+  };
+
+  const registerSale = async () => {
+    const storageUser = JSON.parse(localStorage.getItem('user'));
+    const sale = {
+      userId: storageUser.id,
+      totalPrice: totalCart,
+      deliveryAddress: street,
+      deliveryNumber: houseNR,
+    };
+    const saleId = await createNewSale(sale);
+    await registerProducts(saleId);
+  };
+
   const handleClick = () => {
     const twothousand = 2000;
     setSuccess(true);
     setTimeout(() => handleDelay(), twothousand);
+    setTotalCart(0);
+    localStorage.removeItem('cart');
+    localStorage.removeItem('totalCart');
+    registerSale();
   };
 
   return (

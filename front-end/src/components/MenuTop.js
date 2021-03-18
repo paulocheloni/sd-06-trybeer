@@ -8,7 +8,7 @@ function MenuTop(props) {
 
   return (
     <div>
-      <nav>
+      <nav className="top-bar">
         <i
           onClick={ () => (showSideBar ? setShowSideBar(false) : setShowSideBar(true)) }
           aria-hidden="true"

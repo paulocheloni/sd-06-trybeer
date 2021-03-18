@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Button(props) {
-  const { dataTestid, handleClick, btnDisable, title } = props;
+  const { dataTestid, handleClick, btnDisable, title, className } = props;
   return (
     <div>
       <button
+        className={ className }
         type="button"
         data-testid={ dataTestid }
         disabled={ btnDisable }
@@ -22,6 +23,7 @@ Button.propTypes = {
   handleClick: PropTypes.func.isRequired,
   btnDisable: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
 };
 
 export default Button;
