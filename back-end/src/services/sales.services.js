@@ -1,5 +1,5 @@
 const { utils, sales } = require('../models');
-const { authNewSale } = require('../schemas');
+const { authNewSale, authDetailsSale } = require('../schemas');
 
 const getById = async (userId) => utils.getByFilter({
   table: 'sales',
@@ -24,7 +24,18 @@ const create = async (body, userId) => {
   await sales.insertNewSale(body, userId);
 };
 
+const filterByUserId = async (saleId, userId) => {
+  const [result] = await utils.getByFilter({
+    table: 'sales',
+    filter: 'id',
+    value: saleId,
+  });
+  authDetailsSale(result, userId);
+  return result;
+};
+
 module.exports = {
   create,
+  filterByUserId,
   getById,
 };
