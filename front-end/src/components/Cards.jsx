@@ -62,12 +62,6 @@ export default function Cards() {
         const newQty = productFound.qty - 1;
         productFound = { ...productFound, qty: newQty };
         const newProducts = mapNewProduct(productsCart, productFound, product);
-        // const newP = productsCart.map((item) => {
-        //   if (item.id === product.id) {
-        //     return productFound;
-        //   }
-        //   return item;
-        // });
         localStorage.setItem('productsCart', JSON.stringify(newProducts));
         setProductsCart(newProducts);
       }

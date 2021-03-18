@@ -49,9 +49,25 @@ const fetchChangeName = async (name, email) => {
   });
 };
 
+const fetchAddSale = async (userId, total, street, number, data, status) => {
+  await fetch('http://localhost:3001/checkout', {
+    method: 'POST',
+    headers: contentType,
+    body: JSON.stringify({
+      userId,
+      total,
+      street,
+      number,
+      data,
+      status,
+    }),
+  });
+};
+
 module.exports = {
   fetchLogin,
   fetchRegister,
   fetchProducts,
   fetchChangeName,
+  fetchAddSale,
 };

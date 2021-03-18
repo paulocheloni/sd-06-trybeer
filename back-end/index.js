@@ -5,12 +5,13 @@ const cors = require('cors');
 const userController = require('./controllers/userController');
 const changeNameController = require('./controllers/changeNameController');
 const productController = require('./controllers/productController');
+const cartController = require('./controllers/cartController');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use('/', userController, changeNameController);
+app.use('/', userController, changeNameController, cartController);
 
 app.use('/', productController);
 app.use(bodyParser.urlencoded({ extended: false }));
