@@ -9,6 +9,7 @@ function Provider({ children }) {
   const [registerName, setRegisterName] = useState('');
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
+<<<<<<< HEAD
   const [registerIsDisabled, setregisterIsDisabled] = useState('');
   const [sale, setSale] = useState(
     {
@@ -16,6 +17,9 @@ function Provider({ children }) {
       total: '',
     },
   );
+=======
+  const [registerIsDisabled, setRegisterIsDisabled] = useState('');
+>>>>>>> req-5-back-end
 
   const getUser = () => {
     const user = JSON.parse(localStorage.getItem('user'));
