@@ -1,23 +1,23 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
-const UserService = require('../service/UserService');
+const LoginService = require('../service/LoginService');
 
 const ProfileController = new Router();
 
 const OK = 200;
 
-ProfileController.post('/', rescue(async(req, res) => {
+ProfileController.post('/', rescue(async (req, res) => {
   const { email: requestEmail } = req.body;
-  const { name } = await UserService.getByEmail(requestEmail);
-  // const profiles = await UserService.getAll();
+  const { name } = await LoginService.getByEmail(requestEmail);
 
   res.status(OK).json(name);
 }));
 
-ProfileController.put('/', rescue(async(req, res) => {
-  console.log('req.headers', req.headers.authorization)
-  console.log('req.body', req.body)
-  return res.end();
+ProfileController.put('/', rescue(async (req, res) => {
+  const { newName, email } = req.body;
+  await LoginService.update(newName, email);
+
+  res.status(OK).json({ message: 'Atualização concluída com sucesso' });
 }));
 
 module.exports = ProfileController;
