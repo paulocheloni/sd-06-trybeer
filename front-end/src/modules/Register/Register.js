@@ -27,8 +27,6 @@ function Register() {
 
   const baseUrl = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
 
-  const STATUS_CONFLICT = 409;
-
   const signUpOnClick = () => {
     const whatSTheRole = isChecked() ? 'administrator' : 'client';
     const token = axios
@@ -83,11 +81,6 @@ function Register() {
               id="wannasell"
               label="Quero vender"
               value="wannasell"
-<<<<<<< Updated upstream
-=======
-              checked={ isChecked }
-              onChange={ ({ target }) => handleChecked(target.checked) }
->>>>>>> Stashed changes
             />
             Quero vender
           </label>

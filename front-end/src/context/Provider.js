@@ -36,7 +36,7 @@ function Provider({ children }) {
     registerPassword,
     setRegisterPassword,
     registerIsDisabled,
-    setregisterIsDisabled,
+    setRegisterIsDisabled,
     getUser,
     setUser,
   };
