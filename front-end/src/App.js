@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
-import { Login, Register, Products, ClientProfile, AdminProfile, Orders, OrdersAdm } from './pages';
+import { Login, Register,
+        Products, ClientProfile, AdminProfile, Orders, OrdersAdm } from './pages';
 
 function App() {
   return (
