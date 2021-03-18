@@ -5,25 +5,27 @@ import productsContext from '../context/productsContext';
 
 export default function ProductsCard() {
   const { products, cartProducts, setCartProducts } = useContext(productsContext);
-  // const [totalValue, setTotalValue] = useState(0);
   const history = useHistory();
 
   const MINUSONE = -1;
   const ONE = 1;
 
-  // Garante que temos acesso a varíavel products atualizada
-  // useEffect(() => {
-  //   if (cartProducts.length) {
-  //     localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
-  //   }
-  //   // console.log('cartProducts', cartProducts);
-  // }, [cartProducts]);
+  // Garante que ao atualizar a página o carrinho do contexto global é populado novamente.
+  useEffect(() => {
+    const cartLS = JSON.parse(localStorage.getItem('cartProducts'));
+    if (!cartLS) return;
+    setCartProducts(cartLS);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleTotalPrice = () => {
-    const totalPrices = cartProducts
-      .reduce((accumulator, current) => accumulator + current.subTotal, 0);
+    if (cartProducts.length) {
+      const totalPrices = cartProducts
+        .reduce((accumulator, current) => accumulator + current.subTotal, 0);
 
-    return (totalPrices.toFixed(2)).replace('.', ',');
+      return (totalPrices.toFixed(2)).replace('.', ',');
+    }
+    return '0,00';
   };
 
   const isCartWithoutProducts = () => {
@@ -34,15 +36,13 @@ export default function ProductsCard() {
   };
 
   const showQuantity = (index) => {
-    const ourCartProducts = JSON.parse(localStorage.getItem('cartProducts'));
-    // console.log('nosso local storage', ourCartProducts);
-
-    if (ourCartProducts) {
-      const productExists = ourCartProducts
+    if (cartProducts) {
+      const productExists = cartProducts
         .find((product) => parseInt(product.id, 10) === parseInt(index, 10));
-      if (productExists) { return productExists.quantityItem; }
+      if (productExists) {
+        return productExists.quantityItem;
+      }
     }
-
     return 0;
   };
 
@@ -53,7 +53,7 @@ export default function ProductsCard() {
 
     if (cartProducts.length && productExists) {
       console.log('caiu no if');
-      return setCartProducts(cartProducts.map((product) => {
+      return setCartProducts([...cartProducts.map((product) => {
         if (product.id !== Number(productId)) {
           return product;
         }
@@ -64,19 +64,19 @@ export default function ProductsCard() {
         product.subTotal = Number(product.quantityItem * product.price);
         localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
         return product;
-      }));
+      })]);
     }
     console.log('nao caiu no if');
-    setCartProducts([...cartProducts, {
+    const newCartProduct = [...cartProducts, {
       id: parseInt(productId, 10),
       name: products[productId].name,
       price: products[productId].price,
       url: products[productId].url_image,
       quantityItem: unity > 0 ? unity : unity = 0,
       subTotal: Number(products[productId].price),
-    }]);
-    cartProducts;
-    localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+    }];
+    setCartProducts(newCartProduct);
+    localStorage.setItem('cartProducts', JSON.stringify(newCartProduct));
   };
 
   return (
@@ -84,7 +84,7 @@ export default function ProductsCard() {
       { products.length && products.map((product, index) => (
         <div
           className="product-card"
-          key={ index }
+          key={ product.id }
         >
           <div className="card-body">
             <p data-testid={ `${index}-product-price` }>
