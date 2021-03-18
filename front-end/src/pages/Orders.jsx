@@ -10,7 +10,7 @@ function Orders() {
       <div>
         <MenuTop title="Trybeer" />
       </div>
-    )
+    );
   } catch (err) {
     return <Redirect to="/login" />
   }

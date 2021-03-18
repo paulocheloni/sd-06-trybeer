@@ -21,14 +21,14 @@ function MenuSide() {
           Produtos
         </button>
         <button
-          data-testid={`side-menu-item${ modify }orders`}
+          data-testid={ `side-menu-item${modify}orders` }
           type="button"
           onClick={ () => route.push(`${urlRoute}/orders`) }
         >
           Meus Pedidos
         </button>
         <button
-          data-testid={`side-menu-item${ modify }profile`}
+          data-testid={ `side-menu-item${modify}profile` }
           type="button"
           onClick={ () => route.push(`${urlRoute}/profile`) }
         >
