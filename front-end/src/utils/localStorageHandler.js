@@ -4,4 +4,11 @@ const updateName = (name) => {
   localStorage.setItem('user', JSON.stringify(newLocalStorage));
 };
 
-module.exports = { updateName };
+const verifyUser = (history) => {
+  const storage = JSON.parse(localStorage.getItem('user'));
+  if (!storage) return history.push('/login');
+  const { name, email } = storage;
+  return { name, email }
+}
+
+module.exports = { updateName, verifyUser };

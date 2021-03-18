@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './drinkCard.css'
 
 export default function DrinkCard({ productPayload, index }) {
-  const { photo, name, price, quantity } = productPayload;
+  const { url_image, name, price, quantity } = productPayload;
   const testIds = {
     priceId: `${index}-product-price`,
     imgId: `${index}-product-img`,
@@ -17,7 +18,7 @@ export default function DrinkCard({ productPayload, index }) {
   return (
     <div>
       <p className="price-tag" data-testid={ priceId }>{price}</p>
-      <img data-testid={ imgId } alt={ `${name} product card` } src={ photo } />
+      <img className="card-images" data-testid={ imgId } alt={ `${name} product card` } src={ url_image } />
       <p className="name-tag" data-testid={ nameId }>{name}</p>
       <div>
         <button type="button" className="plus-button" data-testid={ plusId }>+</button>

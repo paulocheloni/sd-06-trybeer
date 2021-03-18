@@ -4,6 +4,8 @@ import { getProducts } from '../../services/Products';
 import DrinkCard from '../../components/DrinkCard/DrinkCard';
 import Button from '../../components/Button/Button';
 import { useHistory } from 'react-router-dom';
+import { verifyUser } from '../../utils/localStorageHandler';
+
 
 // O botão 'Ver Carrinho' deverá conter a tag data-testid="checkout-bottom-btn"
 
@@ -13,8 +15,7 @@ export default function Products() {
   const [products, setProducts] = useState([]);
   const history = useHistory();
   useEffect(async () => {
-    const storage = JSON.parse(localStorage.getItem('user'));
-    console.log(storage);
+    verifyUser(history);
     const allProducts = await getProducts();
     setProducts(allProducts);
   }, []);
@@ -22,6 +23,8 @@ export default function Products() {
   const handleRedirect = () => {
     history.push('/checkout');
   }
+
+  console.log(products)
   return (
     <div>
       <Header title="TryBeer" user="client" />
