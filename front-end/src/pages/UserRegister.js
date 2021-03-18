@@ -19,7 +19,7 @@ function UserRegister() {
   return (
     <div>
       <div>
-        <TopBar />
+        <TopBar title="Trybeer" />
         <h1>User Register</h1>
       </div>
       <form>

@@ -20,6 +20,7 @@ export const createNewUSer = async (user) => {
   return requestResponse;
 };
 
+<<<<<<< HEAD
 export const getAllProducts = async () => {
   const requestResponse = await api.get('products')
     .then((response) => response.data)
@@ -27,3 +28,10 @@ export const getAllProducts = async () => {
 
   return requestResponse;  
 }
+=======
+export const updateUser = async (newName, email) => {
+  const requestResponse = await api.put('profile', { email, newName });
+
+  return requestResponse;
+};
+>>>>>>> cbd0f75879c3fdfaa84bbe43b61cf01a9a84c785

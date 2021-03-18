@@ -18,3 +18,8 @@ exports.create = async ({ name, email, password, role }) =>
       role,
     ])
     .then(([result]) => ({ id: result.insertId, email, password, role }));
+
+exports.update = async (newName, email) =>
+  connection
+    .execute('UPDATE users SET name = ? WHERE email = ?', [newName, email])
+    .then(([user]) => user || null);
