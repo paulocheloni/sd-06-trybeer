@@ -13,7 +13,7 @@ const Login = () => {
     const body = { email, password };
     const response = await axios.post('http://localhost:3001/login', body); // headers apos ,
     const data = await response.data;
-    localStorage.setItem('token', JSON.stringify(data.userLogin.token));
+    localStorage.setItem('token', data.userLogin.token);
     if (data.userLogin.role === 'client') return history.push('/products');
     if (data.userLogin.role === 'administrator') return history.push('/admin/orders');
     alert('E-mail ou senha incorreta');

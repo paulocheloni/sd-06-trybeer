@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import GetProducts from '../../services/GetProducts';
+import axios from 'axios';
 import Button from '../Button';
 import AppContext from '../../context/AppContext';
 
@@ -15,8 +16,13 @@ const buttonSeeCar = (
 );
 
 const CardProduct = () => {
-  const { products } = useContext(AppContext);
-  useEffect(() => GetProducts(), []);
+
+  const { products, setProducts } = useContext(AppContext);
+  useEffect(async () => {
+    const response = await axios.get('http://localhost:3001/products');
+    console.log('resposta axius:', response);
+    return setProducts(response.data);
+  }, []);
 
   return (
     <div>
