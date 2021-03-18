@@ -33,10 +33,10 @@ const fetchProducts = async () => {
     headers: contentType,
     body: JSON.stringify(),
   }).then((res) => res.json());
-}
 
   if (response.message) return false;
   return response;
+}
 
   const fetchChangeName = async (name, email) => {
   await fetch('http://localhost:3001/changeName', {
