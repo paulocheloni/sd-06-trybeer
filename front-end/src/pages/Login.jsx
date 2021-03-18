@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import LoginContext from '../context/LoginContext';
 import FormLogin from '../components/pageLogin/FormLogin';
-import visibilityBtnLogin from '../utils/visibilityBtnLogin';
 import api from '../services/api';
+import { loginUtils } from '../utils';
 
 function Login({ history }) {
   const [user, setUser] = useState({ email: '', password: '' });
@@ -12,7 +12,7 @@ function Login({ history }) {
   const [displayErr, setDisplayErr] = useState(false);
 
   useEffect(() => {
-    visibilityBtnLogin(user, setValid);
+    loginUtils.visibilityBtnLogin(user, setValid);
   }, [user]);
 
   const handleChange = ({ target }) => {
