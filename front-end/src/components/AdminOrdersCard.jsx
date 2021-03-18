@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import bancoDeDados from '../pedidosPendentes'
+// import bancoDeDados from '../pedidosPendentes';
+import fetchSales from '../methods/sales'
 
+// const getSales = async () => {
+//   const mySales = await fetchProducts();
+//   console.log( mySales )
+//   return mySales;
+// }
 
-function AdminOrdersCard() {
+function AdminOrdersCard () {
+  const [allSales, setAllSales] = useState([]);
+  useEffect(() => {
+    (async () => {
+      setAllSales(await fetchSales());
+    })();
+  }, []);
   const route = useHistory();
-  console.log(bancoDeDados)
+  // getSales()
+  // console.log(allSales)
   return (
     <div>
-      {bancoDeDados.map((e,i) =>
+      {allSales.map((e,i) =>
         <div 
         key={e.id} className="order-card"
         onClick={ () => route.push(`/admin/orders/${e.id}`) }
