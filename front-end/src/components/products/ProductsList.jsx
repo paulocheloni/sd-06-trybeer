@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 
 const products = [
@@ -37,6 +37,42 @@ const reducer = (state, action) => {
 
 const ProductsList = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  // const [quantity, setQuantity] = useState([]);
+  const [count, setCount] = useState(1);
+
+  localStorage.cartItems = JSON.stringify([]);
+  const handleQuantity = (product) => {
+    const storageItems = JSON.parse(localStorage.cartItems);
+    console.log(storageItems);
+    if (storageItems.length === 0) {
+      // const teste = JSON.stringify(({ ...product, amount: count }));
+      // storageItems.push('teste');
+      localStorage.cartItems = JSON.stringify(({ ...product, amount: count }));
+    } else {
+      console.log(storageItems);
+      // const value = product.amount;
+      // const amount = 'amount';
+      // getProduct[amount] = value + 1;
+      // // array[0] = {};
+      // setQuantity(quantity.concat(getProduct));
+    }
+
+    // const teste = products.find((item) => item.name === product.name);
+
+    // const getProduct = quantity.find((item) => item.name === product.name);
+
+    // if (!teste) {
+    //   setQuantity(quantity.concat({ ...product, amount: count }));
+    // } else {
+    //   const amount = 'amount';
+    //   // setCount(count + 1);
+    //   teste[amount] = count;
+    //   setQuantity(quantity.concat(teste));
+    // }
+    // const findInd = quantity.findIndex((el) => el.name === product.name);
+    // console.log(findInd);
+  };
+  // console.log(quantity);
 
   return products.map((product, index) => (
     <div
@@ -73,7 +109,8 @@ const ProductsList = () => {
       <button
         type="button"
         data-testid={ `${index}-product-minus` }
-        onClick={ () => dispatch({ type: 'decrease' }) }
+        // onClick={ () => dispatch({ type: 'decrease' }) }
+        onClick={ () => handleQuantity(product) }
       >
         <FiMinus />
       </button>
