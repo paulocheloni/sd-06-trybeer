@@ -50,7 +50,6 @@ export async function edit(prevName, nextName) {
     const response = await axios.put(`${URL_BASE}register/edit-user`, {
       prevName, nextName,
     });
-    console.log(response);
     return response;
   } catch (error) {
     if (error.response) {
@@ -65,7 +64,6 @@ export async function edit(prevName, nextName) {
 
 export async function getProducts() {
   const token = localStorage.getItem('token');
-  console.log(token);
   try {
     const products = await axios
       .get(
@@ -79,7 +77,6 @@ export async function getProducts() {
     return products;
   } catch (error) {
     if (error.response) {
-      console.log(error.response);
       return {
         status: error.response.status,
         statusText: error.response.statusText,

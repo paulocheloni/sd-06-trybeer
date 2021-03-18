@@ -36,7 +36,6 @@ class LoginDiv extends React.Component {
     const email = target.parentNode.parentNode.firstChild.childNodes[1].value;
     const password = target.parentNode.parentNode.firstChild.childNodes[3].value;
     const loginUser = await validate(email, password);
-    console.log(loginUser);
     dispatchUser(loginUser);
 
     if (loginUser.role === 'administrator') {
