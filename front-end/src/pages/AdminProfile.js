@@ -8,8 +8,8 @@ class Profile extends React.Component {
     super();
     this.state = {};
   }
-          
-    render() {
+
+  render() {
     // const { history } = this.props;
     return (
       <div className="profile-container">
@@ -17,8 +17,8 @@ class Profile extends React.Component {
         <SideBarAdmin />
         <div className="inputs-div">
           <img src={ defaultProfile } alt="profile" />
-          <span data-testid="profile-name">{`Nome: `}</span>
-          <span data-testid="profile-email">{`Email: `}</span>
+          <h2 data-testid='profile-name'>{`Nome: `}</h2>
+          <h2 data-testid='profile-email'>{`Email: `}</h2>
         </div>
       </div>
     );

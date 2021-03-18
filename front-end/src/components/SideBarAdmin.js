@@ -7,6 +7,10 @@ class SideBarAdmin extends React.Component {
   }
 
   render() {
+    const goLogin = () => (window.location.href = '/login')
+    const goOrders = () => (window.location.href = '/admin/orders')
+    const goProfile = () => (window.location.href = '/admin/profile')
+
     // não consegui usar o history.push pois acrescenta rota na que eu já estou e precisava substituir, não consegui com o history.replace()
     // const { history } = this.props;
     return (
@@ -17,14 +21,14 @@ class SideBarAdmin extends React.Component {
             <button
               type="button"
               data-testid="side-menu-item-orders"
-              onClick={() => (window.location.href = '/admin/orders')}
+              onClick={ goOrders }
             >
               Pedidos
             </button>
             <button
               type="button"
               data-testid="side-menu-item-profile"
-              onClick={() => (window.location.href = '/admin/profile')}
+              onClick={ goProfile }
             >
               Perfil
             </button>
@@ -33,7 +37,7 @@ class SideBarAdmin extends React.Component {
             <button
               type="button"
               data-testid="side-menu-item-logout"
-              onClick={() => (window.location.href = '/login')}
+              onClick={ goLogin }
             >
               Sair
             </button>
