@@ -5,19 +5,24 @@ import Input from '../../../components/Input/Input';
 import { updateUser } from '../../../services/Users';
 import { updateName } from '../../../utils/localStorageHandler';
 
-const handleSaveButton = async ({ name, email, setUserNameInStorage, setIsUpdated }) => {
+const handleSaveButton = async ({
+  userName,
+  email,
+  setUserNameInStorage,
+  setIsUpdated,
+}) => {
   const storage = JSON.parse(localStorage.getItem('user'));
   const { token } = storage;
-  await updateUser(name, email, token);
-  updateName(name);
-  setUserNameInStorage(name);
+  await updateUser(userName, email, token);
+  updateName(userName);
+  setUserNameInStorage(userName);
   setIsUpdated(true);
 };
 
 export default function Profile() {
-  const [userName, setUserName] = useState();
+  const [userName, setUserName] = useState(); // -> lenadro parisi carvalho
   const [userEmail, setUserEmail] = useState();
-  const [userNameInStorage, setUserNameInStorage] = useState();
+  const [userNameInStorage, setUserNameInStorage] = useState(); // -> lenadro parisi
   const [isUpdated, setIsUpdated] = useState(false);
   const history = useHistory();
 
