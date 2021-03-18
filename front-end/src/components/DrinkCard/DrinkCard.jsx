@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function DrinkCard({ cardPayload, index }) {
-  const { photo, name, price, quantity } = cardPayload;
+export default function DrinkCard({ productPayload, index }) {
+  const { photo, name, price, quantity } = productPayload;
   const testIds = {
     priceId: `${index}-product-price`,
     imgId: `${index}-product-img`,
@@ -28,12 +28,12 @@ export default function DrinkCard({ cardPayload, index }) {
   );
 }
 
-DrinkCard.propTypes = {
-  cardPayload: PropTypes.shapeOf({
-    photo: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    quantity: PropTypes.string.isRequired,
-  }).isRequired,
-  index: PropTypes.number.isRequired,
-};
+// DrinkCard.propTypes = {
+//   productPayload: PropTypes.shapeOf({
+//     photo: PropTypes.string.isRequired,
+//     name: PropTypes.string.isRequired,
+//     price: PropTypes.string.isRequired,
+//     quantity: PropTypes.string.isRequired,
+//   }).isRequired,
+//   index: PropTypes.number.isRequired,
+// };
