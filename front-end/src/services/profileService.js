@@ -1,12 +1,12 @@
 import { updateUser } from './api';
 
-export function getLocalStrg(
+export function getLocal({
   setEditedName,
   setNameLocal,
   setEmailLocal,
   setExistsLocal,
   history,
-) {
+}) {
   let userLocalStorage;
   if (localStorage.getItem('user')) {
     userLocalStorage = JSON.parse(localStorage.getItem('user'));

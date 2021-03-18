@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import TopBar from '../components/TopBar';
-import { getLocalStrg, sendNewName } from '../services/profileService';
+import { getLocal, sendNewName } from '../services/profileService';
 import InputProfile from '../services/InputProfile';
 
 function Profile() {
@@ -12,7 +12,7 @@ function Profile() {
   const [emailLocal, setEmailLocal] = useState('');
   const [existsLocal, setExistsLocal] = useState(false);
   useEffect(() => {
-    getLocalStrg(setEditedName, setNameLocal, setEmailLocal, setExistsLocal, history);
+    getLocal({ setEditedName, setNameLocal, setEmailLocal, setExistsLocal, history });
   }, []);
   useEffect(() => {
     if (editedName !== nameLocal) setDisableButton(false);

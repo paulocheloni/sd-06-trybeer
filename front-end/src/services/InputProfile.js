@@ -6,7 +6,6 @@ function InputProfile({ id, title, type, callback, value }) {
     <label htmlFor={ id }>
       { title }
       <input
-        // id={ id }
         type={ type }
         data-testid={ id }
         value={ value }
