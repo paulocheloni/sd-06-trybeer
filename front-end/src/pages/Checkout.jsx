@@ -9,6 +9,12 @@ function Checkout() {
   const produtos = [
     {
       quantity: 11,
+      name: 'vinho',
+      totalValue: 55.00,
+      value: 5,
+    },
+    {
+      quantity: 11,
       name: 'cachaça',
       totalValue: 55.00,
       value: 5,
