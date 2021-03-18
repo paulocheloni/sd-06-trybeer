@@ -38,7 +38,7 @@ const Products = () => {
 
   return (
     <S.Container>
-      {console.log(products)}
+
       <MenuTop />
 
       <SideBar />

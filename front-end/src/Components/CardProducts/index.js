@@ -5,6 +5,33 @@ import { GlobalContext } from '../../Contexts/GlobalContext';
 
 import S from './styles';
 
+const verifyQuantityZero = (cartList, setCartList) => {
+  const productQuantity = cartList.filter((item) => item.quantity !== 0);
+
+  console.log(productQuantity, 'verify');
+
+  setCartList(productQuantity);
+};
+
+const handleCartList = ({ id, price, quantity, value }, cartList, setCartList) => {
+  if (value === 'plus') quantity += 1;
+  else quantity -= 1;
+
+  const product = cartList.find((item) => item.id === id);
+
+  if (!product || product === undefined) {
+    setCartList([...cartList, { id, price, quantity }]);
+  } else if (product && product.id === id) {
+    product.quantity = quantity;
+  } else {
+    setCartList([...cartList, product]);
+  }
+
+  const productZeroQuantity = cartList.find((item) => item.quantity === 0);
+
+  if (productZeroQuantity) verifyQuantityZero(cartList, setCartList);
+};
+
 const handleCounter = (
   { value }, {
     quantity,
@@ -16,25 +43,34 @@ const handleCounter = (
     cartList,
     setCartList,
   },
-  ) => {
+) => {
+  const product = { id, price, quantity, value };
+
   if (value === 'plus') {
     setQuantity(quantity + 1);
     setStateSumPrice(stateSumPrice + Number(price));
-    setCartList(() => (if )[...cartList, { id, price, quantiy: quantity + 1 }]);
+    handleCartList(product, cartList, setCartList);
     localStorage.setItem('total', JSON.stringify(stateSumPrice + Number(price)));
   }
   if (value === 'minus' && quantity > 0) {
     setQuantity(quantity - 1);
     setStateSumPrice(stateSumPrice - Number(price));
-    setCartList([...cartList, { id, price, quantity: quantity - 1 }]);
+    handleCartList(product, cartList, setCartList);
     localStorage.setItem('total', JSON.stringify(stateSumPrice - Number(price)));
   }
 };
 
 const CardProducts = ({ product }) => {
-  const { id, price, name } = product;
+  const { id, price, name, url_image: urlImage } = product;
 
-  const { stateSumPrice, setStateSumPrice, cartList, setCartList } = useContext(GlobalContext);
+  const image = urlImage.replace('/images', '');
+
+  const {
+    stateSumPrice,
+    setStateSumPrice,
+    cartList,
+    setCartList,
+  } = useContext(GlobalContext);
 
   const [quantity, setQuantity] = useState(0);
 
@@ -50,7 +86,7 @@ const CardProducts = ({ product }) => {
   };
 
   return (
-    <S.Container id={`${id - 1}-product-container`}>
+    <S.Container id={ `${id - 1}-product-container` }>
       <S.Price>
         <span data-testid={ `${id - 1}-product-price` }>
           {`R$ ${price.replace('.', ',')}`}
@@ -60,7 +96,7 @@ const CardProducts = ({ product }) => {
       <S.Image>
         <img
           data-testid={ `${id - 1}-product-img` }
-          src="/images/image-heineken.png"
+          src={ image }
           alt={ name }
         />
       </S.Image>

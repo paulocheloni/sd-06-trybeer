@@ -10,7 +10,7 @@ import Input from '../../Components/Input';
 import { GlobalContext } from '../../Contexts/GlobalContext';
 
 // const renderCheckoutProducts = () => {
-  
+
 // }
 
 const Checkout = () => {
@@ -20,53 +20,53 @@ const Checkout = () => {
 
   console.log(cartList, 'veio o cartList');
 
-  return(
+  return (
     <S.Container>
-    <MenuTop />
+      <MenuTop />
 
-    <SideBar />
-    <S.ContainerProducts>
-      <h1>Produtos</h1>
-      <span data-testid="order-total-value">
-        Total:
-      </span>
-    </S.ContainerProducts>
-    <S.ContainerAddress>
-      <h1>Endereço</h1>
-      <Input
-        label="Rua"
-        dataTestid="checkout-street-input"
-        id="Rua"
-        themeStorage={ theme && theme.title }
+      <SideBar />
+      <S.ContainerProducts>
+        <h1>Produtos</h1>
+        <span data-testid="order-total-value">
+          Total:
+        </span>
+      </S.ContainerProducts>
+      <S.ContainerAddress>
+        <h1>Endereço</h1>
+        <Input
+          label="Rua"
+          dataTestid="checkout-street-input"
+          id="Rua"
+          themeStorage={ theme && theme.title }
         // icon={ BiUser }
-      />
-      <Input
-        label="Número da casa"
-        dataTestid="checkout-house-number-input"
-        id="Número da casa"
-        themeStorage={ theme && theme.title }
+        />
+        <Input
+          label="Número da casa"
+          dataTestid="checkout-house-number-input"
+          id="Número da casa"
+          themeStorage={ theme && theme.title }
         // icon={ BiUser }
-      />
-    </S.ContainerAddress>
-    <S.ContainerButton>
-      <Button
-        type="button"
-        color="green"
-        dataTestid=""
-        fontSize="20px"
-        width="91%"
-        heigth="40px"
-        botton="0"
-        position="fixed"
-        disabled
-        onClick={ () => {} }
-        data-testid="checkout-bottom-btn"
-      >
-        Finalizar Pedido
-      </Button>
-    </S.ContainerButton>
-  </S.Container>
-  )
+        />
+      </S.ContainerAddress>
+      <S.ContainerButton>
+        <Button
+          type="button"
+          color="green"
+          dataTestid=""
+          fontSize="20px"
+          width="91%"
+          heigth="40px"
+          botton="0"
+          position="fixed"
+          disabled
+          onClick={ () => {} }
+          data-testid="checkout-bottom-btn"
+        >
+          Finalizar Pedido
+        </Button>
+      </S.ContainerButton>
+    </S.Container>
+  );
 };
 
 export default Checkout;
