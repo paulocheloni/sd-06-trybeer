@@ -12,12 +12,12 @@ export default function ProductsCard() {
   const ONE = 1;
 
   // Garante que temos acesso a varíavel products atualizada
-  useEffect(() => {
-    if (cartProducts.length) {
-      localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
-    }
-    console.log('cartProducts', cartProducts);
-  }, [cartProducts]);
+  // useEffect(() => {
+  //   if (cartProducts.length) {
+  //     localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+  //   }
+  //   // console.log('cartProducts', cartProducts);
+  // }, [cartProducts]);
 
   const handleTotalPrice = () => {
     const totalPrices = cartProducts
@@ -34,9 +34,14 @@ export default function ProductsCard() {
   };
 
   const showQuantity = (index) => {
-    const productExists = cartProducts
-      .find((product) => parseInt(product.id, 10) === parseInt(index, 10));
-    if (productExists) { return productExists.quantityItem; }
+    const ourCartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    // console.log('nosso local storage', ourCartProducts);
+
+    if (ourCartProducts) {
+      const productExists = ourCartProducts
+        .find((product) => parseInt(product.id, 10) === parseInt(index, 10));
+      if (productExists) { return productExists.quantityItem; }
+    }
 
     return 0;
   };
@@ -47,6 +52,7 @@ export default function ProductsCard() {
       .find((product) => parseInt(product.id, 10) === parseInt(productId, 10));
 
     if (cartProducts.length && productExists) {
+      console.log('caiu no if');
       return setCartProducts(cartProducts.map((product) => {
         if (product.id !== Number(productId)) {
           return product;
@@ -56,11 +62,11 @@ export default function ProductsCard() {
           product.quantityItem = 0;
         }
         product.subTotal = Number(product.quantityItem * product.price);
-        // localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+        localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
         return product;
       }));
     }
-
+    console.log('nao caiu no if');
     setCartProducts([...cartProducts, {
       id: parseInt(productId, 10),
       name: products[productId].name,
@@ -69,7 +75,8 @@ export default function ProductsCard() {
       quantityItem: unity > 0 ? unity : unity = 0,
       subTotal: Number(products[productId].price),
     }]);
-    // localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+    cartProducts;
+    localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
   };
 
   return (
