@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import ExposureNeg1Icon from '@material-ui/icons/ExposureNeg1';
 import context from '../Context/ContextAPI';
-import attTotalPrice from './addTotalPrice';
+import attTotalPrice from '../resources/addTotalPrice';
 
-function ButtonSub({ product }) {
+function ButtonSub({ product, dataIndex }) {
   const { cart, setCart, setPrice } = useContext(context);
 
   const subButtonOnCart = () => {
@@ -26,7 +26,7 @@ function ButtonSub({ product }) {
   };
 
   return (
-    <IconButton color="primary" aria-label="add to shopping cart" onClick={ subButtonOnCart }>
+    <IconButton color="primary" aria-label="add to shopping cart" onClick={ subButtonOnCart } data-testid={`${dataIndex}-product-minus`}>
       <ExposureNeg1Icon />
     </IconButton>
   );

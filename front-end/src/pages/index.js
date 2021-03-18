@@ -5,3 +5,4 @@ export { default as Register } from './register';
 export { default as Admin } from './admin';
 export { default as Cliente } from './cliente';
 export { default as Profile } from './profile';
+export { default as Checkout } from './checkout';

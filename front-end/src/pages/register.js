@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router';
 
 // Components
-import validateEmailAndPassword from '../components/validateEmailAndPassword';
+import validateEmailAndPassword from '../resources/validateEmailAndPassword';
 
 // Services
 import api from '../services/api';

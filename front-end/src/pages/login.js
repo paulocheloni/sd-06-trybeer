@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
 // Components
-import validateEmailAndPassword from '../components/validateEmailAndPassword';
+import validateEmailAndPassword from '../resources/validateEmailAndPassword';
 
 // Services
 import { saveState } from '../services/localStorage';

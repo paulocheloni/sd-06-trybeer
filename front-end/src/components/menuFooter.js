@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import sumTotal from '../resources/sumTotal';
 import { loadState, saveState } from '../services/localStorage';
+import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -46,6 +47,8 @@ export default function MenuFooter() {
   const classes = useStyles();
   const { price, setPrice, cart } = useContext(context);
 
+  const history = useHistory();
+
   const allValues = cart.map(elem => parseFloat(elem.totalPrice));
   const totalSum = sumTotal(allValues).toFixed(2);
 
@@ -62,6 +65,10 @@ export default function MenuFooter() {
     const { email } = loadState('user');
     saveState(`${email}_price`, totalSum);
   }, [totalSum])
+
+  const checkoutButton = () => {
+    history.push('/checkout');
+  }
 
   return (
     <>
@@ -81,10 +88,10 @@ export default function MenuFooter() {
           </Fab>
 
           <div className={ classes.grow } />
-            <IconButton edge="start" color="inherit" aria-label="open drawer">
-            {`R$ ${totalSum}`}
+            <IconButton edge="start" color="inherit" aria-label="open drawer" data-testid="checkout-bottom-btn" onClick={checkoutButton}>
+            {`Ver Carrinho`}
+          <span data-testid="checkout-bottom-btn-value">{`R$ ${totalSum}`}</span>
           </IconButton>
-
 
         </Toolbar>
       </AppBar>

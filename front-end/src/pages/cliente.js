@@ -81,21 +81,21 @@ function Cliente() {
           {products.map((tile, index) => {
             const link_img = tile.url_image.replace(/ /g, '_');
             return (
-              <GridListTile key={ link_img } key={ index }>
-                <img src={ link_img } alt={ tile.name } />
+              <GridListTile key={ link_img } key={ index } data-testid={`${index}-product-price`}>
+                <img src={ link_img } alt={ tile.name } data-testid={`${index}-product-img`} />
                 <GridListTileBar
                   title={ tile.name }
-                  subtitle={ <span>
-                    price:
-                    {tile.price}
+                  data-testid={`${index}-product-name`}
+                  subtitle={ <span data-testid={`${index}-product-price`}>
+                    {`R$ ${tile.price}`}
                             </span> }
                   actionIcon={
                     <>
-                      <ButtonAdd product={ tile } />
-                      <span>
+                      <ButtonAdd product={ tile } dataIndex={ index } />
+                      <span data-testid={`${index}-product-qtd`}>
                         {prodQty(tile)}
                       </span>
-                      <ButtonSub product={ tile } />
+                      <ButtonSub product={ tile } dataIndex={ index } />
                     </>
                   }
                 />
