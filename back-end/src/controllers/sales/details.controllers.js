@@ -4,9 +4,9 @@ const { salesError } = require('./error');
 
 module.exports = async (req, res, next) => {
   try {
-    const { userId } = req;
-    const mySales = await sales.getByUser(userId);
-    return res.status(StatusCodes.OK).json(mySales);
+    const { userId, params: { saleId } } = req;
+    const mySale = await sales.getById(saleId, userId);
+    return res.status(StatusCodes.OK).json(mySale);
   } catch (err) {
     return next({ ...salesError, err });
   }

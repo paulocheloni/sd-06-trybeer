@@ -1,11 +1,11 @@
 const express = require('express');
 
 const controllers = require('../controllers/sales');
-const { authToken } = require('../middlewares');
+const middlewares = require('../middlewares');
 
 const sales = express.Router();
 
-sales.get('/:saleId', authToken, controllers.sales.getSaleById);
-sales.get('/', authToken, controllers.sales.getSalesByUser);
+sales.get('/:saleId', middlewares.authToken, controllers.details);
+sales.get('/', middlewares.authToken, controllers.sales);
 
 module.exports = sales;

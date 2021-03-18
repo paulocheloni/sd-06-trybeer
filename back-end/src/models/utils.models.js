@@ -7,9 +7,13 @@ const getAll = async (table) => {
 };
 
 const getByFilter = async ({ table, filter, value }) => {
-  const QUERY = 'SELECT * FROM ?? WHERE ?? = ?';
-  const [results] = await connection.query(QUERY, [table, filter, value]);
-  return results;
+  try {
+    const QUERY = 'SELECT * FROM ?? WHERE ?? = ?';
+    const [results] = await connection.query(QUERY, [table, filter, value]);
+    return results;
+  } catch (err) {
+    return [];
+  }
 };
 
 module.exports = {

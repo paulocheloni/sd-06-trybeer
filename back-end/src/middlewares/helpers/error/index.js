@@ -54,4 +54,14 @@ module.exports = {
     customCode: 'C_ERR_NO_TOKEN',
     customMessage: 'Authentication token is missing.',
   },
+  C_ERR_ACC_DND: {
+    statusCode: 403,
+    customCode: 'C_ERR_ACC_DND',
+    customMessage: 'Access denied.',
+  },
+  C_ERR_NOT_FOUND: {
+    statusCode: 404,
+    customCode: 'C_ERR_NOT_FOUND',
+    customMessage: 'Not found.',
+  },
 };
