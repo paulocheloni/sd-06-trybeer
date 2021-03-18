@@ -19,3 +19,9 @@ export const createNewUSer = async (user) => {
 
   return requestResponse;
 };
+
+export const updateUser = async (newName, email) => {
+  const requestResponse = await api.put('profile', { email, newName });
+
+  return requestResponse;
+};

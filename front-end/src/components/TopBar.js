@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { GoThreeBars } from 'react-icons/go';
 import SideBar from './SideBar';
 
 import './TopBar.css';
 
-function TopBar() {
+function TopBar({ title }) {
   const [activeButton, setActiveButton] = useState(false);
 
   function handleActive() {
@@ -18,16 +19,19 @@ function TopBar() {
         <button
           type="button"
           data-testid="top-hamburguer"
-          // src={<GoThreeBars />}
           onClick={ handleActive }
         >
           <GoThreeBars size={ 40 } />
         </button>
-        <h1 className="title" data-testid="top-title">TryBeer</h1>
+        <h1 className="title" data-testid="top-title">{title}</h1>
       </header>
       { activeButton === true ? <SideBar /> : null }
     </div>
   );
 }
+
+TopBar.propTypes = {
+  title: PropTypes.string.isRequired,
+};
 
 export default TopBar;
