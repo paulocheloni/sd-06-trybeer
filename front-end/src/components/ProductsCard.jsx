@@ -1,12 +1,22 @@
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import './ProductCard.css';
 import productsContext from '../context/productsContext';
 
 export default function ProductsCard() {
   const { products, cartProducts, setCartProducts } = useContext(productsContext);
   const [totalValue] = useState(0);
+  const history = useHistory();
+
   const MINUSONE = -1;
   const ONE = 1;
+
+  const isCartWithoutProducts = () => {
+    if (cartProducts.length) {
+      return false;
+    }
+    return true;
+  };
 
   const showQuantity = (index) => {
     const productExists = cartProducts
@@ -99,6 +109,8 @@ export default function ProductsCard() {
           className="btn btn-primary"
           type="button"
           data-testid="checkout-bottom-btn"
+          disabled={ isCartWithoutProducts() }
+          onClick={ () => { history.push('/mycart'); } }
         >
           Ver Carrinho
         </button>

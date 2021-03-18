@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Checkout from './pages/Checkout';
 import CustomerOrders from './pages/CustomerOrders';
+import MyCart from './pages/MyCart';
 
 export default function Routes() {
   return (
@@ -21,6 +22,7 @@ export default function Routes() {
       <Route path="/profile" component={ Profile } />
       <Route path="/checkout" component={ Checkout } />
       <Route path="/orders" component={ CustomerOrders } />
+      <Route path="/mycart" component={ MyCart } />
     </Switch>
   );
 }
