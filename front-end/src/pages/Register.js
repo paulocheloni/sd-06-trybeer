@@ -48,7 +48,7 @@ function Register() {
   };
 
   return (
-    <div>
+    <div className="login-container d-grid gap-2">
       <RegisterForm
         setName={ setName }
         setPassword={ setPassword }
@@ -57,6 +57,7 @@ function Register() {
       />
       <div>
         <Button
+          className="btn-login btn btn-success"
           dataTestid="signup-btn"
           btnDisable={ btnDisable }
           handleClick={ () => handleRedirect() }

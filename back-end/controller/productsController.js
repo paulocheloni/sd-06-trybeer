@@ -1,6 +1,4 @@
 const { Router } = require('express');
-// const jwt = require('jsonwebtoken');
-// const { validateToken, SECRET } = require('../middlewares/helpers');
 const { getAllProducts } = require('../models/productsModel');
 
 const productsRouter = new Router();

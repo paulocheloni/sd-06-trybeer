@@ -68,15 +68,17 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="login-container d-grid gap-2">
       <LoginForm setEmail={ setEmail } setPassword={ setPassword } />
       <Button
+        className="btn-login btn btn-success"
         title="Entrar"
         dataTestid="signin-btn"
         handleClick={ handleClick }
         btnDisable={ btnDisable }
       />
       <Button
+        className="btn-login btn btn-success"
         title="Ainda não tenho conta"
         dataTestid="no-account-btn"
         handleClick={ () => history.push('/register') }

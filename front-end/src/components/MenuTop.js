@@ -8,11 +8,11 @@ function MenuTop(props) {
 
   return (
     <div>
-      <nav>
-        <i
+      <nav className="top-bar">
+        <img
           onClick={ () => (showSideBar ? setShowSideBar(false) : setShowSideBar(true)) }
           aria-hidden="true"
-          className="fas fa-bars"
+          className="bars-button"
           data-testid="top-hamburguer"
         />
         <h1 data-testid="top-title">{ title }</h1>

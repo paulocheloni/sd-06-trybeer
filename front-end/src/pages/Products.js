@@ -45,8 +45,9 @@ function Products() {
   }, [totalCart]);
 
   return (
-    <div>
+    <div className="product-page">
       <MenuTop title="TryBeer" />
+      <div className="card-container">
       { products.map((product, index) => (
         <Card
           id={ product.id }
@@ -56,14 +57,16 @@ function Products() {
           urlImage={ product.url_image }
           price={ product.price }
         />)) }
+      </div>
       <button
+        className="checkout-btn-bottom btn-success"
         type="button"
         data-testid="checkout-bottom-btn"
         disabled={ btnDisable }
         onClick={ () => history.push('/checkout') }
       >
         Ver Carrinho
-        <p data-testid="checkout-bottom-btn-value">
+        <p className="checkout-price" data-testid="checkout-bottom-btn-value">
           {`R$ ${totalCart.toFixed(2).replace('.', ',')}`}
         </p>
       </button>

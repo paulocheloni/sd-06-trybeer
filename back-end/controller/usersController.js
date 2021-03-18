@@ -17,10 +17,10 @@ usersRouter.post('/', async (req, res) => {
   const { email } = req.body;
   const userFound = await findUserByEmail(email);
   if (userFound) {
-    const { name, password, role } = userFound;
+    const { id, name, password, role } = userFound;
     const jwtConfig = { expiresIn: '7d', algorithm: 'HS256' };
     const token = jwt.sign({ data: { email, role } }, SECRET, jwtConfig);
-    return res.status(200).json({ name, password, role, token });
+    return res.status(200).json({ id, name, password, role, token });
   }
   return res.status(404).send({ message: 'E-mail not found.' });
 });
@@ -35,11 +35,11 @@ usersRouter.post('/register', async (req, res) => {
     password,
     role,
   };
-  await registerUser(obj);
+  const [{ insertId }] = await registerUser(obj);
 
   const token = jwt.sign({ data: { email, role } }, SECRET, jwtConfig);
 
-  return res.status(201).send({ token });
+  return res.status(201).json({ token, insertId });
 });
 
 usersRouter.put('/edit', async (req, res) => {
