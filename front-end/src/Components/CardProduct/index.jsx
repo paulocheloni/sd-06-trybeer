@@ -6,26 +6,30 @@ import GetProducts from '../../services/GetProducts';
 import Button from '../Button';
 import * as S from './style';
 
-const ButtonSeeCar = (cartAvailable) => {
-  const history = useHistory();
-  return (
-    <div>
-      <S.Buttons>
-        <Button
-          dataTestId="checkout-bottom-btn"
-          onClick={ () => history.push('/cart') }
-          disabled={ cartAvailable }
-        >
-          Ver Carrinho
-        </Button>
-      </S.Buttons>
-    </div>
-  );
-};
+// const ButtonSeeCart = (disabled, onClick, dataTestId) => {
+//   return (
+//     <div>
+//       <S.Buttons>
+//         <Button
+//           dataTestId={ dataTestId }
+//           onClick={ onClick }
+//           disabled={ disabled }
+//         >
+//           Ver Carrinho
+//         </Button>
+//       </S.Buttons>
+//     </div>
+//   );
+// };
 
 const CardProduct = () => {
+  const history = useHistory();
   const [products, setProducts] = useState([]);
-  const [cartAvailable, SetCartAvailable] = useState([true]);
+  const [cartDisabled, SetCartDisabled] = useState([true]);
+  useEffect(() => {
+    const retrievedToken = localStorage.getItem('token');
+    if (!retrievedToken || retrievedToken === '') history.push('/login');
+  }, [history]);
   useEffect(() => {
     if (localStorage.products && JSON.parse(localStorage.products) !== []) {
       return setProducts(JSON.parse(localStorage.products));
@@ -35,8 +39,12 @@ const CardProduct = () => {
 
   useEffect(() => {
     localStorage.products = JSON.stringify(products);
-    if (localStorage.products.length > 0) {
-      SetCartAvailable(false);
+    const productsAmount = products.reduce((acc, product) => acc + product
+      .productQuantity, 0);
+    if (productsAmount > 0) {
+      SetCartDisabled(false);
+    } else {
+      SetCartDisabled(true);
     }
   }, [products]);
 
@@ -87,7 +95,6 @@ const CardProduct = () => {
               -
             </Button>
           </S.Buttons>
-          { ButtonSeeCar(cartAvailable) }
           Valor total:
           <span data-testid="checkout-bottom-btn-value">
             R$
@@ -100,6 +107,15 @@ const CardProduct = () => {
           </span>
         </div>
       ))}
+      <S.Buttons>
+        <Button
+          dataTestId="checkout-bottom-btn"
+          onClick={ () => history.push('/checkout') }
+          disabled={ cartDisabled }
+        >
+          Ver Carrinho
+        </Button>
+      </S.Buttons>
     </div>
   );
 };
