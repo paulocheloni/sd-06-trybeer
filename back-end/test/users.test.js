@@ -14,7 +14,8 @@ describe('Tests the login endpoint', () => {
         const { body } = response;
         const result = JSON.parse(body);
         expect(result.message).toBe('Email field is required.');
-      });
+      })
+      .catch((error) => { error })
   });
 
   it('Should not be able to sign in without an password', async () => {
@@ -28,7 +29,8 @@ describe('Tests the login endpoint', () => {
         const { body } = response;
         const result = JSON.parse(body);
         expect(result.message).toBe('Password field is required.');
-      });
+      })
+      .catch((error) => { error })
   });
 
   it('Should not be able to sign in with an invalid email', async () => {
@@ -43,7 +45,8 @@ describe('Tests the login endpoint', () => {
         const { body } = response;
         const result = JSON.parse(body);
         expect(result.message).toBe('Login failed. User not found.');
-      });
+      })
+      .catch((error) => { error })
   });
 
   it('Should not be able to sign in with an invalid password', async () => {
@@ -58,7 +61,8 @@ describe('Tests the login endpoint', () => {
         const { body } = response;
         const result = JSON.parse(body);
         expect(result.message).toBe('Login failed. Invalid credentials.');
-      });
+      })
+      .catch((error) => { error })
   });
 
   it('Should be able to login successfully', async () => {
@@ -72,6 +76,7 @@ describe('Tests the login endpoint', () => {
       .then((responseLogin) => {
         const { json } = responseLogin;
         expect(json.token).not.toBeNull();
-      });
+      })
+      .catch((error) => { error })
   });
 });
