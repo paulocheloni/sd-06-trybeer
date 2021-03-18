@@ -17,8 +17,8 @@ class Profile extends React.Component {
         <SideBarAdmin />
         <div className="inputs-div">
           <img src={ defaultProfile } alt="profile" />
-          <h2 data-testid='profile-name'>{`Nome: `}</h2>
-          <h2 data-testid='profile-email'>{`Email: `}</h2>
+          <h2 data-testid="profile-name">{ "Nome: " }</h2>
+          <h2 data-testid="profile-email">{ "Email:" }</h2>
         </div>
       </div>
     );
