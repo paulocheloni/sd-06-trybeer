@@ -16,7 +16,7 @@ async function validateToken(req, res, next) {
   if (!token) return next({ status: 401, message: notAuthorized });
   const decode = parseJWT(token);
   if (!decode) return next({ status: 401, message: notAuthorized });
-  const { id } = await getByEmail(decode.email);
+  const [{ id }] = await getByEmail(decode.userData);
   if (!id) return next({ status: 401, message: notAuthorized });
   res.locals.userId = id;
   return next();

@@ -29,11 +29,10 @@ const getById = async (id) => {
   };
   
 const createOne = async (name, email, password, role) => {
-  const { insertId } = await connection.execute(
+  await connection.execute(
     'INSERT INTO users (name, email, password, role) VALUES(?, ?, ?, ?)',
     [name, email, password, role],
   );
-  return insertId;
 };
 const getByName = async (name) => {
   const [user] = await connection.execute(
