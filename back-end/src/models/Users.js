@@ -15,7 +15,18 @@ const createUser = async (name, email, password, role) => {
     [name, email, password, role]);
 };
 
+const updateUser = async (name, email) => {
+  const updatedUser = await connection
+    .execute(`
+    UPDATE users
+    SET name = (?)
+    WHERE email = (?)`,
+    [name, email]);
+  return updatedUser;
+};
+
 module.exports = {
   findUser,
   createUser,
+  updateUser,
 };

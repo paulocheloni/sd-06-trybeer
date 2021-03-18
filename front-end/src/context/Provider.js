@@ -17,6 +17,17 @@ function Provider({ children }) {
     },
   );
 
+  const getUser = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user;
+  };
+
+  const setUser = (data) => {
+    const user = localStorage.setItem('user', JSON.stringify(data));
+    console.log(getUser());
+    return user;
+  };
+
   const contextData = {
     loginEmail,
     setLoginEmail,
@@ -34,6 +45,8 @@ function Provider({ children }) {
     setregisterIsDisabled,
     sale,
     setSale,
+    getUser,
+    setUser,
   };
 
   return (
