@@ -12,7 +12,7 @@ const create = async (body) => {
   data.role = (data.isVendor) ? 'administrator' : 'client';
   const newUserId = await users.insertNewUser(data);
 
-  const token = generateToken(newUserId);
+  const token = generateToken(newUserId, data.role);
   const { role } = data;
   return { name, email, token, role };
 };
