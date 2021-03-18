@@ -7,6 +7,7 @@ import Products from './pages/Products';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Provider from './Context/Provider';
+import Checkout from './pages/Checkout';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/products" component={ Products } />
           <Route exact path="/orders" component={ Orders } />
           <Route exact path="/profile" component={ Profile } />
+          <Route exact path="/checkout" component={ Checkout } />
           <Redirect from="/" to="/login" />
         </Switch>
       </Provider>
