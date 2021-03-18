@@ -4,14 +4,22 @@ import productsContext from '../context/productsContext';
 
 export default function ProductsCard() {
   const { products, cartProducts, setCartProducts } = useContext(productsContext);
-  const [totalValue, setTotalValue] = useState(0);
-  const [quantity, setQuantity] = useState([]);
+  const [totalValue] = useState(0);
+
+  const funcao = (index) => {
+    const productFound = cartProducts.find((item) => item.id === index);
+    if (productFound) {
+      console.log(productFound.quantityItem);
+      return productFound.quantityItem;
+    }
+    return 0;
+  };
 
   const handlePlusButton = (event) => {
     const productId = event.target.id;
     if (!cartProducts.length) {
       setCartProducts([{
-        id: productId,
+        id: parseInt(productId, 10),
         name: products[productId].name,
         price: products[productId].price,
         url: products[productId].url_image,
@@ -19,31 +27,27 @@ export default function ProductsCard() {
         subTotal: products[productId].price,
       }]);
     }
-    const productExists = cartProducts.some((product) => product.id === productId);
-    if(productExists) {
-      setCartProducts(cartProducts.map(()))
+
+    const productExists = cartProducts
+      .some((product) => parseInt(product.id, 10) === parseInt(productId, 10));
+
+    if (productExists) {
+      setCartProducts(cartProducts.map((product) => {
+        product.quantityItem += 1;
+        product.subTotal = product.quantityItem * product.price;
+        return product;
+      }));
+    } else {
+      setCartProducts([...cartProducts, {
+        id: parseInt(productId, 10),
+        name: products[productId].name,
+        price: products[productId].price,
+        url: products[productId].url_image,
+        quantityItem: 1,
+        subTotal: products[productId].price,
+      }]);
     }
   };
-
-  /* const handleOnClickPlusMinusButton = (e) => {
-    const buttonValuePlusOrMinus = e.target.value;
-    const index = e.target.id;
-    // console.log('Nosso quantity', quantity);
-    console.log('Nosso index', index);
-    console.log('Preço do produto', products[index].price);
-
-    if (buttonValuePlusOrMinus === 'Plus') {
-      quantity[index] = (parseInt(quantity, 10) + 1);
-      setQuantity([quantity[index]]);
-      setTotalValue(((products[index].price) * quantity[index]).toFixed(2));
-    }
-    if (buttonValuePlusOrMinus === 'Minus') {
-      quantity[index] = (parseInt(quantity, 10) - 1);
-      if (quantity[index] < 0) return quantity[index] === 0;
-      setQuantity([quantity[index]]);
-      setTotalValue(((products[index].price) * quantity[index]).toFixed(2));
-    }
-  }; */
 
   return (
     <div className="products-container">
@@ -70,21 +74,20 @@ export default function ProductsCard() {
                 className="button"
                 type="button"
                 data-testid={ `${index}-product-plus` }
-                onClick={ handleOnClickPlusMinusButton }
+                onClick={ handlePlusButton }
                 value="Plus"
                 id={ index }
               >
                 +
               </button>
               <span>
-                { quantity[index] }
-                {/* { quantity } */}
+                { funcao(index) }
               </span>
               <button
                 className="button"
                 type="button"
                 data-testid={ `${index}-product-minus` }
-                onClick={ handleOnClickPlusMinusButton }
+                onClick={ handlePlusButton }
                 value="Minus"
                 id={ index }
               >

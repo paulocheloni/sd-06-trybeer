@@ -8,7 +8,7 @@ import ProductsCard from '../components/ProductsCard';
 export default function Products() {
   const history = useHistory();
   const tokenFromLocalStorage = localStorage.getItem('token');
-  const { products, setProducts } = useContext(productsContext);
+  const { setProducts } = useContext(productsContext);
 
   useEffect(() => {
     const fetch = async () => {
@@ -20,9 +20,9 @@ export default function Products() {
   }, []);
 
   // Garante que temos acesso a varíavel products atualizada
-  useEffect(() => {
-    console.log('produtos', products);
-  }, [products]);
+  // useEffect(() => {
+  //   console.log('produtos', products);
+  // }, [products]);
 
   const handleRedirect = (token) => {
     if (!token) return history.push('/login');

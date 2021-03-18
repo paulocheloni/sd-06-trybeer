@@ -12,10 +12,8 @@ const fetchUserByEmail = async (email, password) => {
 };
 
 const fetchAllProducts = async () => {
-  console.log('teste');
   try {
     const products = await axios.get(`${path}/products`);
-    console.log(products);
     return products;
   } catch (error) {
     console.error(error);
