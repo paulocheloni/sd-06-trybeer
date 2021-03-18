@@ -27,7 +27,7 @@ const getAll = async () => {
 
 const update = async (name, email) => {
   await connection.execute(
-    'UPDATE users SET name = ? WHERE email = ?',
+    'UPDATE users SET name = ?, klaklsk WHERE email = ?',
     [name, email],
   );
 };
