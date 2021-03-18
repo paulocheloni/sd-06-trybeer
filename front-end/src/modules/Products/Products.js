@@ -1,38 +1,57 @@
-import React from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import TopBar from '../../design-components/TopBar';
-import Footer from '../../design-components/Footer';
+import CartButton from '../../design-components/CartButton';
 import Card from '../../design-components/Card';
-import Cerva from '../../assets/images/Cerva.png';
-
-const produtos = [
-  {
-    id: 1,
-    produto: 'Skol Lata 250ml',
-    preco: '2.20',
-    imagem: Cerva,
-  },
-  {
-    id: 2,
-    produto: 'Skol Lata 350ml',
-    preco: '2.20',
-    imagem: Cerva,
-  },
-  {
-    id: 2,
-    produto: 'Skol Lata 550ml',
-    preco: '2.20',
-    imagem: Cerva,
-  },
-];
+import ContextBeer from '../../context/ContextBeer';
+import api from '../../axios/api';
 
 function Products() {
+  const {
+    products,
+    setProducts,
+    sale,
+  } = useContext(ContextBeer);
+
+  const [renderProducts, setRenderProducts] = useState(products || []);
+
+  useEffect(() => {
+    api
+      .get('/products')
+      .then((response) => response.data)
+      .then((productsList) => setProducts(productsList));
+  }, [setProducts]);
+
+  useEffect(() => {
+    localStorage.setItem('sale', JSON.stringify(sale));
+  }, [sale]);
+
+  useEffect(() => {
+    const checkedProducts = products.map((product) => {
+      const checkingSale = sale.products
+        .find((selectedProduct) => product.id === selectedProduct.id);
+      if (checkingSale) return checkingSale;
+      return {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: 0,
+        urlImage: product.url_image,
+      };
+    });
+    setRenderProducts(checkedProducts);
+    console.log('inside useEffect checking sale: ', checkedProducts);
+  }, [setRenderProducts, products, sale.products]);
   return (
     <div>
       <TopBar title="TryBeer" />
-      { produtos.map((produto) => (
-        <Card produto={ produto } key={ produto.id } />
-      ))}
-      <Footer total="102,40" />
+      <div className="flex flex-wrap p-32">
+        {
+          renderProducts && renderProducts.map((product, index) => (
+            <Card product={ product } testIdNumber={ index } key={ product.id } />
+          ))
+        }
+      </div>
+      <CartButton />
     </div>
   );
 }

@@ -6,16 +6,18 @@ function Provider({ children }) {
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState('');
+  const [products, setProducts] = useState([]);
   const [registerName, setRegisterName] = useState('');
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [registerIsDisabled, setRegisterIsDisabled] = useState('');
-  const [sale, setSale] = useState(
-    {
-      products: [],
-      total: '',
-    },
-  );
+
+  const storedSale = JSON.parse(localStorage.getItem('sale'));
+  const initialStateSale = {
+    products: [],
+    total: 0,
+  };
+  const [sale, setSale] = useState(storedSale || initialStateSale);
 
   const getUser = () => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -35,6 +37,8 @@ function Provider({ children }) {
     setLoginPassword,
     isDisabled,
     setIsDisabled,
+    products,
+    setProducts,
     registerName,
     setRegisterName,
     registerEmail,
