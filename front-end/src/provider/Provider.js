@@ -6,12 +6,15 @@ function TrybeerProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [user, setUser] = useState({});
 
-  useEffect(() => {
-    const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart'));
-    const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
+  const getFromLocalStorage = (key) => {
+    const keyFromLocalStorage = JSON.parse(localStorage.getItem(key));
+    if (!keyFromLocalStorage) return null;
+    return keyFromLocalStorage;
+  };
 
-    if (cartFromLocalStorage) setCart(cartFromLocalStorage);
-    if (userFromLocalStorage) setUser(userFromLocalStorage);
+  useEffect(() => {
+    if (getFromLocalStorage('cart')) setCart(getFromLocalStorage('cart'));
+    if (getFromLocalStorage('user')) setUser(getFromLocalStorage('user'));
   }, []);
 
   const setUserLogged = (userData) => {
@@ -19,17 +22,18 @@ function TrybeerProvider({ children }) {
     localStorage.setItem('user', JSON.stringify(userData));
   };
 
-  const getFromLocalStorage = (key) => {
-    const keyFromLocalStorage = JSON.parse(localStorage.getItem(key));
-    return keyFromLocalStorage;
+  const eraseLocalStorage = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('cart');
   };
 
   const updateProductQuantity = (id, quantity, price) => {
     const product = { id, quantity, price };
-    const cartWithoutProduct = cart.filter((item) => item.id !== id && quantity === 0);
+    const cartWithoutProduct = cart.filter((item) => item.id !== id);
     const newCart = [...cartWithoutProduct, product];
-    setCart(newCart);
-    localStorage.setItem('cart', JSON.stringify(newCart));
+    const cartWithoutZeroQuantities = newCart.filter((item) => item.quantity > 0);
+    setCart(cartWithoutZeroQuantities);
+    localStorage.setItem('cart', JSON.stringify(cartWithoutZeroQuantities));
   };
 
   const contextValue = {
@@ -40,6 +44,7 @@ function TrybeerProvider({ children }) {
     user,
     setUser,
     setUserLogged,
+    eraseLocalStorage,
   };
 
   return (

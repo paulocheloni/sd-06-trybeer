@@ -1,16 +1,20 @@
 const userService = require('../services/UsersService');
 const createToken = require('../auth/createToken');
 
-const registerAndLog = async (email) => {
-  const [userTotal] = await userService.findByEmail(email);
+const registerAndLog = async (reqEmail) => {
+  const [userTotal] = await userService.findByEmail(reqEmail);
+
   const { password, ...userWithoutPassword } = userTotal;
-    const token = createToken(userWithoutPassword);
-    return ({
-      name: userWithoutPassword.name,
-      email: userWithoutPassword.email,
-      role: userWithoutPassword.role,
-      token,
-    });
+  const token = createToken(userWithoutPassword);
+  
+  const { id, name, email, role } = userWithoutPassword; 
+  return ({
+    id,
+    name,
+    email,
+    role,
+    token,
+  });
 };
 
 module.exports = registerAndLog;
