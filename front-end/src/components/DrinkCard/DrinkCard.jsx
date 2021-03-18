@@ -35,6 +35,7 @@ const getItemFromStorageOrCreate = (id) => {
 
 export default function DrinkCard({ productPayload, index }) {
   const { url_image, name, price, id } = productPayload;
+  // ATENÇÂO!!!!!
   // const [cartItem, setCartItem] = useState(getItemFromStorageOrCreate(id));
   const [cartItem, setCartItem] = useState('');
 
