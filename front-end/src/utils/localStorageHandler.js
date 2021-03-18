@@ -11,4 +11,31 @@ const verifyUser = (history) => {
   return { name, email }
 }
 
+// const cart = [
+//   {
+//     id: '',
+//     name: '',
+//     quantity: '',
+//     price: '',
+//   },
+//   {
+
+//   }
+// ]
+
+// const addProductToCart = (product) => {
+//   const { id, name, price } = product;
+//   const 
+  
+
+// }
+
+// const subtractProductFromCart = () => {
+  
+// }
+
+// const getProductQuantity = () => {
+  
+// }
+
 module.exports = { updateName, verifyUser };
