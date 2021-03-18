@@ -22,7 +22,7 @@ export default function Routes() {
       <Route path="/profile" component={ Profile } />
       <Route path="/checkout" component={ Checkout } />
       <Route path="/orders" component={ CustomerOrders } />
-      <Route path="/mycart" component={ MyCart } />
+      <Route path="/checkout" component={ MyCart } />
     </Switch>
   );
 }
