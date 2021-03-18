@@ -16,6 +16,8 @@ const Utils = require('./Utils');
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use(express.static(`${__dirname}/images`));
+console.log(`${__dirname}/images`)
 app.post('/login', rescue(UserService.loginUser));
 
 app.post('/register', 

@@ -8,23 +8,32 @@ import S from './styles';
 const verifyQuantityZero = (cartList, setCartList) => {
   const productQuantity = cartList.filter((item) => item.quantity !== 0);
 
-  console.log(productQuantity, 'verify');
-
   setCartList(productQuantity);
+  localStorage.setItem('infosCheckout', JSON.stringify(productQuantity));
 };
 
-const handleCartList = ({ id, price, quantity, value }, cartList, setCartList) => {
+const handleCartList = ({ id, price, quantity, value, name }, cartList, setCartList) => {
   if (value === 'plus') quantity += 1;
   else quantity -= 1;
 
   const product = cartList.find((item) => item.id === id);
 
+  // const productsLocalStorage = JSON.parse('infosCheckout');
+  // const productLocalStorage = productsLocalStorage.find((item) => item.id === id);
+
   if (!product || product === undefined) {
-    setCartList([...cartList, { id, price, quantity }]);
+    setCartList([...cartList, { id, name, price, quantity }]);
+
+    localStorage.setItem('infosCheckout', JSON.stringify(
+      [...cartList, { id, name, price, quantity }],
+    ));
   } else if (product && product.id === id) {
     product.quantity = quantity;
   } else {
     setCartList([...cartList, product]);
+    localStorage.setItem('infosCheckout', JSON.stringify(
+      [...cartList, product],
+    ));
   }
 
   const productZeroQuantity = cartList.find((item) => item.quantity === 0);
@@ -38,13 +47,14 @@ const handleCounter = (
     setQuantity,
     stateSumPrice,
     setStateSumPrice,
+    name,
     price,
     id,
     cartList,
     setCartList,
   },
 ) => {
-  const product = { id, price, quantity, value };
+  const product = { id, price, quantity, value, name };
 
   if (value === 'plus') {
     setQuantity(quantity + 1);
@@ -79,6 +89,7 @@ const CardProducts = ({ product }) => {
     setQuantity,
     stateSumPrice,
     setStateSumPrice,
+    name,
     price,
     id,
     cartList,

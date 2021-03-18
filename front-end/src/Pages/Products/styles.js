@@ -13,6 +13,8 @@ const ContainerCards = styled.section`
 
     opacity: ${stateSideBar && '0.2'};
 
+    /* overflow: auto; */
+
     width: 100%;
     height: 100%;
 
@@ -23,7 +25,7 @@ const ContainerCards = styled.section`
     justify-content: space-between;
 
     @media (max-width: 500px) {
-      padding: 70px 20px 60px 20px;
+      padding: 60px 10px 50px 10px;
     }
   `} 
 `;
@@ -40,10 +42,10 @@ const ContainerButton = styled.div`
     }
 
   @media (max-width: 500px) {
-    padding: 0 19px;
+    padding: 0 15px;
 
     > button {
-      width: 92%;
+      width: 95%;
     }
   }
 `;

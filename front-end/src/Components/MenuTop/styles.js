@@ -20,19 +20,21 @@ const CompMenuTop = styled.header`
     justify-content: space-between;
 
     > button {
-      background: none;
+      background: ${theme.colors.primary};
       
       padding: 3px 5px 0 5px;
 
-      border: 1px solid ${theme.colors.border};
+      /* border: 1px solid ${theme.colors.border}; */
+      border: none;
       border-radius: 3px;
+      box-shadow: 0 0 5px ${theme.colors.shadowCards};
 
       cursor: pointer;
 
       transition: filter 0.3s;
 
       &:hover {
-        filter: brightness(0.8);
+        filter: brightness(0.955);
       }
 
       > img {
@@ -47,6 +49,8 @@ const CompMenuTop = styled.header`
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
+      font-family: 'Typoslab';
+      font-weight: 400;
     }
   `}
 `;

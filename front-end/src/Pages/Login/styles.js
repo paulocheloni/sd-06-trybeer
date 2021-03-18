@@ -1,16 +1,5 @@
 import styled, { css } from 'styled-components';
 
-// const animate = keyframes`
-//   from {
-//     opacity: 0;
-//     transform: translate3d(-50px);
-//   }
-//   to {
-//     opacity: 1;
-//     transform: translatex(0);
-//   }
-// `;
-
 const Container = styled.div`
   ${({ theme }) => css`
     width: 100%;
@@ -22,6 +11,10 @@ const Container = styled.div`
     justify-content: center;
 
     background: ${theme.colors.secondary};
+
+    @media (max-width: 500px) {
+      background: ${theme.colors.primary};
+    }
 
     > form {
 
@@ -40,14 +33,16 @@ const Container = styled.div`
       > h1 {
         margin-bottom: 20px;
         color: ${theme.colors.text};
+
+        @media (max-width: 500px) {
+          font-size: 26px;
+        }
       }
 
       @media (max-width: 500px) {
         border: none;
         border-radius: 0;
-
-        background: ${theme.colors.secondaryMobile};
-
+        box-shadow: none;
         width: 100%;
       }
     }

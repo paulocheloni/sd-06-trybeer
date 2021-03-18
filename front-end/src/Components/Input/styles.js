@@ -1,16 +1,21 @@
 import styled, { css } from 'styled-components';
 
 const CompInput = styled.label`
-  ${({ theme, themeStorage }) => css`
+  ${({ theme, themeStorage, widthDivLabel }) => css`
     color: ${theme.colors.text};
 
-    width: 100%;
+    width: ${widthDivLabel};
 
     display: flex;
     flex-direction: column;
 
     font-size: 20px;
     font-weight: 450;
+
+    @media (max-width: 500px) {
+      font-size: 18px;
+      width: 100%;
+    }
 
     > div {
     display: flex;
