@@ -1,15 +1,19 @@
 import React, { useEffect, useContext } from 'react';
 import ProductCard from '../components/Products/ProductCard';
+import Checkout from '../components/Products/Cart';
 import TopBar from '../components/TopBar';
 import { getAllProducts } from '../services/api';
 import TrybeerContext from '../context/TrybeerContext';
 
 function Products() {
   const { products, setProducts } = useContext(TrybeerContext);
+  const { cart, setCart } = useContext(TrybeerContext);
+
   useEffect(() => {
     getAllProducts()
       .then((products) => setProducts(products));
   }, []);
+
   return (
     <div>
       <TopBar title="Trybeer" />
@@ -26,6 +30,7 @@ function Products() {
           />
         )
       }) }
+      <Checkout />
     </div>
   );
 }
