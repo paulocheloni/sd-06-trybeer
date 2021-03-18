@@ -12,12 +12,12 @@ function AdminProfile() {
           Perfil
         </h1>
         <ElementProfile
-          text={ `Nome:` }
+          text="Nome:"
           data="name"
           value={ name }
         />
         <ElementProfile
-          text={ `Email:` }
+          text="Email:"
           data="email"
           value={ email }
         />

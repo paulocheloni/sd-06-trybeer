@@ -7,38 +7,29 @@ import MenuSide from './menuSide';
 
 function MenuTop({ title }) {
   const user = JSON.parse(localStorage.getItem('user'));
-  let isAdmin;
-    if (user.role) {
-      user.role === 'administrator'
-        ?  isAdmin=true
-        :  isAdmin=false;
+  let isAdmin = false;
+    if (user.role && user.role === 'administrator') {
+      isAdmin = true
     }
   try {
     const [open, setOpen] = useState(isAdmin); //true para passar no adminprofile
-    let urlRoute = '';
-    if (user.role) {
-      user.role === 'administrator'
-        ?  urlRoute='/admin'
-        :  urlRoute='';
-    }
-    console.log(urlRoute)
-  return (
-    <div className="top">
-      <button
-        type="button"
-        onClick={ () => setOpen(!open) }
-      >
-        <i data-testid="top-hamburguer">
-          <GiHamburgerMenu />
-        </i>
-      </button>
-      <h1 className="title" data-testid="top-title">
-        { title }
-      </h1>
-      {open && <MenuSide title={"Trybeer"}/>}
-    </div>
-  );
-} catch (err) {
+    return (
+      <div className="top">
+        <button
+          type="button"
+          onClick={ () => setOpen(!open) }
+        >
+          <i data-testid="top-hamburguer">
+            <GiHamburgerMenu />
+          </i>
+        </button>
+        <h1 className="title" data-testid="top-title">
+          { title }
+        </h1>
+        {open && <MenuSide title={"Trybeer"}/>}
+      </div>
+    );
+  } catch (err) {
     return <Redirect to="/login" />;
   }
 }

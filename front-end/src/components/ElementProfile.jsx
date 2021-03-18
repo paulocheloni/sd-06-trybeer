@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 function ElementProfile({ value, text, data }) {
   return (
-    <label htmlFor={data} className={ `${data}-label`}>
-      {text}
+    <label htmlFor={ data } className={ `${data}-label` }>
+      { text }
       <p 
-      className={`profile-${data}-p`}
-      data-testid={`profile-${data}`}>
-      { value }
-        </p>
+        className={ `profile-${data}-p` }
+        data-testid={ `profile-${data}` }>
+        { value }
+      </p>
     </label>
   );
 }

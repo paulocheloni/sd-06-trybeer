@@ -3,15 +3,8 @@ import MenuTop from '../components/menuTop';
 import { Redirect } from 'react-router-dom';
 
 function Orders() {
-  let urlRoute = '';
   try {
     const user = JSON.parse(localStorage.getItem('user'));
-    if (user.role) {
-      user.role === 'administrator'
-        ?  urlRoute='/admin'
-        :  urlRoute='';
-    }
-    console.log(urlRoute)
   return (
     <div>
       <MenuTop title={"Trybeer"}/>
@@ -21,6 +14,5 @@ function Orders() {
     return <Redirect to="/login" />;
   }
 }
-
 
 export default Orders;
