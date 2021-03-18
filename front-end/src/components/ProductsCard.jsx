@@ -1,15 +1,30 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import './ProductCard.css';
 import productsContext from '../context/productsContext';
 
 export default function ProductsCard() {
   const { products, cartProducts, setCartProducts } = useContext(productsContext);
-  const [totalValue] = useState(0);
+  // const [totalValue, setTotalValue] = useState(0);
   const history = useHistory();
 
   const MINUSONE = -1;
   const ONE = 1;
+
+  // Garante que temos acesso a varíavel products atualizada
+  useEffect(() => {
+    if (cartProducts.length) {
+      localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+    }
+    console.log('cartProducts', cartProducts);
+  }, [cartProducts]);
+
+  const handleTotalPrice = () => {
+    const totalPrices = cartProducts
+      .reduce((accumulator, current) => accumulator + current.subTotal, 0);
+
+    return (totalPrices.toFixed(2)).replace('.', ',');
+  };
 
   const isCartWithoutProducts = () => {
     if (cartProducts.length) {
@@ -40,7 +55,8 @@ export default function ProductsCard() {
         if (product.quantityItem <= 0) {
           product.quantityItem = 0;
         }
-        product.subTotal = (product.quantityItem * product.price).toFixed(2);
+        product.subTotal = Number(product.quantityItem * product.price);
+        // localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
         return product;
       }));
     }
@@ -51,8 +67,9 @@ export default function ProductsCard() {
       price: products[productId].price,
       url: products[productId].url_image,
       quantityItem: unity > 0 ? unity : unity = 0,
-      subTotal: products[productId].price,
+      subTotal: Number(products[productId].price),
     }]);
+    // localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
   };
 
   return (
@@ -64,7 +81,7 @@ export default function ProductsCard() {
         >
           <div className="card-body">
             <p data-testid={ `${index}-product-price` }>
-              { `R$ ${product.price}` }
+              { `R$ ${(product.price).replace('.', ',')}` }
             </p>
             <img
               data-testid={ `${index}-product-img` }
@@ -110,12 +127,12 @@ export default function ProductsCard() {
           type="button"
           data-testid="checkout-bottom-btn"
           disabled={ isCartWithoutProducts() }
-          onClick={ () => { history.push('/mycart'); } }
+          onClick={ () => { history.push('/checkout'); } }
         >
           Ver Carrinho
         </button>
         <span data-testid="checkout-bottom-btn-value">
-          { `R$ ${(totalValue).toFixed(2)}` }
+          { `R$ ${handleTotalPrice()}` }
         </span>
       </div>
     </div>
