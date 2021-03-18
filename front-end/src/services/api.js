@@ -11,7 +11,7 @@ const generateToken = async (email, password) => axios
   .catch((err) => ({ response: err.response.data, result: false }));
 
 const registerUser = async (name, email, password, role) => axios
-  .post(`${url}/register`, {
+  .post(`${url}/user`, {
     name,
     email,
     password,
