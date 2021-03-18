@@ -3,53 +3,54 @@ import { Link, useHistory } from 'react-router-dom';
 import { verifyEmailAndPassword, handleSubmit } from '../services';
 import logo from '../img/trybe.png';
 import '../css/Login.css';
+import ControllerHeader from '../components/ControllerHeader';
 
 function Login() {
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
   const [activeBtn, setActiveBtn] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({ email: '', password: '' });
   const history = useHistory();
 
   useEffect(() => {
-    verifyEmailAndPassword(email, password, setActiveBtn, setUser);
-    setUser({ email, password });
-  }, [email, password]);
+    const { email, password } = user;
+    verifyEmailAndPassword(email, password, setActiveBtn);
+  }, [user]);
+
   return (
     <div className="login-page">
+      <ControllerHeader />
       <div className="login-container">
         <img src={ logo } alt="logo" className="logo" />
-        <form className="form-container">
+        <div className="form-container">
           <h3 className="login-title">PROJECT - TRYBEER</h3>
+          <span>Email</span>
           <input
             type="email"
-            className="input-form-login"
             data-testid="email-input"
-            placeholder="Informe o e-mail"
-            onChange={ (event) => setEmail(event.target.value) }
+            className="input-form-login"
+            onChange={ ({ target }) => setUser({ ...user, email: target.value }) }
           />
+          <span>Senha</span>
           <input
             type="text"
-            className="input-form-login"
             data-testid="password-input"
-            placeholder="Informe a senha"
-            onChange={ (event) => setPassword(event.target.value) }
+            className="input-form-login"
+            onChange={ ({ target }) => setUser({ ...user, password: target.value }) }
           />
           <button
-            className="button-form-login"
             type="submit"
             disabled={ !activeBtn }
             onClick={ () => handleSubmit(history, user) }
             data-testid="signin-btn"
+            className="button-form-login"
           >
-            ENTRAR
+            Entrar
           </button>
           <Link to="/register">
             <button type="button" data-testid="no-account-btn" className="link-button">
               Ainda não tenho conta
             </button>
           </Link>
-        </form>
+        </div>
       </div>
     </div>
   );
