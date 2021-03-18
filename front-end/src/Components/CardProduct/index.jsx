@@ -26,13 +26,14 @@ const CardProduct = () => {
   const history = useHistory();
   const [products, setProducts] = useState([]);
   const [cartDisabled, SetCartDisabled] = useState([true]);
+  // useEffect(() => {
+  //   const retrievedToken = (localStorage.getItem('token'));
+  //   if (!retrievedToken) history.push('/login');
+  // }, [history]);
   useEffect(() => {
-    const retrievedToken = localStorage.getItem('token');
-    if (!retrievedToken || retrievedToken === '') history.push('/login');
-  }, [history]);
-  useEffect(() => {
-    if (localStorage.products && JSON.parse(localStorage.products) !== []) {
-      return setProducts(JSON.parse(localStorage.products));
+    const retrievedProducts = (localStorage.getItem('products'));
+    if (retrievedProducts && JSON.parse(retrievedProducts) !== []) {
+      return setProducts(JSON.parse(retrievedProducts));
     }
     return GetProducts(setProducts);
   }, []);
