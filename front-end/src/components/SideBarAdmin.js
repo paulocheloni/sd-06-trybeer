@@ -9,6 +9,7 @@ class SideBarAdmin extends React.Component {
 
   render() {
     const { history } = this.props;
+    const cinco = -5;
     console.log(history);
     return (
       <header className="sidebar-container">
@@ -34,7 +35,7 @@ class SideBarAdmin extends React.Component {
             <button
               type="button"
               data-testid="side-menu-item-logout"
-              onClick={ () => history.go(-5) }
+              onClick={ () => history.go(cinco) }
             >
               Sair
             </button>

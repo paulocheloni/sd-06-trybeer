@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // import { Header } from '../components';
 import defaultProfile from '../img/profile.png';
 import SideBarAdmin from '../components/SideBarAdmin';
 
-class Profile extends React.Component {
+class AdminProfile extends React.Component {
   constructor() {
     super();
     this.state = {};
@@ -25,4 +26,9 @@ class Profile extends React.Component {
   }
 }
 
-export default (Profile);
+AdminProfile.propTypes = {
+  history: PropTypes.shape().isRequired,
+};
+
+
+export default (AdminProfile);
