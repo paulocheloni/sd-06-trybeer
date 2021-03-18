@@ -5,7 +5,7 @@ import TopBar from '../components/TopBar';
 function Orders() {
   return (
     <div>
-      <TopBar />
+      <TopBar title="Meus Pedidos" />
       Orders
     </div>
   );

@@ -27,3 +27,9 @@ export const getAllProducts = async () => {
 
   return requestResponse;  
 }
+
+export const updateUser = async (newName, email) => {
+  const requestResponse = await api.put('profile', { email, newName });
+
+  return requestResponse;
+};

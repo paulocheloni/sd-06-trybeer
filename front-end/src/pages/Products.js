@@ -12,7 +12,7 @@ function Products() {
   }, []);
   return (
     <div>
-      <TopBar />
+      <TopBar title="Trybeer" />
       <h1>Products</h1>
       { products.map((product, index) => {
         const { id, name, price, url_image } = product;
