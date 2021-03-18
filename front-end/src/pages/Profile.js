@@ -1,68 +1,56 @@
-import React, { useState, useContext, useEffect } from 'react';
-import TrybeerContext from '../context/TrybeerContext';
-import api from '../services/api';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import TopBar from '../components/TopBar';
+import { getLocalStrg, sendNewName } from '../services/profileService';
+import InputProfile from '../services/InputProfile';
 
 function Profile() {
-  // const { user: { email } } = useContext(TrybeerContext);
-  const [enableButton, setEnableButton] = useState(true);
+  const history = useHistory();
+  const [disableButton, setDisableButton] = useState(true);
   const [editedName, setEditedName] = useState('');
-  const [name, setName] = useState("");
-
-  async function pegaEmail() {
-    const result = await api.post('profile', {
-      "email": "email@email.com"
-    }).then(response => response.data)
-    .catch(err => console.log('erro', err))
-    return setName(result);
-  }
-
+  const [nameLocal, setNameLocal] = useState('');
+  const [emailLocal, setEmailLocal] = useState('');
+  const [existsLocal, setExistsLocal] = useState(false);
   useEffect(() => {
-    pegaEmail();
-    // fazer umg get passando o email
-    // response vem como nome, setName(nome da response)
-    // api.put('/profile', {
-    //   data: 'batatinha'
-    //   },
-    //   {
-    //   headers: {
-    //     authorization: localStorage.getItem("token"),
-    //   // "content-type": "application/json",
-    //   }
-    // })
-  }, [])
-
-
-  function handleButton(event) {
-    event.preventDefault();
-    setEditedName(event.target.value);
-    if (editedName !== name) setEnableButton(false);
-  }
-
-  // function sendNewName () {
-  //   useEffect(() => {
-  //     // put enviando o novo nome
-  //   })
-  // }
-
+    getLocalStrg(setEditedName, setNameLocal, setEmailLocal, setExistsLocal, history);
+  }, []);
+  useEffect(() => {
+    if (editedName !== nameLocal) setDisableButton(false);
+    else setDisableButton(true);
+  }, [editedName]);
+  function handleChangeName(event) { setEditedName(event.target.value); }
   return (
-    <div>
-      <TopBar />
-      <form>
-        <label>
-          Name
-          <input type="text" data-testid="profile-name-input" value={name} onChange={ (event) => handleButton(event) }/>
-        </label>
-
-        <label>
-          Email
-          <input type="email" data-testid="profile-email-input" value="email@email.com" readonly/>
-        </label>
-
-        <button type="button" data-testid="profile-save-btn" disabled={enableButton} /* onClick={ sendNewName } */ >
-          Salvar
-        </button>
-      </form>
+    <div id="div-profile">
+      <TopBar title="Meu perfil" />
+      {existsLocal === true
+        ? (
+          <form>
+            <InputProfile
+              title="Name"
+              id="profile-name-input"
+              type="text"
+              value={ editedName }
+              callback={ (e) => handleChangeName(e) }
+            />
+            <label htmlFor="profile-email-input">
+              Email
+              <input
+                type="email"
+                data-testid="profile-email-input"
+                value={ emailLocal }
+                readOnly
+              />
+            </label>
+            <button
+              type="button"
+              data-testid="profile-save-btn"
+              disabled={ disableButton }
+              onClick={ () => sendNewName(editedName, emailLocal) }
+            >
+              Salvar
+            </button>
+          </form>
+        ) : null}
     </div>
   );
 }
