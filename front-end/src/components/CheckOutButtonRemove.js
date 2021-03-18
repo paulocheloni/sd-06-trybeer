@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import { loadState, saveState } from '../services/localStorage';
 import context from '../Context/ContextAPI';
 
-function CheckoutButtonRemove({productIndex}) {
-  const {cart, setCart} = useContext(context);
-  const [totalValue, setTotalValue] = useState();
+function CheckoutButtonRemove({productIndex, productId}) {
+  const {cart, setCart, price, setPrice} = useContext(context);
+  // const [price, setTotalValue] = useState();
   const [emailUser, setEmailUser] = useState('');
 
   useEffect(() => {
@@ -14,16 +14,17 @@ function CheckoutButtonRemove({productIndex}) {
     setCart(cartStorage);
 
     const totalPriceStorage = loadState(`${loadUser.email}_price`);
-    setTotalValue(totalPriceStorage);
+    setPrice(totalPriceStorage);
   }, []);
 
   const removeCheckout = () => {
-    const newTotalValue = (totalValue - cart[productIndex].totalPrice).toFixed(2);
-    setTotalValue(newTotalValue);
+    const newTotalValue = (price - cart[productIndex].totalPrice).toFixed(2);
+    setPrice(newTotalValue);
     saveState(`${emailUser}_price`, newTotalValue);
 
-    cart.splice(productIndex, 1);
-    saveState(`${emailUser}`, cart);
+    const updateCart = cart.filter((element) => element.id !== productId);
+    setCart(updateCart);
+    saveState(`${emailUser}`, updateCart);
   }
 
   return(

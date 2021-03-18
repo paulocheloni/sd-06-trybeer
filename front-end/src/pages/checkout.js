@@ -6,21 +6,24 @@ import context from '../Context/ContextAPI';
 import { useHistory } from 'react-router';
 
 function Checkout() {
-  const { cart, setCart, setNumberHouse, setStreet } = useContext(context);
-  const [totalValue, setTotalValue] = useState();
+  const { cart, setNumberHouse, setStreet, price, setPrice } = useContext(context);
   const [hidden, setHidden] = useState(true);
-  const [email, setEmail] = useState(true);
+  const [email, setEmail] = useState('');
 
   const history = useHistory();
 
   useEffect(() => {
+    const logon = loadState('user');
+    if (!logon) return history.push('/login');
+    if (logon.role === 'administrator') return history.push('/admin/orders');
+  }, [history]);
+
+  useEffect(() => {
     const loadUser = loadState('user');
-    const loadCart = loadState(`${loadUser.email}`);
-    setEmail(`${loadUser.email}`);
+    setEmail(loadUser.email);
     const loadTotalValue = loadState(`${loadUser.email}_price`);
-    setCart(loadCart);
-    setTotalValue(loadTotalValue);
-  }, []);
+    setPrice(loadTotalValue);
+  }, [cart]);
 
   const finishSale = () => {
     setHidden(false);
@@ -40,7 +43,7 @@ function Checkout() {
           <h3>{product.name}</h3>
           <h4>{product.totalPrice}</h4>
           <h4>{product.price}(und)</h4>
-          <CheckoutButtonRemove productIndex={index} />
+          <CheckoutButtonRemove productId={product.id} productIndex={index} />
         </div>)
       })}
       <h1>Endereco</h1>
@@ -60,8 +63,9 @@ function Checkout() {
           onChange={ (e) => setNumberHouse(e.target.value) }
         />
       </label>
+      <h1>TOTAL R$ {price}</h1>
       <button onClick={finishSale}>Finalizar Pedido</button>
-      <p1 hidden={hidden}>Compra realizada com sucesso!</p1>
+      <p hidden={hidden}>Compra realizada com sucesso!</p>
     </div>
   );
 }
