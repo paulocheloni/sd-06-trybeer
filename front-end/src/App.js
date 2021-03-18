@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
+import Checkout from './pages/Checkout';
 import Login from './pages/Login';
 import Products from './pages/Products';
 import Profile from './pages/Profile';
@@ -18,6 +19,7 @@ function App() {
         <Route path="/register" component={ Register } />
         <Route path="/products" component={ Products } />
         <Route path="/profile" component={ Profile } />
+        <Route path="/checkout" component={ Checkout } />
       </Switch>
     </Router>
   );
