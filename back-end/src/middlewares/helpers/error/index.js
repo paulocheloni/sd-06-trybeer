@@ -39,6 +39,11 @@ module.exports = {
     customCode: 'C_ERR_NAME_INVALID',
     customMessage: 'Name must be at least 12 characters in a valid format. Example: Gabi Dal Silv',
   },
+  ERROR_USER_PROFILE: {
+    statusCode: 400,
+    customCode: 'C_ERR_UPDATE_PROFILE_UNAVAIBLE',
+    customMessage: 'Update profile failed.',
+  },
   C_ERR_ISVENDOR_INVALID: {
     statusCode: 400,
     customCode: 'C_ERR_ISVENDOR_INVALID',
