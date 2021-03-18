@@ -1,5 +1,5 @@
-const status = require('../utils/allStatusCode');
 const { getUserByEmail } = require('../models/RegisterModel');
+const { UNAUTHORIZED, OK } = require('../utils/allStatusCode');
 const { createToken } = require('../utils/createToken');
 const {
   validateEmail,
@@ -12,7 +12,7 @@ const emailAndPasswordIsExists = (email, password) => {
   switch (false) {
     case email:
     case password:
-      return objErr('All fields must be filled', status.UNAUTHORIZED);
+      return objErr('All fields must be filled', UNAUTHORIZED);
     default: return null;
   }
 };
@@ -21,14 +21,14 @@ const emailAndPasswordCheckContent = (email, password) => {
   switch (false) {
     case validateEmail(email):
     case validatePassword(password):
-      return objErr('Incorrect username or password', status.UNAUTHORIZED);
+      return objErr('Incorrect username or password', UNAUTHORIZED);
     default: return null;
   }
 };
 
 const checkUserRegister = (email, password, user) => {
   if (!user || email !== user.email || password !== user.password) {
-    return objErr('Incorrect username or password', status.UNAUTHORIZED); 
+    return objErr('Incorrect username or password', UNAUTHORIZED); 
   }
   return null;
 };
@@ -50,7 +50,7 @@ const LoginServices = async (req, res) => {
   const { password: _password, ...userWithoutPassword } = user;
   const { id: _id, ...userWithoutId } = userWithoutPassword;
   const token = createToken(userWithoutPassword);
-  return res.status(status.OK).json({ ...userWithoutId, token });
+  return res.status(OK).json({ ...userWithoutId, token });
 };
 
 module.exports = LoginServices;

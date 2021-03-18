@@ -6,13 +6,13 @@ const LoginController = require('./controllers/LoginController');
 const RegisterController = require('./controllers/RegisterController');
 const ProfileController = require('./controllers/ProfileController');
 const VerifyAuthorization = require('./middlewares/VerifyAuthotization');
-const connection = require('./database/connection');
+const ProductsController = require('./controllers/ProductsController');
 
 require('dotenv').config();
 
 const app = express();
 
-const PORT = 3000;
+const PORT = 3001;
 
 app.use(cors());
 
@@ -27,16 +27,18 @@ app.use((req, _res, next) => {
 
 app.use(bodyParser.json());
 
-app.get('/eai', async (_req, res) => {
-  const [retornoSql] = await connection.execute('SELECT * FROM products');
-  res.json(retornoSql);
-});
+// app.get('/eai', async (_req, res) => {
+//   const [retornoSql] = await connection.execute('SELECT * FROM products');
+//   res.json(retornoSql);
+// });
 
 app.use('/login', LoginController);
 
 app.use('/register', RegisterController);
 
 app.use('/profile', VerifyAuthorization, ProfileController);
+
+app.use('/products', VerifyAuthorization, ProductsController);
 
 app.use((err, _req, res, _next) => {
   console.error({ err });
