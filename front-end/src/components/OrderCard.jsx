@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function OrderCard({ order, orderIndex }) {
+export default function OrderCard({ order, orderIndex }) {
   return (
     <div data-testid={ `${orderIndex}-order-card-container` } key={ orderIndex }>
       <p data-testid={ `${orderIndex}-order-number` }>
@@ -19,8 +20,8 @@ function OrderCard({ order, orderIndex }) {
 OrderCard.propTypes = {
   order: PropTypes.shape({
     number: PropTypes.number.isRequired,
-    date: PropTypes.date.isRequired,
-    value: PropTypes.value.string,
+    date: PropTypes.string,
+    value: PropTypes.number,
   }).isRequired,
   orderIndex: PropTypes.number.isRequired,
 };

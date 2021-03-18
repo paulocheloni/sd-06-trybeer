@@ -1,5 +1,5 @@
 const url = 'http://localhost:3001';
-const { token } = JSON.parse(localStorage.getitem('user'));
+const { token } = JSON.parse(localStorage.getItem('user'));
 
 const options = {
   method: 'GET',

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import OrderCard from './OrderCard';
 
 function OrdersList({ orders }) {
@@ -20,5 +21,5 @@ function OrdersList({ orders }) {
 export default OrdersList;
 
 OrdersList.propTypes = {
-  orders: PropTypes.Array.isRequired,
+  orders: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
