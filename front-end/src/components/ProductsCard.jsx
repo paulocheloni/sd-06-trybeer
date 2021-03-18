@@ -5,48 +5,44 @@ import productsContext from '../context/productsContext';
 export default function ProductsCard() {
   const { products, cartProducts, setCartProducts } = useContext(productsContext);
   const [totalValue] = useState(0);
+  const MINUSONE = -1;
+  const ONE = 1;
 
-  const funcao = (index) => {
-    const productFound = cartProducts.find((item) => item.id === index);
-    if (productFound) {
-      console.log(productFound.quantityItem);
-      return productFound.quantityItem;
-    }
+  const showQuantity = (index) => {
+    const productExists = cartProducts
+      .find((product) => parseInt(product.id, 10) === parseInt(index, 10));
+    if (productExists) { return productExists.quantityItem; }
+
     return 0;
   };
 
-  const handlePlusButton = (event) => {
+  const handleChangeQuantityButton = (event, unity) => {
     const productId = event.target.id;
-    if (!cartProducts.length) {
-      setCartProducts([{
-        id: parseInt(productId, 10),
-        name: products[productId].name,
-        price: products[productId].price,
-        url: products[productId].url_image,
-        quantityItem: 1,
-        subTotal: products[productId].price,
-      }]);
-    }
-
     const productExists = cartProducts
-      .some((product) => parseInt(product.id, 10) === parseInt(productId, 10));
+      .find((product) => parseInt(product.id, 10) === parseInt(productId, 10));
 
-    if (productExists) {
-      setCartProducts(cartProducts.map((product) => {
-        product.quantityItem += 1;
-        product.subTotal = product.quantityItem * product.price;
+    if (cartProducts.length && productExists) {
+      return setCartProducts(cartProducts.map((product) => {
+        if (product.id !== Number(productId)) {
+          return product;
+        }
+        product.quantityItem += unity;
+        if (product.quantityItem <= 0) {
+          product.quantityItem = 0;
+        }
+        product.subTotal = (product.quantityItem * product.price).toFixed(2);
         return product;
       }));
-    } else {
-      setCartProducts([...cartProducts, {
-        id: parseInt(productId, 10),
-        name: products[productId].name,
-        price: products[productId].price,
-        url: products[productId].url_image,
-        quantityItem: 1,
-        subTotal: products[productId].price,
-      }]);
     }
+
+    setCartProducts([...cartProducts, {
+      id: parseInt(productId, 10),
+      name: products[productId].name,
+      price: products[productId].price,
+      url: products[productId].url_image,
+      quantityItem: unity > 0 ? unity : unity = 0,
+      subTotal: products[productId].price,
+    }]);
   };
 
   return (
@@ -74,20 +70,22 @@ export default function ProductsCard() {
                 className="button"
                 type="button"
                 data-testid={ `${index}-product-plus` }
-                onClick={ handlePlusButton }
+                onClick={ (e) => handleChangeQuantityButton(e, ONE) }
                 value="Plus"
                 id={ index }
               >
                 +
               </button>
-              <span>
-                { funcao(index) }
+              <span
+                data-testid={ `${index}-product-qtd` }
+              >
+                { showQuantity(index) }
               </span>
               <button
                 className="button"
                 type="button"
                 data-testid={ `${index}-product-minus` }
-                onClick={ handlePlusButton }
+                onClick={ (e) => handleChangeQuantityButton(e, MINUSONE) }
                 value="Minus"
                 id={ index }
               >
@@ -105,7 +103,7 @@ export default function ProductsCard() {
           Ver Carrinho
         </button>
         <span data-testid="checkout-bottom-btn-value">
-          { totalValue }
+          { `R$ ${(totalValue).toFixed(2)}` }
         </span>
       </div>
     </div>
