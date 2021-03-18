@@ -5,25 +5,25 @@ import TopMenu from '../components/TopMenu';
 import fetchFunctions from '../api/fetchFunctions';
 import ProductCard from '../components/ProductCard';
 import Cart from '../components/Cart';
-import TrybeerContext from '../context/TrybeerContext';
 
 function Products({ history }) {
   const [products, setProducts] = useState([]);
-  const { user } = useContext(TrybeerContext);
+
+  const verifyToken = () => {
+    const loggedUser = JSON.parse(localStorage.getItem('user'));
+    if (loggedUser) return loggedUser;
+    return false;
+  }
 
   const fetchProducts = async () => {
-    await fetchFunctions.get('products').then((productsArray) => {
-      setProducts(productsArray);
-    });
+    const isLogged = verifyToken();
+    if (!isLogged) return history.push('/login');
+
+    const token = isLogged.token;
+    await fetchFunctions.get('products', token)
+      .then((productsArray) => setProducts(productsArray));
   };
 
-  const verifyIfUserIsLogged = () => {
-    if (!user) {
-      return history.push('/login');
-    }
-  };
-
-  verifyIfUserIsLogged();
 
   useEffect(() => {
     fetchProducts();

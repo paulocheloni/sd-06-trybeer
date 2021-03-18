@@ -17,6 +17,10 @@ const RegisterForm = (props) => {
     password,
   } = props;
 
+  // const logUser = () => {
+
+  // }
+
   const onHandleClick = async () => {
     const role = isChecked ? 'admin' : 'client';
     const user = {
