@@ -1,7 +1,7 @@
 import React from 'react';
 import SideBarAdmin from '../../../design-components/SideBarAdmin'
 
-function AdminOrders() {
+function AdminProfile() {
   return (
     <div>
       <SideBarAdmin />
@@ -9,4 +9,4 @@ function AdminOrders() {
   );
 }
 
-export default AdminOrders;
+export default AdminProfile;
