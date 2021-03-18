@@ -5,7 +5,7 @@ import Orders from './Orders';
 import Profile from './Profile';
 import Admin from './Admin';
 import ClientProfile from './ClientProfile';
-import Checkout from './Checkout'
+import Checkout from './Checkout';
 
 export {
   Login,

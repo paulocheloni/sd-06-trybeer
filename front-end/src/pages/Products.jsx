@@ -4,10 +4,8 @@ import fetchProducts from '../methods/products';
 import renderCards from '../components/RenderCards';
 import isLogged from '../components/isLogged';
 import MenuTop from '../components/menuTop';
+import currencyFormat from '../utils/currencyFormat';
 import './Products.css';
-
-const currencyFormat = (num) => num
-  .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
 const itemQty = (prod) => {
   const items = JSON.parse(localStorage.getItem('items'));
@@ -31,7 +29,7 @@ function Products() {
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('items'));
     const success = JSON.parse(localStorage.getItem('success'));
-    setOnSuccess(success)
+    setOnSuccess(success);
     if (items) {
       const ad = items.map((a) => a.price);
       if (ad !== []) {
