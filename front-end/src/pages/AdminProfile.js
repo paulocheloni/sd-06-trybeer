@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import { Header } from '../components';
+import { connect } from 'react-redux';
 import defaultProfile from '../img/profile.png';
 import SideBarAdmin from '../components/SideBarAdmin';
-import { connect } from 'react-redux';
 
 class AdminProfile extends React.Component {
   constructor() {
