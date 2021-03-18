@@ -25,7 +25,7 @@ export default function ButtonAppBar({ content }) {
 
   return (
     <div className={ classes.root } data-testid="top-title">
-      <AppBar position="fixed">
+      <AppBar position="relative">
         <Toolbar>
           <IconButton
             edge="start"

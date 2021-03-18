@@ -71,36 +71,41 @@ function Cliente() {
   return (
     <div>
       <NavBar content="TryBeer" />
-      <h1>Cliente</h1>
-
-      <div className={ classes.root }>
-        <GridList cellHeight={ 180 } className={ classes.gridList }>
-          <GridListTile key="Subheader" cols={ 2 } style={ { height: 'auto' } }>
-            <h1>Cliente</h1>
-          </GridListTile>
+      <div className={classes.root}>
+        <GridList cellHeight={180} className={classes.gridList}>
           {products.map((tile, index) => {
             const link_img = tile.url_image.replace(/ /g, '_');
             return (
-              <GridListTile key={ link_img } key={ index } data-testid={`${index}-product-price`}>
-                <img src={ link_img } alt={ tile.name } data-testid={`${index}-product-img`} />
+              <GridListTile key={link_img} key={index} data-testid={`${index}-product-price`}>
+
+                {/* Image */}
+                <img src={link_img} data-testid={`${index}-product-img`} alt={tile.name} />
+
                 <GridListTileBar
-                  title={ tile.name }
-                  data-testid={`${index}-product-name`}
-                  subtitle={ <span data-testid={`${index}-product-price`}>
-                    {`R$ ${tile.price}`}
-                            </span> }
+                  // Name
+                  title={<span data-testid={`${index}-product-name`}>{tile.name}</span>}
+
+                  // Price
+                  subtitle={<span data-testid={`${index}-product-price`}>R$ {tile.price.replace('.', ',')}</span>}
                   actionIcon={
                     <>
-                      <ButtonAdd product={ tile } dataIndex={ index } />
+                      {/* Botao de - */}
+                      <ButtonSub product={tile} dataIndex={index} />
+
+                      {/* Quantidade de Produtos*/}
                       <span data-testid={`${index}-product-qtd`}>
                         {prodQty(tile)}
                       </span>
-                      <ButtonSub product={ tile } dataIndex={ index } />
+
+                      {/* Botao de + */}
+                      <ButtonAdd product={tile} dataIndex={index} />
+
                     </>
                   }
                 />
               </GridListTile>
             );
+
           })}
         </GridList>
       </div>

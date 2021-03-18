@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import sumTotal from '../resources/sumTotal';
 import { loadState, saveState } from '../services/localStorage';
 import { useHistory } from 'react-router';
@@ -44,24 +44,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MenuFooter() {
-  const classes = useStyles();
   const { price, setPrice, cart } = useContext(context);
+  const [disabled, setDisabled] = useState('');
 
+  const classes = useStyles();
   const history = useHistory();
+
 
   const allValues = cart.map(elem => parseFloat(elem.totalPrice));
   const totalSum = sumTotal(allValues).toFixed(2);
 
-  useEffect(() => {
-    const { email } = loadState('user');
+  const validates = () => {
+    // if( allValues[0] > 0) setDisabled(false)
+    // return setDisabled(true)
+    console.log(totalSum)
+  };
 
+  useEffect(() => {
+    
+    const { email } = loadState('user');
     const storageTotal = loadState(`${email}_price`);
+    validates();
     (storageTotal !== 0) ? setPrice(storageTotal) : saveState(`${email}_price`, 0);
-  }, []);
+  }, [cart]);
 
   useEffect(() => {
     setPrice(totalSum);
-
     const { email } = loadState('user');
     saveState(`${email}_price`, totalSum);
   }, [totalSum])
@@ -77,10 +85,6 @@ export default function MenuFooter() {
       <AppBar position="fixed" color="primary" className={ classes.appBar }>
         <Toolbar>
 
-          <IconButton edge="start" color="inherit" aria-label="open drawer">
-            <Hamburguer />
-          </IconButton>
-
           <Fab color="secondary" aria-label="add" className={ classes.fabButton }>
 
             <SearchIcon />
@@ -88,9 +92,9 @@ export default function MenuFooter() {
           </Fab>
 
           <div className={ classes.grow } />
-            <IconButton edge="start" color="inherit" aria-label="open drawer" data-testid="checkout-bottom-btn" onClick={checkoutButton}>
-            {`Ver Carrinho`}
-          <span data-testid="checkout-bottom-btn-value">{`R$ ${totalSum}`}</span>
+            <IconButton disabled={ disabled } edge="start" color="inherit" aria-label="open drawer" data-testid="checkout-bottom-btn" onClick={checkoutButton}>
+            Ver Carrinho
+           <span data-testid="checkout-bottom-btn-value">{`R$ ${totalSum.replace('.', ',')}`}</span>
           </IconButton>
 
         </Toolbar>
