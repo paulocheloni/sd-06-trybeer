@@ -1,37 +1,50 @@
 const userService = require('../services/UsersService');
+const validateToken = require('../auth/validateToken');
 
-const validateEmail = async (req, res, next) => {
+const validEmailRegex = (email) => /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/.test(email);
+const validPassword = (password) => password !== '' && password.length > 5;
+const validName = (name) => {
+  const NAME_REGEX = RegExp(/^[a-záàâãéèêíïóôõöúçñ ]+$/i);
+  return NAME_REGEX.test(name);
+};
+
+const validateEmailDatabase = async (req, res, next) => {
   const { email } = req.body;
   const user = await userService.findByEmail(email);
-
   if (user.length > 0) return res.status(400).json({ message: 'User is already registered' });
   next();
 };
 
-const validEmail = (email) => /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/.test(email);
-// const validEmail = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
-const validDatas = (email, password, user) => email && password && user;
-
-// if (!email || !password || !user) {
-//   return res.status(401).json({ message: 'Invalid entries. Try again.' });
-// }
+const validateRegister = async (req, res, next) => {
+  const { name, email, password } = req.body;
+  if (!validEmailRegex(email) || !validPassword(password) || !validName(name)) {
+    return res.status(400).json({ message: 'Invalid entries. Try again' });
+  }
+  next();
+};
 
 const validateLogin = async (req, res, next) => {
   const { email, password } = req.body;
   const [user] = await userService.findByEmail(email);
-
-  if (!validDatas(email, password, user)) {
-    return res.status(401).json({ message: 'Invalid entries. Try again.' });
+  if (!user) return res.status(400).json({ message: 'User not registered' });
+  if (!validEmailRegex(email) || !validPassword(password)) {
+    return res.status(400).json({ message: 'Invalid entries. Try again' });
   }
+  next();
+};
 
-  if (!validEmail(email) || password.length < 6 || user.password !== password) {
-    return res.status(401).json({ message: 'Invalid entries. Try again.' });
-  }
-
+const isUserLoggedIn = async (req, res, next) => {
+  const { authorization } = req.headers;
+  console.log(authorization);
+  const loggedIn = validateToken(authorization);
+  console.log(loggedIn);
+  if (!loggedIn) return res.status(401).json({ message: 'Operation not authorized' });
   next();
 };
 
 module.exports = {
-  validateEmail,
+  validateRegister,
+  validateEmailDatabase,
   validateLogin,
+  isUserLoggedIn,
 };

@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const secret = 'JSONTrybeerSecret@2021';
 
 const jwtConfig = {
-  expiresIn: '2h',
+  expiresIn: '2d',
   algorithm: 'HS256',
 };
 
