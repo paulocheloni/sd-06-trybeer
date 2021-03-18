@@ -11,19 +11,21 @@ function SideBarAdmin() {
   };
 
   return (
-    <div className="bg-black relative admin-side-bar-container flex flex-col space-y-16 items-center">
+    <div
+      className="bg-black relative admin-side-bar-container flex flex-col items-center"
+    >
       <h1 className="text-white text-3xl">TryBeer</h1>
       <Link to="/admin/orders">
-        <Button 
-          bgColor="black" 
+        <Button
+          bgColor="black"
           testId="side-menu-item-orders"
         >
           Pedidos
         </Button>
       </Link>
       <Link to="/admin/profile">
-        <Button 
-          bgColor="black" 
+        <Button
+          bgColor="black"
           testId="side-menu-item-profile"
         >
           Perfil

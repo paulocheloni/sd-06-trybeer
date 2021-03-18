@@ -1,5 +1,5 @@
 import React from 'react';
-import SideBarAdmin from '../../../design-components/SideBarAdmin'
+import SideBarAdmin from '../../../design-components/SideBarAdmin';
 
 function AdminOrders() {
   return (
