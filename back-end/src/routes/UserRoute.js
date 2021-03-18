@@ -5,8 +5,8 @@ const { UserController } = require('../controller');
 
 const UserRoute = Router();
 
-UserRoute.post('/',
-  emailAlreadyExists,
-  UserController.registerUser);
+UserRoute.post('/', emailAlreadyExists, UserController.registerUser);
+
+UserRoute.put('/', UserController.updateUser);
 
 module.exports = UserRoute;

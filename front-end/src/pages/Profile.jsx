@@ -19,12 +19,11 @@ function Profile() {
     }
   }, [history]);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const updateUser = { ...JSON.parse(localStorage.user), name };
     localStorage.user = JSON.stringify(updateUser);
-    api.updateNameOfUser(updateUser.name, updateUser.email);
-    console.log(updateUser, '', updateUser.name, '', updateUser.email);
-    setUpdateName(true);
+    const resultUpdateApi = await api.updateNameOfUser(updateUser.name, updateUser.email);
+    if (resultUpdateApi.result) setUpdateName(true);
   };
 
   const handleChange = ({ target }) => {
