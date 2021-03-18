@@ -28,8 +28,13 @@ function Profile() {
 
   const handleChange = ({ target }) => {
     setName(target.value);
-    setIsDisabled(false);
   };
+
+  useEffect(() => {
+    const nameStorage = JSON.parse(localStorage.user);
+    if (name !== nameStorage.name) setIsDisabled(false);
+    else setIsDisabled(true);
+  }, [name]);
 
   return (
     <div>
