@@ -64,7 +64,7 @@ export default function ProductsCard() {
         >
           <div className="card-body">
             <p data-testid={ `${index}-product-price` }>
-              { product.price }
+              { `R$ ${product.price}` }
             </p>
             <img
               data-testid={ `${index}-product-img` }
