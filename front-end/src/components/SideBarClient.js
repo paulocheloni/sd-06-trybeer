@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import './SideBar.css';
+import './SideBarClient.css';
 
-function SideBar() {
+function SideBarClient() {
   return (
     <div className="side-menu-container">
       <Link to="/products">
@@ -33,4 +33,4 @@ function SideBar() {
   );
 }
 
-export default SideBar;
+export default SideBarClient;

@@ -5,8 +5,9 @@ import Login from './pages/Login';
 import Products from './pages/Products';
 import AdminOrders from './pages/AdminOrders';
 import UserRegister from './pages/UserRegister';
-import Profile from './pages/Profile';
+import ClientProfile from './pages/ClientProfile';
 import Orders from './pages/Orders';
+import AdminProfile from './pages/AdminProfile';
 import './App.css';
 
 function App() {
@@ -21,8 +22,9 @@ function App() {
           <Route exact path="/products" component={ Products } />
           <Route exact path="/admin/orders" component={ AdminOrders } />
           <Route exact path="/register" component={ UserRegister } />
-          <Route exact path="/profile" component={ Profile } />
+          <Route exact path="/profile" component={ ClientProfile } />
           <Route exact path="/orders" component={ Orders } />
+          <Route exact path="/admin/profile" component={ AdminProfile } />
         </Switch>
       </BrowserRouter>
     </LoginProvider>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { GoThreeBars } from 'react-icons/go';
-import SideBar from './SideBar';
+import SideBarClient from './SideBarClient';
 
 import './TopBar.css';
 
@@ -25,7 +25,7 @@ function TopBar({ title }) {
         </button>
         <h1 className="title" data-testid="top-title">{title}</h1>
       </header>
-      { activeButton === true ? <SideBar /> : null }
+      { activeButton === true ? <SideBarClient /> : null }
     </div>
   );
 }
