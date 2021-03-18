@@ -14,7 +14,7 @@ function CheckoutButtonRemove({productIndex, productId}) {
     setCart(cartStorage);
 
     const totalPriceStorage = loadState(`${loadUser.email}_price`);
-    setPrice(totalPriceStorage);
+    // setPrice(totalPriceStorage);
   }, []);
 
   const removeCheckout = () => {
@@ -28,7 +28,7 @@ function CheckoutButtonRemove({productIndex, productId}) {
   }
 
   return(
-    <button type="button" onClick={removeCheckout}>
+    <button data-testid="0-removal-button" type="button" onClick={removeCheckout}>
       X
     </button>
   )

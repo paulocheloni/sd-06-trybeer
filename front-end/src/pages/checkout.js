@@ -1,16 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import NavBar from '../components/menuNavBar';
 import { loadState, saveState } from '../services/localStorage';
 import CheckoutButtonRemove from '../components/CheckOutButtonRemove';
 import context from '../Context/ContextAPI';
-import { useHistory } from 'react-router';
+import sumTotal from '../resources/sumTotal';
 
 function Checkout() {
-  const { cart, setNumberHouse, setStreet, price, setPrice } = useContext(context);
+  const { cart, setCart, numberHouse, setNumberHouse, street, setStreet, setPrice } = useContext(context);
   const [hidden, setHidden] = useState(true);
+  const [disabled, setDisabled] = useState(true);
   const [email, setEmail] = useState('');
 
   const history = useHistory();
+
+  const allValues = cart.map(elem => parseFloat(elem.totalPrice));
+  const totalSum = sumTotal(allValues).toFixed(2);
 
   useEffect(() => {
     const logon = loadState('user');
@@ -19,35 +24,50 @@ function Checkout() {
   }, [history]);
 
   useEffect(() => {
-    const loadUser = loadState('user');
-    setEmail(loadUser.email);
-    const loadTotalValue = loadState(`${loadUser.email}_price`);
-    setPrice(loadTotalValue);
-  }, [cart]);
+    if (!loadState('user')) return history.push('/login');
+    const { email } = loadState('user');
+
+    const storageCart = loadState(`${email}`);
+    storageCart ? setCart(storageCart) : saveState(`${email}`, []);
+  }, []);
+
+  // useEffect(() => {
+  //   const { email } = loadState('user');
+  //   saveState(`${email}_price`, totalSum);
+  // }, [totalSum]);
+
+  const validateCheckout = (street, numberHouse) => {
+    return (street.length > 0 && numberHouse.length > 0) ? setDisabled(false) : setDisabled(true);
+  };
+
+  useEffect(() => {
+    validateCheckout(street, numberHouse);
+  }, [street, numberHouse]);
 
   const finishSale = () => {
     setHidden(false);
     setTimeout(()=> {
       saveState(email, []);
       history.push('/products');
-    }, 2000)
-  }
+    }, 2000);
+  };
 
   return (
     <div>
       <NavBar content="Finalizar Pedido" />
       <h1>Checkout</h1>
-      {cart.map((product, index) => {
+      {(cart.length > 0) ? cart.map((product, index) => {
         return (<div key={index}>
-          <h3>{product.quantity}</h3>
-          <h3>{product.name}</h3>
-          <h4>{product.totalPrice}</h4>
-          <h4>{product.price}(und)</h4>
+          <h3 data-testid="0-product-qtd-input">{product.quantity}</h3>
+          <h3 data-testid="0-product-name">{product.name}</h3>
+          <h4 data-testid="0-product-total-value">{`R$ ${product.totalPrice.replace('.', ',')}`}</h4>
+          <h4 data-testid="0-product-unit-price">{`(R$ ${product.price.replace('.', ',')} un)`}</h4>
           <CheckoutButtonRemove productId={product.id} productIndex={index} />
         </div>)
-      })}
+      })
+      : 'Não há produtos no carrinho'}
       <h1>Endereco</h1>
-      <label>
+      <label data-testid="checkout-street-input">
         Rua
         <input
           type="text"
@@ -55,7 +75,7 @@ function Checkout() {
           onChange={ (e) => setStreet(e.target.value) }
         />
       </label>
-      <label>
+      <label data-testid="checkout-house-number-input">
         Número da casa:
         <input
           type="text"
@@ -63,8 +83,8 @@ function Checkout() {
           onChange={ (e) => setNumberHouse(e.target.value) }
         />
       </label>
-      <h1>TOTAL R$ {price}</h1>
-      <button onClick={finishSale}>Finalizar Pedido</button>
+      <h1 data-testid="order-total-value">TOTAL R$ {totalSum.replace('.', ',')}</h1>
+      <button disabled={ disabled } data-testid="checkout-finish-btn" onClick={finishSale}>Finalizar Pedido</button>
       <p hidden={hidden}>Compra realizada com sucesso!</p>
     </div>
   );

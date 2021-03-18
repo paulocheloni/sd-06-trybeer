@@ -12,7 +12,7 @@ import {
   verifyElementContainsText,
   verifyElementNotContainsAttribute,
 } from '../actions/actionBase';
-  
+
 describe('Criar tela de checkout', () => {
   before(() => {
     createAndInsertsDataBase()
@@ -20,7 +20,7 @@ describe('Criar tela de checkout', () => {
 
   after(() => {
     dropAndTruncateDataBase();
-  }) 
+  })
 
   beforeEach( () => {
     cy.visit(Cypress.config().baseUrl);
