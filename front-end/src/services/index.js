@@ -1,4 +1,4 @@
-import { login, register } from '../api';
+import { login, register, updateName } from '../api';
 
 const verifyEmailAndPassword = (email, password, setActiveBtn) => {
   const isEmailValid = email.match(/\S+@\S+\.\S+/);
@@ -11,12 +11,12 @@ const verifyEmailAndPassword = (email, password, setActiveBtn) => {
 
 const handleSubmit = (history, user) => {
   login(user)
-    .then((response) => {
+    .then(async (response) => {
       const isAdmin = response.data.role === 'administrator';
       localStorage.setItem('token', response.data.token);
 
-      if (isAdmin) history.push('admin/orders');
-      else history.push('/products');
+      if (isAdmin) await history.push('admin/orders');
+      else await history.push('/products');
     });
 };
 
@@ -30,10 +30,10 @@ const verifyRegister = (user, setActiveBtn) => {
   } else setActiveBtn(false);
 };
 
-const handleSubmitRegister = async (user, checked, setUser, history) => {
+const handleSubmitRegister = (user, checked, setUser, history) => {
   if (checked) {
     setUser({ ...user, role: 'administrator' });
-    await register({ ...user, role: 'administrator' })
+    register({ ...user, role: 'administrator' })
       .then((result) => {
         if (result) history.push('admin/orders');
       });
@@ -57,6 +57,11 @@ const redirectMenuBar = (history, payloadUrl) => {
   history.push(payloadUrl);
 };
 
+const handleUpdate = (name) => {
+  console.log(name);
+  updateName(name);
+};
+
 export {
   verifyEmailAndPassword,
   handleSubmit,
@@ -64,4 +69,5 @@ export {
   handleCheckbox,
   handleSubmitRegister,
   redirectMenuBar,
+  handleUpdate,
 };
