@@ -1,14 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import {
-  Login,
-  Register,
-  Profile,
-  Products,
-  Checkout,
-  Orders,
-  Admin,
-  AdminOrders,
+  Login, Register, Profile, Products, Checkout, Orders,
+  Admin, AdminOrders,
 } from '../pages';
 
 function index() {

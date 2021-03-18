@@ -14,19 +14,19 @@ function TrybeerProvider({ children }) {
     if (userFromLocalStorage) setUser(userFromLocalStorage);
   }, []);
 
-  // const updateUserName = (name) => {
-  //   const user = [...user, name];
-  //   localStorage.setItem('user', JSON.stringify(user));
-  // }
-
   const setUserLogged = (userData) => {
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
   };
 
+  const getFromLocalStorage = (key) => {
+    const keyFromLocalStorage = JSON.parse(localStorage.getItem(key));
+    return keyFromLocalStorage;
+  };
+
   const updateProductQuantity = (id, quantity, price) => {
     const product = { id, quantity, price };
-    const cartWithoutProduct = cart.filter((item) => item.id !== id);
+    const cartWithoutProduct = cart.filter((item) => item.id !== id && quantity === 0);
     const newCart = [...cartWithoutProduct, product];
     setCart(newCart);
     localStorage.setItem('cart', JSON.stringify(newCart));
@@ -36,7 +36,7 @@ function TrybeerProvider({ children }) {
     cart,
     setCart,
     updateProductQuantity,
-    // updateUserName,
+    getFromLocalStorage,
     user,
     setUser,
     setUserLogged,

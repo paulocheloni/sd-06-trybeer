@@ -6,28 +6,23 @@ import fetchFunctions from '../api/fetchFunctions';
 import ProductCard from '../components/ProductCard';
 import Cart from '../components/Cart';
 import TrybeerContext from '../context/TrybeerContext';
+import { verifyToken } from '../utils/verifications';
 
 function Products({ history }) {
   const [products, setProducts] = useState([]);
-  const { user } = useContext(TrybeerContext);
-
+  const { user, getFromLocalStorage } = useContext(TrybeerContext);
+  const recoveredUser = getFromLocalStorage('user');
+  console.log(user);
   const fetchProducts = async () => {
     await fetchFunctions.get('products').then((productsArray) => {
       setProducts(productsArray);
     });
   };
 
-  const verifyIfUserIsLogged = () => {
-    if (!user) {
-      return history.push('/login');
-    }
-  };
-
-  verifyIfUserIsLogged();
-
   useEffect(() => {
+    verifyToken('products', recoveredUser, history);
     fetchProducts();
-  }, []);
+  }, [history, recoveredUser]);
 
   return (
     <div>
