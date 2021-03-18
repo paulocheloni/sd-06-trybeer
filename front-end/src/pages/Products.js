@@ -2,27 +2,17 @@ import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import SidebarMenu from '../components/SideBarMenu';
 import TopMenu from '../components/TopMenu';
-import fetchFunctions from '../api/fetchFunctions';
 import ProductCard from '../components/ProductCard';
 import Cart from '../components/Cart';
 import TrybeerContext from '../context/TrybeerContext';
+import { verifyToken } from '../utils/verifications';
 
 function Products({ history }) {
   const [products, setProducts] = useState([]);
   const { dataFromLocalStorage } = useContext(TrybeerContext);
 
-  const verifyToken = () => {
-    const loggedUser = dataFromLocalStorage('user');
-
-    if (loggedUser) return loggedUser;
-    return false;
-  };
-
   const fetchProducts = async () => {
-    if (!verifyToken()) return history.push('/login');
-
-    const { token } = verifyToken();
-    const productsArray = await fetchFunctions.get('products', token);
+    const productsArray = await verifyToken('products', dataFromLocalStorage, history);
     setProducts(productsArray);
   };
 
