@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import fetchFunctions from '../api/fetchFunctions';
+import TrybeerContext from '../context/TrybeerContext';
 
 const RegisterForm = (props) => {
+  const { setUserLogged } = useContext(TrybeerContext);
   const [spam, setSpam] = useState(false);
   const {
     onChangeName,
@@ -17,19 +19,14 @@ const RegisterForm = (props) => {
     password,
   } = props;
 
-  // const logUser = () => {
-
-  // }
-
   const onHandleClick = async () => {
     const role = isChecked ? 'admin' : 'client';
-    const user = {
-      name, email, password, role,
-    };
+    const user = { name, email, password, role };
 
     const response = await fetchFunctions.post('register', user);
 
     if (response.message === 'User is already registered') return setSpam(true);
+    await setUserLogged(response);
     return history.push(isChecked ? '/admin/orders' : '/products');
   };
 
@@ -90,7 +87,7 @@ const RegisterForm = (props) => {
       </fieldset>
       <fieldset>
         <span>
-          { spam ? 'E-mail already in database.' : '' }
+          { spam && 'E-mail already in database.'}
         </span>
       </fieldset>
     </form>

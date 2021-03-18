@@ -9,10 +9,10 @@ import TrybeerContext from '../context/TrybeerContext';
 
 function Products({ history }) {
   const [products, setProducts] = useState([]);
-  const { userFromLocalStorage } = useContext(TrybeerContext);
+  const { dataFromLocalStorage } = useContext(TrybeerContext);
 
   const verifyToken = () => {
-    const loggedUser = userFromLocalStorage();
+    const loggedUser = dataFromLocalStorage('user');
 
     if (loggedUser) return loggedUser;
     return false;

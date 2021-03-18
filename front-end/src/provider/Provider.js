@@ -6,21 +6,22 @@ function TrybeerProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [user, setUser] = useState({});
 
-  const userFromLocalStorage = () => {
-    const foundUser = JSON.parse(localStorage.getItem('user'));
+  const dataFromLocalStorage = (data) => {
+    const foundData = JSON.parse(localStorage.getItem(data));
 
-    if (foundUser) {
-      setUser(foundUser);
-      return foundUser;
+    if (!foundData) return null;
+
+    if (data === 'user') {
+      setUser(foundData);
+      return foundData;
     }
-    return null;
+    setCart(foundData);
+    return foundData;
   };
 
   useEffect(() => {
-    const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart'));
-
-    userFromLocalStorage();
-    if (cartFromLocalStorage) setCart(cartFromLocalStorage);
+    dataFromLocalStorage('user');
+    dataFromLocalStorage('cart');
   }, []);
 
   // const updateUserName = (name) => {
@@ -49,7 +50,7 @@ function TrybeerProvider({ children }) {
     user,
     setUser,
     setUserLogged,
-    userFromLocalStorage,
+    dataFromLocalStorage,
   };
 
   return (
