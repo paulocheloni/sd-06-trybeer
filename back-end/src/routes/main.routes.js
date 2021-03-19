@@ -8,6 +8,7 @@ const usersRouter = require('./users.routes');
 const productsRouter = require('./products.routes');
 const salesRouter = require('./sales.routes');
 const adminRouter = require('./admin.routes');
+const notFound = require('./notFound.routes');
 
 const routes = express.Router();
 
@@ -22,6 +23,6 @@ routes.use('/admin', adminRouter);
 routes.use('/images', express.static(path.join(__dirname, '../images')));
 routes.use(handleError);
 
-routes.use('*', (_req, res) => res.status(404).json({ message: 'Not Found 404' }));
+routes.use('*', notFound);
 
 module.exports = routes;
