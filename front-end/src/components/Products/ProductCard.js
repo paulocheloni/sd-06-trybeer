@@ -7,7 +7,6 @@ function ProductCard({ name, price, urlImage, index }) {
   const { cart, setCart } = useContext(TrybeerContext);
   const [quantity, setQuantity] = useState(0);
   const productInfo = { quantity, setQuantity, name, price, cart, setCart };
-
   useEffect(() => {
     if (localStorageCart) {
       localStorageCart.forEach((element) => {
@@ -15,7 +14,6 @@ function ProductCard({ name, price, urlImage, index }) {
       });
     }
   }, []);
-
   return (
     <div>
       <p
