@@ -47,6 +47,10 @@ function TrybeerProvider({ children }) {
     const cartWithValidQuantitys = newCart.filter((item) => item.quantity > 0);
     setCart(cartWithValidQuantitys);
     localStorage.setItem('cart', JSON.stringify(cartWithValidQuantitys));
+
+  const eraseLocalStorage = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('cart');
   };
 
   const contextValue = {
@@ -59,6 +63,7 @@ function TrybeerProvider({ children }) {
     user,
     setUser,
     setUserLogged,
+    eraseLocalStorage,
   };
 
   return (

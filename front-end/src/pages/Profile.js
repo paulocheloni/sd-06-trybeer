@@ -6,7 +6,7 @@ import fetchFunctions from '../api/fetchFunctions';
 import TrybeerContext from '../context/TrybeerContext';
 
 function Profile(props) {
-  const { user } = useContext(TrybeerContext);
+  const { user, eraseLocalStorage } = useContext(TrybeerContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [disabled, setDisabled] = useState(true);
@@ -28,9 +28,11 @@ function Profile(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetchFunctions.put('register', { name: e.target.form[0].value, email });
+    const { token } = user;
+    await fetchFunctions.put('register', token, { name: e.target.form[0].value, email });
     const { history } = props;
     setIsUpdated(true);
+    eraseLocalStorage();
     setTimeout(() => history.push('/login'), TIME_TO_REDIRECT);
   };
 
@@ -52,7 +54,6 @@ function Profile(props) {
               name="name"
               placeholder="Nome"
               id="name"
-              value={ name }
               onChange={ onChangeName }
             />
           </label>

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import SidebarMenu from '../components/SideBarMenu';
 import TopMenu from '../components/TopMenu';
-import fetchFunctions from '../api/fetchFunctions';
 import ProductCard from '../components/ProductCard';
 import Cart from '../components/Cart';
 import TrybeerContext from '../context/TrybeerContext';
+import verifyToken from '../utils/validations';
 
 function Products() {
   const history = useHistory();
@@ -14,9 +14,8 @@ function Products() {
   const { user } = useContext(TrybeerContext);
 
   const fetchProducts = async () => {
-    await fetchFunctions.get('products').then((productsArray) => {
-      setProducts(productsArray);
-    });
+    const allProducts = await verifyToken('products', user, history);
+    setProducts(allProducts);
   };
 
   useEffect(() => {
