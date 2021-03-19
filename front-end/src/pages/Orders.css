@@ -4,7 +4,6 @@
 }
 .order-card-container {
   width: 33%;
-  height: 20%;
   border: 1px solid white;
   display: flex;
   flex-direction: column;
