@@ -20,12 +20,11 @@ import * as S from './style';
 //   );
 // };
 
-const CardProduct = ({ products }) => {
+const CardProduct = ({ products, setProducts }) => {
   const history = useHistory();
   const [cartDisabled, SetCartDisabled] = useState(true);
 
   useEffect(() => {
-    localStorage.products = JSON.stringify(products);
     const productsAmount = products.reduce((acc, product) => acc + product
       .productQuantity, 0);
     if (productsAmount > 0) {
@@ -109,6 +108,7 @@ const CardProduct = ({ products }) => {
 
 CardProduct.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object),
+  setProducts: PropTypes.func.isRequired,
 };
 
 CardProduct.defaultProps = {
