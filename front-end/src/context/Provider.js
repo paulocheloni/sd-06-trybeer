@@ -15,7 +15,7 @@ function Provider({ children }) {
   const storedSale = JSON.parse(localStorage.getItem('sale'));
   const initialStateSale = {
     products: [],
-    total: 0,
+    total: '0,00',
   };
   const [sale, setSale] = useState(storedSale || initialStateSale);
 

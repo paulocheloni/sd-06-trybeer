@@ -23,6 +23,15 @@ function Checkout() {
   const [deliveryNumber, setDeliveryNumber] = useState('');
   const [buttonDisable, setButtonDisable] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (!user) history.push('/login');
+    if (products) {
+      setIsLoading(false);
+    }
+  }, [products, history]);
 
   useEffect(() => {
     if (sale.products.length === 0
@@ -40,57 +49,57 @@ function Checkout() {
       deliveryNumber,
     };
 
-    console.log('in handle submit: ', bodyObj);
-
     api
       .post('/sales', bodyObj)
       .then(() => setSale({
         products: [],
         total: '0.00',
       }))
-      .then(() => setTimeout(() => setSuccess(true), successTimer))
-      .then(() => history.push('/products'))
+      .then(() => setSuccess(true))
+      .then(() => setTimeout(() => history.push('/products'), successTimer))
       .catch((err) => console.log(err.message));
   };
 
   return (
-    <div>
-      <TopBar title="Finalizar Pedido" />
-      <div className="flex flex-col mt-12 mx-auto space-y-12 max-w-6xl items-center">
-        <ProductsList sale={ sale } />
-        <div className="w-full space-y-12">
-          <LabeledInput
-            value={ deliveryAddress }
-            type="text"
-            onChange={ setDeliveryAddress }
-            label="Rua"
-            testId="checkout-street-input"
-          />
-          <LabeledInput
-            value={ deliveryNumber }
-            type="text"
-            onChange={ setDeliveryNumber }
-            label="Número da casa"
-            testId="checkout-house-number-input"
-          />
+    isLoading ? <p className="absolute inset-auto text-xl">LOADING...</p> : (
+      <div>
+        <TopBar title="Finalizar Pedido" />
+        <div className="flex flex-col mt-12 mx-auto space-y-12 max-w-6xl items-center">
+          <ProductsList sale={ sale } />
+          <div className="w-full space-y-12">
+            <LabeledInput
+              value={ deliveryAddress }
+              type="text"
+              onChange={ setDeliveryAddress }
+              label="Rua"
+              testId="checkout-street-input"
+            />
+            <LabeledInput
+              value={ deliveryNumber }
+              type="text"
+              onChange={ setDeliveryNumber }
+              label="Número da casa"
+              testId="checkout-house-number-input"
+            />
+          </div>
+          <div
+            className={ `absolute inset-auto z-100 flex items-center p-12 justify-center
+            w-64 h-32 text-xl font-bold bg-green-300 text-green-600 rounded-lg
+            ${success ? '' : 'hidden'}` }
+          >
+            Compra realizada com sucesso!
+          </div>
+          <Button
+            isDisabled={ buttonDisable }
+            bgColor="green-600"
+            onClick={ () => handleSubmit() }
+            testId="checkout-finish-btn"
+          >
+            Finalizar Pedido
+          </Button>
         </div>
-        <div
-          className={ `absolute inset-auto flex items-center justify-center w-64 h-32
-          text-xl font-bold bg-green-300 text-green-600 rounded-lg
-          ${success ? '' : 'hidden'}` }
-        >
-          Compra realizada com sucesso!
-        </div>
-        <Button
-          isDisabled={ buttonDisable }
-          bgColor="green-600"
-          onClick={ () => handleSubmit() }
-          testId="checkout-finish-btn"
-        >
-          Finalizar Pedido
-        </Button>
       </div>
-    </div>
+    )
   );
 }
 

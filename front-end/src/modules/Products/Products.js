@@ -25,7 +25,6 @@ function Products() {
         setProducts(productsList);
       })
       .catch(() => history.push('/'));
-    console.log('useEffect do get products');
   }, [setProducts, history]);
 
   useEffect(() => {

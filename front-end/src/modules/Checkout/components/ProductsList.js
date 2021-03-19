@@ -6,15 +6,15 @@ function ProductsList({ sale }) {
   const { products, total } = sale;
   return (
     <div className="flex flex-col items-center mx-auto w-96">
-      {
-        products.map((product, index) => (
+      { products.length === 0
+        ? <p className="text-xl font-bold">Não há produtos no carrinho</p>
+        : products.map((product, index) => (
           <ProductRow
             key={ `${index}-product` }
             testIdNumber={ index }
             product={ product }
           />
-        ))
-      }
+        ))}
       <div>
         <p data-testid="order-total-value">{ `R$ ${total.replace('.', ',')}` }</p>
       </div>
