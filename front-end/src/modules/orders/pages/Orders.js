@@ -1,24 +1,12 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import PaperContainer from '../../../design-system/containers/PaperContainer';
 
-const Orders = () => {
-  const history = useHistory();
-  const storage = JSON.parse(localStorage.getItem('user'));
-  const existToken = storage ? storage.token : false;
+const Orders = () => (
+  <div>
+    <PaperContainer>
+      <p>Pedidos</p>
+    </PaperContainer>
+  </div>
+);
 
-  const timeout = 2000;
-
-  setTimeout(() => {
-    if (!existToken) history.push('/login');
-  }, timeout);
-
-  return (
-    <div>
-      <PaperContainer>
-        <p>Pedidos</p>
-      </PaperContainer>
-    </div>
-  );
-};
 export default Orders;

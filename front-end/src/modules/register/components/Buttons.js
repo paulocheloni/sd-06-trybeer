@@ -10,7 +10,7 @@ function Buttons(errorMsg, setErrorMsg, errorForm) {
   return (
     <div className="w-full mt-10 flex flex-col space-y-2">
       <p
-        className={ `bg-red-500 rounded-md p-2
+        className={ `bg-red-500 rounded-md p-2 text-center
           text-white mt-4 ${errorMsg !== '' ? '' : 'hidden'}` }
       >
         { errorMsg }

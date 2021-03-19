@@ -4,9 +4,13 @@ import GlobalContext from './Context';
 
 function Provider({ children }) {
   const [products, setProducts] = useState([]);
+  const [token, setToken] = useState();
+
   const value = {
     products,
     setProducts,
+    token,
+    setToken,
   };
 
   return (
