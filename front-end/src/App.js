@@ -26,10 +26,15 @@ function App() {
           <Route exact path="/profile" component={ ClientProfile } />
           <Route exact path="/orders" component={ Orders } />
 <<<<<<< HEAD
+<<<<<<< HEAD
           <Route exact path="/admin/profile" component={ AdminProfile } />
 =======
           <Route exact path="/checkout" component={ Checkout } />
 >>>>>>> 5392b5272d7d710365c2c881a603e33d10d2155d
+=======
+          <Route exact path="/admin/profile" component={ AdminProfile } />
+          <Route exact path="/checkout" component={ Checkout } />
+>>>>>>> 1c55a5be875c262c2b52ee42d3b3d46f6ecca14e
         </Switch>
       </BrowserRouter>
     </LoginProvider>
