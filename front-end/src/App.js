@@ -1,6 +1,14 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { Admin, Login, Orders, Profile, Register, Products, Checkout } from './pages/index';
+import {
+  Admin,
+  Login,
+  Orders,
+  Profile,
+  Register,
+  Products,
+  Checkout,
+} from './pages/index';
 import Provider from './hooks/Provider';
 import './App.css';
 
