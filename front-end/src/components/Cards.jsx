@@ -8,6 +8,7 @@ export default function Cards() {
   const featchApiProduct = async() => {
     const allProducts = await api.fetchProducts();
     setProducts(allProducts);
+    console.log(allProducts)
   };
 
   const somarQtd = (index) => {
@@ -21,7 +22,9 @@ export default function Cards() {
 
   const preenchendoONumerodeQtd = () => {
     setQuantProd( ...quantProd, )
-  }
+  };
+
+
 
   useEffect(() => {
     featchApiProduct();
@@ -43,7 +46,7 @@ export default function Cards() {
           >
             -
           </button>
-          <span data-testid={`${index}-product-qtd`} id={index} >{quantProd}</span>
+          <span data-testid={`${index}-product-qtd`} id={index} >quantity</span>
           <button
             id={`${index}-plus`}
             data-testid={`${index}-product-plus`}
