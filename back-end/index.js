@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const userController = require('./controller/usercontroller');
 const registerController = require('./controller/registerController');
 const productsController = require('./controller/productsController');
+const checkoutController = require('./controller/checkoutController');
+const orderController = require('./controller/ordersController');
 
 const app = express();
 app.use(cors());
@@ -12,6 +14,8 @@ app.use(bodyParser.json());
 app.use('/login', userController);
 app.use('/register', registerController);
 app.use('/products', productsController);
+app.use('/checkout', checkoutController);
+app.use('/orders', orderController);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 const port = 3001;
