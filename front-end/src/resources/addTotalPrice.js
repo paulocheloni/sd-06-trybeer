@@ -1,5 +1,4 @@
 function attTotalPrice(array, total) {
-
   const result = array.reduce((acumulador, element) => {
     const number = parseInt(element.totalPrice);
     return acumulador + number;

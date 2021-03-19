@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import sumTotal from '../resources/sumTotal';
-import { loadState, saveState } from '../services/localStorage';
 import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -10,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Fab from '@material-ui/core/Fab';
 import SearchIcon from '@material-ui/icons/Search';
+import { loadState, saveState } from '../services/localStorage';
+import sumTotal from '../resources/sumTotal';
 import Hamburguer from './Hamburguer';
 import context from '../Context/ContextAPI';
 
@@ -50,7 +50,7 @@ export default function MenuFooter() {
 
   const history = useHistory();
 
-  const allValues = cart.map(elem => parseFloat(elem.totalPrice));
+  const allValues = cart.map((elem) => parseFloat(elem.totalPrice));
   const totalSum = sumTotal(allValues).toFixed(2);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ export default function MenuFooter() {
 
     const storageTotal = loadState(`${email}_price`);
     (storageTotal !== 0) ? setPrice(storageTotal) : saveState(`${email}_price`, 0);
-  }, []);
+  }, [history, setPrice]);
 
   useEffect(() => {
     setPrice(totalSum);
@@ -68,11 +68,11 @@ export default function MenuFooter() {
 
     const { email } = loadState('user');
     saveState(`${email}_price`, totalSum);
-  }, [totalSum])
+  }, [setPrice, totalSum]);
 
   const checkoutButton = () => {
     history.push('/checkout');
-  }
+  };
 
   return (
     <h1>
@@ -91,9 +91,20 @@ export default function MenuFooter() {
           </Fab>
 
           <div className={ classes.grow } />
-            <IconButton disabled={ disabled } edge="start" color="inherit" aria-label="open drawer" data-testid="checkout-bottom-btn" onClick={checkoutButton}>
-            {`Ver Carrinho`}
-          <span data-testid="checkout-bottom-btn-value">{`R$ ${totalSum.replace('.', ',')}`}</span>
+          <IconButton
+            disabled={ disabled }
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            data-testid="checkout-bottom-btn"
+            onClick={ checkoutButton }
+          >
+            Ver Carrinho
+            <span
+              data-testid="checkout-bottom-btn-value"
+            >
+              {`R$ ${totalSum.replace('.', ',')}`}
+            </span>
           </IconButton>
         </Toolbar>
       </AppBar>

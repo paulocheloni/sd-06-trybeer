@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
-import { loadState, saveState } from '../services/localStorage';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
+import { loadState, saveState } from '../services/localStorage';
 import NavBar from '../components/menuNavBar';
 import api from '../services/api';
 import context from '../Context/ContextAPI';
@@ -42,13 +42,13 @@ function Cliente() {
 
     const storageCart = loadState(`${email}`);
     storageCart ? setCart(storageCart) : saveState(`${email}`, []);
-  }, []);
+  }, [history, setCart]);
 
   useEffect(() => {
     if (!loadState('user')) return history.push('/login');
     const { email } = loadState('user');
     saveState(`${email}`, cart);
-  }, [cart]);
+  }, [cart, history]);
 
   useEffect(() => {
     const logon = loadState('user');
@@ -73,48 +73,52 @@ function Cliente() {
     return `${cart[idx].quantity}`;
   };
 
-  if (isLoading) return (
-    <h1>Loading...</h1>
-  )
+  if (isLoading) {
+    return (
+      <h1>Loading...</h1>
+    );
+  }
 
   return (
     <div>
       <NavBar content="TryBeer" />
-      <div className={classes.root}>
-        <GridList spacing={20} cols={3} cellHeight={180} className={classes.gridList}>
+      <div className={ classes.root }>
+        <GridList spacing={ 20 } cols={ 2 } cellHeight={ 180 } className={ classes.gridList }>
           {products.map((tile, index) => {
             const link_img = tile.url_image.replace(/ /g, '_');
             return (
-              <GridListTile cellHeight  key={link_img} key={index} data-testid={`${index}-product-price`}>
+              <GridListTile cellHeight key={ link_img } key={ index } data-testid={ `${index}-product-price` }>
 
                 {/* Image */}
-                <img src={link_img} data-testid={`${index}-product-img`} alt={tile.name} />
+                <img src={ link_img } data-testid={ `${index}-product-img` } alt={ tile.name } />
 
                 <GridListTileBar
                   // Name
-                  title={<span data-testid={`${index}-product-name`}>{tile.name}</span>}
+                  title={ <span data-testid={ `${index}-product-name` }>{tile.name}</span> }
 
                   // Price
-                  subtitle={<span data-testid={`${index}-product-price`}>R$ {tile.price.replace('.', ',')}</span>}
+                  subtitle={ <span data-testid={ `${index}-product-price` }>
+                    R$
+                    {tile.price.replace('.', ',')}
+                             </span> }
                   actionIcon={
                     <>
                       {/* Botao de - */}
-                      <ButtonSub product={tile} dataIndex={index} />
+                      <ButtonSub product={ tile } dataIndex={ index } />
 
-                      {/* Quantidade de Produtos*/}
-                      <span data-testid={`${index}-product-qtd`}>
+                      {/* Quantidade de Produtos */}
+                      <span data-testid={ `${index}-product-qtd` }>
                         {prodQty(tile)}
                       </span>
 
                       {/* Botao de + */}
-                      <ButtonAdd product={tile} dataIndex={index} />
+                      <ButtonAdd product={ tile } dataIndex={ index } />
 
                     </>
                   }
                 />
               </GridListTile>
             );
-
           })}
         </GridList>
       </div>

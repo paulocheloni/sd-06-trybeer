@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { loadState, saveState } from '../services/localStorage';
 import context from '../Context/ContextAPI';
 
-function CheckoutButtonRemove({productIndex, productId}) {
-  const {cart, setCart, price, setPrice} = useContext(context);
+function CheckoutButtonRemove({ productIndex, productId }) {
+  const { cart, setCart, price, setPrice } = useContext(context);
   // const [price, setTotalValue] = useState();
   const [emailUser, setEmailUser] = useState('');
 
@@ -13,9 +14,9 @@ function CheckoutButtonRemove({productIndex, productId}) {
     const cartStorage = loadState(loadUser.email);
     setCart(cartStorage);
 
-    const totalPriceStorage = loadState(`${loadUser.email}_price`);
+    // const totalPriceStorage = loadState(`${loadUser.email}_price`);
     // setPrice(totalPriceStorage);
-  }, []);
+  }, [setCart]);
 
   const removeCheckout = () => {
     const newTotalValue = (price - cart[productIndex].totalPrice).toFixed(2);
@@ -25,12 +26,17 @@ function CheckoutButtonRemove({productIndex, productId}) {
     const updateCart = cart.filter((element) => element.id !== productId);
     setCart(updateCart);
     saveState(`${emailUser}`, updateCart);
-  }
+  };
 
-  return(
-    <button data-testid="0-removal-button" type="button" onClick={removeCheckout}>
+  return (
+    <button data-testid="0-removal-button" type="button" onClick={ removeCheckout }>
       X
     </button>
-  )
+  );
 }
 export default CheckoutButtonRemove;
+
+CheckoutButtonRemove.propTypes = {
+  productIndex: PropTypes.string.isRequired,
+  productId: PropTypes.string.isRequired,
+};

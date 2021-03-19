@@ -7,14 +7,26 @@ import context from '../Context/ContextAPI';
 import sumTotal from '../resources/sumTotal';
 
 function Checkout() {
-  const { cart, setCart, numberHouse, setNumberHouse, street, setStreet, setPrice } = useContext(context);
+  const {
+    cart,
+    setCart,
+    numberHouse,
+    setNumberHouse,
+    street,
+    setStreet,
+  } = useContext(context);
+
   const [hidden, setHidden] = useState(true);
   const [disabled, setDisabled] = useState(true);
-  const [email, setEmail] = useState('');
+  const [emailState, setEmailState] = useState('');
 
   const history = useHistory();
 
-  const allValues = cart.map(elem => parseFloat(elem.totalPrice));
+  magicNumber = {
+    DoisMil: 2000,
+  };
+
+  const allValues = cart.map((elem) => parseFloat(elem.totalPrice));
   const totalSum = sumTotal(allValues).toFixed(2);
 
   useEffect(() => {
@@ -28,44 +40,49 @@ function Checkout() {
     const { email } = loadState('user');
 
     const storageCart = loadState(`${email}`);
+
     storageCart ? setCart(storageCart) : saveState(`${email}`, []);
-  }, []);
+  }, [history, setCart]);
 
-  // useEffect(() => {
-  //   const { email } = loadState('user');
-  //   saveState(`${email}_price`, totalSum);
-  // }, [totalSum]);
-
-  const validateCheckout = (street, numberHouse) => {
-    return (street.length > 0 && numberHouse.length > 0) ? setDisabled(false) : setDisabled(true);
-  };
+  const validateCheckout = () => (
+    (street.length > 0 && numberHouse.length > 0) ? setDisabled(false) : setDisabled(true)
+  );
 
   useEffect(() => {
-    validateCheckout(street, numberHouse);
-  }, [street, numberHouse]);
+    validateCheckout();
+  }, [street, numberHouse, validateCheckout]);
 
   const finishSale = () => {
     setHidden(false);
-    setTimeout(()=> {
-      saveState(email, []);
+    setTimeout(() => {
+      saveState(emailState, []);
       history.push('/products');
-    }, 2000);
+    }, magicNumber.DoisMil);
   };
 
   return (
     <div>
       <NavBar content="Finalizar Pedido" />
       <h1>Checkout</h1>
-      {(cart.length > 0) ? cart.map((product, index) => {
-        return (<div key={index}>
-          <h3 data-testid="0-product-qtd-input">{product.quantity}</h3>
-          <h3 data-testid="0-product-name">{product.name}</h3>
-          <h4 data-testid="0-product-total-value">{`R$ ${product.totalPrice.replace('.', ',')}`}</h4>
-          <h4 data-testid="0-product-unit-price">{`(R$ ${product.price.replace('.', ',')} un)`}</h4>
-          <CheckoutButtonRemove productId={product.id} productIndex={index} />
-        </div>)
-      })
-      : 'Não há produtos no carrinho'}
+      {
+        (cart.length > 0)
+          ? cart.map((product, index) => (
+            <div key={ index }>
+              <h3 data-testid="0-product-qtd-input">
+                {product.quantity}
+              </h3>
+              <h3 data-testid="0-product-name">
+                {product.name}
+              </h3>
+              <h4 data-testid="0-product-total-value">
+                {`R$ ${product.totalPrice.replace('.', ',')}`}
+              </h4>
+              <h4 data-testid="0-product-unit-price">
+                {`(R$ ${product.price.replace('.', ',')} un)`}
+              </h4>
+              <CheckoutButtonRemove productId={ product.id } productIndex={ index } />
+            </div>)) : 'Não há produtos no carrinho'
+      }
       <h1>Endereco</h1>
       <label data-testid="checkout-street-input">
         Rua
@@ -83,9 +100,18 @@ function Checkout() {
           onChange={ (e) => setNumberHouse(e.target.value) }
         />
       </label>
-      <h1 data-testid="order-total-value">TOTAL R$ {totalSum.replace('.', ',')}</h1>
-      <button disabled={ disabled } data-testid="checkout-finish-btn" onClick={finishSale}>Finalizar Pedido</button>
-      <p hidden={hidden}>Compra realizada com sucesso!</p>
+      <h1 data-testid="order-total-value">
+        TOTAL R$
+        {totalSum.replace('.', ',')}
+      </h1>
+      <button
+        disabled={ disabled }
+        data-testid="checkout-finish-btn"
+        onClick={ finishSale }
+      >
+        Finalizar Pedido
+      </button>
+      <p hidden={ hidden }>Compra realizada com sucesso!</p>
     </div>
   );
 }
