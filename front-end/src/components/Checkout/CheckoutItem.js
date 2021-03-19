@@ -19,12 +19,12 @@ function CheckoutItem({ name, price, quantity, index }) {
         { name }
       </div>
       <div
-        data-testid={ `${index}-product-total-value` }  
+        data-testid={ `${index}-product-total-value` }
       >
          {`R$ ${totalPrice.toFixed(2).replace('.', ',')}`}
       </div>
       <div
-        data-testid={ `${index}-product-unit-price` } 
+        data-testid={ `${index}-product-unit-price` }
       >
         { `(R$ ${price.replace('.', ',')} un)` }
       </div>

@@ -3,3 +3,7 @@ export function removeCheckoutItem(name, cart, setCart) {
   setCart(newCart); // state global
   localStorage.setItem('cart', JSON.stringify(newCart));
 }
+
+export function sendToBackEnd() {
+  
+}

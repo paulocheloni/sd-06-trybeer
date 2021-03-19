@@ -4,12 +4,15 @@ import { localStorageCart } from '../services/ProductCardService';
 import CheckoutItem from '../components/Checkout/CheckoutItem';
 import Address from '../components/Checkout/Address';
 import TrybeerContext from '../context/TrybeerContext';
+import TopBar from '../components/TopBar';
 
 function Checkout() {
   const loggedUser = JSON.parse(localStorage.getItem('user'));
   const {
-    cart, setCart, totalCart, setTotalCart,
+    cart, setCart, totalCart, setTotalCart, address,
   } = useContext(TrybeerContext);
+
+  const enable = address.rua.length && address.numero.length && totalCart > 0 || false;
 
   useEffect(() => {
     if (localStorageCart) {
@@ -29,6 +32,7 @@ function Checkout() {
     loggedUser
       ? (
         <div>
+          <TopBar />
           <h1 data-testid="top-title">Finalizar Pedido</h1>
           { cart.map((cartItem, index) => (
             <CheckoutItem
@@ -43,6 +47,13 @@ function Checkout() {
             {`Total: R$ ${totalCart.toFixed(2).replace('.', ',')}`}
           </span>
           <Address />
+          <button
+            disabled={ !enable }
+            data-testid="checkout-finish-btn"
+            onClick={ () => console.log('bla') }
+          >
+            Finalizar Pedido
+          </button>
         </div>
       )
       : <Redirect to="/login" />

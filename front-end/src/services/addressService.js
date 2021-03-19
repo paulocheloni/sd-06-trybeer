@@ -1,7 +1,6 @@
-export function handleAddressInput(event, field, address, setAddress) {
-  const { value } = evente.target;
-  setAddress({
-    ...address,
-    [field]: value;
-  });
-}
+export function handleAddressInput(address, setAddress) {
+  const rua = document.getElementById('rua').value;
+  const numero = document.getElementById('numero').value;
+
+  setAddress({ ...address, rua, numero });
+};
