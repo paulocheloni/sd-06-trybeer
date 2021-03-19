@@ -20,7 +20,7 @@ function Products({ history }) {
   useEffect(() => {
     console.log(recoveredUser);
     fetchProducts();
-  }, []);
+  }, [fetchProducts, recoveredUser]);
 
   return (
     <div>

@@ -15,7 +15,7 @@ function index() {
       <Route path="/checkout" component={ Checkout } />
       <Route path="/orders" component={ Orders } />
       <Route path="/admin/orders" component={ AdminOrders } />
-      <Route path="/admin" component={ Admin } />
+      <Route path="/admin/profile" component={ Admin } />
       <Route path="/" component={ Login } />
     </Switch>
   );
