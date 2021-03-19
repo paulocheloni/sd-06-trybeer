@@ -12,6 +12,7 @@ const rescue = require('express-rescue');
 const UserService = require('./Services/userService');
 const ProductsService = require('./Services/productService');
 const Utils = require('./Utils');
+const SalesService = require('./Services/salesService');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -29,6 +30,16 @@ app.put('/profile/edit',
   rescue(UserService.updateUser));
 
 app.get('/products', ProductsService.findAllProducts);
+
+app.post('/orders', 
+  rescue(Utils.verifyToken), 
+  rescue(SalesService.registerNewOrder));
+
+app.get('/orders/:useremail',
+rescue(SalesService.getOrdersByUser));
+
+app.get('/orderdetails/:saleid',
+rescue(SalesService.getOrderDetails));
 
 app.use((err, _req, res, _next) => {
   const codeStatus = (err.codeStatus) ? err.codeStatus : 500;
