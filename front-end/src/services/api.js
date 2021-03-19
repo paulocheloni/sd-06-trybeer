@@ -25,8 +25,8 @@ export const getAllProducts = async () => {
     .then((response) => response.data)
     .catch((error) => error.response.data);
 
-  return requestResponse;  
-}
+  return requestResponse;
+};
 
 export const updateUser = async (newName, email) => {
   const requestResponse = await api.put('profile', { email, newName });

@@ -1,26 +1,24 @@
 import React, { useEffect, useContext } from 'react';
+import { Redirect } from 'react-router';
 import ProductCard from '../components/Products/ProductCard';
 import Cart from '../components/Products/Cart';
 import TopBar from '../components/TopBar';
 import { getAllProducts } from '../services/api';
+import { localStorageCart } from '../services/ProductCardService';
 import TrybeerContext from '../context/TrybeerContext';
-import { Redirect } from 'react-router';
 
 function Products() {
   const {
-    products, setProducts, setCart, setTotalCart,
+    products, setProducts, setCart,
   } = useContext(TrybeerContext);
   const loggedUser = JSON.parse(localStorage.getItem('user'));
-  const shoppingCart = localStorage.getItem('cart');
-  const totalPrice = localStorage.getItem('totalPrice');
 
   useEffect(() => {
     getAllProducts()
-      .then((products) => setProducts(products));
+      .then((product) => setProducts(product));
 
-    if (shoppingCart) {
-      setCart(shoppingCart);
-      setTotalCart(totalPrice);
+    if (localStorageCart) {
+      setCart(localStorageCart);
     }
   }, []);
 
@@ -31,16 +29,16 @@ function Products() {
           <TopBar title="Trybeer" />
           <h1>Products</h1>
           { products.map((product, index) => {
-            const { id, name, price, url_image } = product;
+            const { id, name, price, url_image: urlImage } = product;
             return (
               <ProductCard
                 key={ id }
                 name={ name }
                 price={ price }
-                url_image={ url_image }
+                urlImage={ urlImage }
                 index={ index }
               />
-            )
+            );
           }) }
           <Cart />
         </div>
@@ -48,7 +46,7 @@ function Products() {
       : (
         <Redirect to="/login" />
       )
-    );
+  );
 }
 
 export default Products;

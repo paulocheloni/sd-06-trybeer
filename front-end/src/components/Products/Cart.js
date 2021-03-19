@@ -5,21 +5,22 @@ import TrybeerContext from '../../context/TrybeerContext';
 function Cart() {
   const { cart, totalCart, setTotalCart } = useContext(TrybeerContext);
   const history = useHistory();
+  const disableButton = cart.length ? false : true
 
   useEffect(() => {
     let totalValue = 0;
     cart.forEach((cartItem) => {
-      totalValue += parseFloat(cartItem.price) * parseInt(cartItem.quantity);
+      totalValue += parseFloat(cartItem.price) * Number(cartItem.quantity);
     });
     setTotalCart(totalValue);
   }, [cart]);
 
   return (
     <button
-      disabled={ cart.length ? false : true }
+      disabled={ disableButton }
       type="button"
       data-testid="checkout-bottom-btn"
-      onClick={ () => history.push('/checkout')}
+      onClick={ () => history.push('/checkout') }
     >
       Ver Carrinho
       <span data-testid="checkout-bottom-btn-value">
@@ -27,7 +28,6 @@ function Cart() {
       </span>
     </button>
   );
-
 }
 
 export default Cart;

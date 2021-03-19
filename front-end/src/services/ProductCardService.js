@@ -1,24 +1,35 @@
-export function saveCart({ name, price, newQuantity, cart, setCart }) {
+export const localStorageCart = JSON.parse(localStorage.getItem('cart'));
+
+function saveCart({ name, price, newQuantity, cart, setCart }) {
   const quantity = newQuantity;
   const cartProduct = cart.filter((element) => element.name !== name);
-  setCart([...cartProduct, {name, price, quantity}]);
+
+  setCart([...cartProduct, { name, price, quantity }]);
+
+  const newCart = [...cartProduct, { name, price, quantity }];
+
+  localStorage.setItem('cart', JSON.stringify(newCart));
 }
 
 function removeFromCart(cart, setCart, name) {
   const newCart = cart.filter((element) => element.name !== name);
+
   setCart(newCart);
+
+  localStorage.setItem('cart', JSON.stringify(newCart));
 }
 
-export function handleQuantity(event, { quantity, setQuantity, name, price, cart, setCart }) {
+export function handleQuantity(event, productInfo) {
+  const { quantity, setQuantity, name, price, cart, setCart } = productInfo;
   const { innerHTML } = event.target;
   let newQuantity = quantity;
 
-  if (innerHTML ==='+') {
+  if (innerHTML === '+') {
     setQuantity(quantity + 1);
     newQuantity += 1;
   }
 
-  if (innerHTML ==='-') {
+  if (innerHTML === '-') {
     if (quantity === 1) {
       removeFromCart(cart, setCart, name);
       setQuantity(quantity - 1);
@@ -32,5 +43,3 @@ export function handleQuantity(event, { quantity, setQuantity, name, price, cart
 
   saveCart({ name, price, newQuantity, cart, setCart });
 }
-
-export default handleQuantity;

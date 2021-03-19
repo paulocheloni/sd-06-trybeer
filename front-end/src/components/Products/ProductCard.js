@@ -1,10 +1,20 @@
-import React, { useState, useContext } from 'react';
-import { handleQuantity } from '../../services/ProductCardService';
+import React, { useState, useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { handleQuantity, localStorageCart } from '../../services/ProductCardService';
 import TrybeerContext from '../../context/TrybeerContext';
-function ProductCard({ name, price, url_image, index}) {
+
+function ProductCard({ name, price, urlImage, index }) {
   const { cart, setCart } = useContext(TrybeerContext);
   const [quantity, setQuantity] = useState(0);
   const productInfo = { quantity, setQuantity, name, price, cart, setCart };
+
+  useEffect(() => {
+    if (localStorageCart) {
+      localStorageCart.forEach((element) => {
+        if (element.name === name) setQuantity(element.quantity);
+      });
+    }
+  }, []);
 
   return (
     <div>
@@ -22,10 +32,11 @@ function ProductCard({ name, price, url_image, index}) {
       </p>
       <img
         data-testid={ `${index}-product-img` }
-        src={ url_image }
+        src={ urlImage }
         alt="product"
       />
       <button
+        type="button"
         id={ `${index}-product-minus` }
         data-testid={ `${index}-product-minus` }
         onClick={ (event) => handleQuantity(event, productInfo) }
@@ -34,6 +45,7 @@ function ProductCard({ name, price, url_image, index}) {
       </button>
       <span data-testid={ `${index}-product-qtd` }>{quantity}</span>
       <button
+        type="button"
         id={ `${index}-product-plus` }
         data-testid={ `${index}-product-plus` }
         onClick={ (event) => handleQuantity(event, productInfo) }
@@ -43,5 +55,12 @@ function ProductCard({ name, price, url_image, index}) {
     </div>
   );
 }
+
+ProductCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  urlImage: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+};
 
 export default ProductCard;
