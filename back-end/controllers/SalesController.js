@@ -1,5 +1,6 @@
 const { Router } = require('express');
 
+const routerSalesDetails = require('./SalesDetailsController');
 const validateToken = require('../middlewares/validateToken');
 const { createOne, getAllByUserId } = require('../models/SalesService');
 
@@ -22,6 +23,8 @@ routerSales.get('/', validateToken, async (req, res) => {
   console.log(orders, 'orders');
   res.status(200).json({ orders });
 });
+
+routerSales.use('/:id', routerSalesDetails);
 
 module.exports = routerSales;
 

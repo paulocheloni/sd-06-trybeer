@@ -1,21 +1,25 @@
-import React from 'react';
-// import PropTypes from 'prop-types';
-// import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import MenuTop from '../components/MenuTop';
+import OrderDetailsCard from '../components/OrderDetailsCard';
 
-function OrderDetails(props) {
-//   const {} = props;
-//   const { id } = useParams();
+function OrderDetails() {
+  const [data, setData] = useState('');
+  const { id } = useParams();
+  useEffect(() => {
+    fetchData = async () => {
+      const orderDetails = await fetchOrderDetails(id);
+      setData(orderDetails);
+    };
+  }, [id]);
 
   return (
     <>
-      {props}
-      {' '}
+      <MenuTop title="TryBeer" />
+      <h1>detalhe do pedido</h1>
+      <OrderDetailsCard order={ data } />
     </>
   );
 }
-
-// OrderDetails.propTypes = {
-
-// };
 
 export default OrderDetails;
