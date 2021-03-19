@@ -14,14 +14,16 @@ function App() {
     <Provider>
       <GlobalStyle />
       <Switch>
-        <Route exact path="/">
-          <Redirect to="/login" />
-        </Route>
-        <Route exact path="/login" component={ Login } />
-        <Route exact path="/register" component={ Register } />
-        <Route exact path="/profile" component={ Profile } />
-        <Route exact path="/products" component={ Products } />
-        <Route exact path="/checkout" component={ Cart } />
+        <BrowserRouter>
+          <Route exact path="/">
+            <Redirect to="/login" />
+          </Route>
+          <Route exact path="/login" component={ Login } />
+          <Route exact path="/register" component={ Register } />
+          <Route exact path="/profile" component={ Profile } />
+          <Route exact path="/products" component={ Products } />
+          <Route exact path="/checkout" component={ Cart } />
+        </BrowserRouter>
       </Switch>
     </Provider>
   );
