@@ -21,7 +21,9 @@ function Provider({ children }) {
 
   const totalSum = () => {
     const allPrices = cart.map((element) => element.totalPrice);
-    return sumTotal(allPrices);
+    const total = sumTotal(allPrices);
+    setTotalValue(total);
+    return total;
   };
 
   async function getAllProducts() {
