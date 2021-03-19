@@ -19,6 +19,11 @@ function Provider({ children }) {
   const [totalValue, setTotalValue] = useState(0);
   const [sucessmsg, setSucessmsg] = useState(false);
 
+  const totalSum = () => {
+    const allPrices = cart.map((element) => element.totalPrice);
+    return sumTotal(allPrices);
+  };
+
   async function getAllProducts() {
     const products = await productsFetch();
     if (products.message) {
@@ -52,9 +57,13 @@ function Provider({ children }) {
   }
 
   useEffect(() => {
+    const cartTotal = localStorage.getItem('CartTotal');
     const localStgCart = JSON.parse(localStorage.getItem('Cart'));
     if (localStgCart) {
       setCart(localStgCart);
+    }
+    if (cartTotal) {
+      setTotalValue(cartTotal);
     }
   }, []);
 
@@ -88,6 +97,7 @@ function Provider({ children }) {
     handleDeleteClick,
     sucessmsg,
     setSucessmsg,
+    totalSum,
   };
 
   return (

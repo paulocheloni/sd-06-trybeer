@@ -46,13 +46,6 @@ function Checkout({ history }) {
   },[]);
 
   useEffect(() => {
-    const cartTotal = localStorage.getItem('CartTotal');
-    console.log('Cart Total', cartTotal);
-    setTotalValue(cartTotal);
-    // eslint-disable-next-line
-  },[totalValue]);
-
-  useEffect(() => {
     if (cart.length > 0) {
       setIsFetching(false);
     } else {

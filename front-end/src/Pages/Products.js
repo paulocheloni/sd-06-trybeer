@@ -6,12 +6,9 @@ import ProductCard from '../components/ProductCard';
 import sumTotal from '../services/TotalPrice';
 
 export default function Products({ history }) {
-  const { cart, isFetching, allProducts,
-    getAllProducts, tokenInvalid, setTotalValue } = useContext(Context);
+  const { totalValue, isFetching, allProducts,
+    getAllProducts, tokenInvalid, setTotalValue, totalSum } = useContext(Context);
   const [disable, setDisable] = useState(true);
-
-  const allPrices = cart.map((element) => element.totalPrice);
-  const totalSum = sumTotal(allPrices);
 
   useEffect(() => {
     getAllProducts();
@@ -22,12 +19,11 @@ export default function Products({ history }) {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('CartTotal', totalSum);
-    setTotalValue(totalSum);
-    if (totalSum > 0) return setDisable(false);
-    if (totalSum === 0) return setDisable(true);
+    setTotalValue(totalSum());
+    if (totalValue > 0) return setDisable(false);
+    if (totalValue === 0) return setDisable(true);
     // eslint-disable-next-line
-  }, [totalSum]);
+  }, [totalValue]);
 
   return (
     <div>
