@@ -70,8 +70,8 @@ export default function Checkout() {
               .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
           </span>
           <span data-testid={ `${index}-product-unit-price` }>
-            (
-            { Number(item.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) } un)
+            { `(${Number(item.price)
+              .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} un)` }
           </span>
           <span data-testid={ `${index}-removal-button` }>
             <button type="button" onClick={ () => removeProduct(item) }>X</button>
