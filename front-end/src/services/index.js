@@ -58,11 +58,11 @@ const redirectMenuBar = (history, payloadUrl) => {
 };
 
 const handleUpdate = (name, setShowMessage) => {
-  const userFromStorage = JSON.parse(localStorage.getItem('user')) 
+  const userFromStorage = JSON.parse(localStorage.getItem('user'));
   const { id } = userFromStorage;
 
   updateName(name, id, setShowMessage)
-    .then(setShowMessage(true))
+    .then(setShowMessage(true));
 };
 
 export {

@@ -43,7 +43,7 @@ function updateName(name, id) {
 
   return axios.put(`/user/${id}`,
     { name },
-    { headers: { Authorization: localStorage.token } })
+    { headers: { Authorization: localStorage.token } });
 }
 
 export {

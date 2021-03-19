@@ -10,20 +10,23 @@ function ProfileClient() {
   const [showMessage, setShowMessage] = useState(false);
 
   const handleChange = ({ value }) => {
-    const userFromStorage = JSON.parse(localStorage.getItem('user'))
+    const userFromStorage = JSON.parse(localStorage.getItem('user'));
 
-    if(userFromStorage.name !== value) {
-      setActiveBtn(true)
-    } else setActiveBtn(false)
-    
-    setUser({ ...user, name: value })
-  }
+    if (userFromStorage.name !== value) {
+      setActiveBtn(true);
+    } else setActiveBtn(false);
+
+    setUser({ ...user, name: value });
+  };
 
   useEffect(() => {
     async function fetchData() {
       const token = localStorage.getItem('token');
       const response = await profile(token);
-      localStorage.setItem('user', JSON.stringify({ name: response.name, email: response.email, id: response.id }))
+      localStorage.setItem(
+        'user',
+        JSON.stringify({ name: response.name, email: response.email, id: response.id }),
+      );
       setUser({ name: response.name, email: response.email });
     }
 
@@ -32,9 +35,11 @@ function ProfileClient() {
   }, []);
 
   useEffect(() => {
+    const EXPIRE_MESSAGE = 4000;
+
     setTimeout(() => {
       setShowMessage(false);
-    }, 4000)
+    }, EXPIRE_MESSAGE);
   }, [showMessage]);
 
   return (
@@ -66,7 +71,11 @@ function ProfileClient() {
       >
         Salvar
       </button>
-      <span className={showMessage ? 'show' : 'no-show'}>Atualização concluída com sucesso</span>
+      <span
+        className={ showMessage ? 'show' : 'no-show' }
+      >
+        Atualização concluída com sucesso
+      </span>
     </div>
   );
 }
