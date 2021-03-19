@@ -40,24 +40,24 @@ const products = [
 //         quantity,
 //       });
 //     }
-    // if (!state.cartItems.find((item) => item.id === action.product.id)) {
-    //   const quantity = 1;
-    //   state.cartItems.push({
-    //     ...action.product,
-    //     quantity,
-    //   });
-    //   localStorage.cart = JSON.stringify(state.cartItems);
-    //   break;
-    // } else {
-    //   state.cartItems[state.cartItems
-    //     .findIndex((item) => item.id === action.product.id)].quantity += 1;
-    //   localStorage.cart = JSON.stringify(state.cartItems);
-    // }
+// if (!state.cartItems.find((item) => item.id === action.product.id)) {
+//   const quantity = 1;
+//   state.cartItems.push({
+//     ...action.product,
+//     quantity,
+//   });
+//   localStorage.cart = JSON.stringify(state.cartItems);
+//   break;
+// } else {
+//   state.cartItems[state.cartItems
+//     .findIndex((item) => item.id === action.product.id)].quantity += 1;
+//   localStorage.cart = JSON.stringify(state.cartItems);
+// }
 
-    // return {
-    //   ...state,
-    //   cartItems: [...state.cartItems],
-    // };
+// return {
+//   ...state,
+//   cartItems: [...state.cartItems],
+// };
 //   case 'decrease':
 //     return { quantity: state.quantity - 1 };
 //   default:
@@ -81,14 +81,19 @@ const ProductsList = () => {
       quantity: 0,
     };
 
-    currentProduct.quantity = currentProduct.quantity + 1;
+    currentProduct.quantity += 1;
     console.log('currentProduct:', currentProduct);
-    const cartMap = cart.map((item) => item.id === product.id ? currentProduct : item);
+    const cartMap = cart.map((item) => {
+      if (item.id === product.id) {
+        return currentProduct;
+      }
+      return item;
+    });
     console.log('cartMap:', cartMap);
     const newCart = cart.length > 1 ? cartMap : [currentProduct];
     console.log('newCart', newCart);
     setCart(newCart);
-    localStorage.cart = JSON.stringify(newCart); 
+    localStorage.cart = JSON.stringify(newCart);
     // if (!currentProduct) {
     //   const handleQuantityOfCart = {
     //     ...product,
@@ -110,15 +115,15 @@ const ProductsList = () => {
 
   const minusItemCart = (product) => {
     cart[cart.findIndex((item) => item.id === product.id)].quantity -= 1;
-    setCart([...cart])
+    setCart([...cart]);
     localStorage.cart = JSON.stringify(cart);
   };
 
   const handleItem = (product) => {
     const itemsCart = JSON.parse(localStorage.cart);
     console.log('itemsCart', itemsCart);
-    if (itemsCart.length !== 0){
-      const handleQuantity = itemsCart.map(item => {
+    if (itemsCart.length !== 0) {
+      const handleQuantity = itemsCart.map((item) => {
         if (item.id === product.id) {
           return item.quantity;
         }
@@ -128,7 +133,7 @@ const ProductsList = () => {
     }
 
     return 0;
-  }
+  };
 
   return products.map((product, index) => (
     <ProductCard

@@ -1,9 +1,10 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { FiPlus, FiMinus } from 'react-icons/fi';
 
-const ProductCard = ({ product, index, plusItemCart, quantity, minusItemCart, handleItem }) => {
+const ProductCard = ({ product, index, plusItemCart, minusItemCart, handleItem }) => {
+  console.log('');
   return (
     <div>
       <img
@@ -45,6 +46,14 @@ const ProductCard = ({ product, index, plusItemCart, quantity, minusItemCart, ha
       </button>
     </div>
   );
+};
+
+ProductCard.propTypes = {
+  index: PropTypes.number.isRequired,
+  product: PropTypes.objectOf(Object).isRequired,
+  plusItemCart: PropTypes.func(Function).isRequired,
+  minusItemCart: PropTypes.func(Function).isRequired,
+  handleItem: PropTypes.func(Function).isRequired,
 };
 
 export default ProductCard;
