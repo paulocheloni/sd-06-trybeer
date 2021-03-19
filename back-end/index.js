@@ -35,11 +35,15 @@ app.post('/orders',
   rescue(Utils.verifyToken), 
   rescue(SalesService.registerNewOrder));
 
-app.get('/orders/:useremail',
-rescue(SalesService.getOrdersByUser));
+app.get('/orders/:useremail', rescue(SalesService.getOrdersByUser));
 
-app.get('/orderdetails/:saleid',
-rescue(SalesService.getOrderDetails));
+app.get('/orderdetails/:saleid', rescue(SalesService.getOrderDetails));
+
+app.get('/admin/orders', rescue(SalesService.getAdminOrders));
+
+app.get('/admin/orders/:id', rescue(SalesService.getAdminOrderDetails));
+
+app.put('/admin/orders/:id', rescue(SalesService.editOrderStatus));
 
 app.use((err, _req, res, _next) => {
   const codeStatus = (err.codeStatus) ? err.codeStatus : 500;
