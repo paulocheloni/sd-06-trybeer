@@ -5,6 +5,7 @@ const jwtConfig = {
   expiresIn: '7d',
   algorithm: 'HS256',
 };
+const SECRET = 'http://senhasupersecreta.com/';
 
 const userService = require('../service/UserService');
 const { OK, UNAUTHORIZED } = require('../schema/statusSchema');
@@ -21,7 +22,7 @@ LoginController.post('/', async (req, res) => {
     const { email, password } = req.body;
     const user = await userService.verifyUser(email, password);
     const { role } = user[0];
-    const token = jwt.sign({ data: user }, process.env.SECRET, jwtConfig);
+    const token = jwt.sign({ data: user }, SECRET, jwtConfig);
 
     res.status(OK).json({ token, role });
   } catch (e) {
