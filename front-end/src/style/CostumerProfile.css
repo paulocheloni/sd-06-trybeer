@@ -11,14 +11,14 @@ body {
   flex-flow: column wrap;
   justify-content: center;
   margin: auto;
-  margin-top: 30px;
-  width: 100%;
+  width: 305px;
 }
 
 .costumer_profile p {
   font-family: 'Poppins', sans-serif;
   font-size: 14pt;
   font-weight: 900;
+  margin-bottom: -1px;
   text-align: center;
 }
 

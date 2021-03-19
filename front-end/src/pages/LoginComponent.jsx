@@ -12,6 +12,7 @@ const logo = require('../images/logo_provisorio.png');
 function Login() {
   const {
     setUser,
+    setProductQuantity,
   } = useContext(BeersAppContext);
 
   const [valid, setValid] = useState(true);
@@ -46,11 +47,10 @@ function Login() {
       return;
     }
     setUser(ola);
+    setProductQuantity([]);
     if (ola.role === 'administrator') {
-      console.log('entrou no admin');
       history.push('/admin/orders');
     } else if (ola.role === 'client') {
-      console.log('entrou no client');
       history.push('products');
     }
   };

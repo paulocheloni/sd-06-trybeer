@@ -1,8 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
+import BeersAppContext from '../context/BeersAppContext';
 // import dataFalse from '../dataFalse';
 
-function CheckoutCards({ index }) {
-  const [products, setProducts] = useState([]);
+function CheckoutCards({ element, index }) {
+  const {
+    user: { token },
+    productQuantity,
+    setProductQuantity,
+    setAmount,
+    amount,
+  } = useContext(BeersAppContext);
+
+  const { id, qnt } = element;
+
+  const [products, setProducts] = useState({});
   // const [totalPrice, setTotalPrice] = useState(0.00);
 
   // const sumPrices = (qnt, productPrice) => {
@@ -10,7 +22,7 @@ function CheckoutCards({ index }) {
   // };
 
   useEffect(() => {
-    const url = '/products';
+    const url = `/products/${id}`;
     fetch(
       `http://localhost:3001${url}`, {
         headers: {
@@ -20,22 +32,54 @@ function CheckoutCards({ index }) {
       },
     ).then((response) => response.json())
       .then((data) => setProducts(data));
-  });
+  }, []);
+
+  const totalProductPrice = (parseFloat(qnt) * parseFloat(products.price))
+    .toFixed(2);
+
+  const deleteItem = () => {
+    const productQuantityObjectRemoved = productQuantity
+      .filter((objQuantity) => {
+        if (objQuantity.id === id) {
+          const priceTotal = parseFloat(amount) - parseFloat(totalProductPrice);
+          setAmount(Number(priceTotal.toFixed(2)));
+          return false;
+        }
+        return true;
+      });
+    setProductQuantity(productQuantityObjectRemoved);
+  };
+
+  const comma = (priceParemeter) => `${parseFloat(priceParemeter).toFixed(2)}`
+    .replace('.', ',');
 
   return (
-    <>
-      <p>Produtos</p>
-      <p data-testid={ `${index}-product-qtd-input` }>{products.qnt}</p>
-      <p data-testid={ `${index}-product-total-value` }>{products.name}</p>
-      <p data-testid={ `${index}-product-unit-price` }>{`R$: ${products.price}`}</p>
-      <button type="button" data-testid={ `${index}-removal-button` }>Remover</button>
-      <p data-testid="order-total-value">{`Total: R$ ${productPrice}`}</p>
-    </>
+    <div>
+      <p data-testid={ `${index}-product-qtd-input` }>{qnt}</p>
+      <p data-testid={ `${index}-product-name` }>{products.name}</p>
+      <p data-testid={ `${index}-product-total-value` }>
+        {`R$ ${comma(totalProductPrice)}`}
+      </p>
+      <p data-testid={ `${index}-product-unit-price` }>
+        {`(R$ ${comma(products.price)} un)`}
+      </p>
+      <button
+        type="button"
+        data-testid={ `${index}-removal-button` }
+        onClick={ deleteItem }
+      >
+        Remover
+      </button>
+    </div>
   );
 }
 
 CheckoutCards.propTypes = {
   index: PropTypes.number.isRequired,
+  element: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    qnt: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default CheckoutCards;

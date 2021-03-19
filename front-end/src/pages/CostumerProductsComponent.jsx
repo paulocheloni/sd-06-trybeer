@@ -13,21 +13,20 @@ function CostumerProducts() {
   const history = useHistory();
   const {
     user: { token },
-    productQuantity,
+    amount,
   } = useContext(BeersAppContext);
 
   if (!token) history.push('/login');
 
-  const [amount, setAmount] = useState(0.00);
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    const totalPrice = productQuantity.reduce((total, element) => {
-      const unityPrice = element.qnt * element.price;
-      return total + unityPrice;
-    }, 0);
-    setAmount(totalPrice.toFixed(2));
-  }, [productQuantity]);
+  // useEffect(() => {
+  //   const totalPrice = productQuantity.reduce((total, element) => {
+  //     const unityPrice = element.qnt * element.price;
+  //     return total + unityPrice;
+  //   }, 0);
+  //   setAmount(totalPrice.toFixed(2));
+  // }, [productQuantity]);
 
   useEffect(() => {
     const url = '/products';
@@ -50,7 +49,7 @@ function CostumerProducts() {
 
   const clickRedirect = () => history.push('/checkout');
 
-  const commaAmount = amount.toString().replace('.', ',');
+  const commaAmount = `${amount.toFixed(2)}`.replace('.', ',');
 
   // const buttonValid = () => {
   //   if (amount === 0.00) return true;
@@ -78,7 +77,7 @@ function CostumerProducts() {
           onClick={ clickRedirect }
           data-testid="checkout-bottom-btn"
           className="bttn-product"
-          disabled={ Math.trunc(amount) === 0 }
+          disabled={ Math.trunc(amount * 100) === 0 }
         >
           Ver Carrinho
           {' '}

@@ -10,9 +10,15 @@ function Provider({ children }) {
     setProductQuantity,
   ] = useState(loadStorage('productQuantity', []));
 
+  const [amount, setAmount] = useState(loadStorage('amount', 0.00));
+
   useEffect(() => {
     saveStorage('productQuantity', productQuantity);
   }, [productQuantity]);
+
+  useEffect(() => {
+    saveStorage('amount', amount);
+  }, [amount]);
 
   useEffect(() => {
     saveStorage('user', user);
@@ -23,6 +29,8 @@ function Provider({ children }) {
     setUser,
     productQuantity,
     setProductQuantity,
+    amount,
+    setAmount,
   };
 
   return (

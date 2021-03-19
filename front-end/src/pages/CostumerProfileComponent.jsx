@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Header from '../components/HeaderComponent';
 import fetchApiJsonBody from '../service/fetchApi';
 import BeersAppContext from '../context/BeersAppContext';
+import funcValidations from '../service/funcValidations';
 import '../style/CostumerProfile.css';
 
 function CostumerProfile() {
@@ -29,6 +30,13 @@ function CostumerProfile() {
 
   const onClickSave = async () => {
     const url = '/profile/update';
+    const nameWithValidation = funcValidations.validateName(inputName);
+    if (!nameWithValidation) {
+      return setShowSuccess(
+        'Nome não pode ter mais que 12 caracteres ou'
+        + ' conter numeros/caracteres especiais.',
+      );
+    }
     const response = await fetchApiJsonBody(url,
       { name: inputName }, 'PUT', token);
     if (response.err) return setShowSuccess(response.err);
@@ -62,7 +70,7 @@ function CostumerProfile() {
       <button
         type="button"
         data-testid="profile-save-btn"
-        // className="bttn_costumer_profile"
+        className="bttn_costumer_profile"
         disabled={ valid }
         onClick={ onClickSave }
       >

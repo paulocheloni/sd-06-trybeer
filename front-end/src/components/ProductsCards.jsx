@@ -1,15 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+// import { Antartica } from '../images';
 import BeersAppContext from '../context/BeersAppContext';
-import '../style/ProductCard.css';
+// import '../style/ProductCard.css';
 
 function ProductsCard({ element, index }) {
   const {
     productQuantity,
     setProductQuantity,
+    amount,
+    setAmount,
   } = useContext(BeersAppContext);
 
   const { name, price, id } = element;
+  // console.log(element);
 
   const storageInitialState = () => {
     const objQuantity = productQuantity
@@ -23,7 +27,7 @@ function ProductsCard({ element, index }) {
   useEffect(() => {
     const ola = productQuantity
       .filter((objStoraged) => objStoraged.id !== id);
-    if (qnt !== 0) setProductQuantity([...ola, { id, price, qnt }]);
+    if (qnt !== 0) setProductQuantity([...ola, { id, qnt }]);
     else setProductQuantity(ola);
   }, [qnt]);
 
@@ -31,11 +35,15 @@ function ProductsCard({ element, index }) {
 
   const clickPlus = () => {
     setQnt(qnt + 1);
+    const priceTotal = parseFloat(amount) + parseFloat(price);
+    setAmount(Number(priceTotal.toFixed(2)));
   };
 
   const clickMinus = () => {
     if (qnt > 0) {
       setQnt(qnt - 1);
+      const priceTotal = parseFloat(amount) - parseFloat(price);
+      setAmount(Number(priceTotal.toFixed(2)));
     }
   };
 
@@ -44,6 +52,7 @@ function ProductsCard({ element, index }) {
   return (
     <div className="productCards">
       <img
+        // src={ Antartica }
         alt="fotoProduto"
         data-testid={ `${index}-product-img` }
       />
@@ -78,7 +87,12 @@ function ProductsCard({ element, index }) {
 }
 
 ProductsCard.propTypes = {
-  element: PropTypes.arrayOf(PropTypes.object).isRequired,
+  element: PropTypes.shape({
+    name: PropTypes.string,
+    price: PropTypes.string,
+    id: PropTypes.number,
+    url_image: PropTypes.string,
+  }).isRequired,
   index: PropTypes.number.isRequired,
 };
 
