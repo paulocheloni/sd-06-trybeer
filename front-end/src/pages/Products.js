@@ -26,8 +26,7 @@ function Products() {
     loggedUser
       ? (
         <div>
-          <TopBar title="Trybeer" />
-          <h1>Products</h1>
+          <TopBar title="TryBeer" />
           { products.map((product, index) => {
             const { id, name, price, url_image: urlImage } = product;
             return (

@@ -16,7 +16,7 @@ function Cart() {
 
   return (
     <button
-      disabled={ cart.length > 0 }
+      disabled={ cart.length === 0 }
       type="button"
       data-testid="checkout-bottom-btn"
       onClick={ () => history.push('/checkout') }

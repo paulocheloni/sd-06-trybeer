@@ -28,7 +28,7 @@ function ProductCard({ name, price, urlImage, index }) {
         id={ `${index}-product-price` }
         data-testid={ `${index}-product-price` }
       >
-        { price }
+        { price.replace('.', ',') }
       </p>
       <img
         data-testid={ `${index}-product-img` }
