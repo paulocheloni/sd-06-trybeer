@@ -3,13 +3,13 @@ import SideBarAdmin from '../components/SideBarAdmin';
 
 import './Admin.css';
 
-function AdminOrders() {
+function AdminProfile() {
   return (
     <div className="div-main">
       <SideBarAdmin />
-      <h1 className="title">Admin Orders</h1>
+      <h1 className="title">Admin Profile</h1>
     </div>
   );
 }
 
-export default AdminOrders;
+export default AdminProfile;

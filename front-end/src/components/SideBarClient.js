@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import './SideBar.css';
+import './SideBarClient.css';
 
-function SideBar() {
+function SideBarClient() {
+  function clearLocalStorage() {
+    localStorage.clear();
+  }
+
   return (
     <div className="side-menu-container">
       <Link to="/products">
@@ -25,7 +29,12 @@ function SideBar() {
       </Link>
 
       <Link to="/">
-        <button className="botao" data-testid="side-menu-item-logout" type="button">
+        <button
+          className="botao"
+          data-testid="side-menu-item-logout"
+          type="button"
+          onClick={ clearLocalStorage }
+        >
           Sair
         </button>
       </Link>
@@ -33,4 +42,4 @@ function SideBar() {
   );
 }
 
-export default SideBar;
+export default SideBarClient;

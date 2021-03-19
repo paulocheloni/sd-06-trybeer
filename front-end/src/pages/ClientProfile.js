@@ -4,7 +4,7 @@ import TopBar from '../components/TopBar';
 import { getLocal, sendNewName } from '../services/profileService';
 import InputProfile from '../services/InputProfile';
 
-function Profile() {
+function ClientProfile() {
   const history = useHistory();
   const [disableButton, setDisableButton] = useState(true);
   const [editedName, setEditedName] = useState('');
@@ -55,4 +55,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default ClientProfile;
