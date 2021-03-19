@@ -11,7 +11,7 @@ const orderController = require('./controller/ordersController');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/login', userController);
+app.use('/', userController);
 app.use('/register', registerController);
 app.use('/products', productsController);
 app.use('/checkout', checkoutController);
