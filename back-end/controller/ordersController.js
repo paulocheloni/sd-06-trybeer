@@ -10,14 +10,13 @@ router.post('/orders', validateToken, rescue(async (req, res) => {
     const { totalPrice, address, number, date, orderStatus } = req.body.objOrder;
     const userId = req.user.id;
     const orderData = {
-      totalPrice: Number(totalPrice),
+      totalPrice,
       address,
       number,
       date,
       orderStatus,
     };
-    console.log('data order controller', orderData, userId);
-
+    console.log(userId, orderData);
     await ordersService.createOrders(userId, orderData);
 
     res.status(CREATED).json({ message: 'Compra realizada com sucesso!' });

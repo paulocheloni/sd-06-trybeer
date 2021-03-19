@@ -61,11 +61,13 @@ export default function Products() {
   };
 
   const sendOrder = () => {
+    const limitIndex = 19;
+    const date = new Date();
     const objOrder = {
-      totalPrice: handleTotalPrice(),
+      totalPrice: Number(handleTotalPrice().replace(',', '.')),
       address: street,
       number: houseNumber,
-      date: new Date(),
+      date: date.toISOString().slice(0, limitIndex).replace('T', ' '),
       orderStatus: 'pendente',
     };
     fetches.createOrder(tokenFromLocalStorage, objOrder);
