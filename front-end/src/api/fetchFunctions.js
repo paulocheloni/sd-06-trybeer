@@ -14,14 +14,14 @@ const get = (endpoint, authorization) => fetch(`${urlBase}/${endpoint}`,
   .then((e) => e.json())
   .catch((e) => e.message);
 
-const post = async (endpoint, user) => fetch(`${urlBase}/${endpoint}`,
+const post = async (endpoint, body) => fetch(`${urlBase}/${endpoint}`,
   {
     method: 'POST',
     headers: {
       Accept,
       'Content-Type': Accept,
     },
-    body: user ? JSON.stringify(user) : undefined,
+    body: body ? JSON.stringify(body) : undefined,
   })
   .then((e) => e.json())
   .catch((e) => e.message);

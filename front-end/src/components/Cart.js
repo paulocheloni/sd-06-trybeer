@@ -3,28 +3,19 @@ import { useHistory } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
 
 const Cart = () => {
-  const { cart } = useContext(TrybeerContext);
+  const { cart, getTotalPriceCart } = useContext(TrybeerContext);
   const history = useHistory();
 
-  const totalCart = useCallback(() => {
-    if (cart.length > 0) {
-      const total = cart
-        .reduce((result, product) => result + (product.quantity * product.price), 0);
-      return total;
-    }
-    return 0;
-  });
-
-  const disabledButton = totalCart() === null || totalCart() === 0;
+  const disabledButton = getTotalPriceCart() === null || getTotalPriceCart() === 0;
 
   useEffect(() => {
-    totalCart();
-  }, [cart, totalCart]);
+    getTotalPriceCart();
+  }, [cart, getTotalPriceCart]);
 
   return (
     <div className="cart-container">
       <p data-testid="checkout-bottom-btn-value">
-        { `R$ ${totalCart().toFixed(2).replace('.', ',')}` }
+        { `R$ ${getTotalPriceCart().toString().replace('.', ',')}` }
       </p>
       <button
         data-testid="checkout-bottom-btn"

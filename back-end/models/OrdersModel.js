@@ -7,6 +7,13 @@ const connection = require('./connection');
 //   return user;
 // };
 
+const getByDateAndId = async (date, id) => {
+  const [order_id] = await connection.execute(
+    'SELECT id FROM sales WHERE sale_date=? AND user_id=?', [date, id]
+  );
+  return order_id;
+};
+
 const createOrder = async ({
   userId,
   totalPrice,
@@ -19,7 +26,9 @@ const createOrder = async ({
     'INSERT INTO sales (user_id, total_price, delivery_address, delivery_number, sale_date, status) VALUES (?, ?, ?, ?, ?, ?)',
     [userId, totalPrice, deliveryAddress, deliveryNumber, saleDate, status],
   );
+  const [{ id }] = await getByDateAndId(saleDate, userId);
   return ({
+    id,
     totalPrice,
     deliveryAddress,
     deliveryNumber,

@@ -2,21 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TrybeerContext from '../context/TrybeerContext';
 
-<<<<<<< HEAD
-function TrybeerProvider({ children }) {
-  const [cart, setCart] = useState([]);
-  const [user, setUser] = useState({});
-  const [isVisible, setIsVisible] = useState(false);
-
-  const setVisibility = () => setIsVisible(!isVisible);
-=======
 const getFromLocalStorage = (key) => {
   const keyFromLocalStorage = JSON.parse(localStorage.getItem(key));
   return keyFromLocalStorage;
 };
->>>>>>> 32245a2c12bbc12137d6cd4b50c2ca9cc7002be4
 
 function TrybeerProvider({ children }) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const setVisibility = () => setIsVisible(!isVisible);
   const [cart, setCart] = useState(() => {
     const cartFromLocalStorage = getFromLocalStorage('cart');
     if (cartFromLocalStorage) return cartFromLocalStorage;
@@ -62,6 +56,7 @@ function TrybeerProvider({ children }) {
     localStorage.removeItem('user');
     localStorage.removeItem('cart');
   };
+
 
   const contextValue = {
     cart,

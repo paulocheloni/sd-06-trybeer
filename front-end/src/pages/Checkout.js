@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import fetchFunctions from '../api/fetchFunctions';
 import ProductListItem from '../components/ProductListItem';
 import TopMenu from '../components/TopMenu';
 import TrybeerContext from '../context/TrybeerContext';
@@ -7,6 +8,8 @@ import formatedPrice from '../utils/formatedPrice';
 import AddressForm from '../components/AddressForm';
 
 function Checkout() {
+  const [street, setStreet] = useState('');
+  const [number, setNumber] = useState('');
   const history = useHistory();
   const { user, cart, getTotalPriceCart } = useContext(TrybeerContext);
   const [isFormFilled, setIsFormFilled] = useState(false);
@@ -22,7 +25,21 @@ function Checkout() {
     console.log(validatePurchase);
   }, [cart, setIsFormFilled, validatePurchase, history, user.token]);
 
-  const handleCheckOut = () => {
+  const handleCheckOut = async () => {
+    const totalValue = getTotalPriceCart();
+    const salesTable = {
+      total_price: totalValue,
+      delivery_address: street,
+      delivery_number: number,
+      user_id: user.id,
+    };
+    const { id } = await fetchFunctions.post('order', salesTable);
+
+    const salesProductsTable = {
+      sale_id: id,
+      cart: [...cart]
+    }
+    await fetchFunctions.post('sale_product', salesProductsTable);
     setTimeout(() => history.push('/products'), TIME_TO_REDIRECT);
   };
 
@@ -46,7 +63,13 @@ function Checkout() {
         Total:
         {formatedPrice(getTotalPriceCart().toString())}
       </p>
-      <AddressForm setIsFormFilled={ setIsFormFilled } />
+      <AddressForm
+        street={street}
+        number={number}
+        setStreet={setStreet}
+        setNumber={setNumber}
+        setIsFormFilled={ setIsFormFilled }
+      />
       <h3>{ isFormFilled && cartHasProducts ? 'Compra realizada com sucesso!' : ''}</h3>
       <button
         type="button"
