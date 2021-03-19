@@ -49,7 +49,8 @@ const fetchChangeName = async (name, email) => {
   });
 };
 
-const fetchAddSale = async (userId, total, street, number, data, status) => {
+const fetchAddSale = async (sale) => {
+  const { userId, total, street, number, data, status } = sale;
   await fetch('http://localhost:3001/checkout', {
     method: 'POST',
     headers: contentType,
@@ -63,23 +64,6 @@ const fetchAddSale = async (userId, total, street, number, data, status) => {
     }),
   });
 };
-
-// não poder usar a palavra status dessa maneira
-// const fetchAddSale = async ({ userId, total, street, number, data, status }) => {
-//   await fetch('http://localhost:3001/checkout', {
-//     method: 'POST',
-//     headers: contentType,
-//     body: JSON.stringify({
-//       userId,
-//       total,
-//       street,
-//       number,
-//       data,
-//       status,
-//     }),
-//   });
-// };
-// fetchAddSale({ userId, total, street, number, data, status });
 
 module.exports = {
   fetchLogin,
