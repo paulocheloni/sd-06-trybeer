@@ -87,6 +87,7 @@ export default function Cards() {
             data-testid={ `${index}-product-img` }
             src={ product.url_image }
             alt={ product.name }
+            width="100px"
           />
           <button
             id={ `${index}-minus` }

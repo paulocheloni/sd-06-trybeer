@@ -29,7 +29,7 @@ const register = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
 
-    const token = jwt.sign({ data: [email, password] }, secret, jwtConfig);
+    // const token = jwt.sign({ data: [email, password] }, secret, jwtConfig);
 
     const user = await userService.findUserByEmail(email);
     if (user 
@@ -37,11 +37,11 @@ const register = async (req, res) => {
 
     await userService.create(name, email, password, role);
 
-    const createUser = { name, email, token, role };
+    // const createUser = { name, email, token, role };
 
-    const createdUser = await userService.findUserByEmail(email)
+    const findNeWUser = await userService.findUserByEmail(email);
 
-    return res.status(201).json({ user: createdUser });
+    return res.status(201).json({ user: findNeWUser });
   } catch (error) {
     return res.status(500).json({ message: error });
   }
