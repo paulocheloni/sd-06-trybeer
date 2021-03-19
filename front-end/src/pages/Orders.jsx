@@ -11,18 +11,22 @@ function Orders() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await clientOrders.getAll();
-        setOrders(response);
+        const user = JSON.parse(localStorage.getItem('user'));
+        console.log(user, user.token)
+        const response = await clientOrders.getAll(user.token);
+        console.log(response)
+        setOrders(response.orders);
       } catch (err) {
+        console.log(err.message)
         history.push('/login');
       }
     };
     fetchProducts();
-  }, [history, orders]);
+  }, []);
 
   return (
     <div>
-      <MenuTop />
+      <MenuTop title="TryBeer" />
       <h1 data-testid="top-title">Meus Pedidos</h1>
       <Orderslist orders={ orders } />
     </div>

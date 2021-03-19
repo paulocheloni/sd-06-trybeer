@@ -10,7 +10,7 @@ const getToken = () => {
 getToken();
 
 const validateHeaders = new Headers({
-  Authorization: `Bearer${getToken()}`,
+  authorization: getToken(),
   'Content-Type': 'application/json',
 });
 

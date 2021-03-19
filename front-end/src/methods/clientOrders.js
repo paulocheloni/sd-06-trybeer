@@ -1,15 +1,15 @@
 const url = 'http://localhost:3001';
-const { token } = JSON.parse(localStorage.getItem('user'));
 
 const options = {
   method: 'GET',
-  headers: {
-    authorization: token,
-  },
+  
 };
 
 const clientOrders = {
-  async getAll() {
+  async getAll(token) {
+    options.headers = {};
+    options.headers.authorization = token;
+    console.log(options);
     const response = await (await fetch(`${url}/orders`, options)).json();
     return response;
   },

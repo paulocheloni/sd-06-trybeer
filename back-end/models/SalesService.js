@@ -9,9 +9,15 @@ const createOne = async (data) => {
      + 'VALUES(?, ?, ?, ?, ?, ?)',
     [userId, price, address, number, date, status],
   );
-  return sale;
+  return { insertId: sale.insertId, date };
 };
 
+const getAllByUserId = async (id) => {
+  const sales = await connection.execute(
+    'SELECT * FROM sales WHERE user_id = ?', [id],)
+  return sales;
+}
+
 module.exports = {
-  createOne,
+  createOne, getAllByUserId
 };

@@ -11,7 +11,7 @@ function OrdersList({ orders }) {
             <OrderCard
               order={ order }
               orderIndex={ index }
-              key={ order.name }
+              key={ order.id }
             />))
       }
     </div>
