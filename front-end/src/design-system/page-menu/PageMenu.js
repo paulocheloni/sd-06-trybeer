@@ -4,7 +4,6 @@ import GlobalContext from '../../context/Context';
 import MenuList from './MenuItems';
 import BoxMenu from './BoxMenu';
 
-
 function PageMenu({ pageName }) {
   const { menuStatus } = useContext(GlobalContext);
 
