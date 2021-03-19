@@ -1,8 +1,6 @@
-/* eslint-disable react/no-multi-comp */
-/* eslint-disable max-lines-per-function */
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import GetProducts from '../../services/GetProducts';
+import PropTypes from 'prop-types';
 import Button from '../Button';
 import * as S from './style';
 
@@ -22,17 +20,9 @@ import * as S from './style';
 //   );
 // };
 
-const CardProduct = () => {
+const CardProduct = ({ products }) => {
   const history = useHistory();
-  const [products, setProducts] = useState([]);
   const [cartDisabled, SetCartDisabled] = useState(true);
-  useEffect(() => {
-    if (localStorage.products && JSON.parse(localStorage.products) !== []) {
-      return setProducts(JSON.parse(localStorage.products));
-    } 
-
-    return GetProducts(setProducts);
-  }, []);
 
   useEffect(() => {
     localStorage.products = JSON.stringify(products);
@@ -115,6 +105,14 @@ const CardProduct = () => {
       </S.Buttons>
     </div>
   );
+};
+
+CardProduct.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.object),
+};
+
+CardProduct.defaultProps = {
+  products: [],
 };
 
 export default CardProduct;
