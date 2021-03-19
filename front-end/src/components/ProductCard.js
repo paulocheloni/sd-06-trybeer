@@ -17,14 +17,14 @@ const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
   const increaseQuantity = () => {
     const result = quantity + 1;
     setQuantity(result);
-    updateProductQuantity(id, result, price);
+    updateProductQuantity(id, name, result, price);
   };
 
   const decreaseQuantity = () => {
     if (quantity !== 0) {
       const result = quantity - 1;
       setQuantity(result);
-      updateProductQuantity(id, result, price);
+      updateProductQuantity(id, name, result, price);
     }
   };
 

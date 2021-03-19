@@ -1,28 +1,61 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TrybeerContext from '../context/TrybeerContext';
 
+<<<<<<< HEAD
 function TrybeerProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [user, setUser] = useState({});
   const [isVisible, setIsVisible] = useState(false);
 
   const setVisibility = () => setIsVisible(!isVisible);
+=======
+const getFromLocalStorage = (key) => {
+  const keyFromLocalStorage = JSON.parse(localStorage.getItem(key));
+  return keyFromLocalStorage;
+};
+>>>>>>> 32245a2c12bbc12137d6cd4b50c2ca9cc7002be4
 
-  const getFromLocalStorage = (key) => {
-    const keyFromLocalStorage = JSON.parse(localStorage.getItem(key));
-    if (!keyFromLocalStorage) return null;
-    return keyFromLocalStorage;
-  };
+function TrybeerProvider({ children }) {
+  const [cart, setCart] = useState(() => {
+    const cartFromLocalStorage = getFromLocalStorage('cart');
+    if (cartFromLocalStorage) return cartFromLocalStorage;
+    return [];
+  });
 
-  useEffect(() => {
-    if (getFromLocalStorage('cart')) setCart(getFromLocalStorage('cart'));
-    if (getFromLocalStorage('user')) setUser(getFromLocalStorage('user'));
-  }, []);
+  const [user, setUser] = useState(() => {
+    const userFromLocalStorage = getFromLocalStorage('user');
+    if (userFromLocalStorage) return userFromLocalStorage;
+    return {};
+  });
 
   const setUserLogged = (userData) => {
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
+  };
+
+  const getTotalPriceCart = () => {
+    if (cart.length > 0) {
+      const total = cart
+        .reduce((result, product) => result + (product.quantity * product.price), 0);
+      return total.toFixed(2);
+    }
+    return 0;
+  };
+
+  const removeItemCart = (id) => {
+    const cartWithoutItem = cart.filter((item) => item.id !== id);
+    setCart(cartWithoutItem);
+    localStorage.setItem('cart', JSON.stringify(cartWithoutItem));
+  };
+
+  const updateProductQuantity = (id, name, quantity, price) => {
+    const product = { id, name, quantity, price };
+    const cartWithoutProduct = cart.filter((item) => item.id !== id);
+    const newCart = [...cartWithoutProduct, product];
+    const cartWithValidQuantitys = newCart.filter((item) => item.quantity > 0);
+    setCart(cartWithValidQuantitys);
+    localStorage.setItem('cart', JSON.stringify(cartWithValidQuantitys));
   };
 
   const eraseLocalStorage = () => {
@@ -30,20 +63,13 @@ function TrybeerProvider({ children }) {
     localStorage.removeItem('cart');
   };
 
-  const updateProductQuantity = (id, quantity, price) => {
-    const product = { id, quantity, price };
-    const cartWithoutProduct = cart.filter((item) => item.id !== id);
-    const newCart = [...cartWithoutProduct, product];
-    const cartWithoutZeroQuantities = newCart.filter((item) => item.quantity > 0);
-    setCart(cartWithoutZeroQuantities);
-    localStorage.setItem('cart', JSON.stringify(cartWithoutZeroQuantities));
-  };
-
   const contextValue = {
     cart,
     setCart,
     updateProductQuantity,
     getFromLocalStorage,
+    removeItemCart,
+    getTotalPriceCart,
     user,
     setUser,
     setUserLogged,
