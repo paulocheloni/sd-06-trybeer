@@ -11,6 +11,13 @@ class AdminProfile extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    const { history } = this.props;
+    if(!localStorage.token) {
+      history.go(-5);
+    }
+  }
+
   render() {
     const { history, stateActualUser } = this.props;
     console.log(stateActualUser);
