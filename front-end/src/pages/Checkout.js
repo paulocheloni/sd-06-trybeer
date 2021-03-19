@@ -5,7 +5,7 @@ import { Header } from '../components';
 import {
   addCart, globalID, globalQuantity, removeCartItem, updatePrice } from '../actions';
 
-class Home extends React.Component {
+class Checkout extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -84,6 +84,18 @@ class Home extends React.Component {
 
   async exclude({ id, price }) {
     const { dispatchRemoved, stateCart, stateID } = this.props;
+    // Atualização Valor total do Carrinho após Excluir item
+    const itemToExclude = stateCart.filter((element) => element.id === id)[0];
+    const priceItem = itemToExclude.price.split(' ')[1].replace(',', '.');
+    const quantityItem = itemToExclude.quantity;
+    let priceCart = localStorage.getItem('price');
+    priceCart -= parseFloat(priceItem * quantityItem).toFixed(2);
+    localStorage.setItem('price', parseFloat(priceCart).toFixed(2));
+    // Atualização da quantidade do Carrinho após Excluir item
+    const quantityStore = JSON.parse(localStorage.getItem('stateQuantity'));
+    quantityStore[id] = 0;
+    localStorage.setItem('stateQuantity', JSON.stringify(quantityStore));
+
     const newCart = stateCart.filter((element) => element.id !== id);
     await dispatchRemoved(newCart);
     localStorage.setItem('stateCart', JSON.stringify(newCart));
@@ -105,7 +117,7 @@ class Home extends React.Component {
         <div className="checkout-div">
           <div className="products-div">
             <h2>Produtos</h2>
-            { localCart.length > 0 ? localCart.map((element, index) => (
+            { stateCart && stateCart.length ? stateCart.map((element, index) => (
               <div
                 className="cart-item"
                 key={ index }
@@ -188,7 +200,7 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchRemoved: (array) => dispatch(removeCartItem(array)),
 });
 
-Home.propTypes = {
+Checkout.propTypes = {
   dispatchID: PropTypes.func.isRequired,
   dispatchCart: PropTypes.func.isRequired,
   dispatchPrice: PropTypes.func.isRequired,
@@ -200,4 +212,4 @@ Home.propTypes = {
   statePrice: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
