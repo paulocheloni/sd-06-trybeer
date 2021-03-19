@@ -1,42 +1,20 @@
-/* eslint-disable react/no-multi-comp */
 /* eslint-disable max-lines-per-function */
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import GetProducts from '../../services/GetProducts';
+import PropTypes from 'prop-types';
 import Button from '../Button';
 import * as S from './style';
 
-const ButtonSeeCar = (cartAvailable) => {
+const CardProduct = ({ products, setProducts }) => {
   const history = useHistory();
-  return (
-    <div>
-      <S.Buttons>
-        <Button
-          dataTestId="checkout-bottom-btn"
-          onClick={ () => history.push('/cart') }
-          disabled={ cartAvailable }
-        >
-          Ver Carrinho
-        </Button>
-      </S.Buttons>
-    </div>
-  );
-};
-
-const CardProduct = () => {
-  const [products, setProducts] = useState([]);
-  const [cartAvailable, SetCartAvailable] = useState([true]);
+  const [cartDisabled, SetCartDisabled] = useState(true);
   useEffect(() => {
-    if (localStorage.products && JSON.parse(localStorage.products) !== []) {
-      return setProducts(JSON.parse(localStorage.products));
-    }
-    return GetProducts(setProducts);
-  }, []);
-
-  useEffect(() => {
-    localStorage.products = JSON.stringify(products);
-    if (localStorage.products.length > 0) {
-      SetCartAvailable(false);
+    const productsAmount = products.reduce((acc, product) => acc + product
+      .productQuantity, 0);
+    if (productsAmount > 0) {
+      SetCartDisabled(false);
+    } else {
+      SetCartDisabled(true);
     }
   }, [products]);
 
@@ -87,7 +65,6 @@ const CardProduct = () => {
               -
             </Button>
           </S.Buttons>
-          { ButtonSeeCar(cartAvailable) }
           Valor total:
           <span data-testid="checkout-bottom-btn-value">
             R$
@@ -100,8 +77,26 @@ const CardProduct = () => {
           </span>
         </div>
       ))}
+      <S.Buttons>
+        <Button
+          dataTestId="checkout-bottom-btn"
+          onClick={ () => history.push('/checkout') }
+          disabled={ cartDisabled }
+        >
+          Ver Carrinho
+        </Button>
+      </S.Buttons>
     </div>
   );
+};
+
+CardProduct.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.object),
+  setProducts: PropTypes.func.isRequired,
+};
+
+CardProduct.defaultProps = {
+  products: [],
 };
 
 export default CardProduct;

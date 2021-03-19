@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import GlobalStyle from './Style/GlobalStyle';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
