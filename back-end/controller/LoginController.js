@@ -5,7 +5,7 @@ const jwtConfig = {
   expiresIn: '7d',
   algorithm: 'HS256',
 };
-const SECRET = 'http://senhasupersecreta.com/';
+const SECRET = 'senhasupersecreta.com';
 
 const userService = require('../service/UserService');
 const { OK, UNAUTHORIZED } = require('../schema/statusSchema');

@@ -13,7 +13,7 @@ const getAll = async () => {
 // Verify Auth
 const verifyAuth = async (req, res, next) => {
   const { authorization } = req.headers;
-  
+
   if (!authorization) return res.status(UNAUTHORIZED).json({ message: 'jwt is missing' });
 
   jwt.verify(authorization, SECRET, (err) => {

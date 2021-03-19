@@ -15,7 +15,7 @@ const jwtConfig = {
   expiresIn: '7d',
   algorithm: 'HS256',
 };
-const SECRET = 'http://senhasupersecreta.com/';
+const SECRET = 'senhasupersecreta.com';
 
 const UserController = new Router();
 
@@ -53,7 +53,7 @@ UserController.put('/:id', verifyId, verifyAuth, async (req, res) => {
 
   await update(id, name);
   const user = await findById(id);
-  const token = jwt.sign({ data: user }, process.env.SECRET, jwtConfig);
+  const token = jwt.sign({ data: user }, SECRET, jwtConfig);
   res.status(OK).json({ token });
 });
 
