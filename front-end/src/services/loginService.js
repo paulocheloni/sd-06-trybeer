@@ -25,7 +25,7 @@ export const routeByRole = (role, history) => {
     break;
   case 'client': history.push('/products');
     break;
-  default:
+  default: localStorage.clear();
     break;
   }
 };

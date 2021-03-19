@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import './SideBarAdmin.css';
 
 function SideBarAdmin() {
+  function clearLocalStorage() {
+    localStorage.clear();
+  }
+
   return (
     <nav className="admin-side-bar-container">
       <h1>TryBeer</h1>
@@ -18,7 +22,12 @@ function SideBarAdmin() {
         </button>
       </Link>
       <Link to="/">
-        <button type="button" data-testid="side-menu-item-logout" className="logout">
+        <button
+          type="button"
+          data-testid="side-menu-item-logout"
+          className="logout"
+          onClick={ clearLocalStorage }
+        >
           Sair
         </button>
       </Link>

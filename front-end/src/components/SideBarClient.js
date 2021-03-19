@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import './SideBarClient.css';
 
 function SideBarClient() {
+  function clearLocalStorage() {
+    localStorage.clear();
+  }
+
   return (
     <div className="side-menu-container">
       <Link to="/products">
@@ -25,7 +29,12 @@ function SideBarClient() {
       </Link>
 
       <Link to="/">
-        <button className="botao" data-testid="side-menu-item-logout" type="button">
+        <button
+          className="botao"
+          data-testid="side-menu-item-logout"
+          type="button"
+          onClick={ clearLocalStorage }
+        >
           Sair
         </button>
       </Link>
