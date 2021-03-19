@@ -49,41 +49,43 @@ const Products = () => {
 
       <SideBar />
 
-      <S.ContainerCards stateSideBar={ stateSideBar }>
-        {products && (
-          products.map((product) => (
-            <CardProducts
-              key={ product.id }
-              product={ product }
-            />
-          ))
-        )}
-      </S.ContainerCards>
+      <S.ContainerProducts>
+        <S.ContainerCards stateSideBar={ stateSideBar }>
+          {products && (
+            products.map((product) => (
+              <CardProducts
+                key={ product.id }
+                product={ product }
+              />
+            ))
+          )}
+        </S.ContainerCards>
 
-      <S.ContainerButton>
-        <Button
-          type="button"
-          color="green"
-          fontSize="20px"
-          width="93%"
-          heigth="40px"
-          botton="0"
-          position="fixed"
-          marginBottom="10px"
-          disabled={ isDisabled }
-          onClick={ () => saveCart(cartList, history) }
-          dataTestid="checkout-bottom-btn"
-        >
-          Ver Carrinho -
-          {' '}
-          <span data-testid="checkout-bottom-btn-value">
-            {localStorage.getItem('total') !== null
-              ? `R$ ${(Number(localStorage.getItem('total'))
-                .toFixed(2)).replace('.', ',')}`
-              : `R$ ${(stateSumPrice.toFixed(2)).replace('.', ',')}`}
-          </span>
-        </Button>
-      </S.ContainerButton>
+        <S.ContainerButton stateSideBar={ stateSideBar }>
+          <Button
+            type="button"
+            color="green"
+            fontSize="20px"
+            width="93%"
+            heigth="40px"
+            botton="0"
+            position="fixed"
+            marginBottom="10px"
+            disabled={ isDisabled }
+            onClick={ () => saveCart(cartList, history) }
+            dataTestid="checkout-bottom-btn"
+          >
+            Ver Carrinho -
+            {' '}
+            <span data-testid="checkout-bottom-btn-value">
+              {localStorage.getItem('total') !== null
+                ? `R$ ${(Number(localStorage.getItem('total'))
+                  .toFixed(2)).replace('.', ',')}`
+                : `R$ ${(stateSumPrice.toFixed(2)).replace('.', ',')}`}
+            </span>
+          </Button>
+        </S.ContainerButton>
+      </S.ContainerProducts>
     </S.Container>
   );
 };

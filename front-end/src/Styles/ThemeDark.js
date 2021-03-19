@@ -12,7 +12,7 @@ export default {
     secondaryMobile: '#232323',
     shadowMobile: 'black',
     shadowCards: 'black',
-    backgroundMouseOver: '#232323',
+    backgroundMouseOver: '#232320',
     backgroundDiv: '#353535',
 
     title: '#fff',

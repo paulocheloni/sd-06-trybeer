@@ -8,6 +8,22 @@ const Container = styled.div`
   `}
 `;
 
+const ContainerProducts = styled.div`
+  ${({ theme }) => css`
+    width: 100%;
+    background: ${theme.colors.secondary};
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+
+    @media (max-width: 1350px) {
+      height: 100%;
+    }
+  `}
+`;
+
 const ContainerCards = styled.section`
   ${({ stateSideBar }) => css`
 
@@ -15,43 +31,77 @@ const ContainerCards = styled.section`
 
     /* overflow: auto; */
 
-    width: 100%;
+    width: 70%;
     height: 100%;
 
     padding: 70px 10px 65px 10px;
 
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+
+    @media (max-width: 1300px) {
+      width: 80%;
+    }
+
+    @media (max-width: 870px) {
+      width: 90%;
+    }
+
+    @media (max-width: 770px) {
+      width: 100%;
+    }
 
     @media (max-width: 500px) {
       padding: 60px 10px 50px 10px;
+      justify-content: space-between;
     }
   `} 
 `;
 
 const ContainerButton = styled.div`
+  ${({ stateSideBar }) => css`
     width: 100%;
     padding: 0 19px;
+
+    opacity: ${stateSideBar ? '0.3' : '1'};
 
     display: flex;
     justify-content: center;
 
     > button {
-      width: 50%;
-    }
+      width: 55%;
+      margin-bottom: 20px;
 
-  @media (max-width: 500px) {
-    padding: 0 15px;
+      @media (max-width: 1450px) {
+        width: 75%;
+      }
 
-    > button {
-      width: 95%;
+      @media (max-width: 1355px) {
+        width: 65%;
+      }
+
+      @media (max-width: 1130px) {
+        width: 58%;
+      }
+
+      @media (max-width: 1000px) {
+        padding: 0 15px;
+        margin-bottom: 20px;
+
+        width: 95%;
+      }
+
+      @media (max-width: 690px) {
+        margin-bottom: 10px;
+      }
     }
-  }
+  `}
 `;
 
 export default {
   Container,
   ContainerButton,
   ContainerCards,
+  ContainerProducts,
 };

@@ -5,7 +5,7 @@ export default {
     // primary: '#EFEFEF',
     primary: '#F3F8EC',
     secondary: '#F3F8EC',
-    text: '#000',
+    text: '#353535',
     border: '#000',
     borderInput: '#CCCCCC',
     backgroundInput: '#E5E5E5',

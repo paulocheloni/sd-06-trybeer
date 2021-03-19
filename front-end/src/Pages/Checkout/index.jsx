@@ -33,12 +33,13 @@ const form = (params) => {
     setNumberHouse,
     cardsProductsValues,
     checkOut,
+    stateSideBar,
   } = params;
 
   const theme = JSON.parse(localStorage.getItem('@trybeer:theme'));
 
   return (
-    <div>
+    <S.ContainerMain stateSideBar={ stateSideBar }>
       {checkOut ? (
         <S.CompletedSale>Compra realizada com sucesso!</S.CompletedSale>
       ) : (
@@ -55,25 +56,27 @@ const form = (params) => {
             <Input
               id="Rua"
               label="Rua"
+              width="100%"
               dataTestid="checkout-street-input"
               themeStorage={ theme && theme.title }
-              widthDivLabel="none"
+              widthDivLabel="100%"
               icon={ FaStreetView }
               onChange={ ({ target }) => setStreet(target.value) }
             />
             <Input
               id="Número da casa"
               label="Número da casa"
+              width="100%"
               dataTestid="checkout-house-number-input"
               themeStorage={ theme && theme.title }
-              widthDivLabel="none"
+              widthDivLabel="100%"
               icon={ AiOutlineFieldNumber }
               onChange={ ({ target }) => setNumberHouse(target.value) }
             />
           </S.ContainerAddress>
         </S.ContainerProducts>
       )}
-    </div>
+    </S.ContainerMain>
   );
 };
 
@@ -83,7 +86,7 @@ const Checkout = () => {
   const [street, setStreet] = useState('');
   const [numberHouse, setNumberHouse] = useState('');
   const [checkOut, setCheckOut] = useState(false);
-  const { setCartList } = useContext(GlobalContext);
+  const { setCartList, stateSideBar } = useContext(GlobalContext);
   const history = useHistory();
 
   const cartListLocalStorage = JSON.parse(localStorage.getItem('infosCheckout'));
@@ -162,6 +165,7 @@ const Checkout = () => {
     setNumberHouse,
     cardsProductsValues,
     checkOut,
+    stateSideBar,
   };
 
   return (
@@ -172,12 +176,12 @@ const Checkout = () => {
 
       {form(params)}
 
-      <S.ContainerButton>
+      <S.ContainerButton stateSideBar={ stateSideBar }>
         <Button
           type="button"
           color="green"
           fontSize="20px"
-          width="91%"
+          width="100%"
           heigth="40px"
           botton="0"
           position="fixed"

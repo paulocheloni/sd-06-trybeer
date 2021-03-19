@@ -45,6 +45,7 @@ const form = (params) => {
       <Input
         id="senha"
         label="Senha"
+        width="400px"
         dataTestid="password-input"
         onChange={ ({ target }) => setPassword(target.value) }
         themeStorage={ theme && theme.title }

@@ -8,8 +8,8 @@ import Register from './Pages/Register';
 import Profile from './Pages/Profile';
 import Products from './Pages/Products';
 import Checkout from './Pages/Checkout';
-import MyOrder from './Pages/MyOrder';
-import OrderDetails from './Pages/OrderDetails';
+import MyOrders from './Pages/OrderDetails';
+import OrderDetails from './Pages/MyOrders';
 
 import { useTheme } from './Hooks/theme';
 
@@ -26,8 +26,8 @@ function App() {
           <Route path="/profile" component={ Profile } />
           <Route path="/products" component={ Products } />
           <Route path="/checkout" component={ Checkout } />
-          <Route path="/orders" component={ MyOrder } />
-          <Route path="/orders/:numero-do-pedido" component={ OrderDetails } />
+          <Route exact path="/orders" component={ OrderDetails } />
+          <Route path="/orders/:id" component={ MyOrders } />
         </Switch>
       </GlobalProvider>
     </ThemeProvider>

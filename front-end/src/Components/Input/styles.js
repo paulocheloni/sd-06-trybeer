@@ -43,11 +43,11 @@ const CompInput = styled.label`
 `;
 
 const Input = styled.input`
-  ${({ theme, themeStorage, isIcon }) => css`
+  ${({ theme, themeStorage, isIcon, width }) => css`
     background: ${theme.colors.backgroundInput};
     color: ${theme.colors.text};
 
-    width: 400px;
+    width: ${width};
     height: 40px;
 
     padding-left: 10px;

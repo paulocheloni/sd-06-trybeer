@@ -10,6 +10,7 @@ const Input = ({
   label,
   id,
   value,
+  width,
   themeStorage,
   widthDivLabel,
   icon: Icon,
@@ -42,6 +43,7 @@ const Input = ({
             onChange={ (e) => onChange(e) }
             readOnly={ readOnly }
             themeStorage={ themeStorage }
+            width={ width }
           />
         </div>
       ) : (
@@ -53,6 +55,7 @@ const Input = ({
           onChange={ (e) => onChange(e) }
           readOnly={ readOnly }
           themeStorage={ themeStorage }
+          width={ width }
         />
       )}
     </S.CompInput>
@@ -66,6 +69,7 @@ Input.defaultProps = {
   onChange: () => {},
   icon: undefined,
   widthDivLabel: '100%',
+  width: '400px',
 };
 
 Input.propTypes = {
@@ -78,6 +82,7 @@ Input.propTypes = {
   themeStorage: PropTypes.string,
   icon: PropTypes.elementType,
   widthDivLabel: PropTypes.string,
+  width: PropTypes.string,
 };
 
 export default Input;

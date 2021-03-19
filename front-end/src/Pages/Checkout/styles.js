@@ -2,36 +2,41 @@ import styled, { css } from 'styled-components';
 
 const Container = styled.div`
   ${({ theme }) => css`
-  
-  background-color: ${theme.colors.primary};
-  width: 100%;
-  height: 100vh;
-
-  > section {
+    background-color: ${theme.colors.primary};
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    
+  `}
+`;
 
-    padding: 70px 10px 65px 10px;
-
+const ContainerMain = styled.div`
+  ${({ stateSideBar }) => css`
+    width: 100%;
+    height: 100vh;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-    @media (max-width: 500px) {
-      padding: 70px 20px 60px 20px;
-    }
-  }
+    justify-content: center;
+    opacity: ${stateSideBar ? '0.3' : '1'};
   `}
 `;
 
 const ContainerProducts = styled.div`
   ${({ theme }) => css`
-    width: 100%;
+    width: 60%;
     display: flex;
-    flex-flow: column wrap;
-    display: flex;
-    justify-content: center;
+    flex-direction: column;
     padding: 70px 20px 20px 20px;
+
+    @media (max-width: 1000px) {
+    width: 70%;
+    }
+    
+    @media (max-width: 750px) {
+      width: 90%;
+    }
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
 
     > h1 {
       font-size: 20px;
@@ -116,10 +121,8 @@ const ButtonForm = styled.button`
 
     &:hover {
       filter: brightness(0.9);
-    }> span {
-
-width: 50%;
-background: red;
+    }
+    
   `}
 `;
 
@@ -129,7 +132,6 @@ const NameProduct = styled.div`
 const ContainerAddress = styled.div`
   ${({ theme }) => css`
     width: 100%;
-
     display: flex;
     flex-flow: column wrap;
     align-items: center;
@@ -145,22 +147,34 @@ const ContainerAddress = styled.div`
 `;
 
 const ContainerButton = styled.div`
+  ${({ stateSideBar }) => css`
     width: 100%;
     padding: 0 19px;
     display: flex;
     justify-content: center;
 
-    > button {
-      width: 50%;
+    opacity: ${stateSideBar ? '0.3' : '1'};
+
+    @media (max-width: 500px) {
+      padding: 0 19px;
     }
 
-  @media (max-width: 500px) {
-    padding: 0 19px;
-
     > button {
-      width: 91%;
+      width: 57%;
+
+      @media (max-width: 1000px) {
+      width: 65%;
+      }
+      
+      @media (max-width: 700px) {
+        width: 75%;
+      }
+
+      @media (max-width: 500px) {
+        width: 91%;
+      }
     }
-  }
+  `}
 `;
 
 const CompletedSale = styled.span`
@@ -189,4 +203,5 @@ export default {
   CompletedSale,
   ButtonForm,
   NameProduct,
+  ContainerMain,
 };
