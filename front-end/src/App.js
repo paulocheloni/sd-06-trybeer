@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import history from './utilities/history';
 import {
-  Login, Register, Profile, Products, Orders, AdminOrders, Home, Checkout,AdminProfile
+  Login, Register, Profile, Products, Orders, AdminOrders, Home, Checkout, AdminProfile,
 } from './pages';
 
 function App() {
