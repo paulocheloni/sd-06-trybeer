@@ -18,7 +18,7 @@ const TokenValidation = async (req, res, next) => {
       return res.status(STATUS_UNAUTHORIZED).json({ message: 'jwt malformed' });
     }
     const userData = await findUser(decoded.data.email);
-    req.user = userData;
+    // req.user = userData;
     next();
   } catch (err) {
     return res.status(STATUS_INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });

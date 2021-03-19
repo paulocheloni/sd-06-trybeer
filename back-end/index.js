@@ -6,6 +6,7 @@ const LoginController = require('./src/controllers/LoginController');
 const RegisterController = require('./src/controllers/RegisterController');
 const ProductsController = require('./src/controllers/ProductsController');
 const ProfileController = require('./src/controllers/ProfileController');
+const SalesController = require('./src/controllers/SalesController');
 require('dotenv').config();
 
 const app = express();
@@ -26,5 +27,7 @@ app.use('/register', RegisterController);
 app.use('/products', ProductsController);
 
 app.use('/profile', ProfileController);
+
+app.use('/sales', SalesController);
 
 app.listen(port, () => console.log(`Running at ${port}`));
