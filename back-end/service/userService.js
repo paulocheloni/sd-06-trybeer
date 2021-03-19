@@ -2,8 +2,6 @@ const userModel = require('../model/userModel');
 
 const UNPROCESSABLE_ENTITY = 422;
 
-const getAllUsers = async () => userModel.getAllUsers();
-
 const findUserByEmail = async (userEmail, password) => {
   const userFound = await userModel.findUserByEmail(userEmail);  
 
@@ -21,8 +19,20 @@ const updateUserNameByEmail = async (userEmail, updatedName) => {
   await userModel.updateUserNameByEmail(userEmail, updatedName);
 };
 
+const createUser = async (name, email, password, role) => {
+  const userFound = await userModel.findUserByEmail(email);  
+  if (userFound) {
+    return {
+      status: UNPROCESSABLE_ENTITY,
+      message: 'Email alredy exists ',
+      isError: true,
+    };
+  }
+  await userModel.createUser(name, email, password, role);
+};
+
 module.exports = {
-  getAllUsers,
   findUserByEmail,
   updateUserNameByEmail,
+  createUser,
 };
