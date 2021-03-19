@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import TopMenu from '../components/TopMenu';
 import productsContext from '../context/productsContext';
 import './pagesCSS/Checkout.css';
@@ -7,7 +8,10 @@ export default function Products() {
   const { cartProducts, setCartProducts } = useContext(productsContext);
   const [street, setStreet] = useState('');
   const [houseNumber, setHouseNumber] = useState('');
-  // const [totalValue, setTotalValue] = useState('');
+  const history = useHistory();
+  const tokenFromLocalStorage = localStorage.getItem('token');
+  let totalPrice = '0,00';
+  
 
   useEffect(() => {
     const cartLS = JSON.parse(localStorage.getItem('cartProducts'));
@@ -15,35 +19,35 @@ export default function Products() {
     setCartProducts(cartLS);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
+  const handleRedirect = (token) => {
+    if (!token) return history.push('/login');
+  };
 
   // aqui é uma validação tem que mandar la pra pasta validations?
-  // const isAnyOrder = () => {
-  //   console.log('totalValue length', totalValue.length);
-  //   const isTotalValueFilled = street.length > 0;
-  //   console.log('totalValue filled', isTotalValueFilled);
-  //   return isTotalValueFilled;
-  // };
+  const isTotalNotPriceZero = () => {
+    if (totalPrice === '0,00') {
+      return false;
+    }
+    return true;
+  };
 
   const streetValidation = () => {
-    // console.log('street length', street.length);
     const isStreetFilled = street.length > 0;
-    // console.log('filled', isStreetFilled);
     return isStreetFilled;
   };
 
   const houseNumberValidation = () => {
-    // console.log('house', houseNumber.length);
     const ishouseNumberFilled = houseNumber.length > 0;
-    // console.log('house filled', ishouseNumberFilled);
     return ishouseNumberFilled;
   };
 
   const handleTotalPrice = () => {
-    let totalPrice = '0,00';
     if (cartProducts.length) {
       totalPrice = cartProducts
         .reduce((accumulator, current) => accumulator + current.subTotal, 0);
-      return (totalPrice.toFixed(2)).replace('.', ',');
+      totalPrice = (totalPrice.toFixed(2)).replace('.', ',');
+      return totalPrice;
     }
     return totalPrice;
   };
@@ -59,6 +63,7 @@ export default function Products() {
 
   return (
     <div>
+      { handleRedirect(tokenFromLocalStorage) }
       <TopMenu data-testid="top-title" pageTitle="Finalizar Pedido" />
       <div className="cart-products-container">
         { !cartProducts.length
@@ -130,7 +135,7 @@ export default function Products() {
       <button
         data-testid="checkout-finish-btn"
         type="button"
-        disabled={ (!streetValidation() || !houseNumberValidation()) }
+        disabled={ !(isTotalNotPriceZero() && streetValidation() && houseNumberValidation()) }
       >
         Finalizar Pedido
       </button>
