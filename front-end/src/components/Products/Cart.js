@@ -5,7 +5,6 @@ import TrybeerContext from '../../context/TrybeerContext';
 function Cart() {
   const { cart, totalCart, setTotalCart } = useContext(TrybeerContext);
   const history = useHistory();
-  const disableButton = cart.length ? false : true
 
   useEffect(() => {
     let totalValue = 0;
@@ -17,7 +16,7 @@ function Cart() {
 
   return (
     <button
-      disabled={ disableButton }
+      disabled={ cart.length > 0 }
       type="button"
       data-testid="checkout-bottom-btn"
       onClick={ () => history.push('/checkout') }
