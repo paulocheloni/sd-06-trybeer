@@ -25,10 +25,6 @@ function Products() {
   }, [setProducts, history]);
 
   useEffect(() => {
-    localStorage.setItem('sale', JSON.stringify(sale));
-  }, [sale]);
-
-  useEffect(() => {
     const checkedProducts = products.map((product) => {
       const checkingSale = sale.products
         .find((selectedProduct) => product.id === selectedProduct.id);
@@ -44,6 +40,7 @@ function Products() {
     setRenderProducts(checkedProducts);
     console.log('inside useEffect checking sale: ', checkedProducts);
   }, [setRenderProducts, products, sale.products]);
+
   return (
     <div>
       <TopBar title="TryBeer" />

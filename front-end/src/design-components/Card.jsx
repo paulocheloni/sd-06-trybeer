@@ -17,11 +17,12 @@ function Card({ product, testIdNumber }) {
   const handleClickPlus = () => {
     const quantity = localQuantity + 1;
     setLocalQuantity(quantity);
-    const products = sale.products.filter((thisProduct) => thisProduct.id !== id);// push
+    const products = sale.products.filter((thisProduct) => thisProduct.id !== id);
     const currentProduct = { id, name, urlImage, price, quantity };
     products.push(currentProduct);
     const total = products
-      .reduce((acc, curr) => acc + (parseFloat(curr.price) * curr.quantity), 0);
+      .reduce((acc, curr) => acc + (parseFloat(curr.price) * curr.quantity), 0)
+      .toFixed(2);
     setSale({
       products,
       total,
@@ -32,11 +33,12 @@ function Card({ product, testIdNumber }) {
     if (localQuantity <= 0) return;
     const quantity = localQuantity - 1;
     setLocalQuantity(quantity);
-    const products = sale.products.filter((thisProduct) => thisProduct.id !== id);// push
+    const products = sale.products.filter((thisProduct) => thisProduct.id !== id);
     const currentProduct = { id, name, urlImage, price, quantity };
     products.push(currentProduct);
     const total = products
-      .reduce((acc, curr) => acc + (parseFloat(curr.price) * curr.quantity), 0);
+      .reduce((acc, curr) => (acc + (parseFloat(curr.price) * curr.quantity)), 0)
+      .toFixed(2);
     setSale({
       products,
       total,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ContextBeer from './ContextBeer';
 
@@ -18,6 +18,10 @@ function Provider({ children }) {
     total: 0,
   };
   const [sale, setSale] = useState(storedSale || initialStateSale);
+
+  useEffect(() => {
+    localStorage.setItem('sale', JSON.stringify(sale));
+  }, [sale]);
 
   const getUser = () => {
     const user = JSON.parse(localStorage.getItem('user'));
