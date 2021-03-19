@@ -9,7 +9,6 @@ function TrybeerProvider({ children }) {
   useEffect(() => {
     const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart'));
     const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
-    console.log(cartFromLocalStorage)
     if (cartFromLocalStorage) setCart(cartFromLocalStorage);
     if (userFromLocalStorage) setUser(userFromLocalStorage);
   }, []);
@@ -19,18 +18,33 @@ function TrybeerProvider({ children }) {
     localStorage.setItem('user', JSON.stringify(userData));
   };
 
+  const getTotalPriceCart = () => {
+    if (cart.length > 0) {
+      const total = cart
+        .reduce((result, product) => result + (product.quantity * product.price), 0);
+      return total.toFixed(2);
+    }
+    return 0;
+  }
+
   const getFromLocalStorage = (key) => {
     const keyFromLocalStorage = JSON.parse(localStorage.getItem(key));
     return keyFromLocalStorage;
   };
 
-  const updateProductQuantity = (id, quantity, price) => {
-    console.log(cart)
-    const product = { id, quantity, price };
-    const cartWithoutProduct = cart.filter((item) => item.id !== id && quantity === 0);
+  const removeItemCart = (id) => {
+    const cartWithoutItem = cart.filter((item) => item.id !== id);
+    setCart(cartWithoutItem);
+    localStorage.setItem('cart', JSON.stringify(cartWithoutItem));
+  }
+
+  const updateProductQuantity = (id, name, quantity, price) => {
+    const product = { id, name, quantity, price };
+    const cartWithoutProduct = cart.filter((item) => item.id !== id);
     const newCart = [...cartWithoutProduct, product];
-    setCart(newCart);
-    localStorage.setItem('cart', JSON.stringify(newCart));
+    const cartWithValidQuantitys = newCart.filter((item) => item.quantity > 0);
+    setCart(cartWithValidQuantitys);
+    localStorage.setItem('cart', JSON.stringify(cartWithValidQuantitys));
   };
 
   const contextValue = {
@@ -38,6 +52,8 @@ function TrybeerProvider({ children }) {
     setCart,
     updateProductQuantity,
     getFromLocalStorage,
+    removeItemCart,
+    getTotalPriceCart,
     user,
     setUser,
     setUserLogged,

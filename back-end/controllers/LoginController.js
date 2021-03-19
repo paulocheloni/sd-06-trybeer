@@ -5,7 +5,7 @@ const { validateLogin } = require('../middlewares/validations');
 
 const LoginController = new Router();
 
-LoginController.post('/', validateLogin, async (req, res, next) => {
+LoginController.post('/', async (req, res, next) => {
   try {
     const { email } = req.body;
     const newUser = await registerAndLog(email);

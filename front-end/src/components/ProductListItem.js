@@ -1,38 +1,19 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import TrybeerContext from '../context/TrybeerContext';
+import formatedPrice from '../utils/formatedPrice';
 
-const ProductListItem = ({ index, name, price }) => {
-  const [quantity, setQuantity] = useState(0);
-  const formatedPrice = price.replace('.', ',');
-
+const ProductListItem = ({ index, id, name, quantity, price }) => {
+  const totalPrice = (quantity * price).toFixed(2);
+  const { removeItemCart } = useContext(TrybeerContext);
+  
   return (
-    <div className="product-card">
-      <img
-        data-testid={ `${index}-product-img` }
-        className="product-card-image"
-        alt={ name }
-        src={ urlImage }
-      />
+    <div>
+      <p data-testid={ `${index}-product-qtd-input` }>{quantity}</p>
       <p data-testid={ `${index}-product-name` }>{name}</p>
-      <p data-testid={ `${index}-product-price` }>{`R$ ${formatedPrice}`}</p>
-      <div className="quantity-controller">
-        <button
-          onClick={ decreaseQuantity }
-          data-testid={ `${index}-product-minus` }
-          type="button"
-        >
-          -
-        </button>
-        <p data-testid={ `${index}-product-qtd` }>{quantity}</p>
-        <button
-          onClick={ increaseQuantity }
-          data-testid={ `${index}-product-plus` }
-          type="button"
-        >
-          +
-        </button>
-      </div>
+      <p data-testid={ `${index}-product-total-value` }>{formatedPrice(totalPrice)}</p>
+      <p data-testid={ `${index}-product-unit-price` }>{`(${formatedPrice(price)} un)`}</p>
+      <button data-testid={ `${index}-removal-button` } onClick={() => removeItemCart(id)}>X</button>
     </div>
   );
 };
@@ -40,9 +21,9 @@ const ProductListItem = ({ index, name, price }) => {
 ProductListItem.propTypes = {
   index: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
+  quantity: PropTypes.number.isRequired,
+  //name: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
-  url_image: PropTypes.string.isRequired,
 };
 
 export default ProductListItem;
