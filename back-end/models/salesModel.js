@@ -11,7 +11,7 @@ const createSale = async (sale) => {
   const newSale = await connection
     .execute(`INSERT INTO Trybeer.sales (user_id, total_price, 
       delivery_address, delivery_number, sale_date, status) VALUES (?, ?, ?, ?, NOW(), ?)`,
-      [userId, totalPrice, deliveryAddress, deliveryNumber, 'pendente']);
+      [userId, totalPrice, deliveryAddress, deliveryNumber, 'Pendente']);
   return newSale;
 };
 
@@ -42,9 +42,16 @@ const getOrder = async (id) => {
   return order;
 };
 
+const updateOrder = async (id) => {
+  const update = await connection
+    .execute('UPDATE Trybeer.sales SET status = ? WHERE id = ?', ['Entregue', id]);
+    return update;
+};
+
 module.exports = {
   getAllSales,
   createSale,
   createSaleProduct,
   getOrder,
+  updateOrder,
 };

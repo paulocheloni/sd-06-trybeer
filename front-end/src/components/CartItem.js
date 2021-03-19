@@ -3,7 +3,15 @@ import PropTypes from 'prop-types';
 import context from '../context/Context';
 
 export default function CartItem(props) {
-  const { index, quantity, name, price, setCart } = props;
+  const {
+    index,
+    quantity,
+    name,
+    price,
+    setCart,
+    unitPriceID,
+    qtdID,
+  } = props;
   const { totalCart, setTotalCart } = useContext(context);
   const totalValue = price * quantity;
 
@@ -17,10 +25,9 @@ export default function CartItem(props) {
     setTotalCart(TOTALCART);
     localStorage.setItem('totalCart', JSON.stringify(TOTALCART.toFixed(2)));
   };
-
   return (
     <div>
-      <p data-testid={ `${index}-product-qtd-input` }>{ quantity }</p>
+      <p data-testid={ `${index}-${qtdID}` }>{ quantity }</p>
       <p data-testid={ `${index}-product-name` }>{ name }</p>
       <p
         data-testid={ `${index}-product-total-value` }
@@ -28,9 +35,11 @@ export default function CartItem(props) {
         { `R$ ${totalValue.toFixed(2).replace('.', ',')}` }
       </p>
       <p
-        data-testid={ `${index}-product-unit-price` }
+        data-testid={ `${index}-${unitPriceID}` }
       >
-        { `(R$ ${price.replace('.', ',')} un)` }
+        {unitPriceID !== 'order-unit-price'
+          ? `(R$ ${price.replace('.', ',')} un)`
+          : `(R$ ${price.replace('.', ',')})`}
       </p>
       <button
         data-testid={ `${index}-removal-button` }
@@ -49,4 +58,6 @@ CartItem.propTypes = {
   price: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired,
   setCart: PropTypes.func.isRequired,
+  unitPriceID: PropTypes.number.isRequired,
+  qtdID: PropTypes.number.isRequired,
 };
