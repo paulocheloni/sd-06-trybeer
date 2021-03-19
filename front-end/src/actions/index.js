@@ -52,7 +52,7 @@ export const prodList = (array) => ({
   array,
 });
 
-export const addCart = (id, name, price, quantity, url) => ({
+export const addCart = ({ id, name, price, quantity, url }) => ({
   type: CART_LIST,
   id,
   name,

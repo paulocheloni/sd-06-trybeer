@@ -47,7 +47,7 @@ class ProductsList extends React.Component {
       for (let index = 0; index < localStorageCart.length; index += 1) {
         const { stateCart } = this.props;
         const contains = stateCart.filter(
-          (element) => element.name === localStorageCart[index].name
+          (element) => element.name === localStorageCart[index].name,
         );
         if (contains.length < 1) {
           dispatchCart(
@@ -131,7 +131,7 @@ class ProductsList extends React.Component {
 
   async sendToCart(target, id) {
     const {
-      dispatchCart, dispatchID, stateID
+      dispatchCart, dispatchID, stateID,
     } = this.props;
     const imgUrl = target.parentNode.parentNode.parentNode.childNodes[0].src;
     const name = target.parentNode.parentNode.parentNode.childNodes[1].innerText;
@@ -222,7 +222,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatchID: (id) => dispatch(globalID(id)),
   dispatchProducts: (array) => dispatch(prodList(array)),
-  dispatchCart: (id, name, price, qtd, url) => dispatch(addCart(id, name, price, qtd, url)),
+  dispatchCart: ({ id, name, price, qtd, url }) => dispatch(
+    addCart(id, name, price, qtd, url),
+  ),
   dispatchQtd: (qtd, id) => dispatch(globalQuantity(qtd, id)),
   dispatchRemoved: (array) => dispatch(removeCartItem(array)),
   dispatchPrice: (number) => dispatch(updatePrice(number)),

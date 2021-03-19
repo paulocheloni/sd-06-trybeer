@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Header } from '../components';
-import { addCart, globalID, globalQuantity, removeCartItem, updatePrice } from '../actions';
+import {
+  addCart, globalID, globalQuantity, removeCartItem, updatePrice } from '../actions';
 
 class Home extends React.Component {
   constructor() {
@@ -17,16 +18,21 @@ class Home extends React.Component {
     this.storageToRedux = this.storageToRedux.bind(this);
   }
 
-  async componentDidMount() {
-    await this.storageToRedux();
-    const { stateCart, statePrice, history } = this.props;
-    await this.setState({
-      localCart: stateCart,
-      localPrice: statePrice,
-    });
+  componentDidMount() {
+    const { history } = this.props;
+    this.storageToRedux();
+    this.handleSetState();
     if (!localStorage.token) {
       history.push('./login');
     }
+  }
+
+  handleSetState() {
+    const { stateCart, statePrice } = this.props;
+    this.setState({
+      localCart: stateCart,
+      localPrice: statePrice,
+    });
   }
 
   handleChange({ target: { name, value } }) {
@@ -49,7 +55,6 @@ class Home extends React.Component {
 
   storageToRedux() {
     const { stateQuantity, dispatchCart, dispatchID, dispatchPrice } = this.props;
-    console.log('storageToRedux')
     if (!localStorage.getItem('stateQuantity')) {
       localStorage.setItem('stateQuantity', JSON.stringify(stateQuantity));
     }
@@ -58,7 +63,7 @@ class Home extends React.Component {
       for (let index = 0; index < localStorageCart.length; index += 1) {
         const { stateCart } = this.props;
         const contains = stateCart.filter(
-          (element) => element.name === localStorageCart[index].name
+          (element) => element.name === localStorageCart[index].name,
         );
         if (contains.length < 1) {
           dispatchCart(
@@ -175,7 +180,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchID: (id) => dispatch(globalID(id)),
-  dispatchCart: (id, name, price, qtd, url) => dispatch(addCart(id, name, price, qtd, url)),
+  dispatchCart: ({ id, name, price, qtd, url }) => dispatch(
+    addCart(id, name, price, qtd, url),
+  ),
   dispatchQtd: (qtd, id) => dispatch(globalQuantity(qtd, id)),
   dispatchPrice: (number) => dispatch(updatePrice(number)),
   dispatchRemoved: (array) => dispatch(removeCartItem(array)),
@@ -184,11 +191,13 @@ const mapDispatchToProps = (dispatch) => ({
 Home.propTypes = {
   dispatchID: PropTypes.func.isRequired,
   dispatchCart: PropTypes.func.isRequired,
+  dispatchPrice: PropTypes.func.isRequired,
   history: PropTypes.shape().isRequired,
   stateCart: PropTypes.arrayOf(PropTypes.object).isRequired,
   dispatchRemoved: PropTypes.func.isRequired,
   stateID: PropTypes.arrayOf(PropTypes.string).isRequired,
   stateQuantity: PropTypes.objectOf(PropTypes.number).isRequired,
+  statePrice: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
