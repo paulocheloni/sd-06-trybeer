@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import UserContext from '../hooks/UseContext';
 import { validateUser } from '../services/users';
+import logo from '../images/tb-logo.png';
+import '../styles/login.css'
 
 function LoginForm() {
   const {
@@ -33,40 +35,55 @@ function LoginForm() {
   };
 
   return (
-    <div>
-      <label htmlFor="emailInput">
-        Email
-        <input
-          id="emailInput"
-          data-testid="email-input"
-          onChange={ (e) => setEmail(e.target.value) }
-        />
-      </label>
-      <label htmlFor="passwordInput">
-        Senha
-        <input
-          id="passwordInput"
-          type="password"
-          data-testid="password-input"
-          onChange={ (e) => setPassword(e.target.value) }
-        />
-      </label>
-      <button
-        type="button"
-        disabled={ !isDisabled }
-        id="signinBtn"
-        data-testid="signin-btn"
-        onClick={ () => handleSubmit(email, password) }
-      >
-        Entrar
-      </button>
-      <button
-        type="button"
-        data-testid="no-account-btn"
-        onClick={ () => history.push('/register') }
-      >
-        Ainda não tenho conta
-      </button>
+    <div className="maincontainer">
+      <div className="transparence">
+        <div className="logincontainer">
+          <img width="350px" src={logo} alt='logo' className="logoimage" />
+          <label
+            htmlFor="emailInput"
+            className="label"
+          >
+            Email
+          </label>
+          <input
+            id="emailInput"
+            data-testid="email-input"
+            onChange={ (e) => setEmail(e.target.value) }
+            className="input"
+            />
+          <label
+            htmlFor="passwordInput"
+            className="label"
+          >
+            Senha
+          </label>
+          <input
+            id="passwordInput"
+            type="password"
+            data-testid="password-input"
+            onChange={ (e) => setPassword(e.target.value) }
+            className="input"
+            />
+          <button
+            type="button"
+            disabled={ !isDisabled }
+            id="signinBtn"
+            data-testid="signin-btn"
+            onClick={ () => handleSubmit(email, password) }
+            className="button"
+            >
+            Entrar
+          </button>
+          <button
+            type="button"
+            data-testid="no-account-btn"
+            onClick={ () => history.push('/register') }
+            className="button"
+            >
+            Ainda não tenho conta
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
