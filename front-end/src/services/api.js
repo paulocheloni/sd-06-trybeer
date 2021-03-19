@@ -75,6 +75,16 @@ const fetchAddSaleProduct = async (salesProducts) => {
   });
 };
 
+const fetchSales = async () => {
+  const response = await fetch('http://localhost:3001/saleProduct', {
+    method: 'GET',
+    headers: contentType,
+    body: JSON.stringify(),
+  }).then((res) => res.json());
+  if (response.message) return false;
+  return response;
+};
+
 module.exports = {
   fetchLogin,
   fetchRegister,
@@ -82,4 +92,5 @@ module.exports = {
   fetchChangeName,
   fetchAddSale,
   fetchAddSaleProduct,
+  fetchSales,
 };
