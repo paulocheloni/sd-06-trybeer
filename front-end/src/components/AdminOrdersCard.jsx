@@ -24,7 +24,7 @@ function AdminOrdersCard() {
   return (
     <div>
       { bancoDeDados.map((e, i) =>
-        <a
+        (<menu
           key={ e.id }
           className="order-card"
           onClick={ () => route.push(`/admin/orders/${e.id}`) }
@@ -35,8 +35,9 @@ function AdminOrdersCard() {
           <span data-testid={ `${i}-order-status` }>
             { e.status ? 'Pendente' : 'Entregue' }
           </span>
-        </a>
-      )}
+        </menu>
+        )
+      )};
     </div>
   );
 }
