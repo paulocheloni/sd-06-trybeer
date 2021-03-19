@@ -1,0 +1,125 @@
+/* width */
+::-webkit-scrollbar {
+  width: 13px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $blue;
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.5); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $darkBlue;
+}
+.checkout-div {
+  display: flex;
+  margin: 100px auto 0 auto;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  .products-div {
+    overflow-y: auto;
+    height: 455px;
+    text-align: center;
+    .cart-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr 3fr 1fr 1fr 0.3fr;
+      align-items: center;
+      width: 800px;
+      border: solid 2px rgba(0,0,0,0.5);
+      border-radius: 6px;
+      margin: 10px;
+      background-color: $white;
+      padding-right: 10px;
+      .total-div {}
+      img {
+        width: 80px;
+        height: 80px;
+        border-radius: 6px;
+      }
+      h5 {
+        font-size: 10px;
+      }
+      button {
+        background-color: $white;
+        border: none;
+        border-radius: 3px;
+        transition: 0.1s;
+        height: 32px;
+        &:hover {
+          background-color: $blue;
+          i { color: $darkerWhite }
+        }
+        i {
+          color: crimson;
+          font-size: 25px;
+        }
+      }
+    }
+  }
+  .adress-div{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 35px;
+    align-items: center;
+    text-align: left;
+    h4 {
+      font-size: 18px;
+      margin: 5px;
+      font-weight: 500;
+    }
+    input {
+      width: 550px;
+      height: 35px;
+      transition: 0.1s;
+      border-radius: 5px;
+      border: none;
+      font-size: 18px;
+      font-weight: 900;
+      color: $lightblue;
+      padding-left: 5px;
+      margin: 0 0 25px 5px;
+      &:hover {
+        box-shadow: 0 0px 10px #9ecaed;
+      }
+      &:focus {
+        outline: none;
+        border-color: #9ecaed;
+        box-shadow: 2px 2x 15px #9ecaed;
+      }
+    }
+    button {
+      background-color: $blue;
+      color: $darkWhite;
+      width: 400px;
+      height: 45px;
+      font-size: 19px;
+      font-weight: 900;
+      margin-top: 30px;
+      border-radius: 7px;
+      border: none;
+      transition: 0.3s;
+      &:hover {
+        transition: 0.3s;
+        box-shadow: 0 0 15px #9ecaed;
+        opacity: 0.8;
+      }
+      &:disabled {
+        color: gray;
+        background-color: $darkestBlue;
+        box-shadow: 0 0px 0px #9ecaed;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

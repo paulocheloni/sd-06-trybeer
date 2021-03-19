@@ -12,10 +12,15 @@ class ProductsList extends React.Component {
     this.state = {};
     this.sendToCart = this.sendToCart.bind(this);
     this.increaseQuantity = this.increaseQuantity.bind(this);
+    this.toCheckout = this.toCheckout.bind(this);
   }
 
   async componentDidMount() {
-    const { dispatchProducts, dispatchPrice, history } = this.props;
+    const {
+      dispatchProducts,
+      dispatchPrice,
+      history } = this.props;
+    this.storageToRedux();
     const products = await getProducts();
     if (products.message) {
       history.replace('/login');
@@ -30,6 +35,41 @@ class ProductsList extends React.Component {
     localStorage.setItem('PRICE', statePrice);
   }
 
+  async storageToRedux() {
+    const { stateQuantity, dispatchQtd, dispatchCart, dispatchID } = this.props;
+    if (!localStorage.getItem('stateQuantity')) {
+      await localStorage.setItem('stateQuantity', JSON.stringify(stateQuantity));
+    }
+    if (localStorage.getItem('stateQuantity')) {
+      const localStorageQtd = JSON.parse(localStorage.getItem('stateQuantity'));
+      const qtdLength = 12;
+      for (let index = 1; index < qtdLength; index += 1) {
+        dispatchQtd(localStorageQtd[index], index);
+      }
+    }
+    if (localStorage.getItem('stateCart')) {
+      const localStorageCart = JSON.parse(localStorage.getItem('stateCart'));
+      for (let index = 0; index < localStorageCart.length; index += 1) {
+        dispatchCart(localStorageCart[index]);
+        dispatchID(localStorageCart[index].id);
+      }
+    }
+  }
+
+  toCheckout() {
+    const { history } = this.props;
+    const cart = JSON.parse(localStorage.getItem(('stateCart')));
+    const qtd = JSON.parse(localStorage.getItem('stateQuantity'));
+    for (let index = 0; index < cart.length; index += 1) {
+      cart[index].quantity = qtd[cart[index].id];
+    }
+    // dispatchRemoved(cart);
+    localStorage.setItem('stateCart', JSON.stringify(cart));
+    history.push('/checkout');
+    // reload page checkout
+    history.go(0);
+  }
+
   removeItem(id) {
     const { dispatchRemoved, stateCart, stateID } = this.props;
     const newCart = stateCart.filter((element) => element.id !== id);
@@ -40,6 +80,7 @@ class ProductsList extends React.Component {
 
   increaseQuantity({ target }, id) {
     const { dispatchQtd, stateQuantity, dispatchPrice, statePrice } = this.props;
+    const localStQtd = JSON.parse(localStorage.getItem('stateQuantity'));
     const productPrice = Number(target.parentNode.parentNode
       .nextSibling.childNodes[0].innerText.split(' ')[1].replace(',', '.'));
     const reajustedPrice = Number((statePrice + productPrice));
@@ -47,25 +88,38 @@ class ProductsList extends React.Component {
     this.sendToCart(target, id);
     dispatchPrice(reajustedPrice);
     localStorage.setItem('price', reajustedPrice);
+    localStQtd[id] += 1;
+    localStorage.setItem('stateQuantity', JSON.stringify(localStQtd));
   }
 
-  decreaseQuantity({ target }, id) {
+  async decreaseQuantity({ target }, id) {
     const { dispatchQtd, stateQuantity, statePrice, dispatchPrice } = this.props;
     const productPrice = Number(target.parentNode.parentNode
       .nextSibling.childNodes[0].innerText.split(' ')[1].replace(',', '.'));
     const reajustedPrice = Number((statePrice - productPrice));
-    if (statePrice !== 0) dispatchPrice(reajustedPrice);
+    if (statePrice > 0) dispatchPrice(reajustedPrice);
+    if (statePrice > 0) localStorage.setItem('price', reajustedPrice);
     if (stateQuantity[id]) {
+      const localStQtd = JSON.parse(localStorage.getItem('stateQuantity'));
       dispatchQtd(stateQuantity[id] - 1, id);
       if (stateQuantity[id] === 1) {
         this.setState({ [id]: 0 });
-        this.removeItem(id);
+        if (localStQtd[id] === 1) {
+          localStQtd[id] = 0;
+          localStorage.setItem('stateQuantity', JSON.stringify(localStQtd));
+        }
+        await this.removeItem(id);
+        const { stateCart } = this.props;
+        localStorage.setItem('stateCart', JSON.stringify(stateCart));
+      }
+      if (localStQtd[id] > 0) {
+        localStQtd[id] -= 1;
+        localStorage.setItem('stateQuantity', JSON.stringify(localStQtd));
       }
     }
-    localStorage.setItem('price', reajustedPrice);
   }
 
-  sendToCart(target, id) {
+  async sendToCart(target, id) {
     const {
       dispatchCart, dispatchID, stateID,
     } = this.props;
@@ -74,13 +128,15 @@ class ProductsList extends React.Component {
     const price = target.parentNode.parentNode.parentNode.childNodes[3].innerText;
     const cartItem = { id, name, price, quantity: 1, imgUrl };
     if (!stateID.includes(id)) {
-      dispatchCart(cartItem);
+      await dispatchCart(cartItem);
       dispatchID(id);
+      const { stateCart } = this.props;
+      localStorage.setItem('stateCart', JSON.stringify(stateCart));
     }
   }
 
   render() {
-    const { stateProducts, stateQuantity, statePrice, history, stateCart } = this.props;
+    const { stateProducts, statePrice, stateCart, history } = this.props;
     return (
       <div className="prodlist-container">
         <div className="products-container">
@@ -105,7 +161,7 @@ class ProductsList extends React.Component {
                       <i className="fas fa-minus" />
                     </button>
                     <span data-testid={ `${product.id - 1}-product-qtd` }>
-                      { stateQuantity[product.id] }
+                      { JSON.parse(localStorage.getItem('stateQuantity'))[product.id] }
                     </span>
                     <button
                       type="button"
@@ -126,7 +182,7 @@ class ProductsList extends React.Component {
           <button
             type="button"
             data-testid="checkout-bottom-btn"
-            onClick={ () => history.push('./checkout') }
+            onClick={ this.toCheckout }
             disabled={ stateCart.length === 0 ? true : null }
           >
             Ver Carrinho
@@ -134,6 +190,8 @@ class ProductsList extends React.Component {
           <span data-testid="checkout-bottom-btn-value">
             { statePrice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
           </span>
+          { history.location.state !== undefined
+            ? <span>Compra realizada com sucesso!</span> : null}
         </div>
       </div>
     );

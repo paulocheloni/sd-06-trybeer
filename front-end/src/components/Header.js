@@ -18,6 +18,9 @@ class Header extends React.Component {
     if (pathname === '/admin/profile') {
       header.innerText = 'Admin - Meu Perfil';
     }
+    if (pathname === '/checkout') {
+      header.innerText = 'Finalizar Pedido';
+    }
   }
 
   toogleInOut() {
