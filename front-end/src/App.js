@@ -5,7 +5,7 @@ import {
   Signup,
   CostumerProfile,
   CostumerProducts,
-  // CostumerCheckout,
+  CostumerCheckout,
 } from './pages';
 import Provider from './context/Provider';
 
