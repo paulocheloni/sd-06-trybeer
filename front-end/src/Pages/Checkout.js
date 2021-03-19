@@ -5,8 +5,8 @@ import MenuTop from '../components/MenuTop';
 import Context from '../Context/Context';
 
 function Checkout({ history }) {
-  const { cart, isFetching, setIsFetching, setStreet, totalValue, setNumber,
-    handleDeleteClick, street, number, tokenInvalid, sucessmsg, setSucessmsg,
+  const { cart, setCart, isFetching, setIsFetching, setStreet, totalValue, setNumber,
+    handleDeleteClick, street, number, sucessmsg, setSucessmsg, setTotalValue,
   } = useContext(Context);
   const [isDisabled, setIsDisabled] = useState(true);
   const time = 3000;
@@ -30,15 +30,29 @@ function Checkout({ history }) {
   function handleCheckoutFinish() {
     setSucessmsg(true);
     localStorage.removeItem('Cart');
+    setCart([]);
     setTimeout(() => {
+      setSucessmsg(false);
       history.push('/products');
     }, time);
   }
 
   useEffect(() => {
-    if (tokenInvalid) {
+    const token = localStorage.getItem('token');
+    if (!token) {
       history.push('/');
     }
+    // eslint-disable-next-line
+  },[]);
+
+  useEffect(() => {
+    const cartTotal = localStorage.getItem('CartTotal');
+    console.log('Cart Total', cartTotal);
+    setTotalValue(cartTotal);
+    // eslint-disable-next-line
+  },[totalValue]);
+
+  useEffect(() => {
     if (cart.length > 0) {
       setIsFetching(false);
     } else {
@@ -66,7 +80,7 @@ function Checkout({ history }) {
         <h4
           data-testid="order-total-value"
         >
-          {`Total R$ ${totalValue.toFixed(2).replace('.', ',')}`}
+          {`Total R$ ${parseFloat(totalValue).toFixed(2).replace('.', ',')}`}
         </h4>
       </div>
       <div>
