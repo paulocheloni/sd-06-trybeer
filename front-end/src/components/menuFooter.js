@@ -10,7 +10,6 @@ import Fab from '@material-ui/core/Fab';
 import SearchIcon from '@material-ui/icons/Search';
 import { loadState, saveState } from '../services/localStorage';
 import sumTotal from '../resources/sumTotal';
-import Hamburguer from './Hamburguer';
 import context from '../Context/ContextAPI';
 
 const useStyles = makeStyles((theme) => ({
@@ -56,16 +55,17 @@ export default function MenuFooter() {
   useEffect(() => {
     if (!loadState('user')) return history.push('/login');
     const { email } = loadState('user');
-
     const storageTotal = loadState(`${email}_price`);
-    (storageTotal !== 0) ? setPrice(storageTotal) : saveState(`${email}_price`, 0);
+    if (storageTotal !== 0) {
+      return setPrice(storageTotal);
+    }
+    return saveState(`${email}_price`, 0);
   }, [history, setPrice]);
 
   useEffect(() => {
     setPrice(totalSum);
     if (totalSum > 0) return setDisabled(false);
     if (totalSum === '0.00') return setDisabled(true);
-
     const { email } = loadState('user');
     saveState(`${email}_price`, totalSum);
   }, [setPrice, totalSum]);
@@ -80,9 +80,6 @@ export default function MenuFooter() {
       <Paper square className={ classes.paper } />
       <AppBar position="fixed" color="primary" className={ classes.appBar }>
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="open drawer">
-            <Hamburguer />
-          </IconButton>
 
           <Fab color="secondary" aria-label="add" className={ classes.fabButton }>
 

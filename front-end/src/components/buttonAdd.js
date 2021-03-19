@@ -14,7 +14,7 @@ function ButtonAdd({ product, dataIndex }) {
     }
     const isIndex = cart.findIndex((prod) => prod.name === product.name);
     const newCart = [...cart];
-    newCart[isIndex].quantity = newCart[isIndex].quantity + 1;
+    newCart[isIndex].quantity += 1;
     newCart[isIndex].totalPrice = (newCart[isIndex].quantity * product.price).toFixed(2);
     setCart(newCart);
   };

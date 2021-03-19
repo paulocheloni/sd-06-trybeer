@@ -16,19 +16,22 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    gridcolumn: 1,
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 'auto',
-    height: 'auto',
+    width: 500,
+    height: 1000,
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
 }));
+
+const magicNumber = {
+  menosUm: -1,
+};
 
 function Cliente() {
   const [products, setProducts] = useState([]);
@@ -41,7 +44,8 @@ function Cliente() {
     const { email } = loadState('user');
 
     const storageCart = loadState(`${email}`);
-    storageCart ? setCart(storageCart) : saveState(`${email}`, []);
+    if (storageCart) return setCart(storageCart);
+    return saveState(`${email}`, []);
   }, [history, setCart]);
 
   useEffect(() => {
@@ -58,8 +62,8 @@ function Cliente() {
 
   useEffect(() => {
     api.listProducts()
-      .then((products) => {
-        setProducts(products.data);
+      .then((productsList) => {
+        setProducts(productsList.data);
       })
       .catch((err) => console.log(err));
     setIsLoading(false);
@@ -69,7 +73,7 @@ function Cliente() {
 
   const prodQty = (tile) => {
     const idx = cart.findIndex((elem) => elem.name === tile.name);
-    if (idx === -1) return '0';
+    if (idx === magicNumber.menosUm) return '0';
     return `${cart[idx].quantity}`;
   };
 
@@ -83,43 +87,50 @@ function Cliente() {
     <div>
       <NavBar content="TryBeer" />
       <div className={ classes.root }>
-        <GridList spacing={ 20 } cols={ 2 } cellHeight={ 180 } className={ classes.gridList }>
-          {products.map((tile, index) => {
-            const link_img = tile.url_image.replace(/ /g, '_');
-            return (
-              <GridListTile cellHeight key={ link_img } key={ index } data-testid={ `${index}-product-price` }>
+        <GridList cellHeight={ 180 } className={ classes.gridList }>
+          {products.map((tile, index) => (
+            <GridListTile
+              key={ index }
+              data-testid={ `${index}-product-price` }
+            >
 
-                {/* Image */}
-                <img src={ link_img } data-testid={ `${index}-product-img` } alt={ tile.name } />
+              {/* Image */}
+              <img
+                src={ tile.url_image.replace(/ /g, '_') }
+                data-testid={ `${index}-product-img` }
+                alt={ tile.name }
+              />
 
-                <GridListTileBar
-                  // Name
-                  title={ <span data-testid={ `${index}-product-name` }>{tile.name}</span> }
+              <GridListTileBar
+                // Name
+                title={ <span data-testid={ `${index}-product-name` }>{tile.name}</span> }
 
-                  // Price
-                  subtitle={ <span data-testid={ `${index}-product-price` }>
+                // Price
+                subtitle={
+                  <span data-testid={ `${index}-product-price` }>
                     R$
+                    {' '}
                     {tile.price.replace('.', ',')}
-                             </span> }
-                  actionIcon={
-                    <>
-                      {/* Botao de - */}
-                      <ButtonSub product={ tile } dataIndex={ index } />
+                  </span>
+                }
+                actionIcon={
+                  <>
+                    {/* Botao de - */}
+                    <ButtonSub product={ tile } dataIndex={ index } />
 
-                      {/* Quantidade de Produtos */}
-                      <span data-testid={ `${index}-product-qtd` }>
-                        {prodQty(tile)}
-                      </span>
+                    {/* Quantidade de Produtos */}
+                    <span data-testid={ `${index}-product-qtd` }>
+                      {prodQty(tile)}
+                    </span>
 
-                      {/* Botao de + */}
-                      <ButtonAdd product={ tile } dataIndex={ index } />
+                    {/* Botao de + */}
+                    <ButtonAdd product={ tile } dataIndex={ index } />
 
-                    </>
-                  }
-                />
-              </GridListTile>
-            );
-          })}
+                  </>
+                }
+              />
+            </GridListTile>
+          ))}
         </GridList>
       </div>
       <MenuFooter />

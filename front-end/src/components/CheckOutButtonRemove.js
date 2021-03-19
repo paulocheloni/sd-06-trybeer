@@ -5,7 +5,6 @@ import context from '../Context/ContextAPI';
 
 function CheckoutButtonRemove({ productIndex, productId }) {
   const { cart, setCart, price, setPrice } = useContext(context);
-  // const [price, setTotalValue] = useState();
   const [emailUser, setEmailUser] = useState('');
 
   useEffect(() => {
@@ -13,9 +12,6 @@ function CheckoutButtonRemove({ productIndex, productId }) {
     setEmailUser(loadUser.email);
     const cartStorage = loadState(loadUser.email);
     setCart(cartStorage);
-
-    // const totalPriceStorage = loadState(`${loadUser.email}_price`);
-    // setPrice(totalPriceStorage);
   }, [setCart]);
 
   const removeCheckout = () => {
