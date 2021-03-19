@@ -12,7 +12,7 @@ body {
   justify-content: center;
   margin: auto;
   margin-top: 30px;
-  width: 100%;
+  width: 305px;
 }
 
 .img-logo-login {
@@ -27,11 +27,13 @@ body {
   flex-flow: column wrap;
   justify-content: center;
   margin: auto;
+  width: 305px;
 }
 
 .login-register form label {
   font-family: 'Poppins', sans-serif;
   font-size: 14pt;
+  font-weight: 900;
   text-align: center;
 }
 
@@ -41,6 +43,7 @@ body {
   font-family: 'Poppins', sans-serif;
   font-size: 14pt;
   height: 30px;
+  margin: 5px 0px;
   text-align: center;
   width: 300px;
 }
@@ -59,7 +62,7 @@ form button {
   font-size: 16pt;
   font-weight: 700;
   height: 40px;
-  margin-top: 5px;
+  margin-top: 15px;
   width: 305px;
 }
 
@@ -85,11 +88,22 @@ form button:hover:disabled {
 }
 
 .checkbox {
-  display: block;
-  font-family: 'Poppins', sans-serif;
-  font-size: 14pt;
+  align-items: center;
+  align-content: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin-top: 10px;
+  width: 305px;
 }
 
+.checkbox label {
+  margin-left: 100px;
+}
+
+.checkbox input {
+  margin-right:  -50px;
+}
 
 @media only screen and (min-width: 1000px) {
   .login {

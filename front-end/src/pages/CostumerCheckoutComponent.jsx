@@ -1,5 +1,5 @@
 import React from 'react';
-import CheckoutCards from '../components/CheckoutCards';
+// import CheckoutCards from '../components/CheckoutCards';
 import Header from '../components/HeaderComponent';
 
 function CostumerCheckout() {
@@ -23,13 +23,28 @@ function CostumerCheckout() {
       <form action="post">
         <label htmlFor="street">
           Rua:
-          <input type="text" name="street" id="street" />
+          <input
+            type="text"
+            name="street"
+            id="street"
+            data-testid="checkout-street-input"
+          />
         </label>
         <label htmlFor="number">
           Número da casa:
-          <input type="text" name="number" id="number" />
+          <input
+            type="text"
+            name="number"
+            id="number"
+            data-testid="checkout-house-number-input"
+          />
         </label>
-        <button type="button">Finalizar Pedido</button>
+        <button
+          type="button"
+          data-testid="checkout-finish-btn"
+        >
+          Finalizar Pedido
+        </button>
       </form>
     </>
   );

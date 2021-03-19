@@ -100,15 +100,17 @@ function Signup({ history }) {
             onChange={ handleChange }
           />
         </label>
-        <label htmlFor="vender">
-          Quero vender
-          <input
-            type="checkbox"
-            data-testid="signup-seller"
-            defaultChecked={ checked }
-            onChange={ handleCheck }
-          />
-        </label>
+        <div className="checkbox">
+          <label htmlFor="vender">
+            Quero vender
+            <input
+              type="checkbox"
+              data-testid="signup-seller"
+              defaultChecked={ checked }
+              onChange={ handleCheck }
+            />
+          </label>
+        </div>
         <span>{errMessage}</span>
         <button
           id="sign-up"

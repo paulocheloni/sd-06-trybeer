@@ -21,7 +21,14 @@ function App() {
             <Route path="/products" component={ CostumerProducts } />
             <Route path="/checkout" component={ CostumerCheckout } />
             <Route path="/orders" component={ () => <h1>/cliente/meuspedidos</h1> } />
-            <Route path="/admin/orders" component={ () => <h1>/admin/orders</h1> } />
+            {/* <Route path="/admin/profile" component={ AdminProfile } /> */}
+            {/* <Route path="/admin/orders" component={ AdminOders } /> */}
+            <Route
+              path="/admin/orders/:id"
+              component={
+                () => <h1>/admin/orders id</h1>
+              }
+            />
             <Route path="/" component={ () => <Redirect to="/login" /> } />
           </Switch>
         </Provider>

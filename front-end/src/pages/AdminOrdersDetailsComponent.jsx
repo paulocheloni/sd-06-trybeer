@@ -1,25 +1,13 @@
-import React, { useState } from 'react';
-import { SideBarAdmin, OrdersCards } from '../components';
+import React from 'react';
+import { SideBarAdmin } from '../components';
 
-function AdminOrders() {
-  const [orders] = useState([]);
-
+function AdminOrdersDetails() {
   return (
-    <div className="admin_profile">
+    <div className="admin_orders_details">
       <SideBarAdmin />
-      <h1>Pedidos</h1>
-      <div className="order-list">
-        {orders.map((element, index) => (
-          <div key={ element.id }>
-            <OrdersCards
-              element={ element }
-              index={ index }
-            />
-          </div>
-        ))}
-      </div>
+      <h1>Pedido </h1>
     </div>
   );
 }
 
-export default AdminOrders;
+export default AdminOrdersDetails;
