@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const productsModel = require('../model/Products');
 const { UNAUTHORIZED } = require('../schema/statusSchema');
 
+const SECRET = 'senhasupersecreta.com';
+
 // Return all products
 const getAll = async () => {
   const products = await productsModel.getAll();
@@ -14,7 +16,7 @@ const verifyAuth = async (req, res, next) => {
   
   if (!authorization) return res.status(UNAUTHORIZED).json({ message: 'jwt is missing' });
 
-  jwt.verify(authorization, process.env.SECRET, (err) => {
+  jwt.verify(authorization, SECRET, (err) => {
     if (err) return res.status(UNAUTHORIZED).json({ message: 'failed to auth token' });
   });
 

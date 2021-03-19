@@ -3,8 +3,9 @@ import SideBar from './SideBar';
 import Header from './Header';
 import '../css/ControllerHeader.css';
 
-function ControllerHeader(props) {
+function ControllerHeader() {
   const [viewMenu, setViewMenu] = useState(false);
+
   return (
     <div className="controllerheader">
       <button
@@ -14,8 +15,8 @@ function ControllerHeader(props) {
       >
         ☰
       </button>
-      <Header title={ props.title } />
-      { viewMenu && <SideBar/> }
+      <Header />
+      { viewMenu && <SideBar setViewMenu={ setViewMenu } /> }
     </div>
   );
 }
