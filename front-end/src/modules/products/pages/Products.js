@@ -1,8 +1,12 @@
+
 import React, { useEffect, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import PageMenu from '../../../design-system/page-menu/PageMenu';
 import Buttons from '../components/Buttons';
 import GlobalContext from '../../../context/Context';
 import api from '../../../axios';
 import PaperContainer from '../../../design-system/containers/PaperContainer';
+import BodyContainer from '../../../design-system/containers/BodyContainer';
 
 function Products() {
   const [prod, setProd] = useState('');
@@ -63,9 +67,12 @@ function Products() {
   };
 
   return (
-    <PaperContainer>
-      {rendering ? renderProducts() : <span>Waiting data</span>}
-    </PaperContainer>
+    <BodyContainer>
+      <PaperContainer>
+        <PageMenu pageName="Pedidos" />
+        {rendering ? getProducts() : <span>Waiting data</span>}
+      </PaperContainer>
+    </BodyContainer>
   );
 }
 

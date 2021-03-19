@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import PaperContainer from '../../../design-system/containers/PaperContainer';
+import PageMenu from '../../../design-system/page-menu/PageMenu';
 
 const Orders = () => {
   const history = useHistory();
@@ -15,6 +16,7 @@ const Orders = () => {
 
   return (
     <div>
+      <PageMenu pageName="Pedidos" />
       <PaperContainer>
         <p>Pedidos</p>
       </PaperContainer>
