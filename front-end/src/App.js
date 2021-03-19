@@ -9,6 +9,7 @@ import Products from './pages/Products';
 import Orders from './pages/Orders';
 import Checkout from './pages/Checkout';
 import AdminOrders from './pages/AdminOrders';
+import AdminProfile from './pages/AdminProfile';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="/checkout" component={ Checkout } />
         <Route exact path="/orders" component={ Orders } />
         <Route exact path="/admin/orders" component={ AdminOrders } />
+        <Route exact path="/admin/profile" component={ AdminProfile } />
       </Switch>
     </Provider>
   );
