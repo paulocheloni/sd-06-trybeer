@@ -23,11 +23,13 @@ function AdminOrdersCard() {
   // console.log(allSales)
   return (
     <div>
-      { bancoDeDados.map((e, i) => {
-        return (
+      { bancoDeDados.map((e, i) => 
+        (
           <div
             key={ e.id }
             className="order-card"
+            role="div-card"
+            onKeyDown={ () => console.log('test linter') }
             onClick={ () => {
               route.push(`/admin/orders/${e.id}`);
             } }
@@ -39,8 +41,8 @@ function AdminOrdersCard() {
               { e.status ? 'Pendente' : 'Entregue' }
             </span>
           </div>
-        );
-      })}
+        )
+      )}
     </div>
   );
 }

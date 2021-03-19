@@ -16,7 +16,8 @@ function MenuSide() {
     return (
       <div className="side-menu-container">
         {
-          isClient && <button
+          isClient &&
+          <button
             data-testid="side-menu-item-products"
             type="button"
             onClick={ () => route.push('/products') }
