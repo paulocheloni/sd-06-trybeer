@@ -1,9 +1,10 @@
 import React from 'react';
+import SideBarAdmin from '../../../design-components/SideBarAdmin';
 
 function AdminOrders() {
   return (
     <div>
-      AdminOrders
+      <SideBarAdmin />
     </div>
   );
 }
