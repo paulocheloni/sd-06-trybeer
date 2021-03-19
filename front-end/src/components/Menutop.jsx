@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import './menuTop.css';
 import PropTypes from 'prop-types';
-import MenuSide from './menuSide';
+import MenuSide from './Menuside';
 
 function MenuTop({ title }) {
   const [open, setOpen] = useState(false);
