@@ -18,7 +18,7 @@ const listProducts = () => (api.get('/products'));
 
 const createSale = (dataSale) => {
   console.log(dataSale);
-  return api.post('/sales', { dataSale });
+  return api.post('/sales', dataSale);
 };
 
 export default {

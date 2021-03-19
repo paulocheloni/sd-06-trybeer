@@ -94,7 +94,6 @@ function Cliente() {
               data-testid={ `${index}-product-price` }
             >
 
-
               {/* Image */}
               <img
                 src={ tile.url_image.replace(/ /g, '_') }
