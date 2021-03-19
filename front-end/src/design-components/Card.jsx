@@ -55,11 +55,10 @@ function Card({ product, testIdNumber }) {
           className="mx-auto h-24 w-24 w-auto"
           data-testid={ `${testIdNumber}-product-img` }
         />
-        <h4 data-testid={ `${testIdNumber}-product-name` }>{name}</h4>
-        <h5 data-testid={ `${testIdNumber}-product-price` }>
-          R$
-          {price}
-        </h5>
+        <p data-testid={ `${testIdNumber}-product-name` }>{name}</p>
+        <p data-testid={ `${testIdNumber}-product-price` }>
+          {`R$ ${price.replace('.', ',')}`}
+        </p>
       </div>
       <div className="relative side-menu-container flex justify-center items-center">
         <button
@@ -69,12 +68,12 @@ function Card({ product, testIdNumber }) {
         >
           <FaIcons.FaPlusSquare />
         </button>
-        <h2
+        <p
           className=""
           data-testid={ `${testIdNumber}-product-qtd` }
         >
           {localQuantity}
-        </h2>
+        </p>
         <button
           type="button"
           onClick={ () => handleClickMinus() }
