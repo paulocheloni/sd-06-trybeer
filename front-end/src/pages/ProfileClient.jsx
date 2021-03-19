@@ -2,25 +2,40 @@ import React, { useState, useEffect } from 'react';
 import { handleUpdate } from '../services/index';
 import { profile } from '../api/index';
 import ControllerHeader from '../components/ControllerHeader';
+import '../css/Util.css';
 
 function ProfileClient() {
   const [user, setUser] = useState({ name: '', email: '' });
   const [activeBtn, setActiveBtn] = useState();
+  const [showMessage, setShowMessage] = useState(false);
+
+  const handleChange = ({ value }) => {
+    const userFromStorage = JSON.parse(localStorage.getItem('user'))
+
+    if(userFromStorage.name !== value) {
+      setActiveBtn(true)
+    } else setActiveBtn(false)
+    
+    setUser({ ...user, name: value })
+  }
 
   useEffect(() => {
     async function fetchData() {
       const token = localStorage.getItem('token');
-      const userLo = await profile(token);
-      setUser(name, email);
+      const response = await profile(token);
+      localStorage.setItem('user', JSON.stringify({ name: response.name, email: response.email, id: response.id }))
+      setUser({ name: response.name, email: response.email });
     }
 
     setActiveBtn(false);
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   ;
-  // }, [name]);
+  useEffect(() => {
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 4000)
+  }, [showMessage]);
 
   return (
     <div>
@@ -30,14 +45,15 @@ function ProfileClient() {
         <input
           name="name"
           data-testid="profile-name-input"
-          onChange={ ({ target }) => setUser({ ...user, name: target.value }) }
+          value={ user.name }
+          onChange={ ({ target }) => handleChange(target) }
         />
       </label>
       <label htmlFor="email">
         Email
         <input
           name="email"
-          // value=user.name
+          value={ user.email }
           data-testid="profile-email-input"
           readOnly
         />
@@ -46,10 +62,11 @@ function ProfileClient() {
         type="submit"
         disabled={ !activeBtn }
         data-testid="profile-save-btn"
-        onClick={ () => handleUpdate(user.name) }
+        onClick={ () => handleUpdate(user.name, setShowMessage) }
       >
         Salvar
       </button>
+      <span className={showMessage ? 'show' : 'no-show'}>Atualização concluída com sucesso</span>
     </div>
   );
 }

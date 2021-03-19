@@ -57,9 +57,12 @@ const redirectMenuBar = (history, payloadUrl) => {
   history.push(payloadUrl);
 };
 
-const handleUpdate = (name) => {
-  console.log(name);
-  updateName(name);
+const handleUpdate = (name, setShowMessage) => {
+  const userFromStorage = JSON.parse(localStorage.getItem('user')) 
+  const { id } = userFromStorage;
+
+  updateName(name, id, setShowMessage)
+    .then(setShowMessage(true))
 };
 
 export {

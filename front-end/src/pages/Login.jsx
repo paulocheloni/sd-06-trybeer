@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import { verifyEmailAndPassword, handleSubmit } from '../services';
 import logo from '../img/trybe.png';
 import '../css/Login.css';
-// import ControllerHeader from '../components/ControllerHeader';
 
 function Login() {
   const [activeBtn, setActiveBtn] = useState(false);
@@ -17,7 +16,6 @@ function Login() {
 
   return (
     <div className="login-page">
-      {/* <ControllerHeader /> */}
       <div className="login-container">
         <img src={ logo } alt="logo" className="logo" />
         <div className="form-container">

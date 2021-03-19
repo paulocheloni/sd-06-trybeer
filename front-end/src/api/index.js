@@ -38,12 +38,12 @@ function register(user) {
   return result;
 }
 
-function updateName(name) {
+function updateName(name, id) {
   const axios = buildAxiosHandler();
 
-  return axios.put('/user/:id', name, { headers: { Authorization: localStorage.token } })
-    .then((result) => console.log(result))
-    .catch((err) => console.log(err.response));
+  return axios.put(`/user/${id}`,
+    { name },
+    { headers: { Authorization: localStorage.token } })
 }
 
 export {
