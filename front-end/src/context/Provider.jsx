@@ -8,7 +8,6 @@ function Provider({ children }) {
   const [validRegister, setValidRegister] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [products, setProducts] = useState([]);
   useEffect(() => {
     const maxLength = 5;
     function validateForm(emailInput, passwordInput) {
@@ -39,8 +38,6 @@ function Provider({ children }) {
     validRegister,
     register,
     setRegister,
-    products,
-    setProducts,
   };
 
   return (
