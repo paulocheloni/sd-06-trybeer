@@ -6,6 +6,7 @@ import Products from './pages/Products';
 import Checkout from './pages/Checkout';
 import AdminOrders from './pages/AdminOrders';
 import UserRegister from './pages/UserRegister';
+import AdminProfile from './pages/AdminProfile';
 import Profile from './pages/Profile';
 import Orders from './pages/Orders';
 import './App.css';
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/orders" component={ Orders } />
           <Route exact path="/checkout" component={ Checkout } />
+          <Route exact path="/admin/profile" component={ AdminProfile } />
         </Switch>
       </BrowserRouter>
     </LoginProvider>
