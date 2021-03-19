@@ -13,7 +13,7 @@ const LoginProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [totalCart, setTotalCart] = useState(0);
-  
+
   const providerValue = {
     user,
     setUser,
