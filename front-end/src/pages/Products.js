@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import SidebarMenu from '../components/SideBarMenu';
 import TopMenu from '../components/TopMenu';
-import fetchFunctions from '../api/fetchFunctions';
 import ProductCard from '../components/ProductCard';
 import Cart from '../components/Cart';
 import TrybeerContext from '../context/TrybeerContext';
@@ -10,19 +9,18 @@ import { verifyToken } from '../utils/verifications';
 
 function Products({ history }) {
   const [products, setProducts] = useState([]);
-  const { user, getFromLocalStorage } = useContext(TrybeerContext);
+  const { getFromLocalStorage } = useContext(TrybeerContext);
   const recoveredUser = getFromLocalStorage('user');
-  console.log(user);
+
   const fetchProducts = async () => {
-    await fetchFunctions.get('products').then((productsArray) => {
-      setProducts(productsArray);
-    });
+    const allProducts = await verifyToken('products', recoveredUser, history);
+    setProducts(allProducts);
   };
 
   useEffect(() => {
-    verifyToken('products', recoveredUser, history);
+    console.log(recoveredUser);
     fetchProducts();
-  }, [history, recoveredUser]);
+  }, []);
 
   return (
     <div>
