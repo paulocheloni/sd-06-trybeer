@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import PaperContainer from '../../../design-system/containers/PaperContainer';
 import PageMenu from '../../../design-system/page-menu/PageMenu';
 
-
 const Orders = () => {
   const history = useHistory();
   const storage = JSON.parse(localStorage.getItem('user'));
