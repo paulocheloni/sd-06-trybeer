@@ -11,6 +11,8 @@ function Login({ history }) {
   const [errMsg, setErrMsg] = useState('');
   const [displayErr, setDisplayErr] = useState(false);
 
+  localStorage.cart = JSON.stringify([]);
+
   useEffect(() => {
     visibilityBtnLogin(user, setValid);
   }, [user]);
