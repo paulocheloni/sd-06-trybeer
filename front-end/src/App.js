@@ -3,6 +3,7 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import LoginProvider from './context/LoginProvider';
 import Login from './pages/Login';
 import Products from './pages/Products';
+import Checkout from './pages/Checkout';
 import AdminOrders from './pages/AdminOrders';
 import UserRegister from './pages/UserRegister';
 import ClientProfile from './pages/ClientProfile';
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/profile" component={ ClientProfile } />
           <Route exact path="/orders" component={ Orders } />
           <Route exact path="/admin/profile" component={ AdminProfile } />
+          <Route exact path="/checkout" component={ Checkout } />
         </Switch>
       </BrowserRouter>
     </LoginProvider>
