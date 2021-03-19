@@ -7,7 +7,10 @@ function AdminOrders() {
   return (
     <div className="div-main">
       <SideBarAdmin />
-      <h1 className="title">Admin Orders</h1>
+      <div className="div-filha">
+        <h1 className="title">Admin Orders</h1>
+        <h2>Teste</h2>
+      </div>
     </div>
   );
 }

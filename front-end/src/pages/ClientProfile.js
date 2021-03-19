@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import TopBar from '../components/TopBar';
-import { getLocal, sendNewName } from '../services/profileService';
+import { getLocal, sendNewName } from '../services/ClientProfileService';
 import InputProfile from '../services/InputProfile';
 
 function ClientProfile() {
