@@ -3,7 +3,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 // const images = require('../images.tar.gz');
 const { routerLogin,
-   routerSales, routerRegister, routerProducts, routerProfile } = require('./controllers');
+  routerRegister, routerProducts, routerProfile, routerSales, 
+  routerSalesAdm } = require('./controllers');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -20,6 +21,7 @@ app.use('/products', routerProducts);
 app.use('/profile', routerProfile);
 app.use('/register', routerRegister);
 app.use('/orders', routerSales);
+app.use('/admin/orders', routerSalesAdm);
 
 app.use(async (err, _req, res, _next) => {
   console.log(err);

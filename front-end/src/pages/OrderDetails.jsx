@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import MenuTop from '../components/MenuTop';
+import OrderDetailsCard from '../components/OrderDetailsCard';
 
 function OrderDetails() {
   const [data, setData] = useState('');
@@ -16,7 +17,7 @@ function OrderDetails() {
     <>
       <MenuTop title="TryBeer" />
       <h1>detalhe do pedido</h1>
-      <OrderDetails order={ data } />
+      <OrderDetailsCard order={ data } />
     </>
   );
 }

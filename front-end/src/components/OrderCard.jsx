@@ -9,29 +9,29 @@ export default function OrderCard({ order, orderIndex }) {
   return (
     <div>
 
-    <button
-      data-testid={ `${orderIndex}-order-card-container` }
-      key={ `${orderIndex}` }
-      type="button"
-      onClick={ () => history.push(`/orders/${orderIndex + 1}`) }
+      <button
+        data-testid={ `${orderIndex}-order-card-container` }
+        key={ `${orderIndex}` }
+        type="button"
+        onClick={ () => history.push(`/orders/${orderIndex + 1}`) }
       >
-      <p data-testid={ `${orderIndex}-order-number` }>
-        Pedido
-        {' '}
-        {orderIndex + 1}
-      </p>
-      <p data-testid={ `${orderIndex}-order-date` }>
-        data:
-        {' '}
-        {convertData(order.sale_date)}
-      </p>
-      <p data-testid={ `${orderIndex}-order-total-value` }>
-        valor total:
-        {' '}
-        {currencyFormat(Number(order.total_price))}
-      </p>
-      <hr />
-    </button>
+        <p data-testid={ `${orderIndex}-order-number` }>
+          Pedido
+          {' '}
+          {orderIndex + 1}
+        </p>
+        <p data-testid={ `${orderIndex}-order-date` }>
+          data:
+          {' '}
+          {convertData(order.sale_date)}
+        </p>
+        <p data-testid={ `${orderIndex}-order-total-value` }>
+          valor total:
+          {' '}
+          {currencyFormat(Number(order.total_price))}
+        </p>
+        <hr />
+      </button>
     </div>
   );
 }

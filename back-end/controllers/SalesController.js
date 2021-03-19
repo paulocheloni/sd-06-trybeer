@@ -1,4 +1,5 @@
 const { Router } = require('express');
+
 const validateToken = require('../middlewares/validateToken');
 const { createOne, getAllByUserId } = require('../models/SalesService');
 
@@ -15,12 +16,12 @@ routerSales.post('/', validateToken, async (req, res) => {
 });
 
 routerSales.get('/', validateToken, async (req, res) => {
+  console.log(res.locals);
   const { userId } = res.locals;
   const [orders] = await getAllByUserId(userId);
   console.log(orders, 'orders');
   res.status(200).json({ orders });
 });
-
 
 module.exports = routerSales;
 

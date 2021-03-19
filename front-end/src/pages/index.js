@@ -6,6 +6,8 @@ import OrderDetails from './OrderDetails';
 import Profile from './Profile';
 import Admin from './Admin';
 import ClientProfile from './ClientProfile';
+import AdminProfile from './AdminProfile';
+import OrdersAdm from './OrdersAdm';
 import Checkout from './Checkout';
 
 export {
@@ -17,5 +19,7 @@ export {
   Admin,
   OrderDetails,
   ClientProfile,
+  AdminProfile,
+  OrdersAdm,
   Checkout,
 };
