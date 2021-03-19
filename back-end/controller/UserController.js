@@ -1,13 +1,20 @@
 const { Router } = require('express');
+const jwt = require('jsonwebtoken');
 const {
   getAll,
   verifyEmail,
   createNewUser,
   verifyId,
+  findById,
   update,
   verifyAuth
 } = require('../service/UserService');
 const { OK, CREATED } = require('../schema/statusSchema');
+
+const jwtConfig = {
+  expiresIn: '7d',
+  algorithm: 'HS256',
+};
 
 const UserController = new Router();
 
@@ -25,13 +32,27 @@ UserController.post('/', verifyEmail, async (req, res) => {
   res.status(CREATED).json({ message: 'OK' });
 });
 
-// Update Product
+// Get Profile
+UserController.get('/profile', verifyAuth, async (req, res) => {
+  const { authorization } = req.headers;
+
+  jwt.verify(authorization, process.env.SECRET, (err, decoded) => {
+    const dec = decoded.data[0];
+    if (!decoded.data[0]) res.status(OK).json(decoded.data);
+    res.status(OK).json(dec);
+  });
+
+});
+
+// Update
 UserController.put('/:id', verifyId, verifyAuth, async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
 
   await update(id, name);
-  res.status(OK).json({ message: 'name updated!' });
+  const user = await findById(id);
+  const token = jwt.sign({ data: user }, process.env.SECRET, jwtConfig);
+  res.status(OK).json({ token });
 });
 
 module.exports = UserController;
