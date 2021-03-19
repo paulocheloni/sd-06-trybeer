@@ -20,8 +20,12 @@ function Products() {
     api
       .get('/products')
       .then((response) => response.data)
-      .then((productsList) => setProducts(productsList))
+      .then((productsList) => {
+        setProducts([]);
+        setProducts(productsList);
+      })
       .catch(() => history.push('/'));
+    console.log('useEffect do get products');
   }, [setProducts, history]);
 
   useEffect(() => {
@@ -29,16 +33,10 @@ function Products() {
       const checkingSale = sale.products
         .find((selectedProduct) => product.id === selectedProduct.id);
       if (checkingSale) return checkingSale;
-      return {
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        quantity: 0,
-        urlImage: product.url_image,
-      };
+      return product;
     });
     setRenderProducts(checkedProducts);
-    console.log('inside useEffect checking sale: ', checkedProducts);
+    console.log('useEffect do checkproducts');
   }, [setRenderProducts, products, sale.products]);
 
   return (

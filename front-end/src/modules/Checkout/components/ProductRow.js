@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import * as FaIcons from 'react-icons/fa';
 import ContextBeer from '../../../context/ContextBeer';
 
-function ProductRow({ product }) {
+function ProductRow({ product, testIdNumber }) {
   const { name, price, quantity, id } = product;
   const { sale, setSale } = useContext(ContextBeer);
 
@@ -21,18 +21,23 @@ function ProductRow({ product }) {
   return (
     <div className="flex w-full justify-between">
       <div>
-        <p>{ quantity }</p>
+        <p data-testid={ `${testIdNumber}-product-qtd-input` }>{ quantity }</p>
       </div>
       <div>
-        <p>{ name }</p>
+        <p data-testid={ `${testIdNumber}-product-name` }>{ name }</p>
       </div>
       <div>
-        <p>{ (parseFloat(price) * quantity).toFixed(2) }</p>
+        <p data-testid={ `${testIdNumber}-product-total-value` }>
+          { `R$ ${(parseFloat(price) * quantity).toFixed(2).replace('.', ',')}` }
+        </p>
       </div>
       <div>
-        <p>{ `(${price})` }</p>
+        <p data-testid={ `${testIdNumber}-product-unit-price` }>
+          { `(R$ ${price.replace('.', ',')} un)` }
+        </p>
       </div>
       <button
+        data-testid={ `${testIdNumber}-removal-button` }
         type="button"
         className="focus:outline-none"
         onClick={ () => onClick() }
@@ -50,7 +55,8 @@ ProductRow.propTypes = {
     price: PropTypes.string,
     quantity: PropTypes.number,
     urlImage: PropTypes.string,
-  }).isRequired,
-};
+  }),
+  testIdNumber: PropTypes.number,
+}.isRequired;
 
 export default ProductRow;

@@ -29,7 +29,7 @@ function CartButton() {
       >
         <h1>Ver Carrinho</h1>
         <span data-testid="checkout-bottom-btn-value">
-          { `R$ ${localTotal.replace('.', ',')}` }
+          { localTotal === 0 ? 'R$ 0,00' : `R$ ${localTotal.replace('.', ',')}` }
         </span>
       </button>
     </div>

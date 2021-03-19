@@ -12,7 +12,7 @@ function Card({ product, testIdNumber }) {
 
   const [localQuantity, setLocalQuantity] = useState(prevQuantity);
 
-  const formatedImgUrl = urlImage.split(' ').join('%20');
+  console.log('card number ', testIdNumber);
 
   const handleClickPlus = () => {
     const quantity = localQuantity + 1;
@@ -52,7 +52,7 @@ function Card({ product, testIdNumber }) {
     >
       <div className="relative side-menu-container flex flex-col space-y-4 items-center">
         <img
-          src={ formatedImgUrl }
+          src={ urlImage }
           alt={ name }
           className="mx-auto h-24 w-24 w-auto"
           data-testid={ `${testIdNumber}-product-img` }

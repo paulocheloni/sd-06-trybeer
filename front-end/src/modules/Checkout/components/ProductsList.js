@@ -8,11 +8,15 @@ function ProductsList({ sale }) {
     <div className="flex flex-col items-center mx-auto w-96">
       {
         products.map((product, index) => (
-          <ProductRow key={ `${index}-product` } product={ product } />
+          <ProductRow
+            key={ `${index}-product` }
+            testIdNumber={ index }
+            product={ product }
+          />
         ))
       }
       <div>
-        <p>{ total }</p>
+        <p data-testid="order-total-value">{ `R$ ${total.replace('.', ',')}` }</p>
       </div>
     </div>
   );

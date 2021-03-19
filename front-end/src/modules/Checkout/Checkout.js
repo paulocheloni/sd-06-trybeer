@@ -28,25 +28,29 @@ function Checkout() {
     if (sale.products.length === 0
       || deliveryAddress === ''
       || deliveryNumber === '') setButtonDisable(true);
+    else setButtonDisable(false);
   }, [sale, deliveryAddress, deliveryNumber]);
 
   const handleSubmit = () => {
     const bodyObj = {
       products: products
         .map((product) => ({ id: product.id, quantity: product.quantity })),
-      total,
+      total: parseFloat(total),
       deliveryAddress,
       deliveryNumber,
     };
+
+    console.log('in handle submit: ', bodyObj);
 
     api
       .post('/sales', bodyObj)
       .then(() => setSale({
         products: [],
-        total: 0,
+        total: '0.00',
       }))
       .then(() => setTimeout(() => setSuccess(true), successTimer))
-      .then(() => history.push('/products'));
+      .then(() => history.push('/products'))
+      .catch((err) => console.log(err.message));
   };
 
   return (
@@ -60,12 +64,14 @@ function Checkout() {
             type="text"
             onChange={ setDeliveryAddress }
             label="Rua"
+            testId="checkout-street-input"
           />
           <LabeledInput
             value={ deliveryNumber }
             type="text"
             onChange={ setDeliveryNumber }
             label="Número da casa"
+            testId="checkout-house-number-input"
           />
         </div>
         <div
@@ -79,6 +85,7 @@ function Checkout() {
           isDisabled={ buttonDisable }
           bgColor="green-600"
           onClick={ () => handleSubmit() }
+          testId="checkout-finish-btn"
         >
           Finalizar Pedido
         </Button>
