@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TrybeerContext from '../context/TrybeerContext';
+import getFromLocalStorage from '../utils/getFromLocalStorage';
 
 function TrybeerProvider({ children }) {
-  const getFromLocalStorage = (key) => {
-    const keyFromLocalStorage = JSON.parse(localStorage.getItem(key));
-    return keyFromLocalStorage;
-  };
-
   const [cart, setCart] = useState(() => {
     const cartFromLocalStorage = getFromLocalStorage('cart');
     if (cartFromLocalStorage) return cartFromLocalStorage;
@@ -71,7 +67,7 @@ function TrybeerProvider({ children }) {
       { children }
     </TrybeerContext.Provider>
   );
-}
+};
 
 TrybeerProvider.propTypes = {
   children: PropTypes.node.isRequired,
