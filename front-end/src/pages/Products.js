@@ -6,15 +6,16 @@ import TopMenu from '../components/TopMenu';
 import ProductCard from '../components/ProductCard';
 import Cart from '../components/Cart';
 import TrybeerContext from '../context/TrybeerContext';
-import { verifyToken } from '../utils/verifications';
+import fetchFunctions from '../api/fetchFunctions';
 
 function Products() {
   const history = useHistory();
   const [products, setProducts] = useState([]);
   const { user } = useContext(TrybeerContext);
+  console.log(products);
 
   const fetchProducts = async () => {
-    const allProducts = await verifyToken('products', user, history);
+    const allProducts = await fetchFunctions.get('products', user.token);
     setProducts(allProducts);
   };
 
@@ -23,7 +24,7 @@ function Products() {
       history.push('/login');
     }
     fetchProducts();
-  }, [user, history, fetchProducts]);
+  }, [user, history]);
 
   return (
     <div>
