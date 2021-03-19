@@ -1,53 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
-import SideBarAdmin from '../components/SideBarAdmin'
+import { useHistory } from 'react-router-dom';
+import SideBarAdmin from '../components/SideBarAdmin';
+import getLocal from '../services/AdminProfileService';
+
+import './Admin.css';
 
 function AdminProfile() {
-  const [renderProfile, setRenderProfile] = useState(false);
-  const [nameLocal, setNameLocal] = useState('')
-  const [emailLocal, setEmailLocal] = useState('')
+  const history = useHistory();
+  const [nameLocal, setNameLocal] = useState('');
+  const [emailLocal, setEmailLocal] = useState('');
+  const [existsLocal, setExistsLocal] = useState(false);
 
-  const verify = JSON.parse(localStorage.getItem('user'));
-  const user = verify ? verify.role === 'administrator' : false;
-  console.log(user);
-
-  // useEffect(() => {
-  //   if (user) return setRenderProfile(true)
-  //   setRenderProfile(false);
-  // }, []);
-
-  // useEffect(() => {
-  //   setNameLocal(user.name)
-  //   setEmailLocal(user.email)
-  // },[])
+  useEffect(() => {
+    getLocal({ setNameLocal, setEmailLocal, history, setExistsLocal });
+  }, []);
 
   return (
-    user
+    existsLocal === true
       ? (
-        <div>
+        <div className="div-main">
           <SideBarAdmin />
-          <h1>Perfil</h1>
-          <label htmlFor="nome">
-            Nome
-            <input
-              type="text"
-              readOnly
-              data-testid="profile-name"
-              value={ verify.name }
-            />
-          </label>
-          <label htmlFor="email">
-            Email:
-            <input
-              type="email"
-              readOnly
-              value={ verify.email }
-              data-testid="profile-email"
-            />
-          </label>
+          <div className="div-filha">
+            <h1 className="title">Perfil</h1>
+            <p data-testid="profile-name">{`Nome: ${nameLocal}`}</p>
+            <p data-testid="profile-email">{`Email: ${emailLocal}`}</p>
+          </div>
         </div>
       )
-      : <Redirect to="/login" />
+      : null
   );
 }
 
