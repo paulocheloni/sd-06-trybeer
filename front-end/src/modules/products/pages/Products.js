@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import PageMenu from '../../../design-system/page-menu/PageMenu';
 import Buttons from '../components/Buttons';
 import api from '../../../axios';
 import PaperContainer from '../../../design-system/containers/PaperContainer';
+import BodyContainer from '../../../design-system/containers/BodyContainer';
 
 const Products = () => {
   const history = useHistory();
@@ -39,9 +41,12 @@ const Products = () => {
   }
 
   return (
-    <PaperContainer>
-      {rendering ? getProducts() : <span>Waiting data</span>}
-    </PaperContainer>
+    <BodyContainer>
+      <PaperContainer>
+        <PageMenu pageName="Pedidos" />
+        {rendering ? getProducts() : <span>Waiting data</span>}
+      </PaperContainer>
+    </BodyContainer>
   );
 };
 
