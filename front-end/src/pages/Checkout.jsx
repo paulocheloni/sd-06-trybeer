@@ -18,9 +18,7 @@ function Checkout() {
     const ckItems = JSON.parse(localStorage.getItem('items'));
     if (ckItems) {
       const ad = ckItems.map((a) => a.price);
-      if (ad.length !== 0) {
-        setCartTotal(ad.reduce((e, f) => +e + +f, 0));
-      }
+      setCartTotal(ad.reduce((e, f) => +e + +f, 0));
       setItems(ckItems);
       setReload(ckItems.length);
     }

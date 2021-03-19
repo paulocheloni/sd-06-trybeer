@@ -21,6 +21,7 @@ routerSales.get('/', validateToken, async (req, res) => {
   res.status(200).json({ orders });
 });
 
+
 module.exports = routerSales;
 
 // {price: 2.2, address: "asd", number: "12", status: "Pendente"}

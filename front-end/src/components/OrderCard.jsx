@@ -7,12 +7,14 @@ import currencyFormat from '../utils/currencyFormat';
 export default function OrderCard({ order, orderIndex }) {
   const history = useHistory();
   return (
+    <div>
+
     <button
       data-testid={ `${orderIndex}-order-card-container` }
       key={ `${orderIndex}` }
       type="button"
       onClick={ () => history.push(`/orders/${orderIndex + 1}`) }
-    >
+      >
       <p data-testid={ `${orderIndex}-order-number` }>
         Pedido
         {' '}
@@ -30,6 +32,7 @@ export default function OrderCard({ order, orderIndex }) {
       </p>
       <hr />
     </button>
+    </div>
   );
 }
 
