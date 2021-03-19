@@ -26,7 +26,7 @@ const Buttons = ({ index, prod }) => {
       ));
     }
 
-    if (cartItems[position].quantity === 1 && type !== 'add') {
+    if (cartItems[position].quantity === 1 && type === 'sub') {
       return setCartItems((prev) => (
         [
           ...prev.slice(0, position),
