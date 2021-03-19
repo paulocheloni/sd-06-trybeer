@@ -48,12 +48,13 @@ const ProductCard = ({ product, index, plusItemCart, minusItemCart, handleItem }
   );
 };
 
-ProductCard.propTypes = {
+ProductCard.propTypes = ({
   index: PropTypes.number.isRequired,
   product: PropTypes.objectOf(Object).isRequired,
-  plusItemCart: PropTypes.func(Function).isRequired,
-  minusItemCart: PropTypes.func(Function).isRequired,
-  handleItem: PropTypes.func(Function).isRequired,
-};
+  plusItemCart: PropTypes.objectOf(Object).isRequired,
+  minusItemCart: PropTypes.objectOf(Object).isRequired,
+  handleItem: PropTypes.objectOf(Object).isRequired,
+});
+// Pesquisar a maneira certa de validar função
 
 export default ProductCard;
