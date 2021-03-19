@@ -27,9 +27,9 @@ function AdminOrdersCard() {
           type="button"
           onClick={ () => history.push(`/admin/orders/${e.id}`) }
         >
-          <h1 data-testid={ `${i}-order-number` }>{ `Pedido ${e.delivery_number}` }</h1>
-          <p data-testid={ `${i}-order-address` }>{ e.delivery_address }</p>
-          <span data-testid={ `${i}-order-total-value` }>{`R$ ${e.total_price}` }</span>
+          <h1 data-testid={ `${i}-order-number` }>{ `Pedido ${e.id}` }</h1>
+          <p data-testid={ `${i}-order-address` }>{ `${e.delivery_address}, ${e.delivery_number}` }</p>
+          <span data-testid={ `${i}-order-total-value` }>{`R$ ${e.total_price.replace('.', ',')}` }</span>
           <span data-testid={ `${i}-order-status` }>
             { e.status ? 'Pendente' : 'Entregue' }
           </span>
