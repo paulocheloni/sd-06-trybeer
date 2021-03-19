@@ -40,7 +40,7 @@ const Login = () => {
           dataTestId="signin-btn"
           onClick={ () => fetchApi() }
         >
-          ENTRAR
+          Entrar
         </Button>
         <Button
           dataTestId="no-account-btn"

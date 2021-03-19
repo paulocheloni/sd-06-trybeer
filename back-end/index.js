@@ -9,7 +9,7 @@ const productsController = require('./controller/productsController');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/login', userController);
+app.use('/', userController);
 app.use('/register', registerController);
 app.use('/products', productsController);
 app.use('/images', express.static(path.join(__dirname, 'images')));

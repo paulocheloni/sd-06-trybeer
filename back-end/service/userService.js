@@ -10,7 +10,18 @@ const userRegister = async (user) => {
   return userCreate;
 };
 
+const findUserByEmail = async (email) => {
+  const userCreate = await useModel.findUserByEmail(email);
+  return userCreate;
+};
+const userEditByEmail = async (name, email) => {
+  const userEdit = await useModel.userEditByEmail(name, email);
+  return userEdit;
+};
+
 module.exports = {
   userLogin,
   userRegister,
+  findUserByEmail,
+  userEditByEmail,
 };
