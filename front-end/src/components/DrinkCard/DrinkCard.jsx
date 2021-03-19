@@ -2,12 +2,24 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './drinkCard.css'
 
-/** local history e nulo inicialmente*/
-/** todos os carts sao populados com quantity 0 */
-/** tem produto no local history */
-/** tem local history mas não o tem produto */
-/** produto excluido do local history */
-/** produto n pode sem menor que 0 */
+
+const sumAll = () => {
+  const oldStorage = JSON.parse(localStorage.getItem('cart'));
+  if (!oldStorage) return 0;
+  const prices = oldStorage.map((product) => {
+    return {
+      price: product.price,
+      quantity: product.quantity
+    }
+  });
+  let sum = 0;
+  prices.forEach(product => {
+    const productSum = product.price * product.quantity;
+    sum += productSum;
+  });
+  return sum;
+};
+
 const updateStorage = (cartItem, id) => {
   const oldStorage = JSON.parse(localStorage.getItem('cart'));
   let newStorage = [];
@@ -74,6 +86,8 @@ export default function DrinkCard({ productPayload, index }) {
   // const [cartItem, setCartItem] = useState('');
   
   const [cartItem, setCartItem] = useState(getLocalStorage());
+  const [cartSum, setCartSum] = useState(sumAll());
+
 
   // useEffect(() => {
   //     setCartItem(getLocalStorage());
@@ -87,6 +101,7 @@ export default function DrinkCard({ productPayload, index }) {
     if (!cartItem.default_product) {
       console.log(cartItem);
       syncStorageWithCart(cartItem, id)
+      setCartSum(sumAll())
     }
   }, [cartItem])
 
@@ -131,6 +146,9 @@ export default function DrinkCard({ productPayload, index }) {
         <button type="button" className="plus-button" data-testid={ plusId } onClick={() => addItem()}>+</button>
         <div data-testid={qtdId}>{cartItem.quantity}</div>
         <button type="button" className="minus-button" data-testid={minusId} onClick={() => subtractItem()}>-</button>
+      </div>
+      <div className="cartSum">
+        {cartSum}
       </div>
     </div>
   );
