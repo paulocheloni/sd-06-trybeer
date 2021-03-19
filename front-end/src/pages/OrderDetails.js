@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import MenuAdmin from '../components/MenuAdmin';
 import CartItem from '../components/CartItem';
-import { getSaleByID } from '../services/salesServices';
+import { getSaleByID, updateOrderById } from '../services/salesServices';
 import Button from '../components/Button';
 
 function OrderDetails({ match }) {
@@ -18,15 +18,21 @@ function OrderDetails({ match }) {
     setOrders(result);
     setOrderStatus(result[0].Status);
     setTotalValue(result[0].total.replace('.', ','));
+    if (result[0].Status !== 'Entregue') {
+      setOrderDone(false);
+    } else {
+      setOrderDone(true);
+    }
   };
 
   useEffect(() => {
     getOrders();
   }, []);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     setOrderDone(true);
     setOrderStatus('Entregue');
+    await updateOrderById(id);
   };
 
   return (
@@ -41,7 +47,8 @@ function OrderDetails({ match }) {
           quantity={ order.quantidade }
           name={ order.product }
           price={ order.price }
-          unitPrice="order-unit-price"
+          unitPriceID="order-unit-price"
+          qtdID="product-qtd"
         />)) }
       <p data-testid="order-total-value">{`Total: R$ ${totalValue}`}</p>
       {!orderDone && (

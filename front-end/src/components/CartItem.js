@@ -3,7 +3,15 @@ import PropTypes from 'prop-types';
 import context from '../context/Context';
 
 export default function CartItem(props) {
-  const { index, quantity, name, price, setCart, unitPrice } = props;
+  const { 
+    index,
+    quantity,
+    name,
+    price,
+    setCart,
+    unitPriceID,
+    qtdID,
+   } = props;
   const { totalCart, setTotalCart } = useContext(context);
   const totalValue = price * quantity;
 
@@ -20,7 +28,7 @@ export default function CartItem(props) {
 
   return (
     <div>
-      <p data-testid={ `${index}-product-qtd-input` }>{ quantity }</p>
+      <p data-testid={ `${index}-${ qtdID }` }>{ quantity }</p>
       <p data-testid={ `${index}-product-name` }>{ name }</p>
       <p
         data-testid={ `${index}-product-total-value` }
@@ -28,7 +36,7 @@ export default function CartItem(props) {
         { `R$ ${totalValue.toFixed(2).replace('.', ',')}` }
       </p>
       <p
-        data-testid={ `${index}-${unitPrice}` }
+        data-testid={ `${index}-${unitPriceID}` }
       >
         { `(R$ ${price.replace('.', ',')} un)` }
       </p>
