@@ -25,7 +25,7 @@ function AdminProfile() {
         <div>
           <h1>Perfil</h1>
           <label htmlFor="nome">
-            Nome:
+            Nome
             <input
               type="text"
               readOnly
