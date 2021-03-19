@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const userController = require('./controller/userController');
 const productsController = require('./controller/productsController');
+const ordersController = require('./controller/ordersController');
 const unexpectedError = require('./middlewares/unexpectedError');
 require('dotenv').config();
 
@@ -19,6 +20,8 @@ app.use('/', userController);
 app.use('/profile', userController);
 
 app.use('/products', productsController);
+
+app.use('/', ordersController);
 
 app.use(unexpectedError);
 

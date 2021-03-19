@@ -11,7 +11,7 @@ const router = Router();
 
 router.post('/login', validatePassword, validateEmail, rescue(async (req, res) => {
   const { email, password } = req.body;
-  const getUser = await userService.findUserByEmail(email, password);
+  const getUser = await userService.findUserByEmailAndPassword(email, password);
   if (getUser.isError) {
     return res.status(getUser.status).json({ message: getUser.message });
   }
@@ -23,7 +23,6 @@ router.post('/login', validatePassword, validateEmail, rescue(async (req, res) =
   };
 
   const userToken = createToken(userDataForFront);
-  // console.log(userToken);
 
   return res.status(200).json([userDataForFront, userToken]);
 }));
@@ -32,7 +31,7 @@ router.post('/login', validatePassword, validateEmail, rescue(async (req, res) =
   validatePassword, validateEmail, nameValidation, rescue(async (req, res) => {
   const { name, email, password, role } = req.body;
   await userService.createUser(name, email, password, role);
-  const user = await userService.findUserByEmail(email, password);
+  const user = await userService.findUserByEmailAndPassword(email, password);
   
   const userDataForFront = {
     id: user.id,

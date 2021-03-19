@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import TopMenu from '../components/TopMenu';
 import productsContext from '../context/productsContext';
+import fetches from '../services/fetches';
 import './pagesCSS/Checkout.css';
 
 export default function Products() {
@@ -11,7 +12,6 @@ export default function Products() {
   const history = useHistory();
   const tokenFromLocalStorage = localStorage.getItem('token');
   let totalPrice = '0,00';
-  
 
   useEffect(() => {
     const cartLS = JSON.parse(localStorage.getItem('cartProducts'));
@@ -19,7 +19,6 @@ export default function Products() {
     setCartProducts(cartLS);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
   const handleRedirect = (token) => {
     if (!token) return history.push('/login');
   };
@@ -59,6 +58,17 @@ export default function Products() {
     const newCartProduct = cartProducts;
     localStorage.setItem('cartProducts', JSON.stringify(newCartProduct));
     window.location.reload();
+  };
+
+  const sendOrder = () => {
+    const objOrder = {
+      totalPrice: handleTotalPrice(),
+      address: street,
+      number: houseNumber,
+      date: new Date(),
+      orderStatus: 'pendente',
+    };
+    fetches.createOrder(tokenFromLocalStorage, objOrder);
   };
 
   return (
@@ -135,7 +145,10 @@ export default function Products() {
       <button
         data-testid="checkout-finish-btn"
         type="button"
-        disabled={ !(isTotalNotPriceZero() && streetValidation() && houseNumberValidation()) }
+        disabled={ !(isTotalNotPriceZero()
+          && streetValidation()
+          && houseNumberValidation()) }
+        onClick={ sendOrder }
       >
         Finalizar Pedido
       </button>

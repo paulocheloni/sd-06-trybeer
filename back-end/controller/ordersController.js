@@ -1,11 +1,26 @@
-/* const { Router } = require('express');
+const { Router } = require('express');
 const rescue = require('express-rescue');
 const ordersService = require('../service/ordersService');
-const userServive = require('../service/userService');
+const { validateToken } = require('../middlewares/tokenValidation');
 
 const router = Router();
+const CREATED = 201;
 
-router.post('/orders', rescue(async (req, res) => {
-    const userFound = await userServive.findUserByEmail(email)
-    const { userId, totalPrice, address, number, date, status } = req.body;
-  })); */
+router.post('/orders', validateToken, rescue(async (req, res) => {
+    const { totalPrice, address, number, date, orderStatus } = req.body.objOrder;
+    const userId = req.user.id;
+    const orderData = {
+      totalPrice: Number(totalPrice),
+      address,
+      number,
+      date,
+      orderStatus,
+    };
+    console.log('data order controller', orderData, userId);
+
+    await ordersService.createOrders(userId, orderData);
+
+    res.status(CREATED).json({ message: 'Compra realizada com sucesso!' });
+  }));
+
+  module.exports = router;

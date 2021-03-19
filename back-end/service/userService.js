@@ -2,8 +2,8 @@ const userModel = require('../model/userModel');
 
 const UNPROCESSABLE_ENTITY = 422;
 
-const findUserByEmail = async (userEmail, password) => {
-  const userFound = await userModel.findUserByEmail(userEmail);  
+const findUserByEmailAndPassword = async (email, password) => {
+  const userFound = await userModel.findUserByEmail(email);  
 
   if (!userFound || userFound.password !== password) {
     return {
@@ -13,6 +13,11 @@ const findUserByEmail = async (userEmail, password) => {
     };
   }
   return userFound;
+};
+
+const findUserByEmail = async (email) => {
+  const user = await userModel.findUserByEmail(email);
+  return user;
 };
 
 const updateUserNameByEmail = async (userEmail, updatedName) => {
@@ -32,6 +37,7 @@ const createUser = async (name, email, password, role) => {
 };
 
 module.exports = {
+  findUserByEmailAndPassword,
   findUserByEmail,
   updateUserNameByEmail,
   createUser,
