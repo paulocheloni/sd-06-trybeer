@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const userModel = require('../model/User');
 const { NOT_FOUND, CONFLICT, UNAUTHORIZED } = require('../schema/statusSchema');
 
+const SECRET = 'http://senhasupersecreta.com/';
+
 // Return all Users
 const getAll = async () => {
   const users = await userModel.getAll();
@@ -59,10 +61,10 @@ const verifyId = async (req, res, next) => {
 // Verify Auth
 const verifyAuth = async (req, res, next) => {
   const { authorization } = req.headers;
-  
+
   if (!authorization) return res.status(UNAUTHORIZED).json({ message: 'jwt is missing' });
 
-  jwt.verify(authorization, process.env.SECRET, (err) => {
+  jwt.verify(authorization, SECRET, (err) => {
     if (err) return res.status(UNAUTHORIZED).json({ message: 'failed to auth token' });
   });
 

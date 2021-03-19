@@ -7,7 +7,7 @@ const {
   verifyId,
   findById,
   update,
-  verifyAuth
+  verifyAuth,
 } = require('../service/UserService');
 const { OK, CREATED } = require('../schema/statusSchema');
 
@@ -15,6 +15,7 @@ const jwtConfig = {
   expiresIn: '7d',
   algorithm: 'HS256',
 };
+const SECRET = 'http://senhasupersecreta.com/';
 
 const UserController = new Router();
 
@@ -36,12 +37,13 @@ UserController.post('/', verifyEmail, async (req, res) => {
 UserController.get('/profile', verifyAuth, async (req, res) => {
   const { authorization } = req.headers;
 
-  jwt.verify(authorization, process.env.SECRET, (err, decoded) => {
+  jwt.verify(authorization, SECRET, (err, decoded) => {
     const dec = decoded.data[0];
-    if (!decoded.data[0]) res.status(OK).json(decoded.data);
+    console.log('Usuario decodificado', dec);
+    if (!decoded.data[0]) return res.status(OK).json(decoded.data);
+    
     res.status(OK).json(dec);
   });
-
 });
 
 // Update

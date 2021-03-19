@@ -14,6 +14,14 @@ function login(user) {
   return axios.post('/login', user);
 }
 
+function profile(token) {
+  const axios = buildAxiosHandler();
+
+  return axios.get('/user/profile', {
+    headers: { authorization: token },
+  }).then((response) => response.data);
+}
+
 function register(user) {
   const axios = buildAxiosHandler();
   const result = axios.post('/user', user)
@@ -40,6 +48,7 @@ function updateName(name) {
 
 export {
   login,
+  profile,
   register,
   updateName,
 };

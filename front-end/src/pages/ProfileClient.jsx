@@ -1,9 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { handleUpdate } from '../services/index';
+import { profile } from '../api/index';
 import ControllerHeader from '../components/ControllerHeader';
 
 function ProfileClient() {
-  const [name, setName] = useState('');
+  const [user, setUser] = useState({ name: '', email: '' });
+  const [activeBtn, setActiveBtn] = useState();
+
+  useEffect(() => {
+    async function fetchData() {
+      const token = localStorage.getItem('token');
+      const userLo = await profile(token);
+      setUser(name, email);
+    }
+
+    setActiveBtn(false);
+    fetchData();
+  }, []);
+
+  // useEffect(() => {
+  //   ;
+  // }, [name]);
 
   return (
     <div>
@@ -13,21 +30,23 @@ function ProfileClient() {
         <input
           name="name"
           data-testid="profile-name-input"
-          onChange={ ({ target }) => setName(target.value) }
+          onChange={ ({ target }) => setUser({ ...user, name: target.value }) }
         />
       </label>
       <label htmlFor="email">
         Email
         <input
           name="email"
+          // value=user.name
           data-testid="profile-email-input"
           readOnly
         />
       </label>
       <button
         type="submit"
+        disabled={ !activeBtn }
         data-testid="profile-save-btn"
-        onClick={ () => handleUpdate(name) }
+        onClick={ () => handleUpdate(user.name) }
       >
         Salvar
       </button>
