@@ -30,6 +30,7 @@ const CardProduct = () => {
     if (localStorage.products && JSON.parse(localStorage.products) !== []) {
       return setProducts(JSON.parse(localStorage.products));
     } 
+
     return GetProducts(setProducts);
   }, []);
 
