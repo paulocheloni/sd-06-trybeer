@@ -60,6 +60,7 @@ export default function Register() {
 
   const handleClick = async () => {
     const response = await api.fetchRegister(name, email, password, check);
+
     localStorage.setItem('user', JSON.stringify(response.user));
 
     if (response) {

@@ -28,13 +28,7 @@ export default function Cards() {
         const newQty = productFound.qty + 1;
         productFound = { ...productFound, qty: newQty };
         const newProducts = mapNewProduct(productsCart, productFound, product);
-        // const newProducts = productsCart.map((item) => {
-        //   if (item.id === product.id) {
-        //     return productFound;
-        //   }
-        //   return item;
-        // });
-        console.log(newProducts);
+
         localStorage.setItem('productsCart', JSON.stringify(newProducts));
         setProductsCart(newProducts);
       } else {
@@ -62,12 +56,6 @@ export default function Cards() {
         const newQty = productFound.qty - 1;
         productFound = { ...productFound, qty: newQty };
         const newProducts = mapNewProduct(productsCart, productFound, product);
-        // const newP = productsCart.map((item) => {
-        //   if (item.id === product.id) {
-        //     return productFound;
-        //   }
-        //   return item;
-        // });
         localStorage.setItem('productsCart', JSON.stringify(newProducts));
         setProductsCart(newProducts);
       }
@@ -93,6 +81,7 @@ export default function Cards() {
             data-testid={ `${index}-product-img` }
             src={ product.url_image }
             alt={ product.name }
+            width="100px"
           />
           <button
             id={ `${index}-minus` }
