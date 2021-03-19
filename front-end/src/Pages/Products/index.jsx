@@ -10,14 +10,22 @@ const Products = () => {
   useEffect(() => {
     if (localStorage.products && localStorage.products !== '[]') {
       setProducts(JSON.parse(localStorage.products));
+    } else {
+      GetProducts(setProducts);
     }
-    GetProducts(setProducts);
   }, []);
   useEffect(() => {
     if (!window.localStorage.token) {
       history.push('/login');
     }
   });
+  useEffect(() => {
+    const amountInCart = products
+      .reduce((acc, product) => acc + product.productQuantity, 0);
+    if (amountInCart !== 0) {
+      localStorage.setItem('products', JSON.stringify(products));
+    }
+  }, [products]);
   return (
     <>
       <Menu><p data-testid="top-title">TryBeer</p></Menu>

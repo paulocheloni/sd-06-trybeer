@@ -4,22 +4,6 @@ import PropTypes from 'prop-types';
 import Button from '../Button';
 import * as S from './style';
 
-// const ButtonSeeCart = (disabled, onClick, dataTestId) => {
-//   return (
-//     <div>
-//       <S.Buttons>
-//         <Button
-//           dataTestId={ dataTestId }
-//           onClick={ onClick }
-//           disabled={ disabled }
-//         >
-//           Ver Carrinho
-//         </Button>
-//       </S.Buttons>
-//     </div>
-//   );
-// };
-
 const CardProduct = ({ products, setProducts }) => {
   const history = useHistory();
   const [cartDisabled, SetCartDisabled] = useState(true);
