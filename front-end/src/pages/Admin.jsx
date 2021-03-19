@@ -1,5 +1,5 @@
 import React from 'react';
-import MenuTop from '../components/Menutop';
+import MenuTop from '../components/MenuTop';
 
 function Admin() {
   return (
