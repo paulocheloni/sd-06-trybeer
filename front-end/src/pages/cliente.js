@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
+// import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import { loadState, saveState } from '../services/localStorage';
@@ -77,7 +77,7 @@ function Cliente() {
     return `${cart[idx].quantity}`;
   };
 
-  if (isLoading) {
+  if (!isLoading) {
     return (
       <h1>Loading...</h1>
     );
@@ -87,51 +87,51 @@ function Cliente() {
     <div>
       <NavBar content="TryBeer" />
       <div className={ classes.root }>
-        <GridList cellHeight={ 180 } className={ classes.gridList }>
-          {products.map((tile, index) => (
-            <GridListTile
-              key={ index }
-              data-testid={ `${index}-product-price` }
-            >
+        {/* <GridList cellHeight={ 180 } className={ classes.gridList }> */}
+        {products.map((tile, index) => (
+          <GridListTile
+            key={ index }
+            data-testid={ `${index}-product-price` }
+          >
 
-              {/* Image */}
-              <img
-                src={ tile.url_image.replace(/ /g, '_') }
-                data-testid={ `${index}-product-img` }
-                alt={ tile.name }
-              />
+            {/* Image */}
+            <img
+              src={ tile.url_image.replace(/ /g, '_') }
+              data-testid={ `${index}-product-img` }
+              alt={ tile.name }
+            />
 
-              <GridListTileBar
-                // Name
-                title={ <span data-testid={ `${index}-product-name` }>{tile.name}</span> }
+            <GridListTileBar
+              // Name
+              title={ <span data-testid={ `${index}-product-name` }>{tile.name}</span> }
 
-                // Price
-                subtitle={
-                  <span data-testid={ `${index}-product-price` }>
-                    R$
-                    {' '}
-                    {tile.price.replace('.', ',')}
+              // Price
+              subtitle={
+                <span data-testid={ `${index}-product-price` }>
+                  R$
+                  {' '}
+                  {tile.price.replace('.', ',')}
+                </span>
+              }
+              actionIcon={
+                <>
+                  {/* Botao de - */}
+                  <ButtonSub product={ tile } dataIndex={ index } />
+
+                  {/* Quantidade de Produtos */}
+                  <span data-testid={ `${index}-product-qtd` }>
+                    {prodQty(tile)}
                   </span>
-                }
-                actionIcon={
-                  <>
-                    {/* Botao de - */}
-                    <ButtonSub product={ tile } dataIndex={ index } />
 
-                    {/* Quantidade de Produtos */}
-                    <span data-testid={ `${index}-product-qtd` }>
-                      {prodQty(tile)}
-                    </span>
+                  {/* Botao de + */}
+                  <ButtonAdd product={ tile } dataIndex={ index } />
 
-                    {/* Botao de + */}
-                    <ButtonAdd product={ tile } dataIndex={ index } />
-
-                  </>
-                }
-              />
-            </GridListTile>
-          ))}
-        </GridList>
+                </>
+              }
+            />
+          </GridListTile>
+        ))}
+        {/* </GridList> */}
       </div>
       <MenuFooter />
     </div>
