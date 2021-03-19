@@ -1,14 +1,13 @@
 import React from 'react';
+import SideBarAdmin from '../components/SideBarAdmin';
 
-import TopBar from '../components/TopBar';
-import SideBar from '../components/SideBar';
+import './Admin.css';
 
 function AdminOrders() {
   return (
-    <div>
-      <TopBar title="Admin Orders" />
-      <SideBar />
-      <h1>Admin Orders</h1>
+    <div className="div-main">
+      <SideBarAdmin />
+      <h1 className="title">Admin Orders</h1>
     </div>
   );
 }

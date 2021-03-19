@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import SideBarAdmin from '../components/SideBarAdmin'
 
 function AdminProfile() {
   // const [renderProfile, setRenderProfile] = useState(false);
@@ -23,6 +24,7 @@ function AdminProfile() {
     user
       ? (
         <div>
+          <SidebarAdmin />
           <h1>Perfil</h1>
           <label htmlFor="nome">
             Nome
