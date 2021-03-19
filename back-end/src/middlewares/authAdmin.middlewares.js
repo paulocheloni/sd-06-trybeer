@@ -12,9 +12,8 @@ module.exports = (req, _res, next) => {
   try {
     const { authorization: token } = req.headers;
     if (!token) throw new Error(noToken);
-    const { sub, role } = verifyToken(token);
-    req.userId = sub;
-    req.userRole = role;
+    const { role } = verifyToken(token);
+    if (role !== 'administrator') throw new Error(tokenError.customCode);
     return next();
   } catch (err) {
     next({ ...tokenError, err });
