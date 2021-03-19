@@ -12,6 +12,19 @@ module.exports = {
         'secondary-light': '#6bffbb',
         'secondary-dark': '#00c55b',
       },
+      keyframes: {
+        'fade-hide': {
+            '0%': {
+                opacity: '1'
+            },
+            '100%': {
+                opacity: '0'
+            },
+        },
+      },
+      animation: {
+          'fade-hide': 'hide 1s'
+      }
     },
   },
   variants: {
@@ -20,4 +33,4 @@ module.exports = {
     },
   },
   plugins: [],
-};
+}
