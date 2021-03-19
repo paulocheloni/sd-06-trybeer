@@ -1,38 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import SideBarAdmin from '../components/SideBarAdmin'
 
 function AdminProfile() {
-  // const [renderProfile, setRenderProfile] = useState(false);
-  // const [user, setUser] = useState({ email: '', name: '' });
+  const [renderProfile, setRenderProfile] = useState(false);
+  const [nameLocal, setNameLocal] = useState('')
+  const [emailLocal, setEmailLocal] = useState('')
 
   const verify = JSON.parse(localStorage.getItem('user'));
   const user = verify ? verify.role === 'administrator' : false;
   console.log(user);
 
   // useEffect(() => {
-  //   if (!verify) {
-  //     return setRenderProfile(false);
-  //   }
-  //   if (verify.role === 'administrator') {
-  //     return setRenderProfile(true);
-  //   }
-  //   // setUser({ name: verify.name, email: verify.email });
-  // }, [renderProfile, verify]);
+  //   if (user) return setRenderProfile(true)
+  //   setRenderProfile(false);
+  // }, []);
+
+  // useEffect(() => {
+  //   setNameLocal(user.name)
+  //   setEmailLocal(user.email)
+  // },[])
 
   return (
     user
       ? (
         <div>
-          <SidebarAdmin />
+          <SideBarAdmin />
           <h1>Perfil</h1>
           <label htmlFor="nome">
             Nome
             <input
               type="text"
               readOnly
-              value={ verify.name }
               data-testid="profile-name"
+              value={ verify.name }
             />
           </label>
           <label htmlFor="email">
