@@ -13,12 +13,11 @@ const parseJWT = (token) => {
 async function validateToken(req, res, next) {
   const token = req.headers.authorization;
   if (!token) return next({ status: 401, message: 'no token' });
-  
   const decode = parseJWT(token);
-  console.log(decode, 'decode');
   if (!decode) return next({ status: 401, message: 'invalid decode' });
   const [user] = await getByEmail(decode.userData);
   if (!user && !user.id) return next({ status: 401, message: 'invalid match of token' });
+  res.locals.role = user.role;
   res.locals.userId = user.id;
   return next();
 }

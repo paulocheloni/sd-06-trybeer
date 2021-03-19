@@ -19,6 +19,13 @@ const getAllByUserId = async (id) => {
   return sales;
 };
 
+const getAllOrders = async () => {
+  const sales = await connection.execute(
+    'SELECT * FROM sales',
+);
+  return sales;
+};
+
 module.exports = {
-  createOne, getAllByUserId,
+  createOne, getAllByUserId, getAllOrders,
 };

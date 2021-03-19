@@ -16,6 +16,7 @@ routerSales.post('/', validateToken, async (req, res) => {
 });
 
 routerSales.get('/', validateToken, async (req, res) => {
+  console.log(res.locals);
   const { userId } = res.locals;
   const [orders] = await getAllByUserId(userId);
   console.log(orders, 'orders');
