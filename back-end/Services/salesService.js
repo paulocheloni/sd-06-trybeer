@@ -36,8 +36,34 @@ const getOrderDetails = async (req, res) => {
   res.status(200).json(response);
 };
 
+const getAdminOrders = async (req, res) => {
+  const orders = await SalesModel.getAdminOrders();
+
+  res.status(200).json(orders);
+};
+
+const getAdminOrderDetails = async (req, res) => {
+  const { id } = req.params;
+
+  const orderDetails = await SalesModel.getOrderById(id);
+  const orderProductsDetails = await SalesModel.getOrderProductsByOrderId(id);
+
+  const response = { ...orderDetails, products: orderProductsDetails };
+  res.status(200).json(response);
+};
+
+const editOrderStatus = async (req, res) => {
+  const { id } = req.params;
+  await SalesModel.editOrderStatus(id);
+  
+  res.status(200).json({ message: 'ok' });
+};
+
 module.exports = {
   registerNewOrder,
   getOrdersByUser,
   getOrderDetails,
+  getAdminOrders,
+  getAdminOrderDetails,
+  editOrderStatus,
 };
