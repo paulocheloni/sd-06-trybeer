@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import TopBar from '../../design-components/TopBar';
 import CartButton from '../../design-components/CartButton';
 import Card from '../../design-components/Card';
@@ -6,6 +7,7 @@ import ContextBeer from '../../context/ContextBeer';
 import api from '../../axios/api';
 
 function Products() {
+  const history = useHistory();
   const {
     products,
     setProducts,
@@ -18,8 +20,9 @@ function Products() {
     api
       .get('/products')
       .then((response) => response.data)
-      .then((productsList) => setProducts(productsList));
-  }, [setProducts]);
+      .then((productsList) => setProducts(productsList))
+      .catch(() => history.push('/'));
+  }, [setProducts, history]);
 
   useEffect(() => {
     localStorage.setItem('sale', JSON.stringify(sale));
