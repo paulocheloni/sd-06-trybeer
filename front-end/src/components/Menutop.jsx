@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import './menuTop.css';
 import PropTypes from 'prop-types';
-import MenuSide from './Menuside';
+import Menuside from './MenuSide';
 
 function MenuTop({ title }) {
   const [open, setOpen] = useState(false);
@@ -19,7 +19,7 @@ function MenuTop({ title }) {
       <h1 className="title" data-testid="top-title">
         { title }
       </h1>
-      {open && <MenuSide />}
+      {open && <Menuside />}
     </div>
   );
 }
