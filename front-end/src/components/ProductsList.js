@@ -20,7 +20,9 @@ class ProductsList extends React.Component {
       dispatchProducts,
       dispatchPrice,
       history } = this.props;
-    // this.storageToRedux();
+    this.storageToRedux();
+
+    // apartir daqui ele dá o render
     const products = await getProducts();
     if (products.message) {
       history.replace('/login');
@@ -35,33 +37,31 @@ class ProductsList extends React.Component {
     localStorage.setItem('PRICE', statePrice);
   }
 
-  // async storageToRedux() {
-  //   const { stateQuantity, dispatchQtd, dispatchCart, dispatchID } = this.props;
-  //   if (!localStorage.getItem('stateQuantity')) {
-  //     await localStorage.setItem('stateQuantity', JSON.stringify(stateQuantity));
-  //   }
-  //   if (localStorage.getItem('stateQuantity')) {
-  //     const localStorageQtd = JSON.parse(localStorage.getItem('stateQuantity'));
-  //     const qtdLength = 12;
-  //     for (let index = 1; index < qtdLength; index += 1) {
-  //       dispatchQtd(localStorageQtd[index], index);
-  //     }
-  //   }
-  //   if (localStorage.getItem('stateCart')) {
-  //     const localStorageCart = JSON.parse(localStorage.getItem('stateCart'));
-  //     for (let index = 0; index < localStorageCart.length; index += 1) {
-  //       const { stateCart } = this.props;
-  //       const contains = stateCart.filter((element) => element.name === localStorageCart[index].name);
-  //       if (contains.length < 1) {
-  //         dispatchCart(localStorageCart[index]);
-  //         dispatchID(localStorageCart[index].id);
-  //         // console.log(`adicionou ${index} vez`)
-  //       }
-  //     }
-  //   }
-  // }
-
-  
+  async storageToRedux() {
+    const { stateQuantity, dispatchCart, dispatchID } = this.props;
+    if (!localStorage.getItem('stateQuantity')) {
+      await localStorage.setItem('stateQuantity', JSON.stringify(stateQuantity));
+    }
+    if (localStorage.getItem('stateCart')) {
+      const localStorageCart = JSON.parse(localStorage.getItem('stateCart'));
+      for (let index = 0; index < localStorageCart.length; index += 1) {
+        const { stateCart } = this.props;
+        const contains = stateCart.filter(
+          (element) => element.name === localStorageCart[index].name
+        );
+        if (contains.length < 1) {
+          dispatchCart(
+            localStorageCart[index].id,
+            localStorageCart[index].name,
+            localStorageCart[index].price,
+            localStorageCart[index].quantity,
+            localStorageCart[index].imgUrl,
+          );
+          dispatchID(localStorageCart[index].id);
+        }
+      }
+    }
+  }
 
   toCheckout() {
     const { history } = this.props;
@@ -71,8 +71,8 @@ class ProductsList extends React.Component {
       cart[index].quantity = qtd[cart[index].id];
     }
     localStorage.setItem('stateCart', JSON.stringify(cart));
+    localStorage.setItem('stateCart', JSON.stringify(cart));
     history.push('/checkout');
-    this.increaseQuantity();
   }
 
   removeItem(id) {
@@ -81,45 +81,50 @@ class ProductsList extends React.Component {
     dispatchRemoved(newCart);
     const indexToBeRemoved = stateID.indexOf(id);
     stateID.splice(indexToBeRemoved, 1);
+    const stateQtd = JSON.parse(localStorage.getItem('stateQuantity'));
+    stateQtd[id] = 0;
+    localStorage.setItem('stateQuantity', JSON.stringify(stateQtd));
   }
 
-  increaseQuantity({ target }, id) {
-    const { dispatchQtd, stateQuantity, dispatchPrice, statePrice } = this.props;
-    const localStQtd = JSON.parse(localStorage.getItem('stateQuantity'));
+  async increaseQuantity({ target }, id) {
+    const { dispatchPrice, statePrice } = this.props;
     const productPrice = Number(target.parentNode.parentNode
       .nextSibling.childNodes[0].innerText.split(' ')[1].replace(',', '.'));
     const reajustedPrice = Number((statePrice + productPrice));
-    dispatchQtd(stateQuantity[id] + 1, id);
-    this.sendToCart(target, id);
+    const { stateCart } = this.props;
+    const find = stateCart.find((element) => element.id === id);
+    const index = stateCart.indexOf(find);
+    if (find) {
+      stateCart[index].quantity += 1;
+      localStorage.setItem('stateCart', JSON.stringify(stateCart));
+      const stateQtd = JSON.parse(localStorage.getItem('stateQuantity'));
+      stateQtd[id] += 1;
+      localStorage.setItem('stateQuantity', JSON.stringify(stateQtd));
+    }
+    await this.sendToCart(target, id);
     dispatchPrice(reajustedPrice);
     localStorage.setItem('price', reajustedPrice);
-    localStQtd[id] += 1;
-    localStorage.setItem('stateQuantity', JSON.stringify(localStQtd));
   }
 
   async decreaseQuantity({ target }, id) {
-    const { dispatchQtd, stateQuantity, statePrice, dispatchPrice } = this.props;
+    const { statePrice, dispatchPrice } = this.props;
     const productPrice = Number(target.parentNode.parentNode
       .nextSibling.childNodes[0].innerText.split(' ')[1].replace(',', '.'));
     const reajustedPrice = Number((statePrice - productPrice));
     if (statePrice > 0) dispatchPrice(reajustedPrice);
     if (statePrice > 0) localStorage.setItem('price', reajustedPrice);
-    if (stateQuantity[id]) {
-      const localStQtd = JSON.parse(localStorage.getItem('stateQuantity'));
-      dispatchQtd(stateQuantity[id] - 1, id);
-      if (stateQuantity[id] === 1) {
-        this.setState({ [id]: 0 });
-        if (localStQtd[id] === 1) {
-          localStQtd[id] = 0;
-          localStorage.setItem('stateQuantity', JSON.stringify(localStQtd));
-        }
-        await this.removeItem(id);
-        const { stateCart } = this.props;
+    const { stateCart } = this.props;
+    const find = stateCart.find((element) => element.id === id);
+    const index = stateCart.indexOf(find);
+    if (find) {
+      if (stateCart[index].quantity > 1) {
+        stateCart[index].quantity -= 1;
         localStorage.setItem('stateCart', JSON.stringify(stateCart));
-      }
-      if (localStQtd[id] > 0) {
-        localStQtd[id] -= 1;
-        localStorage.setItem('stateQuantity', JSON.stringify(localStQtd));
+        const stateQtd = JSON.parse(localStorage.getItem('stateQuantity'));
+        stateQtd[id] -= 1;
+        localStorage.setItem('stateQuantity', JSON.stringify(stateQtd));
+      } else {
+        this.removeItem(id);
       }
     }
   }
@@ -133,21 +138,18 @@ class ProductsList extends React.Component {
     const price = target.parentNode.parentNode.parentNode.childNodes[3].innerText;
     if (!stateID.includes(id)) {
       await dispatchCart(id, name, price, 1, imgUrl);
-      dispatchID(id);
+      await dispatchID(id);
       const { stateCart } = this.props;
       localStorage.setItem('stateCart', JSON.stringify(stateCart));
-    } else {
-      const { stateCart } = this.props;
-      const find = stateCart.find((element) => element.id === id);
-      const index = stateCart.indexOf(find);
-      if (find) {
-        stateCart[index].quantity += 1;
-      }
+      const stateQtd = JSON.parse(localStorage.getItem('stateQuantity'));
+      stateQtd[id] = 1;
+      localStorage.setItem('stateQuantity', JSON.stringify(stateQtd));
     }
   }
 
   render() {
-    const { stateProducts, statePrice, stateCart } = this.props;
+    const { stateProducts, statePrice, stateCart, history } = this.props;
+
     return (
       <div className="prodlist-container">
         <div className="products-container">
@@ -201,6 +203,8 @@ class ProductsList extends React.Component {
           <span data-testid="checkout-bottom-btn-value">
             { statePrice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
           </span>
+          { history.location.state !== undefined
+            ? <span>Compra realizada com sucesso!</span> : null}
         </div>
       </div>
     );
@@ -230,7 +234,6 @@ ProductsList.propTypes = {
   dispatchID: PropTypes.func.isRequired,
   dispatchCart: PropTypes.func.isRequired,
   dispatchPrice: PropTypes.func.isRequired,
-  dispatchQtd: PropTypes.func.isRequired,
   dispatchRemoved: PropTypes.func.isRequired,
   stateProducts: PropTypes.arrayOf(PropTypes.object).isRequired,
   stateCart: PropTypes.arrayOf(PropTypes.object).isRequired,

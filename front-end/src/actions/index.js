@@ -56,6 +56,7 @@ export const addCart = (id, name, price, quantity, url) => ({
   type: CART_LIST,
   id,
   name,
+  price,
   quantity,
   url,
 });
