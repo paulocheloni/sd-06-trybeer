@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../hooks/UseContext';
-import { registerUser } from '../services/users';
+import { registerUser, validateUser } from '../services/users';
 
 function RegisterForm() {
   const [disabled, setDisabled] = useState(false);
@@ -37,8 +37,13 @@ function RegisterForm() {
       const message = document.getElementById('message');
       message.innerHTML = result.message;
     }
-    if (result.role === 'administrator') return history.push('/admin/orders');
-    if (result.role === 'client') return history.push('/products');
+
+    const newUser = await validateUser(userEmail, userPassword);
+
+    localStorage.setItem('user', JSON.stringify(newUser));
+
+    if (newUser.role === 'administrator') return history.push('/admin/orders');
+    if (newUser.role === 'client') return history.push('/products');
   };
 
   return (
