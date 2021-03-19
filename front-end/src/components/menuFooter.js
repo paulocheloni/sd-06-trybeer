@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MenuFooter() {
   const classes = useStyles();
-  const { price, setPrice, cart } = useContext(context);
+  const { setPrice, cart } = useContext(context);
   const [disabled, setDisabled] = useState(true);
 
   const history = useHistory();
@@ -75,12 +75,11 @@ export default function MenuFooter() {
   }
 
   return (
-    <>
+    <h1>
       <CssBaseline />
       <Paper square className={ classes.paper } />
       <AppBar position="fixed" color="primary" className={ classes.appBar }>
         <Toolbar>
-
           <IconButton edge="start" color="inherit" aria-label="open drawer">
             <Hamburguer />
           </IconButton>
@@ -96,9 +95,8 @@ export default function MenuFooter() {
             {`Ver Carrinho`}
           <span data-testid="checkout-bottom-btn-value">{`R$ ${totalSum.replace('.', ',')}`}</span>
           </IconButton>
-
         </Toolbar>
       </AppBar>
-    </>
+    </h1>
   );
 }

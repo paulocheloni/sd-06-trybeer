@@ -4,9 +4,9 @@ import ContextAPI from './ContextAPI';
 
 const TrybeerProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState('0,00');
   const [street, setStreet] = useState('');
-  const [numberHouse, setNumberHouse] = useState();
+  const [numberHouse, setNumberHouse] = useState('');
 
   const contextState = {
     cart,

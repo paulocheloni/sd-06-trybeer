@@ -34,6 +34,7 @@ function Cliente() {
   const [products, setProducts] = useState([]);
   const { cart, setCart } = useContext(context);
   const history = useHistory();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!loadState('user')) return history.push('/login');
@@ -61,6 +62,7 @@ function Cliente() {
         setProducts(products.data);
       })
       .catch((err) => console.log(err));
+    setIsLoading(false);
   }, []);
 
   const classes = useStyles();
@@ -70,6 +72,10 @@ function Cliente() {
     if (idx === -1) return '0';
     return `${cart[idx].quantity}`;
   };
+
+  if (isLoading) return (
+    <h1>Loading...</h1>
+  )
 
   return (
     <div>
