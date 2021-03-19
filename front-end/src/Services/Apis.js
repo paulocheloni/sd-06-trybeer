@@ -57,3 +57,29 @@ export const findAllProducts = async () => {
 
   return products;
 };
+
+export const registerOrder = async (infosOrder) => {
+  const order = await axios({
+    method: 'POST',
+    url: 'http://localhost:3001/orders',
+    data: {
+      infosOrder,
+    },
+  }).then((res) => res.data.order)
+    .catch((err) => {
+      console.error(`ops! ocorreu um erro${err}`);
+    });
+
+  return order;
+};
+
+export const getAllOrdes = async (email) => {
+  const ordes = await axios({
+    url: `http://localhost:3001/orders/${email}`,
+  }).then((res) => res.data)
+    .catch(() => {
+      console.error('ops! orders not found');
+    });
+
+  return ordes;
+};

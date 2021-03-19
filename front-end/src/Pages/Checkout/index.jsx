@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { FaStreetView } from 'react-icons/fa';
 import { AiOutlineFieldNumber } from 'react-icons/ai';
+import { registerOrder } from '../../Services/Apis';
 
 import MenuTop from '../../Components/MenuTop';
 import SideBar from '../../Components/SideBar';
@@ -13,14 +14,32 @@ import { GlobalContext } from '../../Contexts/GlobalContext';
 import S from './styles';
 import Input from '../../Components/Input';
 
-const checkOutRedirect = (setCheckOut, history) => {
+const mountData = (params) => {
+  const { street, numberHouse } = params;
+  const user = JSON.parse(localStorage.getItem('user'));
+  const products = JSON.parse(localStorage.getItem('infosCheckout'));
+  const orderValue = JSON.parse(localStorage.getItem('total'));
+  const order = {
+    email: user.email,
+    orderValue: orderValue,
+    address: street,
+    number:numberHouse,
+    products: products,
+    token: user.token,
+  };
+  return order;
+};
+
+const checkOutRedirect = (setCheckOut, history, params) => {
   const time = 2000;
-
+  const order = mountData(params);
+  
   setCheckOut(true);
-
   setTimeout(() => {
     history.push('/products');
   }, time);
+
+  registerOrder(order);
 
   localStorage.removeItem('infosCheckout');
   localStorage.removeItem('total');
@@ -161,8 +180,10 @@ const Checkout = () => {
 
   const params = {
     valueTotal,
+    street,
     setStreet,
     setNumberHouse,
+    numberHouse,
     cardsProductsValues,
     checkOut,
     stateSideBar,
@@ -186,7 +207,7 @@ const Checkout = () => {
           botton="0"
           position="fixed"
           disabled={ isDisabled }
-          onClick={ () => checkOutRedirect(setCheckOut, history) }
+          onClick={ () => checkOutRedirect(setCheckOut, history, params) }
           dataTestid="checkout-finish-btn"
         >
           Finalizar Pedido

@@ -17,7 +17,7 @@ const SideBarAdmin = () => {
       {stateSideBarAdmin && (
         <S.CompSideBar className="admin-side-bar-container">
           <S.Navigation
-            href="/orders"
+            href="/admin/orders"
             data-testid="side-menu-item-orders"
           >
             <FaListAlt
@@ -28,7 +28,7 @@ const SideBarAdmin = () => {
             Pedidos
           </S.Navigation>
           <S.Navigation
-            href="/profile"
+            href="/admin/profile"
             data-testid="side-menu-item-profile"
           >
             <FaUserAlt
