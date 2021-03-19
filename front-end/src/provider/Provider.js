@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 // import { useHistory } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
 
-const getFromLocalStorage = (key) => {
+function TrybeerProvider({ children }) {
+  const getFromLocalStorage = (key) => {
   const keyFromLocalStorage = JSON.parse(localStorage.getItem(key));
   return keyFromLocalStorage;
 };
 
-function TrybeerProvider({ children }) {
   const [cart, setCart] = useState(() => {
     const cartFromLocalStorage = getFromLocalStorage('cart');
     if (cartFromLocalStorage) return cartFromLocalStorage;
