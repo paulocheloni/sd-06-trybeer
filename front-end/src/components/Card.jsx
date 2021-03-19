@@ -4,23 +4,28 @@ import '../css/Card.css';
 
 function Card(props) {
   const [quantity, setQuantity] = useState(0);
-  const { info } = props;
+  const { products, index } = props;
+
   return (
     <div className="card-container">
-      <img src={ info.img } alt="imagem cerveja" data-testid="0-product-img"/>
-      <p data-testid="0-product-price">R$ { info.price }</p>
-      <p data-testid="0-product-name">{ info.name }</p>
+      <img src={ products.img } alt="imagem cerveja" data-testid={`${index}-product-img`}/>
+      <p data-testid={`${index}-product-price`}>R$ { products.price }</p>
+      <p data-testid={`${index}-product-name`}>{ products.name }</p>
       <button
-        data-testid="0-product-minus"
+        data-testid={`${index}-product-minus`}
         type="button"
-        onClick={ () => reduceProduct(quantity, setQuantity, info.name) }
-      >-</button>
-      <span data-testid="0-product-qtd">{quantity}</span>
+        onClick={ () => reduceProduct(quantity, setQuantity, products.name) }
+      >
+        -
+      </button>
+      <span data-testid={`${index}-product-qtd`}>{quantity}</span>
       <button
-        data-testid="0-product-plus"
+        data-testid={`${index}-product-plus`}
         type="button"
-        onClick={ () => addProduct(quantity, setQuantity, info.name) }
-        >+</button>
+        onClick={ () => addProduct(quantity, setQuantity, products.name) }
+      >
+        +
+      </button>
     </div>
   );
 }
