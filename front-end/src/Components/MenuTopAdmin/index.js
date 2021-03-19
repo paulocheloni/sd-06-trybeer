@@ -5,10 +5,10 @@ import { useTheme } from '../../Hooks/theme';
 import S from './styles';
 import Toogle from '../Toggle';
 
-const MenuTop = () => {
+const MenuTopAdmin = () => {
   const [pathName, setPathName] = useState('');
 
-  const { stateSideBar, setStateSideBar } = useContext(GlobalContext);
+  const { stateSideBarAdmin, setStateSideBarAdmin } = useContext(GlobalContext);
 
   const { toggleTheme, theme } = useTheme();
 
@@ -39,6 +39,8 @@ const MenuTop = () => {
       return setPathName('Meus Pedidos');
     case '/admin/profile':
       return setPathName('Perfil');
+    case '/admin/orders':
+      return setPathName('Pedidos Pendentes');
     default:
       return setPathName('Detalhes de Pedido');
     }
@@ -49,7 +51,7 @@ const MenuTop = () => {
       <button
         type="button"
         data-testid="top-hamburguer"
-        onClick={ () => setStateSideBar(!stateSideBar) }
+        onClick={ () => setStateSideBarAdmin(!stateSideBarAdmin) }
       >
         <img
           src="/images/cardapio.png"
@@ -80,4 +82,4 @@ const MenuTop = () => {
   );
 };
 
-export default MenuTop;
+export default MenuTopAdmin;

@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import App from './App';
+import RoutesAnimation from './routesAnimation';
 import * as serviceWorker from './serviceWorker';
 
+import { GlobalProvider } from './Contexts/GlobalContext';
 import { ThemeProvider } from './Hooks/theme';
 
 import GlobalStyles from './Styles/Global';
@@ -12,7 +13,9 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        <App />
+        <GlobalProvider>
+          <RoutesAnimation />
+        </GlobalProvider>
         <GlobalStyles />
       </ThemeProvider>
     </BrowserRouter>

@@ -26,12 +26,12 @@ const CompSideBar = styled.div`
     left: 0;
     right: 0;
     overflow: hidden;
-    position: fixed;
-    
+    /* position: fixed; */
+
     padding-top: 100px;
 
     border-right: 3px solid ${theme.colors.green};
-    background: ${theme.colors.secondary}cc;
+    background: ${theme.colors.secondary};
 
     display: flex;
     flex-direction: column;

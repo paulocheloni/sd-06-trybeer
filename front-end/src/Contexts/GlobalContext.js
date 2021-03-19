@@ -5,6 +5,7 @@ export const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
   const [stateSideBar, setStateSideBar] = useState(false);
+  const [stateSideBarAdmin, setStateSideBarAdmin] = useState(true);
   const [stateSumPrice, setStateSumPrice] = useState(0);
   const [stateTheme, setStateTheme] = useState(false);
   const [cartList, setCartList] = useState([]);
@@ -18,6 +19,8 @@ export const GlobalProvider = ({ children }) => {
     setStateTheme,
     cartList,
     setCartList,
+    stateSideBarAdmin,
+    setStateSideBarAdmin,
   };
 
   return (

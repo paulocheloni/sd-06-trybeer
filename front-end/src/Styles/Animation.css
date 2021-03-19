@@ -1,0 +1,13 @@
+html {
+  background: #232323;
+}
+
+.transition-enter {
+  transform: translateY(-100vh);
+  z-index: 999;
+}
+
+.transition-enter.transition-enter-active {
+  transform: translateY(0vh);
+  transition: transform 1000ms ;
+}

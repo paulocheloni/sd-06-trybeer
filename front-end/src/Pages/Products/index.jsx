@@ -26,7 +26,9 @@ const Products = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if (stateSumPrice !== 0) {
+    const priceTotal = Number(localStorage.getItem('total'));
+
+    if (priceTotal !== 0) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);

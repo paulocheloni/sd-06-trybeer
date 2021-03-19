@@ -2,9 +2,26 @@ import styled, { css } from 'styled-components';
 
 const Container = styled.div`
   ${({ theme }) => css`
+
     background: ${theme.colors.secondary};
+  
     width: 100%;
     height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 500px) {
+      background: ${theme.colors.primary};
+    }
+  `}
+`;
+
+const Context = styled.div`
+  ${() => css`
+    display: flex;
   `}
 `;
 
@@ -80,6 +97,7 @@ const CardOrder = styled.div`
 
 export default {
   Container,
+  Context,
   ContainerOrders,
   CardOrder,
 };
