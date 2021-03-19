@@ -32,12 +32,17 @@ router.post('/login', validatePassword, validateEmail, rescue(async (req, res) =
   validatePassword, validateEmail, nameValidation, rescue(async (req, res) => {
   const { name, email, password, role } = req.body;
   await userService.createUser(name, email, password, role);
+  const user = await userService.findUserByEmail(email, password);
+  
   const userDataForFront = {
-     name,
-     email,
-     role,
+    id: user.id,
+    name,
+    email,
+    role,
   };
+
   const userToken = createToken(userDataForFront);
+  console.log(userToken);
   return res.status(201).json({ userToken });
 }));
 
