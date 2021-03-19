@@ -16,13 +16,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
+    gridcolumn: 1,
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 500,
-    height: 1000,
+    width: 'auto',
+    height: 'auto',
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
@@ -35,6 +36,7 @@ function Cliente() {
   const history = useHistory();
 
   useEffect(() => {
+    if (!loadState('user')) return history.push('/login');
     const { email } = loadState('user');
 
     const storageCart = loadState(`${email}`);
@@ -42,6 +44,7 @@ function Cliente() {
   }, []);
 
   useEffect(() => {
+    if (!loadState('user')) return history.push('/login');
     const { email } = loadState('user');
     saveState(`${email}`, cart);
   }, [cart]);
@@ -72,11 +75,11 @@ function Cliente() {
     <div>
       <NavBar content="TryBeer" />
       <div className={classes.root}>
-        <GridList cellHeight={180} className={classes.gridList}>
+        <GridList spacing={20} cols={3} cellHeight={180} className={classes.gridList}>
           {products.map((tile, index) => {
             const link_img = tile.url_image.replace(/ /g, '_');
             return (
-              <GridListTile key={link_img} key={index} data-testid={`${index}-product-price`}>
+              <GridListTile cellHeight  key={link_img} key={index} data-testid={`${index}-product-price`}>
 
                 {/* Image */}
                 <img src={link_img} data-testid={`${index}-product-img`} alt={tile.name} />

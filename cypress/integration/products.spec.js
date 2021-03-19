@@ -8,7 +8,7 @@ import {
   verifyContainsUrl,
   verifyElementIsDisable,
 } from '../actions/actionBase';
-  
+
 describe('Criar tela de produtos', () => {
   before(() => {
     createAndInsertsDataBase();
@@ -16,7 +16,7 @@ describe('Criar tela de produtos', () => {
 
   after(() => {
     dropAndTruncateDataBase();
-  }) 
+  })
 
   beforeEach( () => {
     cy.visit(Cypress.config().baseUrl);
@@ -50,7 +50,7 @@ describe('Criar tela de produtos', () => {
       verifyElementVisible(`[data-testid="${i}-product-minus"]`);
       cy.get(`[data-testid="${i}-product-qtd"]`).should('have.text', '0');
       verifyElementVisible(`[data-testid="${i}-product-plus"]`);
-    }     
+    }
   });
 
   it('Será validado que é possíve clicar no botão "+" e atualizar o produto para 1', () => {
