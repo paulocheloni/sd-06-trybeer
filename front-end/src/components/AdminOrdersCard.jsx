@@ -2,25 +2,8 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import bancoDeDados from '../pedidosPendentes';
 
-// , { useEffect, useState } from 'react';
-// import fetchSales from '../methods/sales'
-
-// const getSales = async () => {
-//   const mySales = await fetchProducts();
-//   console.log( mySales )
-//   return mySales;
-// }
-
 function AdminOrdersCard() {
   const route = useHistory();
-  // const [allSales, setAllSales] = useState([]);
-  // useEffect(() => {
-  //   (async () => {
-  //     setAllSales(await fetchSales());
-  //   })();
-  // }, []);
-  // getSales()
-  // console.log(allSales)
   return (
     <div>
       { bancoDeDados.map((e, i) => (
@@ -36,8 +19,7 @@ function AdminOrdersCard() {
           { e.status ? 'Pendente' : 'Entregue' }
         </span>
       </button>
-      )
-      )}
+      ))}
     </div>
   );
 }
