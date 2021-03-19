@@ -4,7 +4,7 @@ const { StatusCodes } = require('http-status-codes');
 const url = 'http://localhost:3001';
 
 describe('Test the register endpoint', () => {
-  beforeAll(async () => {
+  afterAll(async () => {
     await connection.execute(
       'DELETE FROM Trybeer.users;',
     );
@@ -18,7 +18,7 @@ describe('Test the register endpoint', () => {
   });
 
   it('Should not be able to sign in without an name', async () => {
-    expect.assertions(2);
+    // expect.assertions(2);
     await frisby
       .post(`${url}/user/register`,
         {
@@ -35,7 +35,7 @@ describe('Test the register endpoint', () => {
   });
 
   it('Should not be able to sign in without an email', async () => {
-    expect.assertions(2);
+    // expect.assertions(2);
     await frisby
       .post(`${url}/user/register`,
         {
@@ -52,7 +52,7 @@ describe('Test the register endpoint', () => {
   });
 
   it('Should not be able to sign in with an invalid email', async () => {
-    expect.assertions(2);
+    // expect.assertions(2);
     await frisby
       .post(`${url}/user/register`,
         {
@@ -70,7 +70,7 @@ describe('Test the register endpoint', () => {
   });
 
   it('Should not be able to sign in without an password', async () => {
-    expect.assertions(2);
+    // expect.assertions(2);
     await frisby
       .post(`${url}/user/register`,
         {
@@ -87,7 +87,7 @@ describe('Test the register endpoint', () => {
   });
 
   it('Should be able to sign in successfully', async () => {
-    expect.assertions(2);
+    // expect.assertions(2);
     await frisby
       .post(`${url}/user/register`,
         {
@@ -112,8 +112,7 @@ describe('Test the register endpoint', () => {
           name: 'Gabi Dal Silv',
           email: 'gabi.dalsilv@gmail.com',
           password: 'test123',
-        })
-      .expect('status', StatusCodes.CREATED);
+        });
 
     await frisby
       .post(`${url}/user/register`,
