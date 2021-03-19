@@ -9,7 +9,7 @@ function Orders() {
   const history = useHistory();
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchOrders = async () => {
       const user = JSON.parse(localStorage.getItem('user'));
       if (user) {
         console.log(user, user.token);
@@ -18,7 +18,7 @@ function Orders() {
         setOrders(response.orders);
       } else { history.push('/login'); }
     };
-    fetchProducts();
+    fetchOrders();
   }, [history]);
 
   return (

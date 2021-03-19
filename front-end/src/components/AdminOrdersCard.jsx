@@ -1,17 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import bancoDeDados from '../pedidosPendentes';
+// import bancoDeDados from '../pedidosPendentes';
+import admOrders from '../methods/admOrders';
 
 function AdminOrdersCard() {
-  const route = useHistory();
+  const [orders, setOrders] = useState([]);
+  const history = useHistory();
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (user) {
+        const response = await admOrders.getAll(user.token);
+        setOrders(response.orders);
+      } else { history.push('/login'); }
+    };
+    fetchOrders();
+  }, [history]);
+
   return (
     <div>
-      { bancoDeDados.map((e, i) => (
+      { orders.map((e, i) => (
         <button
           key={ e.id }
           className="order-card"
           type="button"
-          onClick={ () => route.push(`/admin/orders/${e.id}`) }
+          onClick={ () => history.push(`/admin/orders/${e.id}`) }
         >
           <h1 data-testid={ `${i}-order-number` }>{ `Pedido ${e.delivery_number}` }</h1>
           <p data-testid={ `${i}-order-address` }>{ e.delivery_address }</p>
