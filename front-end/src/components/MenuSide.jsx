@@ -17,14 +17,14 @@ function MenuSide() {
       <div className="side-menu-container">
         {
           isClient
-          &&
-          <button
-            data-testid="side-menu-item-products"
-            type="button"
-            onClick={ () => route.push('/products') }
-          >
-            Produtos
-          </button>
+           && (
+             <button
+               data-testid="side-menu-item-products"
+               type="button"
+               onClick={ () => route.push('/products') }
+             >
+               Produtos
+             </button>)
         }
         <button
           data-testid={ `side-menu-item${modifyId}orders` }
