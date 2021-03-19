@@ -46,13 +46,34 @@ export default function Checkout() {
     const time = 2500;
     setSuccesMessage(true);
     localStorage.setItem('productsCart', JSON.stringify([]));
+
     const total = products.reduce(sumOfCart, 0);
+
     setTimeout(() => history.push('/products'), time);
+
     const now = new Date();
+
     const date = `${now.getFullYear()}-${now.getMonth()}-${now.getDay()}
       ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
-    const saleId = await api.fetchAddSale(user.id, total, rua, numero, date, 'Pendente');
-    console.log(saleId); // posso retirar essa contante?? para passar no lint
+
+    const saleId = await api.fetchAddSale({
+      userId: user.id,
+      total,
+      street: rua,
+      number: numero,
+      data: date,
+      status: 'Pendente',
+    });
+
+    const productsCart = products.map((product) => (
+      {
+        productId: Number(product.id),
+        quantity: product.qty,
+        saleId,
+      }
+    ));
+
+    await api.fetchAddSaleProduct(productsCart);
   };
 
   return (

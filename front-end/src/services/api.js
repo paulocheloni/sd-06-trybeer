@@ -51,7 +51,7 @@ const fetchChangeName = async (name, email) => {
 
 const fetchAddSale = async (sale) => {
   const { userId, total, street, number, data, status } = sale;
-  await fetch('http://localhost:3001/checkout', {
+  const response = await fetch('http://localhost:3001/checkout', {
     method: 'POST',
     headers: contentType,
     body: JSON.stringify({
@@ -62,6 +62,16 @@ const fetchAddSale = async (sale) => {
       data,
       status,
     }),
+  }).then((res) => res.json());
+
+  return response.saleId;
+};
+
+const fetchAddSaleProduct = async (salesProducts) => {
+  await fetch('http://localhost:3001/saleProduct', {
+    method: 'POST',
+    headers: contentType,
+    body: JSON.stringify(salesProducts),
   });
 };
 
@@ -71,4 +81,5 @@ module.exports = {
   fetchProducts,
   fetchChangeName,
   fetchAddSale,
+  fetchAddSaleProduct,
 };
