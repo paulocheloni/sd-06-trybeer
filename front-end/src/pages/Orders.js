@@ -4,12 +4,13 @@ import TopMenu from '../components/TopMenu';
 import './Orders.css';
 
 function Orders() {
-  const fetchOrders = () => {
-    await fetchFunctions.get('orders').then((ordersArray) => {
-      setOrders(ordersArray);
-    });
-  }
-  useEffect(() => {fetchOrders()}, [])
+
+  // const fetchOrders = async () => {
+  //   await fetchFunctions.get('orders', token).then((ordersArray) => {
+  //     setOrders(ordersArray);
+  //   });
+  // }
+  // useEffect(() => {fetchOrders()}, [])
   return (
     <div>
       <TopMenu 

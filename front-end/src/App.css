@@ -47,7 +47,6 @@ button {
   width: 80vw;
   display: flex;
   color: white;
-  margin-left: 20vw;
   margin-top: 51px;
   height: 110vh;
   overflow-x: hidden;
@@ -63,7 +62,6 @@ button {
   flex-direction: column;
   justify-content:space-around;
   text-align: center;
-  visibility: hidden;
   position: fixed;
 }
 

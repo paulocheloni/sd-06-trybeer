@@ -5,6 +5,9 @@ import TrybeerContext from '../context/TrybeerContext';
 function TrybeerProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [user, setUser] = useState({});
+  const [isVisible, setIsVisible] = useState(false);
+
+  const setVisibility = () => setIsVisible(!isVisible);
 
   const getFromLocalStorage = (key) => {
     const keyFromLocalStorage = JSON.parse(localStorage.getItem(key));
@@ -45,6 +48,8 @@ function TrybeerProvider({ children }) {
     setUser,
     setUserLogged,
     eraseLocalStorage,
+    isVisible,
+    setVisibility,
   };
 
   return (
