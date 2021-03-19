@@ -6,7 +6,7 @@ import TopMenu from '../components/TopMenu';
 import ProductCard from '../components/ProductCard';
 import Cart from '../components/Cart';
 import TrybeerContext from '../context/TrybeerContext';
-import verifyToken from '../utils/validations';
+import { verifyToken } from '../utils/verifications';
 
 function Products() {
   const history = useHistory();
@@ -23,7 +23,7 @@ function Products() {
       history.push('/login');
     }
     fetchProducts();
-  }, [user, history]);
+  }, [user, history, fetchProducts]);
 
   return (
     <div>

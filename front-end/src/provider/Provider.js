@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TrybeerContext from '../context/TrybeerContext';
-import getFromLocalStorage from '../utils/getFromLocalStorage';
+
+const getFromLocalStorage = (key) => {
+  const keyFromLocalStorage = JSON.parse(localStorage.getItem(key));
+  return keyFromLocalStorage;
+};
 
 function TrybeerProvider({ children }) {
   const [cart, setCart] = useState(() => {
@@ -43,6 +47,7 @@ function TrybeerProvider({ children }) {
     const cartWithValidQuantitys = newCart.filter((item) => item.quantity > 0);
     setCart(cartWithValidQuantitys);
     localStorage.setItem('cart', JSON.stringify(cartWithValidQuantitys));
+  };
 
   const eraseLocalStorage = () => {
     localStorage.removeItem('user');
@@ -67,7 +72,7 @@ function TrybeerProvider({ children }) {
       { children }
     </TrybeerContext.Provider>
   );
-};
+}
 
 TrybeerProvider.propTypes = {
   children: PropTypes.node.isRequired,
