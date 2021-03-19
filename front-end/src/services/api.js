@@ -20,10 +20,16 @@ const createSale = (email, total_price, delivery_address, delivery_number, statu
   '/sales', { email, total_price, delivery_address, delivery_number, statusSale, cart },
 ));
 
+const listAllOrders = (email) => (api.get('/orders', {headers: { email }}));
+
+const orderDetails = (id) => (api.get(`/orders/${id}`));
+
 export default {
   listLogin,
   createUser,
   updateUser,
   listProducts,
   createSale,
+  listAllOrders,
+  orderDetails
 };
