@@ -1,13 +1,19 @@
 const jwt = require('jsonwebtoken');
-const productsModel = require('../model/Products');
+const salesModel = require('../model/Sales');
 const { UNAUTHORIZED } = require('../schema/statusSchema');
 
 const SECRET = 'senhaSuperSecreta.com';
 
-// Return all products
+// Return all sales
 const getAll = async () => {
-  const products = await productsModel.getAll();
-  return products;
+  const sales = await salesModel.getAll();
+  return sales;
+};
+
+// store request
+const storeRequest = async (userId, totalPrice, address, number) => {
+  const sales = await salesModel.storeRequest(userId, totalPrice, address, number);
+  return sales;
 };
 
 // Verify Auth
@@ -25,5 +31,6 @@ const verifyAuth = async (req, res, next) => {
 
 module.exports = {
   getAll,
+  storeRequest,
   verifyAuth,
 };
