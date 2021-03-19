@@ -8,7 +8,7 @@ import MenuSide from './MenuSide';
 function MenuTop({ title }) {
   const user = JSON.parse(localStorage.getItem('user'));
   let isAdmin = false;
-  if (user.role && user.role === 'administrator') {
+  if (user && user.role === 'administrator') {
     isAdmin = true;
   }
   try {
