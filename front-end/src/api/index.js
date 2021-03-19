@@ -38,7 +38,18 @@ function updateName(name) {
     .catch((err) => console.log(err.response));
 }
 
+async function getProducts() {
+  const axios = buildAxiosHandler();
+  const token = localStorage.getItem('token')
+
+  axios.get('/products',{
+    headers:{
+      'authorization': token
+  }}).then(async response => console.log(response));
+}
+
 export {
+  getProducts,
   login,
   register,
   updateName,
