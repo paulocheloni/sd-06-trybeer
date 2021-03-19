@@ -16,9 +16,14 @@ const updateUser = (name, email) => (api.put('/user/update', { name, email }));
 
 const listProducts = () => (api.get('/products'));
 
+const createSale = (email, total_price, delivery_address, delivery_number, statusSale, cart) => (api.post(
+  '/sales', { email, total_price, delivery_address, delivery_number, statusSale, cart },
+));
+
 export default {
   listLogin,
   createUser,
   updateUser,
   listProducts,
+  createSale,
 };

@@ -5,9 +5,10 @@ import { loadState, saveState } from '../services/localStorage';
 import CheckoutButtonRemove from '../components/CheckOutButtonRemove';
 import context from '../Context/ContextAPI';
 import sumTotal from '../resources/sumTotal';
+import api from '../services/api';
 
 function Checkout() {
-  const { cart, setCart, numberHouse, setNumberHouse, street, setStreet, setPrice } = useContext(context);
+  const { cart, setCart, numberHouse, setNumberHouse, street, setStreet, price ,setPrice } = useContext(context);
   const [hidden, setHidden] = useState(true);
   const [disabled, setDisabled] = useState(true);
   const [email, setEmail] = useState('');
@@ -26,15 +27,11 @@ function Checkout() {
   useEffect(() => {
     if (!loadState('user')) return history.push('/login');
     const { email } = loadState('user');
+    setEmail(email);
 
     const storageCart = loadState(`${email}`);
     storageCart ? setCart(storageCart) : saveState(`${email}`, []);
   }, []);
-
-  // useEffect(() => {
-  //   const { email } = loadState('user');
-  //   saveState(`${email}_price`, totalSum);
-  // }, [totalSum]);
 
   const validateCheckout = (street, numberHouse) => {
     return (street.length > 0 && numberHouse.length > 0) ? setDisabled(false) : setDisabled(true);
@@ -45,11 +42,16 @@ function Checkout() {
   }, [street, numberHouse]);
 
   const finishSale = () => {
-    setHidden(false);
-    setTimeout(()=> {
+    api.createSale(email, price, street, numberHouse, 'Pendente', cart)
+    .then((response) => {
+      setHidden(false);
       saveState(email, []);
-      history.push('/products');
-    }, 2000);
+      setTimeout(()=> {
+        history.push('/products');
+      }, 2000);
+    })
+    .catch((err) => console.log(err));
+
   };
 
   return (

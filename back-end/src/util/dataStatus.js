@@ -11,6 +11,9 @@ const messages = {
     nomeInvalido: {
         message: 'Nome inválido',
     },
+    salesExistente: {
+        message: 'Sale already in database.',
+    },
 };
 
 const status = {

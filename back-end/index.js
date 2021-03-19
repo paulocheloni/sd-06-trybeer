@@ -15,6 +15,7 @@ const PORT = 3001;
 const LoginController = require('./src/controllers/LoginController');
 const UserController = require('./src/controllers/UserController');
 const ProductsController = require('./src/controllers/ProductsController');
+const SalesController = require('./src/controllers/SalesController');
 
 app.use(express.json());
 app.use(cors());
@@ -22,6 +23,7 @@ app.use(cors());
 app.use('/login', rescue(LoginController));
 app.use('/user', rescue(UserController));
 app.use('/products', rescue(ProductsController));
+app.use('/sales', rescue(SalesController));
 
 app.use('/images', express.static(`${__dirname}/images`));
 
