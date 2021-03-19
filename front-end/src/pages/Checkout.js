@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Header } from '../components';
-import { cartList, globalID, globalQuantity, removeCartItem } from '../actions';
+import { addCart, globalID, globalQuantity, removeCartItem } from '../actions';
 
 class Home extends React.Component {
   constructor() {
@@ -52,8 +52,12 @@ class Home extends React.Component {
     if (localStorage.getItem('stateCart')) {
       const localStorageCart = JSON.parse(localStorage.getItem('stateCart'));
       for (let index = 0; index < localStorageCart.length; index += 1) {
-        dispatchCart(localStorageCart[index]);
-        dispatchID(localStorageCart[index].id);
+        const { stateCart } = this.props;
+        const contains = stateCart.filter((element) => element.name === localStorageCart[index].name);
+        if (contains.length < 1) {
+          dispatchCart(localStorageCart[index]);
+          dispatchID(localStorageCart[index].id);
+        }
       }
     }
   }
@@ -70,6 +74,7 @@ class Home extends React.Component {
   render() {
     const { history, stateCart } = this.props;
     const { validAdress, validNumber } = this.state;
+    console.log(stateCart)
     return (
       <div className="checkout-container">
         <Header history={ history } />
@@ -79,7 +84,7 @@ class Home extends React.Component {
             { stateCart ? stateCart.map((element, index) => (
               <div
                 className="cart-item"
-                key={ element.name }
+                key={ index }
                 data-testid={ `${index}-product-price` }
               >
                 <img src={ element.imgUrl } alt={ `product-${index}` } />
@@ -149,7 +154,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchID: (id) => dispatch(globalID(id)),
-  dispatchCart: (array) => dispatch(cartList(array)),
+  dispatchCart: (array) => dispatch(addCart(array)),
   dispatchQtd: (qtd, id) => dispatch(globalQuantity(qtd, id)),
   dispatchRemoved: (array) => dispatch(removeCartItem(array)),
 });

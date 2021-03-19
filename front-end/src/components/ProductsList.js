@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
-  cartList, globalID, globalQuantity, prodList, removeCartItem, updatePrice,
+  addCart, globalID, globalQuantity, prodList, removeCartItem, updatePrice,
 } from '../actions';
 import { getProducts } from '../api';
 
@@ -20,7 +20,7 @@ class ProductsList extends React.Component {
       dispatchProducts,
       dispatchPrice,
       history } = this.props;
-    this.storageToRedux();
+    // this.storageToRedux();
     const products = await getProducts();
     if (products.message) {
       history.replace('/login');
@@ -35,37 +35,44 @@ class ProductsList extends React.Component {
     localStorage.setItem('PRICE', statePrice);
   }
 
-  async storageToRedux() {
-    const { stateQuantity, dispatchQtd, dispatchCart, dispatchID } = this.props;
-    if (!localStorage.getItem('stateQuantity')) {
-      await localStorage.setItem('stateQuantity', JSON.stringify(stateQuantity));
-    }
-    if (localStorage.getItem('stateQuantity')) {
-      const localStorageQtd = JSON.parse(localStorage.getItem('stateQuantity'));
-      const qtdLength = 12;
-      for (let index = 1; index < qtdLength; index += 1) {
-        dispatchQtd(localStorageQtd[index], index);
-      }
-    }
-    if (localStorage.getItem('stateCart')) {
-      const localStorageCart = JSON.parse(localStorage.getItem('stateCart'));
-      for (let index = 0; index < localStorageCart.length; index += 1) {
-        dispatchCart(localStorageCart[index]);
-        dispatchID(localStorageCart[index].id);
-      }
-    }
-  }
+  // async storageToRedux() {
+  //   const { stateQuantity, dispatchQtd, dispatchCart, dispatchID } = this.props;
+  //   if (!localStorage.getItem('stateQuantity')) {
+  //     await localStorage.setItem('stateQuantity', JSON.stringify(stateQuantity));
+  //   }
+  //   if (localStorage.getItem('stateQuantity')) {
+  //     const localStorageQtd = JSON.parse(localStorage.getItem('stateQuantity'));
+  //     const qtdLength = 12;
+  //     for (let index = 1; index < qtdLength; index += 1) {
+  //       dispatchQtd(localStorageQtd[index], index);
+  //     }
+  //   }
+  //   if (localStorage.getItem('stateCart')) {
+  //     const localStorageCart = JSON.parse(localStorage.getItem('stateCart'));
+  //     for (let index = 0; index < localStorageCart.length; index += 1) {
+  //       const { stateCart } = this.props;
+  //       const contains = stateCart.filter((element) => element.name === localStorageCart[index].name);
+  //       if (contains.length < 1) {
+  //         dispatchCart(localStorageCart[index]);
+  //         dispatchID(localStorageCart[index].id);
+  //         // console.log(`adicionou ${index} vez`)
+  //       }
+  //     }
+  //   }
+  // }
+
+  
 
   toCheckout() {
-    const { history, dispatchRemoved } = this.props;
+    const { history } = this.props;
     const cart = JSON.parse(localStorage.getItem(('stateCart')));
     const qtd = JSON.parse(localStorage.getItem('stateQuantity'));
     for (let index = 0; index < cart.length; index += 1) {
       cart[index].quantity = qtd[cart[index].id];
     }
-    // dispatchRemoved(cart);
     localStorage.setItem('stateCart', JSON.stringify(cart));
     history.push('/checkout');
+    this.increaseQuantity();
   }
 
   removeItem(id) {
@@ -119,17 +126,23 @@ class ProductsList extends React.Component {
 
   async sendToCart(target, id) {
     const {
-      dispatchCart, dispatchID, stateID,
+      dispatchCart, dispatchID, stateID
     } = this.props;
     const imgUrl = target.parentNode.parentNode.parentNode.childNodes[0].src;
     const name = target.parentNode.parentNode.parentNode.childNodes[1].innerText;
     const price = target.parentNode.parentNode.parentNode.childNodes[3].innerText;
-    const cartItem = { id, name, price, quantity: 1, imgUrl };
     if (!stateID.includes(id)) {
-      await dispatchCart(cartItem);
+      await dispatchCart(id, name, price, 1, imgUrl);
       dispatchID(id);
       const { stateCart } = this.props;
       localStorage.setItem('stateCart', JSON.stringify(stateCart));
+    } else {
+      const { stateCart } = this.props;
+      const find = stateCart.find((element) => element.id === id);
+      const index = stateCart.indexOf(find);
+      if (find) {
+        stateCart[index].quantity += 1;
+      }
     }
   }
 
@@ -205,7 +218,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatchID: (id) => dispatch(globalID(id)),
   dispatchProducts: (array) => dispatch(prodList(array)),
-  dispatchCart: (array) => dispatch(cartList(array)),
+  dispatchCart: (id, name, price, qtd, url) => dispatch(addCart(id, name, price, qtd, url)),
   dispatchQtd: (qtd, id) => dispatch(globalQuantity(qtd, id)),
   dispatchRemoved: (array) => dispatch(removeCartItem(array)),
   dispatchPrice: (number) => dispatch(updatePrice(number)),
