@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const productsModel = require('../models/ProductsModel');
-const { isUserLoggedIn } = require('../middlewares/validations');
 
 const ProductsRouter = new Router();
 

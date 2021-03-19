@@ -8,17 +8,19 @@ import AddressForm from '../components/AddressForm';
 
 function Checkout() {
   const history = useHistory();
-  const { cart, getFromLocalStorage, getTotalPriceCart } = useContext(TrybeerContext);
+  const { user, cart, getTotalPriceCart } = useContext(TrybeerContext);
   const [isFormFilled, setIsFormFilled] = useState(false);
-  const recoveredCart = getFromLocalStorage('cart');
   const TITLE_MENU_CHECKOUT = 'Finalizar Pedido';
   const TIME_TO_REDIRECT = 3000;
-  const cartHasProducts = recoveredCart.length > 0;
+  const cartHasProducts = cart.length > 0;
   const validatePurchase = cartHasProducts && isFormFilled;
 
   useEffect(() => {
+    if (!user.token) {
+      history.push('/login');
+    }
     console.log(validatePurchase);
-  }, [cart, setIsFormFilled, validatePurchase]);
+  }, [cart, setIsFormFilled, validatePurchase, history]);
 
   const handleCheckOut = () => {
     setTimeout(() => history.push('/products'), TIME_TO_REDIRECT);
@@ -30,7 +32,7 @@ function Checkout() {
       <br />
       <br />
       <h2>Produtos</h2>
-      {cartHasProducts ? recoveredCart.map(({ id, name, quantity, price }, index) => (
+      {cartHasProducts ? cart.map(({ id, name, quantity, price }, index) => (
         <ProductListItem
           key={ index }
           name={ name }

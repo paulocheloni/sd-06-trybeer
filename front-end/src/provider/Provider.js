@@ -1,17 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+// import { useHistory } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
 
-function TrybeerProvider({ children }) {
-  const [cart, setCart] = useState([]);
-  const [user, setUser] = useState({});
+const getFromLocalStorage = (key) => {
+  const keyFromLocalStorage = JSON.parse(localStorage.getItem(key));
+  return keyFromLocalStorage;
+};
 
-  useEffect(() => {
-    const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart'));
-    const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
-    if (cartFromLocalStorage) setCart(cartFromLocalStorage);
-    if (userFromLocalStorage) setUser(userFromLocalStorage);
-  }, []);
+function TrybeerProvider({ children }) {
+  const [cart, setCart] = useState(() => {
+    const cartFromLocalStorage = getFromLocalStorage('cart');
+    if (cartFromLocalStorage) return cartFromLocalStorage;
+    return [];
+  });
+
+  const [user, setUser] = useState(() => {
+    const userFromLocalStorage = getFromLocalStorage('user');
+    if (userFromLocalStorage) return userFromLocalStorage;
+    return {};
+  });
+
+  // const verifyIfUserIsLogged = () => {
+
+  // };
 
   const setUserLogged = (userData) => {
     setUser(userData);
@@ -25,11 +37,6 @@ function TrybeerProvider({ children }) {
       return total.toFixed(2);
     }
     return 0;
-  };
-
-  const getFromLocalStorage = (key) => {
-    const keyFromLocalStorage = JSON.parse(localStorage.getItem(key));
-    return keyFromLocalStorage;
   };
 
   const removeItemCart = (id) => {
@@ -57,6 +64,7 @@ function TrybeerProvider({ children }) {
     user,
     setUser,
     setUserLogged,
+    // verifyIfUserIsLogged,
   };
 
   return (

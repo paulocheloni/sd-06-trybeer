@@ -1,8 +1,6 @@
 const { Router } = require('express');
 const registerAndLog = require('../utils/registerAndLog');
 
-const { validateLogin } = require('../middlewares/validations');
-
 const LoginController = new Router();
 
 LoginController.post('/', async (req, res, next) => {
