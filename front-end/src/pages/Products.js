@@ -22,7 +22,7 @@ function Products({ history }) {
   useEffect(() => {
     verifyToken('products', recoveredUser, history);
     fetchProducts();
-  }, []);
+  }, [history, recoveredUser]);
 
   return (
     <div>

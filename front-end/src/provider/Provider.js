@@ -25,7 +25,7 @@ function TrybeerProvider({ children }) {
       return total.toFixed(2);
     }
     return 0;
-  }
+  };
 
   const getFromLocalStorage = (key) => {
     const keyFromLocalStorage = JSON.parse(localStorage.getItem(key));
@@ -36,7 +36,7 @@ function TrybeerProvider({ children }) {
     const cartWithoutItem = cart.filter((item) => item.id !== id);
     setCart(cartWithoutItem);
     localStorage.setItem('cart', JSON.stringify(cartWithoutItem));
-  }
+  };
 
   const updateProductQuantity = (id, name, quantity, price) => {
     const product = { id, name, quantity, price };
