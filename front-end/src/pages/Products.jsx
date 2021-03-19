@@ -16,10 +16,16 @@ function Products() {
   // ]
   
   useEffect(() => {
-    const availableProducts = getProducts();
-    // console.log('produtos', availableProducts.data)
+    async function teste() {
+      const availableProducts = await getProducts();
+      { console.log('produtos', availableProducts) }
+      setProducts(availableProducts)
+    }
 
-    setProducts(availableProducts.data)
+    teste()
+
+
+
   }, []);
 
   return (

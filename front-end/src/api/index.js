@@ -53,7 +53,7 @@ async function getProducts() {
   axios.get('/products',{
     headers:{
       'authorization': token
-  }}).then(async response => console.log(response));
+  }}).then(response => response.data);
 }
 
 export {
