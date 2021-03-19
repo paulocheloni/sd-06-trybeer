@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import fetchFunctions from '../api/fetchFunctions';
+import TrybeerContext from '../context/TrybeerContext';
 
 const RegisterForm = (props) => {
+  const { setUserLogged } = useContext(TrybeerContext);
   const [spam, setSpam] = useState(false);
   const {
     onChangeName,
@@ -24,6 +26,7 @@ const RegisterForm = (props) => {
     };
 
     const response = await fetchFunctions.post('register', user);
+    setUserLogged(response);
 
     if (response.message === 'User is already registered') return setSpam(true);
     return history.push(isChecked ? '/admin/orders' : '/products');

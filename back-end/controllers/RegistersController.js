@@ -13,8 +13,8 @@ RegisterRouter.post('/', validateEmailDatabase, validateRegister, async (req, re
   try {
     const { email, name, password, role } = req.body;
     await userService.createUserService({ email, name, password, role });
-    const newUser = registerAndLog(email);
-    return res.status(201).json({ newUser });
+    const newUser = await registerAndLog(email);
+    return res.status(201).json(newUser);
   } catch (err) {
     next(err);
   }

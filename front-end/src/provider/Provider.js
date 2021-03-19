@@ -21,10 +21,6 @@ function TrybeerProvider({ children }) {
     return {};
   });
 
-  // const verifyIfUserIsLogged = () => {
-
-  // };
-
   const setUserLogged = (userData) => {
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
@@ -52,6 +48,10 @@ function TrybeerProvider({ children }) {
     const cartWithValidQuantitys = newCart.filter((item) => item.quantity > 0);
     setCart(cartWithValidQuantitys);
     localStorage.setItem('cart', JSON.stringify(cartWithValidQuantitys));
+
+  const eraseLocalStorage = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('cart');
   };
 
   const contextValue = {
@@ -65,6 +65,7 @@ function TrybeerProvider({ children }) {
     setUser,
     setUserLogged,
     // verifyIfUserIsLogged,
+    eraseLocalStorage,
   };
 
   return (
