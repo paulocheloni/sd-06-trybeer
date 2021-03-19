@@ -7,18 +7,23 @@ const getToken = () => {
   }
 };
 
-getToken();
+// getToken();
 
-const validateHeaders = new Headers({
-  authorization: getToken(),
-  'Content-Type': 'application/json',
-});
+// const validateHeaders = new Headers({
+//   authorization: getToken(),
+//   'Content-Type': 'application/json',
+// });
 
 const checkoutPost = async (orderData) => {
   console.log(orderData);
+  const token = getToken();
+  const headers = {
+    'Content-Type': 'application/json',
+    authorization: token,
+  };
   const postMethod = {
     method: 'POST',
-    headers: validateHeaders,
+    headers,
     body: JSON.stringify({
       order: orderData,
     }),

@@ -5,6 +5,7 @@ const notAuthorized = 'not authorized';
 
 const parseJWT = (token) => {
   try {
+    console.log('token', token)
     return JSON.parse(atob(token.split('.')[1]));
   } catch (err) {
     return null;
@@ -13,12 +14,14 @@ const parseJWT = (token) => {
 
 async function validateToken(req, res, next) {
   const token = req.headers.authorization;
-  if (!token) return next({ status: 401, message: notAuthorized });
+  if (!token) return next({ status: 401, message: 'no token' });
+  
   const decode = parseJWT(token);
-  if (!decode) return next({ status: 401, message: notAuthorized });
-  const [{ id }] = await getByEmail(decode.userData);
-  if (!id) return next({ status: 401, message: notAuthorized });
-  res.locals.userId = id;
+  console.log(decode, 'decode');
+  if (!decode) return next({ status: 401, message: 'invalid decode' });
+  const [user] = await getByEmail(decode.userData);
+  if (!user && !user.id) return next({ status: 401, message: 'invalid match of token' });
+  res.locals.userId = user.id;
   return next();
 }
 

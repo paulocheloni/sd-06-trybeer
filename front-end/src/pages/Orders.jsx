@@ -10,16 +10,15 @@ function Orders() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      try {
         const user = JSON.parse(localStorage.getItem('user'));
-        console.log(user, user.token)
-        const response = await clientOrders.getAll(user.token);
-        console.log(response)
-        setOrders(response.orders);
-      } catch (err) {
-        console.log(err.message)
-        history.push('/login');
-      }
+        if (user) {
+          console.log(user, user.token)
+          const response = await clientOrders.getAll(user.token);
+          console.log(response)
+          setOrders(response.orders);
+          
+        }
+        else { history.push('/login') };
     };
     fetchProducts();
   }, []);

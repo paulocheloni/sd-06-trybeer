@@ -14,10 +14,11 @@ const createOne = async (data) => {
 
 const getAllByUserId = async (id) => {
   const sales = await connection.execute(
-    'SELECT * FROM sales WHERE user_id = ?', [id],)
+    'SELECT * FROM sales WHERE user_id = ?', [id],
+);
   return sales;
-}
+};
 
 module.exports = {
-  createOne, getAllByUserId
+  createOne, getAllByUserId,
 };

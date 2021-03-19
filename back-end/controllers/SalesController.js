@@ -10,16 +10,16 @@ routerSales.post('/', validateToken, async (req, res) => {
   console.log(userId, price, address, number, status);
   const { insertId, date } = await createOne({ userId, price, address, number, status });
   res.status(201).json({ order: {
-    saleId: insertId, userId, price, address, number, status, date
+    saleId: insertId, userId, price, address, number, status, date,
   } });
 });
 
 routerSales.get('/', validateToken, async (req, res) => {
-  const {userId} = res.locals
+  const { userId } = res.locals;
   const [orders] = await getAllByUserId(userId);
-  console.log(orders, 'orders')
-  res.status(200).json({ orders })
-})
+  console.log(orders, 'orders');
+  res.status(200).json({ orders });
+});
 
 module.exports = routerSales;
 
