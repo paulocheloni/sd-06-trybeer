@@ -20,6 +20,12 @@ const verifyUser = async (email, password) => {
   return user;
 };
 
+// FindById
+const findById = async (id) => {
+  const user = await userModel.findById(id);
+  return user;
+};
+
 // Update name
 const update = async (id, name) => {
   const user = await userModel.updateName(id, name);
@@ -68,6 +74,7 @@ module.exports = {
   createNewUser,
   verifyUser,
   verifyEmail,
+  findById,
   update,
   verifyId,
   verifyAuth,
