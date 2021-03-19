@@ -12,7 +12,7 @@ class AdminProfile extends React.Component {
   }
 
   componentDidMount() {
-    const five = -5
+    const five = -5;
     const { history } = this.props;
     if (!localStorage.token) {
       history.go(five);
