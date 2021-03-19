@@ -17,6 +17,10 @@ class Checkout extends React.Component {
 
   componentDidMount() {
     this.storageToRedux();
+    const { history } = this.props;
+    if (!localStorage.token) {
+      history.push('./login');
+    }
   }
 
   handleChange({ target: { name, value } }) {
@@ -142,6 +146,7 @@ class Checkout extends React.Component {
             <button
               type="button"
               data-testid="checkout-finish-btn"
+              onClick={ () => history.push('/products', { purchase: true }) }
               disabled={ !validAdress || !validNumber }
             >
               Finalizar Pedido

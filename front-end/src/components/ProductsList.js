@@ -136,7 +136,7 @@ class ProductsList extends React.Component {
   }
 
   render() {
-    const { stateProducts, statePrice, stateCart } = this.props;
+    const { stateProducts, statePrice, stateCart, history } = this.props;
     return (
       <div className="prodlist-container">
         <div className="products-container">
@@ -190,6 +190,8 @@ class ProductsList extends React.Component {
           <span data-testid="checkout-bottom-btn-value">
             { statePrice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
           </span>
+          { history.location.state !== undefined
+            ? <span>Compra realizada com sucesso!</span> : null}
         </div>
       </div>
     );
