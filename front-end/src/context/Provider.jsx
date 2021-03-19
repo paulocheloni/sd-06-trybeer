@@ -5,6 +5,20 @@ import BeersAppContext from './BeersAppContext';
 
 function Provider({ children }) {
   const [user, setUser] = useState(loadStorage('user', {}));
+  const [
+    productQuantity,
+    setProductQuantity,
+  ] = useState(loadStorage('productQuantity', []));
+
+  const [amount, setAmount] = useState(loadStorage('amount', 0.00));
+
+  useEffect(() => {
+    saveStorage('productQuantity', productQuantity);
+  }, [productQuantity]);
+
+  useEffect(() => {
+    saveStorage('amount', amount);
+  }, [amount]);
 
   useEffect(() => {
     saveStorage('user', user);
@@ -13,6 +27,10 @@ function Provider({ children }) {
   const contextValue = {
     user,
     setUser,
+    productQuantity,
+    setProductQuantity,
+    amount,
+    setAmount,
   };
 
   return (

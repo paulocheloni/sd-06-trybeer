@@ -12,6 +12,7 @@ const logo = require('../images/logo_provisorio.png');
 function Login() {
   const {
     setUser,
+    setProductQuantity,
   } = useContext(BeersAppContext);
 
   const [valid, setValid] = useState(true);
@@ -46,11 +47,10 @@ function Login() {
       return;
     }
     setUser(ola);
+    setProductQuantity([]);
     if (ola.role === 'administrator') {
-      console.log('entrou no admin');
       history.push('/admin/orders');
     } else if (ola.role === 'client') {
-      console.log('entrou no client');
       history.push('products');
     }
   };
@@ -61,7 +61,6 @@ function Login() {
       <form>
         <label htmlFor="email">
           Email
-          <br />
           <input
             data-testid="email-input"
             type="email"
@@ -71,7 +70,6 @@ function Login() {
             onChange={ handleChange }
           />
         </label>
-        <br />
         <label htmlFor="pass">
           Senha
           <br />
@@ -84,7 +82,6 @@ function Login() {
             data-testid="password-input"
           />
         </label>
-        <br />
         <span>{ errMessage }</span>
         <button
           data-testid="signin-btn"
@@ -95,7 +92,6 @@ function Login() {
         >
           ENTRAR
         </button>
-        <br />
         <button
           data-testid="no-account-btn"
           id="sign-up"

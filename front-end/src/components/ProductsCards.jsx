@@ -1,66 +1,98 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { loadStorage, saveStorage } from '../service/localStorage';
-
-const seila = (element) => {
-  const productQuantity = loadStorage('productQuantity', []);
-  const objQuantity = productQuantity
-    .find((objStoraged) => objStoraged.id === element.id);
-  if (objQuantity) return objQuantity.qnt;
-  return 0;
-};
+// import { Antartica } from '../images';
+import BeersAppContext from '../context/BeersAppContext';
+// import '../style/ProductCard.css';
 
 function ProductsCard({ element, index }) {
-  const [qnt, setQnt] = useState(seila(element));
+  const {
+    productQuantity,
+    setProductQuantity,
+    amount,
+    setAmount,
+  } = useContext(BeersAppContext);
+
+  const { name, price, id } = element;
+  // console.log(element);
+
+  const storageInitialState = () => {
+    const objQuantity = productQuantity
+      .find((objStoraged) => objStoraged.id === id);
+    if (objQuantity) return objQuantity.qnt;
+    return 0;
+  };
+
+  const [qnt, setQnt] = useState(storageInitialState());
 
   useEffect(() => {
-    const des = loadStorage('productQuantity', [])
-      .filter((objStoraged) => objStoraged.id !== element.id);
-    saveStorage('productQuantity', [...des, { id: element.id, qnt }]);
+    const ola = productQuantity
+      .filter((objStoraged) => objStoraged.id !== id);
+    if (qnt !== 0) setProductQuantity([...ola, { id, qnt }]);
+    else setProductQuantity(ola);
   }, [qnt]);
 
-  const { name, urlImage, price } = element;
+  // url_image
 
   const clickPlus = () => {
     setQnt(qnt + 1);
+    const priceTotal = parseFloat(amount) + parseFloat(price);
+    setAmount(Number(priceTotal.toFixed(2)));
   };
 
   const clickMinus = () => {
     if (qnt > 0) {
       setQnt(qnt - 1);
+      const priceTotal = parseFloat(amount) - parseFloat(price);
+      setAmount(Number(priceTotal.toFixed(2)));
     }
   };
 
+  const commaPrice = price.replace('.', ',');
+
   return (
-    <div>
+    <div className="productCards">
       <img
-        src={ urlImage }
+        // src={ Antartica }
         alt="fotoProduto"
         data-testid={ `${index}-product-img` }
       />
-      <p data-testid={ `${index}-product-name` }>{ name }</p>
-      <p>{ price }</p>
-      <button
-        type="button"
-        data-testid={ `${index}-product-plus` }
-        onClick={ clickPlus }
+      <p data-testid={ `${index}-product-name` } className="txt-productCards">{ name }</p>
+      <p
+        className="txt-productCards"
+        data-testid={ `${index}-product-price` }
       >
-        +
-      </button>
-      <p data-testid={ `${index}-product-qtd` }>{ qnt }</p>
-      <button
-        type="button"
-        data-testid={ `${index}-product-minus` }
-        onClick={ clickMinus }
-      >
-        -
-      </button>
+        { `R$ ${commaPrice}` }
+      </p>
+      <div className="productCards-qtt">
+        <button
+          type="button"
+          data-testid={ `${index}-product-plus` }
+          onClick={ clickPlus }
+          className="bttn-productCards"
+        >
+          +
+        </button>
+        <p data-testid={ `${index}-product-qtd` } className="qtt-productCards">{ qnt }</p>
+        <button
+          type="button"
+          data-testid={ `${index}-product-minus` }
+          onClick={ clickMinus }
+          className="bttn-productCards"
+        >
+          -
+        </button>
+      </div>
     </div>
   );
 }
 
 ProductsCard.propTypes = {
-  element: PropTypes.arrayOf(PropTypes.object).isRequired,
+  element: PropTypes.shape({
+    name: PropTypes.string,
+    price: PropTypes.string,
+    id: PropTypes.number,
+    url_image: PropTypes.string,
+  }).isRequired,
   index: PropTypes.number.isRequired,
 };
 

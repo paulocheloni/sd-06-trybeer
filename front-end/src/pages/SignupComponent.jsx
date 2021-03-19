@@ -10,7 +10,10 @@ import '../style/LoginRegister.css';
 const logo = require('../images/logo_provisorio.png');
 
 function Signup({ history }) {
-  const { setUser } = useContext(BeersAppContext);
+  const {
+    setUser,
+    setProductQuantity,
+  } = useContext(BeersAppContext);
 
   const [checked, setChecked] = useState(false);
   const [valid, setValid] = useState(true);
@@ -56,6 +59,7 @@ function Signup({ history }) {
       return;
     }
     setUser(ola);
+    setProductQuantity([]);
     if (ola.role === 'administrator') {
       history.push('/admin/orders');
     } else if (ola.role === 'client') {
@@ -100,15 +104,17 @@ function Signup({ history }) {
             onChange={ handleChange }
           />
         </label>
-        <label htmlFor="vender">
-          Quero vender
-          <input
-            type="checkbox"
-            data-testid="signup-seller"
-            defaultChecked={ checked }
-            onChange={ handleCheck }
-          />
-        </label>
+        <div className="checkbox">
+          <label htmlFor="vender">
+            Quero vender
+            <input
+              type="checkbox"
+              data-testid="signup-seller"
+              defaultChecked={ checked }
+              onChange={ handleCheck }
+            />
+          </label>
+        </div>
         <span>{errMessage}</span>
         <button
           id="sign-up"

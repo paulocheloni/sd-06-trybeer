@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import SideBar from './SideBarComponent';
+import { Logo, Menu } from '../images';
 import '../style/HeaderCostumer.css';
-
-const logo = require('../images/logo_provisorio.png');
-const buttonHamburguer = require('../images/hamburguer.png');
 
 function Header({ text, id }) {
   const [renderSideBar, setRenderSideBar] = useState(false);
@@ -22,7 +20,7 @@ function Header({ text, id }) {
             onClick={ () => setRenderSideBar(!renderSideBar) }
           >
             <img
-              src={ buttonHamburguer }
+              src={ Menu }
               className="img-menu-costumer"
               alt="ham-btn"
             />
@@ -30,7 +28,7 @@ function Header({ text, id }) {
         </div>
         <h1 data-testid={ id } className="title">{text}</h1>
         <img
-          src={ logo }
+          src={ Logo }
           className="img-logo"
           alt="logo"
         />
@@ -44,7 +42,11 @@ function Header({ text, id }) {
 
 Header.propTypes = {
   text: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
+};
+
+Header.defaultProps = {
+  id: '',
 };
 
 export default Header;
