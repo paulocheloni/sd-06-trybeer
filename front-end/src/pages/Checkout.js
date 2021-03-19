@@ -20,7 +20,7 @@ function Checkout() {
       history.push('/login');
     }
     console.log(validatePurchase);
-  }, [cart, setIsFormFilled, validatePurchase, history]);
+  }, [cart, setIsFormFilled, validatePurchase, history, user.token]);
 
   const handleCheckOut = () => {
     setTimeout(() => history.push('/products'), TIME_TO_REDIRECT);
