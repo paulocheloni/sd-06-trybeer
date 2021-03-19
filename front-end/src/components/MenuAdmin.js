@@ -18,7 +18,7 @@ function MenuAdmin() {
         className="btn-login btn btn-success width-med margin-med"
         title="Meus Pedidos"
         dataTestid="side-menu-item-orders"
-        // handleClick={ () => history.push('/admin/orders') }
+        handleClick={ () => history.push('/admin/orders') }
         btnDisable={ false }
       />
       <Button

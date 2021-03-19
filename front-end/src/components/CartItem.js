@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import context from '../context/Context';
 
 export default function CartItem(props) {
-  const { index, quantity, name, price, setCart } = props;
+  const { index, quantity, name, price, setCart, unitPrice } = props;
   const { totalCart, setTotalCart } = useContext(context);
   const totalValue = price * quantity;
 
@@ -28,7 +28,7 @@ export default function CartItem(props) {
         { `R$ ${totalValue.toFixed(2).replace('.', ',')}` }
       </p>
       <p
-        data-testid={ `${index}-product-unit-price` }
+        data-testid={ `${index}-${unitPrice}` }
       >
         { `(R$ ${price.replace('.', ',')} un)` }
       </p>
@@ -49,4 +49,5 @@ CartItem.propTypes = {
   price: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired,
   setCart: PropTypes.func.isRequired,
+  unitPrice: PropTypes.number.isRequired,
 };

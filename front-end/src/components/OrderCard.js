@@ -7,11 +7,19 @@ function OrderCard(props) {
   const history = useHistory();
 
   return (
-    <div onClick={() => history.push(`/admin/orders/${saleId}`)}>
-      <p data-testid={`${index}-order-number`}>{`Pedido ${saleId}`}</p>
-      <p data-testid={`${index}-order-address`}>{`${street}, ${streetNR}`}</p>
-      <p data-testid={`${index}-order-total-value`}>{`R$ ${totalValue.replace('.', ',')}`}</p>
-      <p data-testid={`${index}-order-status`}>{status}</p>
+    <div
+      data-testid={ `${index}-admin-card-container` }
+      onClick={ () => history.push(`/admin/orders/${saleId}`) }
+      aria-hidden="true"
+    >
+      <p data-testid={ `${index}-order-number` }>{ `Pedido ${saleId}` }</p>
+      <p data-testid={ `${index}-order-address` }>{ `${street}, ${streetNR}` }</p>
+      <p
+        data-testid={ `${index}-order-total-value` }
+      >
+        { `R$ ${totalValue.replace('.', ',')}` }
+      </p>
+      <p data-testid={ `${index}-order-status` }>{ status }</p>
     </div>
   );
 }

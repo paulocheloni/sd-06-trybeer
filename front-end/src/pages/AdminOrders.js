@@ -7,9 +7,9 @@ function AdminOrders() {
   const [orders, setOrders] = useState([]);
 
   const getAllOrders = async () => {
-    const responseOrders = await allSales()
+    const responseOrders = await allSales();
     setOrders(responseOrders);
-  }
+  };
 
   useEffect(() => {
     getAllOrders();

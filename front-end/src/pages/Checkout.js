@@ -95,6 +95,7 @@ function Checkout() {
             name={ item.name }
             quantity={ item.quantity }
             price={ item.price }
+            unitPrice="product-unit-price"
           />))}
       </div>
       <p
