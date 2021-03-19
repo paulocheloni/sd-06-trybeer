@@ -1,12 +1,5 @@
 const connection = require('./connection');
 
-const getAllUsers = async () => {
-  const [users] = await connection.execute(
-    'SELECT * FROM Trybeer.users',
-  );
-  return users;
-};
-
 const findUserByEmail = async (userEmail) => {
   const [[user]] = await connection.execute(
     'SELECT * FROM Trybeer.users WHERE email=?', [userEmail],
@@ -21,8 +14,16 @@ const updateUserNameByEmail = async (userEmail, updatedName) => {
   );
 };
 
+const createUser = async (name, email, password, role) => {
+  await connection.execute(
+    'INSERT INTO Trybeer.users (name, email, password, role) VALUE (?,?,?,?)',
+    [name, email, password, role],
+  );  
+};
+
 module.exports = {
-  getAllUsers,
   findUserByEmail,
   updateUserNameByEmail,
+  createUser, 
+
 };

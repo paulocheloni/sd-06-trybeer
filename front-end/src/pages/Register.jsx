@@ -5,6 +5,7 @@ import { nameValidation,
   passwordValidation,
   emailValidation } from '../utils/validations';
 import fetches from '../services/fetches';
+// const createToken = require('../auth/createToken');
 
 export default function Register() {
   const history = useHistory();
@@ -24,9 +25,13 @@ export default function Register() {
     const doesTheEmailExist = await fetches.fetchUserByEmail(email, password);
     console.log(doesTheEmailExist);
     if (doesTheEmailExist) return setEmailAlreadyExists('E-mail already in database.');
+    const newUser = await fetches.createUser(email, name, password, role);
+    console.log('newUser', newUser);
     if (role === 'client') {
+      localStorage.setItem('token', newUser.userToken);
       history.push('/products');
     } else {
+      localStorage.setItem('token', newUser.userToken);
       history.push('/admin/orders');
     }
   };
