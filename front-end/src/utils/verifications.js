@@ -1,6 +1,6 @@
 import fetchFunctions from '../api/fetchFunctions';
 
-const messageError = 'Unauthorized access';
+const messageError = 'Operation not authorized';
 const invalidMessage = (message) => message.message === messageError;
 
 export const verifyToken = async (endpoint, user, history) => {
