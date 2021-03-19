@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import './menuTop.css';
+import './MenuTop.css';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import MenuSide from './menuSide';
+import MenuSide from './MenuSide';
 
 function MenuTop({ title }) {
   const user = JSON.parse(localStorage.getItem('user'));

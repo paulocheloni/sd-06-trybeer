@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import InputProfileName from '../components/InputProfileName';
 import InputProfileEmail from '../components/InputProfileEmail';
 import editUserName from '../methods/editUserName';
+import MenuTop from '../components/MenuTop';
 
 function ClientProfile() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -12,6 +13,7 @@ function ClientProfile() {
     const { name, email } = user;
     return (
       <div>
+        <MenuTop />
         <h1 data-testid="top-title">
           Meu perfil
         </h1>
