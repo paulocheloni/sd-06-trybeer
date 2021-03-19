@@ -1,21 +1,27 @@
 const { Router } = require('express');
-const { getAll } = require('../models/SalesModel');
+
+const validateToken = require('../middlewares/validateToken');
+const { createOne, getAllByUserId } = require('../models/SalesService');
 
 const routerSales = Router();
 
-routerSales.get('/', async (_req, res) => {
-  const sales = await getAll();
-  res.status(200).json(sales);
+routerSales.post('/', validateToken, async (req, res) => {
+  const { price, address, number, status } = req.body.order;
+  const { userId } = res.locals;
+  console.log(userId, price, address, number, status);
+  const { insertId, date } = await createOne({ userId, price, address, number, status });
+  res.status(201).json({ order: {
+    saleId: insertId, userId, price, address, number, status, date,
+  } });
 });
 
-// routerSales.post('/', async (req, res) => {
-//   console.log(req, res);
-//   try {    
-//     const [sales] = await createProduct(res.sales);
-//     return res.status(200).json(sales);
-//   } catch (err) {
-//     console.log(err.message);
-//   }
-// });
+routerSales.get('/', validateToken, async (req, res) => {
+  const { userId } = res.locals;
+  const [orders] = await getAllByUserId(userId);
+  console.log(orders, 'orders');
+  res.status(200).json({ orders });
+});
 
 module.exports = routerSales;
+
+// {price: 2.2, address: "asd", number: "12", status: "Pendente"}
