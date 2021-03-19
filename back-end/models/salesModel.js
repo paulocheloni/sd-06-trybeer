@@ -23,8 +23,28 @@ const createSaleProduct = async (product) => {
   return newProduct;
 };
 
+const getOrder = async (id) => {
+  const [order] = await connection.execute(`
+  SELECT s.status AS Status,
+  sp.sale_id AS idVenda,
+  p.name AS product,
+  p.price AS price,
+  s.total_price AS total,
+  s.sale_date AS saleDate,
+  sp.quantity AS quantidade
+  FROM Trybeer.sales AS s
+  JOIN Trybeer.sales_products AS sp
+  JOIN Trybeer.products AS p
+  ON p.id = sp.product_id
+  ON s.id = sp.sale_id
+  WHERE sp.sale_id = ?`, [id]);
+
+  return order;
+};
+
 module.exports = {
   getAllSales,
   createSale,
   createSaleProduct,
+  getOrder,
 };

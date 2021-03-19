@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getAllSales, createSale, createSaleProduct } = require('../models/salesModel');
+const { getAllSales, createSale, createSaleProduct, getOrder } = require('../models/salesModel');
 
 const salesRouter = new Router();
 
@@ -34,6 +34,12 @@ salesRouter.post('/:id', async (req, res) => {
   await createSaleProduct(obj);
 
   return res.status(201).json(obj);
+});
+
+salesRouter.get('/:id', async (req, res) => {
+  const { id } = req.params;
+  const order = await getOrder(id);
+  res.status(200).send(order);
 });
 
 module.exports = salesRouter;

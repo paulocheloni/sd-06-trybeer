@@ -20,3 +20,8 @@ export const allSales = async () => fetch(URL_SALES, {
   method: 'GET',
   headers: headerType,
 }).then((response) => response.json());
+
+export const getSaleByID = async (id) => fetch(`${URL_SALES}/${id}`, {
+  method: 'GET',
+  headers: headerType,
+}).then((response) => response.json());
