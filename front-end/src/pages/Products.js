@@ -23,15 +23,6 @@ function Products() {
   }, []);
 
   return (
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <div>
-      <TopBar title="TryBeer" />
-      <h1>Products</h1>
-    </div>
-=======
-=======
->>>>>>> 1c55a5be875c262c2b52ee42d3b3d46f6ecca14e
     loggedUser
       ? (
         <div>
@@ -54,10 +45,6 @@ function Products() {
       : (
         <Redirect to="/login" />
       )
-<<<<<<< HEAD
->>>>>>> 5392b5272d7d710365c2c881a603e33d10d2155d
-=======
->>>>>>> 1c55a5be875c262c2b52ee42d3b3d46f6ecca14e
   );
 }
 
