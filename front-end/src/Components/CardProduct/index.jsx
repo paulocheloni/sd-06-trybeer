@@ -33,7 +33,7 @@ const CardProduct = ({ products, setProducts }) => {
               alt="beer"
             />
             <span data-testid={ `${index}-product-name` }>
-              { ` ${item.name}` }
+              { `${item.name}` }
             </span>
             <S.Container>
               <S.Buttons>

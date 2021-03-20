@@ -31,7 +31,7 @@ const Orders = () => {
   }
   return (
     <>
-      <Menu><p data-testid="top-title">TryBeer</p></Menu>
+      <Menu><p data-testid="top-title">Meus Pedidos</p></Menu>
       <S.Container>
         {orders.length < 1 ? <div>No orders</div> : orders.map((order, index) => (
           <S.Item key={ index }>

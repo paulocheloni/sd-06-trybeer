@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SButton from './style';
 
-const Button = ({ disabled, onClick, children, color, txtColor, dataTestId }) => (
+const Button = ({ disabled, onClick, children, color, txtColor, dataTestId, id }) => (
   <SButton
+    id={ id }
     data-testid={ dataTestId }
     type="button"
     disabled={ disabled }
@@ -21,6 +22,7 @@ Button.propTypes = {
   children: PropTypes.string,
   txtColor: PropTypes.string,
   dataTestId: PropTypes.string,
+  id: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -30,6 +32,7 @@ Button.defaultProps = {
   color: '',
   txtColor: '',
   dataTestId: '',
+  id: '',
 };
 
 export default Button;
