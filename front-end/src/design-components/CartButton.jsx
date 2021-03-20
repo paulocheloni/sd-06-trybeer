@@ -8,7 +8,7 @@ function CartButton() {
   const {
     sale,
   } = useContext(ContextBeer);
-  const [localTotal, setLocalTotal] = useState(0);
+  const [localTotal, setLocalTotal] = useState(sale.total);
 
   useEffect(() => setLocalTotal(sale.total), [sale]);
 
@@ -29,7 +29,7 @@ function CartButton() {
       >
         <h1>Ver Carrinho</h1>
         <span data-testid="checkout-bottom-btn-value">
-          { `R$ ${localTotal.toFixed(2).replace('.', ',')}` }
+          { localTotal === 0 ? 'R$ 0,00' : `R$ ${localTotal.replace('.', ',')}` }
         </span>
       </button>
     </div>
