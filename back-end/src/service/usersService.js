@@ -30,7 +30,10 @@ const createUser = async (name, email, userPass, role) => {
   if (validation.payload) return validation;
 
   const result = await usersModel.createUser(name, email, userPass, role);
-  return result;
+
+  const token = Utils.generateToken(result.id);
+
+  return ({ ...result, token });
 };
 
 const updateUser = async (name, email, token) => {

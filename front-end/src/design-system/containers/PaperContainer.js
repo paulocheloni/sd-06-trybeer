@@ -6,7 +6,7 @@ const PaperContainer = (props) => {
 
   return (
     <div
-      className="w-full rounded-md overflow-hidden bg-white"
+      className="w-full rounded-md overflow-hidden bg-white relative"
     >
       <div className="w-full h-2 bg-primary-dark" />
       <div className="w-full h-10 bg-primary" />

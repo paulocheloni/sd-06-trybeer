@@ -72,10 +72,11 @@ const Buttons = ({ index, prod }) => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex items-center space-x-1">
       <button
         className="mr-2"
         data-testid={ `${index}-product-minus` }
+        className="bg-gray-200 w-6 h-6 flex items-center justify-center rounded-full"
         type="button"
         name="-"
         onClick={ () => handleClick('sub') }
@@ -90,6 +91,7 @@ const Buttons = ({ index, prod }) => {
       <button
         className="mr-2"
         data-testid={ `${index}-product-plus` }
+        className="bg-gray-200 w-6 h-6 flex items-center justify-center rounded-full"
         type="button"
         name="+"
         onClick={ () => handleClick('add') }
