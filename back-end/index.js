@@ -13,6 +13,7 @@ const app = express();
 const PORT = parseInt(process.env.PORT, 10) || 3001;
 
 app.use(express.json());
+app.use('/images', express.static(`${__dirname}/images`));
 app.use(cors());
 app.use(log);
 
