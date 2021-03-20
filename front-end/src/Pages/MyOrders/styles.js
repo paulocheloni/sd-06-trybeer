@@ -74,6 +74,11 @@ const CardOrder = styled.div`
     > div {
       display: flex;
       justify-content: space-between;
+
+      > h2 {
+        font-size: 20px;
+        font-weight: 400;
+      }
     }
   `}
 `;

@@ -4,6 +4,8 @@ const Container = styled.div`
   ${({ theme, stateSideBar }) => css`
 
     background: ${theme.colors.secondary};
+
+    z-index: 997;
   
     width: 100%;
     height: 100vh;

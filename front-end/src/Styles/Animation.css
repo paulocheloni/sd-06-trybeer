@@ -2,12 +2,23 @@ html {
   background: #232323;
 }
 
+/* .transition-appear */
 .transition-enter {
-  transform: translateY(-100vh);
-  z-index: 999;
+  opacity: 0;
+  z-index: 550;
 }
 
+/* .transition-appear-active */
 .transition-enter.transition-enter-active {
-  transform: translateY(0vh);
-  transition: transform 1000ms ;
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.transition-exit {
+  opacity: 0;
+}
+
+.transition-exit.transition-exit-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
 }

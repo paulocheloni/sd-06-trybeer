@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import RoutesAnimation from './routesAnimation';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { GlobalProvider } from './Contexts/GlobalContext';
@@ -14,7 +14,7 @@ ReactDOM.render(
     <BrowserRouter>
       <ThemeProvider>
         <GlobalProvider>
-          <RoutesAnimation />
+          <App />
         </GlobalProvider>
         <GlobalStyles />
       </ThemeProvider>

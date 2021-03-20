@@ -19,8 +19,8 @@ const MyOrders = () => {
   }, [history]);
 
   const orders = [
-    { id: 1, numPedido: 1, date: '08/09', total: 2.20 },
-    { id: 2, numPedido: 2, date: '10/09', total: 10.50 },
+    { id: 1, numPedido: 1, date: '20/03', total: 2.20 },
+    { id: 2, numPedido: 2, date: '20/03', total: 10.50 },
     { id: 3, numPedido: 3, date: '20/09', total: 22.20 },
   ];
 
@@ -35,18 +35,18 @@ const MyOrders = () => {
           orders.map((order, index) => (
             <S.CardOrder
               key={ index }
-              testid="0-order-card-container"
-              onClick={ () => history.push('/orders/:num') }
+              testid={ `${index}-order-card-container` }
+              onClick={ () => history.push(`/orders/${order.numPedido}`) }
             >
               <div>
-                <span data-testid="0-order-number">
+                <span data-testid={ `${index}-order-number` }>
                   {`Pedido ${order.numPedido}`}
                 </span>
-                <span data-testid="0-order-date">
+                <h2 data-testid={ `${index}-order-date` }>
                   {order.date}
-                </span>
+                </h2>
               </div>
-              <p data-testid="0-order-total-value">
+              <p data-testid={ `${index}-order-total-value` }>
                 {`R$ ${(order.total).toFixed(2).replace('.', ',')}`}
               </p>
             </S.CardOrder>

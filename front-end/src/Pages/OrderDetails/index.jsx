@@ -15,7 +15,7 @@ const OrderDetails = () => {
 
   const orders = {
     numOrder: 1,
-    date: '08/09/2021',
+    date: '20/03/2021',
     orderValue: 17.20,
     products: [{
       quantity: 1,
@@ -23,9 +23,9 @@ const OrderDetails = () => {
       valueTotal: 2.20,
     },
     {
-      quantity: 3,
-      description: 'Stella 330ml',
-      valueTotal: 7.50,
+      quantity: 2,
+      description: 'Skol Lata 250ml',
+      valueTotal: 4.40,
     },
     {
       quantity: 5,
@@ -56,7 +56,7 @@ const OrderDetails = () => {
         <S.TopInfos>
 
           <h2 data-testid="order-number">
-            {`Pedidos ${orders.numOrder} `}
+            {`Pedido ${orders.numOrder} `}
           </h2>
           <span data-testid="order-date">
             {(orders.date).replace('/2021', '')}
@@ -74,17 +74,17 @@ const OrderDetails = () => {
             <S.ContainerInfos key={ index }>
               <span
                 className="quantity"
-                data-testid="0-product-qtd"
+                data-testid={ `${index}-product-qtd` }
               >
                 {`${product.quantity} -`}
               </span>
               <span
                 className="description"
-                data-testid="0-product-name"
+                data-testid={ `${index}-product-name` }
               >
                 {product.description}
               </span>
-              <span data-testid="0-product-total-value">
+              <span data-testid={ `${index}-product-total-value` }>
                 R$
                 {' '}
                 {`${(product.valueTotal.toFixed(2)).replace('.', ',')}`}

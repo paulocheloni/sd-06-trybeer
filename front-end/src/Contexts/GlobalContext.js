@@ -9,6 +9,7 @@ export const GlobalProvider = ({ children }) => {
   const [stateSumPrice, setStateSumPrice] = useState(0);
   const [stateTheme, setStateTheme] = useState(false);
   const [cartList, setCartList] = useState([]);
+  const [stateIsFixed, setStateIsFixed] = useState('fixed');
 
   const context = {
     stateSideBar,
@@ -21,6 +22,8 @@ export const GlobalProvider = ({ children }) => {
     setCartList,
     stateSideBarAdmin,
     setStateSideBarAdmin,
+    stateIsFixed,
+    setStateIsFixed,
   };
 
   return (

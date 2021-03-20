@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import { BiUser } from 'react-icons/bi';
 import { FiMail } from 'react-icons/fi';
 import { GlobalContext } from '../../Contexts/GlobalContext';
-import { updateUser } from '../../Services/Apis';
 
 import MenuTopAdmin from '../../Components/MenuTopAdmin';
 import SideBarAdmin from '../../Components/SideBarAdmin';
@@ -13,31 +12,15 @@ import LogoTryBeer from '../../Components/LogoTryBeer';
 
 import S from './styles';
 
-const handleSubmit = async (event, { name, email }, token, setUpdateMessage) => {
-  event.preventDefault();
-
-  const updated = await updateUser(name, email, token);
-
-  // console.log(updated);
-
-  if (updated.message === 'Token Inválido') localStorage.setItem('user', '{}');
-  if (updated.name === name) localStorage.setItem('user', JSON.stringify(updated));
-
-  setUpdateMessage(true);
-};
-
-const form = ([
+const profile = ([
   name,
   setNameState,
   email,
-  token,
-  setUpdateMessage,
 ]) => {
-  const user = { name, email };
   const theme = JSON.parse(localStorage.getItem('@trybeer:theme'));
 
   return (
-    <form onSubmit={ (e) => handleSubmit(e, user, token, setUpdateMessage) }>
+    <S.ContextProfile>
       <h1 data-testid="top-title">Meu perfil</h1>
       <Input
         id="name-input"
@@ -58,14 +41,13 @@ const form = ([
         icon={ FiMail }
       />
 
-    </form>
+    </S.ContextProfile>
   );
 };
 
 const AdminProfile = () => {
   const [nameState, setNameState] = useState('');
   const [emailState, setEmailState] = useState('');
-  const [isDisabled, setIsDisabled] = useState(true);
   const [updateMessage, setUpdateMessage] = useState(false);
 
   const { stateSideBar } = useContext(GlobalContext);
@@ -73,30 +55,23 @@ const AdminProfile = () => {
   const history = useHistory();
 
   useEffect(() => {
-    const userToken = JSON.parse(localStorage.getItem('user'));
+    const dataStorage = JSON.parse(localStorage.getItem('user'));
 
-    if (!userToken) history.push('/login');
-  }, [history]);
+    if (!dataStorage) history.push('/login');
 
-  useEffect(() => {
-    const dataStorage = localStorage.getItem('user');
-    const { name, email } = JSON.parse(dataStorage);
+    let name = '';
+    let email = '';
+
+    if (!dataStorage) {
+      history.push('/login');
+    } else {
+      name = dataStorage.name;
+      email = dataStorage.email;
+    }
 
     setEmailState(email);
     setNameState(name);
-  }, []);
-
-  useEffect(() => {
-    const nameFormat = /^[A-Za-z ]+$/.test(nameState);
-    const dataStorage = localStorage.getItem('user');
-    const { name } = JSON.parse(dataStorage);
-    const twelve = 12;
-
-    setIsDisabled(!((nameFormat && nameState.length > twelve && nameState !== name)));
-  }, [nameState]);
-
-  const dataStorage = localStorage.getItem('user');
-  const { token } = JSON.parse(dataStorage);
+  }, [history]);
 
   return (
     <>
@@ -109,12 +84,10 @@ const AdminProfile = () => {
 
           <LogoTryBeer />
 
-          {form([
+          {profile([
             nameState,
             setNameState,
             emailState,
-            token,
-            isDisabled,
             updateMessage,
             setUpdateMessage,
           ])}

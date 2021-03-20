@@ -21,10 +21,10 @@ const mountData = (params) => {
   const orderValue = JSON.parse(localStorage.getItem('total'));
   const order = {
     email: user.email,
-    orderValue: orderValue,
+    orderValue,
     address: street,
-    number:numberHouse,
-    products: products,
+    number: numberHouse,
+    products,
     token: user.token,
   };
   return order;
@@ -33,7 +33,7 @@ const mountData = (params) => {
 const checkOutRedirect = (setCheckOut, history, params) => {
   const time = 2000;
   const order = mountData(params);
-  
+
   setCheckOut(true);
   setTimeout(() => {
     history.push('/products');

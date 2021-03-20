@@ -15,6 +15,8 @@ const CompButton = styled.button`
     width: ${width || '100%'};
     height: ${heigth};
 
+    z-index: 0;
+
     opacity: ${stateSideBar && '0.2'};
 
     position: ${position};
