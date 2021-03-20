@@ -8,7 +8,7 @@ import Products from './modules/Products/Products';
 import AdminOrders from './modules/Admin/Orders/AdminOrders';
 import AdminProfile from './modules/Admin/Profile/AdminProfile';
 import Checkout from './modules/Checkout/Checkout';
-
+import AdminOrderDetail from './modules/Admin/OrderDetail/AdminOrderDetail';
 
 function Routes() {
   return (
@@ -17,6 +17,7 @@ function Routes() {
         <Route path="/login" component={ Login } />
         <Route path="/products" component={ Products } />
         <Route path="/admin/orders" component={ AdminOrders } />
+        <Route path="/admin/orders/:id" component={ AdminOrderDetail } />
         <Route path="/admin/profile" component={ AdminProfile } />
         <Route path="/register" component={ Register } />
         <Route path="/profile" component={ Profile } />

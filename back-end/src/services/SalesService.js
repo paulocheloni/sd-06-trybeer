@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { createSale } = require('../models/Sales');
+const { createSale, getAll } = require('../models/Sales');
 
 const secret = 'T1f7C0e8E1p9I8h8M';
 const STATUS_OK = 200;
@@ -19,6 +19,19 @@ const SalesService = async (req, res, _next) => {
   }
 };
 
+const getAllSales = async (req, res, _next) => {
+  const sales = await getAll();
+  const formatedSales = sales.map((sale) => ({
+    id: sale.id,
+    deliveryAddress: sale.delivery_address,
+    deliveryNumber: sale.delivery_number,
+    totalPrice: sale.total_price,
+    status: sale.status,
+}));
+  return res.status(STATUS_OK).json(formatedSales);
+};
+
 module.exports = {
   SalesService,
+  getAllSales,
 };

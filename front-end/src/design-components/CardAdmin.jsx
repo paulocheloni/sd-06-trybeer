@@ -2,7 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function CardAdmin(props) {
-  const { pedido: { id, address, status, price } } = props;
+  const { pedido: {
+    id,
+    deliveryAddress,
+    deliveryNumber,
+    status,
+    totalPrice,
+  } } = props;
   return (
     <div
       className="flex flex-wrap border-2
@@ -20,13 +26,15 @@ function CardAdmin(props) {
         <div
           data-testid={ `${id}-order-address` }
         >
-          {address}
+          {deliveryAddress}
+          ,
+          {deliveryNumber}
         </div>
         <div
           className="mt-10"
           data-testid={ `${id}-order-total-value` }
         >
-          {price}
+          {totalPrice}
         </div>
       </div>
       <div className="flex-auto">
@@ -43,9 +51,10 @@ function CardAdmin(props) {
 CardAdmin.propTypes = {
   pedido: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    address: PropTypes.string.isRequired,
+    deliveryAddress: PropTypes.string.isRequired,
+    deliveryNumber: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
+    totalPrice: PropTypes.string.isRequired,
   }).isRequired,
 };
 
