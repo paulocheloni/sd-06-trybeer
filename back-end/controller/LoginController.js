@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
-
-const SECRET = 'senhaSuperSecreta.com';
+const { SECRET } = require('../middlewares/authToken');
 
 const jwtConfig = {
   expiresIn: '7d',

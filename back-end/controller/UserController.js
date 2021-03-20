@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
+const { verifyLogin, SECRET } = require('../middlewares/authToken');
 const {
   getAll,
   verifyEmail,
@@ -7,11 +8,8 @@ const {
   verifyId,
   findById,
   update,
-  verifyAuth,
 } = require('../service/UserService');
 const { OK, CREATED } = require('../schema/statusSchema');
-
-const SECRET = 'senhaSuperSecreta.com';
 
 const jwtConfig = {
   expiresIn: '7d',
@@ -35,18 +33,20 @@ UserController.post('/', verifyEmail, async (req, res) => {
 });
 
 // Get Profile
-UserController.get('/profile', verifyAuth, async (req, res) => {
+UserController.get('/profile', verifyLogin, async (req, res) => {
   const { authorization } = req.headers;
 
-  jwt.verify(authorization, SECRET, (err, decoded) => {
+  jwt.verify(authorization, SECRET, (_err, decoded) => {
     const dec = decoded.data[0];
-    if (!decoded.data[0]) res.status(OK).json(decoded.data);
+    console.log('Usuario decodificado', dec);
+    if (!decoded.data[0]) return res.status(OK).json(decoded.data);
+    
     res.status(OK).json(dec);
   });
 });
 
 // Update
-UserController.put('/:id', verifyId, verifyAuth, async (req, res) => {
+UserController.put('/:id', verifyId, verifyLogin, async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
 
