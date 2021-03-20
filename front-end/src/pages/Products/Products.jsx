@@ -3,6 +3,8 @@ import Header from '../../components/Header/Header';
 import { getProducts } from '../../services/Products';
 import DrinkCard from '../../components/DrinkCard/DrinkCard';
 import Button from '../../components/Button/Button';
+import { getFullCartPrice } from '../../utils/localStorageHandler'
+
 import { useHistory } from 'react-router-dom';
 import { verifyUser } from '../../utils/localStorageHandler';
 
@@ -13,7 +15,10 @@ import { verifyUser } from '../../utils/localStorageHandler';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
+  const [cartSum, setCartSum] = useState(getFullCartPrice());
+
   const history = useHistory();
+
   useEffect(async () => {
     verifyUser(history);
     const allProducts = await getProducts();
@@ -29,10 +34,10 @@ export default function Products() {
     <div>
       <Header title="TryBeer" user="client" />
       {products.map((product, index) => (
-        <DrinkCard productPayload={ product } index={ index } />
+        <DrinkCard productPayload={ product } index={ index } setCartSum={setCartSum}/>
       ))}
       <Button
-        title='Ver Carrinho'
+        title={`Ver carrrinho R$ ${cartSum}`}
         testId='checkout-bottom-btn'
         onClick={handleRedirect}
       />

@@ -1,130 +1,59 @@
 import React, { useState, useEffect } from 'react';
+import { getCart, getFullCartPrice, setCart, addItem, subtractItem } from '../../utils/localStorageHandler'
 import PropTypes from 'prop-types';
 import './drinkCard.css'
 
-
-const sumAll = () => {
-  const oldStorage = JSON.parse(localStorage.getItem('cart'));
-  if (!oldStorage) return 0;
-  const prices = oldStorage.map((product) => {
-    return {
-      price: product.price,
-      quantity: product.quantity
-    }
-  });
-  let sum = 0;
-  prices.forEach(product => {
-    const productSum = product.price * product.quantity;
-    sum += productSum;
-  });
-  return sum;
-};
-
-const updateStorage = (cartItem, id) => {
-  const oldStorage = JSON.parse(localStorage.getItem('cart'));
-  let newStorage = [];
-}
-
 const syncStorageWithCart = (cartItem, id) => {
-  console.log(cartItem);
   const newCartItem = { ...cartItem, default_product: false };
-  console.log(`funcao syncStorageWithCart ${newCartItem}`);
-  const oldStorage = JSON.parse(localStorage.getItem('cart'));
+  const oldStorage = getCart();
   let newStorage = []
   if (newCartItem) {
     if (!oldStorage) {
       newStorage = [{ ...newCartItem }]
-      return localStorage.setItem('cart', JSON.stringify(newStorage))
+      return setCart(newStorage)
     }
     const isItemInCart = oldStorage.filter(product => product.id === id).length
     if (!isItemInCart) {
       newStorage = [...oldStorage, { ...newCartItem }]
-      return localStorage.setItem('cart', JSON.stringify(newStorage))
+      return setCart(newStorage)
     }
     if (isItemInCart) {
       const oldStorageWithoutItem = oldStorage.filter(product => product.id !== id)
       if (newCartItem.quantity === 0) {
-        return localStorage.setItem('cart', JSON.stringify(oldStorageWithoutItem));
+        return setCart(oldStorageWithoutItem)
       }
       newStorage = [...oldStorageWithoutItem, { ...newCartItem }]
-      return localStorage.setItem('cart', JSON.stringify(newStorage))
+      return setCart(newStorage)
     }
   }
 }
 
-const getItemFromStorageOrCreate = (id) => {
-  const cart = JSON.parse(localStorage.getItem('cart')) || '';
-  const emptyItem = '';
-  if (!cart) return emptyItem;
-  const productInCart = cart.filter(product => product.id === id);
-  if (!productInCart.length) return emptyItem;
-  return productInCart
-}
-
-export default function DrinkCard({ productPayload, index }) {
-  const { url_image, name, price, id } = productPayload;
-  // ATENÇÂO!!!!!
-  // const [cartItem, setCartItem] = useState(getItemFromStorageOrCreate(id));
-  /** traz todos produtos do local history */
-  const getLocalStorage = () => {
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    let product = {id, name, price, quantity: 0, url_image, default_product: true }    
-    
-    /** carrinho não existe */
-    if (!cart) return product;
-    
-    if (cart) {
-      const result = cart.find(item => item.id === id);
-
-      /** carrinho existe mas n tem o produto */
-      if (!result) return product;
-
-      /** carrinho existe e tem o produto */
-      return result;
-    }
-  };
-  // const [cartItem, setCartItem] = useState('');
+const recoverProductFromStorage = (url_image, name, price, id) => {
+  const cart = getCart();
+  let product = {id, name, price, quantity: 0, url_image, default_product: true }    
   
-  const [cartItem, setCartItem] = useState(getLocalStorage());
-  const [cartSum, setCartSum] = useState(sumAll());
+  if (!cart) return product;
+  
+  if (cart) {
+    const result = cart.find(item => item.id === id);
+
+    if (!result) return product;
+
+    return result;
+  }
+};
 
 
-  // useEffect(() => {
-  //     setCartItem(getLocalStorage());
-  // }, []);
+export default function DrinkCard({ productPayload, index, setCartSum }) {
+  const { url_image, name, price, id } = productPayload;
+  const [cartItem, setCartItem] = useState(recoverProductFromStorage(url_image, name, price, id));
 
   useEffect(() => {
-    console.log('entrou no useEffect, mas não atualizou o storage')
-    const oldStorage = JSON.parse(localStorage.getItem('cart')) || [];
-    const isItemInCart = oldStorage.filter(product => product.id === id).length;
-    
     if (!cartItem.default_product) {
-      console.log(cartItem);
       syncStorageWithCart(cartItem, id)
-      setCartSum(sumAll())
+      setCartSum(getFullCartPrice())
     }
   }, [cartItem])
-
-  const addItem = () => {
-    if (cartItem === '') {
-      const newProduct = { name, id, price, quantity: 1, url_image, default_product: false }
-      return setCartItem(newProduct)
-    }
-
-    const product = { ...cartItem, quantity: cartItem.quantity + 1, default_product: false }
-    return setCartItem(product);
-  }
-
-  const subtractItem = () => {
-    if (cartItem === '') {
-      return console.log('produto não existe ainda');
-    }
-    if (cartItem.quantity > 0) {
-      const product = { ...cartItem, quantity: cartItem.quantity - 1, default_product: false };
-      return setCartItem(product);
-    }
-  }
-
 
   const testIds = {
     priceId: `${index}-product-price`,
@@ -143,13 +72,11 @@ export default function DrinkCard({ productPayload, index }) {
       <img className="card-images" data-testid={ imgId } alt={ `${name} product card` } src={ url_image } />
       <p className="name-tag" data-testid={ nameId }>{name}</p>
       <div>
-        <button type="button" className="plus-button" data-testid={ plusId } onClick={() => addItem()}>+</button>
+        <button type="button" className="plus-button" data-testid={ plusId } onClick={() => addItem(cartItem, setCartItem)}>+</button>
         <div data-testid={qtdId}>{cartItem.quantity}</div>
-        <button type="button" className="minus-button" data-testid={minusId} onClick={() => subtractItem()}>-</button>
+        <button type="button" className="minus-button" data-testid={minusId} onClick={() => subtractItem(cartItem, setCartItem)}>-</button>
       </div>
-      <div className="cartSum">
-        {cartSum}
-      </div>
+
     </div>
   );
 }
