@@ -64,27 +64,27 @@ const handleUpdate = (name, setShowMessage) => {
   updateName(name, id, setShowMessage)
     .then(setShowMessage(true));
 };
-//////////////////
+/// ///////////////
 const addProduct = (quantity, setQuantity, name) => {
   const total = quantity + 1;
   localStorage.setItem(`${name}`, total);
   setQuantity(total);
-}
+};
 
 const reduceProduct = (quantity, setQuantity, name) => {
-  if(quantity > 0) {
+  if (quantity > 0) {
     const total = quantity - 1;
     localStorage.setItem(`${name}`, total);
     setQuantity(total);
   }
-}
-////////////////////////
+};
+/// /////////////////////
 const tokenExists = (history) => {
-  const token = localStorage.getItem('token')
-  if(!token) {
+  const token = localStorage.getItem('token');
+  if (!token) {
     history.push('/login');
   }
-}
+};
 
 export {
   verifyEmailAndPassword,
@@ -96,5 +96,5 @@ export {
   handleUpdate,
   addProduct,
   reduceProduct,
-  tokenExists
+  tokenExists,
 };

@@ -48,13 +48,12 @@ function updateName(name, id) {
 
 async function getProducts(setProducts) {
   const axios = buildAxiosHandler();
-  const token = localStorage.getItem('token')
-  axios.get('/products',{
-    headers:{
-      'authorization': token
-  }}).then(response => setProducts(response.data));
+  const token = localStorage.getItem('token');
+  axios.get('/products', {
+    headers: {
+      authorization: token,
+    } }).then((response) => setProducts(response.data));
 }
-
 
 export {
   getProducts,
