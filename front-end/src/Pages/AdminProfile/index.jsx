@@ -47,6 +47,7 @@ const form = ([
         onChange={ ({ target }) => setNameState(target.value) }
         themeStorage={ theme && theme.title }
         icon={ BiUser }
+        readOnly
       />
       <Input
         id="email-input"
