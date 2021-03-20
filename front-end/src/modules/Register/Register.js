@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../axios/api';
 import Button from '../../design-components/Button';
 import RegisterInputs from './components/RegisterInputs';
 import ContextBeer from '../../context/ContextBeer';
 import registerValidation from '../../utils/registerValidation';
 
 function Register() {
+  const STATUS_CONFLICT = 409;
   const history = useHistory();
   const [duplicated, setDuplicated] = useState('');
   const {
@@ -23,14 +24,10 @@ function Register() {
 
   const isChecked = () => (document.getElementById('wannasell').checked);
 
-  const baseUrl = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
-
-  const STATUS_CONFLICT = 409;
-
   const signUpOnClick = () => {
     const whatSTheRole = isChecked() ? 'administrator' : 'client';
-    const token = axios
-      .post(`${baseUrl}/register`, {
+    const token = api
+      .post('/register', {
         name: registerName,
         email: registerEmail,
         password: registerPassword,
@@ -41,7 +38,6 @@ function Register() {
         if (response.data.role === 'client') history.push('/products');
       })
       .catch((err) => {
-        console.log(err.response);
         if (err.response.status === STATUS_CONFLICT) {
           setDuplicated(err.response.data.message);
         }
@@ -70,7 +66,7 @@ function Register() {
           <label htmlFor="wannasell">
             <input
               className="mt-5"
-              name="email"
+              name="wannasell"
               type="checkbox"
               data-testid="signup-seller"
               id="wannasell"

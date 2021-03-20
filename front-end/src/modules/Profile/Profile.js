@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../axios/api';
 import LabeledInput from '../../design-components/LabeledInput';
 import Button from '../../design-components/Button';
 import ContextBeer from '../../context/ContextBeer';
@@ -15,10 +15,8 @@ function Profile() {
     setUser,
   } = useContext(ContextBeer);
 
-  const baseUrl = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
-
   function saveOnClick() {
-    axios.put(`${baseUrl}/profile`, {
+    api.put('/profile', {
       name: profileName,
       email: profileEmail,
     })
