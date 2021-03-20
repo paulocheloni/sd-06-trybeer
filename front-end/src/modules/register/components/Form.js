@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
 import * as API from '../../../utils';
 import Buttons from './Buttons';
 import EmailInput from './EmailInput';
 import RoleInput from './RoleInput';
 import NameInput from './NameInput';
 import PasswordInput from './PasswordInput';
+import GlobalContext from '../../../context/Context';
 
 function Form() {
   const [form, setForm] = useState({ email: '', password: '', name: '', role: 'client' });
   const [errorForm, setErrorForm] = useState({ email: true, password: true, name: true });
   const [errorMsg, setErrorMsg] = useState('');
-  const history = useHistory();
+  const { setToken } = useContext(GlobalContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await API.post('/users', form);
     if (response.message) return setErrorMsg('E-mail already in database.');
     localStorage.setItem('user', JSON.stringify(response));
-    const { role } = response;
-    history.push(role === 'client' ? '/products' : '/admin/orders');
+    const delay = 1000;
+    setTimeout(() => setToken(true), delay);
   };
 
   return (

@@ -16,10 +16,10 @@ function Buttons(msg, setMsg, errorForm) {
       </p>
       <p
         className={ `bg-green-500 rounded-md p-2 text-center
-          text-white mt-4 ${msg.success !== '' ? '' : 'hidden'}` }
+          text-white mt-4 ${msg.success !== '' ? '' : 'hidden'} relative` }
       >
-        { msg.success }
-        <p className="hidden">Atualização concluída com sucesso</p>
+        <p className="absolute w-full">{ msg.success }</p>
+        <p className="text-green-500">Atualização concluída com sucesso.</p>
       </p>
       <button
         data-testid="profile-save-btn"

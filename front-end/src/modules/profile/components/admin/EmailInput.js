@@ -6,11 +6,12 @@ function EmailInput(inputValue) {
       <p>Email*</p>
       <input
         id="email-ipt"
-        data-testid="profile-email-input"
+        data-testid="profile-email"
         name="email"
         type="text"
         value={ inputValue }
         disabled
+        readOnly
         className="border rounded-md p-2 bg-gray-300"
       />
     </label>

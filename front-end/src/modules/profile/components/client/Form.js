@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import * as API from '../../../utils';
+import * as API from '../../../../utils';
 import Buttons from './Buttons';
 import EmailInput from './EmailInput';
 import NameInput from './NameInput';
@@ -26,12 +26,10 @@ function Form() {
   };
 
   return (
-    <form className="flex flex-col mt-10" onSubmit={ handleSubmit }>
-      <div className="flex flex-col space-y-4">
-        { NameInput(setErrorForm, setForm, form.name) }
-        { EmailInput(form.email) }
-        { Buttons(msg, setMsg, errorForm) }
-      </div>
+    <form className="flex flex-col mt-10 space-y-4" onSubmit={ handleSubmit }>
+      { NameInput(setErrorForm, setForm, form.name) }
+      { EmailInput(form.email) }
+      { Buttons(msg, setMsg, errorForm) }
     </form>
   );
 }

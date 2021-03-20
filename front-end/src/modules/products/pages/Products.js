@@ -1,14 +1,8 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from 'react';
-=======
 import React, { useEffect, useState, useContext } from 'react';
-import PageMenu from '../../../design-system/page-menu/PageMenu';
->>>>>>> main-group-14
 import Buttons from '../components/Buttons';
 import GlobalContext from '../../../context/Context';
 import api from '../../../axios';
 import PaperContainer from '../../../design-system/containers/PaperContainer';
-import BodyContainer from '../../../design-system/containers/BodyContainer';
 
 function Products() {
   const [prod, setProd] = useState('');
@@ -32,28 +26,33 @@ function Products() {
 
   const renderProducts = () => {
     const eachProduct = (
-      <div>
+      <div className="grid md:grid-cols-4 gap-8 align-baseline">
         { prod.map((p, index) => (
-          <div key={ index }>
-            <p data-testid={ `${index}-product-price` }>
-              <strong>{`R$ ${p.price}`}</strong>
-            </p>
-
-            <img
-              data-testid={ `${index}-product-img` }
-              src={ p.url_image }
-              width="100px"
-              alt={ p.name }
-            />
-
-            <p data-testid={ `${index}-product-name` }>
-              {p.name}
-            </p>
-
-            <Buttons
-              index={ index }
-              prod={ { price: p.price, img: p.url_image, name: p.name, id: p.id } }
-            />
+          <div
+            key={ index }
+            className="border rounded-md border-primary p-2 flex flex-col items-center"
+          >
+            <div className="w-50 h-50 border-gray-200 border p-2">
+              <img
+                data-testid={ `${index}-product-img` }
+                src={ p.url_image }
+                className="round-md object-contain
+                  w-80 h-80 md:w-48 md:h-48 md:object-scale-down"
+                alt={ p.name }
+              />
+            </div>
+            <div className="flex flex-col">
+              <p data-testid={ `${index}-product-price` }>
+                <strong>{`R$ ${p.price}`}</strong>
+              </p>
+              <p data-testid={ `${index}-product-name` }>
+                {p.name}
+              </p>
+              <Buttons
+                index={ index }
+                prod={ { price: p.price, img: p.url_image, name: p.name, id: p.id } }
+              />
+            </div>
           </div>
         ))}
 
@@ -69,12 +68,9 @@ function Products() {
   };
 
   return (
-    <BodyContainer>
-      <PaperContainer>
-        <PageMenu pageName="Pedidos" />
-        {rendering ? renderProducts() : <span>Waiting data</span>}
-      </PaperContainer>
-    </BodyContainer>
+    <PaperContainer>
+      {rendering ? renderProducts() : <span>Waiting data</span>}
+    </PaperContainer>
   );
 }
 
