@@ -1,26 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { addProduct, reduceProduct } from '../services/index'
 import '../css/Card.css';
 
 function Card(props) {
+  const { product } = props;
+  const quantityStorage = localStorage.getItem(product.name);
   const [quantity, setQuantity] = useState(0);
-  const { info } = props;
+
   return (
     <div className="card-container">
-      <img src={ info.img } alt="imagem cerveja" data-testid="0-product-img"/>
-      <p data-testid="0-product-price">R$ { info.price }</p>
-      <p data-testid="0-product-name">{ info.name }</p>
+      <img src={`${product.url_image}`} alt="imagem cerveja" data-testid={`${product.id}-product-img`}/>
+      <p data-testid={`${product.id}-product-price`}>R$ { product.price }</p>
+      <p data-testid={`${product.id}-product-name`}>{ product.name }</p>
       <button
-        data-testid="0-product-minus"
+        data-testid={`${product.id}-product-minus`}
         type="button"
-        onClick={ () => reduceProduct(quantity, setQuantity, info.name) }
+        onClick={ () => reduceProduct(quantity, setQuantity, product.name) }
       >-</button>
-      <span data-testid="0-product-qtd">{quantity}</span>
+      <span data-testid={`${product.id}-product-qtd`}>{quantity}</span>
       <button
-        data-testid="0-product-plus"
+        data-testid={`${product.id}-product-plus`}
         type="button"
-        onClick={ () => addProduct(quantity, setQuantity, info.name) }
-        >+</button>
+        onClick={ () => addProduct(quantity, setQuantity, product.name) }
+      >+</button>
+      <button onClick={() => console.log(quantityStorage)}>Quantity</button>
     </div>
   );
 }

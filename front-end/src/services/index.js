@@ -61,18 +61,25 @@ const handleUpdate = (name) => {
   console.log(name);
   updateName(name);
 };
-
-const addProduct = (quantity, setQuantity, cerveja) => {
+//////////////////
+const addProduct = (quantity, setQuantity, name) => {
   const total = quantity + 1;
-  localStorage.setItem(`${cerveja}`, total);
+  localStorage.setItem(`${name}`, total);
   setQuantity(total);
 }
 
-const reduceProduct = (quantity, setQuantity, cerveja) => {
+const reduceProduct = (quantity, setQuantity, name) => {
   if(quantity > 0) {
     const total = quantity - 1;
-    localStorage.setItem(`${cerveja}`, total);
+    localStorage.setItem(`${name}`, total);
     setQuantity(total);
+  }
+}
+////////////////////////
+const tokenExists = (history) => {
+  const token = localStorage.getItem('token')
+  if(!token) {
+    history.push('/login');
   }
 }
 
@@ -85,5 +92,6 @@ export {
   redirectMenuBar,
   handleUpdate,
   addProduct,
-  reduceProduct
+  reduceProduct,
+  tokenExists
 };
