@@ -1,4 +1,4 @@
-const { users } = require('../models');
+const { users, utils } = require('../models');
 const { generateToken } = require('../security');
 const { authRegisterUser, utils: { validateUserName } } = require('../schemas');
 
@@ -6,8 +6,12 @@ const create = async (body) => {
   const data = body;
   const { name, email } = data;
 
-  const isEmailAvaible = await users.queryByEmail(email);
-  authRegisterUser(data, isEmailAvaible);
+  const isEmailAvailable = await utils.getByFilter({
+    table: 'users',
+    filter: 'email',
+    value: email,
+  });
+  authRegisterUser(data, isEmailAvailable);
 
   data.role = (data.isVendor) ? 'administrator' : 'client';
   const newUserId = await users.insertNewUser(data);

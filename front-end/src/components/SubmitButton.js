@@ -10,7 +10,7 @@ const CheckBox = (props) => {
 
   const label = (type === 'signup')
     ? 'Cadastrar'
-    : 'ENTRAR';
+    : 'Entrar';
 
   return (
     <button type="submit" data-testid={ dataTestId } disabled={ disabled }>
