@@ -1,7 +1,8 @@
 const parseCartPrice = (cartPrice) => {
-  const roundedNumber = Math.round(cartPrice * 100) / 100;
+  const roundedNumber = (Math.round(cartPrice * 100) / 100).toFixed(2);
   const parsedNumber = roundedNumber.toString().replace('.', ',');
-  return parsedNumber;
+  const numberWith$ = `R$ ${parsedNumber}`;
+  return numberWith$;
 };
 
 module.exports = {

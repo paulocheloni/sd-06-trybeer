@@ -4,7 +4,8 @@ import Header from '../../components/Header/Header';
 import { getProducts } from '../../services/Products';
 import DrinkCard from '../../components/DrinkCard/DrinkCard';
 import Button from '../../components/Button/Button';
-import { getFullCartPrice, verifyUser } from '../../utils/localStorageHandler';
+import { verifyUser } from '../../store/LocalStorage/actions';
+import { getFullCartPrice } from '../../store/LocalStorage/provider';
 
 // O botão 'Ver Carrinho' deverá conter a tag data-testid="checkout-bottom-btn"
 
@@ -41,7 +42,7 @@ export default function Products() {
         />
       ))}
       <Button
-        title={ `Ver carrrinho R$ ${cartSum}` }
+        title={ `Ver carrinho ${cartSum}` }
         testId="checkout-bottom-btn"
         onClick={ handleRedirect }
       />

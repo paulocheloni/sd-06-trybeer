@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Header from '../../../components/Header/Header';
 import Input from '../../../components/Input/Input';
 import { updateUser } from '../../../services/Users';
-import { updateName, verifyUser } from '../../../utils/localStorageHandler';
+import { updateName, verifyUser } from '../../../store/LocalStorage/actions';
 
 const handleSaveButton = async ({
   userName,

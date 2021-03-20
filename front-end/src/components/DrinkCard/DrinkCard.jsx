@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { parseCartPrice } from '../../utils/parseValues';
+
+import { addItem,
+  subtractItem,
+  setCart } from '../../store/LocalStorage/actions';
 import { getCart,
-  getFullCartPrice,
-  setCart,
-  addItem,
-  subtractItem } from '../../utils/localStorageHandler';
+  getFullCartPrice } from '../../store/LocalStorage/provider';
 import './drinkCard.css';
 
 const syncStorageWithCart = (cartItem, id) => {
@@ -60,7 +62,12 @@ export default function DrinkCard({ product, index, setCartSum }) {
 
   return (
     <div>
-      <p className="price-tag" data-testid={ `${index}-product-price` }>{price}</p>
+      <p
+        className="price-tag"
+        data-testid={ `${index}-product-price` }
+      >
+        {parseCartPrice(price)}
+      </p>
       <img
         className="card-img"
         data-testid={ `${index}-product-img` }
