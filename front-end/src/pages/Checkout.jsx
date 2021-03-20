@@ -19,7 +19,7 @@ export default function Products() {
     if (!cartLS) return;
     setCartProducts(cartLS);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setCartProducts]);
+  }, []);
 
   const handleRedirect = (token) => {
     if (!token) return history.push('/login');

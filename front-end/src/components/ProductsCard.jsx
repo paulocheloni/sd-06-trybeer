@@ -16,7 +16,7 @@ export default function ProductsCard() {
     if (!cartLS) return;
     setCartProducts(cartLS);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setCartProducts]);
+  }, []);
 
   const handleTotalPrice = () => {
     if (cartProducts.length) {
