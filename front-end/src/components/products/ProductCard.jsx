@@ -3,7 +3,7 @@ import React from 'react';
 
 import { FiPlus, FiMinus } from 'react-icons/fi';
 
-const ProductCard = ({ product, index, plusItemCart, quantity, minusItemCart, handleItem }) => {
+const ProductCard = ({ product, index, plusItemCart, minusItemCart, handleItem }) => {
   return (
     <div>
       <img
@@ -32,8 +32,6 @@ const ProductCard = ({ product, index, plusItemCart, quantity, minusItemCart, ha
       <span
         data-testid={ `${index}-product-qtd` }
       >
-        {/* { (state.quantity >= 0) ? state.quantity : 0 } */}
-        {/* { quantity } */}
         { (handleItem(product)) }
       </span>
       <button

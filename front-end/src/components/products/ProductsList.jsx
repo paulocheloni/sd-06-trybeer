@@ -49,8 +49,15 @@ const ProductsList = () => {
   };
 
   const minusItemCart = (product) => {
-    cart[cart.findIndex((item) => item.id === product.id)].quantity -= 1;
-    setCart([...cart]);
+    const currentProduct = cart.find((item) => item.id === product.id) || {
+      ...product,
+      quantity: 0,
+    };
+
+    if (currentProduct.quantity > 0) {
+      cart[cart.findIndex((item) => item.id === product.id)].quantity -= 1;
+      setCart([...cart]);
+    }
   };
 
   const handleItem = (product) => {
