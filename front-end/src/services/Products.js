@@ -5,4 +5,4 @@ const getProducts = () => fetch(`${endpoint}/products`)
 
 module.exports = {
   getProducts,
-}
+};

@@ -1,41 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import { getCart, getFullCartPrice, setCart, addItem, subtractItem } from '../../utils/localStorageHandler'
 import PropTypes from 'prop-types';
-import './drinkCard.css'
+import { getCart,
+  getFullCartPrice,
+  setCart,
+  addItem,
+  subtractItem } from '../../utils/localStorageHandler';
+import './drinkCard.css';
 
 const syncStorageWithCart = (cartItem, id) => {
   const newCartItem = { ...cartItem, default_product: false };
   const oldStorage = getCart();
-  let newStorage = []
+  let newStorage = [];
   if (newCartItem) {
     if (!oldStorage) {
-      newStorage = [{ ...newCartItem }]
-      return setCart(newStorage)
+      newStorage = [{ ...newCartItem }];
+      return setCart(newStorage);
     }
-    const isItemInCart = oldStorage.filter(product => product.id === id).length
+    const isItemInCart = oldStorage.filter((product) => product.id === id).length;
     if (!isItemInCart) {
-      newStorage = [...oldStorage, { ...newCartItem }]
-      return setCart(newStorage)
+      newStorage = [...oldStorage, { ...newCartItem }];
+      return setCart(newStorage);
     }
     if (isItemInCart) {
-      const oldStorageWithoutItem = oldStorage.filter(product => product.id !== id)
+      const oldStorageWithoutItem = oldStorage.filter((product) => product.id !== id);
       if (newCartItem.quantity === 0) {
-        return setCart(oldStorageWithoutItem)
+        return setCart(oldStorageWithoutItem);
       }
-      newStorage = [...oldStorageWithoutItem, { ...newCartItem }]
-      return setCart(newStorage)
+      newStorage = [...oldStorageWithoutItem, { ...newCartItem }];
+      return setCart(newStorage);
     }
   }
-}
+};
 
-const recoverProductFromStorage = (url_image, name, price, id) => {
+const getItemInStorage = (urlImage, name, price, id) => {
   const cart = getCart();
-  let product = {id, name, price, quantity: 0, url_image, default_product: true }    
-  
+  const product = { id, name, price, quantity: 0, urlImage, default_product: true };
+
   if (!cart) return product;
-  
+
   if (cart) {
-    const result = cart.find(item => item.id === id);
+    const result = cart.find((item) => item.id === id);
 
     if (!result) return product;
 
@@ -43,50 +47,53 @@ const recoverProductFromStorage = (url_image, name, price, id) => {
   }
 };
 
-
-export default function DrinkCard({ productPayload, index, setCartSum }) {
-  const { url_image, name, price, id } = productPayload;
-  const [cartItem, setCartItem] = useState(recoverProductFromStorage(url_image, name, price, id));
+export default function DrinkCard({ product, index, setCartSum }) {
+  const { url_image: urlImage, name, price, id } = product;
+  const [cartItem, setCartItem] = useState(getItemInStorage(urlImage, name, price, id));
 
   useEffect(() => {
     if (!cartItem.default_product) {
-      syncStorageWithCart(cartItem, id)
-      setCartSum(getFullCartPrice())
+      syncStorageWithCart(cartItem, id);
+      setCartSum(getFullCartPrice());
     }
-  }, [cartItem])
-
-  const testIds = {
-    priceId: `${index}-product-price`,
-    imgId: `${index}-product-img`,
-    nameId: `${index}-product-name`,
-    plusId: `${index}-product-plus`,
-    minusId: `${index}-product-minus`,
-    qtdId: `${index}-product-qtd`,
-  };
-
-  const { priceId, imgId, nameId, plusId, minusId, qtdId } = testIds;
+  }, [cartItem, id, setCartSum]);
 
   return (
     <div>
-      <p className="price-tag" data-testid={ priceId }>{price}</p>
-      <img className="card-images" data-testid={ imgId } alt={ `${name} product card` } src={ url_image } />
-      <p className="name-tag" data-testid={ nameId }>{name}</p>
+      <p className="price-tag" data-testid={ `${index}-product-price` }>{price}</p>
+      <img
+        className="card-img"
+        data-testid={ `${index}-product-img` }
+        alt={ `${name} product card` }
+        src={ urlImage }
+      />
+      <p className="name-tag" data-testid={ `${index}-product-name` }>{name}</p>
       <div>
-        <button type="button" className="plus-button" data-testid={ plusId } onClick={() => addItem(cartItem, setCartItem)}>+</button>
-        <div data-testid={qtdId}>{cartItem.quantity}</div>
-        <button type="button" className="minus-button" data-testid={minusId} onClick={() => subtractItem(cartItem, setCartItem)}>-</button>
+        <button
+          type="button"
+          className="plus-button"
+          data-testid={ `${index}-product-plus` }
+          onClick={ () => addItem(cartItem, setCartItem) }
+        >
+          +
+        </button>
+        <div data-testid={ `${index}-product-qtd` }>{cartItem.quantity}</div>
+        <button
+          type="button"
+          className="minus-button"
+          data-testid={ `${index}-product-minus` }
+          onClick={ () => subtractItem(cartItem, setCartItem) }
+        >
+          -
+        </button>
       </div>
 
     </div>
   );
 }
 
-// DrinkCard.propTypes = {
-//   productPayload: PropTypes.shapeOf({
-//     photo: PropTypes.string.isRequired,
-//     name: PropTypes.string.isRequired,
-//     price: PropTypes.string.isRequired,
-//     quantity: PropTypes.string.isRequired,
-//   }).isRequired,
-//   index: PropTypes.number.isRequired,
-// };
+DrinkCard.propTypes = {
+  product: PropTypes.arrayOf(PropTypes.string).isRequired,
+  setCartSum: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
+};

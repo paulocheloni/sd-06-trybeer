@@ -10,9 +10,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const userRouter = require('./src/controllers/UserController');
-const productsRouter = require('./src/controllers/ProductController')
+const productsRouter = require('./src/controllers/ProductController');
 const errorMiddleware = require('./src/middlewares/errorMiddleware');
-const path = require('path')
 
 const app = express();
 const port = 3001;
@@ -21,7 +20,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/user', userRouter);
-app.use('/products', productsRouter)
+app.use('/products', productsRouter);
 app.use('/images', express.static(`${process.cwd()}/images`)); 
 
 app.use(errorMiddleware);

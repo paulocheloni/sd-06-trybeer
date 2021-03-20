@@ -27,7 +27,7 @@ export default function Profile() {
   const history = useHistory();
 
   useEffect(() => {
-    const { name, email } = verifyUser(history)
+    const { name, email } = verifyUser(history);
     setUserName(name);
     setUserEmail(email);
     setUserNameInStorage(name);

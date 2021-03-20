@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import { getProducts } from '../../services/Products';
 import DrinkCard from '../../components/DrinkCard/DrinkCard';
 import Button from '../../components/Button/Button';
-import { getFullCartPrice } from '../../utils/localStorageHandler'
-
-import { useHistory } from 'react-router-dom';
-import { verifyUser } from '../../utils/localStorageHandler';
-
+import { getFullCartPrice, verifyUser } from '../../utils/localStorageHandler';
 
 // O botão 'Ver Carrinho' deverá conter a tag data-testid="checkout-bottom-btn"
 
@@ -19,27 +16,34 @@ export default function Products() {
 
   const history = useHistory();
 
-  useEffect(async () => {
-    verifyUser(history);
-    const allProducts = await getProducts();
-    setProducts(allProducts);
-  }, []);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      verifyUser(history);
+      const allProducts = await getProducts();
+      setProducts(allProducts);
+    };
+    fetchProducts();
+  }, [history]);
 
   const handleRedirect = () => {
     history.push('/checkout');
-  }
+  };
 
-  console.log(products)
   return (
     <div>
       <Header title="TryBeer" user="client" />
       {products.map((product, index) => (
-        <DrinkCard productPayload={ product } index={ index } setCartSum={setCartSum}/>
+        <DrinkCard
+          product={ product }
+          key={ product.id }
+          index={ index }
+          setCartSum={ setCartSum }
+        />
       ))}
       <Button
-        title={`Ver carrrinho R$ ${cartSum}`}
-        testId='checkout-bottom-btn'
-        onClick={handleRedirect}
+        title={ `Ver carrrinho R$ ${cartSum}` }
+        testId="checkout-bottom-btn"
+        onClick={ handleRedirect }
       />
     </div>
   );
