@@ -13,8 +13,8 @@ function App() {
   return (
     <Provider>
       <GlobalStyle />
-      <Switch>
-        <BrowserRouter>
+      <BrowserRouter>
+        <Switch>
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>
@@ -23,8 +23,8 @@ function App() {
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/products" component={ Products } />
           <Route exact path="/checkout" component={ Cart } />
-        </BrowserRouter>
-      </Switch>
+        </Switch>
+      </BrowserRouter>
     </Provider>
   );
 }
