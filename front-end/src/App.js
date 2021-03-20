@@ -6,7 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import { NotFound, Login, Register } from './pages';
+import { NotFound, Login, Register, Error } from './pages';
 
 import './App.css';
 
@@ -19,6 +19,7 @@ function App() {
         <Route exact path="/">
           <Redirect to="/login" />
         </Route>
+        <Route path="/error" component={ Error } />
         <Route component={ NotFound } />
       </Switch>
     </BrowserRouter>

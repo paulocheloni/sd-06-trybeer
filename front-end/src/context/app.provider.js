@@ -17,7 +17,7 @@ const AppProvider = ({ children }) => {
 };
 
 AppProvider.propTypes = {
-  children: PropTypes.arrayOf(Object).isRequired,
+  children: PropTypes.objectOf(Object).isRequired,
 };
 
 export default AppProvider;
