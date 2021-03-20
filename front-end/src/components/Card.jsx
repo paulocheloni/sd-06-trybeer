@@ -24,6 +24,7 @@ function Card(props) {
         onClick={ () => addProduct(quantity, setQuantity, product.name) }
       >+</button>
       <button onClick={() => console.log(quantityStorage)}>Quantity</button>
+
     </div>
   );
 }

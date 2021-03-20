@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ControllerHeader from '../components/ControllerHeader';
 import { useHistory } from 'react-router-dom';
 import Card from '../components/Card'
 import ShowCart from '../components/ShowCart'
+
 import { getProducts } from '../api/index'
 import { tokenExists } from '../services/index'
 
