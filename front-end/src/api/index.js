@@ -46,7 +46,18 @@ function updateName(name, id) {
     { headers: { Authorization: localStorage.token } });
 }
 
+async function getProducts(setProducts) {
+  const axios = buildAxiosHandler();
+  const token = localStorage.getItem('token')
+  axios.get('/products',{
+    headers:{
+      'authorization': token
+  }}).then(response => setProducts(response.data));
+}
+
+
 export {
+  getProducts,
   login,
   profile,
   register,
