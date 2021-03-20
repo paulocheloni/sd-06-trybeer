@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const ORDER_NOT_FOUND = 'ops! order not found';
+
 export const loginUser = async (email, password) => {
   const user = await axios({
     method: 'POST',
@@ -59,13 +61,8 @@ export const findAllProducts = async () => {
 };
 
 export const registerOrder = async (infosOrder) => {
-  const order = await axios({
-    method: 'POST',
-    url: 'http://localhost:3001/orders',
-    data: {
-      infosOrder,
-    },
-  }).then((res) => res.data.order)
+  const order = await axios.post('http://localhost:3001/orders', infosOrder)
+    .then((res) => res.data)
     .catch((err) => {
       console.error(`ops! ocorreu um erro${err}`);
     });
@@ -73,13 +70,46 @@ export const registerOrder = async (infosOrder) => {
   return order;
 };
 
-export const getAllOrdes = async (email) => {
-  const ordes = await axios({
+export const getAllOrders = async (email) => {
+  const orders = await axios({
     url: `http://localhost:3001/orders/${email}`,
   }).then((res) => res.data)
     .catch(() => {
-      console.error('ops! orders not found');
+      console.error(ORDER_NOT_FOUND);
     });
 
-  return ordes;
+  return orders;
+};
+
+export const getOrderDetails = async (id) => {
+  const order = await axios({
+    url: `http://localhost:3001/orderdetails/${id}`,
+  }).then((res) => res.data)
+    .catch(() => {
+      console.error(ORDER_NOT_FOUND);
+    });
+
+  return order;
+};
+
+export const getAllAdminOrders = async () => {
+  const orders = await axios({
+    url: 'http://localhost:3001/admin/orders',
+  }).then((res) => res.data)
+    .catch(() => {
+      console.error(ORDER_NOT_FOUND);
+    });
+
+  return orders;
+};
+
+export const getAdminOrderById = async (id) => {
+  const orders = await axios({
+    url: `http://localhost:3001/admin/orders/${id}`,
+  }).then((res) => res.data)
+    .catch(() => {
+      console.error(ORDER_NOT_FOUND);
+    });
+
+  return orders;
 };

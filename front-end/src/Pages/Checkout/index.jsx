@@ -30,16 +30,15 @@ const mountData = (params) => {
   return order;
 };
 
-const checkOutRedirect = (setCheckOut, history, params) => {
+const checkOutRedirect = async (setCheckOut, history, params) => {
   const time = 2000;
   const order = mountData(params);
 
+  await registerOrder(order);
   setCheckOut(true);
   setTimeout(() => {
     history.push('/products');
   }, time);
-
-  registerOrder(order);
 
   localStorage.removeItem('infosCheckout');
   localStorage.removeItem('total');

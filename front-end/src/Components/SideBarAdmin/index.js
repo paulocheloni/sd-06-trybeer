@@ -10,8 +10,6 @@ import S from './styles';
 const SideBarAdmin = () => {
   const { stateSideBarAdmin } = useContext(GlobalContext);
 
-  console.log(stateSideBarAdmin);
-
   return (
     <div>
       {stateSideBarAdmin && (
