@@ -5,13 +5,13 @@ const useStorage = (key, initialValue = undefined) => {
 
   useEffect(() => {
     setValue(JSON.parse(localStorage.getItem(key)));
-  }, []);
+  }, [key]);
 
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(value));
-  }, [value]);
+  }, [value, key]);
 
-  return [value, setValue];
+  return setValue;
 };
 
 export default useStorage;

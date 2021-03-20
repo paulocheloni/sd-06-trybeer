@@ -1,46 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import * as yup from 'yup';
 
-import { Topbar } from '../components';
-
-import registerUser from '../services/api.registerUser';
-
-import useStorage from '../hooks/useStorage';
+import { Topbar, TextInput, CheckBox, SubmitButton } from '../components';
+import registerUser from '../services/api.user';
+import yup from '../utils/yupSchemas';
 
 import './Forms.css';
 
-const passwordLength = 6;
-
-const schema = yup.object().shape({
-  name: yup.string().matches(/^[a-z ,.'-]{12,}$/i).required(),
-  email: yup.string().email().required(),
-  password: yup.string().min(passwordLength).required(),
-});
+import AppContext from '../context/app.context';
 
 export default function Register() {
-  const [login, setLogin] = useState({});
+  const { setToken } = useContext(AppContext);
+  const [login, setLogin] = useState({ name: '', email: '', password: '' });
   const [disableBtn, setDisableBtn] = useState(true);
-  const [, setLoginStorage] = useStorage('login');
+
   const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const valid = await schema.isValid(login);
-    if (valid) {
-      const newUser = await registerUser({
-        method: 'post',
-        url: 'http://localhost:3001/user/register',
-        data: login,
-      });
 
-      if (newUser && newUser.role) {
-        setLoginStorage(newUser);
+    const valid = await yup.registerSchema.isValid(login);
+    if (valid) {
+      const newUser = await registerUser(login);
+
+      if (newUser.role) {
+        setToken(newUser);
         if (newUser.role === 'administrator') history.push('/admin/orders');
         if (newUser.role === 'client') history.push('/products');
       }
-      console.log(newUser);
-      if (newUser.code && newUser.code === 'C_ERR_EMAIL_UNAVAIBLE') {
+
+      if (newUser.code) {
         history.push({
           pathname: '/error',
           state: { ...newUser } });
@@ -48,65 +37,51 @@ export default function Register() {
     }
   };
 
+  const updateLogin = (target) => {
+    if (target.type === 'checkbox') {
+      setLogin({ ...login, isVendor: target.checked });
+    } else {
+      setLogin({ ...login, [target.name]: target.value });
+    }
+  };
+
   useEffect(() => {
-    const validateForm = async () => {
-      const valid = await schema.isValid(login)
-        .then((result) => result);
-      if (valid === disableBtn) setDisableBtn(!valid);
-    };
+    const validateForm = async () => yup.registerSchema.isValid(login)
+      .then((valid) => {
+        if (disableBtn === valid) {
+          setDisableBtn(!valid);
+        }
+      });
+
     validateForm();
-  }, [login]);
+  }, [login, disableBtn]);
 
   return (
     <div>
       <Topbar />
-      <form onSubmit={ (e) => handleSubmit(e) }>
+      <form onSubmit={ handleSubmit }>
         <fieldset>
           <legend>Registro</legend>
-          <label htmlFor="nome" className="inputError">
-            Nome
-            <input
-              type="text"
-              id="nome"
-              name="nome"
-              data-testid="signup-name"
-              onChange={ (e) => setLogin({ ...login, name: e.target.value }) }
-            />
-            {/* { errors.nome && <span>Nome é campo obrigatório.</span> } */}
-          </label>
-          <label htmlFor="email" className="inputError">
-            Email
-            <input
-              type="email"
-              id="email"
-              name="email"
-              data-testid="signup-email"
-              onChange={ (e) => setLogin({ ...login, email: e.target.value }) }
-            />
-            {/* { errors.email && <span>Email é campo obrigatório.</span> } */}
-          </label>
-          <label htmlFor="senha" className="inputError">
-            Senha
-            <input
-              type="password"
-              id="senha"
-              name="senha"
-              data-testid="signup-password"
-              onChange={ (e) => setLogin({ ...login, password: e.target.value }) }
-            />
-            {/* { errors.senha && <span>Senha é campo obrigatório.</span> } */}
-          </label>
-          <label htmlFor="quero-vender" className="inputError">
-            <input
-              type="checkbox"
-              data-testid="signup-seller"
-              onClick={ (e) => setLogin({ ...login, isVendor: e.target.checked }) }
-            />
-            Quero vender
-          </label>
-          <button type="submit" data-testid="signup-btn" disabled={ disableBtn }>
-            Cadastrar
-          </button>
+          <TextInput
+            name="name"
+            testId="signup"
+            value={ login.name }
+            callback={ updateLogin }
+          />
+          <TextInput
+            name="email"
+            testId="signup"
+            value={ login.email }
+            callback={ updateLogin }
+          />
+          <TextInput
+            name="password"
+            testId="signup"
+            value={ login.password }
+            callback={ updateLogin }
+          />
+          <CheckBox callback={ updateLogin } />
+          <SubmitButton type="signup" disabled={ disableBtn } />
         </fieldset>
       </form>
     </div>

@@ -1,8 +1,17 @@
 import axios from 'axios';
 
-const registerUser = async (settings) => {
+const user = async (payload) => {
   try {
-    const result = await axios(settings);
+    const localhost = process.env.HOSTNAME || 'localhost';
+    const endpoint = (payload.name)
+      ? 'user/register'
+      : 'login';
+    const method = {
+      method: 'post',
+      url: `http://${localhost}:3001/${endpoint}`,
+      data: payload,
+    };
+    const result = await axios(method);
     console.log(result);
     if (result.data) return result.data;
   } catch (error) {
@@ -27,4 +36,4 @@ const registerUser = async (settings) => {
   }
 };
 
-export default registerUser;
+export default user;

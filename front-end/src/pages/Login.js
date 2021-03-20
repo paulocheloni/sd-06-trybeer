@@ -1,84 +1,71 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import * as yup from 'yup';
 
 import AppContext from '../context/app.context';
 
-import { Topbar } from '../components';
-
-import useStorage from '../hooks/useStorage';
-
-import loginUser from '../services/api.loginUser';
-
-const passwordLength = 6;
-
-const schema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().min(passwordLength).required(),
-});
+import { Topbar, TextInput, SubmitButton } from '../components';
+import yup from '../utils/yupSchemas';
+import loginUser from '../services/api.user';
 
 export default function Login() {
-  const { test } = useContext(AppContext);
+  const { setToken } = useContext(AppContext);
   const [disableBtn, setDisableBtn] = useState(true);
-  const [login, setLogin] = useState({});
-  const [, setLoginStorage] = useStorage('login');
+  const [login, setLogin] = useState({ email: '', password: '' });
 
   const history = useHistory();
 
   useEffect(() => {
-    const validateForm = async () => {
-      const valid = await schema.isValid(login)
-        .then((result) => result);
-      if (valid === disableBtn) setDisableBtn(!valid);
-    };
+    const validateForm = async () => yup.loginSchema.isValid(login)
+      .then((valid) => {
+        if (disableBtn === valid) {
+          setDisableBtn(!valid);
+        }
+      });
+
     validateForm();
-  }, [login]);
+  }, [login, disableBtn]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const valid = await schema.isValid(login);
+    const valid = await yup.loginSchema.isValid(login);
+
     if (valid) {
-      const newUser = await loginUser({
-        method: 'post',
-        url: 'http://localhost:3001/login',
-        data: login,
-      });
-      if (newUser && newUser.role) {
-        setLoginStorage(newUser);
-        if (newUser.role === 'administrator') history.push('/admin/orders');
-        if (newUser.role === 'client') history.push('/products');
+      const user = await loginUser(login);
+      if (user.role) {
+        setToken(user);
+        if (user.role === 'administrator') history.push('/admin/orders');
+        if (user.role === 'client') history.push('/products');
+      }
+
+      if (user.code) {
+        history.push({
+          pathname: '/error',
+          state: { ...user } });
       }
     }
   };
 
+  const updateLogin = (target) => setLogin({ ...login, [target.name]: target.value });
+
   return (
     <div>
       <Topbar />
-      <div>{test}</div>
       <form onSubmit={ (e) => handleSubmit(e) }>
         <fieldset>
           <legend>Login</legend>
-          <label htmlFor="email">
-            Email
-            <input
-              type="email"
-              name="email"
-              data-testid="email-input"
-              onChange={ (e) => setLogin({ ...login, email: e.target.value }) }
-            />
-          </label>
-          <label htmlFor="senha">
-            Senha
-            <input
-              type="password"
-              name="password"
-              data-testid="password-input"
-              onChange={ (e) => setLogin({ ...login, password: e.target.value }) }
-            />
-          </label>
-          <button type="submit" data-testid="signin-btn" disabled={ disableBtn }>
-            ENTRAR
-          </button>
+          <TextInput
+            name="email"
+            testId="signin"
+            value={ login.email }
+            callback={ updateLogin }
+          />
+          <TextInput
+            name="password"
+            testId="signin"
+            value={ login.password }
+            callback={ updateLogin }
+          />
+          <SubmitButton type="signin" disabled={ disableBtn } />
           <Link to="/register">
             <button type="button" data-testid="no-account-btn">
               Ainda não tenho conta

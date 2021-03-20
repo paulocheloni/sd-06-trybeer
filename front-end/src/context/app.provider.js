@@ -1,12 +1,20 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AppContext from './app.context';
 
+import useStorage from '../hooks/useStorage';
+
 const AppProvider = ({ children }) => {
-  const [test, setTest] = useState('teste');
+  const [token, setToken] = useState({});
+  const setLoginStorage = useStorage('login');
+
+  useEffect(() => {
+    setLoginStorage(token);
+  }, [token, setLoginStorage]);
+
   const state = {
-    test,
-    setTest,
+    token,
+    setToken,
   };
 
   return (
