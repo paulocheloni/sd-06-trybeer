@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 import validateEmailAndPassword from '../resources/validateEmailAndPassword';
 
 // Services
+import { saveState } from '../services/localStorage';
 import api from '../services/api';
 
 function Register() {
@@ -35,6 +36,7 @@ function Register() {
   const registerUser = () => {
     return api.createUser(name, email, password, checkbox)
       .then((response) => {
+        saveState('user', response.data);
         if (checkbox === 'administrator') {
           history.push('/admin/orders');
         }
