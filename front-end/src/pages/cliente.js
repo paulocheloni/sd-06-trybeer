@@ -39,7 +39,6 @@ function Cliente() {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
 
-  
   useEffect(() => {
     if (!loadState('user')) return history.push('/login');
     const { email } = loadState('user');
