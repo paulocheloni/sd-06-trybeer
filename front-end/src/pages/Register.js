@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 
+import { Topbar } from '../components';
+
 import registerUser from '../services/api.registerUser';
 
-import { Topbar } from '../components';
+import useStorage from '../hooks/useStorage';
 
 import './Forms.css';
 
@@ -19,6 +21,7 @@ const schema = yup.object().shape({
 export default function Register() {
   const [login, setLogin] = useState({});
   const [disableBtn, setDisableBtn] = useState(true);
+  const [, setLoginStorage] = useStorage('login');
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -31,10 +34,10 @@ export default function Register() {
         data: login,
       });
 
-      if (newUser && newUser.role === 'administrator') {
-        history.push('/admin/orders');
-      } else if (newUser && newUser.role === 'client') {
-        history.push('/products');
+      if (newUser && newUser.role) {
+        setLoginStorage(newUser);
+        if (newUser.role === 'administrator') history.push('/admin/orders');
+        if (newUser.role === 'client') history.push('/products');
       }
       console.log(newUser);
       if (newUser.code && newUser.code === 'C_ERR_EMAIL_UNAVAIBLE') {

@@ -6,7 +6,9 @@ import AppContext from '../context/app.context';
 
 import { Topbar } from '../components';
 
-import registerUser from '../services/api.registerUser';
+import useStorage from '../hooks/useStorage';
+
+import loginUser from '../services/api.loginUser';
 
 const passwordLength = 6;
 
@@ -19,6 +21,8 @@ export default function Login() {
   const { test } = useContext(AppContext);
   const [disableBtn, setDisableBtn] = useState(true);
   const [login, setLogin] = useState({});
+  const [, setLoginStorage] = useStorage('login');
+
   const history = useHistory();
 
   useEffect(() => {
@@ -34,16 +38,15 @@ export default function Login() {
     e.preventDefault();
     const valid = await schema.isValid(login);
     if (valid) {
-      const newUser = await registerUser({
+      const newUser = await loginUser({
         method: 'post',
         url: 'http://localhost:3001/login',
         data: login,
       });
-
-      if (newUser && newUser.role === 'administrator') {
-        history.push('/admin/orders');
-      } else if (newUser && newUser.role === 'client') {
-        history.push('/products');
+      if (newUser && newUser.role) {
+        setLoginStorage(newUser);
+        if (newUser.role === 'administrator') history.push('/admin/orders');
+        if (newUser.role === 'client') history.push('/products');
       }
     }
   };
@@ -74,7 +77,7 @@ export default function Login() {
             />
           </label>
           <button type="submit" data-testid="signin-btn" disabled={ disableBtn }>
-            Entrar
+            ENTRAR
           </button>
           <Link to="/register">
             <button type="button" data-testid="no-account-btn">
