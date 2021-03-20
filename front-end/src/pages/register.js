@@ -33,20 +33,18 @@ function Register() {
     validates();
   }, [email, password, name, validates]);
 
-  const registerUser = () => {
-    return api.createUser(name, email, password, checkbox)
-      .then((response) => {
-        saveState('user', response.data);
-        if (checkbox === 'administrator') {
-          history.push('/admin/orders');
-        }
-        if (checkbox === 'client') {
-          history.push('/products');
-        }
-      }).catch(() => {
-        setEmailExists(true);
-      });
-  };
+  const registerUser = () => api.createUser(name, email, password, checkbox)
+    .then((response) => {
+      saveState('user', response.data);
+      if (checkbox === 'administrator') {
+        history.push('/admin/orders');
+      }
+      if (checkbox === 'client') {
+        history.push('/products');
+      }
+    }).catch(() => {
+      setEmailExists(true);
+    });
 
   const checkboxFunc = (e) => {
     setCheckbox(e.target.value);
