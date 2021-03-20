@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const validateToken = require('../middlewares/validateToken');
 const SalesProductsModel = require('../models/SalesProducts');
-const ProductModel = require('../models/ProductsModel');
+// const ProductModel = require('../models/ProductsModel');
 
 const routerSalesDetails = Router();
 
@@ -19,9 +19,10 @@ routerSalesDetails.get('/', async (req, res, next) => {
 });
 
 routerSalesDetails.post('/', async (req, res, next) => {
-  const { userId } = res.locals;
-  const { name } = req.body.order;
-  const productId = ProductModel.getByName(name);
+  // const { userId } = res.locals;
+  // const { name } = req.body.order;
+  // const productId = ProductModel.getByName(name);
+  next();
 });
 
-export default routerSalesDetails;
+module.exports = routerSalesDetails;

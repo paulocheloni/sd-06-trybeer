@@ -4,6 +4,8 @@ import isLogged from '../components/isLogged';
 import RenderCheckout from '../components/RenderCheckout';
 import currencyFormat from '../utils/currencyFormat';
 import checkoutPost from '../methods/checkout';
+import salesDetails from '../methods/salesDetails';
+import salesProductsInfo from '../utils/salesProductsInfo';
 
 function Checkout() {
   const [items, setItems] = useState([]);
@@ -63,6 +65,8 @@ function Checkout() {
             number,
             status: 'Pendente',
           });
+          const SPInfo = salesProductsInfo(items);
+          salesDetails(SPInfo);
         } }
       >
         Finalizar Pedido
