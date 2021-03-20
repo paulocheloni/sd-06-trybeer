@@ -27,6 +27,13 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
+  // gridListTitle: {
+  //   height: 200,
+  //   // zIndex: -1
+  // },
+  gridListTitleBar: {
+    height: 100,
+  },
 }));
 
 const magicNumber = {
@@ -87,49 +94,45 @@ function Cliente() {
     <div>
       <NavBar content="TryBeer" />
       <div className={ classes.root }>
-        {/* <GridList cellHeight={ 180 } className={ classes.gridList }> */}
+        {/* <GridList cellHeight={ 180 }  */}
         {products.map((tile, index) => (
-          <GridListTile
-            key={ index }
-            data-testid={ `${index}-product-price` }
-          >
+          <div key={ index }>
+            <GridListTile
+              className={ classes.gridListTitle }
+            >
 
-            {/* Image */}
-            <img
-              src={ tile.url_image.replace(/ /g, '_') }
-              data-testid={ `${index}-product-img` }
-              alt={ tile.name }
-            />
+              {/* Image */}
+              <img
+                src={ tile.url_image.replace(/ /g, '_') }
+                data-testid={ `${index}-product-img` }
+                alt={ tile.name }
+              />
 
-            <GridListTileBar
-              // Name
-              title={ <span data-testid={ `${index}-product-name` }>{tile.name}</span> }
+              <GridListTileBar
+                className={ classes.gridListTitleBar }
+              />
 
-              // Price
-              subtitle={
-                <span data-testid={ `${index}-product-price` }>
-                  R$
-                  {' '}
-                  {tile.price.replace('.', ',')}
-                </span>
-              }
-              actionIcon={
-                <>
-                  {/* Botao de - */}
-                  <ButtonSub product={ tile } dataIndex={ index } />
+              <p data-testid={ `${index}-product-name` }>{tile.name}</p>
 
-                  {/* Quantidade de Produtos */}
-                  <span data-testid={ `${index}-product-qtd` }>
-                    {prodQty(tile)}
-                  </span>
+              <span data-testid={ `${index}-product-price` }>
+                R$
+                {' '}
+                {tile.price.replace('.', ',')}
+              </span>
 
-                  {/* Botao de + */}
-                  <ButtonAdd product={ tile } dataIndex={ index } />
+              {/* Botao de - */}
+              <ButtonSub product={ tile } dataIndex={ index } />
 
-                </>
-              }
-            />
-          </GridListTile>
+              {/* Quantidade de Produtos */}
+              <span data-testid={ `${index}-product-qtd` }>
+                {prodQty(tile)}
+              </span>
+
+              {/* Botao de + */}
+              <ButtonAdd product={ tile } dataIndex={ index } />
+
+            </GridListTile>
+          </div>
         ))}
         {/* </GridList> */}
       </div>
