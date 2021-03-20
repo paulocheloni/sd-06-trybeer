@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
+// const path = require('path');
 const bodyParser = require('body-parser');
 const userController = require('./controller/usercontroller');
 const registerController = require('./controller/registerController');
@@ -17,7 +17,6 @@ app.use('/register', registerController);
 app.use('/products', productsController);
 app.use('/checkout', checkoutController);
 app.use('/orders', orderController);
-
 
 const port = 3001;
 
