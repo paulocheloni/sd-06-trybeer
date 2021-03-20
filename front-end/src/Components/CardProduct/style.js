@@ -27,5 +27,8 @@ export const Buttons = styled.div`
   border: 2px solid white;
   width: 50px;
   height: 50px;
-}
+`;
+
+export const ItemImage = styled.img`
+  height: 60px;
 `;
