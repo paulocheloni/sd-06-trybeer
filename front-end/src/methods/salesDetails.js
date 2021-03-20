@@ -22,7 +22,7 @@ const salesDetails = async (SPInfo) => {
     }),
   };
 
-  const apiRequest = await fetch(`${baseURL}/orders`, postMethod);
+  const apiRequest = await fetch(`${baseURL}/`, postMethod);
   const apiResponse = await apiRequest.json();
   return apiResponse;
 };

@@ -57,7 +57,7 @@ function Checkout() {
         data-testid="checkout-finish-btn"
         disabled={ reload === 0 || street.length === 0 || number.length === 0 }
         onClick={ () => {
-          // route.push('/products');
+          route.push('/products');
           localStorage.setItem('success', JSON.stringify(true));
           checkoutPost({
             price: cartTotal,
