@@ -1,4 +1,4 @@
-import React, { useEffect, useContext,  } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Redirect } from 'react-router';
 import ProductCard from '../components/Products/ProductCard';
 import Cart from '../components/Products/Cart';

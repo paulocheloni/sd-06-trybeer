@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { removeCheckoutItem } from '../../services/checkoutService';
+import PropTypes from 'prop-types';
+import removeCheckoutItem from '../../services/checkoutService';
 import TrybeerContext from '../../context/TrybeerContext';
 
 function CheckoutItem({ name, price, quantity, index }) {
@@ -21,7 +22,7 @@ function CheckoutItem({ name, price, quantity, index }) {
       <div
         data-testid={ `${index}-product-total-value` }
       >
-         {`R$ ${totalPrice.toFixed(2).replace('.', ',')}`}
+        {`R$ ${totalPrice.toFixed(2).replace('.', ',')}`}
       </div>
       <div
         data-testid={ `${index}-product-unit-price` }
@@ -29,6 +30,7 @@ function CheckoutItem({ name, price, quantity, index }) {
         { `(R$ ${price.replace('.', ',')} un)` }
       </div>
       <button
+        type="button"
         data-testid={ `${index}-removal-button` }
         onClick={ () => removeCheckoutItem(name, cart, setCart) }
       >
@@ -37,5 +39,12 @@ function CheckoutItem({ name, price, quantity, index }) {
     </div>
   );
 }
+
+CheckoutItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  quantity: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+};
 
 export default CheckoutItem;

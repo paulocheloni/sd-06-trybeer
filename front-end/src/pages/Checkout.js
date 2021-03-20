@@ -12,7 +12,8 @@ function Checkout() {
     cart, setCart, totalCart, setTotalCart, address,
   } = useContext(TrybeerContext);
 
-  const enable = address.rua.length && address.numero.length && totalCart > 0 || false;
+  const buttonDisable = address.rua.length && address.numero.length && totalCart > 0;
+  const enable = buttonDisable || false;
 
   useEffect(() => {
     if (localStorageCart) {
@@ -43,11 +44,12 @@ function Checkout() {
               quantity={ cartItem.quantity }
             />
           )) }
-          <span data-testid="order-total-value" >
+          <span data-testid="order-total-value">
             {`Total: R$ ${totalCart.toFixed(2).replace('.', ',')}`}
           </span>
           <Address />
           <button
+            type="button"
             disabled={ !enable }
             data-testid="checkout-finish-btn"
             onClick={ () => console.log('bla') }
