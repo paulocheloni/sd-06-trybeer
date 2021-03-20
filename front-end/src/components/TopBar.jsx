@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import SideBar from './Sidebar';
-import '../styles/topbar.css'
+import '../styles/topbar.css';
 
 function TopBar({ name }) {
   const [visible, setVisible] = useState(true);
@@ -13,21 +13,22 @@ function TopBar({ name }) {
   return (
     <div>
       <div className="topbar">
-        <div
+        <button
+          type="button"
           id="menuhamburguer"
           data-testid="top-hamburguer"
-          class="container"
-          onClick={ () => { setVisible(!visible); applyClass() } }
+          className="container"
+          onClick={ () => { setVisible(!visible); applyClass(); } }
         >
-          <div class="bar1"></div>
-          <div class="bar2"></div>
-          <div class="bar3"></div>
-        </div>
+          <div className="bar1" />
+          <div className="bar2" />
+          <div className="bar3" />
+        </button>
         <h1 data-testid="top-title" className="title">{name}</h1>
       </div>
-        <div hidden={ visible }>
-          <SideBar />
-        </div>
+      <div hidden={ visible }>
+        <SideBar />
+      </div>
     </div>
   );
 }

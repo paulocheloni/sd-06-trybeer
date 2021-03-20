@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import '../styles/sidebar.css'
+import '../styles/sidebar.css';
 
 function SideBar() {
   const history = useHistory();
@@ -30,14 +30,14 @@ function SideBar() {
       >
         Meu Perfil
       </button>
-        <button
-          className="buttonside"
-          type="button"
-          data-testid="side-menu-item-logout"
-          onClick={ () => history.push('/login') }
-          >
-          Sair
-        </button>
+      <button
+        className="buttonside"
+        type="button"
+        data-testid="side-menu-item-logout"
+        onClick={ () => history.push('/login') }
+      >
+        Sair
+      </button>
     </div>
   );
 }

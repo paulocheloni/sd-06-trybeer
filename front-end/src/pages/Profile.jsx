@@ -34,36 +34,36 @@ function Profile() {
       <TopBar name="Meu perfil" />
       <div className="profilecontainer">
         <div className="profileinformations">
-        <label className="labelprofile" htmlFor="profileNameInput">
-          Nome
-          </label>
-          <input
-            id="profileNameInput"
-            data-testid="profile-name-input"
-            className="inputprofile"
-            value={ userName }
-            onChange={ (e) => setUserName(e.target.value) }
+          <label className="labelprofile" htmlFor="profileNameInput">
+            Nome
+            <input
+              id="profileNameInput"
+              data-testid="profile-name-input"
+              className="inputprofile"
+              value={ userName }
+              onChange={ (e) => setUserName(e.target.value) }
             />
-        <label className="labelprofile" htmlFor="profileEmailInput">
-          Email
           </label>
-          <input
-            id="profileEmailInput"
-            data-testid="profile-email-input"
-            className="inputprofile"
-            value={ email }
-            readOnly
+          <label className="labelprofile" htmlFor="profileEmailInput">
+            Email
+            <input
+              id="profileEmailInput"
+              data-testid="profile-email-input"
+              className="inputprofile"
+              value={ email }
+              readOnly
             />
-        <button
-          type="button"
-          className="buttonprofile"
-          data-testid="profile-save-btn"
-          disabled={ isDisabled }
-          onClick={ handleSubmit }
+          </label>
+          <button
+            type="button"
+            className="buttonprofile"
+            data-testid="profile-save-btn"
+            disabled={ isDisabled }
+            onClick={ handleSubmit }
           >
-          Salvar
-        </button>
-        <div hidden={ isVisible }>Atualização concluída com sucesso</div>
+            Salvar
+          </button>
+          <div hidden={ isVisible }>Atualização concluída com sucesso</div>
         </div>
       </div>
     </div>

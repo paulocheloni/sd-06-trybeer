@@ -25,6 +25,10 @@
   padding: 3px 7px;
   margin-left: 10px;
   margin-right: -35px;
+  background: none;
+}
+.container:focus {
+  outline: none;
 }
 
 .bar1,
