@@ -1,27 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+// import PropTypes from 'prop-types';
+import productsContext from '../context/productsContext';
 
-export default function OrderCard({ orders }) {
-  console.log('orders no ordersCard', orders);
+export default function OrderCard() {
+  const { orders } = useContext(productsContext);
 
   return (
     <div className="order-card-container">
-      <h2>order card</h2>
       { orders.length && orders.map((order, index) => (
-        <div
-          key={ order.id }
-          className="order-card"
-          data-testid={ `${index}-order-card-container` }
-        >
-          <div data-testid={ `${index}-order-number` }>{order.id}</div>
-          <div data-testid={ `${index}-order-date` }>{order.sale_date}</div>
-          <div data-testid={ `${index}-order-total-value` }>{order.total_price}</div>
-        </div>
+        <Link key={ order.id } to={ `/orders/${order.id}` }>
+          <div
+            className="order-card"
+            data-testid={ `${index}-order-card-container` }
+          >
+            <div data-testid={ `${index}-order-number` }>{order.id}</div>
+            <div data-testid={ `${index}-order-date` }>{order.sale_date}</div>
+            <div data-testid={ `${index}-order-total-value` }>{order.total_price}</div>
+          </div>
+        </Link>
       ))}
     </div>
   );
 }
-
-OrderCard.propTypes = {
-  orders: PropTypes.arrayOf(Object).isRequired,
-};
