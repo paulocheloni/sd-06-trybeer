@@ -17,7 +17,7 @@ export default function Products() {
     };
     fetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fetch]);
 
   // Garante que temos acesso a varíavel products atualizada
   // useEffect(() => {
