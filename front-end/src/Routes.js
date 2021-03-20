@@ -33,7 +33,7 @@ const Routes = () => {
         </BodyContainer>
       </Route>
       {/* ROTAS PRIVADAS - USUÁRIO CLIENT */}
-      <Route path={ ['/profile', '/products'] }>
+      <Route path={ ['/profile', '/products', '/orders', '/checkout'] }>
         { !existToken && <Redirect to="/" /> }
         <Menu />
         <BodyContainer>

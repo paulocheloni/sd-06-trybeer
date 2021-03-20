@@ -6,6 +6,7 @@ import BodyContainer from '../../../design-system/containers/BodyContainer';
 function Checkout() {
   const { cartItems } = useContext(GlobalContext);
   const storedItems = cartItems;
+  console.log(cartItems)
 
   const totalPrice = storedItems.reduce((acc, curr) => {
     const result = (acc + curr.quantity * curr.price);
