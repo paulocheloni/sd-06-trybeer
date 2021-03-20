@@ -12,6 +12,8 @@ function Login() {
   const {
     loginEmail,
     loginPassword,
+    setLoginEmail,
+    setLoginPassword,
     isDisabled,
     setIsDisabled,
   } = useContext(ContextBeer);
@@ -19,6 +21,11 @@ function Login() {
   useEffect(() => {
     loginValidation(loginEmail, loginPassword, setIsDisabled);
   }, [loginEmail, loginPassword, setIsDisabled]);
+
+  const resetFields = () => {
+    setLoginEmail('');
+    setLoginPassword('');
+  };
 
   const onClick = () => {
     const token = api
@@ -43,7 +50,7 @@ function Login() {
           <input type="hidden" name="remember" value="true" />
           <LoginInputs />
           <Button
-            onClick={ () => onClick() }
+            onClick={ () => onClick() && resetFields() }
             isDisabled={ isDisabled }
             bgColor="indigo-600"
             testId="signin-btn"
