@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Header from '../../../components/Header/Header';
 import Input from '../../../components/Input/Input';
 import { updateUser } from '../../../services/Users';
-import { updateName } from '../../../utils/localStorageHandler';
+import { updateName, verifyUser } from '../../../store/LocalStorage/actions';
 
 const handleSaveButton = async ({
   userName,
@@ -27,9 +27,7 @@ export default function Profile() {
   const history = useHistory();
 
   useEffect(() => {
-    const storage = JSON.parse(localStorage.getItem('user'));
-    if (!storage) return history.push('/login');
-    const { name, email } = storage;
+    const { name, email } = verifyUser(history);
     setUserName(name);
     setUserEmail(email);
     setUserNameInStorage(name);
