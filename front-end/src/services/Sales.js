@@ -12,6 +12,11 @@ const postSale = (token, payload) => fetch(`${endpoint}/sales/checkout`, {
 })
   .then((response) => response.json());
 
-module.exports = {
-  postSale,
-};
+
+const getSales = () => fetch(`${endpoint}/sales`)
+  .then((response) => response.json());
+
+  module.exports = {
+    getSales,
+    postSale,
+  }
