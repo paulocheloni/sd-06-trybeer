@@ -34,8 +34,12 @@ export default function Register() {
   };
 
   useEffect(() => {
-    const validateForm = async () => yupSchemas.register.isValid(login)
-      .then((valid) => (disableBtn === valid) && setDisableBtn(!valid));
+    const validateForm = async () => yupSchemas.register.validate(login)
+      .then((valid) => (valid.email) && setDisableBtn(false))
+      .catch((error) => {
+        if (disableBtn === false) setDisableBtn(true);
+        return error;
+      });
 
     validateForm();
   }, [login, disableBtn]);

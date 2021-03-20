@@ -16,8 +16,12 @@ export default function Login() {
   const history = useHistory();
 
   useEffect(() => {
-    const validateForm = async () => yupSchemas.login.isValid(login)
-      .then((valid) => (disableBtn === valid) && setDisableBtn(!valid));
+    const validateForm = async () => yupSchemas.login.validate(login)
+      .then((valid) => (valid.email) && setDisableBtn(false))
+      .catch((error) => {
+        if (disableBtn === false) setDisableBtn(true);
+        return error;
+      });
 
     validateForm();
   }, [login, disableBtn]);
