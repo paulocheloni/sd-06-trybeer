@@ -5,12 +5,13 @@ const minNameLength = 12;
 
 const mergeSchema = (...schemas) => {
   const [first, ...rest] = schemas;
-  console.log(rest, typeof rest);
   return rest.reduce((mergedSchemas, schema) => mergedSchemas.concat(schema), first);
 };
 
 export const nameSchema = yup.object().shape({
   name: yup.string()
+    .matches(/^[a-zA-Z\s]*$/,
+      'deve conter, no mínimo, 12 letras, sem números ou caracteres especiais')
     .min(minNameLength,
       'deve conter, no mínimo, 12 letras, sem números ou caracteres especiais'),
 });

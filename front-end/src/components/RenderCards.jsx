@@ -1,7 +1,6 @@
 import React from 'react';
+import currencyFormat from '../utils/currencyFormat';
 
-const currencyFormat = (num) => num
-  .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 const renderCards = (allProducts, asd, setAsd, itemQty) => allProducts.map(
   (prod, id) => (
     <section className="card-content" key={ id }>

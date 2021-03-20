@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import InputProfileName from '../components/InputProfileName';
 import InputProfileEmail from '../components/InputProfileEmail';
 import editUserName from '../methods/editUserName';
+import MenuTop from '../components/MenuTop';
 
 function ClientProfile() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -12,8 +13,9 @@ function ClientProfile() {
     const { name, email } = user;
     return (
       <div>
+        <MenuTop />
         <h1 data-testid="top-title">
-        Meu perfil
+          Meu perfil
         </h1>
         <InputProfileName
           setValue={ setNewName }
@@ -38,32 +40,4 @@ function ClientProfile() {
   }
 }
 
-// function ClientProfile() {
-//   const myLocalStorage = JSON.parse(localStorage.getItem('user'));
-//   const [newName, setNewName] = useState(myLocalStorage.name);
-//   if (!myLocalStorage) return <Redirect to="/login" />;
-//   const { name, email } = myLocalStorage;
-//   console.log(newName);
-//   return (
-//     <div>
-//       <h1 data-testid="top-title">
-//         Cliente - Meu Perfil
-//       </h1>
-//       <InputProfileName
-//         setValue={ setNewName }
-//         value={ newName || name }
-//       />
-//       <InputProfileEmail
-//         value={ email }
-//       />
-//       <button
-//         type="button"
-//         onClick={ () => console.log('chama a api') }
-//         disabled={ newName === name }
-//       >
-//         Salvar
-//       </button>
-//     </div>
-//   );
-// }
 export default ClientProfile;
