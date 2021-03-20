@@ -100,7 +100,7 @@ describe('Criar tela de produtos', () => {
     verifyElementContainsText('[data-testid="checkout-bottom-btn-value"]', 'R$ 0,00');
   });
 
-  it('Será validado que ao atualizar a tela continuará na tela de produtos e carrinho com o mesmo valor', () => {
+  it.only('Será validado que ao atualizar a tela continuará na tela de produtos e carrinho com o mesmo valor', () => {
     login(Cypress.env('login'), Cypress.env('password'));
     clickButton('[data-testid="0-product-plus"]');
     cy.reload();
