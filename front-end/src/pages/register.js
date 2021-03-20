@@ -33,9 +33,8 @@ function Register() {
   }, [email, password, name, validates]);
 
   const registerUser = () => {
-    api.createUser(name, email, password, checkbox)
+    return api.createUser(name, email, password, checkbox)
       .then((response) => {
-        console.log(`usuario ${response.data} criado com sucesso!`);
         if (checkbox === 'administrator') {
           history.push('/admin/orders');
         }
