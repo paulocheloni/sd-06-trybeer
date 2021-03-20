@@ -33,10 +33,11 @@ const createUser = async (email, name, password, role) => {
 };
 
 const createOrder = async (token, objOrder) => {
-  console.log('pedido', objOrder);
+  // console.log('pedido', objOrder);
   const newOrder = await axios.post(`${path}/orders`,
     { objOrder },
     { headers: { authorization: token } });
+  // console.log(newOrder.data);
   return newOrder.data;
 };
 

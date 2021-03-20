@@ -9,6 +9,7 @@ export default function Products() {
   const { cartProducts, setCartProducts } = useContext(productsContext);
   const [street, setStreet] = useState('');
   const [houseNumber, setHouseNumber] = useState('');
+  const [orderSuccess, setOrderSuccess] = useState('');
   const history = useHistory();
   const tokenFromLocalStorage = localStorage.getItem('token');
   let totalPrice = '0,00';
@@ -62,6 +63,7 @@ export default function Products() {
 
   const sendOrder = () => {
     const limitIndex = 19;
+    const SUCCESSMESSAGEDESAPEAR = 3000;
     const date = new Date();
     const objOrder = {
       totalPrice: Number(handleTotalPrice().replace(',', '.')),
@@ -70,7 +72,21 @@ export default function Products() {
       date: date.toISOString().slice(0, limitIndex).replace('T', ' '),
       orderStatus: 'pendente',
     };
-    fetches.createOrder(tokenFromLocalStorage, objOrder);
+
+    fetches.createOrder(tokenFromLocalStorage, objOrder)
+      .then((response) => {
+        if (!response) {
+          return;
+        }
+        // console.log('mensagem sucesso', response.message);
+        (setOrderSuccess(response.message));
+        setTimeout(() => {
+          // setOrderSuccess('');
+          setCartProducts('');
+          localStorage.removeItem('cartProducts');
+          history.push('/products');
+        }, SUCCESSMESSAGEDESAPEAR);
+      });
   };
 
   return (
@@ -154,6 +170,7 @@ export default function Products() {
       >
         Finalizar Pedido
       </button>
+      <div>{orderSuccess}</div>
     </div>
   );
 }

@@ -16,7 +16,6 @@ router.post('/orders', validateToken, rescue(async (req, res) => {
       date,
       orderStatus,
     };
-    console.log(userId, orderData);
     await ordersService.createOrders(userId, orderData);
 
     res.status(CREATED).json({ message: 'Compra realizada com sucesso!' });

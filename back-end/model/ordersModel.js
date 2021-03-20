@@ -4,19 +4,18 @@ const connection = require('./connection');
 
 const createOrders = async (userId, objOrder) => {
   try {
-    console.log('cheguei no del', objOrder, userId);
     await connection.execute('INSERT INTO Trybeer.sales ' 
-      + '(id, user_id, total_price, delivery_address, delivery_number, sale_date, status) ' 
+      + '(user_id, total_price, delivery_address, delivery_number, sale_date, status) ' 
       + 'VALUES (?,?,?,?,?,?)', [
       userId,
       objOrder.totalPrice,
       objOrder.address,
       objOrder.number,
       objOrder.date,
-      objOrder.status,
+      objOrder.orderStatus,
     ]);
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
   }
 };
 
