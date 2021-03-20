@@ -4,10 +4,28 @@ export const images = styled.div`
   width: 300 px;
 `;
 
-export const Buttons = styled.div`
-  margin-top: 35px;
+export const CardContainer = styled.div`
+  justify-content: space-between;
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 500px;
+  flex-wrap: wrap;
+`;
+
+export const Card = styled.div`
+  width: 300px;
+  height: 200px;
+`;
+
+export const Container = styled.div`
+  justify-content: space-evenly;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+`;
+
+export const Buttons = styled.div`
+  margin: 5px;
+  border: 2px solid white;
+  width: 50px;
+  height: 50px;
+}
 `;
