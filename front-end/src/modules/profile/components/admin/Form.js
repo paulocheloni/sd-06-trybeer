@@ -7,7 +7,7 @@ function Form() {
 
   useEffect(() => {
     const storage = JSON.parse(localStorage.getItem('user'));
-    setForm({ email: storage.email, name: storage.name });
+    if (storage) setForm({ email: storage.email, name: storage.name });
   }, []);
 
   return (

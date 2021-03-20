@@ -1,26 +1,20 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import GlobalContext from '../../../context/Context';
-import PageMenu from '../../../design-system/page-menu/PageMenu';
 import PaperContainer from '../../../design-system/containers/PaperContainer';
 import BodyContainer from '../../../design-system/containers/BodyContainer';
 
 function Checkout() {
-  const { setMenuStatus } = useContext(GlobalContext);
-  const storedItems = JSON.parse(localStorage.getItem('cart'));
+  const { cartItems } = useContext(GlobalContext);
+  const storedItems = cartItems;
 
   const totalPrice = storedItems.reduce((acc, curr) => {
     const result = (acc + curr.quantity * curr.price);
     return result;
   }, 0);
 
-  useEffect(() => {
-    setMenuStatus(false);
-  }, []);
-
   return (
     <BodyContainer>
       <PaperContainer>
-        <PageMenu pageName="Carrinho" />
         {
           storedItems.map((item, index) => (
             <div className="flex m-4 border" key={ `${index}-algo4` }>
