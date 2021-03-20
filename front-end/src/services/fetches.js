@@ -2,9 +2,11 @@ import axios from 'axios';
 
 const path = 'http://localhost:3001';
 
-const fetchUserByEmail = async (email, password) => {
+const fetchUserByEmail = async (email, password, token) => {
   try {
-    const user = await axios.post(`${path}/login`, { email, password });
+    const user = await axios.post(`${path}/login`,
+      { email, password },
+      { headers: { authorization: token } });
     return user.data;
   } catch (error) {
     console.error(error);
@@ -30,9 +32,19 @@ const createUser = async (email, name, password, role) => {
   return newUserToken.data;
 };
 
+const createOrder = async (token, objOrder) => {
+  // console.log('pedido', objOrder);
+  const newOrder = await axios.post(`${path}/orders`,
+    { objOrder },
+    { headers: { authorization: token } });
+  // console.log(newOrder.data);
+  return newOrder.data;
+};
+
 export default {
   fetchUserByEmail,
   updateUserName,
   fetchAllProducts,
   createUser,
+  createOrder,
 };

@@ -52,7 +52,7 @@ export default function ProductsCard() {
       .find((product) => parseInt(product.id, 10) === parseInt(productId, 10));
 
     if (cartProducts.length && productExists) {
-      console.log('caiu no if');
+      // console.log('caiu no if');
       return setCartProducts([...cartProducts.map((product) => {
         if (product.id !== Number(productId)) {
           return product;
@@ -66,7 +66,7 @@ export default function ProductsCard() {
         return product;
       })]);
     }
-    console.log('nao caiu no if');
+    // console.log('nao caiu no if');
     const newCartProduct = [...cartProducts, {
       id: parseInt(productId, 10),
       name: products[productId].name,
