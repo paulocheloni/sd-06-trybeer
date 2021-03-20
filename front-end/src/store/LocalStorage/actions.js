@@ -21,6 +21,19 @@ export const addItem = (cartItem, setCartItem) => {
   return setCartItem(product);
 };
 
+// Adicionei função pra tirar o item do carrinho, não importando a quantidade
+export const deleteItem = (cartItem, setCartItem) => {
+  console.log(cartItem)
+  // if (cartItem === '') {
+  //   return console.log('produto não existe ainda');
+  // }
+  // if (cartItem.quantity > 0) {
+    const product = {
+      ...cartItem, quantity: cartItem.quantity - 1, default_product: false };
+    return setCartItem(product);
+  // }
+};
+
 export const subtractItem = (cartItem, setCartItem) => {
   if (cartItem === '') {
     return console.log('produto não existe ainda');
@@ -28,6 +41,7 @@ export const subtractItem = (cartItem, setCartItem) => {
   if (cartItem.quantity > 0) {
     const product = {
       ...cartItem, quantity: cartItem.quantity - 1, default_product: false };
+      console.log(cartItem);
     return setCartItem(product);
   }
 };
