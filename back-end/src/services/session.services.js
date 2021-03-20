@@ -3,7 +3,7 @@ const { generateToken } = require('../security');
 const { authLogin } = require('../schemas');
 
 const login = async ({ email, password }) => {
-  const user = await utils.getByFilter({
+  const [user] = await utils.getByFilter({
     table: 'users',
     filter: 'email',
     value: email,

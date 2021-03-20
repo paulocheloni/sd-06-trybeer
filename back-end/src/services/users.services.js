@@ -6,7 +6,7 @@ const create = async (body) => {
   const data = body;
   const { name, email } = data;
 
-  const isEmailAvailable = await utils.getByFilter({
+  const [isEmailAvailable] = await utils.getByFilter({
     table: 'users',
     filter: 'email',
     value: email,

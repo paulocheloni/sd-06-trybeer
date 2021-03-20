@@ -7,6 +7,7 @@ const error = {
 };
 
 const authUser = (email, pass, user) => {
+  console.log('authLogin: ', user);
   switch (true) {
     case isBlank(user): throw new Error(error.userNotFound);
     case isNotEqual(email, user.email): throw new Error(error.invalidCredentials);
