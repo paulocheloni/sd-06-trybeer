@@ -1,7 +1,8 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { GlobalContext } from '../../Contexts/GlobalContext';
+import { getAllAdminOrders } from '../../Services/Apis';
 
 import MenuTopAdmin from '../../Components/MenuTopAdmin';
 import SideBarAdmin from '../../Components/SideBarAdmin';
@@ -9,21 +10,32 @@ import SideBarAdmin from '../../Components/SideBarAdmin';
 import S from './styles';
 
 const AdminOrders = () => {
-  const { stateSideBar } = useContext(GlobalContext);
+  const [orders, setOrders] = useState([]);
+
+  const { stateSideBarAdmin } = useContext(GlobalContext);
 
   const history = useHistory();
 
-  const orders = [
-    { id: 1, numPedido: 1, date: '08/09', total: 2.20 },
-    { id: 2, numPedido: 2, date: '10/09', total: 10.50 },
-    { id: 3, numPedido: 3, date: '20/09', total: 22.20 },
-  ];
+  // const orders = [
+  //   { id: 1, numPedido: 1, date: '08/09', total: 2.20 },
+  //   { id: 2, numPedido: 2, date: '10/09', total: 10.50 },
+  //   { id: 3, numPedido: 3, date: '20/09', total: 22.20 },
+  // ];
 
   useEffect(() => {
     const userToken = JSON.parse(localStorage.getItem('user'));
 
     if (!userToken) history.push('/login');
   }, [history]);
+
+  useEffect(() => {
+    const fetchMyOrders = async () => {
+      const fetchData = await getAllAdminOrders();
+      console.log(fetchData);
+      setOrders(fetchData);
+    };
+    fetchMyOrders();
+  }, []);
 
   return (
     <>
@@ -32,26 +44,31 @@ const AdminOrders = () => {
       <S.Context>
         <SideBarAdmin />
 
-        <S.Container stateSideBar={ stateSideBar }>
-          <S.ContainerOrders stateSideBar={ stateSideBar }>
+        <S.Container stateSideBar={ stateSideBarAdmin }>
+          <S.ContainerOrders stateSideBar={ stateSideBarAdmin }>
             {orders && (
               orders.map((order, index) => (
                 <S.CardOrder
                   key={ index }
-                  testid="0-order-card-container"
-                  onClick={ () => history.push('/orders/:num') }
+                  onClick={ () => history.push(`/orders/${order.id}`) }
                 >
-                  <div>
-                    <span data-testid="0-order-number">
-                      {`Pedido ${order.numPedido}`}
+                  <div className="div-address">
+                    <span data-testid={ `${index}-order-number` }>
+                      {`Pedido ${order.id}`}
                     </span>
-                    <span data-testid="0-order-date">
-                      {order.date}
+                    <span data-testid={ `${index}-order-address` }>
+                      {`${order.address}, ${order.number}`}
                     </span>
                   </div>
-                  <p data-testid="0-order-total-value">
-                    {`R$ ${(order.total).toFixed(2).replace('.', ',')}`}
-                  </p>
+
+                  <div className="div-total-value">
+                    <p data-testid={ `${index}-order-total-value` }>
+                      {`R$ ${(order.totalValue).replace('.', ',')}`}
+                    </p>
+                    <span data-testid={ `${index}-order-status` }>
+                      {order.status}
+                    </span>
+                  </div>
                 </S.CardOrder>
               ))
             )}

@@ -27,7 +27,7 @@ const Context = styled.div`
 
 const ContainerOrders = styled.div`
   ${({ theme, stateSideBar }) => css`
-    opacity: ${stateSideBar ? '0.3' : '1'};
+    opacity: ${!stateSideBar ? '0.3' : '1'};
 
     width: 100%;
     min-height: 100%;
@@ -60,37 +60,45 @@ const CardOrder = styled.div`
     border-radius: 5px;
     padding: 20px;
 
-    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
+    cursor: pointer;
     transition: opacity 0.3s;
 
     &:hover {
       opacity: 0.7;
     }
-
     @media (max-width: 1000px) {
       width: 70%;
     }
-
     @media (max-width: 700px) {
       width: 100%;
     }
-
     @media (max-width: 600px) {
       width: 100%;
       margin-bottom: 10px;
     }
-
     > p {
       text-align: right;
       margin-top: 115px;
       font-size: 24px;
       font-weight: 600;
     }
-
-    > div {
+    .div-address {
+      height: 55%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .div-total-value {
+      margin-top: 30px;
       display: flex;
       justify-content: space-between;
+      > span {
+        color: yellow;
+      }
     }
   `}
 `;
