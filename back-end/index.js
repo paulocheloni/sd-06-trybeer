@@ -7,6 +7,7 @@ const RegisterController = require('./controllers/RegisterController');
 const ProfileController = require('./controllers/ProfileController');
 const VerifyAuthorization = require('./middlewares/VerifyAuthotization');
 const ProductsController = require('./controllers/ProductsController');
+const CheckoutController = require('./controllers/CheckoutController');
 
 require('dotenv').config();
 
@@ -39,6 +40,8 @@ app.use('/register', RegisterController);
 app.use('/profile', VerifyAuthorization, ProfileController);
 
 app.use('/products', VerifyAuthorization, ProductsController);
+
+app.use('/checkout', VerifyAuthorization, CheckoutController);
 
 app.use((err, _req, res, _next) => {
   console.error({ err });
