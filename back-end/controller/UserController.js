@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { verifyLogin, SECRET } = require('../middlewares/authToken');
 const {
   getAll,
-  verifyEmail,
+  emailExist,
   createNewUser,
   verifyId,
   findById,
@@ -25,11 +25,13 @@ UserController.get('/', async (_req, res) => {
 });
 
 // Create New User
-UserController.post('/', verifyEmail, async (req, res) => {
+UserController.post('/', emailExist, async (req, res) => {
   const { name, email, password, role } = req.body;
-  await createNewUser(name, email, password, role);
+  const newUser = await createNewUser(name, email, password, role);
+  const user = await findById(newUser.insertId);
+  const token = jwt.sign({ data: user }, SECRET, jwtConfig);
 
-  res.status(CREATED).json({ message: 'OK' });
+  res.status(CREATED).json({ token });
 });
 
 // Get Profile

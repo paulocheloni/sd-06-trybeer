@@ -31,8 +31,8 @@ const update = async (id, name) => {
   return user;
 };
 
-// Verify Email
-const verifyEmail = async (req, res, next) => {
+// Email exist?
+const emailExist = async (req, res, next) => {
   const { email } = req.body;
   const [exist] = await userModel.findByEmail(email);
 
@@ -59,7 +59,7 @@ module.exports = {
   getAll,
   createNewUser,
   verifyUser,
-  verifyEmail,
+  emailExist,
   findById,
   update,
   verifyId,
