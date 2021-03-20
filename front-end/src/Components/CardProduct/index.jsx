@@ -17,8 +17,6 @@ const CardProduct = ({ products, setProducts }) => {
       SetCartDisabled(true);
     }
   }, [products]);
-  console.log('images', products);
-
   return (
     <div>
       {products.length < 1 ? <div>Loading...</div> : products.map((item, index) => (
