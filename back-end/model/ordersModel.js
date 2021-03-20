@@ -1,7 +1,5 @@
 const connection = require('./connection');
 
-// const salesColumns = 'user_id, total_price, delivery_address, delivery_number, sale_date, status';
-
 const createOrders = async (userId, objOrder) => {
   try {
     await connection.execute('INSERT INTO Trybeer.sales ' 
@@ -19,6 +17,14 @@ const createOrders = async (userId, objOrder) => {
   }
 };
 
+const getOrders = async (userId) => {
+  const [sales] = await connection.execute(
+    'SELECT * FROM Trybeer.sales WHERE user_id=?', [userId],
+  );
+  console.log('pedidos model', sales);
+  return sales;
+};
+
 /* const createProductsSales = async ({ productId, quantity }) => {
   await connection.execute(
     'INSERT INTO Trybeer.sales_products (sale_id, product_id, quantity) VALUES (?,?,?)',
@@ -28,5 +34,6 @@ const createOrders = async (userId, objOrder) => {
 
 module.exports = {
   createOrders,
+  getOrders,
   // createProductsSales,
 };

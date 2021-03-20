@@ -19,11 +19,6 @@ export default function Products() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Garante que temos acesso a varíavel products atualizada
-  // useEffect(() => {
-  //   console.log('produtos', products);
-  // }, [products]);
-
   const handleRedirect = (token) => {
     if (!token) return history.push('/login');
   };

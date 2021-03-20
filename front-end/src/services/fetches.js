@@ -33,12 +33,17 @@ const createUser = async (email, name, password, role) => {
 };
 
 const createOrder = async (token, objOrder) => {
-  // console.log('pedido', objOrder);
   const newOrder = await axios.post(`${path}/orders`,
     { objOrder },
     { headers: { authorization: token } });
-  // console.log(newOrder.data);
   return newOrder.data;
+};
+
+const getSales = async (token) => {
+  const sales = await axios.get(`${path}/orders`,
+    { headers: { authorization: token } });
+  // console.log('fetches', sales);
+  return sales;
 };
 
 export default {
@@ -47,4 +52,5 @@ export default {
   fetchAllProducts,
   createUser,
   createOrder,
+  getSales,
 };
