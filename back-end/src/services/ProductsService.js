@@ -1,8 +1,6 @@
 const products = require('../models/Products');
 
-const formatUrl = (url) => {
-  return url.split(' ').join('%20');
-};
+const formatUrl = (url) => url.split(' ').join('%20');
 
 const getAll = async () => {
   const productsArray = await products.getAll();
