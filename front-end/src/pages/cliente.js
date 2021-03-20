@@ -27,10 +27,10 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
-  // gridListTitle: {
-  //   height: 200,
-  //   // zIndex: -1
-  // },
+  image: {
+    height: 200,
+    // zIndex: -1
+  },
   gridListTitleBar: {
     height: 100,
   },
@@ -95,6 +95,7 @@ function Cliente() {
 
               {/* Image */}
               <img
+                className={ classes.image }
                 src={ tile.url_image.replace(/ /g, '_') }
                 data-testid={ `${index}-product-img` }
                 alt={ tile.name }
