@@ -1,36 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-const orderMock = {
-  orderId: 'Pedido 001',
-  orderAddress: 'Rua Antônio de Barbosa',
-  orderTotalPrice: 'R$  355,10',
-  orderStatus: 'Pendente',
-}
-
-export default function AdminOrderCard() {
-  const {orderId, orderAddress, orderTotalPrice, orderStatus} = orderMock;
+export default function AdminOrderCard({sales, index}) {
+  const { id, delivery_adress, delivery_number, total_price, status } = sales;
   return (
     <div>
       <h3
-        // data-testid={`${index}-order-number`}
+        data-testid={`${index}-order-number`}
       >
-        {orderId}
+        {id}
       </h3>
       <p
-        // data-testid={`${index}-order-address`}
+        data-testid={`${index}-order-address`}
       >
-        {orderAddress}
+        {delivery_adress}, {delivery_number}
       </p>
       <div>
         <span
          // data-testid={`${index]}-order-roral-value`}
         >
-          {orderTotalPrice}
+          {total_price}
         </span>
         <span
-          //  data-testid={`${index}`-ordder-status}
+           data-testid={`${index}-ordder-status`}
         >
-          {orderStatus}
+          {status}
         </span>
       </div>
     </div>
