@@ -77,7 +77,7 @@ function Cliente() {
     return `${cart[idx].quantity}`;
   };
 
-  if (!isLoading) {
+  if (isLoading) {
     return (
       <h1>Loading...</h1>
     );
