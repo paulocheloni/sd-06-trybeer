@@ -17,7 +17,6 @@ const CardProduct = ({ products, setProducts }) => {
       SetCartDisabled(true);
     }
   }, [products]);
-
   return (
     <div>
       <S.CardContainer>
@@ -28,7 +27,7 @@ const CardProduct = ({ products, setProducts }) => {
               {' '}
               {item.price.replace(/\./g, ',')}
             </span>
-            <img
+            <S.ItemImage
               data-testid={ `${index}-product-img` }
               src={ item.url_image }
               alt="beer"
