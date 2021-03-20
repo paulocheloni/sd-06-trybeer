@@ -15,18 +15,20 @@ function MenuTop({ title }) {
     const [open, setOpen] = useState(isAdmin);// true para passar no adminprofile
     return (
       <div className="top">
-        <button
-          type="button"
-          onClick={ () => setOpen(!open) }
-          className="top-btn"
-        >
-          <i data-testid="top-hamburguer" className="top-hamburguer">
-            <GiHamburgerMenu />
-          </i>
-        </button>
-        <h1 className="title" data-testid="top-title">
-          { title }
-        </h1>
+        <div className="title-container">
+          <h1 className="title" data-testid="top-title">
+            { title }
+          </h1>
+          <button
+            type="button"
+            onClick={ () => setOpen(!open) }
+            className="top-btn"
+          >
+            <i data-testid="top-hamburguer" className="top-hamburguer">
+              <GiHamburgerMenu />
+            </i>
+          </button>
+        </div>
         { open && <MenuSide title="Trybeer" /> }
       </div>
     );

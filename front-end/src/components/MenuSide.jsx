@@ -1,4 +1,5 @@
 import React from 'react'; import { useHistory, Redirect } from 'react-router-dom';
+import './MenuSide.css';
 
 function MenuSide() {
   const route = useHistory(); const user = JSON.parse(localStorage.getItem('user')); try {
@@ -13,6 +14,7 @@ function MenuSide() {
         { isClient
         && (
           <button
+            className="side-btn"
             data-testid="side-menu-item-products"
             type="button"
             onClick={ () => route.push('/products') }
@@ -20,6 +22,7 @@ function MenuSide() {
             Produtos
           </button>) }
         <button
+          className="side-btn"
           data-testid={ `side-menu-item${modifyId}orders` }
           type="button"
           onClick={ () => route.push(`${urlRoute}/orders`) }
@@ -27,6 +30,7 @@ function MenuSide() {
           {isClient ? 'Meus Pedidos' : 'Pedidos'}
         </button>
         <button
+          className="side-btn"
           data-testid={ `side-menu-item${modifyId}profile` }
           type="button"
           onClick={ () => route.push(`${urlRoute}/profile`) }
@@ -34,6 +38,7 @@ function MenuSide() {
           {isClient ? 'Meu Perfil' : 'Perfil'}
         </button>
         <button
+          className="side-btn"
           data-testid="side-menu-item-logout"
           type="button"
           onClick={ () => {

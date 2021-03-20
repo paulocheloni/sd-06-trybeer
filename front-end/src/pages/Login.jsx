@@ -32,6 +32,7 @@ function Login() {
 
     <main>
       <form>
+        <h1>Login</h1>
         <Input type="email" setValue={ setEmail } value={ email } label="Email" />
         <Input
           type="password"
