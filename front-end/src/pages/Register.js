@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { Topbar, TextInput, CheckBox, SubmitButton } from '../components';
-import registerUser from '../services/api.user';
-import yup from '../utils/yupSchemas';
-
-import './Forms.css';
-
 import AppContext from '../context/app.context';
+import { Topbar, TextInput, CheckBox, SubmitButton } from '../components';
+import userApi from '../services/api.user';
+import { yupSchemas, handleUser } from '../utils';
+
+import '../styles/Forms.css';
 
 export default function Register() {
   const { setToken } = useContext(AppContext);
@@ -19,21 +18,10 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const valid = await yup.registerSchema.isValid(login);
+    const valid = await yupSchemas.register.isValid(login);
     if (valid) {
-      const newUser = await registerUser(login);
-
-      if (newUser.role) {
-        setToken(newUser);
-        if (newUser.role === 'administrator') history.push('/admin/orders');
-        if (newUser.role === 'client') history.push('/products');
-      }
-
-      if (newUser.code) {
-        history.push({
-          pathname: '/error',
-          state: { ...newUser } });
-      }
+      const newUser = await userApi(login);
+      handleUser(newUser, history, setToken);
     }
   };
 
@@ -46,12 +34,8 @@ export default function Register() {
   };
 
   useEffect(() => {
-    const validateForm = async () => yup.registerSchema.isValid(login)
-      .then((valid) => {
-        if (disableBtn === valid) {
-          setDisableBtn(!valid);
-        }
-      });
+    const validateForm = async () => yupSchemas.register.isValid(login)
+      .then((valid) => (disableBtn === valid) && setDisableBtn(!valid));
 
     validateForm();
   }, [login, disableBtn]);
