@@ -18,8 +18,9 @@ function MenuTop({ title }) {
         <button
           type="button"
           onClick={ () => setOpen(!open) }
+          className="top-btn"
         >
-          <i data-testid="top-hamburguer">
+          <i data-testid="top-hamburguer" className="top-hamburguer">
             <GiHamburgerMenu />
           </i>
         </button>

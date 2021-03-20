@@ -54,14 +54,14 @@ function Products() {
       <MenuTop title="TryBeer" />
       {onSuccess ? <p>Compra realizada com sucesso!</p> : null}
       <section className="cards-container">
-        {renderCards(allProducts, asd, setAsd, itemQty)}
+        {renderCards(allProducts, reload, setReload, itemQty)}
         <section className="checkout-container">
           <p data-testid="checkout-bottom-btn-value" className="checkout-value">
             {currencyFormat(cartTotal)}
           </p>
           <button
             type="button"
-            className="cart-btn"
+            className="checkout-btn"
             disabled={ reload === 0 }
             data-testid="checkout-bottom-btn"
             onClick={ () => route.push('/checkout') }
