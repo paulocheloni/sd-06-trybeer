@@ -7,8 +7,7 @@ const createOrders = async (userId, objOrder) => {
     console.log('cheguei no del', objOrder, userId);
     await connection.execute('INSERT INTO Trybeer.sales ' 
       + '(id, user_id, total_price, delivery_address, delivery_number, sale_date, status) ' 
-      + 'VALUES (?,?,?,?,?,?,?)', [
-      1,
+      + 'VALUES (?,?,?,?,?,?)', [
       userId,
       objOrder.totalPrice,
       objOrder.address,
