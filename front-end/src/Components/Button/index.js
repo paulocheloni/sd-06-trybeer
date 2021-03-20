@@ -17,6 +17,7 @@ const Button = ({
   position,
   botton,
   marginBottom,
+  opacity,
 }) => {
   const { stateSideBar } = useContext(GlobalContext);
 
@@ -31,6 +32,7 @@ const Button = ({
       onClick={ onClick }
       data-testid={ dataTestid }
       position={ position }
+      opacity={ opacity }
       botton={ botton }
       marginBottom={ marginBottom }
       stateSideBar={ stateSideBar }
@@ -48,6 +50,7 @@ Button.defaultProps = {
   botton: '',
   width: '',
   marginBottom: '20px',
+  opacity: '',
 };
 
 Button.propTypes = {
@@ -63,6 +66,7 @@ Button.propTypes = {
   position: PropTypes.string,
   botton: PropTypes.string,
   marginBottom: PropTypes.string,
+  opacity: PropTypes.string,
 };
 
 export default Button;

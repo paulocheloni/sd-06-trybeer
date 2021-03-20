@@ -26,6 +26,8 @@ const profile = ([
         id="name-input"
         value={ name }
         label="Nome"
+        width="100%"
+        widthDivLabel="100%"
         dataTestid="profile-name"
         onChange={ ({ target }) => setNameState(target.value) }
         themeStorage={ theme && theme.title }
@@ -36,6 +38,8 @@ const profile = ([
         id="email-input"
         value={ email }
         label="Email"
+        width="100%"
+        widthDivLabel="100%"
         dataTestid="profile-email"
         readOnly
         themeStorage={ theme && theme.title }
@@ -51,7 +55,7 @@ const AdminProfile = () => {
   const [emailState, setEmailState] = useState('');
   const [updateMessage, setUpdateMessage] = useState(false);
 
-  const { stateSideBar } = useContext(GlobalContext);
+  const { stateSideBarAdmin } = useContext(GlobalContext);
 
   const history = useHistory();
 
@@ -81,7 +85,7 @@ const AdminProfile = () => {
       <S.Context>
         <SideBarAdmin />
 
-        <S.Container stateSideBar={ stateSideBar }>
+        <S.Container stateSideBar={ stateSideBarAdmin }>
 
           <LogoTryBeer />
 

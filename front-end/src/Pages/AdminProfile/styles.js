@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
 const Container = styled.div`
-  ${({ theme }) => css`
-
+  ${({ theme, stateSideBar }) => css`
+    opacity: ${!stateSideBar && '0.2'};
     background: ${theme.colors.secondary};
   
     width: 100%;
@@ -13,7 +13,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
 
-    @media (max-width: 500px) {
+    @media (max-width: 830px) {
       background: ${theme.colors.primary};
     }
   `}
@@ -21,6 +21,7 @@ const Container = styled.div`
 
 const ContextProfile = styled.div`
   ${({ theme, stateSideBar }) => css`
+    width: 450px;
     opacity: ${stateSideBar && '0.2'};
     background: ${theme.colors.primary};
     padding: 20px 30px 10px 30px;
@@ -45,11 +46,15 @@ const ContextProfile = styled.div`
       color: ${theme.colors.text};
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 830px) {
       border: none;
       border-radius: 0;
       box-shadow: none;
       width: 100%;
+
+      input {
+        width: 100%;
+      }
     }
   `}
 `;

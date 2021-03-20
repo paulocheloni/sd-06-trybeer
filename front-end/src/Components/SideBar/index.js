@@ -12,24 +12,26 @@ import S from './styles';
 const navigationPages = ({
   stateSideBar,
   setStateSideBar,
-  setStateIsFixed,
+  setStateIsOpacity,
   history },
 route) => {
   setStateSideBar(!stateSideBar);
-  setStateIsFixed('');
 
   const time = 390;
 
-  setTimeout(() => { setStateIsFixed('fixed'); }, time);
+  setStateIsOpacity('0');
 
+  if (route === '/products') setStateIsOpacity('1');
   if (route === '/login') localStorage.removeItem('user');
 
   history.push(route);
+
+  setTimeout(() => { setStateIsOpacity('1'); }, time);
 };
 
 const SideBar = () => {
   const [route, setRoute] = useState();
-  const { stateSideBar, setStateSideBar, setStateIsFixed } = useContext(GlobalContext);
+  const { stateSideBar, setStateSideBar, setStateIsOpacity } = useContext(GlobalContext);
 
   const history = useHistory();
 
@@ -39,7 +41,7 @@ const SideBar = () => {
     history,
     setRoute,
     route,
-    setStateIsFixed,
+    setStateIsOpacity,
   };
 
   return (

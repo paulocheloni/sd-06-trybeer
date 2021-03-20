@@ -15,7 +15,7 @@ const animate = keyframes`
 `;
 
 const CompSideBar = styled.div`
-  ${({ theme }) => css`
+  ${({ theme, stateSideBarAdmin }) => css`
     width: 300px;
     height: 100vh;
 
@@ -39,7 +39,18 @@ const CompSideBar = styled.div`
 
     animation: ${animate} 0.5s;
 
-    @media (max-width: 500px) {
+    @media (max-width: 850px) {
+      width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      display: ${stateSideBarAdmin ? 'none' : 'flex'};
+      background: ${theme.colors.secondary}dd;
+      position: fixed;
+      width: 50%;
+    }
+
+    @media (max-width: 480px) {
       width: 80%;
     }
 

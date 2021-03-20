@@ -25,7 +25,7 @@ const Products = () => {
     stateSumPrice,
     stateSideBar,
     cartList,
-    stateIsFixed,
+    stateIsOpacity,
   } = useContext(GlobalContext);
 
   const history = useHistory();
@@ -76,7 +76,9 @@ const Products = () => {
             width="93%"
             heigth="40px"
             botton="0"
-            position={ stateIsFixed }
+            position="fixed"
+            opacity={ stateIsOpacity }
+            // position={ stateIsFixed }
             marginBottom="10px"
             disabled={ isDisabled }
             onClick={ () => saveCart(cartList, history) }
