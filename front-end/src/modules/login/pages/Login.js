@@ -10,7 +10,7 @@ const Login = () => {
   const role = storage ? storage.role : '';
   const existToken = storage ? storage.token : false;
 
-  const timeout = 2000;
+  const timeout = 1000;
 
   setTimeout(() => {
     if (existToken && role === 'client') history.push('/products');

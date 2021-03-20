@@ -17,11 +17,19 @@ const Buttons = ({ index, prod }) => {
       return acc;
     }, subtractValue);
 
-    if (position === subtractValue) {
+    if (position === subtractValue && type === 'add') {
       return setCartItems((prev) => (
         [
           ...prev,
-          { id: prod.id, quantity: 1, price: prod.price },
+          { id: prod.id, quantity: 1, price: prod.price, name: prod.name },
+        ]
+      ));
+    }
+
+    if (position === subtractValue && type === 'sub') {
+      return setCartItems((prev) => (
+        [
+          ...prev,
         ]
       ));
     }
@@ -64,8 +72,9 @@ const Buttons = ({ index, prod }) => {
   };
 
   return (
-    <div>
+    <div className="flex">
       <button
+        className="mr-2"
         data-testid={ `${index}-product-minus` }
         type="button"
         name="-"
@@ -74,11 +83,12 @@ const Buttons = ({ index, prod }) => {
         -
       </button>
 
-      <p data-testid={ `${index}-product-qtd` }>
+      <p data-testid={ `${index}-product-qtd` } className="mr-2">
         { getQuantityById() }
       </p>
 
       <button
+        className="mr-2"
         data-testid={ `${index}-product-plus` }
         type="button"
         name="+"

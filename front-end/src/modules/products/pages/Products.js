@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import PageMenu from '../../../design-system/page-menu/PageMenu';
 import Buttons from '../components/Buttons';
 import GlobalContext from '../../../context/Context';
@@ -9,15 +10,37 @@ import BodyContainer from '../../../design-system/containers/BodyContainer';
 function Products() {
   const [prod, setProd] = useState('');
   const [rendering, setRendering] = useState(false);
-  const { cartItems } = useContext(GlobalContext);
+  const {
+    cartItems,
+    setCartItems,
+    setMenuStatus,
+  } = useContext(GlobalContext);
 
   const totalPrice = cartItems.reduce((acc, curr) => {
     const result = (acc + curr.quantity * curr.price);
     return result;
   }, 0);
 
+  const handleCartStorage = () => {
+    const currentCart = JSON.parse(localStorage.getItem('cart'));
+
+    if (!currentCart) localStorage.setItem('cart', JSON.stringify(cartItems));
+
+    if (currentCart) {
+      if (cartItems.length === 0) {
+        setCartItems(currentCart);
+        localStorage.setItem('cart', JSON.stringify(currentCart));
+      }
+      if (cartItems.length > 0) {
+        localStorage.removeItem('cart');
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+      }
+    }
+  };
+
   useEffect(() => {
     api.get('/products').then((resp) => setProd(resp.data));
+    setMenuStatus(false);
   }, []);
 
   useEffect(() => {
@@ -26,24 +49,31 @@ function Products() {
     }
   }, [prod]);
 
+  useEffect(() => {
+    handleCartStorage();
+  }, [cartItems]);
+
   const renderProducts = () => {
     const eachProduct = (
-      <div>
+      <div className="flex flex-wrap">
         { prod.map((p, index) => (
-          <div key={ index }>
-            <p data-testid={ `${index}-product-price` }>
-              <strong>{`R$ ${p.price}`}</strong>
-            </p>
-
+          <div
+            key={ index }
+            className="flex flex-col w-1/4 border items-center justify-items-center m-1"
+          >
             <img
+              className="w-20"
               data-testid={ `${index}-product-img` }
               src={ p.url_image }
-              width="100px"
               alt={ p.name }
             />
 
             <p data-testid={ `${index}-product-name` }>
               {p.name}
+            </p>
+
+            <p data-testid={ `${index}-product-price` }>
+              {`R$ ${p.price.replace('.', ',')}`}
             </p>
 
             <Buttons
@@ -53,11 +83,19 @@ function Products() {
           </div>
         ))}
 
-        <button data-testid="checkout-bottom-btn" type="button" name="shop">
-          Ver carrinho
+        <button
+          data-testid="checkout-bottom-btn"
+          type="button"
+          name="shop"
+          className="flex flex-col w-full items-center"
+        >
+          <Link to="/checkout">
+            Ver carrinho
+            <p data-testid="checkout-bottom-btn-value">
+              { `R$ ${totalPrice.toFixed(2)}` }
+            </p>
+          </Link>
         </button>
-
-        <p data-testid="checkout-bottom-btn-value">{totalPrice.toFixed(2)}</p>
       </div>
     );
 
