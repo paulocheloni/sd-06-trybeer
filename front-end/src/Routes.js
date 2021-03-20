@@ -6,8 +6,9 @@ import Profile from './modules/Profile/Profile';
 import Orders from './modules/Orders/Orders';
 import Products from './modules/Products/Products';
 import AdminOrders from './modules/Admin/Orders/AdminOrders';
+import AdminProfile from './modules/Admin/Profile/AdminProfile';
 import Checkout from './modules/Checkout/Checkout';
-import AdminProfile from './modules/Admin/Orders/AdminProfile';
+
 
 function Routes() {
   return (
