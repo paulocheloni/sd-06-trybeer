@@ -12,4 +12,9 @@ salesRouter.post('/checkout', tokenValidator, async (req, res) => {
   return res.status(status.SUCCESS).json(response);
 });
 
+salesRouter.get('/', async (_req, res) => {
+  const sales = await SalesService.getAllSales();
+  res.status(status.SUCCESS).json(sales);
+});
+
 module.exports = salesRouter;
