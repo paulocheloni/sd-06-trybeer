@@ -34,7 +34,7 @@ const ProductCard = ({ product, index, plusItemCart, quantity, minusItemCart, ha
       >
         {/* { (state.quantity >= 0) ? state.quantity : 0 } */}
         {/* { quantity } */}
-        { handleItem(product) }
+        { (handleItem(product)) }
       </span>
       <button
         type="button"
