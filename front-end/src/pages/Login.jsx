@@ -16,14 +16,15 @@ function Login({ history }) {
   }, [user]);
 
   const handleChange = ({ target }) => {
+    console.log('iniciei');
     setUser({ ...user, [target.name]: target.value });
   };
 
   const handleClick = async (e) => {
-    const list = await api.listProducts();
-    console.log(list.response);
     e.preventDefault();
+    // const list = await api.listProducts();
     const userData = await api.generateToken(user.email, user.password);
+    console.log(userData.response);
     if (userData.result) {
       const { role } = userData.response;
       setErrMsg(false);
