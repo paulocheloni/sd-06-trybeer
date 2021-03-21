@@ -1,31 +1,57 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import './AdminOrderCard.css';
 
-export default function AdminOrderCard({sale, index}) {
-  const { id, delivery_address, delivery_number, total_price, status } = sale;
+export default function AdminOrderCard({ sale, index }) {
+  const {
+    id,
+    delivery_address: deliveryAddress,
+    delivery_number: deliveryNumber,
+    total_price: totalPrice,
+    status,
+  } = sale;
   return (
-    <div>
-      <h3
-        data-testid={`${index}-order-number`}
+    <a className="adminOrderCard" href={ `/orders/${id}` }>
+      <h2
+        data-testid={ `${index}-order-number` }
       >
+        Pedido
+        {' '}
         {id}
-      </h3>
+      </h2>
       <p
-        data-testid={`${index}-order-address`}
+        data-testid={ `${index}-order-address` }
       >
-        {delivery_address}, {delivery_number}
+        {deliveryAddress}
+        ,
+        {deliveryNumber}
       </p>
       <div>
         <span
-         data-testid={`${index}-order-total-value`}
+          data-testid={ `${index}-order-total-value` }
         >
-          {total_price}
+          R$
+          {' '}
+          {(totalPrice).replace('.', ',')}
         </span>
         <span
-           data-testid={`${index}-ordder-status`}
+          className={
+            `itemStatus ${status === 'Pendente' ? 'itemPending' : 'itemDelivered'}`
+          }
+          data-testid={ `${index}-ordder-status` }
         >
           {status}
         </span>
       </div>
-    </div>
-  )
+    </a>
+  );
 }
+
+AdminOrderCard.propTypes = {
+  sale: PropTypes.arrayOf(PropTypes.string).isRequired,
+  index: PropTypes.number.isRequired,
+  delivery_address: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  delivery_number: PropTypes.string.isRequired,
+  total_price: PropTypes.number.isRequired,
+};
