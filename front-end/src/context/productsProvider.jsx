@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import productsContext from './productsContext';
+// import fetches from '../services/fetches';
 
 export default function ProductsProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [cartProducts, setCartProducts] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   const context = {
     products,
     setProducts,
     cartProducts,
     setCartProducts,
+    orders,
+    setOrders,
   };
 
   return (
