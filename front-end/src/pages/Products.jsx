@@ -18,6 +18,13 @@ function Products() {
     getProducts(setProducts);
   }, [history]);
 
+  // useEffect(() => {
+  //   if (JSON.parse(quantityStorage) !== null) {
+  //     const obj = JSON.parse(quantityStorage)
+  //     setQuantity(obj.total);
+  //   }
+  // }, [quantityStorage]);
+
   return (
     <div>
       <ControllerHeader />

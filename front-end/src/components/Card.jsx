@@ -7,15 +7,16 @@ function Card(props) {
   const { product, setTotal } = props;
   const quantityStorage = localStorage.getItem(product.name);
   const [quantity, setQuantity] = useState(0);
+  const { id, name, price, url_image } = product;
+  const params = { quantity, setQuantity, name, setTotal, price };
 
   useEffect(() => {
-    if (quantityStorage !== null) {
-      setQuantity(parseInt(quantityStorage, 10));
+    if (JSON.parse(quantityStorage) !== null) {
+      const obj = JSON.parse(quantityStorage)
+      setQuantity(obj.total);
     }
   }, [quantityStorage]);
 
-  const { id, name, price, url_image } = product;
-  const params = { quantity, setQuantity, name, setTotal };
   return (
     <div className="card-container">
       <img

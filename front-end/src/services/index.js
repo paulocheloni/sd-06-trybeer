@@ -67,7 +67,7 @@ const handleUpdate = (name, setShowMessage) => {
 
 const getItensStorage = () => {
   // https://stackoverflow.com/questions/38750705/filter-object-properties-by-key-in-es6
-  const allowed = Object.keys({ ...localStorage }).filter((key) => key !== 'token');
+  const allowed = Object.keys({ ...localStorage }).filter((key) => key !== 'token' || key !== 'total');
   const items = Object.keys({ ...localStorage })
     .filter((key) => allowed.includes(key))
     .reduce((obj, key) => {
@@ -77,33 +77,47 @@ const getItensStorage = () => {
   return items;
 };
 
-const calculateTotal = (items, products) => {
-  const allowed = Object.keys(items);
-  const infoCartProducts = products.filter((obj) => allowed.includes(obj.name));
-  const arrayTotal = infoCartProducts
-    .map((obj) => parseFloat(obj.price) * parseFloat(items[obj.name]));
-  const total = arrayTotal
-    .reduce((accumulator, currentValue) => accumulator + currentValue)
-    .toFixed(2).toString();
-  console.log(total, products);
-  return total;
+const calculateTotal = (items) => {
+  console.log(items)
+  let total = 0.00
+  const arrayPrices = Object.values(items);
+  arrayPrices.forEach((obj) => {
+    const parseObj = JSON.parse(obj)
+    // console.log(parseObj)
+    total += parseObj['total'] * parseFloat(parseObj['price'])
+    // console.log('parse',parseFloat(parseObj['1']))
+  })
+
+  console.log(total.toFixed(2))
+
+  localStorage.setItem('total', total)
+  return total.toFixed(2)
+
+  // const infoCartProducts = products.filter((obj) => allowed.includes(obj.name));
+  // const arrayTotal = infoCartProducts
+  //   .map((obj) => parseFloat(obj.price) * parseFloat(items[obj.name]));
+  // const total = arrayTotal
+  //   .reduce((accumulator, currentValue) => accumulator + currentValue)
+  //   .toFixed(2).toString();
+  // console.log(total, products);
+  // return total;
 };
 
-const addProduct = ({ quantity, setQuantity, name, setTotal, products }) => {
+const addProduct = ({ quantity, setQuantity, name, setTotal, products, price }) => {
   const total = quantity + 1;
-  localStorage.setItem(`${name}`, total);
+  localStorage.setItem(`${name}`, JSON.stringify({total, price}));
   setQuantity(total);
   const items = getItensStorage();
-  // setTotal(calculateTotal(items, products));
+  setTotal(calculateTotal(items));
 };
 
-const reduceProduct = ({ quantity, setQuantity, name, setTotal, products }) => {
+const reduceProduct = ({ quantity, setQuantity, name, setTotal, products, price }) => {
   if (quantity > 0) {
     const total = quantity - 1;
-    localStorage.setItem(`${name}`, total);
+    localStorage.setItem(`${name}`, JSON.stringify({total, price}));
     setQuantity(total);
     const items = getItensStorage();
-    // setTotal(calculateTotal(items, products));
+    setTotal(calculateTotal(items));
   }
 };
 
