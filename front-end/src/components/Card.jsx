@@ -41,6 +41,7 @@ function Card(props) {
       <span data-testid={ `${id - 1}-product-qtd` }>{quantity}</span>
       <button
         data-testid={ `${id - 1}-product-plus` }
+
         type="button"
         onClick={
           () => addProduct(params)
