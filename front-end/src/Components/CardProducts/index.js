@@ -90,12 +90,6 @@ const CardProducts = ({ product }) => {
 
   return (
     <S.Container id={ `${id - 1}-product-container` }>
-      <S.Price>
-        <span data-testid={ `${id - 1}-product-price` }>
-          {`R$ ${price.replace('.', ',')}`}
-        </span>
-      </S.Price>
-
       <S.Image>
         <img
           data-testid={ `${id - 1}-product-img` }
@@ -103,6 +97,12 @@ const CardProducts = ({ product }) => {
           alt={ name }
         />
       </S.Image>
+
+      <S.Price>
+        <span data-testid={ `${id - 1}-product-price` }>
+          {`R$ ${price.replace('.', ',')}`}
+        </span>
+      </S.Price>
 
       <S.Description>
         <span data-testid={ `${id - 1}-product-name` }>
@@ -112,6 +112,7 @@ const CardProducts = ({ product }) => {
 
       <S.Counter>
         <button
+          className="minus"
           type="button"
           value="minus"
           onClick={ ({ target }) => handleCounter(target, stateProps) }

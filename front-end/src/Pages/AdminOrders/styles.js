@@ -97,7 +97,7 @@ const CardOrder = styled.div`
       display: flex;
       justify-content: space-between;
       > span {
-        color: yellow;
+        color: #cf8d2e;
       }
     }
   `}

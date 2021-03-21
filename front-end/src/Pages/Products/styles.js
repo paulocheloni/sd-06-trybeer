@@ -70,22 +70,15 @@ const ContainerButton = styled.div`
     justify-content: center;
 
     > button {
-      width: 55%;
+      width: 862px;;
       margin-bottom: 20px;
 
-      @media (max-width: 1450px) {
-        width: 75%;
+
+      @media (max-width: 1135px) {
+        width: 641px;
       }
 
-      @media (max-width: 1355px) {
-        width: 65%;
-      }
-
-      @media (max-width: 1130px) {
-        width: 58%;
-      }
-
-      @media (max-width: 1000px) {
+      @media (max-width: 700px) {
         padding: 0 15px;
         margin-bottom: 20px;
 

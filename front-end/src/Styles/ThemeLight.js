@@ -14,6 +14,7 @@ export default {
     shadowCards: '#AAAAAA',
     backgroundMouseOver: ' #DAE8C3',
     backgroundDiv: '#CCCCCC',
+    divCounter: '#E5E5E5',
 
     white: '#fff',
     background: '#f2f3f5',

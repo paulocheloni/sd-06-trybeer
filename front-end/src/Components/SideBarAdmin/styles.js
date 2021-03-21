@@ -37,13 +37,12 @@ const CompSideBar = styled.div`
     flex-direction: column;
     align-items: center;
 
-    animation: ${animate} 0.5s;
-
     @media (max-width: 850px) {
       width: 100%;
     }
 
     @media (max-width: 600px) {
+      animation: ${animate} 0.5s;
       display: ${stateSideBarAdmin ? 'none' : 'flex'};
       background: ${theme.colors.secondary}dd;
       position: fixed;

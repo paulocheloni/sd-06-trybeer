@@ -53,10 +53,18 @@ const MenuTopAdmin = () => {
         data-testid="top-hamburguer"
         onClick={ () => setStateSideBarAdmin(!stateSideBarAdmin) }
       >
-        <img
-          src="/images/cardapio.png"
-          alt="Botão MenuTop"
-        />
+        {stateSideBarAdmin
+          ? (
+            <img
+              src="/images/cardapio.png"
+              alt="Botão MenuTop"
+            />
+          ) : (
+            <img
+              src="/images/close.png"
+              alt="Botão MenuTop"
+            />
+          )}
       </button>
 
       <h2 data-testid="top-title">{pathName}</h2>
