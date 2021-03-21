@@ -60,3 +60,10 @@
   border-radius: 14px 14px 0px 14px;
   color: white;
 }
+
+.keep-shopping {
+  color: black;
+  font-size: 14px;
+  text-decoration: none;
+  width: fit-content;
+}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import isLogged from '../components/isLogged';
 import RenderCheckout from '../components/RenderCheckout';
 import currencyFormat from '../utils/currencyFormat';
@@ -82,6 +83,7 @@ function Checkout() {
       >
         Finalizar Pedido
       </button>
+      <Link to="/products" className="keep-shopping">Continuar comprando</Link>
     </section>
   );
 }
