@@ -61,15 +61,23 @@ export default function Checkout() {
     fetches.createOrder(tokenFromLocalStorage, objOrder)
       .then((response) => {
         if (!response) {
-          return;
+          return (setOrderSuccess('Algum erro aconteceu na realização do seu pedido!'));
         }
-        (setOrderSuccess(response.message));
-        setTimeout(() => {
-          setCartProducts('');
-          localStorage.removeItem('cartProducts');
-          history.push('/products');
-        }, SUCCESSMESSAGEDESAPEAR);
+        const createSaleSuccessMessage = response.message;
+        return (setOrderSuccess(createSaleSuccessMessage));
       });
+
+    fetches.getLastSaleId(tokenFromLocalStorage)
+      .then((response) => {
+        console.log('resposta do ultimo id', response);
+        return response;
+      });
+
+    setTimeout(() => {
+      setCartProducts('');
+      localStorage.removeItem('cartProducts');
+      history.push('/products');
+    }, SUCCESSMESSAGEDESAPEAR);
   };
 
   return (

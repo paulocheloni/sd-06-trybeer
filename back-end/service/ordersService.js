@@ -9,10 +9,16 @@ const getOrders = async (userId) => {
   return sales;
 };
 
+const getLastSaleId = async () => {
+  const lastOrderId = ordersModel.getLastSaleId();
+  return lastOrderId;
+};
+
 // const createProductsSales = async () => ordersModel.createProductsSales();
 
 module.exports = {
   createOrders,
   getOrders,
+  getLastSaleId,
   // createProductsSales,
 };

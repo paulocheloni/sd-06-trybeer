@@ -28,4 +28,10 @@ router.post('/orders', validateToken, rescue(async (req, res) => {
     res.status(OK).json(sales);
   }));
 
+  router.get('/lastorderid', validateToken, rescue(async (req, res) => {
+    const lastSaleId = await ordersService.getLastSaleId();
+    // console.log('última id', lastSaleId);
+    res.status(OK).json(lastSaleId);
+  }));
+
   module.exports = router;

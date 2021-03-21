@@ -46,6 +46,13 @@ const getSales = async (token) => {
   return sales;
 };
 
+const getLastSaleId = async (token) => {
+  const lastSaleId = await axios.get(`${path}/lastorderid`,
+    { headers: { authorization: token } });
+  console.log('lastID', lastSaleId.data);
+  return lastSaleId.data;
+};
+
 export default {
   fetchUserByEmail,
   updateUserName,
@@ -53,4 +60,5 @@ export default {
   createUser,
   createOrder,
   getSales,
+  getLastSaleId,
 };

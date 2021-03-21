@@ -24,7 +24,14 @@ const getOrders = async (userId) => {
   return sales;
 };
 
-/* const createProductsSales = async ({ productId, quantity }) => {
+const getLastSaleId = async () => {
+  const [[lastSaleId]] = await connection.execute(
+    'SELECT MAX(id) lastSaleId FROM Trybeer.sales',
+  );
+  return lastSaleId;
+};
+
+/* const createProductsSales = async ({ sale_id, productId, quantity }) => {
   await connection.execute(
     'INSERT INTO Trybeer.sales_products (sale_id, product_id, quantity) VALUES (?,?,?)',
     [productId, quantity],
@@ -34,5 +41,6 @@ const getOrders = async (userId) => {
 module.exports = {
   createOrders,
   getOrders,
+  getLastSaleId,
   // createProductsSales,
 };
