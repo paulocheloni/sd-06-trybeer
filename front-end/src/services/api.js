@@ -20,12 +20,16 @@ const registerUser = async (name, email, password, role) => axios
   .then((res) => ({ response: res.data, result: true }))
   .catch((err) => ({ response: err.response.data, result: false }));
 
-const updateNameOfUser = async (name) => axios
-  .put(`${baseUrl}/user`, {
-    name,
-  })
-  .then((res) => res.data)
-  .catch((err) => err.response.data);
+const updateNameOfUser = async (name, email) => {
+  console.log('axios', name, email);
+  return axios
+    .put(`${baseUrl}/user`, {
+      name,
+      email,
+    })
+    .then((res) => res.data)
+    .catch((err) => err.response.data);
+};
 
 const getAllProducts = () => [
   {

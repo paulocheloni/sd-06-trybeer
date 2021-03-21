@@ -5,10 +5,10 @@ import {
   Route,
   Redirect } from 'react-router-dom';
 
+  import Products from '../pages/Products';
+  import Register from '../pages/Register';
+  import Profile from '../pages/Profile';
 import Login from '../pages/Login';
-import Products from '../pages/Products';
-import Profile from '../pages/Profile';
-import Register from '../pages/Register';
 
 const Routes = () => (
   <Router>

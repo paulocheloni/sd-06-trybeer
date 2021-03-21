@@ -9,4 +9,6 @@ UserRoute.post('/',
   emailAlreadyExists,
   UserController.registerUser);
 
+UserRoute.put('/', UserController.updateUser);
+
 module.exports = UserRoute;

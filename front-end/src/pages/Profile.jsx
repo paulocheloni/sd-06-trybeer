@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
 
 import MenuTop from '../components/menu/MenuTop';
 
 import api from '../services/api';
 
-function Profile() {
+function Profile({ history }) {
   const { name: userName, email } = JSON.parse(localStorage.user);
   const [name, setName] = useState(userName);
   const [isDisabled, setIsDisabled] = useState(true);
   const [updateName, setUpdateName] = useState(false);
-
-  const history = useHistory();
 
   useEffect(() => {
     if (!localStorage.user) {
@@ -19,17 +16,22 @@ function Profile() {
     }
   }, [history]);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const updateUser = { ...JSON.parse(localStorage.user), name };
     localStorage.user = JSON.stringify(updateUser);
-    api.updateNameOfUser(updateUser);
-    setUpdateName(true);
+    const updateApi = await api.updateNameOfUser(name, email);
+    if (updateApi) setUpdateName(true);
   };
 
   const handleChange = ({ target }) => {
     setName(target.value);
-    setIsDisabled(false);
   };
+
+  useEffect(() => {
+    const nameStorage = JSON.parse(localStorage.user);
+    if (name !== nameStorage.name) setIsDisabled(false);
+    else setIsDisabled(true);
+  }, [name]);
 
   return (
     <div>
@@ -39,7 +41,7 @@ function Profile() {
         <input
           value={ name }
           data-testid="profile-name-input"
-          onChange={ (e) => handleChange(e) }
+          onChange={ handleChange }
         />
       </label>
       <label htmlFor="email">
