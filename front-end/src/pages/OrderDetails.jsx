@@ -1,28 +1,24 @@
-import React from 'react';
-// import { useParams } from 'react-router-dom';
-// import MenuTop from '../components/MenuTop';
-// import OrderDetailsCard from '../components/OrderDetailsCard';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import OrderDetailsCard from '../components/OrderDetailsCard';
+import getSaleDetails from '../methods/salesDetails';
 
 function OrderDetails() {
-  // const [data, setData] = useState('');
-  // const { id } = useParams();
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const orderDetails = await fetchOrderDetails(id);
-  //     setData(orderDetails);
-  //   };
-  //   fetchData();
-  // }, [id]);
+  const { id } = useParams();
+  const [orderDetails, setOrderDetails] = useState({});
+  useEffect(() => {
+    const fetchData = async () => {
+      const saleDetails = await getSaleDetails(id);
+      setOrderDetails(saleDetails);
+    };
+    fetchData();
+  }, [id]);
 
-  // return (
-  //   <>
-  //     <MenuTop title="TryBeer" />
-  //     <h1>detalhe do pedido</h1>
-  //     <OrderDetailsCard order={ data } />
-  //   </>
-  // );
   return (
-    <h1>Order Details</h1>
+    <>
+      <h1 data-testid="top-title"> Detalhe do pedido</h1>
+      <OrderDetailsCard order={ orderDetails } />
+    </>
   );
 }
 

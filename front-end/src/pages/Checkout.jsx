@@ -4,7 +4,6 @@ import isLogged from '../components/isLogged';
 import RenderCheckout from '../components/RenderCheckout';
 import currencyFormat from '../utils/currencyFormat';
 import checkoutPost from '../methods/checkout';
-import salesDetails from '../methods/salesDetails';
 import salesProductsInfo from '../utils/salesProductsInfo';
 
 function Checkout() {

@@ -1,15 +1,26 @@
 const moment = require('moment');
 const connection = require('./connection');
 
-const createOne = async (SaleId, quantity, ProductId, saleData) => {
-  const { userId, price, address, number, status } = saleData;
-  const query = 'INSERT INTO sale_products (sale_id, product_id, quantity) VALUES (?, ?, ?);'
-+ 'INSERT INTO sales (user_id, total_price, delivery_address, delivery_number, sale_date, status)'
-+ 'VALUES(?, ?, ?, ?, ?, ?)';
+const insertSaleProductDetails = async (saleProductData, saleId) => {
+  const productDetailsValues = (
+    saleProductData.map((product) => [saleId, product.prod_id, product.qty]));
+  const productDetailsQuery = (
+    'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES ?;');
+  const [response] = await connection.query(productDetailsQuery, [productDetailsValues]);
+  console.log(response, 'response');
+};
+
+const createOne = async (saleProductData, saleDetailsData) => {
+  const { userId, price, address, number, status } = saleDetailsData;  
   const date = moment().format('YYYY-MM-DD HH:mm:ss');
-  const [saleDetails, sale] = await connection.execute(query,
-    [SaleId, quantity, ProductId, userId, price, address, number, date, status]);
-  return [saleDetails, sale];
+  const saleDetailsQuery = ('INSERT INTO sales' 
+  + '(user_id, total_price, delivery_address, delivery_number, sale_date, status)'
+  + 'VALUES(?, ?, ?, ?, ?, ?);');
+  const [response] = await connection.query(saleDetailsQuery,
+    [userId, price, address, number, date, status]);
+
+  await insertSaleProductDetails(saleProductData, response.insertId);
+  return { insertId: response.insertId, date };
 };
 
 const getAllByUserId = async (id) => {
