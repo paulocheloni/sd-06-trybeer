@@ -19,7 +19,9 @@ function redirectCart(history, setCart) {
   }, timeOut);
 }
 
-export function checkoutOrder(history, setCart) {
+export function checkoutOrder(history, setCart, sale) {
+  console.log(sale);
+
   const cartItens = document.getElementById('cart-checkout');
   const parentDiv = cartItens.parentNode;
   const sentOrderMessage = document.createElement('span');

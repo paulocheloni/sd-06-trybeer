@@ -17,6 +17,14 @@ function Checkout() {
   const buttonDisable = address.rua.length && address.numero.length && totalCart > 0;
   const enable = buttonDisable || false;
 
+  const sale = {
+    userEmail: loggedUser.email,
+    cart,
+    totalPrice: totalCart.toFixed(2).replace('.', ','),
+    status: 'pendente',
+    ...address,
+  };
+
   useEffect(() => {
     if (!loggedUser || !loggedUser.token) history.push('/login');
     if (localStorageCart) setCart(localStorageCart);
@@ -58,7 +66,7 @@ function Checkout() {
           type="button"
           disabled={ !enable }
           data-testid="checkout-finish-btn"
-          onClick={ () => checkoutOrder(history, setCart) }
+          onClick={ () => checkoutOrder(history, setCart, sale) }
         >
           Finalizar Pedido
         </button>
