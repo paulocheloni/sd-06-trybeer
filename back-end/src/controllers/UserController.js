@@ -22,7 +22,7 @@ userRouter.post('/login', async (req, res, next) => {
     
     const token = jwtSign(payload, secret, jwtConfig);
     return res.status(status.SUCCESS)
-      .json({ token, name: user[0].name, email: user[0].email, role: user[0].role });
+      .json({ token, name: user[0].name, email: user[0].email, role: user[0].role, id: user[0].id });
   } catch (error) {
     next(error);
   }
