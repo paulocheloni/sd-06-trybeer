@@ -11,26 +11,26 @@ const deleteProduct = (product, changeState) => {
   return product;
 };
 
-const CheckoutCard = ({ product, changeState, index }) => {
+const CheckoutCard = ({ product, changeState, specialNumber }) => {
   const { quantity, name, price } = product;
   return (
     <div>
-      <span data-testid={ `${index}-product-qtd-input` }>{quantity}</span>
-      <span data-testid={ `${index}-product-name` }>
+      <span data-testid={ `${specialNumber}-product-qtd-input` }>{quantity}</span>
+      <span data-testid={ `${specialNumber}-product-name` }>
         -
         {name}
       </span>
-      <span data-testid={ `${index}-product-total-value` }>
+      <span data-testid={ `${specialNumber}-product-total-value` }>
         { (price * quantity).toFixed(2) }
       </span>
-      <span data-testid={ `${index}-product-unit-price` }>
+      <span data-testid={ `${specialNumber}-product-unit-price` }>
         (
         {price}
         un
         )
       </span>
       <button
-        data-testid={ `${index}-removal-button` }
+        data-testid={ `${specialNumber}-removal-button` }
         type="button"
         onClick={ () => deleteProduct(product, changeState) }
       >

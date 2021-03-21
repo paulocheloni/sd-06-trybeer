@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from '../../../components/Header/Header';
-// import { parseCartPrice } from '../../../utils/parseValues';
 import Button from '../../../components/Button/Button';
 import { verifyUser } from '../../../store/LocalStorage/actions';
 import { postSale } from '../../../services/Sales';
@@ -13,18 +12,23 @@ import { TWO_THOUSAND, NINETEEN } from '../../../services/magicNumbers';
 
 const Checkout = (props) => {
   const { location } = props;
+  if (!location.state) location.state = 0;
 
-  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')));
-  const [mySum, setSum] = useState(location.state.sum);
+  const [user] = useState(JSON.parse(localStorage.getItem('user')));
+  let [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')));
   const [chkButton, setChkButton] = useState(true);
   const [chkForm, setChkForm] = useState({ st: '', num: '' });
-  const [user] = useState(JSON.parse(localStorage.getItem('user')));
   const [statusPedido] = useState('Pendente'); // ou Entregue
+  const [mySum, setSum] = useState(location.state.sum || ' ');
   const [saleDone, setSaleDone] = useState(false);
+  
+  if (!cart) cart = '';
 
   const history = useHistory();
+  
   useEffect(() => {
     verifyUser(history);
+    // verifyUser(history);
   }, [history]);
 
   useEffect(() => {
@@ -91,12 +95,13 @@ const Checkout = (props) => {
               (cart.length)
                 ? (
                   cart.map((product, index) => (
-                    <CheckoutCard
-                      product={ product }
-                      changeState={ changeState }
-                      key={ index }
-                    />
-                  ))
+                      <CheckoutCard
+                        product={ product }
+                        changeState={ changeState }
+                        key={ index }
+                        specialNumber={ index }
+                      />
+                    ))
                 )
                 : (<h2>Não há proodutos no carrinho</h2>)
             }
@@ -121,7 +126,7 @@ const Checkout = (props) => {
 Checkout.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
-      sum: PropTypes.string.isRequired,
+      sum: PropTypes.string,
     }).isRequired,
   }).isRequired,
 };
