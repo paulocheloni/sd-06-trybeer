@@ -15,14 +15,13 @@ const Checkout = () => {
   const [message, setMessage] = useState('');
   useEffect(() => {
     if (!localStorage.token || localStorage.token === '') history.push('/');
-  }, [history]);
-  useEffect(() => {
     if (!localStorage.basketProducts) {
       localStorage.basketProducts = localStorage.products;
     }
     const products = JSON.parse(localStorage.basketProducts)
       .filter((element) => element.productQuantity > 0);
     setCartProducts(products);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     if (street.trim().length > 0 && number.trim().length > 0 && cartProducts.length > 0) {
