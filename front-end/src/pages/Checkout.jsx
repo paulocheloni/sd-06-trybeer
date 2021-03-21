@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import TopMenu from '../components/TopMenu';
+import CheckoutProductsCard from '../components/CheckoutProductsCard';
 import productsContext from '../context/productsContext';
 import fetches from '../services/fetches';
-import './pagesCSS/Checkout.css';
 
-export default function Products() {
+export default function Checkout() {
   const { cartProducts, setCartProducts } = useContext(productsContext);
   const [street, setStreet] = useState('');
   const [houseNumber, setHouseNumber] = useState('');
@@ -13,13 +13,6 @@ export default function Products() {
   const history = useHistory();
   const tokenFromLocalStorage = localStorage.getItem('token');
   let totalPrice = '0,00';
-
-  useEffect(() => {
-    const cartLS = JSON.parse(localStorage.getItem('cartProducts'));
-    if (!cartLS) return;
-    setCartProducts(cartLS);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleRedirect = (token) => {
     if (!token) return history.push('/login');
@@ -32,12 +25,12 @@ export default function Products() {
     }
     return true;
   };
-
+  // aqui é uma validação tem que mandar la pra pasta validations?
   const streetValidation = () => {
     const isStreetFilled = street.length > 0;
     return isStreetFilled;
   };
-
+  // aqui é uma validação tem que mandar la pra pasta validations?
   const houseNumberValidation = () => {
     const ishouseNumberFilled = houseNumber.length > 0;
     return ishouseNumberFilled;
@@ -51,15 +44,6 @@ export default function Products() {
       return totalPrice;
     }
     return totalPrice;
-  };
-
-  const removeProductFromCart = (event) => {
-    const productId = event.target.id;
-
-    cartProducts.splice(productId, 1);
-    const newCartProduct = cartProducts;
-    localStorage.setItem('cartProducts', JSON.stringify(newCartProduct));
-    window.location.reload();
   };
 
   const sendOrder = () => {
@@ -79,10 +63,8 @@ export default function Products() {
         if (!response) {
           return;
         }
-        // console.log('mensagem sucesso', response.message);
         (setOrderSuccess(response.message));
         setTimeout(() => {
-          // setOrderSuccess('');
           setCartProducts('');
           localStorage.removeItem('cartProducts');
           history.push('/products');
@@ -94,39 +76,7 @@ export default function Products() {
     <div>
       { handleRedirect(tokenFromLocalStorage) }
       <TopMenu data-testid="top-title" pageTitle="Finalizar Pedido" />
-      <div className="cart-products-container">
-        { !cartProducts.length
-          ? <h1>Não há produtos no carrinho</h1>
-          : cartProducts.length && cartProducts.map((product, index) => (
-            <div
-              className="cart-products"
-              key={ product.id }
-            >
-              <p data-testid={ `${index}-product-qtd-input` }>
-                { product.quantityItem }
-              </p>
-              <h5 data-testid={ `${index}-product-name` }>
-                { product.name }
-              </h5>
-              <span
-                data-testid={ `${index}-product-total-value` }
-              >
-                { `R$ ${String((product.subTotal).toFixed(2)).replace('.', ',')}` }
-              </span>
-              <span data-testid={ `${index}-product-unit-price` }>
-                { `(R$ ${(product.price).replace('.', ',')} un)` }
-              </span>
-              <button
-                data-testid={ `${index}-removal-button` }
-                type="submit"
-                onClick={ (event) => removeProductFromCart(event) }
-                id={ index }
-              >
-                X
-              </button>
-            </div>
-          )) }
-      </div>
+      <CheckoutProductsCard />
       <div>
         <span
           data-testid="order-total-value"
