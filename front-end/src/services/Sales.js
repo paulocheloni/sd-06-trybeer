@@ -1,4 +1,5 @@
 const { endpoint } = require('./utils');
+
 const applicationJsonContent = 'application/json';
 
 const postSale = (token, payload) => fetch(`${endpoint}/sales/checkout`, {
@@ -9,8 +10,8 @@ const postSale = (token, payload) => fetch(`${endpoint}/sales/checkout`, {
   },
   body: JSON.stringify(payload),
 })
-  .then((response) => response.json())
+  .then((response) => response.json());
 
 module.exports = {
   postSale,
-}
+};

@@ -21,7 +21,7 @@ const Checkout = (props) => {
   const [user] = useState(JSON.parse(localStorage.getItem('user')));
   const [statusPedido] = useState('Pendente'); // ou Entregue
   const [saleDone, setSaleDone] = useState(false);
-  
+
   const history = useHistory();
   useEffect(() => {
     verifyUser(history);
@@ -39,7 +39,7 @@ const Checkout = (props) => {
   const handleChange = (input, e) => {
     setChkForm({ ...chkForm, [input]: e.target.value });
   };
-  
+
   const changeState = (newState) => {
     setCart(newState);
     const newCart = JSON.parse(localStorage.getItem('cart'));
@@ -105,7 +105,7 @@ const Checkout = (props) => {
               {mySum}
             </span>
             <h3>Endereço</h3>
-            <AddressForm handleChange={handleChange} />
+            <AddressForm handleChange={ handleChange } />
             <Button
               title="Finalizar pedido"
               isDisabled={ chkButton }

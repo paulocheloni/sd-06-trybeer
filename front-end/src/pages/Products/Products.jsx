@@ -29,7 +29,7 @@ export default function Products() {
     // history.push('/checkout'); !!!Adicionei passar a soma total como props
     history.push({
       pathname: '/checkout',
-      state: { sum: cartSum }
+      state: { sum: cartSum },
     });
   };
 
