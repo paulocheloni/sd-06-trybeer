@@ -16,7 +16,4 @@ salesRouter.get('/:id', async (req, res) => {
   res.status(status.SUCCESS).json(result);
 });
 
-module.exports = {
-  getAllSales,
-  getSalesById
-}
+module.exports = salesRouter;
