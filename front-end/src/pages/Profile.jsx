@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import MenuTop from '../components/menu/MenuTop';
 
@@ -64,5 +65,9 @@ function Profile({ history }) {
     </div>
   );
 }
+
+Profile.propTypes = {
+  history: PropTypes.objectOf(Object).isRequired,
+};
 
 export default Profile;

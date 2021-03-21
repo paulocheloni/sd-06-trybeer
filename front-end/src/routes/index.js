@@ -5,9 +5,9 @@ import {
   Route,
   Redirect } from 'react-router-dom';
 
-  import Products from '../pages/Products';
-  import Register from '../pages/Register';
-  import Profile from '../pages/Profile';
+import Products from '../pages/Products';
+import Register from '../pages/Register';
+import Profile from '../pages/Profile';
 import Login from '../pages/Login';
 
 const Routes = () => (
