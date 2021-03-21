@@ -1,8 +1,5 @@
-const jwt = require('jsonwebtoken');
 const userModel = require('../model/User');
-const { NOT_FOUND, CONFLICT, UNAUTHORIZED } = require('../schema/statusSchema');
-
-const SECRET = 'http://senhasupersecreta.com/';
+const { NOT_FOUND, CONFLICT } = require('../schema/statusSchema');
 
 // Return all Users
 const getAll = async () => {
@@ -34,8 +31,8 @@ const update = async (id, name) => {
   return user;
 };
 
-// Verify Email
-const verifyEmail = async (req, res, next) => {
+// Email exist?
+const emailExist = async (req, res, next) => {
   const { email } = req.body;
   const [exist] = await userModel.findByEmail(email);
 
@@ -58,26 +55,12 @@ const verifyId = async (req, res, next) => {
   next();
 };
 
-// Verify Auth
-const verifyAuth = async (req, res, next) => {
-  const { authorization } = req.headers;
-
-  if (!authorization) return res.status(UNAUTHORIZED).json({ message: 'jwt is missing' });
-
-  jwt.verify(authorization, SECRET, (err) => {
-    if (err) return res.status(UNAUTHORIZED).json({ message: 'failed to auth token' });
-  });
-
-  next();
-};
-
 module.exports = {
   getAll,
   createNewUser,
   verifyUser,
-  verifyEmail,
+  emailExist,
   findById,
   update,
   verifyId,
-  verifyAuth,
 };
