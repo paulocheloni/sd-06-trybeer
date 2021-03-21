@@ -1,25 +1,13 @@
-import { createSale } from '../models/SalesModel';
+const { createSale } = require('../models/SalesModel');
+const status = require('../utils/statusDictionary');
+const messages = require('../utils/messageDictionary');
+const { ThrowError } = require('../middlewares/errorHandler/errorHandler');
 
-const createSaleService = async (
-  user_id, 
-  total_price, 
-  delivery_address, 
-  delivery_number, 
-  sale_date, 
-  status
-) => {
-  if (user_id, 
-    total_price, 
-    delivery_address, 
-    delivery_number, 
-    sale_date, 
-    status)
-  const response = await createSaleService(
-    user_id, 
-    total_price, 
-    delivery_address, 
-    delivery_number, 
-    sale_date, 
-    status);
-  return response;
-}
+const createSaleService = async (payload) => {
+  if (!payload) throw new ThrowError(status.BAD_REQUEST, messages.NO_EMPTY_FIELDS);
+  return createSale(payload);
+};
+
+module.exports = {
+  createSaleService,
+};

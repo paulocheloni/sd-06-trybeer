@@ -1,19 +1,15 @@
 const { Router } = require('express');
 const tokenValidator = require('../middlewares/tokenValidator');
 const status = require('../utils/statusDictionary');
-const messages = require('../utils/messageDictionary');
-const { ThrowError } = require('../middlewares/errorHandler/errorHandler');
+const { createSaleService } = require('../services/SalesService');
 
 const salesRouter = new Router();
 
-salesRouter.post('/checkout', async(req, res, next) => {
-  console.log(req.body)
-  console.log(req.headers)
+salesRouter.post('/checkout', tokenValidator, async (req, res) => {
+  const payload = req.body;
+  const response = await createSaleService(payload);
   
-  return res.status(200).json({ message: 'ok' });
-})
+  return res.status(status.SUCCESS).json(response);
+});
 
-// FAZENDO AS REQUISIÇÕES
-// COMEÇAR A FAZER OS TESTES PRA FAZER AS REQUISIÇÕES
-// ABRE O INSOMNIA E TESTA O BACK
-// MAS AGORA VOU DORMIR...
+module.exports = salesRouter;
