@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { addProduct, reduceProduct } from '../services/index';
 import '../css/Card.css';
 
@@ -28,7 +29,9 @@ function Card(props) {
       <button
         data-testid={ `${product.id}-product-minus` }
         type="button"
-        onClick={ () => reduceProduct(quantity, setQuantity, product.name, setTotal, products) }
+        onClick={
+          () => reduceProduct(quantity, setQuantity, product.name, setTotal, products)
+        }
       >
         -
       </button>
@@ -36,12 +39,23 @@ function Card(props) {
       <button
         data-testid={ `${product.id}-product-plus` }
         type="button"
-        onClick={ () => addProduct(quantity, setQuantity, product.name, setTotal, products) }
+        onClick={
+          () => addProduct(quantity, setQuantity, product.name, setTotal, products)
+        }
       >
         +
       </button>
     </div>
   );
 }
+
+Card.protoTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    url_image: PropTypes.string.isRequired,
+  }),
+};
 
 export default Card;
