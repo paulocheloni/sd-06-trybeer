@@ -10,19 +10,22 @@ const getOne = async (saleId) => {
      + 'INNER JOIN products as p ON saleDetails.product_id = p.product_id'
      + 'WHERE s.id = ?', [saleId],
   );
-
   return sale;
 };
 
-const query = 'INSERT INTO sale_products (sale_id, product_id, quantity) VALUES (?, ?, ?);'
-+ 'INSERT INTO sales (user_id, total_price, delivery_address, delivery_number, sale_date, status)'
-+ 'VALUES(?, ?, ?, ?, ?, ?)';
-const createOne = async (SaleId, quantity, ProductId, saleData) => {
-  const { userId, price, address, number, status } = saleData;
+const createOne = async (saleProductData, saleDetailsData) => {  
+  const productDetailsQuery = 'INSERT INTO sale_products (product_id, quantity) VALUES ?'; 
+  const saleDetailsQuery = 'INSERT INTO sales' 
+  + '(user_id, total_price, delivery_address, delivery_number, sale_date, status)'
+  + 'VALUES(?, ?, ?, ?, ?, ?)';  
+  const query = `${productDetailsQuery}${saleDetailsQuery}`;  
+  const productDetailsValues = (
+    saleProductData.map((product) => [product.productId, product.quantity]));  
+  const { userId, price, address, number, status } = saleDetailsData;
   const date = moment().format('YYYY-MM-DD HH:mm:ss');
-  const [saleDetails, sale] = await connection.execute(query,
-    [SaleId, quantity, ProductId, userId, price, address, number, date, status]);
-  return [saleDetails, sale];
+  const [saleProductDetails, saleDetails] = await connection.execute(query,
+    [productDetailsValues, userId, price, address, number, date, status]);
+  return [saleProductDetails, saleDetails];
 };
 
 module.exports = {
