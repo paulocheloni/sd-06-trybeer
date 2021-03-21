@@ -6,6 +6,7 @@ import {
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Products from './pages/Products';
+import ProfileClient from './pages/ProfileClient';
 
 import './App.css';
 
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/login"><Login /></Route>
         <Route exact path="/register"><Register /></Route>
         <Route exact path="/products"><Products /></Route>
+        <Route exact path="/profile"><ProfileClient /></Route>
       </div>
     </BrowserRouter>
   );

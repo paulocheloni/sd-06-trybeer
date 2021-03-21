@@ -13,9 +13,15 @@ const createNewUser = async (name, email, password, role) => {
   return user;
 };
 
-// // Verify user by email and password
+// Verify user by email and password
 const verifyUser = async (email, password) => {
   const user = await userModel.verifyUser(email, password);
+  return user;
+};
+
+// FindById
+const findById = async (id) => {
+  const user = await userModel.findById(id);
   return user;
 };
 
@@ -25,8 +31,8 @@ const update = async (id, name) => {
   return user;
 };
 
-// Verify Email
-const verifyEmail = async (req, res, next) => {
+// Email exist?
+const emailExist = async (req, res, next) => {
   const { email } = req.body;
   const [exist] = await userModel.findByEmail(email);
 
@@ -53,7 +59,8 @@ module.exports = {
   getAll,
   createNewUser,
   verifyUser,
-  verifyEmail,
+  emailExist,
+  findById,
   update,
   verifyId,
 };

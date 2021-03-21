@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import SideBar from './SideBar';
 import Header from './Header';
+import '../css/ControllerHeader.css';
 
 function ControllerHeader() {
   const [viewMenu, setViewMenu] = useState(false);
+
   return (
-    <div>
+    <div className="controllerheader">
       <button
         data-testid="top-hamburguer"
         type="button"
