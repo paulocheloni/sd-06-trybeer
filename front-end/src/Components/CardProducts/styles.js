@@ -88,14 +88,11 @@ const Counter = styled.div`
   > button {
     ${({ theme }) => css`
       color: ${theme.colors.text};
-
       font-size: 40px;
       background: none;
       border: none;
-
       cursor: pointer;
       outline: none;
-
       transition: opacity 0.3s;
 
       &:hover {

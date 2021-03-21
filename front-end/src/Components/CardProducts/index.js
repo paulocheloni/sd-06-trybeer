@@ -11,17 +11,21 @@ const verifyQuantityZero = (cartList, setCartList) => {
   setCartList(productQuantity);
 };
 
-const handleCartList = ({ id, price, quantity, value, name }, cartList, setCartList) => {
+const handleCartList = ({
+  id,
+  price,
+  quantity,
+  value,
+  name,
+  image,
+}, cartList, setCartList) => {
   if (value === 'plus') quantity += 1;
   else quantity -= 1;
 
   const product = cartList.find((item) => item.id === id);
 
-  // const productsLocalStorage = JSON.parse('infosCheckout');
-  // const productLocalStorage = productsLocalStorage.find((item) => item.id === id);
-
   if (!product || product === undefined) {
-    setCartList([...cartList, { id, name, price, quantity }]);
+    setCartList([...cartList, { id, name, price, quantity, imageUrl: image }]);
   } else if (product && product.id === id) {
     product.quantity = quantity;
   } else {
@@ -39,14 +43,15 @@ const handleCounter = (
     setQuantity,
     stateSumPrice,
     setStateSumPrice,
+    id,
     name,
     price,
-    id,
+    image,
     cartList,
     setCartList,
   },
 ) => {
-  const product = { id, price, quantity, value, name };
+  const product = { id, price, quantity, value, name, image };
 
   if (value === 'plus') {
     setQuantity(quantity + 1);
@@ -81,9 +86,10 @@ const CardProducts = ({ product }) => {
     setQuantity,
     stateSumPrice,
     setStateSumPrice,
+    id,
     name,
     price,
-    id,
+    image,
     cartList,
     setCartList,
   };
