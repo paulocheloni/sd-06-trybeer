@@ -27,7 +27,7 @@ function CardAdmin(props) {
           data-testid={ `${id - 1}-order-address` }
         >
           {deliveryAddress}
-          ,
+          {', '}
           {deliveryNumber}
         </div>
         <div
