@@ -3,15 +3,13 @@ import { useHistory } from 'react-router-dom';
 import ControllerHeader from '../components/ControllerHeader';
 import Card from '../components/Card';
 import ShowCart from '../components/ShowCart';
-
 import { getProducts } from '../api/index';
 import { tokenExists } from '../services/index';
 
 function Products() {
   const [products, setProducts] = useState(false);
   const history = useHistory();
-  const [cartTotal, setCartTotal] = useState(0);
-  // calculateTotal(getItensStorage(), products)
+  const [cartTotal, setCartTotal] = useState(localStorage.getItem('total'));
 
   useEffect(() => {
     tokenExists(history);
@@ -22,13 +20,13 @@ function Products() {
     <div>
       <ControllerHeader />
       { products && products
-        .map((prod) => (<Card
+        .map((prod, index) => (<Card
           key={ prod.id }
           product={ prod }
           setTotal={ setCartTotal }
+          index={ index }
         />
         ))}
-      <button type="button" onClick={ () => console.log(products) }>Console</button>
       <ShowCart total={ cartTotal } />
     </div>
   );

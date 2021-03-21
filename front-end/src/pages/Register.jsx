@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { verifyRegister, handleCheckbox, handleSubmitRegister } from '../services';
-import ControllerHeader from '../components/ControllerHeader';
 
 function Register() {
   const [activeBtn, setActiveBtn] = useState(false);
@@ -13,7 +12,6 @@ function Register() {
 
   return (
     <div className="test">
-      <ControllerHeader />
       <span>Nome</span>
       <input
         data-testid="signup-name"
