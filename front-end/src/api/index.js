@@ -48,7 +48,6 @@ function updateName(name, id) {
 
 async function getProducts(setProducts) {
   const axios = buildAxiosHandler();
-<<<<<<< HEAD
   const token = localStorage.getItem('token');
   axios.get('/products', {
     headers: {
@@ -56,16 +55,6 @@ async function getProducts(setProducts) {
     } }).then((response) => setProducts(response.data));
 }
 
-=======
-  const token = localStorage.getItem('token')
-  axios.get('/products',{
-    headers:{
-      'authorization': token
-  }}).then(response => setProducts(response.data));
-}
-
-
->>>>>>> b5dc60dffa28154ca2901897bd3f8c70744a8638
 export {
   getProducts,
   login,
