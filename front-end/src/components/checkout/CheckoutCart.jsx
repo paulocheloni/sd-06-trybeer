@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import CartContext from '../../context/CartContext';
 
 const CheckoutCart = () => {
-  const { cart } = useContext(CartContext);
+  const { cart, history } = useContext(CartContext);
   const [totalPrice, setTotalPrice] = useState(0);
   const handleTotalPrice = totalPrice.toFixed(2).replace('.', ',');
 
@@ -16,6 +16,7 @@ const CheckoutCart = () => {
       <button
         type="button"
         data-testid="checkout-bottom-btn"
+        onClick={ () => history.push('/checkout') }
       >
         Ver Carrinho
       </button>

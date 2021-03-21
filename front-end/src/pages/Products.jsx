@@ -7,7 +7,7 @@ import ProductsContext from '../context/ProductsContext';
 import CartContext from '../context/CartContext';
 import { getAllProducts } from '../services/api';
 
-function Products() {
+function Products({ history }) {
   const [products] = useState(getAllProducts);
   const [cart, setCart] = useState([]);
 
@@ -19,7 +19,7 @@ function Products() {
 
   return (
     <ProductsContext.Provider value={ { products } }>
-      <CartContext.Provider value={ { cart, setCart } }>
+      <CartContext.Provider value={ { cart, setCart, history } }>
         <MenuTop name="TryBeer" />
         <ProductsList />
         <CheckoutCart />
