@@ -7,10 +7,10 @@ export default function ShowCart(props) {
   const { total } = props;
 
   useEffect(() => {
-    if(total === '0.00' || !total) {
-      setActiveBtn(false)
+    if (total === '0.00' || !total) {
+      setActiveBtn(false);
     } else {
-      setActiveBtn(true)
+      setActiveBtn(true);
     }
   }, [total]);
 
@@ -29,9 +29,6 @@ export default function ShowCart(props) {
                 ? ` R$ ${total.toString().replace('.', ',')}`
                 : ' R$ 0,00'
             }
-
-
-            {/* { total && `R$ ${total.toString().replace('.', ',')}` } */}
           </span>
         </button>
       </Link>
@@ -42,5 +39,3 @@ export default function ShowCart(props) {
 ShowCart.propTypes = {
   total: PropTypes.number.isRequired,
 };
-
-// export default ShowCart;

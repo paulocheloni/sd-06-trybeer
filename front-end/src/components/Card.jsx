@@ -7,12 +7,12 @@ function Card(props) {
   const { product, setTotal } = props;
   const quantityStorage = localStorage.getItem(product.name);
   const [quantity, setQuantity] = useState(0);
-  const { id, name, price, url_image } = product;
+  const { id, name, price, url_image: urlImage } = product;
   const params = { quantity, setQuantity, name, setTotal, price };
 
   useEffect(() => {
     if (JSON.parse(quantityStorage) !== null) {
-      const obj = JSON.parse(quantityStorage)
+      const obj = JSON.parse(quantityStorage);
       setQuantity(obj.total);
     }
   }, [quantityStorage]);
@@ -20,9 +20,9 @@ function Card(props) {
   return (
     <div className="card-container">
       <img
-        src={ `${ url_image }` }
+        src={ `${urlImage}` }
         alt="imagem cerveja"
-        data-testid={ `${id - 1 }-product-img` }
+        data-testid={ `${id - 1}-product-img` }
       />
       <p data-testid={ `${id - 1}-product-price` }>
         R$
@@ -32,20 +32,15 @@ function Card(props) {
       <button
         data-testid={ `${product.id - 1}-product-minus` }
         type="button"
-        onClick={
-          () => reduceProduct(params)
-        }
+        onClick={ () => reduceProduct(params) }
       >
         -
       </button>
       <span data-testid={ `${id - 1}-product-qtd` }>{quantity}</span>
       <button
         data-testid={ `${id - 1}-product-plus` }
-
         type="button"
-        onClick={
-          () => addProduct(params)
-        }
+        onClick={ () => addProduct(params) }
       >
         +
       </button>

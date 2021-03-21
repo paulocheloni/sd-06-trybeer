@@ -24,10 +24,9 @@ function Products() {
           key={ prod.id }
           product={ prod }
           setTotal={ setCartTotal }
-          index = { index }
+          index={ index }
         />
         ))}
-      <button type="button" onClick={ () => console.log(products) }>Console</button>
       <ShowCart total={ cartTotal } />
     </div>
   );

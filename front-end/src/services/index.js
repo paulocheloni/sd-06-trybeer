@@ -67,42 +67,46 @@ const handleUpdate = (name, setShowMessage) => {
 
 const getItensStorage = () => {
   // https://stackoverflow.com/questions/38750705/filter-object-properties-by-key-in-es6
-  const allowed = Object.keys({ ...localStorage }).filter((key) => key !== 'token');
-  const secondAllowed = allowed.filter((key) => key !== 'total');
+  const filterKeys = Object
+    .keys({ ...localStorage })
+    .filter((key) => key !== 'token')
+    .filter((key) => key !== 'total');
   const items = Object.keys({ ...localStorage })
-    .filter((key) => secondAllowed.includes(key))
-    .reduce((obj, key) => {
-      obj[key] = { ...localStorage }[key];
-      return obj;
+    .filter((key) => filterKeys.includes(key))
+    .reduce((beerObject, key) => {
+      beerObject[key] = { ...localStorage }[key];
+
+      return beerObject;
     }, {});
+
   return items;
 };
 
 const calculateTotal = (items) => {
-  console.log(items)
-  let total = 0.00
-  const arrayPrices = Object.values(items);
-  arrayPrices.forEach((obj) => {
-    const parseObj = JSON.parse(obj)
-    total += parseObj['total'] * parseFloat(parseObj['price'])
-  })
+  let total = 0.00;
+  const beersArray = Object.values(items);
 
-  localStorage.setItem('total', total.toFixed(2))
-  return total.toFixed(2)
+  beersArray.forEach((obj) => {
+    const parsedObject = JSON.parse(obj);
+    total += parsedObject.total * parseFloat(parsedObject.price);
+  });
+
+  localStorage.setItem('total', total.toFixed(2));
+  return total.toFixed(2);
 };
 
-const addProduct = ({ quantity, setQuantity, name, setTotal, products, price }) => {
+const addProduct = ({ quantity, setQuantity, name, setTotal, price }) => {
   const total = quantity + 1;
-  localStorage.setItem(`${name}`, JSON.stringify({total, price}));
+  localStorage.setItem(`${name}`, JSON.stringify({ total, price }));
   setQuantity(total);
   const items = getItensStorage();
   setTotal(calculateTotal(items));
 };
 
-const reduceProduct = ({ quantity, setQuantity, name, setTotal, products, price }) => {
+const reduceProduct = ({ quantity, setQuantity, name, setTotal, price }) => {
   if (quantity > 0) {
     const total = quantity - 1;
-    localStorage.setItem(`${name}`, JSON.stringify({total, price}));
+    localStorage.setItem(`${name}`, JSON.stringify({ total, price }));
     setQuantity(total);
     const items = getItensStorage();
     setTotal(calculateTotal(items));
