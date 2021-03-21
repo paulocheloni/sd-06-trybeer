@@ -13,16 +13,26 @@ const Checkout = () => {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [message, setMessage] = useState('');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    if (!localStorage.token || localStorage.token === '') history.push('/');
-    if (!localStorage.basketProducts) {
-      localStorage.basketProducts = localStorage.products;
+    if (!window.localStorage.token) {
+      return history.push('/login');
     }
+    localStorage.basketProducts = localStorage.products;
     const products = JSON.parse(localStorage.basketProducts)
       .filter((element) => element.productQuantity > 0);
     setCartProducts(products);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [history]);
+  const handleDelete = ({ target }) => {
+    const items = cartProducts.filter((el) => el.id !== parseInt(target.id, 10));
+    setCartProducts(items);
+    localStorage.basketProducts = JSON.stringify(items);
+  };
+  const handleFinish = () => {
+    const TWO_SECONDS = 2000;
+    setMessage('Compra realizada com sucesso!');
+    setTimeout(() => history.push('/products'), TWO_SECONDS);
+  };
   useEffect(() => {
     if (street.trim().length > 0 && number.trim().length > 0 && cartProducts.length > 0) {
       setDisabled(true);
@@ -35,17 +45,6 @@ const Checkout = () => {
       .reduce((acc, total) => acc + total.price * total.productQuantity, 0);
     setTotalPrice(totalPrices);
   }, [cartProducts]);
-  const handleDelete = ({ target }) => {
-    const items = cartProducts.filter((el) => el.id !== parseInt(target.id, 10));
-    setCartProducts(items);
-    localStorage.basketProducts = JSON.stringify(items);
-  };
-  const handleFinish = () => {
-    const TWO_SECONDS = 2000;
-    console.log('foi');
-    setMessage('Compra realizada com sucesso!');
-    setTimeout(() => history.push('/products'), TWO_SECONDS);
-  };
   return (
     <S.Container>
       <Menu><p data-testid="top-title">Finalizar Pedido</p></Menu>

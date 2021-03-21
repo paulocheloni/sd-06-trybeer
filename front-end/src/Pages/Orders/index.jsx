@@ -1,9 +1,16 @@
 // import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import Menu from '../../Components/Menu';
 import * as S from './style';
 
 const Orders = () => {
+  const history = useHistory();
+  useEffect(() => {
+    if (!window.localStorage.token) {
+      history.push('/login');
+    }
+  });
   const [orders, setOrders] = useState([]);
   // fetchApi = async () => {
   // const auth = JSON.parse(localStorage.token);
@@ -29,6 +36,7 @@ const Orders = () => {
   } catch (err) {
     alert('Seus pedidos inexistentes ou inacessíveis');
   }
+
   return (
     <>
       <Menu><p data-testid="top-title">Meus Pedidos</p></Menu>
