@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { CartContext } from '../../context/CartContext';
 
 const CheckoutCart = () => {
-  const [totalPrice, setTotelPrice] = useState(0);
+  const { cart } = useContext(CartContext);
+  const [totalPrice, setTotalPrice] = useState(0);
   const handleTotalPrice = totalPrice.toFixed(2).replace('.', ',');
+
+  useEffect(() => {
+    const sumItems = cart.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0);
+    setTotalPrice(sumItems);
+  }, [cart]);
 
   return (
     <footer>

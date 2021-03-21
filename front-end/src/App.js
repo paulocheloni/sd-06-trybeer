@@ -1,9 +1,10 @@
 import React from 'react';
 
 import './App.css';
-import CartContextProvider from './context/CartContext';
 
 import ProductsContextProvider from './context/ProductsContext';
+import CartContextProvider from './context/CartContext';
+
 import Routes from './routes';
 
 function App() {
