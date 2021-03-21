@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import ProductsContext from '../../context/ProductsContext';
 import CartContext from '../../context/CartContext';
@@ -8,6 +8,11 @@ const ProductsList = () => {
   const { products } = useContext(ProductsContext);
   const { cart, setCart } = useContext(CartContext);
 
+  useEffect(() => {
+    const storage = JSON.stringify(cart);
+    localStorage.cart = storage;
+  }, [cart]);
+
   const plusItemCart = (product) => {
     const currentProduct = cart.find((item) => item.id === product.id) || {
       ...product,
@@ -16,7 +21,7 @@ const ProductsList = () => {
 
     currentProduct.quantity += 1;
 
-    localStorage.cart = JSON.stringify(cart);
+    // localStorage.cart = JSON.stringify(cart);
     setCart([...cart]);
 
     const productIndex = cart.findIndex((item) => item.id === product.id);
@@ -37,7 +42,7 @@ const ProductsList = () => {
     }
 
     setCart(cart.filter((item) => item.quantity > 0));
-    localStorage.cart = JSON.stringify(cart);
+    // localStorage.cart = JSON.stringify(cart);
   };
 
   const handleQuantity = (product) => {

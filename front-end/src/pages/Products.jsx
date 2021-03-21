@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import ProductsList from '../components/products/ProductsList';
 import CheckoutCart from '../components/checkout/CheckoutCart';
 import MenuTop from '../components/menu/MenuTop';
 
 import ProductsContext from '../context/ProductsContext';
 import CartContext from '../context/CartContext';
+
 import { getAllProducts } from '../services/api';
 
 function Products({ history }) {
+  const initialCart = JSON.parse(localStorage.cart || []);
   const [products] = useState(getAllProducts);
-  const [cart, setCart] = useState([]);
-
-  useEffect(() => {
-    const storageCart = JSON.parse(localStorage.cart);
-    const storage = storageCart !== [] ? storageCart : [];
-    setCart(storage);
-  }, []);
+  const [cart, setCart] = useState(initialCart);
 
   return (
     <ProductsContext.Provider value={ { products } }>
@@ -27,5 +25,9 @@ function Products({ history }) {
     </ProductsContext.Provider>
   );
 }
+
+Products.propTypes = {
+  history: PropTypes.objectOf(Object).isRequired,
+};
 
 export default Products;
