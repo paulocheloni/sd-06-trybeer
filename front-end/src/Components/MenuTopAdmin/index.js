@@ -49,6 +49,7 @@ const MenuTopAdmin = () => {
   return (
     <S.CompMenuTop darkTheme={ darkTheme }>
       <button
+        className="hamburger"
         type="button"
         data-testid="top-hamburguer"
         onClick={ () => setStateSideBarAdmin(!stateSideBarAdmin) }
