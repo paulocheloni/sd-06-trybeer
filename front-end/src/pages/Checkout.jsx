@@ -6,6 +6,7 @@ import currencyFormat from '../utils/currencyFormat';
 import checkoutPost from '../methods/checkout';
 import salesDetails from '../methods/salesDetails';
 import salesProductsInfo from '../utils/salesProductsInfo';
+import '../style/Checkout.css';
 
 function Checkout() {
   const [items, setItems] = useState([]);
@@ -28,33 +29,43 @@ function Checkout() {
 
   if (isLogged()) return <Redirect to="/login" />;
   return (
-    <>
-      <h1 data-testid="top-title">finalizar pedido</h1>
+    <section className="checkout-container">
+      <h1 data-testid="top-title">Finalizar pedido</h1>
       {reload === 0
         ? <p>Não há produtos no carrinho</p>
         : RenderCheckout(items, reload, setReload)}
-      <h3 data-testid="order-total-value">{currencyFormat(cartTotal)}</h3>
-      <label htmlFor="street">
-        Rua
-        <input
-          data-testid="checkout-street-input"
-          type="text"
-          name="street"
-          onChange={ ({ target }) => setStreet(target.value) }
-        />
-      </label>
-      <label htmlFor="number">
-        Número da casa
-        <input
-          data-testid="checkout-house-number-input"
-          type="text"
-          name="number"
-          onChange={ ({ target }) => setNumber(target.value) }
-        />
-      </label>
+      <div className="total-value-container">
+        <p className="total-p">valor total</p>
+        <h3 data-testid="order-total-value">
+          {currencyFormat(cartTotal)}
+        </h3>
+      </div>
+      <section className="checkout-inputs-container">
+        <label htmlFor="street" className="checkout-label">
+          Rua
+          <input
+            className="checkout-inputs"
+            data-testid="checkout-street-input"
+            type="text"
+            name="street"
+            onChange={ ({ target }) => setStreet(target.value) }
+          />
+        </label>
+        <label htmlFor="number" className="checkout-label">
+          Número da casa
+          <input
+            className="checkout-inputs"
+            data-testid="checkout-house-number-input"
+            type="text"
+            name="number"
+            onChange={ ({ target }) => setNumber(target.value) }
+          />
+        </label>
+      </section>
       <button
         type="button"
         data-testid="checkout-finish-btn"
+        className="checkout-finish-btn"
         disabled={ reload === 0 || street.length === 0 || number.length === 0 }
         onClick={ () => {
           route.push('/products');
@@ -71,7 +82,7 @@ function Checkout() {
       >
         Finalizar Pedido
       </button>
-    </>
+    </section>
   );
 }
 

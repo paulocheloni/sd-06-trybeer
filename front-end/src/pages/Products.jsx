@@ -55,7 +55,7 @@ function Products() {
       {onSuccess ? <p>Compra realizada com sucesso!</p> : null}
       <section className="cards-container">
         {renderCards(allProducts, reload, setReload, itemQty)}
-        <section className="checkout-container">
+        <section className="checkout-prods-container">
           <p data-testid="checkout-bottom-btn-value" className="checkout-value">
             {currencyFormat(cartTotal)}
           </p>
