@@ -59,14 +59,14 @@ function Checkout() {
         onClick={ () => {
           route.push('/products');
           localStorage.setItem('success', JSON.stringify(true));
+          const SPInfo = salesProductsInfo(items.map((item) => item.id));
           checkoutPost({
+            products: SPInfo,
             price: cartTotal,
             address: street,
             number,
             status: 'Pendente',
           });
-          const SPInfo = salesProductsInfo(items.map((item) => item.id));
-          salesDetails(SPInfo);
         } }
       >
         Finalizar Pedido
