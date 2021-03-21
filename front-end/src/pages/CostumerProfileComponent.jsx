@@ -62,7 +62,7 @@ function CostumerProfile() {
       <button
         type="button"
         data-testid="profile-save-btn"
-        // className="bttn_costumer_profile"
+        className="bttn_costumer_profile"
         disabled={ valid }
         onClick={ onClickSave }
       >

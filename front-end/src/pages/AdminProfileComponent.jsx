@@ -7,11 +7,11 @@ function AdminProfile() {
       <SideBarAdmin />
       <p data-testid="profile-name">
         Nome:
-        <span>{ nome }</span>
+        {/* <span>{ nome }</span> */}
       </p>
       <p data-testid="profile-email">
         Email:
-        <span>{ email }</span>
+        {/* <span>{ email }</span> */}
       </p>
     </div>
   );

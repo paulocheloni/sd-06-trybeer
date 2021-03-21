@@ -4,6 +4,21 @@
   background-color: #205527;
   display: flex;
   flex-flow: row nowrap;
+  height: 70px;
+  justify-content: space-between;
+  margin: auto;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 0;
+}
+
+.header_body {
+  align-items: center;
+  align-content: center;
+  background-color: #205527;
+  display: flex;
+  flex-flow: row nowrap;
   justify-content: space-between;
   margin: auto;
   position: fixed;

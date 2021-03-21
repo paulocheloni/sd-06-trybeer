@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import SideBar from './SideBarComponent';
+import { Logo, Menu} from '../images';
 import '../style/HeaderCostumer.css';
-
-const logo = require('../images/logo_provisorio.png');
-const buttonHamburguer = require('../images/hamburguer.png');
 
 function Header({ text, id }) {
   const [renderSideBar, setRenderSideBar] = useState(false);
 
   return (
-    <>
-      <div className="header_costumer">
+    <div className="header_costumer">
+      <div className="header_body">
         <div className="dropdown">
           <button
             type="button"
@@ -22,7 +20,7 @@ function Header({ text, id }) {
             onClick={ () => setRenderSideBar(!renderSideBar) }
           >
             <img
-              src={ buttonHamburguer }
+              src={ Menu }
               className="img-menu-costumer"
               alt="ham-btn"
             />
@@ -30,7 +28,7 @@ function Header({ text, id }) {
         </div>
         <h1 data-testid={ id } className="title">{text}</h1>
         <img
-          src={ logo }
+          src={ Logo }
           className="img-logo"
           alt="logo"
         />
@@ -38,7 +36,7 @@ function Header({ text, id }) {
       <div className="sidebar">
         {(renderSideBar) && <SideBar text="TryBeer" id="top-title" />}
       </div>
-    </>
+    </div>
   );
 }
 
