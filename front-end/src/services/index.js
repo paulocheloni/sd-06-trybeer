@@ -95,6 +95,7 @@ const addProduct = ({ quantity, setQuantity, name, setTotal, products }) => {
   setQuantity(total);
   const items = getItensStorage();
   // setTotal(calculateTotal(items, products));
+
 };
 
 const reduceProduct = ({ quantity, setQuantity, name, setTotal, products }) => {
@@ -104,6 +105,7 @@ const reduceProduct = ({ quantity, setQuantity, name, setTotal, products }) => {
     setQuantity(total);
     const items = getItensStorage();
     // setTotal(calculateTotal(items, products));
+
   }
 };
 
