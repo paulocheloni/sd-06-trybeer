@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/login', LoginRoute);
-app.use('/register', UserRoute);
+app.use('/user', UserRoute);
 app.use(error);
 
 module.exports = app;
