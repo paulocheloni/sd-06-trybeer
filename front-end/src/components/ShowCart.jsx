@@ -9,11 +9,20 @@ export default function ShowCart(props) {
     <div>
       <Link to="/orders/:id">
         <button
-          data-testid="checkout-bottom-btn-value"
+          data-testid="checkout-bottom-btn"
           type="button"
         >
-          Ver carrinho R$
-          { total && ` ${total.toString().replace('.', ',')}` }
+          Ver Carrinho
+          <span data-testid="checkout-bottom-btn-value">
+            {
+              total
+                ? ` R$ ${total.toString().replace('.', ',')}`
+                : 'R$ 0,00'
+            }
+
+
+            {/* { total && `R$ ${total.toString().replace('.', ',')}` } */}
+          </span>
         </button>
       </Link>
     </div>

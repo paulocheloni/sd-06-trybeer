@@ -67,9 +67,10 @@ const handleUpdate = (name, setShowMessage) => {
 
 const getItensStorage = () => {
   // https://stackoverflow.com/questions/38750705/filter-object-properties-by-key-in-es6
-  const allowed = Object.keys({ ...localStorage }).filter((key) => key !== 'token' || key !== 'total');
+  const allowed = Object.keys({ ...localStorage }).filter((key) => key !== 'token');
+  const secondAllowed = allowed.filter((key) => key !== 'total');
   const items = Object.keys({ ...localStorage })
-    .filter((key) => allowed.includes(key))
+    .filter((key) => secondAllowed.includes(key))
     .reduce((obj, key) => {
       obj[key] = { ...localStorage }[key];
       return obj;
@@ -83,24 +84,11 @@ const calculateTotal = (items) => {
   const arrayPrices = Object.values(items);
   arrayPrices.forEach((obj) => {
     const parseObj = JSON.parse(obj)
-    // console.log(parseObj)
     total += parseObj['total'] * parseFloat(parseObj['price'])
-    // console.log('parse',parseFloat(parseObj['1']))
   })
 
-  console.log(total.toFixed(2))
-
-  localStorage.setItem('total', total)
+  localStorage.setItem('total', total.toFixed(2))
   return total.toFixed(2)
-
-  // const infoCartProducts = products.filter((obj) => allowed.includes(obj.name));
-  // const arrayTotal = infoCartProducts
-  //   .map((obj) => parseFloat(obj.price) * parseFloat(items[obj.name]));
-  // const total = arrayTotal
-  //   .reduce((accumulator, currentValue) => accumulator + currentValue)
-  //   .toFixed(2).toString();
-  // console.log(total, products);
-  // return total;
 };
 
 const addProduct = ({ quantity, setQuantity, name, setTotal, products, price }) => {
