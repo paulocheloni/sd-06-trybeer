@@ -1,18 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+// import { getProducts } from '../api/index';
+// import { getItensStorage, calculateTotal } from '../services/index';
 
-function ShowCart() {
-  const [total, setTotal] = useState(0);
-  const [activeBtn, setActiveBtn] = useState(false);
-  
+function ShowCart(props) {
+  const { total } = props;
+  // const [products, setProducts] = useState(false);
+
+  // useEffect(() => {
+  //   getProducts(setProducts);
+  // }, []);
+
   return (
     <div>
-      <Link to='/orders/:id'>
+      <Link to="/orders/:id">
         <button
-          disabled={activeBtn}
           data-testid="checkout-bottom-btn-value"
           type="button"
-        >Ver carrinho R$ {total}</button>
+        >
+          Ver carrinho R$
+          { total }
+        </button>
       </Link>
     </div>
   );

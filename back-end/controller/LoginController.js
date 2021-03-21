@@ -1,11 +1,11 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
+const { SECRET } = require('../middlewares/authToken');
 
 const jwtConfig = {
   expiresIn: '7d',
   algorithm: 'HS256',
 };
-const SECRET = 'senhasupersecreta.com';
 
 const userService = require('../service/UserService');
 const { OK, UNAUTHORIZED } = require('../schema/statusSchema');

@@ -64,27 +64,52 @@ const handleUpdate = (name, setShowMessage) => {
   updateName(name, id, setShowMessage)
     .then(setShowMessage(true));
 };
-//////////////////
-const addProduct = (quantity, setQuantity, name) => {
+
+const getItensStorage = () => {
+  // https://stackoverflow.com/questions/38750705/filter-object-properties-by-key-in-es6
+  const allowed = Object.keys({ ...localStorage }).filter((key) => key !== 'token');
+  const items = Object.keys({ ...localStorage })
+    .filter((key) => allowed.includes(key))
+    .reduce((obj, key) => {
+      obj[key] = { ...localStorage }[key];
+      return obj;
+    }, {});
+  return items;
+};
+
+const calculateTotal = (items, products) => {
+  const allowed = Object.keys(items);
+  const infoCartProducts = products.filter((obj) => allowed.includes(obj.name));
+  const arrayTotal = infoCartProducts.map((obj) => parseFloat(obj.price) * parseFloat(items[obj.name]));
+  const total = arrayTotal.reduce((accumulator, currentValue) => accumulator + currentValue).toFixed(2).toString();
+  console.log(total, products);
+  return total;
+};
+
+const addProduct = (quantity, setQuantity, name, setTotal, products) => {
   const total = quantity + 1;
   localStorage.setItem(`${name}`, total);
   setQuantity(total);
-}
+  const items = getItensStorage();
+  setTotal(calculateTotal(items, products));
+};
 
-const reduceProduct = (quantity, setQuantity, name) => {
-  if(quantity > 0) {
+const reduceProduct = (quantity, setQuantity, name, setTotal, products) => {
+  if (quantity > 0) {
     const total = quantity - 1;
     localStorage.setItem(`${name}`, total);
     setQuantity(total);
+    const items = getItensStorage();
+    setTotal(calculateTotal(items, products));
   }
-}
-////////////////////////
+};
+
 const tokenExists = (history) => {
-  const token = localStorage.getItem('token')
-  if(!token) {
+  const token = localStorage.getItem('token');
+  if (!token) {
     history.push('/login');
   }
-}
+};
 
 export {
   verifyEmailAndPassword,
@@ -96,5 +121,7 @@ export {
   handleUpdate,
   addProduct,
   reduceProduct,
-  tokenExists
+  tokenExists,
+  getItensStorage,
+  calculateTotal,
 };
