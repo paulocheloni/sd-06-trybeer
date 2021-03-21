@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 import productsContext from '../context/productsContext';
 
 export default function OrderCard() {
@@ -11,9 +10,10 @@ export default function OrderCard() {
     const indexDate = -2;
     const newDateInBrazilTimeZone = new Date(date.valueOf() - date.getTimezoneOffset()
     * dateInMiliseconds);
-    return `${(`0${newDateInBrazilTimeZone.getDate()}`)
-      .slice(indexDate)}/${(`0${newDateInBrazilTimeZone.getMonth() + 1}`)
-      .slice(indexDate)}`;
+    const day = `0${newDateInBrazilTimeZone.getDate()}`;
+    const month = `0${newDateInBrazilTimeZone.getMonth() + 1}`;
+    const newDate = `${day.slice(indexDate)}/${month.slice(indexDate)}`;
+    return newDate;
   };
 
   const formatTotalPrice = (price) => {
@@ -35,7 +35,9 @@ export default function OrderCard() {
             >
               { formatDate(new Date(order.sale_date)) }
             </div>
-            <div data-testid={ `${index}-order-total-value` }>{formatTotalPrice(order.total_price)}</div>
+            <div data-testid={ `${index}-order-total-value` }>
+              {formatTotalPrice(order.total_price)}
+            </div>
           </div>
         </Link>
       ))}
