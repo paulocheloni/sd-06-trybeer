@@ -13,7 +13,7 @@ const ProductCard = ({ product, index, plusItemCart, minusItemCart, handleQuanti
     <span
       data-testid={ `${index}-product-price` }
     >
-      { `R$ ${product.price.toFixed(2).replace('.', ',')}` }
+      { `R$ ${product.price.replace('.', ',')}` }
     </span>
     <span
       data-testid={ `${index}-product-name` }

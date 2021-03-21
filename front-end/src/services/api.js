@@ -20,42 +20,18 @@ const registerUser = async (name, email, password, role) => axios
   .then((res) => ({ response: res.data, result: true }))
   .catch((err) => ({ response: err.response.data, result: false }));
 
-const updateNameOfUser = async (name, email) => {
-  console.log('axios', name, email);
-  return axios
-    .put(`${baseUrl}/user`, {
-      name,
-      email,
-    })
-    .then((res) => res.data)
-    .catch((err) => err.response.data);
-};
+const updateNameOfUser = async (name, email) => axios
+  .put(`${baseUrl}/user`, {
+    name,
+    email,
+  })
+  .then((res) => ({ response: res.data, result: true }))
+  .catch((err) => err.response.data);
 
-const getAllProducts = () => [
-  {
-    id: 1,
-    name: 'Skol Lata 250ml',
-    price: 2.20,
-    image: 'http://localhost:3001/images/Skol Lata 350ml.jpg',
-  },
-  {
-    id: 2,
-    name: 'Heineken 600ml',
-    price: 7.50,
-    image: 'http://localhost:3001/images/Heineken 600ml.jpg',
-  },
-  {
-    id: 3,
-    name: 'Antarctica Pilsen 300ml',
-    price: 2.49,
-    image: 'http://localhost:3001/images/Antarctica Pilsen 300ml.jpg',
-  },
-];
-
-// axios
-//   .get(`${baseUrl}/products`)
-//   .then((res) => res.data)
-//   .catch((err) => err.response.data);
+const getAllProducts = async () => axios
+  .get(`${baseUrl}/products`)
+  .then((res) => res.data)
+  .catch((err) => err.response.data);
 
 module.exports = {
   generateToken,

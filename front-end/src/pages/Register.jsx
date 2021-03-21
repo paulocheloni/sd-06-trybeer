@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import FormRegister from '../components/pageRegister/FormRegister';
-import visibilityBtnRegister from '../utils/visibilityBtnRegister';
+import { registerUtils } from '../utils';
 import RegisterContext from '../context/RegisterContext';
 import api from '../services/api';
 
@@ -13,7 +13,7 @@ function Register({ history }) {
   const [displayErr, setDisplayErr] = useState(false);
 
   useEffect(() => {
-    visibilityBtnRegister(newUser, setValid);
+    registerUtils.visibilityBtnRegister(newUser, setValid);
   }, [newUser]);
 
   const handleChange = ({ target }) => {

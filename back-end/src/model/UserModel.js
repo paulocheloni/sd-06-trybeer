@@ -3,8 +3,7 @@ const connection = require('./connection');
 const getUserByEmail = async (email) => {
   const [result] = await connection.execute(
     'SELECT email, password, role FROM Trybeer.users WHERE email=?', [email],
-  );
-  
+  );  
   return result;
 };
 
@@ -27,7 +26,7 @@ const updateUser = async (name, email) => {
      'UPDATE Trybeer.users SET name=? WHERE email=?', [name, email],
    );
    return {
-     message: 'Atualização concluída com sucesso'
+     message: 'Atualização concluída com sucesso',
    };
  };
 
