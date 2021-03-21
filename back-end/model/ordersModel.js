@@ -21,7 +21,6 @@ const getOrders = async (userId) => {
   const [sales] = await connection.execute(
     'SELECT * FROM Trybeer.sales WHERE user_id=?', [userId],
   );
-  console.log('pedidos model', sales);
   return sales;
 };
 

@@ -7,10 +7,18 @@ export default function OrderCard() {
   const { orders } = useContext(productsContext);
 
   const formatDate = (date) => {
-    console.log(date);
-    const day = date.getDate();
-    const month = Number(date.getMonth()) + 1;
-    return `${day}/${month}`;
+    const dateInMiliseconds = 60000;
+    const indexDate = -2;
+    const newDateInBrazilTimeZone = new Date(date.valueOf() - date.getTimezoneOffset()
+    * dateInMiliseconds);
+    return `${(`0${newDateInBrazilTimeZone.getDate()}`)
+      .slice(indexDate)}/${(`0${newDateInBrazilTimeZone.getMonth() + 1}`)
+      .slice(indexDate)}`;
+  };
+
+  const formatTotalPrice = (price) => {
+    const newPrice = price.replace('.', ',');
+    return `R$ ${newPrice}`;
   };
 
   return (
@@ -21,13 +29,13 @@ export default function OrderCard() {
             className="order-card"
             data-testid={ `${index}-order-card-container` }
           >
-            <div data-testid={ `${index}-order-number` }>{order.id}</div>
+            <div data-testid={ `${index}-order-number` }>{`Pedido ${order.id}`}</div>
             <div
               data-testid={ `${index}-order-date` }
             >
               { formatDate(new Date(order.sale_date)) }
             </div>
-            <div data-testid={ `${index}-order-total-value` }>{order.total_price}</div>
+            <div data-testid={ `${index}-order-total-value` }>{formatTotalPrice(order.total_price)}</div>
           </div>
         </Link>
       ))}

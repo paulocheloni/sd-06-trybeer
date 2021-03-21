@@ -24,9 +24,7 @@ router.post('/orders', validateToken, rescue(async (req, res) => {
 
   router.get('/orders', validateToken, rescue(async (req, res) => {
     const userId = req.user.id;
-    console.log('id novo user', userId);
     const sales = await ordersService.getOrders(userId);
-
     res.status(OK).json(sales);
   }));
 
