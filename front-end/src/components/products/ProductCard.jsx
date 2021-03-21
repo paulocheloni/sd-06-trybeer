@@ -1,9 +1,10 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { FiPlus, FiMinus } from 'react-icons/fi';
 
-const ProductCard = ({ product, index, plusItemCart, minusItemCart, handleItem }) => {
+const ProductCard = ({ product, index, plusItemCart, minusItemCart, handleQuantity }) => {
+  console.log('');
   return (
     <div>
       <img
@@ -32,7 +33,7 @@ const ProductCard = ({ product, index, plusItemCart, minusItemCart, handleItem }
       <span
         data-testid={ `${index}-product-qtd` }
       >
-        { (handleItem(product)) }
+        { handleQuantity(product) }
       </span>
       <button
         type="button"
@@ -44,5 +45,14 @@ const ProductCard = ({ product, index, plusItemCart, minusItemCart, handleItem }
     </div>
   );
 };
+
+ProductCard.propTypes = ({
+  index: PropTypes.number.isRequired,
+  product: PropTypes.objectOf(Object).isRequired,
+  plusItemCart: PropTypes.func.isRequired,
+  minusItemCart: PropTypes.func.isRequired,
+  handleQuantity: PropTypes.func.isRequired,
+});
+// Pesquisar a maneira certa de validar função
 
 export default ProductCard;

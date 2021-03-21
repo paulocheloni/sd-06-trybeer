@@ -1,9 +1,9 @@
 const axios = require('axios');
 
-const url = 'http://localhost:3001';
+const baseUrl = 'http://localhost:3001';
 
 const generateToken = async (email, password) => axios
-  .post(`${url}/login`, {
+  .post(`${baseUrl}/login`, {
     email,
     password,
   })
@@ -11,7 +11,7 @@ const generateToken = async (email, password) => axios
   .catch((err) => ({ response: err.response.data, result: false }));
 
 const registerUser = async (name, email, password, role) => axios
-  .post(`${url}/user`, {
+  .post(`${baseUrl}/user`, {
     name,
     email,
     password,
@@ -21,14 +21,41 @@ const registerUser = async (name, email, password, role) => axios
   .catch((err) => ({ response: err.response.data, result: false }));
 
 const updateNameOfUser = async (name) => axios
-  .put(`${url}/user`, {
+  .put(`${baseUrl}/user`, {
     name,
   })
   .then((res) => res.data)
   .catch((err) => err.response.data);
 
+const getAllProducts = () => [
+  {
+    id: 1,
+    name: 'Skol Lata 250ml',
+    price: 2.20,
+    image: 'http://localhost:3001/images/Skol Lata 350ml.jpg',
+  },
+  {
+    id: 2,
+    name: 'Heineken 600ml',
+    price: 7.50,
+    image: 'http://localhost:3001/images/Heineken 600ml.jpg',
+  },
+  {
+    id: 3,
+    name: 'Antarctica Pilsen 300ml',
+    price: 2.49,
+    image: 'http://localhost:3001/images/Antarctica Pilsen 300ml.jpg',
+  },
+];
+
+// axios
+//   .get(`${baseUrl}/products`)
+//   .then((res) => res.data)
+//   .catch((err) => err.response.data);
+
 module.exports = {
   generateToken,
   registerUser,
   updateNameOfUser,
+  getAllProducts,
 };
