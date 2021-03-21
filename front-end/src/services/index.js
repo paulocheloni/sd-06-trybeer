@@ -80,13 +80,16 @@ const getItensStorage = () => {
 const calculateTotal = (items, products) => {
   const allowed = Object.keys(items);
   const infoCartProducts = products.filter((obj) => allowed.includes(obj.name));
-  const arrayTotal = infoCartProducts.map((obj) => parseFloat(obj.price) * parseFloat(items[obj.name]));
-  const total = arrayTotal.reduce((accumulator, currentValue) => accumulator + currentValue).toFixed(2).toString();
+  const arrayTotal = infoCartProducts
+    .map((obj) => parseFloat(obj.price) * parseFloat(items[obj.name]));
+  const total = arrayTotal
+    .reduce((accumulator, currentValue) => accumulator + currentValue)
+    .toFixed(2).toString();
   console.log(total, products);
   return total;
 };
 
-const addProduct = (quantity, setQuantity, name, setTotal, products) => {
+const addProduct = ({ quantity, setQuantity, name, setTotal, products }) => {
   const total = quantity + 1;
   localStorage.setItem(`${name}`, total);
   setQuantity(total);
@@ -94,7 +97,7 @@ const addProduct = (quantity, setQuantity, name, setTotal, products) => {
   setTotal(calculateTotal(items, products));
 };
 
-const reduceProduct = (quantity, setQuantity, name, setTotal, products) => {
+const reduceProduct = ({ quantity, setQuantity, name, setTotal, products }) => {
   if (quantity > 0) {
     const total = quantity - 1;
     localStorage.setItem(`${name}`, total);

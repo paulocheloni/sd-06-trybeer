@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 // import { getProducts } from '../api/index';
 // import { getItensStorage, calculateTotal } from '../services/index';
 
-function ShowCart(props) {
+export default function ShowCart(props) {
   const { total } = props;
   // const [products, setProducts] = useState(false);
 
@@ -27,8 +27,8 @@ function ShowCart(props) {
   );
 }
 
-ShowCart.protoTypes = {
-  total: PropTypes.string.isRequired,
+ShowCart.propTypes = {
+  total: PropTypes.number.isRequired,
 };
 
-export default ShowCart;
+// export default ShowCart;

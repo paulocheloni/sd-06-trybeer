@@ -5,7 +5,7 @@ import Card from '../components/Card';
 import ShowCart from '../components/ShowCart';
 
 import { getProducts } from '../api/index';
-import { tokenExists, getItensStorage, calculateTotal } from '../services/index';
+import { tokenExists } from '../services/index';
 
 function Products() {
   const [products, setProducts] = useState(false);
@@ -21,8 +21,14 @@ function Products() {
   return (
     <div>
       <ControllerHeader />
-      { products && products.map((prod) => <Card key={ prod.id } product={ prod } setTotal={ setCartTotal } products={ products } />) }
-      <button type="button" onClick={ () => console.log(products) }>Console products</button>
+      { products && products
+        .map((prod) => (<Card
+          key={ prod.id }
+          product={ prod }
+          setTotal={ setCartTotal }
+        />
+        ))}
+      <button type="button" onClick={ () => console.log(products) }>Console</button>
       <ShowCart total={ cartTotal } />
     </div>
   );
