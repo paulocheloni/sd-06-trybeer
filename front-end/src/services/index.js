@@ -41,6 +41,7 @@ const handleSubmitRegister = (user, checked, setUser, history) => {
     setUser({ ...user, role: 'client' });
     register({ ...user, role: 'client' })
       .then((result) => {
+        localStorage.setItem('token', result.data.token); // todo: verificar se este token está correto
         if (result) history.push('products');
       });
   }
