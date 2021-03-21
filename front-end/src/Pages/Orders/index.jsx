@@ -1,62 +1,58 @@
 // import axios from 'axios';
+import Axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import Menu from '../../Components/Menu';
 import * as S from './style';
 
 const Orders = () => {
   const history = useHistory();
+  const [orders, setOrders] = useState([]);
   useEffect(() => {
     if (!window.localStorage.token) {
       history.push('/login');
     }
   });
-  const [orders, setOrders] = useState([]);
-  // fetchApi = async () => {
-  // const auth = JSON.parse(localStorage.token);
-  // const body = { auth };
-  // const response = await axios.post('http://localhost:3001/orders', body);
-  try {
-    // const retrievedOrders = await response.orders;
-    const retrievedOrders = [
-      {
-        date: '19/03',
-        value: 25.30,
-        id: 1,
-      },
-      {
-        date: '19/03',
-        value: 35.99,
-        id: 2,
-      },
-    ];
-    if (orders.length === 0) {
-      setOrders(retrievedOrders);
-    }
-  } catch (err) {
-    alert('Seus pedidos inexistentes ou inacessíveis');
-  }
+  useEffect(() => {
+    const getOrders = async () => {
+      const { token } = localStorage;
+      const request = await Axios
+        .get('http://localhost:3001/orders', { headers: { authorization: token } });
+      const data = await request.data;
+      setOrders(data);
+    };
+    getOrders();
+  }, []);
 
   return (
     <>
       <Menu><p data-testid="top-title">Meus Pedidos</p></Menu>
       <S.Container>
-        {orders.length < 1 ? <div>No orders</div> : orders.map((order, index) => (
-          <S.Item key={ index }>
-            <span data-testid={ `${index}-order-card-container` }>
-              <div data-testid={ `${index}-order-number` }>
-                Pedido
-                {' '}
-                { index + 1 }
-              </div>
-              <div data-testid={ `${index}-order-date` }>{ order.date }</div>
-              <div data-testid={ `${index}-order-total-value` }>
-                R$
-                { order.value }
-              </div>
-            </span>
-          </S.Item>
-        ))}
+        {orders.length < 1 ? <div>No orders</div> : orders.map((order, index) => {
+          const filteredDate = `${order.sale_date
+            .split('-')[2].split('T')[0]}/${order.sale_date.split('-')[1]}`;
+
+          return (
+            <S.Item key={ index }>
+              <Link to={ `/orders/${order.id}` }>
+                <span data-testid={ `${index}-order-card-container` }>
+                  <div data-testid={ `${index}-order-number` }>
+                    Pedido
+                    {' '}
+                    { order.id }
+                  </div>
+                  <div data-testid={ `${index}-order-date` }>{ filteredDate }</div>
+                  <div data-testid={ `${index}-order-total-value` }>
+                    R$
+                    {' '}
+                    { order.total_price.replace(/\./g, ',')}
+                  </div>
+                </span>
+              </Link>
+            </S.Item>
+          );
+        })}
         <div />
       </S.Container>
     </>

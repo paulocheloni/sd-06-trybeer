@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import Button from '../../Components/Button';
@@ -28,9 +29,35 @@ const Checkout = () => {
     setCartProducts(items);
     localStorage.basketProducts = JSON.stringify(items);
   };
-  const handleFinish = () => {
+  const handleFinish = async () => {
+    const { token } = localStorage;
+    const LESS_TWO = -2;
+    const date = new Date();
+    const dateAndMonth = `${(`0${date.getDate()}`)
+      .slice(LESS_TWO)}/${(`0${date.getMonth() + 1}`).slice(LESS_TWO)}`;
+    const request = await Axios.post('http://localhost:3001/checkout', {
+      sale: {
+        totalPrice,
+        deliveryAddress: street,
+        deliveryNumber: number,
+        saleDate: `${dateAndMonth}/21`,
+        status: 'Pendente',
+      },
+      product_id: cartProducts[0].id,
+      quantity: cartProducts[0].productQuantity,
+    }, { headers: { authorization: token } });
+    const resp = await request.data;
+    /*
+      const multRequest = cartProducts.map(async (element) => {
+        const body = { sale, productId: element.id, quantity: element.productQuantity };
+        const request = await Axios.post('http://localhost:3001/checkout', body);
+        const resp = await request.data;
+        return resp;
+      });
+    */
+    console.log(resp);
     const TWO_SECONDS = 2000;
-    setMessage('Compra realizada com sucesso!');
+    setMessage(resp.message);
     setTimeout(() => history.push('/products'), TWO_SECONDS);
   };
   useEffect(() => {
