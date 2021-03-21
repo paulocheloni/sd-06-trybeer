@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './App.css';
+import CartContextProvider from './context/CartContext';
 
 import ProductsContextProvider from './context/ProductsContext';
 import Routes from './routes';
@@ -8,7 +9,9 @@ import Routes from './routes';
 function App() {
   return (
     <ProductsContextProvider>
-      <Routes />
+      <CartContextProvider>
+        <Routes />
+      </CartContextProvider>
     </ProductsContextProvider>
   );
 }
