@@ -30,13 +30,14 @@ const ProductsList = () => {
       quantity: 0,
     };
 
-    localStorage.cart = JSON.stringify(cart);
-
     if (currentProduct.quantity > 0) {
       const productIndex = cart.findIndex((item) => item.id === product.id);
       cart[productIndex].quantity -= 1;
       setCart([...cart]);
     }
+
+    setCart(cart.filter((item) => item.quantity > 0));
+    localStorage.cart = JSON.stringify(cart);
   };
 
   const handleQuantity = (product) => {

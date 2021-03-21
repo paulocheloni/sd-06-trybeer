@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const CheckoutCart = () => {
-  const [totalPrice] = useState(0);
+  const [totalPrice, setTotelPrice] = useState(0);
   const handleTotalPrice = totalPrice.toFixed(2).replace('.', ',');
 
   return (
