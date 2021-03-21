@@ -1,4 +1,4 @@
-const { checkOrders, insertSaleProducts } = require('../models/checkoutModel');
+const { checkOrders, insertSaleProducts, getIdByEmail } = require('../models/checkoutModel');
 
 const OrdersDone = async (sale) => checkOrders(sale);
 // pegar valor id
@@ -9,4 +9,8 @@ const OrdersDone = async (sale) => checkOrders(sale);
 } */
 const salesProduct = async (id, productId, quantity) => insertSaleProducts(id, productId, quantity);
 
-module.exports = { OrdersDone, salesProduct };
+const getIdByMail = async (email) => getIdByEmail(email);
+
+const getProduct = async (prodId) => getProduct(prodId);
+
+module.exports = { OrdersDone, salesProduct, getIdByMail, getProduct };

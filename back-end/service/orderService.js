@@ -1,5 +1,7 @@
-const getOrder = require('../models/ordersModel');
+const { getOrder, getDetailOrder } = require('../models/ordersModel');
 
 const getOrders = (userId) => getOrder(userId);
 
-module.exports = getOrders;
+const getDetailOrders = async (saleId) => getDetailOrder(saleId);
+
+module.exports = { getOrders, getDetailOrders };
