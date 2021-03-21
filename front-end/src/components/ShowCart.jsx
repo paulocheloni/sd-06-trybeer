@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getProducts } from '../api/index';
-import { getItensStorage, calculateTotal } from '../services/index';
+// import { getProducts } from '../api/index';
+// import { getItensStorage, calculateTotal } from '../services/index';
 
-function ShowCart() {
-  const [total, setTotal] = useState(0);
-  const [products, setProducts] = useState(false);
-  const [items, setItems] = useState(getItensStorage());
+function ShowCart(props) {
+  const { total } = props;
+  // const [products, setProducts] = useState(false);
 
-  useEffect(() => {
-    getProducts(setProducts);
-    console.log(items);
-  }, [items]);
-
-  useEffect(() => {
-  }, [products]);
+  // useEffect(() => {
+  //   getProducts(setProducts);
+  // }, []);
 
   return (
     <div>
@@ -24,10 +19,9 @@ function ShowCart() {
           type="button"
         >
           Ver carrinho R$
-          { products && total}
+          { total }
         </button>
       </Link>
-      <button onClick={ () => calculateTotal(items, products) }>calculo</button>
     </div>
   );
 }

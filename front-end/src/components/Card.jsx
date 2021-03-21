@@ -3,7 +3,7 @@ import { addProduct, reduceProduct } from '../services/index';
 import '../css/Card.css';
 
 function Card(props) {
-  const { product } = props;
+  const { product, setTotal, products } = props;
   const quantityStorage = localStorage.getItem(product.name);
   const [quantity, setQuantity] = useState(0);
 
@@ -28,7 +28,7 @@ function Card(props) {
       <button
         data-testid={ `${product.id}-product-minus` }
         type="button"
-        onClick={ () => reduceProduct(quantity, setQuantity, product.name) }
+        onClick={ () => reduceProduct(quantity, setQuantity, product.name, setTotal, products) }
       >
         -
       </button>
@@ -36,7 +36,7 @@ function Card(props) {
       <button
         data-testid={ `${product.id}-product-plus` }
         type="button"
-        onClick={ () => addProduct(quantity, setQuantity, product.name) }
+        onClick={ () => addProduct(quantity, setQuantity, product.name, setTotal, products) }
       >
         +
       </button>
