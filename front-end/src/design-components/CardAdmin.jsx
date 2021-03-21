@@ -16,7 +16,7 @@ function CardAdmin(props) {
     >
       <div className="flex-col">
         <div
-          data-testid={ `${id}-order-number` }
+          data-testid={ `${id - 1}-order-number` }
           className="text-2xl"
         >
           Pedido
@@ -24,7 +24,7 @@ function CardAdmin(props) {
           {id}
         </div>
         <div
-          data-testid={ `${id}-order-address` }
+          data-testid={ `${id - 1}-order-address` }
         >
           {deliveryAddress}
           ,
@@ -32,14 +32,14 @@ function CardAdmin(props) {
         </div>
         <div
           className="mt-10"
-          data-testid={ `${id}-order-total-value` }
+          data-testid={ `${id - 1}-order-total-value` }
         >
           {totalPrice}
         </div>
       </div>
       <div className="flex-auto">
         <div
-          data-testid={ `${id}-order-status` }
+          data-testid={ `${id - 1}-order-status` }
         >
           {status}
         </div>
