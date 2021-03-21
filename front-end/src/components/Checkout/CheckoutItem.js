@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import removeCheckoutItem from '../../services/checkoutService';
+import { removeCheckoutItem } from '../../services/checkoutService';
 import TrybeerContext from '../../context/TrybeerContext';
 
 function CheckoutItem({ name, price, quantity, index }) {
