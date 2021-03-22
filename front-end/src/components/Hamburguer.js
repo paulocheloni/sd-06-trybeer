@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   paper: {
-    
+
     zIndex: 99,
     marginRight: theme.spacing(2),
   },

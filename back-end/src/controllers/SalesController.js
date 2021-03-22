@@ -8,8 +8,7 @@ const CreateSalesService = require('../services/CreateSalesService');
 // middleware imports
 
 const CreateSale = async (req, res) => {
-  const { email, total_price, delivery_address, delivery_number, statusSale, cart } = req.body;
-  const { status, message } = await CreateSalesService(email, total_price, delivery_address, delivery_number, statusSale, cart);
+  const { status, message } = await CreateSalesService(req.body);
 
   return res.status(status).json(message);
 };

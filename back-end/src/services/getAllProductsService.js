@@ -1,12 +1,9 @@
 const Products = require('../models/Products');
 
 // Componente de repostas https
-const { status, messages } = require('../util/dataStatus');
+const { status } = require('../util/dataStatus');
 
-const { sucess, unauthorized } = status;
-const { emailExistente } = messages;
-
-const ZERO = 0;
+const { sucess } = status;
 
 const getAllProducts = async () => {
   const products = await Products.getAllProducts();

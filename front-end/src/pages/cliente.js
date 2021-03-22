@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
-import { loadState, saveState } from '../services/localStorage';
-import GridList from '@material-ui/core/GridList';
+// import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
+import { loadState, saveState } from '../services/localStorage';
 import NavBar from '../components/menuNavBar';
 import api from '../services/api';
 import context from '../Context/ContextAPI';
@@ -27,27 +27,38 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
+  image: {
+    height: 200,
+    // zIndex: -1
+  },
+  gridListTitleBar: {
+    height: 100,
+  },
 }));
+
+const magicNumber = {
+  menosUm: -1,
+};
 
 function Cliente() {
   const [products, setProducts] = useState([]);
   const { cart, setCart } = useContext(context);
   const history = useHistory();
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!loadState('user')) return history.push('/login');
     const { email } = loadState('user');
 
     const storageCart = loadState(`${email}`);
-    storageCart ? setCart(storageCart) : saveState(`${email}`, []);
-  }, []);
+    if (storageCart) return setCart(storageCart);
+    return saveState(`${email}`, []);
+  }, [history, setCart]);
 
   useEffect(() => {
     if (!loadState('user')) return history.push('/login');
     const { email } = loadState('user');
     saveState(`${email}`, cart);
-  }, [cart]);
+  }, [cart, history]);
 
   useEffect(() => {
     const logon = loadState('user');
@@ -57,65 +68,66 @@ function Cliente() {
 
   useEffect(() => {
     api.listProducts()
-      .then((products) => {
-        setProducts(products.data);
+      .then((productsList) => {
+        setProducts(productsList.data);
       })
       .catch((err) => console.log(err));
-    setIsLoading(false);
   }, []);
 
   const classes = useStyles();
 
   const prodQty = (tile) => {
     const idx = cart.findIndex((elem) => elem.name === tile.name);
-    if (idx === -1) return '0';
+    if (idx === magicNumber.menosUm) return '0';
     return `${cart[idx].quantity}`;
   };
-
-  if (isLoading) return (
-    <h1>Loading...</h1>
-  )
 
   return (
     <div>
       <NavBar content="TryBeer" />
-      <div className={classes.root}>
-        <GridList cellHeight={180} className={classes.gridList}>
-          {products.map((tile, index) => {
-            const link_img = tile.url_image.replace(/ /g, '_');
-            return (
-              <GridListTile key={link_img} key={index} data-testid={`${index}-product-price`}>
+      <div className={ classes.root }>
+        {/* <GridList cellHeight={ 180 }  */}
+        {products.map((tile, index) => (
+          <div key={ index }>
+            <GridListTile
+              className={ classes.gridListTitle }
+            >
 
-                {/* Image */}
-                <img src={link_img} data-testid={`${index}-product-img`} alt={tile.name} />
+              {/* Image */}
+              <img
+                className={ classes.image }
+                src={ tile.url_image.replace(/ /g, '_') }
+                data-testid={ `${index}-product-img` }
+                alt={ tile.name }
+              />
 
-                <GridListTileBar
-                  // Name
-                  title={<span data-testid={`${index}-product-name`}>{tile.name}</span>}
+              <GridListTileBar
+                className={ classes.gridListTitleBar }
+              />
 
-                  // Price
-                  subtitle={<span data-testid={`${index}-product-price`}>R$ {tile.price.replace('.', ',')}</span>}
-                  actionIcon={
-                    <>
-                      {/* Botao de - */}
-                      <ButtonSub product={tile} dataIndex={index} />
+              <p data-testid={ `${index}-product-name` }>{tile.name}</p>
 
-                      {/* Quantidade de Produtos*/}
-                      <span data-testid={`${index}-product-qtd`}>
-                        {prodQty(tile)}
-                      </span>
+              <span data-testid={ `${index}-product-price` }>
+                R$
+                {' '}
+                {tile.price.replace('.', ',')}
+              </span>
 
-                      {/* Botao de + */}
-                      <ButtonAdd product={tile} dataIndex={index} />
+              {/* Botao de - */}
+              <ButtonSub product={ tile } dataIndex={ index } />
 
-                    </>
-                  }
-                />
-              </GridListTile>
-            );
+              {/* Quantidade de Produtos */}
+              <span data-testid={ `${index}-product-qtd` }>
+                {prodQty(tile)}
+              </span>
 
-          })}
-        </GridList>
+              {/* Botao de + */}
+              <ButtonAdd product={ tile } dataIndex={ index } />
+
+            </GridListTile>
+          </div>
+        ))}
+        {/* </GridList> */}
       </div>
       <MenuFooter />
     </div>

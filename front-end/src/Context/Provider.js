@@ -13,8 +13,10 @@ const TrybeerProvider = ({ children }) => {
     setCart,
     price,
     setPrice,
-    street, setStreet,
-    numberHouse, setNumberHouse
+    street,
+    setStreet,
+    numberHouse,
+    setNumberHouse,
   };
 
   return (
