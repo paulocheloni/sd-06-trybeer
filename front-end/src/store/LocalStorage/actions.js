@@ -16,8 +16,9 @@ export const addItem = (cartItem, setCartItem) => {
   const product = {
     ...cartItem,
     quantity:
-    cartItem.quantity + 1,
-    default_product: false };
+      cartItem.quantity + 1,
+    default_product: false,
+  };
   return setCartItem(product);
 };
 
@@ -25,7 +26,8 @@ export const addItem = (cartItem, setCartItem) => {
 export const deleteItem = (cartItem, setCartItem) => {
   // console.log(cartItem);
   const product = {
-    ...cartItem, quantity: cartItem.quantity - 1, default_product: false };
+    ...cartItem, quantity: cartItem.quantity - 1, default_product: false,
+  };
   return setCartItem(product);
 };
 
@@ -35,7 +37,8 @@ export const subtractItem = (cartItem, setCartItem) => {
   }
   if (cartItem.quantity > 0) {
     const product = {
-      ...cartItem, quantity: cartItem.quantity - 1, default_product: false };
+      ...cartItem, quantity: cartItem.quantity - 1, default_product: false,
+    };
     // console.log(cartItem);
     return setCartItem(product);
   }
@@ -43,7 +46,24 @@ export const subtractItem = (cartItem, setCartItem) => {
 
 export const verifyUser = (history) => {
   const storage = JSON.parse(localStorage.getItem('user'));
-  if (!storage) return history.push('/login');
+  if (!storage) {
+    history.push('/login');
+    return { email: null, name: null };
+  }
   const { name, email } = storage;
+  return { name, email };
+};
+
+export const verifyAdmin = (history) => {
+  const storage = JSON.parse(localStorage.getItem('user'));
+  if (!storage) {
+    history.push('/login');
+    return { email: null, name: null };
+  }
+  const { name, email, role } = storage;
+  if (role !== 'administrator') {
+    history.push('/login');
+    return { email: null, name: null };
+  }
   return { name, email };
 };
