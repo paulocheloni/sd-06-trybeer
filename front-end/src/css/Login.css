@@ -82,6 +82,7 @@
 
 .logo {
   width: 110px;
+  height: 50px;
   margin-bottom: 20px;
   animation: animation-fade 1s;
   animation-delay: 1.3s;

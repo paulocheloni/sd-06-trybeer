@@ -4,13 +4,16 @@
   flex-flow: column;
   height: 100vh;
   position: absolute;
+  border-right: 2px solid black;
   top: 0;
   width: 15%;
+  min-width: 125px;
 }
 
 .sidebar button {
   background-color: #004370;
   border: solid 2px #061A40;
+  border-radius: 5px;
   color: white;
   font-size: large;
   justify-content: center;
