@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function CardClient(props) {
   const { pedido: { id, totalPrice, saleDate } } = props;
@@ -37,7 +38,7 @@ CardClient.propTypes = {
   pedido: PropTypes.shape({
     id: PropTypes.number.isRequired,
     totalPrice: PropTypes.string.isRequired,
-    saleDate: PropTypes.date.isRequired,
+    saleDate: PropTypes.instanceOf(Date).isRequired,
   }).isRequired,
 };
 
