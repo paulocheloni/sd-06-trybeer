@@ -15,7 +15,7 @@ function OrderDetails() {
   return (
     <div>
       <NavBar content="Trybeer" />
-      <h1>Admin</h1>
+      <h1>orderDetails</h1>
     </div>
   );
 }
