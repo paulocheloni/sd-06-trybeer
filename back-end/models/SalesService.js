@@ -37,6 +37,13 @@ const getAllOrders = async () => {
   return sales;
 };
 
+const updatedOne = async (id) => {
+  await connection.execute(
+    'UPDATE sales WHERE sale_id ? REPLACE(status, ?)',
+    [id, 'Entregue'],
+  );
+};
+
 module.exports = {
-  createOne, getAllByUserId, getAllOrders,
+  createOne, getAllByUserId, getAllOrders, updatedOne,
 };

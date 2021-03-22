@@ -1,33 +1,56 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ProductCard from './ProductCard';
+import ProductCardAdm from './ProductCardAdm';
 import currencyFormat from '../utils/currencyFormat';
-import convertData from '../utils/convertData';
+import updateStatus from '../methods/updateStatus';
+
+// const handleChanges = async (disabledButton, id) => {
+//   try {
+//     disabledButton(true);
+//   } catch (err) {
+//     disabledButton(false);
+//   }
+// };
 
 function OrderDetailsCard({ orderDetails }) {
+  // const [status, setStatus] = useState('');
+  // const [buttonState, setButtonState] = useState(false);
+  // console.log(status);
+
+  // handleChanges(setButtonState, orderDetails[0]);
+
   console.log(orderDetails);
   if (orderDetails[0]) {
     return (
 
       <div>
-        <p data-testid="order-number">
-
-          {`Pedido ${orderDetails[0].id}`}
-        </p>
-        <p data-testid="order-date">
-          data do pedido:
-          {convertData(orderDetails[0].saleDate)}
-        </p>
-        {orderDetails.map(
-          (product) => <ProductCard product={ product } key={ product.productName } />,
-        )}
-        <p data-testid="order-total-value">
-          total do pedido:
-          {' '}
-          {currencyFormat(Number(orderDetails[0].saleTotal))}
-          {' '}
-        </p>
-        <hr />
+        <div>
+          <span data-testid="order-number">{`Pedido ${orderDetails[0].id}`}</span>
+          <span data-testid="order-status">{` - ${orderDetails[0].statusSale}`}</span>
+        </div>
+        <div>
+          {orderDetails.map(
+            (product) => (<ProductCardAdm
+              product={ product }
+              key={ product.productName }
+            />),
+          )}
+          <p data-testid="order-total-value">
+            total do pedido:
+            {' '}
+            {currencyFormat(Number(orderDetails[0].saleTotal))}
+            {' '}
+          </p>
+          <hr />
+        </div>
+        <button
+          data-testid="mark-as-delivered-btn"
+          type="button"
+          disabled={ false }
+          onClick={ async () => updateStatus(orderDetails[0].id) }
+        >
+          Marcar como entregue
+        </button>
       </div>);
   }
   return <p>...loading </p>;
