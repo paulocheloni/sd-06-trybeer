@@ -76,11 +76,13 @@ const fetchAddSaleProduct = async (salesProducts) => {
 };
 
 const fetchAllOrders = async () => {
-  await fetch('http://localhost:3001/adminOrders', {
+  const allOrders = await fetch('http://localhost:3001/adminOrders', {
     method: 'GET',
     headers: contentType,
     body: JSON.stringify(),
   }).then((res) => res.json());
+
+  return allOrders;
 };
 
 module.exports = {
