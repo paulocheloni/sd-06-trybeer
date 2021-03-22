@@ -4,7 +4,7 @@ const {
   getEmailService,
   registerUserService,
   updateUserName,
-  allUserOrdersService
+  allUserOrdersService,
 } = require('../services/UserService');
 const tokenValidator = require('../middlewares/tokenValidator');
 const status = require('../utils/statusDictionary');

@@ -28,7 +28,7 @@ const updateName = async (newUserName, email) => {
 };
 
 const getAllUserOrders = async (idUser) => {
-  const [allUserOrders] = await connection.execute('SELECT * FROM sales WHERE user_id=?', [idUser])
+  const [allUserOrders] = await connection.execute('SELECT * FROM sales WHERE user_id=?', [idUser]);
   return allUserOrders;
 };
 
@@ -37,5 +37,5 @@ module.exports = {
   getEmail,
   registerUser,
   updateName,
-  getAllUserOrders
+  getAllUserOrders,
 };

@@ -2,7 +2,7 @@ const {
   getEmail,
   registerUser,
   updateName,
-  getAllUserOrders
+  getAllUserOrders,
 } = require('../models/UserModel');
 
 const getEmailService = async (emailLogin) => {
@@ -26,8 +26,8 @@ const updateUserName = async (newUserName, email) => {
 
 const allUserOrdersService = async (email) => {
   const user = await getEmail(email);
-  const user_id = user[0].id;
-  const userOrders = await getAllUserOrders(user_id);
+  const userId = user[0].id;
+  const userOrders = await getAllUserOrders(userId);
   return userOrders;
 };
 
@@ -35,5 +35,5 @@ module.exports = {
   getEmailService,
   registerUserService,
   updateUserName,
-  allUserOrdersService
+  allUserOrdersService,
 };
