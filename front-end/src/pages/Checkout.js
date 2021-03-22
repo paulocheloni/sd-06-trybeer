@@ -17,6 +17,18 @@ function Checkout() {
   const buttonDisable = address.rua.length && address.numero.length && totalCart > 0;
   const enable = buttonDisable || false;
 
+  let sale;
+
+  if (loggedUser) {
+    sale = {
+      userEmail: loggedUser.email,
+      cart,
+      totalPrice: totalCart.toFixed(2).replace('.', ','),
+      status: 'pendente',
+      ...address,
+    };
+  }
+
   useEffect(() => {
     if (!loggedUser || !loggedUser.token) history.push('/login');
     if (localStorageCart) setCart(localStorageCart);
@@ -29,14 +41,6 @@ function Checkout() {
     });
     setTotalCart(totalValue);
   }, [cart]);
-
-  const sale = {
-    userEmail: loggedUser.email,
-    cart,
-    totalPrice: totalCart.toFixed(2).replace('.', ','),
-    status: 'pendente',
-    ...address,
-  };
 
   return (
     <div>
