@@ -40,7 +40,7 @@ function ProductCard({ productInfo, index }) {
     const productList = JSON.parse(localStorage.getItem('productList'));
 
     productList[index].productQuantity = productQuantity;
-
+    
     localStorage.setItem('productList', JSON.stringify(productList));
   }, [index, productQuantity]);
 

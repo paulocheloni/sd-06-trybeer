@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { ProductCard, CartButton } from '../components/index';
 import TopBar from '../components/TopBar';
-import ProductCard from '../components/ProductCard';
-import CartButton from '../components/CartButton';
 import { getAllProducts } from '../services/products';
 import '../styles/productcard.css';
 
@@ -26,7 +25,7 @@ function Products() {
     if (!user) history.push('/login');
 
     getAllProducts().then((json) => setProducts(json.products));
-  });
+  }, [history]);
 
   useEffect(() => {
     createList();
