@@ -4,7 +4,16 @@ import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 // Provider
 import Provider from './Context/Provider';
 // Pages
-import { Login, Register, Admin, Cliente, Profile, Checkout, Orders, OrderDetails } from './pages';
+import {
+  Login,
+  Register,
+  Admin,
+  Cliente,
+  Profile,
+  Checkout,
+  Orders,
+  OrderDetails,
+  ProfileAdmin } from './pages';
 // CSS
 import './App.css';
 
@@ -19,6 +28,7 @@ function App() {
           <Route exact path="/login" component={ Login } />
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/register" component={ Register } />
+          <Route exact path="/admin/Profile" component={ ProfileAdmin } />
           <Route exact path="/admin/orders" component={ Admin } />
           <Route exact path="/products" component={ Cliente } />
           <Route exact path="/checkout" component={ Checkout } />

@@ -8,9 +8,9 @@ const { sucess } = status;
 
 const listAllOrders = async (email) => {
   const user = await Login.findByEmail(email);
-  const user_id = user[0].id;
+  const userId = user[0].id;
 
-  const orders = await Orders.listAllOrders(user_id);
+  const orders = await Orders.listAllOrders(userId);
 
   return { status: sucess, message: orders };
 };
