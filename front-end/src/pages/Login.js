@@ -3,8 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
 import { Topbar, TextInput, SubmitButton } from '../components';
-import { yupSchemas, handleUser } from '../utils';
-import userApi from '../services/api.user';
+import { yupSchemas, handleSubmit } from '../utils';
 
 import '../styles/Forms.css';
 
@@ -14,6 +13,8 @@ export default function Login() {
   const [login, setLogin] = useState({ email: '', password: '' });
 
   const history = useHistory();
+
+  const updateLogin = (target) => setLogin({ ...login, [target.name]: target.value });
 
   useEffect(() => {
     const validateForm = async () => yupSchemas.login.validate(login)
@@ -26,22 +27,10 @@ export default function Login() {
     validateForm();
   }, [login, disableBtn]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const valid = await yupSchemas.login.isValid(login);
-    if (valid) {
-      const newUser = await userApi(login);
-      handleUser(newUser, history, setToken);
-    }
-  };
-
-  const updateLogin = (target) => setLogin({ ...login, [target.name]: target.value });
-
   return (
     <div>
       <Topbar />
-      <form onSubmit={ (e) => handleSubmit(e) }>
+      <form onSubmit={ (e) => handleSubmit(e, login, history, setToken) }>
         <fieldset>
           <legend>Login</legend>
           <TextInput

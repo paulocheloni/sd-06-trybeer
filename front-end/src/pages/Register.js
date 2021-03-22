@@ -3,8 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
 import { Topbar, TextInput, CheckBox, SubmitButton } from '../components';
-import userApi from '../services/api.user';
-import { yupSchemas, handleUser } from '../utils';
+import { yupSchemas, handleSubmit } from '../utils';
 
 import '../styles/Forms.css';
 
@@ -14,16 +13,6 @@ export default function Register() {
   const [disableBtn, setDisableBtn] = useState(true);
 
   const history = useHistory();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const valid = await yupSchemas.register.isValid(login);
-    if (valid) {
-      const newUser = await userApi(login);
-      handleUser(newUser, history, setToken);
-    }
-  };
 
   const updateLogin = (target) => {
     if (target.type === 'checkbox') {
@@ -47,7 +36,7 @@ export default function Register() {
   return (
     <div>
       <Topbar />
-      <form onSubmit={ handleSubmit }>
+      <form onSubmit={ (e) => handleSubmit(e, login, history, setToken) }>
         <fieldset>
           <legend>Registro</legend>
           <TextInput
