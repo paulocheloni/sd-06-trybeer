@@ -20,6 +20,8 @@ function Orders() {
     .catch((err) => console.log(err));
 
     setEmail(user.email);
+
+    console.log(orders);
   }, []);
 
   return (
