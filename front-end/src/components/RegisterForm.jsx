@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../hooks/UseContext';
 import { registerUser, validateUser } from '../services/users';
-import '../styles/register.css'
+import '../styles/register.css';
 
 function RegisterForm() {
   const [disabled, setDisabled] = useState(false);
