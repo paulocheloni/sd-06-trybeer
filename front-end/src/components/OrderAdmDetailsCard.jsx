@@ -16,6 +16,7 @@ function OrderDetailsCard({ orderDetails }) {
   // const [status, setStatus] = useState('');
   // const [buttonState, setButtonState] = useState(false);
   // console.log(status);
+  const status = false;
 
   // handleChanges(setButtonState, orderDetails[0]);
 
@@ -46,7 +47,7 @@ function OrderDetailsCard({ orderDetails }) {
         <button
           data-testid="mark-as-delivered-btn"
           type="button"
-          disabled={ false }
+          disabled={ !status }
           onClick={ async () => updateStatus(orderDetails[0].id) }
         >
           Marcar como entregue
