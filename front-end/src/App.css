@@ -48,7 +48,6 @@ button {
   display: flex;
   color: white;
   margin-top: 51px;
-  margin-left: 250px;
   height: 110vh;
   overflow-x: hidden;
   flex-direction: column;

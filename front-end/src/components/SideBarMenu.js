@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
 
 const SidebarMenu = () => {
-  const { eraseLocalStorage, isVisible } = useContext(TrybeerContext);
+  const { eraseLocalStorage, isVisible, setVisibility } = useContext(TrybeerContext);
 
   return (
     <div>
@@ -15,6 +15,7 @@ const SidebarMenu = () => {
                 <button
                   data-testid="side-menu-item-products"
                   type="button"
+                  onClick={ setVisibility }
                 >
                   Produtos
                 </button>
@@ -23,6 +24,7 @@ const SidebarMenu = () => {
                 <button
                   data-testid="side-menu-item-my-orders"
                   type="button"
+                  onClick={ setVisibility }
                 >
                   Meus Pedidos
                 </button>
@@ -31,6 +33,7 @@ const SidebarMenu = () => {
                 <button
                   data-testid="side-menu-item-my-profile"
                   type="button"
+                  onClick={ setVisibility }
                 >
                   Meu Perfil
                 </button>

@@ -23,7 +23,10 @@ const createOrderService = async (sale) => {
 
 const getAll = async () => ordersModel.getAll();
 
+const getAllByUser = async (id) => ordersModel.getAllByUser(id);
+
 module.exports = {
   createOrderService,
   getAll,
+  getAllByUser,
 };

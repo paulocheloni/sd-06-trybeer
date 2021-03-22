@@ -37,6 +37,12 @@ const getAll = async () => {
   return orders;
 };
 
+const getAllByUser = async (id) => {
+  const [orders] = await connection.execute('SELECT * FROM sales WHERE user_id=?',
+  [id]);
+  return orders;
+};
+
 // const update = async (name, email) => {
 //   await connection.execute(
 //     'UPDATE users SET name = ?, klaklsk WHERE email = ?',
@@ -47,4 +53,5 @@ const getAll = async () => {
 module.exports = {
   createOrder,
   getAll,
+  getAllByUser,
 };
