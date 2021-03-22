@@ -31,10 +31,10 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
     - [1 - Crie uma página de login](#1---crie-uma-página-de-login)
     - [2 - Crie uma página de registro de usuários](#2---crie-uma-página-de-registro-de-usuários)
     - [3 - Crie o menu top e o menu side bar](#3---crie-o-menu-top-e-o-menu-side-bar)
-    
+
     - [4 - Criar tela de perfil do cliente](#4---criar-tela-de-perfil-do-cliente)
     - [5 - Criar Tela de Produtos](#5---criar-tela-de-produtos)
-    
+
     `Requisitos Entrega 2:`
     - [6 - Criar Tela de Checkout](#6---criar-tela-de-checkout)
     - [7 - Criar Tela de Meus Pedidos](#7---criar-tela-de-meus-pedidos)
@@ -43,7 +43,7 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
     - [10 - Criar tela de perfil de Administrador](#10---criar-tela-de-perfil-de-administrador)
     - [11 - Criar tela de pedidos de admin](#11---criar-tela-de-pedidos-de-admin)
     - [12 - Criar tela de Detalhes de admin](#12---criar-tela-de-detalhes-de-admin)
-    
+
     `Bônus:`
     - [13 - Cobertura de testes unitários](#13---cobertura-de-testes-unitários)
 - [Avisos Finais](#avisos-finais)
@@ -1225,7 +1225,7 @@ Link: [FORMULÁRIO DE AVALIAÇÃO DE PROJETO](https://be-trybe.typeform.com/to/Z
 
 ---
 
-### IMPORTANTE ⚠️ 
+### IMPORTANTE ⚠️
 
 * O projeto TryBeer é a base para o desenvolvimento do projeto TryBeer **v2**;
 

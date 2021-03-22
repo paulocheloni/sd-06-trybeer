@@ -4,27 +4,27 @@ const OrdersRouter = Router();
 
 // services imports
 const ListAllOrdersService = require('../services/ListAllOrdersService');
-const GetByIdOrderService = require('../services/GetByIdOrderService');
+const GetByIdDetailsService = require('../services/GetByIdDetailsService');
 
 // middleware imports
 
 const ListAllOrders = async (req, res) => {
   const { email } = req.headers;
-  
+
   const { status, message } = await ListAllOrdersService(email);
 
   return res.status(status).json(message);
 };
 
-const GetByIdOrder = async (req, res) => {
+const GetByIdDetails = async (req, res) => {
   const { id } = req.params;
-  
-  const { status, message } = await GetByIdOrderService(id);
+
+  const { status, message } = await GetByIdDetailsService(id);
 
   return res.status(status).json(message);
 }
 
 OrdersRouter.get('/', ListAllOrders);
-OrdersRouter.get('/:id', GetByIdOrder);
+OrdersRouter.get('/:id', GetByIdDetails);
 
 module.exports = OrdersRouter;

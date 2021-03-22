@@ -16,12 +16,14 @@ function Orders() {
     const user = loadState('user');
 
     api.listAllOrders(user.email)
-    .then((response) => setOrders(response.data))
+    .then((response) => {
+      console.log(response.data)
+
+      setOrders(response.data)
+    })
     .catch((err) => console.log(err));
 
     setEmail(user.email);
-
-    console.log(orders);
   }, []);
 
   return (
