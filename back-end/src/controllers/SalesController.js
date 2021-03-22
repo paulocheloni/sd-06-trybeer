@@ -6,8 +6,9 @@ const SalesService = require('../services/SalesService');
 const salesRouter = new Router();
 
 salesRouter.post('/checkout', tokenValidator, async (req, res) => {
-  const payload = req.body;
-  const response = await SalesService.createSaleService(payload);
+  const { payload, products } = req.body;
+  // console.log(products)
+  const response = await SalesService.createSaleService(payload, products);
   
   return res.status(status.SUCCESS).json(response);
 });

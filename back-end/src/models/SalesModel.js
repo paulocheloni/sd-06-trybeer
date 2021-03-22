@@ -21,6 +21,17 @@ const createSale = async (payload) => {
   return response;
 };
 
+const createSaleProducts = async (insertId, insertProducts) => {
+  await insertProducts.forEach(async (product) => {
+    await connection.execute('INSERT INTO sales_products VALUES (?, ?, ?)',
+    [
+      insertId,
+      product.id,
+      product.quantity
+    ])
+  });
+}
+
 const getAllSales = async () => {
   const [sales] = await connection.execute('SELECT * FROM sales');
   return sales;
@@ -54,5 +65,6 @@ module.exports = {
   getSaleProducts,
   getAllSales,
   createSale,
-  fullfilSale
+  fullfilSale,
+  createSaleProducts
 }

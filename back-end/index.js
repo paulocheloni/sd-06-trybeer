@@ -18,7 +18,6 @@ app.use('/user', userRouter);
 app.use('/products', productsRouter);
 app.use('/sales', salesRouter)
 app.use('/images', express.static(`${process.cwd()}/images`)); 
-app.use('/sales', salesRouter);
 
 app.use(errorMiddleware);
 

@@ -3,9 +3,17 @@ const status = require('../utils/statusDictionary');
 const messages = require('../utils/messageDictionary');
 const { ThrowError } = require('../middlewares/errorHandler/errorHandler');
 
-const createSaleService = async (payload) => {
+const createSaleService = async (payload, products) => {
   if (!payload) throw new ThrowError(status.BAD_REQUEST, messages.NO_EMPTY_FIELDS);
-  return SalesModel.createSale(payload);
+  const response = await SalesModel.createSale(payload);
+  const { insertId } = response;
+  const insertProducts = products.map((product) => {
+    return (
+      { id: product.id, quantity: product.quantity }
+    )
+  })
+  const responsePayload = await SalesModel.createSaleProducts(insertId, insertProducts)
+  return response;
 };
 
 const getAllSales = async () => {

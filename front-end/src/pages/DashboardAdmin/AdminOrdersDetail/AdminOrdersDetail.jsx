@@ -12,6 +12,7 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
   useEffect(() => {
     const fetchSale = async () => {
       const sale = await getAdminSaleDetails(id)
+      console.log(sale, 'sale')
       setSaleDetails(sale);
     }
     fetchSale()
@@ -21,7 +22,6 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
     const newState = {...saleDetails, sale: { ...saleDetails.sale, status: 'entregue'}}
     setSaleDetails(newState);
     await fullfilSale(id)
-
   }
 
   const { saleProducts, sale } = saleDetails
@@ -33,17 +33,17 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
       {saleProducts && (
       <>
       <h1>
-        <span data-testid="order-number">{`Pedido 00${id}`} - </span>
+        <span data-testid="order-number">{`Pedido ${id}`} - </span>
         <span data-testid="order-status">{sale && capitalize(sale.status)}</span>
         </h1>
       <div className="sale-details">
         <ul>
-          {saleProducts.map(({quantity, name, price}, index) => (
+          {saleProducts.map((sale, index) => (
             <li>
-              <span data-testid={`${index}-product-qtd`}>{quantity} - </span>
-              <span data-testid={`${index}-product-name`}>{name} - </span>
-              <span data-testid={`${index}-product-unit-price`}>{parseCartPrice(price)} - </span>
-              <span data-testid={`${index}-product-total-value`}>{parseCartPrice(price * quantity)}</span>
+              <p data-testid={`${index}-product-qtd`}>{sale.quantity} - </p>
+              <p data-testid={`${index}-product-name`}>{sale.name} - </p>
+              <p data-testid={`${index}-order-unit-price`}>{parseCartPrice(sale.price)} - </p>
+              <p data-testid={`${index}-product-total-value`}>{parseCartPrice(sale.price * sale.quantity)}</p>
             </li>
           ))}
         </ul>

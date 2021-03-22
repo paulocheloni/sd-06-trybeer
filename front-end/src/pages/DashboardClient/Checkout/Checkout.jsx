@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../../../components/Header/Header';
 import Button from '../../../components/Button/Button';
 import { verifyUser } from '../../../store/LocalStorage/actions';
+import { getCart } from '../../../store/LocalStorage/provider';
 import { postSale } from '../../../services/Sales';
 import CheckoutCard from '../../../components/checkoutCard/CheckoutCard';
 import AddressForm from './AddressForm';
@@ -64,7 +65,8 @@ const Checkout = (props) => {
       sale_date: date,
       status: statusPedido,
     };
-    const saleResponse = await postSale(user.token, payload);
+    const products = getCart();
+    const saleResponse = await postSale(user.token, payload, products);
 
     if (saleResponse.affectedRows) {
       setSaleDone('Compra realizada com sucesso!');

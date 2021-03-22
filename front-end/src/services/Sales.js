@@ -2,13 +2,13 @@ const { endpoint } = require('./utils');
 
 const applicationJsonContent = 'application/json';
 
-const postSale = (token, payload) => fetch(`${endpoint}/sales/checkout`, {
+const postSale = (token, payload, products) => fetch(`${endpoint}/sales/checkout`, {
   method: 'post',
   headers: {
     'Content-type': applicationJsonContent,
     authorization: token,
   },
-  body: JSON.stringify(payload),
+  body: JSON.stringify({ payload, products }),
 })
   .then((response) => response.json());
 
@@ -16,7 +16,11 @@ const getSales = () => fetch(`${endpoint}/sales`)
   .then((response) => response.json());
 
 
-const getAdminSaleDetails = (id) => fetch(`${endpoint}/sales/admin/details/${id}`).then(response => response.json())
+const getAdminSaleDetails = async (id) => {
+  const response = await fetch(`${endpoint}/sales/admin/details/${id}`)
+  const result = await response.json();
+  return result;
+}
 
 const fullfilSale = (id) => fetch(`${endpoint}/sales/admin/details/${id}`, {
   method: 'put'
