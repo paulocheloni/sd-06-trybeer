@@ -7,6 +7,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import ProfileClient from './pages/ProfileClient';
+import AdminOrders from './pages/AdminOrders';
+import AdminProfile from './pages/AdminProfile';
 
 import './App.css';
 
@@ -19,6 +21,8 @@ function App() {
         <Route exact path="/register"><Register /></Route>
         <Route exact path="/products"><Products /></Route>
         <Route exact path="/profile"><ProfileClient /></Route>
+        <Route exact path="/admin/orders"><AdminOrders /></Route>
+        <Route exact path="/admin/profile"><AdminProfile /></Route>
       </div>
     </BrowserRouter>
   );

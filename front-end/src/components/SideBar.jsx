@@ -31,6 +31,7 @@ function SideBar() {
         <button
           data-testid="side-menu-item-logout"
           type="button"
+          onClick={ () => localStorage.clear() }
         >
           Sair
         </button>

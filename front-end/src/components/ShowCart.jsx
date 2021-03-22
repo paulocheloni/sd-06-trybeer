@@ -1,26 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import { getProducts } from '../api/index';
-// import { getItensStorage, calculateTotal } from '../services/index';
 
 export default function ShowCart(props) {
+  const [activeBtn, setActiveBtn] = useState(false);
   const { total } = props;
-  // const [products, setProducts] = useState(false);
 
-  // useEffect(() => {
-  //   getProducts(setProducts);
-  // }, []);
+  useEffect(() => {
+    if (total === '0.00' || !total) {
+      setActiveBtn(false);
+    } else {
+      setActiveBtn(true);
+    }
+  }, [total]);
 
   return (
     <div>
-      <Link to="/orders/:id">
+      <Link to="/checkout">
         <button
-          data-testid="checkout-bottom-btn-value"
+          data-testid="checkout-bottom-btn"
           type="button"
+          disabled={ !activeBtn }
         >
-          Ver carrinho R$
-          { total }
+          Ver Carrinho
+          <span data-testid="checkout-bottom-btn-value">
+            {
+              total
+                ? ` R$ ${total.toString().replace('.', ',')}`
+                : ' R$ 0,00'
+            }
+          </span>
         </button>
       </Link>
     </div>
@@ -30,5 +39,3 @@ export default function ShowCart(props) {
 ShowCart.propTypes = {
   total: PropTypes.number.isRequired,
 };
-
-// export default ShowCart;

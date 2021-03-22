@@ -7,6 +7,46 @@ const getAll = async () => {
   return sales;
 };
 
+// Find Sales by ID
+const getById = async (userId) => {
+  const [[sale]] = await connection
+    .execute(`SELECT s.id AS saleId,
+      s.sale_date AS saleDate,
+      s.total_price AS saleTotal,
+      s.status AS saleStatus
+      FROM Trybeer.sales s
+      WHERE id = ?`, [userId]);
+  return sale;
+};
+
+// Find All sales by UserID
+const getByUserId = async (userId) => {
+  const [sales] = await connection
+    .execute(`SELECT s.id AS saleId,
+      s.sale_date AS saleDate,
+      s.total_price AS saleTotal,
+      s.status AS saleStatus
+      FROM Trybeer.sales s
+      WHERE user_id = ? ORDER BY id`, [userId]);
+  return sales;
+};
+
+// Find All Sale Products by SaleID
+const getSalesProductsBySaleId = async (saleId) => {
+  const sale = await getById(saleId);
+  const [products] = await connection
+    .execute(`SELECT p.id AS productId,
+      p.name AS productName,
+      p.price AS productPrice,
+      sp.quantity AS quantity
+      FROM Trybeer.sales_products AS sp
+      JOIN Trybeer.products AS p
+      ON p.id = sp.product_id
+      WHERE sp.sale_id = ?`, [saleId]);
+    const saleProducts = { sale, products };
+  return saleProducts;
+};
+
 // Store request
 const storeRequest = async (userId, totalPrice, address, number) => {
   const [sales] = await connection
@@ -20,5 +60,8 @@ const storeRequest = async (userId, totalPrice, address, number) => {
 
 module.exports = {
   getAll,
+  getById,
+  getByUserId,
+  getSalesProductsBySaleId,
   storeRequest,
 };
