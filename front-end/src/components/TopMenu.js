@@ -4,10 +4,19 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoBeerOutline } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
 import TrybeerContext from '../context/TrybeerContext';
+import SidebarMenu from './SideBarMenu';
+import SidebarMenuAdmin from './SideBarMenuAdmin';
 
 const TopMenu = ({ titleMenu }) => {
-  const { setVisibility } = useContext(TrybeerContext);
+  const { user, isVisible, setVisibility } = useContext(TrybeerContext);
+  
+  if(user.role === 'administrator') return (
+    <SidebarMenuAdmin />
+  )
+
   return (
+    <div>
+    { isVisible && user.role === 'client' && <SidebarMenu /> }
     <header>
       <button type="button" id="side-menu" onClick={ setVisibility }>
         <i data-testid="top-hamburguer">
@@ -21,6 +30,7 @@ const TopMenu = ({ titleMenu }) => {
         <IoBeerOutline />
       </IconContext.Provider>
     </header>
+    </div>
   );
 };
 

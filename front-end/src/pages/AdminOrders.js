@@ -1,17 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import TopMenu from '../components/TopMenu';
 
 function AdminOrders() {
   return (
     <div>
-      <Link to="/admin/profile">
-        <button
-          data-testid="side-menu-item-profile"
-          type="button"
-        >
-          Meu Perfil
-        </button>
-      </Link>
+      <TopMenu />
       Admin Orders
     </div>
   );

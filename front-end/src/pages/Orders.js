@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import SidebarMenu from '../components/SideBarMenu';
 import TrybeerContext from '../context/TrybeerContext';
 import TopMenu from '../components/TopMenu';
 import { verifyToken } from '../utils/verifications';
@@ -28,7 +27,6 @@ function Orders({ history }) {
       <TopMenu
         titleMenu="Meus Pedidos"
       />
-      <SidebarMenu />
       <div className="content-panel">
         <div className="container">
           {

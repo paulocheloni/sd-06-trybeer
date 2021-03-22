@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import SidebarMenu from '../components/SideBarMenu';
 import TopMenu from '../components/TopMenu';
 import fetchFunctions from '../api/fetchFunctions';
 import TrybeerContext from '../context/TrybeerContext';
@@ -44,7 +43,6 @@ function Profile(props) {
       <TopMenu
         titleMenu="Meu perfil"
       />
-      <SidebarMenu />
       <form method="put">
         <div className="content-panel">
           <label htmlFor="name">
