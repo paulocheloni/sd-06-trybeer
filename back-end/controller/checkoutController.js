@@ -7,11 +7,13 @@ const checkoutController = Router();
 const SUCCESS = 200;
 
 checkoutController.post('/', checkAuthorization, async (req, res) => {
+  console.log(req.body, 'linha 10 checkoutController');
   const { sale, product_id, quantity } = req.body;
   const { email } = req.payload;
   const [[{ id: userId }]] = await getIdByMail(email);
   sale.userId = userId;
   const insertId = await OrdersDone(sale);
+  
   await salesProduct(insertId, product_id, quantity);
   res.status(SUCCESS).json({ message: 'Compra realizada com sucesso!' });
 });
