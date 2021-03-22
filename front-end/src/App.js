@@ -21,6 +21,7 @@ function App() {
           <Route exact path="/orders" component={ Orders } />
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/checkout" component={ Checkout } />
+          <Route exact path="/order/details" />
           <Redirect from="/" to="/login" />
         </Switch>
       </Provider>
