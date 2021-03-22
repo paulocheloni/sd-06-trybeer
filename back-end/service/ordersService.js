@@ -14,11 +14,27 @@ const getLastSaleId = async () => {
   return lastOrderId;
 };
 
-// const createProductsSales = async () => ordersModel.createProductsSales();
+const createProductsSales = async (productData) => {
+    ordersModel.createProductsSales(productData);
+};
+
+const getSaleById = async (saleId) => {
+  // console.log('entrei no meu service', saleId);
+  const saleById = await ordersModel.getSaleById(saleId);
+  return saleById;
+};
+
+const getSaleProductById = async (saleId) => {
+  // console.log('entrei no meu service', saleId);
+  const saleProductById = await ordersModel.getSaleProductById(saleId);
+  return saleProductById;
+};
 
 module.exports = {
   createOrders,
   getOrders,
   getLastSaleId,
-  // createProductsSales,
+  createProductsSales,
+  getSaleById,
+  getSaleProductById,
 };

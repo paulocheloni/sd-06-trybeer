@@ -31,16 +31,43 @@ const getLastSaleId = async () => {
   return lastSaleId;
 };
 
-/* const createProductsSales = async ({ sale_id, productId, quantity }) => {
-  await connection.execute(
-    'INSERT INTO Trybeer.sales_products (sale_id, product_id, quantity) VALUES (?,?,?)',
-    [productId, quantity],
+const createProductsSales = async (productData) => {
+  try {
+    await connection.execute(
+      'INSERT INTO Trybeer.sales_products (sale_id, product_id, quantity) VALUES (?,?,?)', [
+        productData.saleId,
+        productData.productId,
+        productData.quantity,
+      ],
+    );
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+const getSaleById = async (saleId) => {
+  // console.log('entrei no model', saleId);
+  const [saleById] = await connection.execute(
+      'SELECT * FROM Trybeer.sales WHERE id=?', [saleId],
   );
-}; */
+  // console.log('resposta do meu model by id', saleById);
+  return saleById;
+};
+
+const getSaleProductById = async (saleId) => {
+  // console.log('entrei no model', saleId);
+  const [saleProductById] = await connection.execute(
+      'SELECT * FROM Trybeer.sales_products WHERE sale_id=?', [saleId],
+  );
+  // console.log('resposta do meu model by id', saleProductById);
+  return saleProductById;
+};
 
 module.exports = {
   createOrders,
   getOrders,
   getLastSaleId,
-  // createProductsSales,
+  createProductsSales,
+  getSaleById,
+  getSaleProductById,
 };

@@ -9,7 +9,7 @@ export default function TopMenu({ pageTitle }) {
   const [asideClass, setasideClass] = useState('aside-menu-off');
 
   const handleOnClickHamburguerButton = () => {
-    console.log('click');
+    // console.log('click');
     const asideOn = 'aside-menu-on';
     const asideOff = 'aside-menu-off';
     if (asideClass === asideOn) {
@@ -21,7 +21,7 @@ export default function TopMenu({ pageTitle }) {
   };
 
   const handleOnClickAsideButton = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     if (e.target.value === 'Produtos') { history.push('/products'); }
     if (e.target.value === 'Meus Pedidos') { history.push('/orders'); }
     if (e.target.value === 'Meu Perfil') { history.push('/profile'); }

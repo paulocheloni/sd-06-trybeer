@@ -46,11 +46,11 @@ const getSales = async (token) => {
   return sales;
 };
 
-const getLastSaleId = async (token) => {
-  const lastSaleId = await axios.get(`${path}/lastorderid`,
+const createSaleProducts = async (token, mySaleProducts) => {
+  const newProductSale = await axios.post(`${path}/checkout`,
+    { mySaleProducts },
     { headers: { authorization: token } });
-  console.log('lastID', lastSaleId.data);
-  return lastSaleId.data;
+  return newProductSale;
 };
 
 export default {
@@ -60,5 +60,5 @@ export default {
   createUser,
   createOrder,
   getSales,
-  getLastSaleId,
+  createSaleProducts,
 };
