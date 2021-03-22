@@ -1,26 +1,42 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import currencyFormat from '../utils/currencyFormat';
 
-function ProductCard() {
-/* - A quantidade do produto deverá conter a tag `data-testid="0-product-qtd"`
+function ProductCard({ product }) {
+  console.log(product);
+  /* - A quantidade do produto deverá conter a tag `data-testid="0-product-qtd"`
 
 - O nome do produto deverá conter a tag `data-testid="0-product-name"`
 
 - O valor total do produto deverá conter a tag `data-testid="0-product-total-value"` */
   return (
     <>
-      <p data-testid={ `${productid}-product-qtd` }>
-        {productqtd}
+      <p data-testid={ `${product.id}-product-qtd` }>
+        quantidade:
+        {' '}
+        {`${product.productQuantity} und`}
         {' '}
       </p>
-      <p data-testid={ `${productid}-product-name` }>
-        {productname}
+      <p data-testid={ `${product.id}-product-name` }>
+        {`nome do produto: ${product.productName}`}
+      </p>
+      <p data-testid={ `${product.id}-product-total-value` }>
+        subtotal:
         {' '}
+        {currencyFormat(Number(product.productQuantity * product.productPrice))}
       </p>
-      <p data-testid={ `${productid}-product-total-value` }>
-        {productqtd * productprice}
-      </p>
+      <hr />
     </>
   );
 }
 
 export default ProductCard;
+
+ProductCard.propTypes = {
+  product: PropTypes.shape({
+    productName: PropTypes.string.isRequired,
+    productQuantity: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    productPrice: PropTypes.string.isRequired,
+  }).isRequired,
+};

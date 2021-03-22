@@ -13,11 +13,10 @@ function OrderDetails() {
     };
     fetchData();
   }, [id]);
-
   return (
     <>
       <h1 data-testid="top-title"> Detalhe do pedido</h1>
-      <OrderDetailsCard order={ orderDetails } />
+      {orderDetails.length > 0 && <OrderDetailsCard orderDetails={ orderDetails } /> }
     </>
   );
 }
