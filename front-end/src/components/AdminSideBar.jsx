@@ -7,7 +7,9 @@ function AdminSideBar() {
   const history = useHistory();
   return (
     <div
-    className="sidebar" data-testid="admin-side-bar-container">
+      className="sidebar"
+      data-testid="admin-side-bar-container"
+    >
       <h3>Trybeer</h3>
       <button
         type="button"
