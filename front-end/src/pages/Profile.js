@@ -5,7 +5,7 @@ import { yupSchemas, handleSaveUser } from '../utils';
 import AppContext from '../context/app.context';
 import { Topbar, TextInput, SubmitButton } from '../components';
 
-export default function Products() {
+export default function Profile() {
   const { token, setToken } = useContext(AppContext);
   const history = useHistory();
   const [name, setName] = useState(token.name);
@@ -24,14 +24,13 @@ export default function Products() {
 
   useEffect(() => {
     const validateForm = async () => yupSchemas.update.validate({ name })
-      .then(() => setDisableBtn(false))
-      .catch((error) => {
-        if (disableBtn === false) setDisableBtn(true);
-        return error;
-      });
+      .then((valid) => valid)
+      .catch((error) => error);
 
-    if (name.normalize() === token.name.normalize()) return setDisableBtn(true);
-    if (name.normalize() !== token.name.normalize()) validateForm();
+    const nameChanged = name.normalize() !== token.name.normalize();
+    const validate = (nameChanged) && validateForm();
+    if (validate && disableBtn === true) setDisableBtn(false);
+    if (!validate && disableBtn === false) setDisableBtn(true);
   }, [name, token.name, disableBtn]);
 
   return (

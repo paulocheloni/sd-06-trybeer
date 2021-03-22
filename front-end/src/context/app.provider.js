@@ -5,7 +5,7 @@ import AppContext from './app.context';
 import useStorage from '../hooks/useStorage';
 
 const AppProvider = ({ children }) => {
-  const [token, setToken] = useState({});
+  const [token, setToken] = useState({ name: '', email: '', token: '' });
   const setLoginStorage = useStorage('login');
 
   useEffect(() => {
