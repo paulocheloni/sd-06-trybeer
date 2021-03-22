@@ -21,10 +21,16 @@ const createSale = (dataSale) => {
   return api.post('/sales', dataSale);
 };
 
+const listAllOrders = (email) => (api.get('/orders', {headers: { email }}));
+
+const orderDetails = (id) => (api.get(`/orders/${id}`));
+
 export default {
   listLogin,
   createUser,
   updateUser,
   listProducts,
   createSale,
+  listAllOrders,
+  orderDetails
 };
