@@ -21,6 +21,7 @@ export default function Routes() {
       <Route path="/admin/orders" component={ Orders } />
       <Route path="/profile" component={ Profile } />
       <Route path="/checkout" component={ Checkout } />
+      <Route path="/admin/profile" component={ Profile } />
       <Route exact path="/orders/:id" component={ ProductDetails } />
       <Route path="/orders" component={ CustomerOrders } />
     </Switch>

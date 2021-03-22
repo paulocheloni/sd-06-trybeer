@@ -11,7 +11,7 @@ export default function TopMenuAdmin({ pageTitle }) {
       history.push('/admin/orders');
     }
     if (e.target.value === 'Perfil') {
-      history.push('/profile');
+      history.push('/admin/profile');
     }
     if (e.target.value === 'Sair') {
       localStorage.setItem('token', '');
