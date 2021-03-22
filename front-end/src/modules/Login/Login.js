@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import api from '../../axios/api';
 import Button from '../../design-components/Button';
@@ -9,16 +9,23 @@ import loginValidation from '../../utils/loginValidation';
 
 function Login() {
   const history = useHistory();
+  const [isDisabled, setIsDisabled] = useState(true);
   const {
     loginEmail,
     loginPassword,
-    isDisabled,
-    setIsDisabled,
+    setLoginEmail,
+    setLoginPassword,
   } = useContext(ContextBeer);
 
   useEffect(() => {
     loginValidation(loginEmail, loginPassword, setIsDisabled);
-  }, [loginEmail, loginPassword, setIsDisabled]);
+    // eslint-disable-next-line
+  }, [loginEmail, loginPassword]);
+
+  const resetFields = () => {
+    setLoginEmail('');
+    setLoginPassword('');
+  };
 
   const onClick = () => {
     const token = api
@@ -40,10 +47,10 @@ function Login() {
       <div className="max-w-md w-full space-y-8">
         <img className="mx-auto h-64 w-64 w-auto" src={ Logo } alt="Workflow" />
         <form className="mt-8 space-y-6" action="#" method="POST">
-          <input type="hidden" name="remember" value="true" />
+          {/* <input type="hidden" name="remember" value="true" /> */}
           <LoginInputs />
           <Button
-            onClick={ () => onClick() }
+            onClick={ () => onClick() && resetFields() }
             isDisabled={ isDisabled }
             bgColor="indigo-600"
             testId="signin-btn"

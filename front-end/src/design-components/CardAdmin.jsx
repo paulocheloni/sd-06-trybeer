@@ -2,7 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function CardAdmin(props) {
-  const { pedido: { id, address, status, price } } = props;
+  const { pedido: {
+    id,
+    deliveryAddress,
+    deliveryNumber,
+    status,
+    totalPrice,
+  }, IndexId } = props;
   return (
     <div
       className="flex flex-wrap border-2
@@ -10,7 +16,7 @@ function CardAdmin(props) {
     >
       <div className="flex-col">
         <div
-          data-testid={ `${id}-order-number` }
+          data-testid={ `${IndexId}-order-number` }
           className="text-2xl"
         >
           Pedido
@@ -18,20 +24,22 @@ function CardAdmin(props) {
           {id}
         </div>
         <div
-          data-testid={ `${id}-order-address` }
+          data-testid={ `${IndexId}-order-address` }
         >
-          {address}
+          {deliveryAddress}
+          {', '}
+          {deliveryNumber}
         </div>
         <div
           className="mt-10"
-          data-testid={ `${id}-order-total-value` }
+          data-testid={ `${IndexId}-order-total-value` }
         >
-          {price}
+          R$ {totalPrice.replace('.', ',')}
         </div>
       </div>
       <div className="flex-auto">
         <div
-          data-testid={ `${id}-order-status` }
+          data-testid={ `${IndexId}-order-status` }
         >
           {status}
         </div>
@@ -43,10 +51,12 @@ function CardAdmin(props) {
 CardAdmin.propTypes = {
   pedido: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    address: PropTypes.string.isRequired,
+    deliveryAddress: PropTypes.string.isRequired,
+    deliveryNumber: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
+    totalPrice: PropTypes.string.isRequired,
   }).isRequired,
+  IndexId: PropTypes.number.isRequired,
 };
 
 export default CardAdmin;

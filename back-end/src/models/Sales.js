@@ -1,5 +1,11 @@
 const connection = require('./connection');
 
+const getAll = async () => {
+  const [sales] = await connection 
+    .execute('SELECT * FROM sales');
+  return sales;
+};
+
 const createSale = async (USER_ID, TOTAL_PRICE, DELIVERY_ADDRESS, DELIVERY_NUMBER) => {
   await connection
     .execute(`INSERT INTO sales
@@ -8,4 +14,4 @@ const createSale = async (USER_ID, TOTAL_PRICE, DELIVERY_ADDRESS, DELIVERY_NUMBE
     [USER_ID, TOTAL_PRICE, DELIVERY_ADDRESS, DELIVERY_NUMBER, 'Pendente']);
 };
 
-module.exports = { createSale };
+module.exports = { createSale, getAll };

@@ -20,7 +20,7 @@ function LoginInputs() {
         name="email"
         type="email"
         onChange={ setLoginEmail }
-        autoComplete="email"
+        // autoComplete="email"
       />
       <LabeledInput
         value={ loginPassword }
@@ -30,7 +30,7 @@ function LoginInputs() {
         name="password"
         type="password"
         onChange={ setLoginPassword }
-        autoComplete="password"
+        // autoComplete="password"
       />
     </div>
   );

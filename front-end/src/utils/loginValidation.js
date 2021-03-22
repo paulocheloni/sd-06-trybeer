@@ -1,11 +1,12 @@
-const verifyEmailAndPassword = (email, password, changeDisabled) => {
-  const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
-  const emailFormat = regex.test(email);
-  const passwordMinLength = 6;
-  if (password && password.length >= passwordMinLength && emailFormat) {
-    changeDisabled(false);
+const verifyEmailAndPassword = (email, password, isDisabled) => {
+  const emailRegex = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+  const emailFormat = emailRegex.test(email);
+  const passwordMinLength = /.{6,}/;
+  const passwordFormat = passwordMinLength.test(password);
+  if (emailFormat && passwordFormat) {
+    isDisabled(false);
   } else {
-    changeDisabled(true);
+    isDisabled(true);
   }
 };
 

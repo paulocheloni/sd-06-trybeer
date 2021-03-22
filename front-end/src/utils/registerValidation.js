@@ -1,17 +1,16 @@
-const verifyNameEmailAndPassword = (name, email, password, changeDisabled) => {
-  const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+const verifyNameEmailAndPassword = (name, email, password, isDisabled) => {
+  const emailRegex = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
   const nameRegex = /^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$/;
+  const nameMinLength = /.{12,}/;
+  const passwordMinLength = /.{6,}/;
   const emailFormat = emailRegex.test(email);
   const nameFormat = nameRegex.test(name);
-  const nameMinLength = 12;
-  const passwordMinLength = 6;
-  if (name.length >= nameMinLength
-    && nameFormat
-    && password && password.length >= passwordMinLength
-    && emailFormat) {
-    changeDisabled(false);
+  const nameFormatMinLength = nameMinLength.test(name);
+  const passwordFormat = passwordMinLength.test(password);
+  if (emailFormat && nameFormat && nameFormatMinLength && passwordFormat) {
+    isDisabled(false);
   } else {
-    changeDisabled(true);
+    isDisabled(true);
   }
 };
 

@@ -12,24 +12,24 @@ function SideBarMenu() {
   return (
     <div className="relative side-menu-container flex flex-col space-y-16 items-center">
       <Link to="/products">
-        <Button bgColor="indigo-400" testId="side-menu-item-products">
+        <Button bgColor="black" testId="side-menu-item-products">
           Produtos
         </Button>
       </Link>
       <Link to="/orders">
-        <Button bgColor="indigo-400" testId="side-menu-item-my-orders">
+        <Button bgColor="black" testId="side-menu-item-my-orders">
           Meus pedidos
         </Button>
       </Link>
       <Link to="/profile">
-        <Button bgColor="indigo-400" testId="side-menu-item-my-profile">
+        <Button bgColor="black" testId="side-menu-item-my-profile">
           Meu Perfil
         </Button>
       </Link>
       <div className="absolute bottom-12">
         <Button
           onClick={ () => onClick() }
-          bgColor="indigo-400"
+          bgColor="white"
           testId="side-menu-item-logout"
         >
           Sair
