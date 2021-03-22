@@ -1,7 +1,7 @@
 const connection = require('./connection');
 
 const listAllOrders = async (userId) => {
-  const [orders] = await connection.execute('SELECT * from sales WHERE userId = ?', [userId]);
+  const [orders] = await connection.execute('SELECT * from sales WHERE user_id = ?', [userId]);
   return orders;
 };
 
@@ -24,11 +24,11 @@ const getByIdDetails = async (id) => {
     ON sales_products.sale_id = sales.id
     JOIN products
     ON products.id = sales_products.product_id
-    WHERE sales.id = ?`, [id]
+    WHERE sales.id = ?`, [id],
   );
 
   return order;
-}
+};
 
 module.exports = {
   listAllOrders,
