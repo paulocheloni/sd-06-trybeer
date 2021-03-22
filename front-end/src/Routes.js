@@ -8,8 +8,8 @@ import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Profile from './Pages/Profile';
 import Products from './Pages/Products';
-// import Checkout from './Pages/Checkout';
-import CheckoutTest from './Pages/CheckoutTest';
+import Checkout from './Pages/Checkout';
+// import CheckoutTest from './Pages/CheckoutTest';
 import MyOrders from './Pages/OrderDetails';
 import OrderDetails from './Pages/MyOrders';
 import AdminProfile from './Pages/AdminProfile';
@@ -40,7 +40,7 @@ const Routes = () => (
                 <Route path="/register" component={ Register } />
                 <Route path="/profile" component={ Profile } />
                 <Route path="/products" component={ Products } />
-                <Route path="/checkout" component={ CheckoutTest } />
+                <Route path="/checkout" component={ Checkout } />
                 <Route exact path="/orders" component={ OrderDetails } />
                 <Route path="/orders/:id" component={ MyOrders } />
                 <Route path="/admin/profile" component={ AdminProfile } />

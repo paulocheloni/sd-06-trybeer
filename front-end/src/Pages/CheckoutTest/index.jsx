@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect, useMemo, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { FaStreetView } from 'react-icons/fa';
-import { AiOutlineFieldNumber } from 'react-icons/ai';
-import { registerOrder } from '../../Services/Apis';
+// import { FaStreetView } from 'react-icons/fa';
+// import { AiOutlineFieldNumber } from 'react-icons/ai';
+// import { registerOrder } from '../../Services/Apis';
 
 import MenuTop from '../../Components/MenuTop';
 import SideBar from '../../Components/SideBar';
@@ -12,91 +12,37 @@ import Button from '../../Components/Button';
 import { GlobalContext } from '../../Contexts/GlobalContext';
 
 import S from './styles';
-import Input from '../../Components/Input';
+// import Input from '../../Components/Input';
 
-const mountData = (params) => {
-  const { street, numberHouse } = params;
-  const user = JSON.parse(localStorage.getItem('user'));
-  const products = JSON.parse(localStorage.getItem('infosCheckout'));
-  const orderValue = JSON.parse(localStorage.getItem('total'));
-  const order = {
-    email: user.email,
-    orderValue,
-    address: street,
-    number: numberHouse,
-    products,
-    token: user.token,
-  };
-  return order;
-};
+// const mountData = (params) => {
+//   const { street, numberHouse } = params;
+//   const user = JSON.parse(localStorage.getItem('user'));
+//   const products = JSON.parse(localStorage.getItem('infosCheckout'));
+//   const orderValue = JSON.parse(localStorage.getItem('total'));
+//   const order = {
+//     email: user.email,
+//     orderValue,
+//     address: street,
+//     number: numberHouse,
+//     products,
+//     token: user.token,
+//   };
+//   return order;
+// };
 
-const checkOutRedirect = async (setCheckOut, history, params) => {
-  const time = 2000;
-  const order = mountData(params);
+// const checkOutRedirect = async (setCheckOut, history, params) => {
+//   const time = 2000;
+//   const order = mountData(params);
 
-  await registerOrder(order);
-  setCheckOut(true);
-  setTimeout(() => {
-    history.push('/products');
-  }, time);
+//   await registerOrder(order);
+//   setCheckOut(true);
+//   setTimeout(() => {
+//     history.push('/products');
+//   }, time);
 
-  localStorage.removeItem('infosCheckout');
-  localStorage.removeItem('total');
-};
-
-const form = (params) => {
-  const {
-    valueTotal,
-    setStreet,
-    setNumberHouse,
-    cardsProductsValues,
-    checkOut,
-    stateSideBar,
-  } = params;
-
-  const theme = JSON.parse(localStorage.getItem('@trybeer:theme'));
-
-  return (
-    <S.ContainerMain stateSideBar={ stateSideBar }>
-      {checkOut ? (
-        <S.CompletedSale>Compra realizada com sucesso!</S.CompletedSale>
-      ) : (
-        <S.ContainerProducts>
-          <h1>Produtos</h1>
-          {cardsProductsValues}
-          <S.Total data-testid="order-total-value">
-            Total: R$
-            {' '}
-            {(valueTotal).toFixed(2).replace('.', ',')}
-          </S.Total>
-          <S.ContainerAddress>
-            <h1>Endereço</h1>
-            <Input
-              id="Rua"
-              label="Rua"
-              width="100%"
-              dataTestid="checkout-street-input"
-              themeStorage={ theme && theme.title }
-              widthDivLabel="100%"
-              icon={ FaStreetView }
-              onChange={ ({ target }) => setStreet(target.value) }
-            />
-            <Input
-              id="Número da casa"
-              label="Número da casa"
-              width="100%"
-              dataTestid="checkout-house-number-input"
-              themeStorage={ theme && theme.title }
-              widthDivLabel="100%"
-              icon={ AiOutlineFieldNumber }
-              onChange={ ({ target }) => setNumberHouse(target.value) }
-            />
-          </S.ContainerAddress>
-        </S.ContainerProducts>
-      )}
-    </S.ContainerMain>
-  );
-};
+//   localStorage.removeItem('infosCheckout');
+//   localStorage.removeItem('total');
+// };
 
 const CheckoutTest = () => {
   const [isDisabled, setIsDisabled] = useState(true);
@@ -107,7 +53,7 @@ const CheckoutTest = () => {
   const { setCartList, stateSideBar } = useContext(GlobalContext);
   const history = useHistory();
 
-  const cartListLocalStorage = JSON.parse(localStorage.getItem('infosCheckout'));
+  // const cartListLocalStorage = JSON.parse(localStorage.getItem('infosCheckout'));
 
   useEffect(() => {
     const userToken = JSON.parse(localStorage.getItem('user'));
@@ -115,78 +61,31 @@ const CheckoutTest = () => {
     if (!userToken) history.push('/login');
   }, [history]);
 
-  useEffect(() => {
-    if (cartListLocalStorage) {
-      const prices = cartListLocalStorage.map((item) => item.price * item.quantity);
+  // useEffect(() => {
+  //   if (cartListLocalStorage) {
+  //     const prices = cartListLocalStorage.map((item) => item.price * item.quantity);
 
-      const total = prices.reduce((acc, cur) => acc + cur, 0);
+  //     const total = prices.reduce((acc, cur) => acc + cur, 0);
 
-      setValueTotal(total);
+  //     setValueTotal(total);
 
-      if (total > 0 && street.length > 0 && numberHouse.length > 0) {
-        setIsDisabled(false);
-      } else {
-        setIsDisabled(true);
-      }
-    }
-  }, [cartListLocalStorage, numberHouse.length, street.length]);
+  //     if (total > 0 && street.length > 0 && numberHouse.length > 0) {
+  //       setIsDisabled(false);
+  //     } else {
+  //       setIsDisabled(true);
+  //     }
+  //   }
+  // }, [cartListLocalStorage, numberHouse.length, street.length]);
 
-  const removeItem = useCallback((id) => {
-    const products = JSON.parse(localStorage.getItem('infosCheckout'));
+  // const removeItem = useCallback((id) => {
+  //   const products = JSON.parse(localStorage.getItem('infosCheckout'));
 
-    const product = products.filter((item) => item.id !== id);
+  //   const product = products.filter((item) => item.id !== id);
 
-    localStorage.setItem('infosCheckout', JSON.stringify(product));
+  //   localStorage.setItem('infosCheckout', JSON.stringify(product));
 
-    setCartList(products);
-  }, [setCartList]);
-
-  const cardsProductsValues = useMemo(() => (
-    <div>
-      {cartListLocalStorage && cartListLocalStorage.length > 0 ? (
-        cartListLocalStorage.map((infos, index) => (
-          <S.ContainerInfos key={ infos.id }>
-            <div data-testid={ `${index}-product-qtd-input` }>{infos.quantity}</div>
-            <span data-testid={ `${index}-product-name` }>{infos.name}</span>
-            <span data-testid={ `${index}-product-total-value` }>
-              R$
-              {' '}
-              {(infos.price * infos.quantity).toFixed(2).replace('.', ',')}
-            </span>
-            <p data-testid={ `${index}-product-unit-price` }>
-              (R$
-              {' '}
-              {(infos.price).replace('.', ',')}
-              {' '}
-              un)
-            </p>
-            <S.ButtonForm
-              type="button"
-              onClick={ () => removeItem(infos.id) }
-              data-testid={ `${index}-removal-button` }
-            >
-              X
-            </S.ButtonForm>
-          </S.ContainerInfos>
-        ))
-      ) : (
-        <S.ContainerEmptyCart>
-          <span>Não há produtos no carrinho</span>
-        </S.ContainerEmptyCart>
-      )}
-    </div>
-  ), [cartListLocalStorage, removeItem]);
-
-  const params = {
-    valueTotal,
-    street,
-    setStreet,
-    setNumberHouse,
-    numberHouse,
-    cardsProductsValues,
-    checkOut,
-    stateSideBar,
-  };
+  //   setCartList(products);
+  // }, [setCartList]);
 
   return (
     <S.Container>
@@ -194,9 +93,40 @@ const CheckoutTest = () => {
 
       <SideBar />
 
-      {form(params)}
+      <S.Content>
+        <div>
+          <h1>Produtos</h1>
+        </div>
+        <S.ContainerProducts>
+          <img src="./images/image-heineken.png" alt="Heineken 600ml" />
+          <span>2</span>
+          <span>R$ 4,40</span>
+          <span>(R$ 2,20 un)</span>
+          <button type="button">X</button>
+        </S.ContainerProducts>
 
-      <S.ContainerButton stateSideBar={ stateSideBar }>
+        <S.ContainerProducts>
+          <img src="./images/image-heineken.png" alt="Heineken 600ml" />
+          <span>2</span>
+          <span>R$ 4,40</span>
+          <span>(R$ 2,20 un)</span>
+          <button type="button">X</button>
+        </S.ContainerProducts>
+
+        <S.ContainerProducts>
+          <img src="./images/image-heineken.png" alt="Heineken 600ml" />
+          <span>2</span>
+          <span>R$ 4,40</span>
+          <span>(R$ 2,20 un)</span>
+          <button type="button">X</button>
+        </S.ContainerProducts>
+
+        <S.ContainerForm>
+          <h1>Form</h1>
+        </S.ContainerForm>
+      </S.Content>
+
+      <S.ContainerButton>
         <Button
           type="button"
           color="green"
@@ -206,7 +136,7 @@ const CheckoutTest = () => {
           botton="0"
           position="fixed"
           disabled={ isDisabled }
-          onClick={ () => checkOutRedirect(setCheckOut, history, params) }
+          onClick={ () => {} }
           dataTestid="checkout-finish-btn"
         >
           Finalizar Pedido
