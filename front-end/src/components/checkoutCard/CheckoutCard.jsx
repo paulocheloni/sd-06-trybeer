@@ -20,7 +20,6 @@ const CheckoutCard = ({ product, changeState, specialNumber }) => {
   return (
     <div>
       <span data-testid={ `${specialNumber}-product-qtd-input` }>
-        R$
         {quantity}
       </span>
       <span data-testid={ `${specialNumber}-product-name` }>
@@ -31,10 +30,7 @@ const CheckoutCard = ({ product, changeState, specialNumber }) => {
         { editFullPrice }
       </span>
       <span data-testid={ `${specialNumber}-product-unit-price` }>
-        (
-        {editPrice}
-        un
-        )
+        {`(${editPrice} un)`}
       </span>
       <button
         data-testid={ `${specialNumber}-removal-button` }
