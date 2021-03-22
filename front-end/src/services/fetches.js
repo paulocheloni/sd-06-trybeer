@@ -46,11 +46,10 @@ const getSales = async (token) => {
   return sales;
 };
 
-const createSaleProducts = async (token, mySaleProducts) => {
-  const newProductSale = await axios.post(`${path}/checkout`,
-    { mySaleProducts },
+const getSaleById = async (token, pathName) => {
+  const sale = await axios.get(`${path}${pathName}`,
     { headers: { authorization: token } });
-  return newProductSale;
+  return sale;
 };
 
 export default {
@@ -60,5 +59,5 @@ export default {
   createUser,
   createOrder,
   getSales,
-  createSaleProducts,
+  getSaleById,
 };

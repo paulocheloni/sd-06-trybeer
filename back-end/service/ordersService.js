@@ -1,8 +1,6 @@
 const ordersModel = require('../model/ordersModel');
 
-const createOrders = async (userId, objOrder) => {
-  ordersModel.createOrders(userId, objOrder);
-};
+const createOrders = async (userId, objOrder) => ordersModel.createOrders(userId, objOrder);
 
 const getOrders = async (userId) => {
   const sales = ordersModel.getOrders(userId);
@@ -14,20 +12,14 @@ const getLastSaleId = async () => {
   return lastOrderId;
 };
 
-const createProductsSales = async (productData) => {
-    ordersModel.createProductsSales(productData);
+const createProductsSales = async (mySaleProducts) => {
+    ordersModel.createProductsSales(mySaleProducts);
 };
 
-const getSaleById = async (saleId) => {
-  // console.log('entrei no meu service', saleId);
-  const saleById = await ordersModel.getSaleById(saleId);
-  return saleById;
-};
-
-const getSaleProductById = async (saleId) => {
-  // console.log('entrei no meu service', saleId);
-  const saleProductById = await ordersModel.getSaleProductById(saleId);
-  return saleProductById;
+const getSaleDetail = async (saleId) => {
+  const saleDetail = await ordersModel.getSaleDetail(saleId);
+  // console.log('entrei no service', saleDetail);
+  return saleDetail;
 };
 
 module.exports = {
@@ -35,6 +27,5 @@ module.exports = {
   getOrders,
   getLastSaleId,
   createProductsSales,
-  getSaleById,
-  getSaleProductById,
+  getSaleDetail,
 };

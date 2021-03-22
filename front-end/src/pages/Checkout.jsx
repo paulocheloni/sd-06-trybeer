@@ -56,6 +56,7 @@ export default function Checkout() {
       number: houseNumber,
       date: date.toISOString().slice(0, limitIndex).replace('T', ' '),
       orderStatus: 'pendente',
+      cartProducts,
     };
 
     fetches.createOrder(tokenFromLocalStorage, objOrder)
@@ -67,29 +68,23 @@ export default function Checkout() {
         return (setOrderSuccess(createSaleSuccessMessage));
       });
 
-    // fetches.getLastSaleId(tokenFromLocalStorage)
-    //   .then((response) => {
-    //     console.log('resposta do ultimo id', response);
-    //     return response;
-    //   });
-
     setTimeout(() => {
-      setCartProducts('');
+      setCartProducts([]);
       localStorage.removeItem('cartProducts');
       history.push('/products');
     }, SUCCESSMESSAGEDESAPEAR);
   };
 
-  const sendProductsFromSale = () => {
-    cartProducts.map((product) => {
-      const mySaleProducts = {
-        productId: product.id,
-        quantity: product.quantityItem,
-      };
-      // console.log('frontend myProductsSale checkout', mySaleProducts);
-      return fetches.createSaleProducts(tokenFromLocalStorage, mySaleProducts);
-    });
-  };
+  // const sendProductsFromSale = () => {
+  //   cartProducts.map((product) => {
+  //     const mySaleProducts = {
+  //       productId: product.id,
+  //       quantity: product.quantityItem,
+  //     };
+  //     // console.log('frontend myProductsSale checkout', mySaleProducts);
+  //     return fetches.createSaleProducts(tokenFromLocalStorage, mySaleProducts);
+  //   });
+  // };
 
   return (
     <div>
@@ -136,7 +131,7 @@ export default function Checkout() {
         disabled={ !(isTotalNotPriceZero()
           && streetValidation()
           && houseNumberValidation()) }
-        onClick={ () => { sendOrder(); sendProductsFromSale(); } }
+        onClick={ () => { sendOrder(); } }
       >
         Finalizar Pedido
       </button>

@@ -2,7 +2,7 @@ const connection = require('./connection');
 
 const createOrders = async (userId, objOrder) => {
   try {
-    await connection.execute('INSERT INTO Trybeer.sales ' 
+    return await connection.execute('INSERT INTO Trybeer.sales ' 
       + '(user_id, total_price, delivery_address, delivery_number, sale_date, status) ' 
       + 'VALUES (?,?,?,?,?,?)', [
       userId,
@@ -31,13 +31,13 @@ const getLastSaleId = async () => {
   return lastSaleId;
 };
 
-const createProductsSales = async (productData) => {
+const createProductsSales = async (mySaleProducts) => {
   try {
     await connection.execute(
       'INSERT INTO Trybeer.sales_products (sale_id, product_id, quantity) VALUES (?,?,?)', [
-        productData.saleId,
-        productData.productId,
-        productData.quantity,
+        mySaleProducts.saleId,
+        mySaleProducts.productId,
+        mySaleProducts.quantity,
       ],
     );
   } catch (error) {
@@ -45,22 +45,15 @@ const createProductsSales = async (productData) => {
   }
 };
 
-const getSaleById = async (saleId) => {
-  // console.log('entrei no model', saleId);
-  const [saleById] = await connection.execute(
-      'SELECT * FROM Trybeer.sales WHERE id=?', [saleId],
+const getSaleDetail = async (saleId) => {
+  const [saleDetail] = await connection.execute(
+    'SELECT * FROM Trybeer.sales '
+    + 'INNER JOIN Trybeer.sales_products ON Trybeer.sales.id = Trybeer.sales_products.sale_id '
+    + 'INNER JOIN Trybeer.products ON Trybeer.products.id = Trybeer.sales_products.product_id '
+    + 'WHERE sale_id=?', [saleId],
   );
-  // console.log('resposta do meu model by id', saleById);
-  return saleById;
-};
-
-const getSaleProductById = async (saleId) => {
-  // console.log('entrei no model', saleId);
-  const [saleProductById] = await connection.execute(
-      'SELECT * FROM Trybeer.sales_products WHERE sale_id=?', [saleId],
-  );
-  // console.log('resposta do meu model by id', saleProductById);
-  return saleProductById;
+  // console.log('entrei no detalhe do produto', saleDetail);
+  return saleDetail;
 };
 
 module.exports = {
@@ -68,6 +61,5 @@ module.exports = {
   getOrders,
   getLastSaleId,
   createProductsSales,
-  getSaleById,
-  getSaleProductById,
+  getSaleDetail,
 };
