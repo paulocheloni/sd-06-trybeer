@@ -8,6 +8,7 @@ const path = require('path');
 const loginController = require('./controllers/loginControllers');
 const registerController = require('./controllers/registerController');
 const productsController = require('./controllers/productsControllers');
+const orderController = require('./controllers/orderController');
 const validateToken = require('./middlewares/validateToken');
 const log = require('./middlewares/logger');
 const error = require('./middlewares/error');
@@ -25,6 +26,8 @@ app.use('/login', loginController);
 app.use('/register', registerController);
 
 app.use('/products', validateToken, productsController);
+
+app.use('/orders', orderController);
 
 app.use('/images', express.static(path.resolve(__dirname, 'images')));
 
