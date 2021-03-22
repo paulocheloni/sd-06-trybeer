@@ -1,4 +1,4 @@
-import { saveSale } from "./api";
+import { saveSale } from './api';
 
 export function removeCheckoutItem(name, cart, setCart) {
   const newCart = cart.filter((item) => item.name !== name);
