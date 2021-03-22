@@ -10,7 +10,7 @@ require('dotenv/config');
 
 // const connection = mysql.createPool({
 //   user: 'root',
-//   password: '1234',
+//   password: '',
 //   host: 'localhost',
 //   database: 'Trybeer',
 // });

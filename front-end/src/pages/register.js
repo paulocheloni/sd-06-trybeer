@@ -2,9 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router';
 
 // Components
-import validateEmailAndPassword from '../components/validateEmailAndPassword';
+import validateEmailAndPassword from '../resources/validateEmailAndPassword';
 
 // Services
+import { saveState } from '../services/localStorage';
 import api from '../services/api';
 
 function Register() {
@@ -32,20 +33,18 @@ function Register() {
     validates();
   }, [email, password, name, validates]);
 
-  const registerUser = () => {
-    api.createUser(name, email, password, checkbox)
-      .then((response) => {
-        console.log(`usuario ${response.data} criado com sucesso!`);
-        if (checkbox === 'administrator') {
-          history.push('/admin/orders');
-        }
-        if (checkbox === 'client') {
-          history.push('/products');
-        }
-      }).catch(() => {
-        setEmailExists(true);
-      });
-  };
+  const registerUser = () => api.createUser(name, email, password, checkbox)
+    .then((response) => {
+      saveState('user', response.data);
+      if (checkbox === 'administrator') {
+        history.push('/admin/orders');
+      }
+      if (checkbox === 'client') {
+        history.push('/products');
+      }
+    }).catch(() => {
+      setEmailExists(true);
+    });
 
   const checkboxFunc = (e) => {
     setCheckbox(e.target.value);

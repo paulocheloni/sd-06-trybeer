@@ -3,11 +3,20 @@ import PropTypes from 'prop-types';
 import ContextAPI from './ContextAPI';
 
 const TrybeerProvider = ({ children }) => {
-  const [email, setEmail] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [price, setPrice] = useState('0,00');
+  const [street, setStreet] = useState('');
+  const [numberHouse, setNumberHouse] = useState('');
 
   const contextState = {
-    email,
-    setEmail,
+    cart,
+    setCart,
+    price,
+    setPrice,
+    street,
+    setStreet,
+    numberHouse,
+    setNumberHouse,
   };
 
   return (

@@ -14,8 +14,17 @@ const createUser = (name, email, password, role) => (api.post(
 
 const updateUser = (name, email) => (api.put('/user/update', { name, email }));
 
+const listProducts = () => (api.get('/products'));
+
+const createSale = (dataSale) => {
+  console.log(dataSale);
+  return api.post('/sales', dataSale);
+};
+
 export default {
   listLogin,
   createUser,
   updateUser,
+  listProducts,
+  createSale,
 };
