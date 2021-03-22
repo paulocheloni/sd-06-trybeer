@@ -8,32 +8,27 @@ const connection = require('./connection');
 // };
 
 const getByDateAndId = async (date, id) => {
-  const [order_id] = await connection.execute(
-    'SELECT id FROM sales WHERE sale_date=? AND user_id=?', [date, id]
+  const [orderId] = await connection.execute(
+    'SELECT id FROM sales WHERE sale_date=? AND user_id=?', [date, id],
   );
-  return order_id;
+  return orderId;
 };
-
+const columns = 'user_id, total_price, delivery_address, delivery_number, sale_date, status';
 const createOrder = async ({
   userId,
   totalPrice,
   deliveryAddress,
   deliveryNumber,
   saleDate,
-  status
+  status,
 }) => {
   await connection.execute(
-    'INSERT INTO sales (user_id, total_price, delivery_address, delivery_number, sale_date, status) VALUES (?, ?, ?, ?, ?, ?)',
+    `INSERT INTO sales (${columns}) VALUES (?, ?, ?, ?, ?, ?)`,
     [userId, totalPrice, deliveryAddress, deliveryNumber, saleDate, status],
   );
   const [{ id }] = await getByDateAndId(saleDate, userId);
   return ({
-    id,
-    totalPrice,
-    deliveryAddress,
-    deliveryNumber,
-    saleDate,
-    status,
+    id, totalPrice, deliveryAddress, deliveryNumber, saleDate, status,
   });
 };
 

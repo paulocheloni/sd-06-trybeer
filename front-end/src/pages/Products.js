@@ -12,7 +12,6 @@ function Products() {
   const history = useHistory();
   const [products, setProducts] = useState([]);
   const { user } = useContext(TrybeerContext);
-  console.log(products);
 
   const fetchProducts = async () => {
     const allProducts = await fetchFunctions.get('products', user.token);
@@ -31,7 +30,7 @@ function Products() {
       <TopMenu />
       <SidebarMenu />
       <div className="products-container">
-        {products.map(({ id, name, price, url_image: urlImage }, index) => (
+        {products && products.map(({ id, name, price, url_image: urlImage }, index) => (
           <ProductCard
             id={ id }
             key={ index }

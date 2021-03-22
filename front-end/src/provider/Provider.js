@@ -34,7 +34,7 @@ function TrybeerProvider({ children }) {
         .reduce((result, product) => result + (product.quantity * product.price), 0);
       return total.toFixed(2);
     }
-    return 0;
+    return 0.00.toFixed(2);
   };
 
   const removeItemCart = (id) => {
@@ -52,11 +52,9 @@ function TrybeerProvider({ children }) {
     localStorage.setItem('cart', JSON.stringify(cartWithValidQuantitys));
   };
 
-  const eraseLocalStorage = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('cart');
+  const eraseLocalStorage = (key) => {
+    localStorage.removeItem(key);
   };
-
 
   const contextValue = {
     cart,

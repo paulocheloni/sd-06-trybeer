@@ -3,7 +3,7 @@ const cors = require('cors');
 const RegisterController = require('./controllers/RegistersController');
 const ProductsController = require('./controllers/ProductsController');
 const LoginController = require('./controllers/LoginController');
-const { validateLogin } = require('./middlewares/validations');
+// const { validateLogin } = require('./middlewares/validations');
 const handleError = require('./middlewares/handleError');
 const OrdersController = require('./controllers/OrdersController');
 const OrdersProductsController = require('./controllers/OrdersProductsController');
@@ -16,9 +16,9 @@ app.use(express.json());
 
 app.use('/register', RegisterController);
 app.use('/products', ProductsController);
-app.use('/login',LoginController);
+app.use('/login', LoginController);
 app.use('/orders', OrdersController);
-app.use('/sale_product', OrdersProductsController)
+app.use('/sale_product', OrdersProductsController);
 
 app.use('/images', express.static(__dirname.concat('/images')));
 

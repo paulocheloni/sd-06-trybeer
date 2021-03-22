@@ -21,10 +21,10 @@ OrdersRouter.post('/', async (req, res, next) => {
       deliveryAddress,
       deliveryNumber,
     } = req.body;
-    console.log(req.body);
+
     const newOrder = await ordersService
     .createOrderService({ userId, totalPrice, deliveryAddress, deliveryNumber });
-    return res.status(201).json({ newOrder });
+    return res.status(201).json(newOrder);
   } catch (err) {
     next(err);
   }

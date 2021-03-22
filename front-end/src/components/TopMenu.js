@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoBeerOutline } from 'react-icons/io5';

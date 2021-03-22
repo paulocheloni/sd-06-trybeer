@@ -7,16 +7,21 @@ const createOrderService = async (sale) => {
     deliveryAddress,
     deliveryNumber,
   } = sale;
+
   const date = new Date();
-  const saleDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-  console.log(saleDate)
+
+  const part1Date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  const part2Date = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+
+  const saleDate = `${part1Date} ${part2Date}`;
   const status = 'pendente';
   const newOrder = await ordersModel
   .createOrder({ userId, totalPrice, deliveryAddress, deliveryNumber, saleDate, status });
+  
   return newOrder;
-}
+};
 
-const getAll = async () => await ordersModel.getAll();
+const getAll = async () => ordersModel.getAll();
 
 module.exports = {
   createOrderService,
