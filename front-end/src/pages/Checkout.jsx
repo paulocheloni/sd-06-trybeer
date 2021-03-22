@@ -9,31 +9,43 @@ import { checkoutUtils } from '../utils';
 function Checkout() {
   const produtos = [
     {
-      idUser: 3,
+      idProduct: 5,
+      idUser: 1,
       quantity: 11,
       name: 'vinho',
       totalValue: 55.00,
       value: 5,
     },
     {
-      idUser: 3,
+      idProduct: 4,
+      idUser: 1,
+      quantity: 11,
+      name: 'vinho',
+      totalValue: 55.00,
+      value: 5,
+    },
+    {
+      idProduct: 3,
+      idUser: 1,
       quantity: 11,
       name: 'cachaça',
       totalValue: 55.00,
       value: 5,
     },
     {
-      idUser: 3,
+      idProduct: 2,
+      idUser: 1,
       quantity: 1,
       name: 'Heineken',
-      totalValue: 4.99,
+      totalValue: 5000,
       value: 4.99,
     },
     {
-      idUser: 3,
+      idProduct: 1,
+      idUser: 1,
       quantity: 1,
-      name: 'Heineken',
-      totalValue: 4.99,
+      name: 'Bavaria',
+      totalValue: 1000,
       value: 4.99,
     },
 
@@ -49,18 +61,7 @@ function Checkout() {
   };
 
   useEffect(() => {
-    const valueTotal = () => {
-      const reducer = (acc, curr) => acc + curr;
-      const noValue = '0,00';
-      if (products.length > 0) {
-        const totalValue = products.map((item) => item.totalValue).reduce(reducer);
-        setSumTotal(totalValue.toFixed(2));
-        return totalValue;
-      }
-      setSumTotal(noValue);
-      return noValue;
-    };
-    valueTotal();
+    checkoutUtils.valueTotal(products, setSumTotal);
   }, [products]);
 
   useEffect(() => {

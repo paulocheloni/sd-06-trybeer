@@ -19,14 +19,14 @@ const registerSale = async (params) => {
   };
 };
 
-const fieldSalesP = 'sale_id, product_id, quantity';
 const regSalesProducts = async (params) => {
+const fieldSalesP = 'sale_id, product_id, quantity';
  await connection.execute(
     `INSERT INTO Trybeer.sales_products (${fieldSalesP}) VALUES (?,?,?)`,
     [params.idSale, params.idProduct, params.quantity],
   );
   return {
-    ok: true,    
+    ok: true,
   };
 };
 
