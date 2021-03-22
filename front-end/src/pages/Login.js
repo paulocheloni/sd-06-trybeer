@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+// import { Link, useHistory } from 'react-router-dom';
+import history from '../utils/history';
 
 import AppContext from '../context/app.context';
 import { Topbar, TextInput, SubmitButton } from '../components';
@@ -13,7 +15,7 @@ export default function Login() {
   const [disableBtn, setDisableBtn] = useState(true);
   const [login, setLogin] = useState({ email: '', password: '' });
 
-  const history = useHistory();
+  // const history = useHistory();
 
   useEffect(() => {
     const validateForm = async () => yupSchemas.login.validate(login)
