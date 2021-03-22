@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import AppContext from '../context/app.context';
-
-import history from '../utils/history';
 
 export default function Sidebar(props) {
   const { setToken } = useContext(AppContext);
   const { hide } = props;
   const className = `side-menu-container ${hide}`;
+
+  const history = useHistory();
 
   const logOff = () => {
     setToken({});
