@@ -5,3 +5,7 @@ exports.create = async ({
 }) => Checkout.create({
   userId, totalPrice, rua, numero, status,
 });
+
+exports.createSaleProduct = async (saleProducts) => (
+  Checkout.createSaleProduct(saleProducts)
+);

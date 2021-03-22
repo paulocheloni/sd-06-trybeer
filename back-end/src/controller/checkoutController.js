@@ -26,6 +26,8 @@ router.post('/', rescue(async (req, res) => {
     const saleProduct = newCart.map((element) => ({ saleId, ...element }));
     // { saleId: 14, productId: 11, quantity: 1 };
 
+    await CheckoutService.createSaleProduct(saleProduct);
+
    return res.status(200).json({ message: "Sale success" });
   } catch (err) {
     return res.status(404).json({ message: "Sale failure" });
