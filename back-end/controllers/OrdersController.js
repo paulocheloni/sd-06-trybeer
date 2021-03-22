@@ -4,7 +4,7 @@ const { isUserLoggedIn } = require('../middlewares/validations');
 
 const OrdersRouter = new Router();
 
-OrdersRouter.get('/', async (_req, res, next) => {
+OrdersRouter.get('/', isUserLoggedIn, async (_req, res, next) => {
   try {
     const orders = await ordersService.getAll();
     res.status(200).json(orders);
@@ -13,7 +13,7 @@ OrdersRouter.get('/', async (_req, res, next) => {
   }
 });
 
-OrdersRouter.get('/:id', async (req, res, next) => {
+OrdersRouter.get('/:id', isUserLoggedIn, async (req, res, next) => {
   try {
     const { id } = req.params;
     const orders = await ordersService.getAllByUser(id);

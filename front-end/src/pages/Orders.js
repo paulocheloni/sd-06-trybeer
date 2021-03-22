@@ -15,10 +15,7 @@ function Orders({ history }) {
   const recoveredUser = getFromLocalStorage('user');
 
   const fetchOrders = async () => {
-    // const allOrders = await verifyToken('orders', recoveredUser, history);
-    console.log(user.id);
     const allOrders = await verifyToken(`orders/${user.id}`, recoveredUser, history);
-    console.log(allOrders);
     setOrders(allOrders);
   };
 
