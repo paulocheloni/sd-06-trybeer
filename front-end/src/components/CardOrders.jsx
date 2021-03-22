@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../services/api';
 
 export default function CardOrders() {
@@ -17,12 +18,14 @@ export default function CardOrders() {
     <div>
       {console.log(sales)}
       { sales.map((sale, index) => (
-        <div data-testid={ `${index}` } key={ sale.id }>
-          <h4 data-testid={ `${index}-order-number` }>{ sale.id }</h4>
-          <h4 data-testid={ `${index}-order-date` }>{ sale.id }</h4>
-          <h4 data-testid={ `${index}-order-total-value` }>{ sale.id }</h4>
-          <h4 data-testid={ `${index}-order-number` }>{ sale.id }</h4>
-        </div>
+        // <Link to={`/order/details/${sale.id}`}>
+        <Link to="/order/details">
+          <div data-testid={ `${index}-order-card-container` } key={ sale.id }>
+            <h4 data-testid={ `${index}-order-number` }>{ `Pedido número: ${sale.id}` }</h4>
+            <h4 data-testid={ `${index}-order-date` }>{ `DATA: ${Object.values(sale)[5].slice(5, 10)}` }</h4>
+            <h4 data-testid={ `${index}-order-total-value` }>{ `Valor: ${Object.values(sale)[2]}` }</h4>
+          </div>
+        </Link>
       ))}
     </div>
   );
