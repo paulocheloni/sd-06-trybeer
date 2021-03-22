@@ -15,7 +15,7 @@ export default {
     backgroundMouseOver: ' #DAE8C3',
     backgroundDiv: '#CCCCCC',
     divCounter: '#E5E5E5',
-    backgroundHtml: 'white',
+    backgroundHtml: 'rgb(243,248,236)',
 
     white: '#fff',
     background: '#f2f3f5',

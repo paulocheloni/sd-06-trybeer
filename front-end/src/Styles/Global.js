@@ -21,8 +21,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    ${() => css`
-      background: rgb(32,32,32);
+    ${({ theme }) => css`
+      background: ${theme.colors.backgroundHtml};
       padding: 0;
       margin: 0;
       font-family: 'Open Sans', sans-serif;

@@ -7,8 +7,6 @@ import * as serviceWorker from './serviceWorker';
 import { GlobalProvider } from './Contexts/GlobalContext';
 import { ThemeProvider } from './Hooks/theme';
 
-import GlobalStyles from './Styles/Global';
-
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -16,7 +14,6 @@ ReactDOM.render(
         <GlobalProvider>
           <App />
         </GlobalProvider>
-        <GlobalStyles />
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,
