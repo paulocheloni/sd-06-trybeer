@@ -2,11 +2,9 @@ import React from 'react';
 import {
   Switch,
   Route,
-  Router,
+  BrowserRouter,
   Redirect,
 } from 'react-router-dom';
-
-import history from './utils/history';
 
 import { NotFound, Login, Register, Profile, Products, Error } from './pages';
 
@@ -14,7 +12,7 @@ import './styles/App.css';
 
 function App() {
   return (
-    <Router history={ history }>
+    <BrowserRouter>
       <Switch>
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />
@@ -26,7 +24,7 @@ function App() {
         <Route path="/error" component={ Error } />
         <Route component={ NotFound } />
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 }
 

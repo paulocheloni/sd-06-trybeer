@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import history from '../utils/history';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
 import { Topbar, TextInput, CheckBox, SubmitButton } from '../components';
@@ -14,7 +13,7 @@ export default function Register() {
   const [login, setLogin] = useState({ name: '', email: '', password: '' });
   const [disableBtn, setDisableBtn] = useState(true);
 
-  // const history = useHistory();
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
