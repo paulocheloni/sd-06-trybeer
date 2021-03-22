@@ -17,7 +17,8 @@ export default function Products() {
   useEffect(() => {
     const cartLS = JSON.parse(localStorage.getItem('cartProducts'));
     if (!cartLS) return;
-    setCartProducts(cartLS);
+    console.log(cartLS);
+    setCartProducts(cartLS.filter((product) => product.quantityItem !== 0));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -83,7 +84,7 @@ export default function Products() {
         (setOrderSuccess(response.message));
         setTimeout(() => {
           // setOrderSuccess('');
-          setCartProducts('');
+          setCartProducts([]);
           localStorage.removeItem('cartProducts');
           history.push('/products');
         }, SUCCESSMESSAGEDESAPEAR);

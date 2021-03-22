@@ -36,9 +36,9 @@ export default function ProductsCard() {
   };
 
   const showQuantity = (index) => {
-    if (cartProducts) {
+    if (cartProducts.length > 0) {
       const productExists = cartProducts
-        .find((product) => parseInt(product.id, 10) === parseInt(index, 10));
+        .find((product) => Number(product.id) === Number(index));
       if (productExists) {
         return productExists.quantityItem;
       }
