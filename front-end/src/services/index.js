@@ -98,7 +98,7 @@ const calculateTotal = (items) => {
 
 const addProduct = ({ quantity, setQuantity, name, setTotal, price }) => {
   const total = quantity + 1;
-  localStorage.setItem(`${name}`, JSON.stringify({ total, price }));
+  localStorage.setItem(`${name}`, JSON.stringify({ name, total, price }));
   setQuantity(total);
   const items = getItensStorage();
   setTotal(calculateTotal(items));
@@ -121,6 +121,24 @@ const tokenExists = (history) => {
   }
 };
 
+const deleteItemCart = ({ item, product, setTotal, setItems }) => {
+  console.log(product.name);
+  localStorage.removeItem(product.name);
+  const items = getItensStorage();
+  setTotal(calculateTotal(items));
+  setItems(Object.values(getItensStorage()))
+}
+
+const compraFinalizada = () => {
+  setTimeout(() => {console.log('Compra realizada com sucesso!')}, 2000)
+  // Ao clicar em "Finalizar pedido", deve ser feita uma requisição para o backend
+  //  para salvar o pedido no banco de dados, caso a operação dê certo, a mensagem
+  //   Compra realizada com sucesso! deve ser exibida por 2 segundos e em seguida a
+  //    pessoa deve ser redirecionada para a página Cliente - Produtos. Caso contrário,
+  //     deve ser exibido uma mensagem de erro;
+  //   Quando um pedido for finalizado, o carrinho deve ser esvaziado;
+}
+
 export {
   verifyEmailAndPassword,
   handleSubmit,
@@ -134,4 +152,6 @@ export {
   tokenExists,
   getItensStorage,
   calculateTotal,
+  deleteItemCart,
+  compraFinalizada,
 };
