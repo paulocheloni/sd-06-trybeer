@@ -11,7 +11,7 @@ export default function AdminOrderCard({ sale, index }) {
     status,
   } = sale;
   return (
-    <a className="adminOrderCard" href={ `/orders/${id}` }>
+    <a className="adminOrderCard" href={ `/admin/orders/${id}` }>
       <h2
         data-testid={ `${index}-order-number` }
       >
