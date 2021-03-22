@@ -23,9 +23,7 @@ router.post('/', rescue(async (req, res) => {
       userId, totalPrice: totalPrice.replace(',','.'), rua, numero, status,
     });
 
-    const saleProduct = newCart.map((element) => (Object.values(
-      { saleId, ...element }
-    )));
+    const saleProduct = newCart.map((element) => ({ saleId, ...element }));
 
     const produtosSalvos = await CheckoutService.createSaleProduct(saleProduct);
 

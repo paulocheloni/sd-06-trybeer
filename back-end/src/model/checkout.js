@@ -17,11 +17,18 @@ exports.create = async ({ userId, totalPrice, rua, numero, status }) =>
     .then(([result]) => ({ id: result.insertId }));
 
 exports.createSaleProduct = async (saleProducts) => {
-  console.log(saleProducts);
+  let products = '';
 
-  return connection.execute("INSERT INTO sales (sale_id, product_id, quantity) VALUES (?, ?, ?)",
-  saleProducts).then(([result]) => result);
+  for (let products of saleProducts) {
+    products = `${products} (
+      ${saleProducts.saleId},
+      ${saleProducts.productId},
+      ${saleProducts.quantity}
+    ),`
+  };
 
-  // const sql = "INSERT INTO sales (sale_id, product_id, quantity) VALUES ?";
-  // return connection.query(sql, saleProducts);
+  return connection
+    .execute(`INSERT INTO sales (sale_id, product_id, quantity) VALUES
+      ${products.substr(0, saleProducts.length - 1)}`)
+      .then(([result]) => result)
 };
