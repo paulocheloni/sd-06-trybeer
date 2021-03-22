@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
-import { Topbar, TextInput, CheckBox, SubmitButton } from '../components';
+import { TextInput, CheckBox, SubmitButton } from '../components';
 import { yupSchemas, handleSubmit } from '../utils';
 
 import '../styles/Forms.css';
