@@ -100,7 +100,7 @@ const Checkout = (props) => {
                     />
                   ))
                 )
-                : (<h2>Não há proodutos no carrinho</h2>)
+                : (<h2>Não há produtos no carrinho</h2>)
             }
             <span data-testid="order-total-value">
               Total:

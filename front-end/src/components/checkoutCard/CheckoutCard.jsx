@@ -13,19 +13,26 @@ const deleteProduct = (product, changeState) => {
 
 const CheckoutCard = ({ product, changeState, specialNumber }) => {
   const { quantity, name, price } = product;
+  const editPrice = `R$ ${price.toString().replace('.', ',')}`;
+  const fullPrice = (price * quantity).toFixed(2);
+  const editFullPrice = `R$ ${fullPrice.toString().replace('.', ',')}`;
+
   return (
     <div>
-      <span data-testid={ `${specialNumber}-product-qtd-input` }>{quantity}</span>
+      <span data-testid={ `${specialNumber}-product-qtd-input` }>
+        R$
+        {quantity}
+      </span>
       <span data-testid={ `${specialNumber}-product-name` }>
         -
         {name}
       </span>
       <span data-testid={ `${specialNumber}-product-total-value` }>
-        { (price * quantity).toFixed(2) }
+        { editFullPrice }
       </span>
       <span data-testid={ `${specialNumber}-product-unit-price` }>
         (
-        {price}
+        {editPrice}
         un
         )
       </span>
