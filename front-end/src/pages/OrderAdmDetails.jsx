@@ -18,7 +18,7 @@ function OrderAdmDetails() {
     };
     fetchData();
   }, [id]);
-  console.log(orderDetails);
+  console.log('Assim que clicar no item:', orderDetails);
   return (
     <>
       <h1 data-testid="top-title"> Detalhe do pedido</h1>
