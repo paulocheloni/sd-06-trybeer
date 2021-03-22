@@ -1,17 +1,9 @@
-/**
- * 1 - fazer estrutura básica do index
- * 2 - fazer estrutura básica do connection
- * 3 - criar rota de login (controller, service e model)
- * 4 - criar middleware de verificação de email e senha
- * 5 - implementar geração de token
- * 6 - retornar o token para o usuário
- */
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const userRouter = require('./src/controllers/UserController');
 const productsRouter = require('./src/controllers/ProductController');
-const salesRouter = require('./src/controllers/SalesController');
 
 const errorMiddleware = require('./src/middlewares/errorMiddleware');
 const salesRouter = require('./src/controllers/SalesController');
