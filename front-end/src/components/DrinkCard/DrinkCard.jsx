@@ -89,6 +89,7 @@ export default function DrinkCard({ product, index, setCartSum }) {
           type="button"
           className="minus-button"
           data-testid={ `${index}-product-minus` }
+          //  VOLTAR PRO SUBTRACT ITEM
           onClick={ () => subtractItem(cartItem, setCartItem) }
         >
           -

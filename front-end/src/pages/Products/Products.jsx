@@ -26,7 +26,11 @@ export default function Products() {
   }, [history]);
 
   const handleRedirect = () => {
-    history.push('/checkout');
+    // history.push('/checkout'); !!!Adicionei passar a soma total como props
+    history.push({
+      pathname: '/checkout',
+      state: { sum: cartSum },
+    });
   };
 
   return (

@@ -6,6 +6,7 @@ const status = {
   NOT_FOUND: 404,
   CONFLICT: 409,
   INTERNAL_ERROR: 500,
+  BAD_REQUEST: 400,
 };
 
 module.exports = status;
