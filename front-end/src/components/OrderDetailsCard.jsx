@@ -12,7 +12,7 @@ function OrderDetailsCard({ orderDetails }) {
       <div>
         <p data-testid="order-number">
 
-          {`Pedido: ${orderDetails[0].id}`}
+          {`Pedido ${orderDetails[0].id}`}
         </p>
         <p data-testid="order-date">
           data do pedido:

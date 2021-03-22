@@ -11,16 +11,16 @@ function ProductCard({ product }) {
 - O valor total do produto deverá conter a tag `data-testid="0-product-total-value"` */
   return (
     <>
-      <p data-testid={ `${product.id}-product-qtd` }>
+      <p data-testid={ `${product.id - 1 }-product-qtd` }>
         quantidade:
         {' '}
         {`${product.productQuantity} und`}
         {' '}
       </p>
-      <p data-testid={ `${product.id}-product-name` }>
+      <p data-testid={ `${product.id - 1}-product-name` }>
         {`nome do produto: ${product.productName}`}
       </p>
-      <p data-testid={ `${product.id}-product-total-value` }>
+      <p data-testid={ `${product.id - 1}-product-total-value` }>
         subtotal:
         {' '}
         {currencyFormat(Number(product.productQuantity * product.productPrice))}

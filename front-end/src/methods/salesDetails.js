@@ -1,10 +1,11 @@
 const baseURL = 'http://localhost:3001/orders';
 
 const getToken = () => {
-  const { token } = JSON.parse(localStorage.getItem('user'));
-  if (token !== null) {
-    return token;
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (user && user.token) {
+    return user.token;
   }
+  return null
 };
 
 const salesDetails = async (id) => {
@@ -19,7 +20,7 @@ const salesDetails = async (id) => {
     headers,
 
   };
-
+  if (!token) return {redirect: true}
   const apiRequest = await fetch(`${baseURL}/${id}`, getMethod);
   const apiResponse = await apiRequest.json();
   return apiResponse;
