@@ -12,21 +12,13 @@ import S from './styles';
 const navigationPages = ({
   stateSideBar,
   setStateSideBar,
-  setStateIsOpacity,
   history },
 route) => {
   setStateSideBar(!stateSideBar);
 
-  const time = 390;
-
-  setStateIsOpacity('0');
-
-  if (route === '/products') setStateIsOpacity('1');
   if (route === '/login') localStorage.removeItem('user');
 
   history.push(route);
-
-  setTimeout(() => { setStateIsOpacity('1'); }, time);
 };
 
 const SideBar = () => {

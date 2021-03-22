@@ -25,7 +25,6 @@ const Products = () => {
     stateSumPrice,
     stateSideBar,
     cartList,
-    stateIsOpacity,
   } = useContext(GlobalContext);
 
   const history = useHistory();
@@ -56,7 +55,7 @@ const Products = () => {
 
       <SideBar />
 
-      <S.ContainerProducts>
+      <S.ContainerProducts className="content">
         <S.ContainerCards stateSideBar={ stateSideBar }>
           {products && (
             products.map((product) => (
@@ -77,8 +76,6 @@ const Products = () => {
             heigth="40px"
             botton="0"
             position="fixed"
-            opacity={ stateIsOpacity }
-            // position={ stateIsFixed }
             marginBottom="10px"
             disabled={ isDisabled }
             onClick={ () => saveCart(cartList, history) }

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 import Typoslab from './fonts/TypoSlabIrregularDemo.otf';
 
@@ -21,9 +21,12 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    padding: 0;
-    margin: 0;
-    font-family: 'Open Sans', sans-serif;
+    ${() => css`
+      background: rgb(32,32,32);
+      padding: 0;
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+    `}
   }
 `;
 
