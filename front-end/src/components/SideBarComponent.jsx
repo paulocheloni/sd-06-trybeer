@@ -11,7 +11,7 @@ function SideBar() {
         type="button"
         data-testid="side-menu-item-products"
         onClick={ () => history.push('/products') }
-        classame="bttn_sidebar_costumer"
+        className="bttn_sidebar_costumer"
       >
         Produtos
       </button>

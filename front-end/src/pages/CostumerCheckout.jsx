@@ -1,8 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { CheckoutCards } from '../components';
-// import CheckoutCards from '../components/CheckoutCards';
-import Header from '../components/HeaderComponent';
+import { CheckoutCards, Header } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
 
 function CostumerCheckout() {
@@ -47,7 +45,7 @@ function CostumerCheckout() {
   };
 
   return (
-    <>
+    <div>
       <Header text="Finalizar Pedido" id="top-title" />
       <h1>Produtos</h1>
       <div>
@@ -100,7 +98,7 @@ function CostumerCheckout() {
         </button>
         <span>{ showMessage }</span>
       </form>
-    </>
+    </div>
   );
 }
 

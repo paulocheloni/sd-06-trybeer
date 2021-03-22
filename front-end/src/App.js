@@ -6,6 +6,7 @@ import {
   CostumerProfile,
   CostumerProducts,
   CostumerCheckout,
+  AdminProfile,
 } from './pages';
 import Provider from './context/Provider';
 
@@ -21,7 +22,7 @@ function App() {
             <Route path="/products" component={ CostumerProducts } />
             <Route path="/checkout" component={ CostumerCheckout } />
             <Route path="/orders" component={ () => <h1>/cliente/meuspedidos</h1> } />
-            {/* <Route path="/admin/profile" component={ AdminProfile } /> */}
+            <Route path="/admin/profile" component={ AdminProfile } />
             {/* <Route path="/admin/orders" component={ AdminOders } /> */}
             <Route
               path="/admin/orders/:id"
