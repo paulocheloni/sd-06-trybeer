@@ -4,9 +4,9 @@ import Topbar from '../components/Topbar';
 
 export default function Products() {
   return (
-    <div>
+    <section>
       <Topbar />
       Products
-    </div>
+    </section>
   );
 }

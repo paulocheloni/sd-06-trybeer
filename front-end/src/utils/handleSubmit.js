@@ -1,14 +1,12 @@
 import userApi from '../services/api.user';
 import yupSchemas from './yupSchemas';
-import handleUser from './handleUser';
+import redirectUser from './redirectUser';
 
-const handleSubmit = async (e, login, history, setToken) => {
-  e.preventDefault();
-
+const handleSubmit = async ({ action, login, setToken, history }) => {
   const valid = await yupSchemas.login.isValid(login);
   if (valid) {
-    const newUser = await userApi(login);
-    handleUser(newUser, history, setToken);
+    const newUser = await userApi(action, login);
+    redirectUser(newUser, history, setToken);
   }
 };
 

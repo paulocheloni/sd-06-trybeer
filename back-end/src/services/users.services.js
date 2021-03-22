@@ -21,7 +21,7 @@ const create = async (body) => {
   return { name, email, token, role };
 };
 
-const updateName = async ({ name }, id) => {
+const updateName = async (name, id) => {
   validateUserName(name);
   return users.updateNameByEmail(name, id);
 };

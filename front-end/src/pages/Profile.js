@@ -1,12 +1,62 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { useHistory, Redirect } from 'react-router-dom';
+import { yupSchemas, handleSaveUser } from '../utils';
 
-import Topbar from '../components/Topbar';
+import AppContext from '../context/app.context';
+import { Topbar, TextInput, SubmitButton } from '../components';
 
 export default function Products() {
+  const { token, setToken } = useContext(AppContext);
+  const history = useHistory();
+  const [name, setName] = useState(token.name);
+  const [disableBtn, setDisableBtn] = useState(true);
+  const [success, setSuccess] = useState(false);
+
+  const updateName = (target) => setName(target.value);
+
+  const submit = async (e) => {
+    e.preventDefault();
+
+    const payload = { ...token, newName: name };
+    const result = await handleSaveUser(payload, setToken, history);
+    if (result.success) setSuccess(true);
+  };
+
+  useEffect(() => {
+    const validateForm = async () => yupSchemas.update.validate({ name })
+      .then(() => setDisableBtn(false))
+      .catch((error) => {
+        if (disableBtn === false) setDisableBtn(true);
+        return error;
+      });
+
+    if (name.normalize() === token.name.normalize()) return setDisableBtn(true);
+    if (name.normalize() !== token.name.normalize()) validateForm();
+  }, [name, token.name, disableBtn]);
+
   return (
-    <div>
-      <Topbar />
-      Products
-    </div>
+    <section>
+      { (!token.token) && <Redirect to="/login" /> }
+      <Topbar title="Meu perfil" />
+      <form onSubmit={ submit }>
+        <fieldset>
+          <legend>Registro</legend>
+          <TextInput
+            name="name"
+            testId="profile"
+            value={ name }
+            callback={ updateName }
+          />
+          <TextInput
+            name="email"
+            testId="profile"
+            value={ token.email }
+            readonly
+          />
+        </fieldset>
+        <SubmitButton type="profile" disabled={ disableBtn } />
+      </form>
+      { (success) ? <p>Atualização concluída com sucesso.</p> : null }
+    </section>
   );
 }

@@ -1,18 +1,33 @@
 import axios from 'axios';
 
-const user = async (payload) => {
+const user = async (action, payload) => {
   try {
     const localhost = process.env.HOSTNAME || 'localhost';
-    const endpoint = (payload.name)
-      ? 'user/register'
-      : 'login';
-    const method = {
-      method: 'post',
+    let endpoint = '';
+    switch (action) {
+    case 'register':
+      endpoint = 'user/register';
+      break;
+    case 'login':
+      endpoint = 'login';
+      break;
+    case 'update':
+      endpoint = 'user/edit';
+      break;
+    default: return null;
+    }
+
+    const method = (action === 'update') ? 'put' : 'post';
+    const headers = { authorization: payload.token };
+
+    const request = {
+      method,
       url: `http://${localhost}:3001/${endpoint}`,
       data: payload,
+      headers,
     };
-    const result = await axios(method);
-    console.log(result);
+    const result = await axios(request);
+    console.log('axios request: ', result);
     if (result.data) return result.data;
   } catch (error) {
     if (error.response) {

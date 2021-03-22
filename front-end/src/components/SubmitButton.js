@@ -1,16 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CheckBox = (props) => {
+const SubmitButton = (props) => {
   const { type, disabled } = props;
 
-  const dataTestId = (type === 'signup')
-    ? 'signup-btn'
-    : 'signin-btn';
-
-  const label = (type === 'signup')
-    ? 'Cadastrar'
-    : 'Entrar';
+  let dataTestId;
+  let label;
+  switch (type) {
+  case 'signup':
+    dataTestId = 'signup-btn';
+    label = 'Cadastrar';
+    break;
+  case 'signin':
+    dataTestId = 'signin-btn';
+    label = 'Entrar';
+    break;
+  case 'profile':
+    dataTestId = 'profile-save-btn';
+    label = 'Salvar';
+    break;
+  default: return null;
+  }
 
   return (
     <button type="submit" data-testid={ dataTestId } disabled={ disabled }>
@@ -19,9 +29,9 @@ const CheckBox = (props) => {
   );
 };
 
-CheckBox.propTypes = {
+SubmitButton.propTypes = {
   type: PropTypes.string.isRequired,
   disabled: PropTypes.bool.isRequired,
 };
 
-export default CheckBox;
+export default SubmitButton;

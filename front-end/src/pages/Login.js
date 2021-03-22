@@ -16,6 +16,13 @@ export default function Login() {
 
   const updateLogin = (target) => setLogin({ ...login, [target.name]: target.value });
 
+  const submit = (e) => {
+    e.preventDefault();
+
+    const params = { action: 'login', login, setToken, history };
+    handleSubmit(params);
+  };
+
   useEffect(() => {
     const validateForm = async () => yupSchemas.login.validate(login)
       .then((valid) => (valid.email) && setDisableBtn(false))
@@ -30,7 +37,7 @@ export default function Login() {
   return (
     <div>
       <Topbar />
-      <form onSubmit={ (e) => handleSubmit(e, login, history, setToken) }>
+      <form onSubmit={ submit }>
         <fieldset>
           <legend>Login</legend>
           <TextInput

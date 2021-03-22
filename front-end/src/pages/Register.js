@@ -9,10 +9,9 @@ import '../styles/Forms.css';
 
 export default function Register() {
   const { setToken } = useContext(AppContext);
+  const history = useHistory();
   const [login, setLogin] = useState({ name: '', email: '', password: '' });
   const [disableBtn, setDisableBtn] = useState(true);
-
-  const history = useHistory();
 
   const updateLogin = (target) => {
     if (target.type === 'checkbox') {
@@ -20,6 +19,13 @@ export default function Register() {
     } else {
       setLogin({ ...login, [target.name]: target.value });
     }
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+
+    const params = { action: 'register', login, setToken, history };
+    handleSubmit(params);
   };
 
   useEffect(() => {
@@ -36,7 +42,7 @@ export default function Register() {
   return (
     <div>
       <Topbar />
-      <form onSubmit={ (e) => handleSubmit(e, login, history, setToken) }>
+      <form onSubmit={ submit }>
         <fieldset>
           <legend>Registro</legend>
           <TextInput

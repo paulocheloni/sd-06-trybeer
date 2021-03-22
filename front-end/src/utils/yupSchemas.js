@@ -18,4 +18,8 @@ const register = yup.object().shape({
   password: yup.string().min(passwordLength, invalid).required(required),
 });
 
-export default { login, register };
+const update = yup.object().shape({
+  name: yup.string().matches(/^[a-z ,.'-]{12,}$/i, invalid).required(required),
+});
+
+export default { login, register, update };
