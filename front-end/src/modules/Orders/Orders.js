@@ -10,6 +10,7 @@ function Orders() {
   useEffect(() => {
     axios.get('http://localhost:3001/sales')
       .then((response) => {
+        console.log(response.data)
         setSales(response.data)
       })
       .catch((err) => console.log(err.message));
@@ -18,12 +19,12 @@ function Orders() {
   return (
     <div>
       Orders
-      {/* <TopBar title={'Meus Pedidos'} />
+      <TopBar title={'Meus Pedidos'} />
       { sales.map((pedido, index) => (
         <Link key={ pedido.id } to={ `/orders/${pedido.id}` }>
           <CardClient key={ pedido.id } pedido={ pedido } IndexId={ index }/>
         </Link>
-      ))} */}
+      ))}
     </div>
   );
 }

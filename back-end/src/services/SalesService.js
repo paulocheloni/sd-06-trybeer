@@ -10,8 +10,8 @@ const SalesService = async (req, res, _next) => {
     const token = req.headers.authorization;
     const decoded = jwt.verify(token, secret);
     const { id } = decoded.data;
-    const { total, deliveryAddress, deliveryNumber, saleDate } = req.body;
-    const sale = await createSale(id, total, deliveryAddress, deliveryNumber, saleDate);
+    const { total, deliveryAddress, deliveryNumber } = req.body;
+    const sale = await createSale(id, total, deliveryAddress, deliveryNumber);
     res.status(STATUS_OK).json(sale);
   } catch (error) {
     console.log(error.message);
@@ -26,6 +26,7 @@ const getAllSales = async (req, res, _next) => {
     deliveryAddress: sale.delivery_address,
     deliveryNumber: sale.delivery_number,
     totalPrice: sale.total_price,
+    saleDate: sale.sale_date,
     status: sale.status,
 }));
   return res.status(STATUS_OK).json(formatedSales);
