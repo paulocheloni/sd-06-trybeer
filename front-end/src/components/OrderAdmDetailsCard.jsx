@@ -4,21 +4,11 @@ import ProductCardAdm from './ProductCardAdm';
 import currencyFormat from '../utils/currencyFormat';
 import updateStatus from '../methods/updateStatus';
 
-// const handleChanges = async (disabledButton, id) => {
-//   try {
-//     disabledButton(true);
-//   } catch (err) {
-//     disabledButton(false);
-//   }
-// };
-
 function OrderDetailsCard({ orderDetails }) {
-  // const [status, setStatus] = useState('');
-  // const [buttonState, setButtonState] = useState(false);
-  // console.log(status);
-  const status = false;
-
-  // handleChanges(setButtonState, orderDetails[0]);
+  let vissible = true;
+  if (orderDetails[0].statusSale && orderDetails[0].statusSale === 'Entregue') {
+    vissible = false;
+  }
 
   console.log(orderDetails);
   if (orderDetails[0]) {
@@ -44,14 +34,16 @@ function OrderDetailsCard({ orderDetails }) {
           </p>
           <hr />
         </div>
-        <button
-          data-testid="mark-as-delivered-btn"
-          type="button"
-          disabled={ !status }
-          onClick={ async () => updateStatus(orderDetails[0].id) }
-        >
-          Marcar como entregue
-        </button>
+        { vissible
+        && (
+          <button
+            data-testid="mark-as-delivered-btn"
+            type="button"
+            onClick={ async () => updateStatus(orderDetails[0].id) }
+          >
+            Marcar como entregue
+          </button>
+        ) }
       </div>);
   }
   return <p>...loading </p>;
