@@ -14,7 +14,7 @@ function Orders() {
   useEffect(() => {
     if (!loadState('user')) return history.push('/login');
     const user = loadState('user');
-    
+
     api.listAllOrders(user.email)
     .then((response) => setOrders(response.data))
     .catch((err) => console.log(err));
@@ -24,7 +24,7 @@ function Orders() {
 
   return (
     <div>
-      <NavBar content="Trybeer" />
+      <NavBar content="Meus Pedidos" />
       <h1>Orders</h1>
       {orders.map((order, index) => {
         return (
