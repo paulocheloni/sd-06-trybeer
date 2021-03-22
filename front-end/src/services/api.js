@@ -37,9 +37,19 @@ const getAllProducts = async (token) => axios
   .then((res) => res.data)
   .catch((err) => err.response.data);
 
+const getAllOrders = async (token) => axios
+  .get(`${baseUrl}/admin/orders`, {
+    headers: {
+      authorization: token,
+    },
+  })
+  .then((res) => res.data)
+  .catch((err) => err.response.data);
+
 module.exports = {
   generateToken,
   registerUser,
   updateNameOfUser,
   getAllProducts,
+  getAllOrders,
 };

@@ -5,6 +5,7 @@ import {
   Route,
   Redirect } from 'react-router-dom';
 
+import AdminOrders from '../pages/AdminOrders';
 import Products from '../pages/Products';
 import Register from '../pages/Register';
 import Profile from '../pages/Profile';
@@ -16,7 +17,7 @@ const Routes = () => (
       <Route exact path="/">
         <Redirect from="/" to="/login" />
       </Route>
-      <Route path="/admin/orders" />
+      <Route path="/admin/orders" component={ AdminOrders } />
       <Route path="/login" component={ Login } />
       <Route path="/register" component={ Register } />
       <Route path="/products" component={ Products } />
