@@ -110,24 +110,28 @@ export default function Hamburguer() {
                     id="menu-list-grow"
                     onKeyDown={ handleListKeyDown }
                   >
+
                     <MenuItem
                       data-testid="side-menu-item-products"
                       onClick={ () => handleRedirect('Produtos') }
                     >
                       Produtos
                     </MenuItem>
+
                     <MenuItem
                       data-testid="side-menu-item-my-orders"
                       onClick={ () => handleRedirect('Meus Pedidos') }
                     >
                       Meus Pedidos
                     </MenuItem>
+
                     <MenuItem
                       data-testid="side-menu-item-my-profile"
                       onClick={ () => handleRedirect('Meu Perfil') }
                     >
                       Meu Perfil
                     </MenuItem>
+
                     <MenuItem
                       data-testid="side-menu-item-logout"
                       onClick={ () => handleRedirect('Sair') }

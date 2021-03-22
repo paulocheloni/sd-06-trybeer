@@ -1,10 +1,10 @@
 import React from 'react';
-import NavBar from '../components/menuNavBar';
+import NavBarAdmin from '../components/menuNavBarAdmin';
 
 function Admin() {
   return (
     <div>
-      <NavBar content="Trybeer" />
+      <NavBarAdmin content="Trybeer" />
       <h1>Admin</h1>
     </div>
   );
