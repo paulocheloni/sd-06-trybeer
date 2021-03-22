@@ -23,12 +23,13 @@ router.post('/', rescue(async (req, res) => {
       userId, totalPrice: totalPrice.replace(',','.'), rua, numero, status,
     });
 
-    const saleProduct = newCart.map((element) => ({ saleId, ...element }));
-    // { saleId: 14, productId: 11, quantity: 1 };
+    const saleProduct = newCart.map((element) => (Object.values(
+      { saleId, ...element }
+    )));
 
-    await CheckoutService.createSaleProduct(saleProduct);
+    const produtosSalvos = await CheckoutService.createSaleProduct(saleProduct);
 
-   return res.status(200).json({ message: "Sale success" });
+   return res.status(200).json(produtosSalvos);
   } catch (err) {
     return res.status(404).json({ message: "Sale failure" });
   }
