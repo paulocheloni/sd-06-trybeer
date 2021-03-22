@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import SideBar from './Sidebar';
+import SideBar from './SideBar';
 
 function TopBar({ name }) {
   const [visible, setVisible] = useState(true);
