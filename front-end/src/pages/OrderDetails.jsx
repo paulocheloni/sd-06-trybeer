@@ -1,28 +1,28 @@
-import React from 'react';
-// import { useParams } from 'react-router-dom';
-// import MenuTop from '../components/MenuTop';
-// import OrderDetailsCard from '../components/OrderDetailsCard';
+import React, { useEffect, useState } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+import OrderDetailsCard from '../components/OrderDetailsCard';
+import getSaleDetails from '../methods/salesDetails';
 
 function OrderDetails() {
-  // const [data, setData] = useState('');
-  // const { id } = useParams();
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const orderDetails = await fetchOrderDetails(id);
-  //     setData(orderDetails);
-  //   };
-  //   fetchData();
-  // }, [id]);
-
-  // return (
-  //   <>
-  //     <MenuTop title="TryBeer" />
-  //     <h1>detalhe do pedido</h1>
-  //     <OrderDetailsCard order={ data } />
-  //   </>
-  // );
+  const { id } = useParams();
+  const history = useHistory();
+  const [orderDetails, setOrderDetails] = useState({});
+  useEffect(() => {
+    const fetchData = async () => {
+      const saleDetails = await getSaleDetails(id);
+      if (saleDetails.redirect) {
+        history.push('/login');
+      } else {
+        setOrderDetails(saleDetails);
+      }
+    };
+    fetchData();
+  }, [history, id]);
   return (
-    <h1>Order Details</h1>
+    <>
+      <h1 data-testid="top-title"> Detalhe do pedido</h1>
+      {orderDetails.length > 0 && <OrderDetailsCard orderDetails={ orderDetails } /> }
+    </>
   );
 }
 

@@ -7,24 +7,22 @@ const { createOne, getAllByUserId } = require('../models/SalesService');
 const routerSales = Router();
 
 routerSales.post('/', validateToken, async (req, res) => {
-  const { price, address, number, status } = req.body.order;
+  const { products, price, address, number, status } = req.body.order;
   const { userId } = res.locals;
-  console.log(userId, price, address, number, status);
-  const { insertId, date } = await createOne({ userId, price, address, number, status });
+  const { insertId, date } = await createOne(products,
+     { userId, price, address, number, status });
   res.status(201).json({ order: {
     saleId: insertId, userId, price, address, number, status, date,
   } });
 });
 
 routerSales.get('/', validateToken, async (req, res) => {
-  console.log(res.locals);
   const { userId } = res.locals;
   const [orders] = await getAllByUserId(userId);
-  console.log(orders, 'orders');
   res.status(200).json({ orders });
 });
 
-routerSales.use('/:id', routerSalesDetails);
+routerSales.use('/', routerSalesDetails);
 
 module.exports = routerSales;
 

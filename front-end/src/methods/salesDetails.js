@@ -1,28 +1,27 @@
-const baseURL = 'http://localhost:3001';
+const baseURL = 'http://localhost:3001/orders';
 
 const getToken = () => {
-  const { token } = JSON.parse(localStorage.getItem('user'));
-  if (token !== null) {
-    return token;
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (user && user.token) {
+    return user.token;
   }
+  return null;
 };
 
-const salesDetails = async (SPInfo) => {
+const salesDetails = async (id) => {
   const token = getToken();
   const headers = {
     'Content-Type': 'application/json',
     authorization: token,
   };
 
-  const postMethod = {
-    method: 'POST',
+  const getMethod = {
+    method: 'GET',
     headers,
-    body: JSON.stringify({
-      sale: SPInfo,
-    }),
-  };
 
-  const apiRequest = await fetch(`${baseURL}/`, postMethod);
+  };
+  if (!token) return { redirect: true };
+  const apiRequest = await fetch(`${baseURL}/${id}`, getMethod);
   const apiResponse = await apiRequest.json();
   return apiResponse;
 };
