@@ -7,6 +7,9 @@ import Profile from './Pages/Profile';
 import Provider from './context/Provider';
 import './App.css';
 import Products from './Pages/Products';
+import Orders from './Pages/Orders';
+import Checkout from './Pages/Checkout';
+import OrderDetail from './Pages/OrderDetail';
 
 function App() {
   return (
@@ -21,6 +24,9 @@ function App() {
           <Route exact path="/register" component={ Register } />
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/products" component={ Products } />
+          <Route exact path="/checkout" component={ Checkout } />
+          <Route exact path="/orders" component={ Orders } />
+          <Route path="/orders/:orderId" exact component={ OrderDetail } />
         </Switch>
       </BrowserRouter>
     </Provider>

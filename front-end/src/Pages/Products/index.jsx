@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import GetProducts from '../../services/GetProducts';
@@ -18,7 +19,7 @@ const Products = () => {
     if (!window.localStorage.token) {
       history.push('/login');
     }
-  });
+  }, []);
   useEffect(() => {
     const amountInCart = products
       .reduce((acc, product) => acc + product.productQuantity, 0);

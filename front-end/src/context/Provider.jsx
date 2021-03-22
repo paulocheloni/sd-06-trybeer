@@ -14,22 +14,17 @@ function Provider({ children }) {
   useEffect(() => {
     const maxLength = 5;
     function validateForm(emailInput, passwordInput) {
-      // const emailRegex = /\S+@\S+\.\S+/;
       if (validator.isEmail(emailInput)
-      && passwordInput.length > maxLength) return setValidForm(true);
-      // if (emailRegex.test(emailInput) && passwordInput.length > maxLength) return setValidForm(true);
+        && passwordInput.length > maxLength) return setValidForm(true);
       setValidForm(false);
     }
     validateForm(email, password);
   }, [email, password]);
   const validateRegister = (name, emailInput, passwordInput) => {
-    // const emailReg = /\S+@\S+\.\S+/;
-    const nameReg = /^[A-Za-z ]{2,30}$/;
+    const nameReg = /^[a-zA-Z ]{2,30}$/;
     const maxlength = 12;
     const maxlengthPass = 6;
-    if (name.length >= maxlength && nameReg.test(name)
-    && validator.isEmail(emailInput)
-    // if (name.length >= maxlength && nameReg.test(name) && emailReg(emailInput)
+    if (name.length >= maxlength && nameReg.test(name) && validator.isEmail(emailInput)
     && passwordInput.length >= maxlengthPass) return setValidRegister(true);
     setValidRegister(false);
   };

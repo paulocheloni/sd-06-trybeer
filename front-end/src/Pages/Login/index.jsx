@@ -38,7 +38,7 @@ const Login = () => {
         <Button
           disabled={ !validForm }
           dataTestId="signin-btn"
-          onClick={ () => fetchApi() }
+          onClick={ fetchApi }
         >
           Entrar
         </Button>
