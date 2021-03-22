@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import parseCurrency from '../utils/parseCurrencyToBRL';
 import Context from '../hooks/UseContext';
+import '../styles/productcard.css';
 
 function ProductCard({ productInfo, index }) {
   const { totalPrice, setTotalPrice } = useContext(Context);
@@ -44,34 +45,37 @@ function ProductCard({ productInfo, index }) {
   }, [index, productQuantity]);
 
   return (
-    <div>
+    <div className="card">
       <img
         data-testid={ `${index}-product-img` }
         src={ urlImage }
         alt={ name }
         height="150px"
-      />
+        />
       <div data-testid={ `${index}-product-name` }>{name}</div>
       <div data-testid={ `${index}-product-price` }>{parseCurrency(price)}</div>
       <div>
         <button
+          className="quantitybutton"
           type="button"
           data-testid={ `${index}-product-minus` }
           onClick={ () => handleQuantity('minus') }
-        >
+          >
           -
         </button>
         <span
+          className="quantityvalue"
           data-testid={ `${index}-product-qtd` }
           value={ productQuantity }
-        >
+          >
           { productQuantity }
         </span>
         <button
+          className="quantitybutton"
           type="button"
           data-testid={ `${index}-product-plus` }
           onClick={ () => handleQuantity('plus') }
-        >
+          >
           +
         </button>
       </div>

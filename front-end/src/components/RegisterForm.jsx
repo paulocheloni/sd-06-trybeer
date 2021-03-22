@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../hooks/UseContext';
 import { registerUser, validateUser } from '../services/users';
+import '../styles/register.css'
 
 function RegisterForm() {
   const [disabled, setDisabled] = useState(false);
@@ -47,36 +48,41 @@ function RegisterForm() {
   };
 
   return (
-    <div>
-      <form>
-        <label htmlFor="nameInput">
+    <div className="registercontainer">
+      <h1>Registre-se</h1>
+      <form className="registerinformations">
+        <label htmlFor="nameInput" className="labelregister">
           Nome
           <input
+            className="inputregister"
             id="nameInput"
             data-testid="signup-name"
             onChange={ (e) => setName(e.currentTarget.value) }
           />
         </label>
-        <label htmlFor="emailInput">
+        <label htmlFor="emailInput" className="labelregister">
           Email
           <input
+            className="inputregister"
             id="emailInput"
             data-testid="signup-email"
             onChange={ (e) => setEmail(e.target.value) }
           />
         </label>
-        <label htmlFor="passwordInput">
+        <label htmlFor="passwordInput" className="labelregister">
           Senha
           <input
+            className="inputregister"
             id="passwordInput"
             type="password"
             data-testid="signup-password"
             onChange={ (e) => setPassword(e.target.value) }
           />
         </label>
-        <label htmlFor="seller-checkbox">
+        <label htmlFor="seller-checkbox" className="labelcheckbox">
           Quero vender
           <input
+            className="checkbox"
             id="seller-checkbox"
             type="checkbox"
             data-testid="signup-seller"
@@ -84,6 +90,7 @@ function RegisterForm() {
           />
         </label>
         <button
+          className="buttonregister"
           type="button"
           disabled={ !disabled }
           id="signup-btn"

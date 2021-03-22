@@ -4,6 +4,7 @@ import TopBar from '../components/TopBar';
 import ProductCard from '../components/ProductCard';
 import CartButton from '../components/CartButton';
 import { getAllProducts } from '../services/products';
+import '../styles/productcard.css';
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -34,10 +35,14 @@ function Products() {
   return !products ? <h1>Loading...</h1> : (
     <div>
       <TopBar name="TryBeer" />
-      {products.map((product, index) => (
-        <ProductCard key={ product.id } productInfo={ product } index={ index } />
-      ))}
-      <CartButton />
+      <div className="productcontainer">
+        <div className="cardcontainer">
+          {products.map((product, index) => (
+            <ProductCard key={ product.id } productInfo={ product } index={ index } />
+          ))}
+        </div>
+        <CartButton />
+      </div>
     </div>
   );
 }
