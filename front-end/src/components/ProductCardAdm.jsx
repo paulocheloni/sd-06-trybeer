@@ -4,11 +4,6 @@ import currencyFormat from '../utils/currencyFormat';
 
 function ProductCardAdm({ product }) {
   console.log(product);
-  /* - A quantidade do produto deverá conter a tag `data-testid="0-product-qtd"`
-
-- O nome do produto deverá conter a tag `data-testid="0-product-name"`
-
-- O valor total do produto deverá conter a tag `data-testid="0-product-total-value"` */
   return (
     <table>
       <tr>
@@ -24,9 +19,7 @@ function ProductCardAdm({ product }) {
           {currencyFormat(Number(product.productPrice * product.productQuantity))}
         </span>
         <span data-testid={ `${product.id - 1}-order-unit-price` }>
-          (
-          {currencyFormat(Number(product.productPrice))}
-          )
+          {`(${currencyFormat(Number(product.productPrice))})`}
         </span>
       </tr>
     </table>
