@@ -3,43 +3,43 @@ import { Link } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
 
 const SidebarMenuADM = () => {
-  const { eraseLocalStorage, isVisible, setVisibility } = useContext(TrybeerContext);
+  const { eraseLocalStorage, setVisibility } = useContext(TrybeerContext);
 
   return (
-          <div className="admin-side-bar-container">
-              <p>TryBeer</p>
-              <Link to="/admin/orders">
-                <button
-                  data-testid="side-menu-item-orders"
-                  type="button"
-                  onClick={ setVisibility }
-                >
-                  Pedidos
-                </button>
-              </Link>
-              <Link to="/admin/profile">
-                <button
-                  data-testid="side-menu-item-profile"
-                  type="button"
-                  onClick={ setVisibility }
-                >
-                  Perfil
-                </button>
-              </Link>
-            <Link to="/login" className="justify-at-the-end">
-              <button
-                className="justify-at-the-end"
-                data-testid="side-menu-item-logout"
-                type="button"
-                onClick={ () => {
-                  eraseLocalStorage('cart');
-                  eraseLocalStorage('user');
-                } }
-              >
-                Sair
-              </button>
-            </Link>
-          </div>
+    <div className="admin-side-bar-container">
+      <p>TryBeer</p>
+      <Link to="/admin/orders">
+        <button
+          data-testid="side-menu-item-orders"
+          type="button"
+          onClick={ setVisibility }
+        >
+          Pedidos
+        </button>
+      </Link>
+      <Link to="/admin/profile">
+        <button
+          data-testid="side-menu-item-profile"
+          type="button"
+          onClick={ setVisibility }
+        >
+          Perfil
+        </button>
+      </Link>
+      <Link to="/login" className="justify-at-the-end">
+        <button
+          className="justify-at-the-end"
+          data-testid="side-menu-item-logout"
+          type="button"
+          onClick={ () => {
+            eraseLocalStorage('cart');
+            eraseLocalStorage('user');
+          } }
+        >
+          Sair
+        </button>
+      </Link>
+    </div>
   );
 };
 
