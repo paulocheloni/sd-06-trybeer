@@ -15,6 +15,9 @@ function Header() {
     case '/products':
       setTitle('TryBeer');
       break;
+    case '/checkout':
+      setTitle('Finalizar Pedido');
+      break;
     default:
       setTitle('Erro');
       break;

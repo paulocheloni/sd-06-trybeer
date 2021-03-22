@@ -19,7 +19,8 @@ function profile(token) {
 
   return axios.get('/user/profile', {
     headers: { authorization: token },
-  }).then((response) => response.data);
+  }).then((response) => response.data)
+    .catch((err) => console.log(err));
 }
 
 function register(user) {
