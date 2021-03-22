@@ -1,10 +1,11 @@
 import React from 'react';
-import MenuTop from '../components/menuTop';
+
+import MenuTop from '../components/MenuTop';
 
 function Admin() {
   return (
     <div>
-      <MenuTop />
+      <MenuTop title="Trybeer" />
     </div>
   );
 }
