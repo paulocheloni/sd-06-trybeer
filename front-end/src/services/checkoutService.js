@@ -1,3 +1,5 @@
+import { saveSale } from "./api";
+
 export function removeCheckoutItem(name, cart, setCart) {
   const newCart = cart.filter((item) => item.name !== name);
   setCart(newCart);
@@ -19,8 +21,8 @@ function redirectCart(history, setCart) {
   }, timeOut);
 }
 
-export function checkoutOrder(history, setCart, sale) {
-  console.log(sale);
+export async function checkoutOrder(history, setCart, sale) {
+  await saveSale(sale);
 
   const cartItens = document.getElementById('cart-checkout');
   const parentDiv = cartItens.parentNode;
