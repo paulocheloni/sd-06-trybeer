@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import InputRegister from './InputRegister';
+import '../style/Register.css';
 
 const RegisterForm = ({ state, setState, handleClick }) => {
   const { name,
@@ -8,7 +10,7 @@ const RegisterForm = ({ state, setState, handleClick }) => {
   const { setName, setEmail, setPassword, setSeller } = setState;
   return (
 
-    <>
+    <section className="register-container">
       <h1>Pagina de Registro</h1>
       <InputRegister
         name="name"
@@ -37,11 +39,12 @@ const RegisterForm = ({ state, setState, handleClick }) => {
         label="Quero vender"
         type="checkbox"
       />
-      <p>
+      <p className="signup-p">
         {messageError
        !== '' || responseError !== '' ? messageError || responseError : null}
       </p>
       <button
+        className="signup-btn"
         type="button"
         disabled={ !formValidated }
         data-testid="signup-btn"
@@ -49,7 +52,14 @@ const RegisterForm = ({ state, setState, handleClick }) => {
       >
         Cadastrar
       </button>
-    </>
+      <Link
+        to="/login"
+        className="no-account-btn"
+        data-testid="no-account-btn"
+      >
+        Já tenho conta
+      </Link>
+    </section>
   );
 };
 export default RegisterForm;
