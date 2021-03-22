@@ -5,7 +5,7 @@ import ContextBeer from './ContextBeer';
 function Provider({ children }) {
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
-  const [isDisabled, setIsDisabled] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
   const [products, setProducts] = useState([]);
   const [registerName, setRegisterName] = useState('');
   const [registerEmail, setRegisterEmail] = useState('');

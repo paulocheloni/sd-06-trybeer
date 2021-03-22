@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import api from '../../axios/api';
 import Button from '../../design-components/Button';
@@ -9,18 +9,18 @@ import loginValidation from '../../utils/loginValidation';
 
 function Login() {
   const history = useHistory();
+  const [isDisabled, setIsDisabled] = useState(true);
   const {
     loginEmail,
     loginPassword,
     setLoginEmail,
     setLoginPassword,
-    isDisabled,
-    setIsDisabled,
   } = useContext(ContextBeer);
 
   useEffect(() => {
     loginValidation(loginEmail, loginPassword, setIsDisabled);
-  }, [loginEmail, loginPassword, setIsDisabled]);
+    // eslint-disable-next-line
+  }, [loginEmail, loginPassword]);
 
   const resetFields = () => {
     setLoginEmail('');

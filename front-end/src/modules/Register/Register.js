@@ -10,17 +10,17 @@ function Register() {
   const STATUS_CONFLICT = 409;
   const history = useHistory();
   const [duplicated, setDuplicated] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
   const {
     registerName,
     registerEmail,
     registerPassword,
-    isDisabled,
-    setIsDisabled,
   } = useContext(ContextBeer);
 
   useEffect(() => {
     registerValidation(registerName, registerEmail, registerPassword, setIsDisabled);
-  }, [registerName, registerEmail, registerPassword, setIsDisabled]);
+    // eslint-disable-next-line
+  }, [registerName, registerEmail, registerPassword]);
 
   const isChecked = () => (document.getElementById('wannasell').checked);
 
