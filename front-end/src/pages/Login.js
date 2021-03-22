@@ -36,7 +36,6 @@ export default function Login() {
 
   return (
     <div>
-      <Topbar />
       <form onSubmit={ submit }>
         <fieldset>
           <legend>Login</legend>

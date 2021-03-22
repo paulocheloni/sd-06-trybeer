@@ -41,7 +41,6 @@ export default function Register() {
 
   return (
     <div>
-      <Topbar />
       <form onSubmit={ submit }>
         <fieldset>
           <legend>Registro</legend>
