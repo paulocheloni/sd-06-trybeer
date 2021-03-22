@@ -45,12 +45,7 @@ function Checkout() {
     return saveState(`${email}`, []);
   }, [history, setCart]);
 
-  // const validateCheckout = () => (
-  //   (street.length > 0 && numberHouse.length > 0)
-  //     ? setDisabled(false) : setDisabled(true)
-  // );
-
-  const validateCheckout = useCallback(() =>
+  const validateCheckout = () => (
     (street.length > 0 && numberHouse.length > 0)
       ? setDisabled(false) : setDisabled(true)
   );
