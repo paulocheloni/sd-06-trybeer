@@ -42,6 +42,7 @@ function Products() {
         </div>
         <CartButton />
       </div>
+      <div className="footer" />
     </div>
   );
 }

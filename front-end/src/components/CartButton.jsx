@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Context from '../hooks/UseContext';
 import parseCurrency from '../utils/parseCurrencyToBRL';
+import '../styles/cartbutton.css';
 
 function CartButton() {
   const { totalPrice, setTotalPrice } = useContext(Context);
@@ -17,7 +18,7 @@ function CartButton() {
     } else {
       setTotalPrice(total);
     }
-  }, []);
+  }, [setTotalPrice]);
 
   useEffect(() => {
     if (Number(totalPrice) > 0) {
@@ -30,6 +31,7 @@ function CartButton() {
 
   return (
     <button
+      className="cartbutton"
       disabled={ isDisabled }
       data-testid="checkout-bottom-btn"
       type="button"

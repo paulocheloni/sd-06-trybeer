@@ -1,0 +1,83 @@
+.checkoutcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.labelcheckout {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.inputcheckout {
+  background: transparent;
+  border: 1px solid rgb(220, 220, 220, 0.7);
+  padding: 6px;
+  margin-bottom: 12px;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 15px;
+  color: rgb(100, 100, 100);
+}
+
+.buttoncheckout {
+  padding: 10px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  background-color: #e9925c;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.buttoncheckout:disabled {
+  background: darkgray;
+}
+
+.adress {
+  font-size: 40px;
+  margin-bottom: 0;
+  color: rgb(85, 85, 85);
+}
+
+.checkoutproducts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 90px;
+}
+
+.checkoutproducts ul {
+  list-style: none;
+}
+
+.productcart {
+  border: none;
+  padding: 5px 8px;
+  background-color: white;
+  border-radius: 5px;
+  color: black;
+  font-size: 20px;
+  font-weight: bolder;
+  box-shadow: 4px 4px 16px -3px rgba(0, 0, 0, 0.75);
+}
+
+.productcart:hover {
+  transform: scale(1.05);
+}
+
+.productcart button {
+  margin-left: 10px;
+  color: white;
+  font-size: large;
+  font-weight: bolder;
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+}

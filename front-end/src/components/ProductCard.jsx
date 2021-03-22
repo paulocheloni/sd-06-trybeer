@@ -20,7 +20,8 @@ function ProductCard({ productInfo, index }) {
     } else {
       setProductQuantity(item.productQuantity);
     }
-  }, [name, price, productQuantity]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleQuantity = (operation) => {
     if (operation === 'minus' && Number(productQuantity) >= 1) {
@@ -40,9 +41,10 @@ function ProductCard({ productInfo, index }) {
     const productList = JSON.parse(localStorage.getItem('productList'));
 
     productList[index].productQuantity = productQuantity;
-    
+
     localStorage.setItem('productList', JSON.stringify(productList));
-  }, [index, productQuantity]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [productQuantity]);
 
   return (
     <div className="card">
@@ -51,23 +53,23 @@ function ProductCard({ productInfo, index }) {
         src={ urlImage }
         alt={ name }
         height="150px"
-        />
+      />
       <div data-testid={ `${index}-product-name` }>{name}</div>
       <div data-testid={ `${index}-product-price` }>{parseCurrency(price)}</div>
-      <div>
+      <div className="quantitycontainer">
         <button
           className="quantitybutton"
           type="button"
           data-testid={ `${index}-product-minus` }
           onClick={ () => handleQuantity('minus') }
-          >
+        >
           -
         </button>
         <span
           className="quantityvalue"
           data-testid={ `${index}-product-qtd` }
           value={ productQuantity }
-          >
+        >
           { productQuantity }
         </span>
         <button
@@ -75,7 +77,7 @@ function ProductCard({ productInfo, index }) {
           type="button"
           data-testid={ `${index}-product-plus` }
           onClick={ () => handleQuantity('plus') }
-          >
+        >
           +
         </button>
       </div>
