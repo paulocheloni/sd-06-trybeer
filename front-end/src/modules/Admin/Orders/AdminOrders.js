@@ -10,7 +10,7 @@ function AdminOrders() {
   useEffect(() => {
     axios.get('http://localhost:3001/sales')
       .then((response) => {
-        setSales(response.data)
+        setSales(response.data);
       })
       .catch((err) => console.log(err.message));
   }, []);
@@ -20,7 +20,7 @@ function AdminOrders() {
       <SideBarAdmin />
       { sales.map((pedido, index) => (
         <Link key={ pedido.id } to={ `/admin/orders/${pedido.id}` }>
-          <CardAdmin key={ pedido.id } pedido={ pedido } IndexId={ index }/>
+          <CardAdmin key={ pedido.id } pedido={ pedido } IndexId={ index } />
         </Link>
       ))}
     </div>

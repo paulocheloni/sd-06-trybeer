@@ -8,7 +8,7 @@ function CardAdmin(props) {
     deliveryNumber,
     status,
     totalPrice,
-  }, IndexId  } = props;
+  }, IndexId } = props;
   return (
     <div
       className="flex flex-wrap border-2
@@ -56,6 +56,7 @@ CardAdmin.propTypes = {
     status: PropTypes.string.isRequired,
     totalPrice: PropTypes.string.isRequired,
   }).isRequired,
+  IndexId: PropTypes.string.isRequired,
 };
 
 export default CardAdmin;

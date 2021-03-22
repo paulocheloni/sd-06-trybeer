@@ -47,7 +47,7 @@ function Login() {
       <div className="max-w-md w-full space-y-8">
         <img className="mx-auto h-64 w-64 w-auto" src={ Logo } alt="Workflow" />
         <form className="mt-8 space-y-6" action="#" method="POST">
-          <input type="hidden" name="remember" value="true" />
+          {/* <input type="hidden" name="remember" value="true" /> */}
           <LoginInputs />
           <Button
             onClick={ () => onClick() && resetFields() }
