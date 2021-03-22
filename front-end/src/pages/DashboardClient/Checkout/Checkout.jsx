@@ -15,20 +15,17 @@ const Checkout = (props) => {
   if (!location.state) location.state = 0;
 
   const [user] = useState(JSON.parse(localStorage.getItem('user')));
-  let [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')));
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || '');
   const [chkButton, setChkButton] = useState(true);
   const [chkForm, setChkForm] = useState({ st: '', num: '' });
   const [statusPedido] = useState('Pendente'); // ou Entregue
   const [mySum, setSum] = useState(location.state.sum || ' ');
   const [saleDone, setSaleDone] = useState(false);
-  
-  if (!cart) cart = '';
 
   const history = useHistory();
-  
+
   useEffect(() => {
     verifyUser(history);
-    // verifyUser(history);
   }, [history]);
 
   useEffect(() => {
@@ -95,13 +92,13 @@ const Checkout = (props) => {
               (cart.length)
                 ? (
                   cart.map((product, index) => (
-                      <CheckoutCard
-                        product={ product }
-                        changeState={ changeState }
-                        key={ index }
-                        specialNumber={ index }
-                      />
-                    ))
+                    <CheckoutCard
+                      product={ product }
+                      changeState={ changeState }
+                      key={ index }
+                      specialNumber={ index }
+                    />
+                  ))
                 )
                 : (<h2>Não há proodutos no carrinho</h2>)
             }

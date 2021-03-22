@@ -47,7 +47,7 @@ CheckoutCard.propTypes = {
     price: PropTypes.number.isRequired,
   }).isRequired,
   changeState: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired,
+  specialNumber: PropTypes.number.isRequired,
 };
 
 export default CheckoutCard;
