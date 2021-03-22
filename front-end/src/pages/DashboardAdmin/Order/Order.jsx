@@ -26,8 +26,7 @@ export default function Orders() {
           index={ index }
         />
       )))
-      || 
-      (<span>Você não possui nenhum pedido :(</span>)}
+      || (<span>Você não possui nenhum pedido :(</span>)}
     </div>
   );
 }
