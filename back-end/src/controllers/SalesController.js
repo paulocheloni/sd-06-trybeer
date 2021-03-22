@@ -1,9 +1,11 @@
 const { Router } = require('express');
-const { SalesService } = require('../services/SalesService');
+const { getAllSales, createSale } = require('../services/SalesService');
 const { TokenValidation } = require('../Auth/TokenValidation');
 
 const SalesController = new Router();
 
-SalesController.post('/', TokenValidation, SalesService);
+SalesController.post('/', TokenValidation, createSale);
+
+SalesController.get('/', TokenValidation, getAllSales);
 
 module.exports = SalesController;
