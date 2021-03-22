@@ -11,6 +11,20 @@ SalesController.get('/', verifyLogin, async (req, res) => {
   res.status(OK).json(sales);
 });
 
+// Get All Sales by User
+SalesController.get('/user/:userId', verifyLogin, async (req, res) => {
+  const { userId } = req.params;
+  const sales = await SalesService.getByUserId(userId);
+  return res.status(OK).json(sales);
+});
+
+// Get All Sales Products by saleID
+SalesController.get('/products/:saleId', verifyLogin, async (req, res) => {
+  const { saleId } = req.params;
+  const saleProducts = await SalesService.getSalesProductsBySaleId(saleId);
+  return res.status(OK).json(saleProducts);
+});
+
 // Store request
 SalesController.post('/checkout', verifyLogin, async (req, res) => {
   const { userId, totalPrice, address, number } = req.body;
