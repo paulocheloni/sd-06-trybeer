@@ -17,4 +17,10 @@ salesRouter.get('/', async (_req, res) => {
   res.status(status.SUCCESS).json(sales);
 });
 
+salesRouter.get('/admin/details/:id', async (req, res) => {
+  const {id: saleId} = req.params;
+  const responsePayload = await SalesService.getSaleById(saleId);
+  res.status(status.SUCCESS).json({responsePayload});
+});
+
 module.exports = salesRouter;

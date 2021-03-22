@@ -6,7 +6,7 @@ export { default as Register } from './Register/Register';
 export { default as Products } from './Products/Products';
 export {
   default as AdminOrdersDetail,
-} from './DashboardAdmin/FulfilledOrders/FulfilledOrders';
+} from './DashboardAdmin/AdminOrdersDetail/AdminOrdersDetail';
 export {
   default as AdminOrders,
 } from './DashboardAdmin/Order/Order';
