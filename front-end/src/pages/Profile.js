@@ -24,13 +24,15 @@ export default function Profile() {
 
   useEffect(() => {
     const validateForm = async () => yupSchemas.update.validate({ name })
-      .then((valid) => valid)
-      .catch((error) => error);
+      .then((valid) => (valid.name) && setDisableBtn(false))
+      .catch((error) => {
+        if (disableBtn === false) setDisableBtn(true);
+        return error;
+      });
 
-    const nameChanged = name.normalize() !== token.name.normalize();
-    const validate = (nameChanged) && validateForm();
-    if (validate && disableBtn === true) setDisableBtn(false);
-    if (!validate && disableBtn === false) setDisableBtn(true);
+    const nameChanged = (name.normalize() !== token.name.normalize());
+    if (!nameChanged) setDisableBtn(true);
+    validateForm();
   }, [name, token.name, disableBtn]);
 
   return (

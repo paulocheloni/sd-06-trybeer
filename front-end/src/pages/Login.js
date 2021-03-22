@@ -25,7 +25,9 @@ export default function Login() {
 
   useEffect(() => {
     const validateForm = async () => yupSchemas.login.validate(login)
-      .then((valid) => (valid.email) && setDisableBtn(false))
+      .then(() => {
+        if (disableBtn === true) setDisableBtn(false);
+      })
       .catch((error) => {
         if (disableBtn === false) setDisableBtn(true);
         return error;
