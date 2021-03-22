@@ -22,9 +22,7 @@ export default function AdminOrderCard({ sale, index }) {
       <p
         data-testid={ `${index}-order-address` }
       >
-        {deliveryAddress}
-        ,
-        {deliveryNumber}
+        {`${deliveryAddress}, ${deliveryNumber}`}
       </p>
       <div>
         <span
@@ -38,7 +36,7 @@ export default function AdminOrderCard({ sale, index }) {
           className={
             `itemStatus ${status === 'Pendente' ? 'itemPending' : 'itemDelivered'}`
           }
-          data-testid={ `${index}-ordder-status` }
+          data-testid={ `${index}-order-status` }
         >
           {status}
         </span>

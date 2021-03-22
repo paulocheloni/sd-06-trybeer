@@ -12,7 +12,6 @@ const postSale = (token, payload) => fetch(`${endpoint}/sales/checkout`, {
 })
   .then((response) => response.json());
 
-
 const getSales = () => fetch(`${endpoint}/sales`)
   .then((response) => response.json());
 
