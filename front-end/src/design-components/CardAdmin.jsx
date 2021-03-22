@@ -34,7 +34,7 @@ function CardAdmin(props) {
           className="mt-10"
           data-testid={ `${IndexId}-order-total-value` }
         >
-          {totalPrice}
+          R$ {totalPrice.replace('.', ',')}
         </div>
       </div>
       <div className="flex-auto">
@@ -56,7 +56,7 @@ CardAdmin.propTypes = {
     status: PropTypes.string.isRequired,
     totalPrice: PropTypes.string.isRequired,
   }).isRequired,
-  IndexId: PropTypes.string.isRequired,
+  IndexId: PropTypes.number.isRequired,
 };
 
 export default CardAdmin;
