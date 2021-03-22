@@ -26,7 +26,7 @@ function SideBarMenu() {
           Meu Perfil
         </Button>
       </Link>
-      <div className="absolute bottom-12">
+      <div className="bottom-12">
         <Button
           onClick={ () => onClick() }
           bgColor="white"
