@@ -1,8 +1,13 @@
 import React from 'react';
+import TopBar from '../components/TopBar';
+import {} from '../components/index';
 
 function Orders() {
   return (
-    <div>Pág de Orders</div>
+    <div>
+      <TopBar name="Meus Pedidos" />
+
+    </div>
   );
 }
 

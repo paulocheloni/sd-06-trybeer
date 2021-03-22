@@ -16,6 +16,8 @@ function Products() {
       productList = [];
       localStorage.setItem('productList', JSON.stringify(productList));
     }
+
+    // productList = productList.filter((product) => product.productQuantity > 0)
   };
 
   useEffect(() => {

@@ -9,8 +9,12 @@ function CheckoutProducts() {
 
   const purchase = () => {
     const products = JSON.parse(localStorage.getItem('productList'));
+    const productsSelected = products.filter((product) => product.productQuantity > 0);
+    localStorage.setItem('productList', JSON.stringify(productsSelected));
 
-    return products.filter((product) => product.productQuantity > 0);
+
+    console.log(productsSelected);
+    return productsSelected;
   };
 
   const deleteProduct = (name, productQuantity, price) => {
@@ -29,7 +33,8 @@ function CheckoutProducts() {
   };
 
   useEffect(() => {
-    setCheckoutProducts(purchase());
+    const products = purchase();
+    setCheckoutProducts(products);
   }, []);
 
   return !checkoutProducts ? <h1>Loading...</h1> : (

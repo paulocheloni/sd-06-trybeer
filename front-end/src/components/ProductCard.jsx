@@ -5,7 +5,7 @@ import Context from '../hooks/UseContext';
 
 function ProductCard({ productInfo, index }) {
   const { totalPrice, setTotalPrice } = useContext(Context);
-  const { name, price, url_image: urlImage } = productInfo;
+  const { id, name, price, url_image: urlImage } = productInfo;
   const [productQuantity, setProductQuantity] = useState('0');
 
   useEffect(() => {
@@ -14,7 +14,7 @@ function ProductCard({ productInfo, index }) {
     const item = productList.find((product) => product.name === name);
 
     if (!item) {
-      productList.push({ name, price, productQuantity });
+      productList.push({ id, name, price, productQuantity });
       localStorage.setItem('productList', JSON.stringify(productList));
     } else {
       setProductQuantity(item.productQuantity);
