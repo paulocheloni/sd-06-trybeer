@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 
 import { FiPlus, FiMinus } from 'react-icons/fi';
 
+import '../../styles/products/ProductCard.css';
+
 const ProductCard = ({ product, index, plusItemCart, minusItemCart, handleQuantity }) => (
-  <div>
+  <div className="productCard">
     <img
       alt={ `Cerveja ${product.name}` }
       data-testid={ `${index}-product-img` }
-      src={ product.image }
+      className="cardImage"
+      src={ product.url_image }
     />
     <span
       data-testid={ `${index}-product-price` }

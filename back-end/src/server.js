@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 const { UserRoute, LoginRoute, ProductsRoute } = require('./routes');
 const { error } = require('./middleware');
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 app.use('/login', LoginRoute);
 app.use('/user', UserRoute);
 app.use('/products', ProductsRoute);
+app.use('/images', express.static(path.join(__dirname, '/images')));
 app.use(error);
 
 module.exports = app;

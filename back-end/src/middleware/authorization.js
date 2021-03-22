@@ -6,7 +6,10 @@ const secret = process.env.TOKEN_SECRET || 'segredodogrupo7';
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 
-  if (!authorization) next(res.status(401).json({ message: 'missing auth token' }));
+  if (!authorization) {
+    res.status(401).json({ message: 'missing auth token' });
+    return;
+  }
 
   try {
     jwt.verify(authorization, secret, (err, email) => { 

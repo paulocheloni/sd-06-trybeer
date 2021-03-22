@@ -17,6 +17,7 @@ function Products({ history }) {
 
   useEffect(() => {
     async function fetchProducts() {
+      // const { token } = JSON.parse(localStorage.user);
       const response = await api.getAllProducts();
       setProducts(response);
     }

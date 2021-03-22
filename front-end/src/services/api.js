@@ -28,8 +28,12 @@ const updateNameOfUser = async (name, email) => axios
   .then((res) => ({ response: res.data, result: true }))
   .catch((err) => err.response.data);
 
-const getAllProducts = async () => axios
-  .get(`${baseUrl}/products`)
+const getAllProducts = async (token) => axios
+  .get(`${baseUrl}/products`, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  })
   .then((res) => res.data)
   .catch((err) => err.response.data);
 
