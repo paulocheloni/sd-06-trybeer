@@ -50,10 +50,10 @@ function Checkout() {
   //     ? setDisabled(false) : setDisabled(true)
   // );
 
-   const validateCheckout = useCallback(() => {
+  const validateCheckout = useCallback(() =>
     (street.length > 0 && numberHouse.length > 0)
       ? setDisabled(false) : setDisabled(true)
-  });
+  );
 
   useEffect(() => {
     validateCheckout();
