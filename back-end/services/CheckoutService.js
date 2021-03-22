@@ -32,8 +32,7 @@ const CheckoutServices = async (req, res) => {
   const data = { id, totalPrice, deliveryAddress, deliveryNumber, salesProducts, saleDate, saleStatus };
   await createSale(data);
 
-  return res.status(OK)
-    .json({ id, totalPrice, deliveryAddress, deliveryNumber, salesProducts, saleDate, saleStatus });
+  return res.status(OK).json(data);
 };
 
 module.exports = CheckoutServices;
