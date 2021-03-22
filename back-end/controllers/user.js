@@ -38,7 +38,7 @@ const register = async (req, res) => {
     await userService.create(name, email, password, role);
 
     const findNeWUser = await userService.findUserByEmail(email);
-    const userObject = { ...findNeWUser, token }
+    const userObject = { ...findNeWUser, token };
 
     return res.status(201).json({ user: userObject });
   } catch (error) {
