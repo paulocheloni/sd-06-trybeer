@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import NavBar from '../components/menuNavBar';
 import { loadState, saveState } from '../services/localStorage';
@@ -45,10 +45,15 @@ function Checkout() {
     return saveState(`${email}`, []);
   }, [history, setCart]);
 
-  const validateCheckout = () => (
+  // const validateCheckout = () => (
+  //   (street.length > 0 && numberHouse.length > 0)
+  //     ? setDisabled(false) : setDisabled(true)
+  // );
+
+   const validateCheckout = useCallback(() => {
     (street.length > 0 && numberHouse.length > 0)
       ? setDisabled(false) : setDisabled(true)
-  );
+  });
 
   useEffect(() => {
     validateCheckout();
