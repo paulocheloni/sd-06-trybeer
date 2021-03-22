@@ -43,7 +43,10 @@ export const subtractItem = (cartItem, setCartItem) => {
 
 export const verifyUser = (history) => {
   const storage = JSON.parse(localStorage.getItem('user'));
-  if (!storage) return history.push('/login');
+  if (!storage) {
+    history.push('/login');
+    return { email: null };
+  }
   const { name, email } = storage;
   return { name, email };
 };

@@ -13,6 +13,7 @@ export default function Orders() {
   useEffect(() => {
     const fetchOrders = async () => {
       const { email } = verifyUser(history);
+      if (!email) return null;
       const allOrders = await userOrders(email);
       setOrders(allOrders);
       console.log(allOrders);
@@ -20,15 +21,20 @@ export default function Orders() {
     fetchOrders();
   }, [history]);
 
+  const redirectOrder = (id) => history.push(`/orders/${id}`);
+
   return (
     <div>
       <Header title="Meus Pedidos" user="client" />
       <div>
         {orders.map((order, index) => (
           <div
+            role="button"
+            tabIndex={ index }
             key={ index }
             data-testid={ `${index}-order-card-container` }
-            onClick={ () => history.push(`/orders/${order.id}`) }
+            onClick={ () => redirectOrder(order.id) }
+            onKeyDown={ () => redirectOrder(order.id) }
             className="orders"
           >
             <h3 data-testid={ `${index}-order-number` }>{`Pedido ${order.id}`}</h3>
