@@ -4,9 +4,9 @@ function FormsCheckout() {
   return (
     <div>
       <span>Rua:</span>
-      <input type="text"></input>
+      <input data-testid="checkout-street-input" type="text"></input>
       <span>Número da Casa:</span>
-      <input type="text"></input>
+      <input data-testid="checkout-house-number-input" type="number"></input>
     </div>
   );
 }

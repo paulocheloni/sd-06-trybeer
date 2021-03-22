@@ -5,7 +5,7 @@ function TotalCheckout(props) {
   const { total } = props;
   return (
     <div>
-      <p>Total: R$ { total.replace('.', ',') }</p>
+      <p data-testid="order-total-value">Total: R$ { total.replace('.', ',') }</p>
     </div>
   );
 }

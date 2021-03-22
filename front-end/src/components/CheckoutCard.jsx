@@ -17,7 +17,7 @@ function CheckoutCard(props) {
       <p data-testid={ `${index}-product-unit-price` }>RS: {product.price.replace('.', ',')}</p>
       <p data-testid={ `${index}-product-total-value` }>Total Produto RS: {JSON.stringify((parseFloat(product.price) * product.total)
       .toFixed(2)).replace('.', ',')}</p>
-      <button type="button" onClick={ () => deleteItemCart(params) }>Excluir</button>
+      <button data-testid={ `${index}-removal-button` } type="button" onClick={ () => deleteItemCart(params) }>Excluir</button>
     </div>
   );
 }

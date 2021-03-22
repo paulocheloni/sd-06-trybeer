@@ -13,7 +13,9 @@ function ButtonFinalizarPedido(props) {
 
   return (
     <div>
-      <button type="button"
+      <button
+        data-testid="checkout-finish-btn"
+        type="button"
         disabled={ activeBtn }
         onClick={() => compraFinalizada() }
       >
