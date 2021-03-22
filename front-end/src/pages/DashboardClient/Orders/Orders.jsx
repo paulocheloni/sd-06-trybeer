@@ -22,7 +22,7 @@ export default function Orders() {
   }, [history]);
 
   const redirectOrder = (id) => history.push(`/orders/${id}`);
-
+//teste
   return (
     <div>
       <Header title="Meus Pedidos" user="client" />
