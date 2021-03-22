@@ -27,15 +27,18 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
   const { saleProducts, sale } = saleDetails
 
   return (
+    
     <div>
       <Header title="TryBeer" user="admin" />
+      {saleProducts && (
+      <>
       <h1>
         <span data-testid="order-number">{`Pedido 00${id}`} - </span>
         <span data-testid="order-status">{sale && capitalize(sale.status)}</span>
         </h1>
       <div className="sale-details">
         <ul>
-          {saleProducts && saleProducts.map(({quantity, name, price}, index) => (
+          {saleProducts.map(({quantity, name, price}, index) => (
             <li>
               <span data-testid={`${index}-product-qtd`}>{quantity} - </span>
               <span data-testid={`${index}-product-name`}>{name} - </span>
@@ -56,6 +59,8 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
         Marcar como entregue
         </button>
       }
+      </>  
+      )}
     </div>
   );
 }
