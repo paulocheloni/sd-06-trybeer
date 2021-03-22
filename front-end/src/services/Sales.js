@@ -15,7 +15,7 @@ const postSale = (token, payload) => fetch(`${endpoint}/sales/checkout`, {
 const getSales = () => fetch(`${endpoint}/sales`)
   .then((response) => response.json());
 
-  module.exports = {
-    getSales,
-    postSale,
-  }
+module.exports = {
+  getSales,
+  postSale,
+};
