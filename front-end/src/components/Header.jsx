@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import '../css/Header.css'
 
 function Header() {
   const [title, setTitle] = useState('');
@@ -29,11 +30,13 @@ function Header() {
   });
 
   return (
-    <div>
-      <h1 data-testid="top-title">
+    <>
+      <h1
+        className="top-title"
+        data-testid="top-title">
         { title }
       </h1>
-    </div>
+    </>
   );
 }
 
