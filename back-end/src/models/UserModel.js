@@ -27,9 +27,15 @@ const updateName = async (newUserName, email) => {
   return null;
 };
 
+const getAllUserOrders = async (idUser) => {
+  const [allUserOrders] = await connection.execute('SELECT * FROM sales WHERE user_id=?', [idUser]);
+  return allUserOrders;
+};
+
 module.exports = {
   getAll,
   getEmail,
   registerUser,
   updateName,
+  getAllUserOrders,
 };

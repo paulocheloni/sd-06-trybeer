@@ -1,4 +1,9 @@
-const { getEmail, registerUser, updateName } = require('../models/UserModel');
+const {
+  getEmail,
+  registerUser,
+  updateName,
+  getAllUserOrders,
+} = require('../models/UserModel');
 
 const getEmailService = async (emailLogin) => {
   const resultService = await getEmail(emailLogin);
@@ -19,8 +24,16 @@ const updateUserName = async (newUserName, email) => {
   return updatedUser;
 };
 
+const allUserOrdersService = async (email) => {
+  const user = await getEmail(email);
+  const userId = user[0].id;
+  const userOrders = await getAllUserOrders(userId);
+  return userOrders;
+};
+
 module.exports = {
   getEmailService,
   registerUserService,
   updateUserName,
+  allUserOrdersService,
 };
