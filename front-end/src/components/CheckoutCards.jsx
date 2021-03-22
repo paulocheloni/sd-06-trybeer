@@ -20,7 +20,6 @@ function CheckoutCards({ element, index }) {
   // const sumPrices = (qnt, productPrice) => {
 
   // };
-
   useEffect(() => {
     const url = `/products/${id}`;
     fetch(

@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-// import { Antartica } from '../images';
 import BeersAppContext from '../context/BeersAppContext';
-// import '../style/ProductCard.css';
+import '../style/ProductCard.css';
 
 function ProductsCard({ element, index }) {
   const {
@@ -12,8 +11,10 @@ function ProductsCard({ element, index }) {
     setAmount,
   } = useContext(BeersAppContext);
 
-  const { name, price, id } = element;
+  const { name, url_image: urlImage, price, id } = element;
   // console.log(element);
+
+  // const [image, setImage] = useState('');
 
   const storageInitialState = () => {
     const objQuantity = productQuantity
@@ -52,9 +53,9 @@ function ProductsCard({ element, index }) {
   return (
     <div className="productCards">
       <img
-        // src={ Antartica }
-        alt="fotoProduto"
+        src={ urlImage }
         data-testid={ `${index}-product-img` }
+        alt="beer"
       />
       <p data-testid={ `${index}-product-name` } className="txt-productCards">{ name }</p>
       <p
