@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TopMenu from '../components/TopMenu';
 
 function OrderDetails(props) {
   const { match: { params } } = props;
@@ -8,6 +9,7 @@ function OrderDetails(props) {
   console.log(id);
   return (
     <div>
+      <TopMenu />
       {`OrderDetails - Pedido - ${id}!`}
     </div>
   );

@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import SidebarMenu from '../components/SideBarMenu';
 import TopMenu from '../components/TopMenu';
 import ProductCard from '../components/ProductCard';
 import Cart from '../components/Cart';
@@ -28,7 +27,6 @@ function Products() {
   return (
     <div>
       <TopMenu />
-      <SidebarMenu />
       <div className="products-container">
         {products && products.map(({ id, name, price, url_image: urlImage }, index) => (
           <ProductCard
