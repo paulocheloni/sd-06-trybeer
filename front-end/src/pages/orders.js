@@ -25,14 +25,14 @@ function Orders() {
   return (
     <div>
       <NavBar content="Meus Pedidos" />
-      <h1>Orders</h1>
+      <h1 data-testid="top-title">Meus Pedidos</h1>
       {orders.map((order, index) => {
         return (
           <Link to={`/orders/${order.id}`} key={index}>
               <div>
-              <h2>{order.id}</h2>
-              <h3>{moment(order.sale_date).format('DD/MM')}</h3>
-              <h3>{order.total_price}</h3>
+              <h2 data-testid="order-number">{order.id}</h2>
+              <h3 data-testid="order-date">{moment(order.sale_date).format('DD/MM')}</h3>
+              <h3 data-testid={`order-total-value`}>{order.total_price}</h3>
             </div>
           </Link>
         )
