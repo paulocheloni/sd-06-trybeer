@@ -24,7 +24,7 @@ function MenuSideBar() {
         type="button"
         className="btnSideBar"
         data-testid="side-menu-item-orders"
-        onClick={ (e) => handlePage(e) }
+        onClick={ handlePage }
         name="orders"
       >
         Meus Pedidos
@@ -42,7 +42,7 @@ function MenuSideBar() {
         type="button"
         className="btnSideBar"
         data-testid="side-menu-item-logout"
-        onClick={ handlePage }
+        onClick={ () => history.push('/login') }
         name="login"
       >
         Sair
