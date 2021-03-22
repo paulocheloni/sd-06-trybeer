@@ -1,11 +1,11 @@
 import React from 'react';
 import MenuTopAdmin from '../components/MenuTopAdmin';
 
-export default function AdminOrders() {
+export default function AdminProfile() {
   return (
     <div>
       <MenuTopAdmin />
-      <h1>Pedidos</h1>
+      <h1>Perfil</h1>
     </div>
   );
 }

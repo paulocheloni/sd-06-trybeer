@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Provider from './Context/Provider';
 import Checkout from './pages/Checkout';
+import AdminProfile from './pages/AdminProfile';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Provider>
         <Switch>
           <Route exact path="/admin/orders" component={ AdminOrders } />
+          <Route exact path="/admin/profile" component={ AdminProfile } />
           <Route exact path="/login" component={ Login } />
           <Route exact path="/register" component={ Register } />
           <Route exact path="/products" component={ Products } />
