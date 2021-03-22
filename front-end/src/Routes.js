@@ -9,7 +9,6 @@ import AdminOrders from './modules/Admin/Orders/AdminOrders';
 import AdminProfile from './modules/Admin/Profile/AdminProfile';
 import Checkout from './modules/Checkout/Checkout';
 
-
 function Routes() {
   return (
     <Router>
