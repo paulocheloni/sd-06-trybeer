@@ -4,7 +4,7 @@ function CardClient(props) {
   const { pedido: { id, totalPrice, saleDate } } = props;
   return (
     <div
-    className="flex flex-wrap border-2
+      className="flex flex-wrap border-2
       border-gray-800 w-96 h-64 m-5"
     >
       <div className="flex-col">
@@ -25,11 +25,20 @@ function CardClient(props) {
           className="mt-10"
           data-testid={ `${id - 1}-order-total-value` }
         >
-          R$ {totalPrice.replace('.', ',')}
+          R$
+          {totalPrice.replace('.', ',')}
         </div>
       </div>
     </div>
   );
 }
+
+CardClient.propTypes = {
+  pedido: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    totalPrice: PropTypes.string.isRequired,
+    saleDate: PropTypes.date.isRequired,
+  }).isRequired,
+};
 
 export default CardClient;

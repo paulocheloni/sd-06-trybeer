@@ -7,7 +7,7 @@ import Orders from './modules/Orders/Orders';
 import Products from './modules/Products/Products';
 import AdminOrders from './modules/Admin/Orders/AdminOrders';
 import AdminProfile from './modules/Admin/Profile/AdminProfile';
-import Checkout from './modules/Checkout/Checkout'
+import Checkout from './modules/Checkout/Checkout';
 import AdminOrderDetail from './modules/Admin/OrderDetail/AdminOrderDetail';
 
 function Routes() {
