@@ -25,8 +25,8 @@ function App() {
         <Route path="/profile" component={ ClientProfile } />
         <Route path="/products" component={ Products } />
         <Route path="/checkout" component={ Checkout } />
-        <Route path="/orders/:numero-do-pedido" component={ OrderDetails } />
-        <Route path="/orders" component={ ClientOrders } />
+        <Route exact path="/orders/:id" component={ OrderDetails } />
+        <Route exact path="/orders" component={ ClientOrders } />
         <Route exact path="/admin/profile" component={ AdminProfile } />
         <Route exact path="/admin/orders/:id" component={ AdminOrdersDetail } />
         <Route exact path="/admin/orders" component={ AdminOrders } />

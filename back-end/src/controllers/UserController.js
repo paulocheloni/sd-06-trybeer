@@ -1,6 +1,11 @@
 const { Router } = require('express');
 const { getAll } = require('../models/UserModel');
-const { getEmailService, registerUserService, updateUserName } = require('../services/UserService');
+const {
+  getEmailService,
+  registerUserService,
+  updateUserName,
+  allUserOrdersService,
+} = require('../services/UserService');
 const tokenValidator = require('../middlewares/tokenValidator');
 const status = require('../utils/statusDictionary');
 const messages = require('../utils/messageDictionary');
@@ -60,6 +65,14 @@ userRouter.put('/update', tokenValidator, async (req, res) => {
   const { email } = req.user;
   await updateUserName(newUserName, email);
   res.status(status.NO_CONTENT).send({ status: 'ok' });
+});
+
+userRouter.get('/orders', async (req, res) => {
+  const { email } = req.headers;
+  const allOrders = await allUserOrdersService(email);
+  // console.log('email:', email)
+  // console.log('resultado:', allOrders)
+  res.status(status.SUCCESS).json(allOrders);
 });
 
 module.exports = userRouter;

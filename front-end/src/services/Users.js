@@ -30,8 +30,19 @@ const updateUser = (name, email, token) => fetch(`${endpoint}/user/update`, {
   body: JSON.stringify({ name, email }),
 }).then((response) => response);
 
+const userOrders = (emailUser) => fetch(`${endpoint}/user/orders`, {
+  method: 'GET',
+  headers: {
+    'Content-type': applicationJsonContent,
+    email: emailUser,
+  },
+}).then((response) => response.json())
+  .then((data) => data);
+// .then((teste) => console.log(teste))
+
 module.exports = {
   login,
   register,
   updateUser,
+  userOrders,
 };
