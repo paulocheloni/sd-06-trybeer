@@ -7,7 +7,7 @@ function DetalhesPedidosAdmin() {
       <MenuSideBar />
       <h1>Detalhes do Pedido</h1>
     </div>
-  )
+  );
 }
 
 export default DetalhesPedidosAdmin;
