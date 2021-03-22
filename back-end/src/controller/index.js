@@ -5,5 +5,5 @@ const ProductsController = require('./ProductsController');
 module.exports = {
   UserController,
   LoginController,
-ProductsController,
+  ProductsController,
 };

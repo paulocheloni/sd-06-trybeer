@@ -12,6 +12,11 @@ function Login({ history }) {
   const [displayErr, setDisplayErr] = useState(false);
 
   useEffect(() => {
+    localStorage.cart = JSON.stringify([]);
+    localStorage.user = JSON.stringify({});
+  }, []);
+
+  useEffect(() => {
     loginUtils.visibilityBtnLogin(user, setValid);
   }, [user]);
 
@@ -20,10 +25,9 @@ function Login({ history }) {
   };
 
   const handleClick = async (e) => {
-    const list = await api.listProducts();
-    console.log(list.response);
     e.preventDefault();
     const userData = await api.generateToken(user.email, user.password);
+
     if (userData.result) {
       const { role } = userData.response;
       setErrMsg(false);

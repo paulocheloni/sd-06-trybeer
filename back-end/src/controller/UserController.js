@@ -17,9 +17,12 @@ const updateUser = rescue(async (req, res) => {
 
   const updated = await UserService.updateUser(name, email);
 
-  return res.status(200).json(updated);
+  return res
+    .status(200)
+    .json(updated);
 });
 
 module.exports = {
-  registerUser, updateUser,
+  registerUser,
+  updateUser,
 };

@@ -3,7 +3,7 @@ const LoginService = require('./LoginService');
 const ProductsService = require('./ProductsService');
 
 module.exports = {
-  UserService,  
+  UserService,
   LoginService,
   ProductsService,
 };

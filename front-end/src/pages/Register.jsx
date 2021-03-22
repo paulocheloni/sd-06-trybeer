@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import RegisterContext from '../context/RegisterContext';
+
 import FormRegister from '../components/pageRegister/FormRegister';
 import { registerUtils } from '../utils';
+import RegisterContext from '../context/RegisterContext';
 import api from '../services/api';
 
 function Register({ history }) {
