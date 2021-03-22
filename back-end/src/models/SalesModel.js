@@ -41,9 +41,18 @@ const getSaleProducts = async (saleId) => {
   return saleProducts;
 }
 
+
+const fullfilSale = async (saleId) => {
+  const newStatus = 'entregue'
+  const query = `
+  UPDATE sales SET status = ? WHERE id=?`
+  const [saleProducts] = await connection.execute(`${query}`, [newStatus, saleId])
+  return saleProducts;
+}
 module.exports = {
   getSaleById,
   getSaleProducts,
   getAllSales,
   createSale,
+  fullfilSale
 }
