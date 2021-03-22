@@ -7,25 +7,29 @@ const CheckoutService = require('../service/CheckoutService');
 const router = new Router();
 
 router.post('/', rescue(async (req, res) => {
-  const { cart, userEmail, totalPrice, status, rua, numero } = req.body;
+  try {
+    const { cart, userEmail, totalPrice, status, rua, numero } = req.body;
 
-  const { id: userId } = await LoginService.getByEmail(userEmail);
-  const products = await ProductService.getAll();
+    const { id: userId } = await LoginService.getByEmail(userEmail);
+    const products = await ProductService.getAll();
 
-  const newCart = cart.map((product) => {
-    const newProduct = products.find((newP) => product.name === newP.name);
+    const newCart = cart.map((product) => {
+      const newProduct = products.find((newP) => product.name === newP.name);
 
-    return { ...newProduct, quantity: product.quantity };
-  });
+      return { product_id: newProduct.id, quantity: product.quantity };
+    });
 
-  const newSale = await CheckoutService.create({
-    userId, totalPrice: totalPrice.replace(',','.'), rua, numero, status,
-  });
+    const { id: saleId } = await CheckoutService.create({
+      userId, totalPrice: totalPrice.replace(',','.'), rua, numero, status,
+    });
 
-  // salvar a venda
-  // salvar os produtos de cada venda;
+    const saleProduct = newCart.map((element) => ({ saleId, ...element }));
+    // { saleId: 14, productId: 11, quantity: 1 };
 
- console.log(newSale);
+   return res.status(200).json({ message: "Sale success" });
+  } catch (err) {
+    return res.status(404).json({ message: "Sale failure" });
+  }
 }));
 
 module.exports = router;
