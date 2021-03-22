@@ -16,8 +16,8 @@ export const update = (route, body = {}) => {
   return response;
 };
 
-export const get = (route) => {
-  const response = API.get(route)
+export const get = (route, body = {}) => {
+  const response = API.get(route, body)
     .then((res) => res.data)
     .catch((error) => error.response.data);
 

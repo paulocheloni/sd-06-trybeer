@@ -11,6 +11,7 @@ import OrdersAdmin from './modules/orders/pages/OrdersAdmin';
 import ProfileClient from './modules/profile/pages/ProfileClient';
 import ProfileAdmin from './modules/profile/pages/ProfileAdmin';
 import Checkout from './modules/products/pages/Checkout';
+import DetailedOrder from './modules/orders/pages/DetailedOrder';
 
 const Routes = () => {
   const { token } = useContext(GlobalContext);
@@ -40,6 +41,7 @@ const Routes = () => {
           <Route path="/profile" component={ ProfileClient } />
           <Route path="/products" component={ Products } />
           <Route exact path="/checkout" component={ Checkout } />
+          <Route exact path="/orders/:id" component={ DetailedOrder } />
           <Route exact path="/orders" component={ OrdersClient } />
         </BodyContainer>
       </Route>

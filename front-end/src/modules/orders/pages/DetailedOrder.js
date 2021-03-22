@@ -1,13 +1,13 @@
 import React from 'react';
 import PaperContainer from '../../../design-system/containers/PaperContainer';
-import Gallery from '../components/Gallery';
+import DetailedOrderCard from '../components/DetailedOrderCard';
 
-const OrdersClient = () => (
+const DetailedOrder = () => (
   <PaperContainer>
     <p className="hidden" data-testid="top-title">Meus pedidos</p>
-    <p>My orders</p>
-    <Gallery />
+    <p>Order</p>
+    <DetailedOrderCard />
   </PaperContainer>
 );
 
-export default OrdersClient;
+export default DetailedOrder;

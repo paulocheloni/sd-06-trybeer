@@ -63,6 +63,7 @@ function Menu(props) {
 
   const logout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('cart');
     setToken(false);
   };
 
