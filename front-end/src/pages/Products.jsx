@@ -21,8 +21,8 @@ export default function Products() {
     }
   }, [productsCart]);
 
-  const token = localStorage.getItem('user');
-  if (!token) return <Redirect to="login" />;
+  const user = localStorage.getItem('user');
+  if (!user) return <Redirect to="login" />;
 
   const sumOfCart = (sum, product) => {
     setProductsCart(sum);

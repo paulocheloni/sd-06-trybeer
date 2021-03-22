@@ -10,8 +10,7 @@ export default function Profile() {
   const [isEnabled, setIsEnabled] = useState(true);
   const [message, setMessage] = useState('');
 
-  const token = localStorage.getItem('token');
-  if (!token) return <Redirect to="login" />;
+  if (!user) return <Redirect to="login" />;
 
   const handleClick = () => {
     api.fetchChangeName(name, user.email);
