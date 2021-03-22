@@ -4,6 +4,7 @@ import isLogged from '../components/isLogged';
 import RenderCheckout from '../components/RenderCheckout';
 import currencyFormat from '../utils/currencyFormat';
 import checkoutPost from '../methods/checkout';
+import salesProductsInfo from '../utils/salesProductsInfo';
 
 function Checkout() {
   const [items, setItems] = useState([]);
@@ -57,7 +58,9 @@ function Checkout() {
         onClick={ () => {
           route.push('/products');
           localStorage.setItem('success', JSON.stringify(true));
+          const SPInfo = salesProductsInfo(items.map((item) => item.id));
           checkoutPost({
+            products: SPInfo,
             price: cartTotal,
             address: street,
             number,

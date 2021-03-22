@@ -11,9 +11,7 @@ routerProfile.get('/', async (_req, res) => {
 routerProfile.post('/', async (req, res) => {
   const { name, newName } = req.body.user;
   try {    
-    const [user] = await updateName(name, newName);
-    // console.log(user);
-    // const { id, ...userWithouId } = user;
+    const [user] = await updateName(name, newName);    
     return res.status(200).json(user);
   } catch (err) {
     console.log(err.message);

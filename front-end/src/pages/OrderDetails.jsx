@@ -1,21 +1,29 @@
-import React from 'react';
-// import PropTypes from 'prop-types';
-// import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+import OrderDetailsCard from '../components/OrderDetailsCard';
+import getSaleDetails from '../methods/salesDetails';
 
-function OrderDetails(props) {
-//   const {} = props;
-//   const { id } = useParams();
-
+function OrderDetails() {
+  const { id } = useParams();
+  const history = useHistory();
+  const [orderDetails, setOrderDetails] = useState({});
+  useEffect(() => {
+    const fetchData = async () => {
+      const saleDetails = await getSaleDetails(id);
+      if (saleDetails.redirect) {
+        history.push('/login');
+      } else {
+        setOrderDetails(saleDetails);
+      } 
+    };
+    fetchData();
+  }, [id]);
   return (
     <>
-      {props}
-      {' '}
+      <h1 data-testid="top-title"> Detalhe do pedido</h1>
+      {orderDetails.length > 0 && <OrderDetailsCard orderDetails={ orderDetails } /> }
     </>
   );
 }
-
-// OrderDetails.propTypes = {
-
-// };
 
 export default OrderDetails;
