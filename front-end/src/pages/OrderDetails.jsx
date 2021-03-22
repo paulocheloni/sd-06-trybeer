@@ -14,7 +14,7 @@ function OrderDetails() {
         history.push('/login');
       } else {
         setOrderDetails(saleDetails);
-      } 
+      }
     };
     fetchData();
   }, [id]);

@@ -11,7 +11,7 @@ function ProductCard({ product }) {
 - O valor total do produto deverá conter a tag `data-testid="0-product-total-value"` */
   return (
     <>
-      <p data-testid={ `${product.id - 1 }-product-qtd` }>
+      <p data-testid={ `${product.id - 1}-product-qtd` }>
         quantidade:
         {' '}
         {`${product.productQuantity} und`}

@@ -16,7 +16,13 @@ routerSalesAdm.get('/', validateToken, async (req, res) => {
 
 routerSalesAdm.post('/', async (req, res) => {
   const { id } = req.body.user;
-  await updateOne(id);
+  const [orde] = await updateOne(id);
+  res.status(200).json({ orde });
+});
+routerSales.get('/', validateToken, async (req, res) => {
+  const { userId } = res.locals;
+  const [orders] = await getAllByUserId(userId);
+  res.status(200).json({ orders });
 });
 
 module.exports = routerSalesAdm;
