@@ -28,6 +28,8 @@ app.use((req, _res, next) => {
 
 app.use(bodyParser.json());
 
+app.use(express.static(__dirname + '/images'));
+
 // app.get('/eai', async (_req, res) => {
 //   const [retornoSql] = await connection.execute('SELECT * FROM products');
 //   res.json(retornoSql);
