@@ -1,9 +1,11 @@
 const emailAlreadyExists = require('./emailAlreadyExists');
-const auth = require('./auth');
+const validateField = require('./validateField');
+const authorization = require('./authorization');
 const error = require('./error');
 
 module.exports = {
   emailAlreadyExists,
-  auth,
+  validateField,
+  authorization,
   error,
 };

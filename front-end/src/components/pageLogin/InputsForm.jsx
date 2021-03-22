@@ -2,11 +2,12 @@ import React from 'react';
 
 function InputsForm(user, handleChange) {
   return (
-    <div>
-      <div>
-        <label htmlFor="email-user">
-          Email:
+    <div className="field">
+      <div className="control">
+        <label className="label length-text" htmlFor="email-user">
+          Email
           <input
+            className="input"
             id="email-user"
             type="email"
             name="email"
@@ -16,10 +17,11 @@ function InputsForm(user, handleChange) {
           />
         </label>
       </div>
-      <div>
-        <label htmlFor="pass-user">
-          Senha:
+      <div className="control">
+        <label className="label space-margin-top length-text" htmlFor="pass-user">
+          Senha
           <input
+            className="input"
             id="pass-user"
             type="password"
             name="password"

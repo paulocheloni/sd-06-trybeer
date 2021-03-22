@@ -4,12 +4,19 @@ import LoginContext from '../context/LoginContext';
 import FormLogin from '../components/pageLogin/FormLogin';
 import api from '../services/api';
 import { loginUtils } from '../utils';
+import '../css/bulma.min.css';
+import '../css/login.css';
 
 function Login({ history }) {
   const [user, setUser] = useState({ email: '', password: '' });
   const [valid, setValid] = useState(true);
   const [errMsg, setErrMsg] = useState('');
   const [displayErr, setDisplayErr] = useState(false);
+
+  useEffect(() => {
+    localStorage.cart = JSON.stringify([]);
+    if (!localStorage.user) localStorage.user = JSON.stringify({});
+  }, []);
 
   useEffect(() => {
     loginUtils.visibilityBtnLogin(user, setValid);
@@ -22,9 +29,7 @@ function Login({ history }) {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    // const list = await api.listProducts();
     const userData = await api.generateToken(user.email, user.password);
-    console.log(userData.response);
     if (userData.result) {
       const { role } = userData.response;
       setErrMsg(false);
@@ -49,7 +54,7 @@ function Login({ history }) {
         displayError: displayErr,
       } }
     >
-      <div>
+      <div className="main-content">
         <FormLogin />
       </div>
     </LoginContext.Provider>

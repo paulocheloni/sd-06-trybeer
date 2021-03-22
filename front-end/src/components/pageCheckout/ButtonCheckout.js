@@ -14,9 +14,9 @@ function ButtonCheckout() {
     return dateTime;
   };
 
+  const userId = JSON.parse(localStorage.user);
   const params = {
-    // userId - LocalStorage || State
-    userId: 1,
+    userId: userId.id || 1,
     total: sumTotal,
     address: address.rua,
     adNumber: address.numero,
@@ -35,7 +35,7 @@ function ButtonCheckout() {
       products.forEach((element) => {
         const objtProd = {
           idSale: result.response.id,
-          idProduct: element.idProduct,
+          idProduct: element.id,
           quantity: element.quantity,
         };
         console.log(objtProd);
@@ -48,6 +48,7 @@ function ButtonCheckout() {
   return (
     <div>
       <button
+        className="button is-success"
         type="submit"
         data-testid="checkout-finish-btn"
         disabled={ able }

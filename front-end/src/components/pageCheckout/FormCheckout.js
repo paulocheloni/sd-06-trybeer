@@ -6,9 +6,10 @@ function FormCheckout() {
 
   return (
     <div>
-      <label htmlFor="rua">
+      <label className="label" htmlFor="rua">
         Rua:
         <input
+          className="input"
           type="text"
           id="rua"
           name="rua"
@@ -17,9 +18,10 @@ function FormCheckout() {
           data-testid="checkout-street-input"
         />
       </label>
-      <label htmlFor="numero">
+      <label className="label" htmlFor="numero">
         Número da casa:
         <input
+          className="input"
           type="number"
           id="numero"
           name="numero"

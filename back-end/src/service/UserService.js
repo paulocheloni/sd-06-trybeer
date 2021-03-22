@@ -6,5 +6,6 @@ const registerUser = async (name, email, password, role) => UserModel
 const updateUser = async (name, email) => UserModel.updateUser(name, email);
 
   module.exports = {
-    registerUser, updateUser,
+    registerUser,
+    updateUser,
   };

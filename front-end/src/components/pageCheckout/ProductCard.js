@@ -17,15 +17,23 @@ function ProductCard() {
   const formatTotalCall = formatSumTotal();
 
   return (
-    <div>
-      <h3>Produtos</h3>
+    <div className="label">
+      <h3 className="subtitle">Produtos</h3>
       {products.length !== 0 ? products.map((item, index) => (
         <div key={ index }>
+
           <p data-testid={ `${index}-product-qtd-input` }>{ item.quantity }</p>
+
           <p data-testid={ `${index}-product-name` }>{ item.name }</p>
-          <p data-testid={ `${index}-product-total-value` }>{ item.totalValue }</p>
-          <p data-testid={ `${index}-product-unit-price` }>{ item.value }</p>
+
+          <p data-testid={ `${index}-product-total-value` }>
+            {
+              (item.totalValue).toFixed(2)
+            }
+          </p>
+          <p data-testid={ `${index}-product-unit-price` }>{ item.price }</p>
           <button
+            className="button is-dark"
             type="button"
             onClick={ () => handleRemove(item.name) }
             data-testid={ `${index}-removal-button` }

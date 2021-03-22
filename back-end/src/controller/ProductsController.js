@@ -3,11 +3,13 @@ const rescue = require('express-rescue');
 const { ProductsService } = require('../service');
 
 const listProducts = rescue(async (_req, res) => {
-  const getProducts = await ProductsService.selectProducts();
+  const getAllProducts = await ProductsService.getAllProducts();
 
   return res
-    .status(201)
-    .json(getProducts);
+    .status(200)
+    .json(getAllProducts);
 });
 
-module.exports = { listProducts };
+module.exports = {
+  listProducts,
+};

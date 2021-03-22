@@ -14,19 +14,13 @@ function FormLogin() {
     displayError: displayErr,
   } = useContext(LoginContext);
 
-  function displayError() {
-    const span = document.querySelector('span');
-    if (span) span.remove();
-    const elementMessage = document.createElement('span');
-    elementMessage.innerText = errMsg;
-    const bodyForm = document.querySelector('#bodyForm');
-    bodyForm.appendChild(elementMessage);
-  }
   return (
-    <div id="bodyForm">
+    <div id="bodyForm" className="form-content">
       { InputsForm(user, handleChange) }
       { ButtonsForm(valid, handleClick, history) }
-      { displayErr && displayError() }
+      <div className="control-errorMsg">
+        { displayErr && <span className="error-color length-text">{errMsg}</span>}
+      </div>
     </div>
   );
 }
