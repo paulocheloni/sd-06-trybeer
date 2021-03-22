@@ -32,7 +32,8 @@ function Profile(props) {
     await fetchFunctions.put('register', token, { name: e.target.form[0].value, email });
     const { history } = props;
     setIsUpdated(true);
-    eraseLocalStorage();
+    eraseLocalStorage('cart');
+    eraseLocalStorage('user');
     setTimeout(() => history.push('/login'), TIME_TO_REDIRECT);
   };
 

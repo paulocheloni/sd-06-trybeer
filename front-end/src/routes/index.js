@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import {
   Login, Register, Profile, Products, Checkout, Orders,
-  Admin, AdminOrders,
+  Admin, AdminOrders, OrderDetails,
 } from '../pages';
 
 function index() {
@@ -13,6 +13,7 @@ function index() {
       <Route path="/profile" component={ Profile } />
       <Route path="/products" component={ Products } />
       <Route path="/checkout" component={ Checkout } />
+      <Route path="/orders/:id" render={ (props) => <OrderDetails { ...props } /> } />
       <Route path="/orders" component={ Orders } />
       <Route path="/admin/orders" component={ AdminOrders } />
       <Route path="/admin/profile" component={ Admin } />

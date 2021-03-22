@@ -1,23 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoBeerOutline } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
+import TrybeerContext from '../context/TrybeerContext';
 
 const TopMenu = ({ titleMenu }) => {
-  const [isVisible, setIsVisible] = useState('hidden');
-
-  const setVisibility = () => {
-    setIsVisible(isVisible === 'hidden' ? 'visible' : 'hidden');
-    if (isVisible === 'visible') {
-      document.querySelector('.side-menu-container')
-        .setAttribute('class', 'side-menu-container isNotVisible');
-    } else {
-      document.querySelector('.side-menu-container')
-        .setAttribute('class', 'side-menu-container isVisible');
-    }
-  };
-
+  const { setVisibility } = useContext(TrybeerContext);
   return (
     <header>
       <button type="button" id="side-menu" onClick={ setVisibility }>

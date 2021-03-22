@@ -8,6 +8,9 @@ const getFromLocalStorage = (key) => {
 };
 
 function TrybeerProvider({ children }) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const setVisibility = () => setIsVisible(!isVisible);
   const [cart, setCart] = useState(() => {
     const cartFromLocalStorage = getFromLocalStorage('cart');
     if (cartFromLocalStorage) return cartFromLocalStorage;
@@ -31,7 +34,7 @@ function TrybeerProvider({ children }) {
         .reduce((result, product) => result + (product.quantity * product.price), 0);
       return total.toFixed(2);
     }
-    return 0;
+    return 0.00.toFixed(2);
   };
 
   const removeItemCart = (id) => {
@@ -49,9 +52,8 @@ function TrybeerProvider({ children }) {
     localStorage.setItem('cart', JSON.stringify(cartWithValidQuantitys));
   };
 
-  const eraseLocalStorage = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('cart');
+  const eraseLocalStorage = (key) => {
+    localStorage.removeItem(key);
   };
 
   const contextValue = {
@@ -65,6 +67,8 @@ function TrybeerProvider({ children }) {
     setUser,
     setUserLogged,
     eraseLocalStorage,
+    isVisible,
+    setVisibility,
   };
 
   return (

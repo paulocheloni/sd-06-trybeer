@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const AddressForm = ({ setIsFormFilled }) => {
-  const [street, setStreet] = useState('');
-  const [number, setNumber] = useState('');
-
+const AddressForm = (props) => {
+  const {
+    setIsFormFilled,
+    number,
+    street,
+    setNumber,
+    setStreet,
+  } = props;
   useEffect(() => {
     if (street && number) {
       setIsFormFilled(true);
@@ -39,6 +43,10 @@ const AddressForm = ({ setIsFormFilled }) => {
 
 AddressForm.propTypes = {
   setIsFormFilled: PropTypes.func.isRequired,
+  number: PropTypes.number.isRequired,
+  street: PropTypes.string.isRequired,
+  setNumber: PropTypes.func.isRequired,
+  setStreet: PropTypes.func.isRequired,
 };
 
 export default AddressForm;
