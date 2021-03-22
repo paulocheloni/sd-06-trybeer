@@ -12,8 +12,6 @@ function Card({ product, testIdNumber }) {
 
   const [localQuantity, setLocalQuantity] = useState(prevQuantity);
 
-  console.log('card number ', testIdNumber);
-
   const handleClickPlus = () => {
     const quantity = localQuantity + 1;
     setLocalQuantity(quantity);

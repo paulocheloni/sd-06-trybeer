@@ -30,7 +30,6 @@ function Provider({ children }) {
 
   const setUser = (data) => {
     const user = localStorage.setItem('user', JSON.stringify(data));
-    console.log(getUser());
     return user;
   };
 

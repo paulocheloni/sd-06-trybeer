@@ -21,7 +21,7 @@ function Products() {
       .get('/products')
       .then((response) => response.data)
       .then((productsList) => {
-        setProducts([]);
+        // setProducts([]);
         setProducts(productsList);
       })
       .catch(() => history.push('/'));
@@ -35,7 +35,7 @@ function Products() {
       return product;
     });
     setRenderProducts(checkedProducts);
-    console.log('useEffect do checkproducts');
+    // console.log('useEffect do checkproducts');
   }, [setRenderProducts, products, sale.products]);
 
   return (
