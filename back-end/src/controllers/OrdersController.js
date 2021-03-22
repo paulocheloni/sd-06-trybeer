@@ -22,7 +22,7 @@ const GetByIdOrder = async (req, res) => {
   const { status, message } = await GetByIdOrderService(id);
 
   return res.status(status).json(message);
-}
+};
 
 OrdersRouter.get('/', ListAllOrders);
 OrdersRouter.get('/:id', GetByIdOrder);
