@@ -10,6 +10,7 @@ function Products() {
   const [rendering, setRendering] = useState(false);
 
   const { cartItems } = useContext(GlobalContext);
+  const btnStatus = true;
 
   const totalPrice = cartItems.reduce((acc, curr) => {
     const result = (acc + curr.quantity * curr.price);
@@ -67,6 +68,7 @@ function Products() {
             bg-secondary rounded-md p-2 justify-center"
           to="/checkout"
           data-testid="checkout-bottom-btn"
+          disabled={ totalPrice > 0 ? !btnStatus : btnStatus }
         >
           <p>Ver Carrinho</p>
           <p data-testid="checkout-bottom-btn-value">
@@ -78,7 +80,7 @@ function Products() {
         <button
           type="button"
           className="flex items-center w-full space-x-2
-          bg-secondary rounded-md p-2 justify-center"
+          bg-red-100 rounded-md p-2 justify-center"
           data-testid="checkout-bottom-btn"
           disabled
         >
