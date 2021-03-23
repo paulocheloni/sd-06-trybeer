@@ -9,6 +9,7 @@ import AdminOrders from './modules/Admin/Orders/AdminOrders';
 import AdminProfile from './modules/Admin/Profile/AdminProfile';
 import Checkout from './modules/Checkout/Checkout'
 import AdminOrderDetail from './modules/Admin/OrderDetail/AdminOrderDetail';
+import DetailOrder from './modules/Orders/DetailOrder';
 
 function Routes() {
   return (
@@ -21,6 +22,7 @@ function Routes() {
         <Route path="/admin/profile" component={ AdminProfile } />
         <Route path="/register" component={ Register } />
         <Route path="/profile" component={ Profile } />
+        <Route path="/orders/:id" component={ DetailOrder } />
         <Route path="/orders" component={ Orders } />
         <Route path="/checkout" component={ Checkout } />
         <Redirect from="/" to="/login" />
