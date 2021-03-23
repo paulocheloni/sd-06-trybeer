@@ -33,7 +33,7 @@ export async function validate(email, password) {
     })
       .then((response) => response.data);
     localStorage.setItem('token', JSON.stringify(result.token));
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {
     if (error.response) {
@@ -91,10 +91,10 @@ export async function finishOrders({ priceTotal, date, userID, address, number }
   try {
     await axios
       .post(
-        `${URL_BASE}orders`,
+        `${URL_BASE}orders/create`,
         { priceTotal, date, userID, address, number },
-      )
-      .then((response) => console.log(response));
+      );
+    // .then((response) => console.log(response));
   } catch (error) {
     if (error.response) {
       return {

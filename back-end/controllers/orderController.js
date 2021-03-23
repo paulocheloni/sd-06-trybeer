@@ -1,13 +1,20 @@
 const { Router } = require('express');
-const Model = require('../models/orderModel');
+const orderServices = require('../services/ordersServices');
+const { ok } = require('../utilities/variables');
 
 const orderRouter = Router();
 
-orderRouter.post('/', async (req, res) => {
+// Get all orders
+orderRouter.get('/get-all', async (req, res) => {
+  const users = await orderServices.getAll();
+  res.status(ok).json(users);
+});
+
+// Create Order
+orderRouter.post('/create', async (req, res) => {
   const { priceTotal, date, userID, address, number } = req.body;
- await Model.create({ priceTotal, date, userID, address, number });
- 
-  res.status(200).json({ message: 'ok' });
+  await orderServices.create({ priceTotal, date, userID, address, number });
+  res.status(ok).json(priceTotal, date, userID, address, number);
 });
 
 module.exports = orderRouter;

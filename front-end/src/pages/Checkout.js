@@ -51,11 +51,12 @@ class Checkout extends React.Component {
   async handleClick() {
     const { history } = this.props;
     const { address, number } = this.state;
-    const priceTotal = localStorage.getItem('price');
+    const priceTotal = Number(localStorage.getItem('price')).toFixed(2);
     const now = new Date();
     // const date = (`${now.getDate()}-${now.getMonth() + 1}`);
     const date = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDay()}`;
-    const userID = localStorage.getItem('userID');
+    const userID = JSON.parse(localStorage.getItem('actualUser')).id;
+    console.log(priceTotal, date, userID, address, number);
 
     await finishOrders({ priceTotal, date, userID, address, number });
 

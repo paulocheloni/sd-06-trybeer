@@ -10,7 +10,7 @@ const registerController = require('./controllers/registerController');
 const productsController = require('./controllers/productsControllers');
 const orderController = require('./controllers/orderController');
 const validateToken = require('./middlewares/validateToken');
-const log = require('./middlewares/logger');
+// const log = require('./middlewares/logger');
 const error = require('./middlewares/error');
 
 const app = express();
@@ -19,7 +19,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(log);
+// app.use(log);
 
 app.use('/login', loginController);
 

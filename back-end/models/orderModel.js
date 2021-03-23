@@ -1,5 +1,11 @@
 const connection = require('./connection');
 
+// Get all orders
+const getAll = async () => {
+  const [orders] = await connection.execute('SELECT * FROM sales');
+  return orders;
+};
+
 const create = async ({ priceTotal, date, userID, address, number }) => {
   try {
     await connection.execute(
@@ -15,4 +21,5 @@ const create = async ({ priceTotal, date, userID, address, number }) => {
 
 module.exports = {
   create,
+  getAll,
 };
