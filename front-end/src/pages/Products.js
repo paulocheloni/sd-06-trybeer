@@ -19,9 +19,10 @@ export default function Products() {
   const [cart, setCart] = useState({});
 
   useEffect(() => {
+    const magicTime = 1500;
     const fetchProducts = async () => {
       const productsArray = await productsApi(token);
-      setTimeout(() => setProducts(productsArray), 1500);
+      setTimeout(() => setProducts(productsArray), magicTime);
       // setProducts(productsArray);
     };
     fetchProducts();
