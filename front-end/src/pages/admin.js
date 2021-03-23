@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import NavBarAdmin from '../components/menuNavBarAdmin';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import NavBarAdmin from '../components/menuNavBarAdmin';
 import api from '../services/api';
 import { loadState } from '../services/localStorage';
 
@@ -17,27 +17,28 @@ function Admin() {
 
   useEffect(() => {
     api.listAllOrdersAdmin()
-    .then((response) => setOrders(response.data))
-    .catch((err) => console.log(err));
-  }, [])
+      .then((response) => setOrders(response.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div>
       <NavBarAdmin content="Trybeer" />
       <h1>Pedidos</h1>
-      {orders.map((order, index) => {
-        return (
-          <Link to={ `/admin/orders/${order.id}` } key={ index }>
-            <div>
-              <h3>Pedido {order.id}</h3>
-              <h4>{order.delivery_address}</h4>
-              <h4>{order.delivery_number}</h4>
-              <h3>{order.total_price}</h3>
-              <h3>{order.status}</h3>
-            </div>
-          </Link>
-        );
-      })}
+      {orders.map((order, index) => (
+        <Link to={ `/admin/orders/${order.id}` } key={ index }>
+          <div>
+            <h3>
+              Pedido
+              {order.id}
+            </h3>
+            <h4>{order.delivery_address}</h4>
+            <h4>{order.delivery_number}</h4>
+            <h3>{order.total_price}</h3>
+            <h3>{order.status}</h3>
+          </div>
+        </Link>
+      ))}
     </div>
   );
 }

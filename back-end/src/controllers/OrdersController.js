@@ -28,25 +28,24 @@ const GetByIdDetails = async (req, res) => {
 };
 
 const listAllOrdersAdmin = async (req, res) => {
-
   const { status, message } = await ListAllOrdersAdminService();
 
   return res.status(status).json(message);
-}
+};
 
 const getByIdOrder = async (req, res) => {
   const { id } = req.params;
 
   const { status, message } = await GetByIdOrderService(id);
   return res.status(status).json(message);
-}
+};
 
 const updateStatusProduct = async (req, res) => {
   const { id } = req.params;
 
   const { status, message } = await UpdateStatusProductService(id);
   return res.status(status).json(message);
-}
+};
 
 OrdersRouter.get('/admin', listAllOrdersAdmin);
 OrdersRouter.get('/', ListAllOrders);

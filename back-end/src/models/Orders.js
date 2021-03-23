@@ -34,12 +34,15 @@ const getByIdDetails = async (id) => {
 const listAllOrdersAdmin = async () => {
   const [orders] = await connection.execute('SELECT * from sales');
   return orders;
-}
+};
 
 const updateStatusProduct = async (id) => {
-  const [{changedRows}] = await connection.execute('UPDATE sales SET status = ? WHERE id = ?', ['Entregue', id] );
+  const [{ changedRows }] = await connection.execute(
+    'UPDATE sales SET status = ? WHERE id = ?',
+    ['Entregue', id],
+  );
   return changedRows;
-}
+};
 
 module.exports = {
   listAllOrders,
