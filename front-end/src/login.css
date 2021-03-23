@@ -1,3 +1,13 @@
+.image-container {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+img {
+  border-radius: 80%;
+  width: 150px;
+}
+
 .main-container {
   display: flex;
   flex-direction: column;

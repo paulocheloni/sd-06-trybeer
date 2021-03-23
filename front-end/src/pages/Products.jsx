@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import productsContext from '../context/productsContext';
 import TopMenu from '../components/TopMenu';
 import fetches from '../services/fetches';
-import ProductsCard from '../components/ProductsCard';
+import ProductsCard from '../components/ProductCard/ProductCard';
 
 export default function Products() {
   const history = useHistory();

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import DeleteIcon from '@material-ui/icons/Delete';
 import productsContext from '../context/productsContext';
 import './componentsCSS/Checkout.css';
 
@@ -51,7 +52,7 @@ export default function CheckoutProductsCard() {
               onClick={ (event) => removeProductFromCart(event) }
               id={ index }
             >
-              X
+              <DeleteIcon fontSize="default" />
             </button>
           </div>
         )) }
