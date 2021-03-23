@@ -37,6 +37,21 @@ const getAllOrders = async () => {
   return sales;
 };
 
+const updatedOne = async ({ id }) => {
+  // fazer uma verificacao se está mesmo pendente?
+  await connection.execute(
+    'UPDATE sales SET status = ? WHERE id = ?',
+    ['Entregue', id],
+  );
+};
+
+const getSaleById = async (id) => {
+  const sales = await connection.execute(
+    'SELECT * FROM sales WHERE id = ?', [id],
+);
+  return sales;
+};
+
 module.exports = {
-  createOne, getAllByUserId, getAllOrders,
+  createOne, getAllByUserId, getAllOrders, updatedOne, getSaleById,
 };

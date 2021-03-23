@@ -35,7 +35,7 @@ function AdminOrdersCard() {
             {`R$ ${e.total_price.replace('.', ',')}` }
           </span>
           <span data-testid={ `${i}-order-status` }>
-            { e.status ? 'Pendente' : 'Entregue' }
+            { e.status }
           </span>
         </button>
       ))}
