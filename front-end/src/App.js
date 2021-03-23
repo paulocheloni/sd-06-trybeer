@@ -10,6 +10,7 @@ import Products from './Pages/Products';
 import Orders from './Pages/Orders';
 import Checkout from './Pages/Checkout';
 import OrderDetail from './Pages/OrderDetail';
+import AdminProfile from './Pages/AdmProfile';
 
 function App() {
   return (
@@ -20,13 +21,14 @@ function App() {
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>
-          <Route exact path="/login" component={ Login } />
-          <Route exact path="/register" component={ Register } />
-          <Route exact path="/profile" component={ Profile } />
-          <Route exact path="/products" component={ Products } />
-          <Route exact path="/checkout" component={ Checkout } />
-          <Route exact path="/orders" component={ Orders } />
-          <Route path="/orders/:orderId" exact component={ OrderDetail } />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/products" component={Products} />
+          <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/orders" component={Orders} />
+          <Route exact path="/admin/profile" component={AdminProfile} />
+          <Route path="/orders/:orderId" exact component={OrderDetail} />
         </Switch>
       </BrowserRouter>
     </Provider>
