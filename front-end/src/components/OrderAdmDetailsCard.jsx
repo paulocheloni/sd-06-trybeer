@@ -5,17 +5,17 @@ import currencyFormat from '../utils/currencyFormat';
 import updateStatus from '../methods/updateStatus';
 
 function OrderDetailsCard({ orderDetails }) {
-  // fazer um hook pra atualizar a pagina dps da requisicao
   const [update, setUpdate] = useState(orderDetails[0]);
-  let visible = false;
-  // if (orderDetails[0].statusSale && orderDetails[0].statusSale === 'Pendente') {
-  // orderDetails[0].statusSale = status desta venda
-  // caso exista e esteja Pendente, entrar no BD e mudar para Entregue
-  //   visible = true;
-  // }
+  let visible = true;
+
+  if (orderDetails[0] && orderDetails[0].statusSale === 'Entregue') {
+    console.log('Já estava entregue');
+    visible = false;
+  }
   if (update && update.status === 'Entregue') {
     console.log('mudou para entregue');
-    visible = true;
+    orderDetails[0].statusSale = update.status;
+    visible = false;
   }
 
   if (orderDetails[0]) {

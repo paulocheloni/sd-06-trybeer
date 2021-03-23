@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import currencyFormat from '../utils/currencyFormat';
 
 function ProductCard({ product }) {
-  console.log(product);
   /* - A quantidade do produto deverá conter a tag `data-testid="0-product-qtd"`
 
 - O nome do produto deverá conter a tag `data-testid="0-product-name"`

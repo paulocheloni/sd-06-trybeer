@@ -5,8 +5,7 @@ import AdminOrdersCard from '../components/AdminOrdersCard';
 
 function OrdersAdm() {
   try {
-    const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
+    JSON.parse(localStorage.getItem('user'));
     return (
       <div>
         <MenuTop title="Trybeer" />
