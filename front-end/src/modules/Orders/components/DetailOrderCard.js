@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function DetailOrderCard(props) {
   const five = 5;
