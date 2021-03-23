@@ -25,3 +25,8 @@ $darkerGray: #686767;
 $darkGray: #8F8F8F;
 $gray: #A7A7A7;
 $lightGray: #DEDEDE; */
+
+
+.font {
+  font-family: 'MontSerrat';
+}
