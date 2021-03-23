@@ -24,7 +24,7 @@ function Orders({ history }) {
 
   useEffect(() => {
     fetchOrders();
-  }, [setOrders, user]);
+  }, [fetchOrders, setOrders, user]);
 
   return (
     <div>
@@ -41,7 +41,7 @@ function Orders({ history }) {
                 className="order-card-container"
                 data-testid={ `${index}-order-card-container` }
               >
-                <Link to={ { pathname: `/orders/${id}`, state: {id, saleDate, totalPrice} } }>
+                <Link to={ { pathname: `/orders/${id}`, state: { id, saleDate, totalPrice } } }>
                   <div className="card-id-date">
                     <div data-testid={ `${index}-order-number` }>
                       {`Pedido ${id}` }
