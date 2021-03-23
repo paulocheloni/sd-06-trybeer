@@ -22,7 +22,7 @@ function Products() {
       history.push('/login');
     }
     fetchProducts();
-  }, [user, history, fetchProducts]);
+  }, []);
 
   return (
     <div>
