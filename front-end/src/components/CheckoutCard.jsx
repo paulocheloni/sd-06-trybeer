@@ -14,9 +14,8 @@ function CheckoutCard(props) {
     <div className="checkout-card-container">
       <p data-testid={ `${index}-product-qtd-input` }>Quantidade: {product.total}</p>
       <p data-testid={ `${index}-product-name` }>{product.name}</p>
-      <p data-testid={ `${index}-product-unit-price` }>RS: {product.price.replace('.', ',')}</p>
-      <p data-testid={ `${index}-product-total-value` }>Total Produto RS: {JSON.stringify((parseFloat(product.price) * product.total)
-      .toFixed(2)).replace('.', ',')}</p>
+      <p data-testid={ `${index}-product-unit-price` }>(R$ {product.price.replace('.', ',')} un)</p>
+      <p data-testid={ `${index}-product-total-value` }>Total Produto R$ {(parseFloat(product.price) * product.total).toFixed(2).replace('.', ',')}</p>
       <button data-testid={ `${index}-removal-button` } type="button" onClick={ () => deleteItemCart(params) }>Excluir</button>
     </div>
   );

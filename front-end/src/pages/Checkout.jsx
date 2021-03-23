@@ -9,6 +9,7 @@ import { getItensStorage, calculateTotal } from '../services/index';
 function Checkout() {
   const [items, setItems] = useState(Object.values(getItensStorage()))
   const [total, setTotal] = useState(calculateTotal(getItensStorage()))
+  const [endereco, setEndereco] = useState({rua: '', numCasa: ''})
 
   useEffect(() => {
     console.log('refresh')
@@ -26,9 +27,9 @@ function Checkout() {
         setTotal={setTotal}
         setItems={setItems}
       />) }
-      <FormsCheckout />
+      <FormsCheckout setEndereco={setEndereco} endereco={endereco}/>
       <TotalCheckout total={total}/>
-      <ButtonFinalizarPedido total={total}/>
+      <ButtonFinalizarPedido total={total} endereco={endereco}/>
     </div>
   );
 }
