@@ -12,7 +12,6 @@ import OrderDetails from './pages/OrderDetails';
 import AdminProfile from './pages/AdminProfile';
 import AdminOrdersDetails from './pages/AdminOrdersDetails';
 
-
 function App() {
   return (
     <BrowserRouter>
