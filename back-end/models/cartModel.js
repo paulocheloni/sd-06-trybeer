@@ -19,7 +19,15 @@ const addSaleProduct = async (salesProducts) => {
   });
 };
 
+const getAllSales = async () => {
+  const [cartSales] = await connection.execute(
+    'SELECT * FROM sales',
+  );
+  return cartSales;
+};
+
 module.exports = {
   addSale,
   addSaleProduct,
+  getAllSales,
 };

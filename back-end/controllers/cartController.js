@@ -20,11 +20,22 @@ router.post('/saleProduct', async (req, res) => {
 
   try {
     await cartService.addSaleProduct(salesProducts);
-
     return res.status(201).json(salesProducts);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
+});
+
+router.get('/saleProduct', async (req, res) => {
+  try {
+      const allSales = await cartService.getAllSales();
+
+      if (!allSales) return res.status(404).json({ message: 'Requisição não encontrada!' });
+
+      return res.status(200).json(allSales);
+    } catch (error) {
+      return res.status(500).json({ message: error });
+    }
 });
 
 module.exports = router;
