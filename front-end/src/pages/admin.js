@@ -28,14 +28,18 @@ function Admin() {
       {orders.map((order, index) => (
         <Link to={ `/admin/orders/${order.id}` } key={ index }>
           <div>
-            <h3>
-              Pedido
-              {order.id}
+            <h3 data-testid={ `${index}-order-number` }>
+              {`Pedido ${order.id}`}
             </h3>
-            <h4>{order.delivery_address}</h4>
-            <h4>{order.delivery_number}</h4>
-            <h3>{order.total_price}</h3>
-            <h3>{order.status}</h3>
+            <h4 data-testid={ `${index}-order-address` }>
+              {`${order.delivery_address}, ${order.delivery_number}`}
+            </h4>
+            <h3 data-testid={ `${index}-order-total-value` }>
+              {`R$ ${order.total_price}`.replace('.', ',')}
+            </h3>
+            <h3 data-testid={ `${index}-order-status` }>
+              {order.status}
+            </h3>
           </div>
         </Link>
       ))}

@@ -44,7 +44,13 @@ function Admin() {
   const isSend = () => {
     if (order.status === 'Pendente') {
       return (
-        <button data-testid="mark-as-delivered-btn" type="button" onClick={ sendProduct }>Marcar como entregue</button>
+        <button
+          data-testid="mark-as-delivered-btn"
+          type="button"
+          onClick={ sendProduct }
+        >
+          Marcar como entregue
+        </button>
       );
     }
   };
@@ -54,23 +60,47 @@ function Admin() {
       <NavBarAdmin content="Trybeer" />
 
       <h1 data-testid="order-status">
-        {order.status}{' '}-{' '}
-        
+        {order.status}
+        {' '}
+        -
+        {' '}
+
       </h1>
       {products.map((product, index) => (
         <div key={ index }>
-          <h1 data-testid={`${index}-order-number`}>Pedido{' '}{order.id}</h1>
-          <h3 data-testid={`${index}-product-qtd`}>{product.productQty}{' '}-{' '}<span data-testid={`${index}-product-name`}>{product.name}</span></h3>
-          
-          <h4 data-testid={`${index}-product-total-value`}>
-            R$ {product.totalPrice.toFixed(2).toString().replace('.', ',') }
-            <span data-testid={`${index}-order-unit-price`}>(R${' '}{ product.price.replace('.', ',')})</span>
+          <h1 data-testid="order-number">
+            Pedido
+            {' '}
+            {order.id}
+          </h1>
+          <h3 data-testid={ `${index}-product-qtd` }>
+            {product.productQty}
+            {' '}
+            -
+            {' '}
+            <span data-testid={ `${index}-product-name` }>{product.name}</span>
+          </h3>
+
+          <h4 data-testid={ `${index}-product-total-value` }>
+            R$
+            {' '}
+            {product.totalPrice.toFixed(2).toString().replace('.', ',') }
+            <span data-testid={ `${index}-order-unit-price` }>
+              (R$
+              {' '}
+              { product.price.replace('.', ',')}
+              )
+            </span>
           </h4>
 
         </div>
       ))}
       <h1 data-testid="order-total-value">
-        Total:{' '}R$ {`${order.total_price}`.replace('.', ',')}
+        Total:
+        {' '}
+        R$
+        {' '}
+        {`${order.total_price}`.replace('.', ',')}
       </h1>
       {isSend()}
     </div>
