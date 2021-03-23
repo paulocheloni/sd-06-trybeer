@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 function TotalCheckout(props) {
   const { total } = props;
   return (

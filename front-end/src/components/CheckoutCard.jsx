@@ -39,7 +39,7 @@ function CheckoutCard(props) {
 }
 
 CheckoutCard.propTypes = {
-  item: PropTypes.shapeOf(PropTypes.object).isRequired,
+  item: PropTypes.shapeOf(PropTypes.string).isRequired,
   index: PropTypes.number.isRequired,
   setTotal: PropTypes.func.isRequired,
   setItems: PropTypes.func.isRequired,
