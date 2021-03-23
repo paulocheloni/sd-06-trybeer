@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import ProductsList from '../components/products/ProductsList';
 import CheckoutCart from '../components/checkout/CheckoutCart';
-import MenuTop from '../components/menu/MenuTop';
+import MenuTop from '../components/menuClient/MenuTop';
 
 import ProductsContext from '../context/ProductsContext';
 import CartContext from '../context/CartContext';
