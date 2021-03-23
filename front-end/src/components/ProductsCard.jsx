@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import './ProductCard.css';
+import './componentsCSS/ProductCard.css';
 import productsContext from '../context/productsContext';
 
 export default function ProductsCard() {

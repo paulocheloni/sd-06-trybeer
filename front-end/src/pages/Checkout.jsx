@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import TopMenu from '../components/TopMenu';
+import CheckoutProductsCard from '../components/CheckoutProductsCard';
 import productsContext from '../context/productsContext';
 import fetches from '../services/fetches';
-import './pagesCSS/Checkout.css';
 
-export default function Products() {
+export default function Checkout() {
   const { cartProducts, setCartProducts } = useContext(productsContext);
   const [street, setStreet] = useState('');
   const [houseNumber, setHouseNumber] = useState('');
@@ -33,12 +33,12 @@ export default function Products() {
     }
     return true;
   };
-
+  // aqui é uma validação tem que mandar la pra pasta validations?
   const streetValidation = () => {
     const isStreetFilled = street.length > 0;
     return isStreetFilled;
   };
-
+  // aqui é uma validação tem que mandar la pra pasta validations?
   const houseNumberValidation = () => {
     const ishouseNumberFilled = houseNumber.length > 0;
     return ishouseNumberFilled;
@@ -54,15 +54,6 @@ export default function Products() {
     return totalPrice;
   };
 
-  const removeProductFromCart = (event) => {
-    const productId = event.target.id;
-
-    cartProducts.splice(productId, 1);
-    const newCartProduct = cartProducts;
-    localStorage.setItem('cartProducts', JSON.stringify(newCartProduct));
-    window.location.reload();
-  };
-
   const sendOrder = () => {
     const limitIndex = 19;
     const SUCCESSMESSAGEDESAPEAR = 3000;
@@ -73,12 +64,13 @@ export default function Products() {
       number: houseNumber,
       date: date.toISOString().slice(0, limitIndex).replace('T', ' '),
       orderStatus: 'pendente',
+      cartProducts,
     };
 
     fetches.createOrder(tokenFromLocalStorage, objOrder)
       .then((response) => {
         if (!response) {
-          return;
+          return (setOrderSuccess('Algum erro aconteceu na realização do seu pedido!'));
         }
         // console.log('mensagem sucesso', response.message);
         (setOrderSuccess(response.message));
@@ -89,45 +81,30 @@ export default function Products() {
           history.push('/products');
         }, SUCCESSMESSAGEDESAPEAR);
       });
+
+    // setTimeout(() => {
+    //   setCartProducts([]);
+    //   localStorage.removeItem('cartProducts');
+    //   history.push('/products');
+    // }, SUCCESSMESSAGEDESAPEAR);
   };
+
+  // const sendProductsFromSale = () => {
+  //   cartProducts.map((product) => {
+  //     const mySaleProducts = {
+  //       productId: product.id,
+  //       quantity: product.quantityItem,
+  //     };
+  //     // console.log('frontend myProductsSale checkout', mySaleProducts);
+  //     return fetches.createSaleProducts(tokenFromLocalStorage, mySaleProducts);
+  //   });
+  // };
 
   return (
     <div>
       { handleRedirect(tokenFromLocalStorage) }
       <TopMenu data-testid="top-title" pageTitle="Finalizar Pedido" />
-      <div className="cart-products-container">
-        { !cartProducts.length
-          ? <h1>Não há produtos no carrinho</h1>
-          : cartProducts.length && cartProducts.map((product, index) => (
-            <div
-              className="cart-products"
-              key={ product.id }
-            >
-              <p data-testid={ `${index}-product-qtd-input` }>
-                { product.quantityItem }
-              </p>
-              <h5 data-testid={ `${index}-product-name` }>
-                { product.name }
-              </h5>
-              <span
-                data-testid={ `${index}-product-total-value` }
-              >
-                { `R$ ${String((product.subTotal).toFixed(2)).replace('.', ',')}` }
-              </span>
-              <span data-testid={ `${index}-product-unit-price` }>
-                { `(R$ ${(product.price).replace('.', ',')} un)` }
-              </span>
-              <button
-                data-testid={ `${index}-removal-button` }
-                type="submit"
-                onClick={ (event) => removeProductFromCart(event) }
-                id={ index }
-              >
-                X
-              </button>
-            </div>
-          )) }
-      </div>
+      <CheckoutProductsCard />
       <div>
         <span
           data-testid="order-total-value"
@@ -168,7 +145,7 @@ export default function Products() {
         disabled={ !(isTotalNotPriceZero()
           && streetValidation()
           && houseNumberValidation()) }
-        onClick={ sendOrder }
+        onClick={ () => { sendOrder(); } }
       >
         Finalizar Pedido
       </button>

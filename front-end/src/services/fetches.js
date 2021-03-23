@@ -46,6 +46,12 @@ const getSales = async (token) => {
   return sales;
 };
 
+const getSaleById = async (token, pathName) => {
+  const sale = await axios.get(`${path}${pathName}`,
+    { headers: { authorization: token } });
+  return sale;
+};
+
 export default {
   fetchUserByEmail,
   updateUserName,
@@ -53,4 +59,5 @@ export default {
   createUser,
   createOrder,
   getSales,
+  getSaleById,
 };

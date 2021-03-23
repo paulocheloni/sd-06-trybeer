@@ -19,7 +19,7 @@ app.use('/', userController);
 
 app.use('/profile', userController);
 
-app.use('/products', productsController);
+app.use('/', productsController);
 
 app.use('/', ordersController);
 
