@@ -12,6 +12,7 @@ import Login from '../pages/Login';
 import PedidosAdmin from '../pages/PedidosAdmin';
 import ProfileAdmin from '../pages/ProfileAdmin';
 import DetalhesPedidosAdmin from '../pages/DetalhesPedidosAdmin';
+import Checkout from '../pages/Checkout';
 
 const Routes = () => (
   <Router>
@@ -26,6 +27,8 @@ const Routes = () => (
       <Route path="/register" component={ Register } />
       <Route path="/products" component={ Products } />
       <Route path="/profile" component={ Profile } />
+      <Route path="/checkout" component={ Checkout } />
+
     </Switch>
   </Router>
 );

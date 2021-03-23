@@ -2,28 +2,30 @@ import React, { useContext } from 'react';
 import CheckoutContext from '../../context/CheckoutContext';
 
 function FormCheckout() {
-  const { handleChange, endereco } = useContext(CheckoutContext);
+  const { handleChange, address } = useContext(CheckoutContext);
 
   return (
     <div>
-      <label htmlFor="rua">
+      <label className="label" htmlFor="rua">
         Rua:
         <input
+          className="input"
           type="text"
           id="rua"
           name="rua"
-          value={ endereco.rua }
+          value={ address.rua }
           onChange={ handleChange }
           data-testid="checkout-street-input"
         />
       </label>
-      <label htmlFor="numero">
+      <label className="label" htmlFor="numero">
         Número da casa:
         <input
+          className="input"
           type="number"
           id="numero"
           name="numero"
-          value={ endereco.numero }
+          value={ address.numero }
           onChange={ handleChange }
           data-testid="checkout-house-number-input"
         />

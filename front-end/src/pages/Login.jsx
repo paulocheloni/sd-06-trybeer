@@ -4,6 +4,8 @@ import LoginContext from '../context/LoginContext';
 import FormLogin from '../components/pageLogin/FormLogin';
 import api from '../services/api';
 import { loginUtils } from '../utils';
+import '../css/bulma.min.css';
+import '../css/login.css';
 
 function Login({ history }) {
   const [user, setUser] = useState({ email: '', password: '' });
@@ -13,7 +15,7 @@ function Login({ history }) {
 
   useEffect(() => {
     localStorage.cart = JSON.stringify([]);
-    localStorage.user = JSON.stringify({});
+    if (!localStorage.user) localStorage.user = JSON.stringify({});
   }, []);
 
   useEffect(() => {
@@ -21,6 +23,7 @@ function Login({ history }) {
   }, [user]);
 
   const handleChange = ({ target }) => {
+    console.log('iniciei');
     setUser({ ...user, [target.name]: target.value });
   };
 
@@ -52,7 +55,7 @@ function Login({ history }) {
         displayError: displayErr,
       } }
     >
-      <div>
+      <div className="main-content">
         <FormLogin />
       </div>
     </LoginContext.Provider>

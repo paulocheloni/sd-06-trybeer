@@ -16,6 +16,7 @@ const CheckoutCart = () => {
   return (
     <footer>
       <button
+        className="button is-success"
         type="button"
         data-testid="checkout-bottom-btn"
         onClick={ () => history.push('/checkout') }

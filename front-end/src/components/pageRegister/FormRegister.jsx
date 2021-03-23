@@ -13,20 +13,13 @@ function FormRegister() {
     displayError: displayErr,
   } = useContext(RegisterContext);
 
-  function displayError() {
-    const span = document.querySelector('span');
-    if (span) span.remove();
-    const elementMessage = document.createElement('span');
-    elementMessage.innerText = errMsg;
-    const bodyForm = document.querySelector('#bodyForm');
-    bodyForm.appendChild(elementMessage);
-  }
-
   return (
-    <div id="bodyForm">
+    <div className="form-content-reg" id="bodyForm">
       {InputsForm(newUser, handleChange)}
       {ButtonsForm(valid, handleClick)}
-      { displayErr && displayError() }
+      <div className="control-errorMsg">
+        { displayErr && <span className="error-color length-text">{errMsg}</span>}
+      </div>
     </div>
   );
 }

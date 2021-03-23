@@ -4,70 +4,63 @@ import CheckoutContext from '../context/CheckoutContext';
 import ProductCard from '../components/pageCheckout/ProductCard';
 import ButtonCheckout from '../components/pageCheckout/ButtonCheckout';
 import FormCheckout from '../components/pageCheckout/FormCheckout';
+import { checkoutUtils } from '../utils';
 
 function Checkout() {
-  const produtos = [
-    {
-      quantity: 11,
-      name: 'cachaça',
-      totalValue: 55.00,
-      value: 5,
-    },
-    {
-      quantity: 1,
-      name: 'Heineken',
-      totalValue: 4.99,
-      value: 4.99,
-    },
-  ];
-  const [endereco, setEndereco] = useState({ rua: '', numero: '' });
-  const [products, setProdutos] = useState(produtos);
-  const [able, setAble] = useState(true);
-  const [value, setValue] = useState(false);
+  // const produtos = [
+  //   {
+  //     idProduct: 1,
+  //     idUser: localStorage.user.id,
+  //     quantity: 1,
+  //     name: 'Bavaria',
+  //     totalValue: 4.99,
+  //     price: 4.99,
+  //   },
 
+  // ];
+  const productsList = JSON.parse(localStorage.cart);
+  const newlist = productsList.map((item) => {
+    item.totalValue = (item.quantity * item.price);
+    return item;
+  });
+  const [address, setEndereco] = useState({ rua: '', numero: '' });
+  const [products, setProdutos] = useState(newlist);
+  const [able, setAble] = useState(true);
+  const [sumTotal, setSumTotal] = useState(0);
   const history = useHistory();
 
   const handleChange = ({ target }) => {
-    setEndereco({ ...endereco, [target.name]: target.value });
+    setEndereco({ ...address, [target.name]: target.value });
   };
 
-  const valorTotal = () => {
-    const reducer = (acc, curr) => acc + curr;
-    const noValue = '0,00';
-    if (products.length > 0) {
-      const totalValue = products.map((item) => item.totalValue).reduce(reducer);
-      return totalValue;
-    }
-    setValue(true);
-    return noValue;
-  };
   useEffect(() => {
-    const disable = () => {
-      if (!value && endereco.rua !== '' && endereco.numero !== '') {
-        setAble(false);
-      } else {
-        return setAble(true);
-      }
-    };
-    disable();
-  }, [value, endereco]);
+    checkoutUtils.valueTotal(products, setSumTotal);
+  }, [products]);
+
+  useEffect(() => {
+    checkoutUtils.disable(setAble, products, address);
+  }, [address, products]);
 
   return (
     <CheckoutContext.Provider
       value={ {
         handleChange,
-        endereco,
+        address,
         products,
         setProdutos,
-        valorTotal,
         able,
         history,
+        sumTotal,
       } }
     >
-      <h1 data-testid="top-title">Finalizar Pedido</h1>
-      <ProductCard />
-      <FormCheckout />
-      <ButtonCheckout />
+      <div className="main-content">
+        <h1 className="title" data-testid="top-title">Finalizar Pedido</h1>
+        <div className="form-content">
+          <ProductCard />
+          <FormCheckout />
+          <ButtonCheckout />
+        </div>
+      </div>
     </CheckoutContext.Provider>
   );
 }

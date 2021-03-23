@@ -5,6 +5,7 @@ import FormRegister from '../components/pageRegister/FormRegister';
 import { registerUtils } from '../utils';
 import RegisterContext from '../context/RegisterContext';
 import api from '../services/api';
+import '../css/register.css';
 
 function Register({ history }) {
   const [newUser, setUser] = useState({ name: '', email: '', senha: '', tipo: 'client' });
@@ -52,7 +53,9 @@ function Register({ history }) {
         displayError: displayErr,
       } }
     >
-      <FormRegister />
+      <div className="main-content-reg">
+        <FormRegister />
+      </div>
     </RegisterContext.Provider>
   );
 }
