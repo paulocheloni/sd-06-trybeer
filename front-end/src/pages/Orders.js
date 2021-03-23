@@ -3,15 +3,18 @@ import OrdersCard from '../components/Orders/OrdersCard';
 import TrybeerContext from '../context/TrybeerContext';
 import TopBar from '../components/TopBar';
 import { getOrders } from '../services/ClientOrderService';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function Orders() {
-  const { email } = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user'));
+  const history = useHistory();
   const { clientOrders, setOrders } = useContext(TrybeerContext);
 
   useEffect(() => {
+    if (!user) return history.push('/login');
+
     async function fetchOrders() {
-      const orders = await getOrders(email);
+      const orders = await getOrders(user.email);
       setOrders(orders);
     }
 
