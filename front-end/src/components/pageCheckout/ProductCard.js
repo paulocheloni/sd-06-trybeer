@@ -9,12 +9,13 @@ function ProductCard() {
     setProdutos(remove);
   };
 
-  const formatSumTotal = () => {
-    const valueSumTotal = String(sumTotal);
-    return valueSumTotal.replace('.', ',');
+  const formatSumTotal = (value) => {
+    const convertValue = parseFloat(value).toFixed(2);
+    const sumTotalValue = String(convertValue);
+    return sumTotalValue.replace('.', ',');
   };
 
-  const formatTotalCall = formatSumTotal();
+  const formatTotalCall = formatSumTotal(sumTotal);
 
   return (
     <div className="label">
@@ -28,10 +29,12 @@ function ProductCard() {
 
           <p data-testid={ `${index}-product-total-value` }>
             {
-              (item.totalValue).toFixed(2)
+              `R$ ${formatSumTotal(item.totalValue)}`
             }
           </p>
-          <p data-testid={ `${index}-product-unit-price` }>{ item.price }</p>
+          <p data-testid={ `${index}-product-unit-price` }>
+            {`(R$ ${formatSumTotal(item.price)} un)`}
+          </p>
           <button
             className="button is-dark"
             type="button"
