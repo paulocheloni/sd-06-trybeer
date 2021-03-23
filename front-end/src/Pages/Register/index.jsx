@@ -87,6 +87,7 @@ const form = (params) => {
           data-testid="signup-seller"
         />
         Quero vender
+        <span className="checkmark" />
       </S.Label>
       {button(isDisabled)}
     </S.Form>
