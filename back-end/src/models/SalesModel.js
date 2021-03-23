@@ -66,10 +66,16 @@ const fullfilSale = async (saleId) => {
  * @returns Objeto contendo itens de venda detalhado
  */
 const getSalesById = async (id) => {
-  const result = await connection.execute(
-    'select sales_products.product_id as idProduct, sales_products.quantity as quantity, sales.id as idSales, sales.sale_date as dateSale, products.name as productName, products.price as price from sales_products inner join sales on sales_products.sale_id = sales.id inner join products on sales_products.product_id = products.id WHERE sale_id=?', [id]);
+  const query = `
+  SELECT sales_products.product_id
+  as idProduct,sales_products.quantity as quantity, sales.id as idSales,
+  sales.sale_date as dateSale, products.name as productName,
+  products.price as price from sales_products
+  inner join sales on sales_products.sale_id = sales.id
+  inner join products on sales_products.product_id = products.id WHERE sale_id=?`;
+  const result = await connection.execute(`${query}`, [id]);
   return result;
-}
+};
 
 module.exports = {
   getSaleById,

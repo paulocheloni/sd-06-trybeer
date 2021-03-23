@@ -34,16 +34,15 @@ const fullfilSale = async (saleId) => {
   return sale;
 };
 
-
 /**
  * Lista venda detalhada filtrada  pelo id da venda
  * @param {String} id 
  * @returns Object contendo detalhes da venda
  */
 const getSalesById = async (id) => {
-  const result = await salesModel.getSalesById(id);
+  const result = await SalesModel.getSalesById(id);
   return result;
-}
+};
 
 module.exports = {
   getSaleById,

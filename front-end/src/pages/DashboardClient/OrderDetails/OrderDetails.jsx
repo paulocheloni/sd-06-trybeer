@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import Header from '../../../components/Header/Header';
 import './OrderDetails.css';
 import { getSalesById } from '../../../services/Sales';
 import { correctDate, parseCartPrice } from '../../../utils/parseValues';
+import { verifyUser } from '../../../store/LocalStorage/actions';
 
 /**
  * Soma o total do pedido (quantidade * preco)
@@ -20,6 +22,11 @@ const soma = (products) => {
 
 export default function Orders({ match: { params: { id } } }) {
   const [orderDetails, setOrderDetails] = useState([]);
+  const history = useHistory();
+
+  useEffect(() => {
+    verifyUser(history);
+  }, [history]);
 
   useEffect(() => {
     const getOrderDetails = async () => {
@@ -39,8 +46,7 @@ export default function Orders({ match: { params: { id } } }) {
           { index === 0 && (
             <div className="title">
               <div className="pedido">
-                <h2>Pedido</h2>
-                <h2 h2 data-testid="order-number">{details.idSales}</h2>
+                <h2 h2 data-testid="order-number">{`Pedido ${details.idSales}`}</h2>
               </div>
               <div className="data">
                 <h2>Data</h2>
@@ -69,7 +75,7 @@ export default function Orders({ match: { params: { id } } }) {
       ))}
       <div className="resumo">
         <h2>total</h2>
-        <h2>
+        <h2 data-testid="order-total-value">
           { parseCartPrice(soma(orderDetails)) }
         </h2>
       </div>
