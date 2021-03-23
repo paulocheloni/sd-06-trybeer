@@ -10,7 +10,7 @@ function Header({ text, id }) {
   return (
     <div>
       <div className="header_costumer">
-        <div className="header_body">
+        <div>
           <button
             type="button"
             id="fome-hamburger"

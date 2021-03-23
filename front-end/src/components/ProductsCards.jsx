@@ -32,7 +32,7 @@ function ProductsCard({ element, index }) {
     else setProductQuantity(ola);
   }, [qnt]);
 
-  // url_image
+  // url_imagea
 
   const clickPlus = () => {
     setQnt(qnt + 1);

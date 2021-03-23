@@ -1,7 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
-.product-list{
-
+.product-list {
+  align-items: center;
+  align-content: center;
+  background-color: #ffff;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin: auto;
+  margin-top: 100px;
+  width: 100%;
 }
 
 .product-bottom {
