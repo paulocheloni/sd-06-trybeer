@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // import { useHistory } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import TopMenu from '../components/TopMenu';
+import TopMenuAdmin from '../components/TopMenuAdmin';
 import { isTheNewNameDifferent, nameValidation } from '../utils/validations';
 import useInput from '../hooks/useInput';
 import fetches from '../services/fetches';
@@ -28,10 +29,11 @@ export default function Profile() {
 
   return (
     <div>
-      <TopMenu
-        data-testid="top-title"
-        pageTitle="Meu perfil"
-      />
+      {tokenDecoded.role === 'client' ? (
+        <TopMenu data-testid="top-title" pageTitle="Meu perfil" />
+      ) : (
+        <TopMenuAdmin pageTitle="TryBeer" />
+      )}
       <fieldset>
         <label htmlFor="name">
           Name
@@ -62,9 +64,7 @@ export default function Profile() {
         disabled={ !(nameValidation(name) && isTheNewNameDifferent(oldName, name)) }
         onClick={ () => handleUpdateInfo(tokenDecoded.email) }
       >
-        <div>
-          { newInfo }
-        </div>
+        <div>{newInfo}</div>
         Salvar
       </button>
     </div>

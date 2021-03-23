@@ -22,6 +22,7 @@ export default function Routes() {
       <Route path="/profile" component={ Profile } />
       <Route path="/checkout" component={ Checkout } />
       <Route exact path="/orders/:id" component={ SaleDetails } />
+      <Route path="/admin/profile" component={ Profile } />
       <Route path="/orders" component={ CustomerOrders } />
     </Switch>
   );

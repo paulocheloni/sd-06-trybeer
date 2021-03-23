@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import TopMenu from '../components/TopMenu';
 import CheckoutProductsCard from '../components/CheckoutProductsCard';
@@ -13,6 +13,14 @@ export default function Checkout() {
   const history = useHistory();
   const tokenFromLocalStorage = localStorage.getItem('token');
   let totalPrice = '0,00';
+
+  useEffect(() => {
+    const cartLS = JSON.parse(localStorage.getItem('cartProducts'));
+    if (!cartLS) return;
+    console.log(cartLS);
+    setCartProducts(cartLS.filter((product) => product.quantityItem !== 0));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleRedirect = (token) => {
     if (!token) return history.push('/login');
@@ -64,15 +72,21 @@ export default function Checkout() {
         if (!response) {
           return (setOrderSuccess('Algum erro aconteceu na realização do seu pedido!'));
         }
-        const createSaleSuccessMessage = response.message;
-        return (setOrderSuccess(createSaleSuccessMessage));
+        // console.log('mensagem sucesso', response.message);
+        (setOrderSuccess(response.message));
+        setTimeout(() => {
+          // setOrderSuccess('');
+          setCartProducts([]);
+          localStorage.removeItem('cartProducts');
+          history.push('/products');
+        }, SUCCESSMESSAGEDESAPEAR);
       });
 
-    setTimeout(() => {
-      setCartProducts([]);
-      localStorage.removeItem('cartProducts');
-      history.push('/products');
-    }, SUCCESSMESSAGEDESAPEAR);
+    // setTimeout(() => {
+    //   setCartProducts([]);
+    //   localStorage.removeItem('cartProducts');
+    //   history.push('/products');
+    // }, SUCCESSMESSAGEDESAPEAR);
   };
 
   // const sendProductsFromSale = () => {
