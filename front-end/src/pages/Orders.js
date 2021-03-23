@@ -30,7 +30,7 @@ class Orders extends React.Component {
       <div>
         <Header history={ history } />
         <div className="orders-container">
-          {stateOrders.length > 1 && stateOrders.map((element, index) => (
+          {stateOrders.length > 0 && stateOrders.map((element, index) => (
             <div className="order" key={ index } data-testid="0-order-card-container">
               <div>
                 <h4 data-testid={ `${index}-order-number` }>
