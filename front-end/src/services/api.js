@@ -94,6 +94,16 @@ const fetchAllOrders = async () => {
   return allOrders;
 };
 
+const fetchSaleProduct = async (id) => {
+  const productsOfSale = await fetch(`http://localhost:3001/orderDetais/${id}`, {
+    method: 'GET',
+    headers: contentType,
+    body: JSON.stringify(),
+  }).then((res) => res.json());
+  console.log('cheguei aqui')
+  return productsOfSale;
+};
+
 module.exports = {
   fetchLogin,
   fetchRegister,
@@ -103,4 +113,5 @@ module.exports = {
   fetchAddSaleProduct,
   fetchSales,
   fetchAllOrders,
+  fetchSaleProduct,
 };
