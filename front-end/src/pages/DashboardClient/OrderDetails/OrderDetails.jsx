@@ -4,6 +4,11 @@ import './OrderDetails.css';
 import { getSalesById } from '../../../services/Sales';
 import { correctDate, parseCartPrice } from '../../../utils/parseValues';
 
+/**
+ * Soma o total do pedido (quantidade * preco)
+ * @param {String} products 
+ * @returns String contendo a soma dos itens
+ */
 const soma = (products) => {
   let totalVenda = 0;
   products.forEach((e) => {
@@ -23,13 +28,6 @@ export default function Orders(props) {
     };
     getOrderDetails();
   }, [id]);
-
-  // dateSale: "2021-03-21T03:00:00.000Z"
-  // idProduct: 2
-  // idSales: 1
-  // price: "7.50"
-  // productName: "Heineken 600ml"
-  // quantity: "5"
 
   return (
     <div className="body">
