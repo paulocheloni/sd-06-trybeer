@@ -16,7 +16,7 @@ function ButtonCheckout() {
     if (hora.length > numberLength) {
       newHour = hora.split(' ');
     }
- 
+
     const dateTime = `${dataFormart} ${newHour[0] || hora}`;
     return dateTime;
   };
