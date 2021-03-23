@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import OrdersCard from '../components/Orders/OrdersCard';
 import TrybeerContext from '../context/TrybeerContext';
 import TopBar from '../components/TopBar';
-import { getOrders } from '../services/ClientOrderService';
-import { Link, useHistory } from 'react-router-dom';
+import getOrders from '../services/ClientOrderService';
 
 function Orders() {
   const user = JSON.parse(localStorage.getItem('user'));
