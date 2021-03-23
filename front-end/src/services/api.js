@@ -41,3 +41,11 @@ export const saveSale = async (sale) => {
 
   return requestResponse;
 };
+
+export const getAllSales = async () => {
+  const requestResponse = await api.get('admin/orders')
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+
+  return requestResponse;
+};

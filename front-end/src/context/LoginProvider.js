@@ -14,6 +14,7 @@ const LoginProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [totalCart, setTotalCart] = useState(0);
   const [address, setAddress] = useState({ rua: '', numero: '' });
+  const [sales, setSales] = useState([]);
 
   const providerValue = {
     user,
@@ -28,6 +29,8 @@ const LoginProvider = ({ children }) => {
     setTotalCart,
     address,
     setAddress,
+    sales,
+    setSales,
   };
 
   return (
