@@ -6,7 +6,7 @@ import AppContext from '../context/app.context';
 import { Topbar, TextInput, SubmitButton } from '../components';
 
 export default function Profile() {
-  const { token, setToken } = useContext(AppContext);
+  const { tokenContext: { token, setToken } } = useContext(AppContext);
   const history = useHistory();
   const [name, setName] = useState(token.name);
   const [disableBtn, setDisableBtn] = useState(true);
@@ -32,8 +32,8 @@ export default function Profile() {
 
     const nameChanged = (name.normalize() !== token.name.normalize());
     if (!nameChanged) setDisableBtn(true);
-    validateForm();
-  }, [name, token.name, disableBtn]);
+    if (nameChanged) validateForm();
+  }, [name, token, disableBtn]);
 
   return (
     <section>

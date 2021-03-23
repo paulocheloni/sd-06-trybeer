@@ -6,7 +6,6 @@ const handleSubmit = async ({ action, login, setToken, history }) => {
   const valid = await yupSchemas.login.isValid(login);
   if (valid) {
     const newUser = await userApi(action, login);
-    console.log('handleSubmit ', newUser);
     redirectUser(newUser, history, setToken);
   }
 };

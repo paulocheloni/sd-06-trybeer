@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 
-const useStorage = (key, initialValue = undefined) => {
-  const [value, setValue] = useState(initialValue);
+const useStorage = (key) => {
+  const currentValue = JSON.parse(localStorage.getItem(key)) || { name: '', email: '' };
+  const [value, setValue] = useState(currentValue);
 
-  useEffect(() => {
-    setValue(JSON.parse(localStorage.getItem(key)));
-  }, [key]);
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
+  const updateStorage = useCallback((payload) => {
+    if (payload && value.email !== payload.email) {
+      setValue(payload);
+      localStorage.setItem(key, JSON.stringify(payload));
+    }
   }, [value, key]);
 
-  return setValue;
+  return updateStorage;
 };
 
 export default useStorage;
