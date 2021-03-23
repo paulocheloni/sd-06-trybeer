@@ -16,7 +16,7 @@ function Form() {
     const response = await API.post('/login', form);
     if (response.message) return setErrorMsg(response.message);
     localStorage.setItem('user', JSON.stringify({ ...response, email: form.email }));
-    const delay = 1000;
+    const delay = 500;
     setTimeout(() => setToken(true), delay);
   };
 
