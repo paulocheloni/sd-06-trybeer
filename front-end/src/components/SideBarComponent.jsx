@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import BeersAppContext from '../context/BeersAppContext';
 import '../style/SideBarCostumer.css';
 
 function SideBar() {
   const history = useHistory();
+  const {
+    setUser,
+  } = useContext(BeersAppContext);
 
   return (
     <div className="side-menu-container">
@@ -11,7 +15,7 @@ function SideBar() {
         type="button"
         data-testid="side-menu-item-products"
         onClick={ () => history.push('/products') }
-        classame="bttn_sidebar_costumer"
+        className="bttn_sidebar_costumer"
       >
         Produtos
       </button>
@@ -34,7 +38,10 @@ function SideBar() {
       <button
         type="button"
         data-testid="side-menu-item-logout"
-        onClick={ () => history.push('/login') }
+        onClick={ () => {
+          setUser({});
+          history.push('/login');
+        } }
         className="bttn_sidebar_costumer"
       >
         Sair

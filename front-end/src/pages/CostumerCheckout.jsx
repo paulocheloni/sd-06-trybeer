@@ -1,9 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { CheckoutCards } from '../components';
-// import CheckoutCards from '../components/CheckoutCards';
-import Header from '../components/HeaderComponent';
+import { CheckoutCards, Header } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
+import fetchApiJsonBody from '../service/fetchApi';
 
 function CostumerCheckout() {
   const history = useHistory();
@@ -11,6 +10,8 @@ function CostumerCheckout() {
     user,
     productQuantity,
     amount,
+    setProductQuantity,
+    setAmount,
   } = useContext(BeersAppContext);
 
   if (!user.token) history.push('/login');
@@ -38,16 +39,26 @@ function CostumerCheckout() {
     setInputValues({ ...inputValues, [target.name]: target.value });
   };
 
-  const redirectingFinishedOrders = () => {
+  const redirectingFinishedOrders = async () => {
+    const salesProducts = productQuantity
+      .map((objQuantity) => [objQuantity.id, objQuantity.qnt]);
+    const returnCheckout = await fetchApiJsonBody('/checkout', {
+      deliveryAddress: inputValues.street,
+      deliveryNumber: inputValues.number,
+      salesProducts,
+    }, 'POST', user.token);
+    if (returnCheckout.err) return setShowMessage(returnCheckout.err);
     const time = 2000;
     setShowMessage('Compra realizada com sucesso!');
     setTimeout(() => {
+      setProductQuantity([]);
+      setAmount(0.00);
       history.push('/products');
     }, time);
   };
 
   return (
-    <>
+    <div>
       <Header text="Finalizar Pedido" id="top-title" />
       <h1>Produtos</h1>
       <div>
@@ -100,7 +111,7 @@ function CostumerCheckout() {
         </button>
         <span>{ showMessage }</span>
       </form>
-    </>
+    </div>
   );
 }
 

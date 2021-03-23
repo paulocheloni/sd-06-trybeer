@@ -13,6 +13,7 @@ function Signup({ history }) {
   const {
     setUser,
     setProductQuantity,
+    setAmount,
   } = useContext(BeersAppContext);
 
   const [checked, setChecked] = useState(false);
@@ -60,6 +61,7 @@ function Signup({ history }) {
     }
     setUser(ola);
     setProductQuantity([]);
+    setAmount(0.00);
     if (ola.role === 'administrator') {
       history.push('/admin/orders');
     } else if (ola.role === 'client') {

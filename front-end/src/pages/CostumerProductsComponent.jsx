@@ -71,13 +71,13 @@ function CostumerProducts() {
           </div>
         ))}
       </div>
-      <div className="product-bottom">
+      <div>
         <button
           type="button"
           onClick={ clickRedirect }
           data-testid="checkout-bottom-btn"
-          className="bttn-product"
           disabled={ Math.trunc(amount * 100) === 0 }
+          className="product-bottom"
         >
           Ver Carrinho
           {' '}

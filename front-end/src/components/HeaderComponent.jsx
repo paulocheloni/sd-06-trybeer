@@ -8,9 +8,9 @@ function Header({ text, id }) {
   const [renderSideBar, setRenderSideBar] = useState(false);
 
   return (
-    <>
+    <div>
       <div className="header_costumer">
-        <div className="dropdown">
+        <div>
           <button
             type="button"
             id="fome-hamburger"
@@ -36,7 +36,7 @@ function Header({ text, id }) {
       <div className="sidebar">
         {(renderSideBar) && <SideBar text="TryBeer" id="top-title" />}
       </div>
-    </>
+    </div>
   );
 }
 

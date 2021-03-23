@@ -13,6 +13,7 @@ function Login() {
   const {
     setUser,
     setProductQuantity,
+    setAmount,
   } = useContext(BeersAppContext);
 
   const [valid, setValid] = useState(true);
@@ -48,6 +49,7 @@ function Login() {
     }
     setUser(ola);
     setProductQuantity([]);
+    setAmount(0.00);
     if (ola.role === 'administrator') {
       history.push('/admin/orders');
     } else if (ola.role === 'client') {
