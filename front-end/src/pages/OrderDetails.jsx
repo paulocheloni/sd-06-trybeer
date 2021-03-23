@@ -18,24 +18,21 @@ export default function OrderDetails() {
   const formatDate = (date) => {
     const month = date.slice(five, seventeen);
     const day = date.slice(eigth, fourteen);
-
     return `${day}/${month}`;
   };
 
 
   useEffect(() => {
-    fetchApiProductOfSale();
+    fetchApiProductOfSale(id);
   }, []);
 
   return (
     <div>
-      <h1>Detalhes de Pedido</h1>
-      <h2>
-        Pedido {id}
-      </h2>
-      <h2>
-        {/* {productsOfSale.length !== 0 && formatDate(productsOfSale[0].sale_date)} */}
-        {console.log(productsOfSale)}
+      <h1 data-testid="top-title">Detalhes de Pedido</h1>
+      <h2 data-testid="order-number">Pedido { id }</h2>
+      <h2
+        data-testid="order-date"
+      >{ productsOfSale.length !== 0 && formatDate(productsOfSale[0].sale_date) }
       </h2>
     </div>
   );

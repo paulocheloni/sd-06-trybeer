@@ -95,12 +95,11 @@ const fetchAllOrders = async () => {
 };
 
 const fetchSaleProduct = async (id) => {
-  const productsOfSale = await fetch(`http://localhost:3001/orderDetais/${id}`, {
+  const productsOfSale = await fetch(`http://localhost:3001/orderDetails/${id}`, {
     method: 'GET',
     headers: contentType,
     body: JSON.stringify(),
   }).then((res) => res.json());
-  console.log('cheguei aqui')
   return productsOfSale;
 };
 
