@@ -1,4 +1,4 @@
-const Checkout = require('../model/checkout');
+const Checkout = require('../model/Checkout');
 
 exports.create = async ({
   userId, totalPrice, rua, numero, status,
