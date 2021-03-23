@@ -56,7 +56,17 @@ async function getProducts(setProducts) {
     } }).then((response) => setProducts(response.data));
 }
 
+async function checkout(userId, totalPrice, address, number) {
+  const axios = buildAxiosHandler();
+  const token = localStorage.getItem('token');
+
+  axios.post('/sales/checkout',
+    { userId, totalPrice, address, number },
+    { headers: { authorization: token } });
+}
+
 export {
+  checkout,
   getProducts,
   login,
   profile,
