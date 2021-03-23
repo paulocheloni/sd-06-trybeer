@@ -13,32 +13,33 @@ const getByDateAndId = async (date, id) => {
   );
   return orderId;
 };
+
 const columns = 'user_id, total_price, delivery_address, delivery_number, sale_date, status';
 const createOrder = async ({
   userId,
   totalPrice,
   deliveryAddress,
   deliveryNumber,
-  saleDate,
   status,
 }) => {
-  await connection.execute(
-    `INSERT INTO sales (${columns}) VALUES (?, ?, ?, ?, ?, ?)`,
-    [userId, totalPrice, deliveryAddress, deliveryNumber, saleDate, status],
+  const [{ insertId }] = await connection.execute(
+    `INSERT INTO sales (${columns}) VALUES (?, ?, ?, ?, now(), ?)`,
+    [userId, totalPrice, deliveryAddress, deliveryNumber, status],
   );
-  const [{ id }] = await getByDateAndId(saleDate, userId);
+  // console.log('saleId', insertId);
+  // const [{ id }] = await getByDateAndId(saleDate, userId);
   return ({
-    id, totalPrice, deliveryAddress, deliveryNumber, saleDate, status,
+    id: insertId, totalPrice, deliveryAddress, deliveryNumber, status,
   });
 };
 
 const getAll = async () => {
-  const [orders] = await connection.execute('SELECT * FROM sales');
+  const [orders] = await connection.execute('SELECT *, CONVERT_TZ (sale_date, "+00:00", "-03:00") as `date_time` FROM sales');
   return orders;
 };
 
 const getAllByUser = async (id) => {
-  const [orders] = await connection.execute('SELECT * FROM sales WHERE user_id=?',
+  const [orders] = await connection.execute('SELECT *, CONVERT_TZ (sale_date, "+00:00", "-03:00") as `date_time` FROM sales WHERE user_id=?',
   [id]);
   return orders;
 };

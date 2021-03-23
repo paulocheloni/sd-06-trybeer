@@ -7,7 +7,10 @@ const createOrderProductService = async ({ item }) => {
 
 const getAll = async () => ordersProductsModel.getAll();
 
+const getById = async (id) => ordersProductsModel.getById(id);
+
 module.exports = {
   createOrderProductService,
   getAll,
+  getById,
 };

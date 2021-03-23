@@ -15,7 +15,10 @@ function Orders({ history }) {
   const recoveredUser = getFromLocalStorage('user');
 
   const fetchOrders = async () => {
+    // const allOrders = await verifyToken('orders', recoveredUser, history);
+    console.log(user.id);
     const allOrders = await verifyToken(`orders/${user.id}`, recoveredUser, history);
+    console.log(allOrders);
     setOrders(allOrders);
   };
 
@@ -32,13 +35,13 @@ function Orders({ history }) {
       <div className="content-panel">
         <div className="container">
           {
-            orders.map(({ id, sale_date: saleDate, total_price: totalPrice }, index) => (
+            orders.map(({ id, date_time: saleDate, total_price: totalPrice }, index) => (
               <div
                 key={ id }
                 className="order-card-container"
                 data-testid={ `${index}-order-card-container` }
               >
-                <Link to={ `/orders/${id}` }>
+                <Link to={ { pathname: `/orders/${id}`, state: {id, saleDate, totalPrice} } }>
                   <div className="card-id-date">
                     <div data-testid={ `${index}-order-number` }>
                       {`Pedido ${id}` }

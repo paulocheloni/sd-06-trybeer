@@ -19,4 +19,12 @@ OrdersProductsRouter.post('/', async (req, res, next) => {
   }
 });
 
+OrdersProductsRouter.get('/:id', async (req, res) => {
+  const { id } = req.params;
+  // console.log(id);
+  const order = await ordersProductsService.getById(id);
+
+  res.status(200).json(order);
+})
+
 module.exports = OrdersProductsRouter;
