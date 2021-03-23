@@ -6,6 +6,17 @@ const getAll = async () => {
   return sales;
 };
 
+const getById = async (id) => {
+  const sale = await connection
+    .execute(`SELECT * FROM sales_products 
+    INNER JOIN products 
+    ON sales_products.product_id = products.id 
+    INNER JOIN sales 
+    ON sales.id = sales_products.sale_id  
+    WHERE sales.id=?`, [id])
+  return sale[0];
+}
+
 const create = async (USER_ID, TOTAL_PRICE, DELIVERY_ADDRESS, DELIVERY_NUMBER) => {
   const sale = await connection
     .execute(`INSERT INTO sales
@@ -21,4 +32,4 @@ const insertSaleProduct = async (SALE_ID, PRODUCT_ID, QUANTITY) => {
     [SALE_ID, PRODUCT_ID, QUANTITY]);
 }
 
-module.exports = { getAll, create, insertSaleProduct };
+module.exports = { getAll, create, insertSaleProduct, getById };
