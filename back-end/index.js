@@ -5,8 +5,9 @@ const LoginController = require('./src/controller/LoginControler');
 const UsersController = require('./src/controller/UsersController');
 const ProductsController = require('./src/controller/ProductsController');
 const ProfileController = require('./src/controller/ProfileController');
-const checkoutController = require('./src/controller/checkoutController');
 const SalesController = require('./src/controller/salesController');
+const CheckoutController = require('./src/controller/CheckoutController');
+const ClientOrdersController = require('./src/controller/ClientOrdersController');
 
 const app = express();
 
@@ -21,8 +22,9 @@ app.use('/register', UsersController);
 app.use('/products', ProductsController);
 app.use('/images', express.static(path.resolve(__dirname, 'images')));
 app.use('/profile', ProfileController);
-app.use('/checkout', checkoutController);
 app.use('/admin/orders', SalesController);
+app.use('/checkout', CheckoutController);
+app.use('/orders', ClientOrdersController);
 
 app.use((err, _req, res, _next) => {
   res.status(err.status || 500).json(err.message);

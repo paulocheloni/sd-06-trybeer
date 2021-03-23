@@ -49,3 +49,11 @@ export const getAllSales = async () => {
 
   return requestResponse;
 };
+
+export const getAllOrders = async (email) => {
+  const requestResponse = await api.post('orders', { email })
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+
+  return requestResponse;
+};
