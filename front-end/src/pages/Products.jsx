@@ -28,7 +28,7 @@ function Products() {
             setTotal={ setCartTotal }
             index={ index }
           />
-        ))}
+          ))}
       </section>
       <ShowCart total={ cartTotal } />
     </div>
