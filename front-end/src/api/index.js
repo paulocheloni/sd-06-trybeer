@@ -60,11 +60,10 @@ async function checkout(userId, totalPrice, address, number) {
   const axios = buildAxiosHandler();
   const token = localStorage.getItem('token');
 
-  axios.post('/sales/checkout', 
+  axios.post('/sales/checkout',
     { userId, totalPrice, address, number },
-    { headers: { authorization: token } },
-  );
-};
+    { headers: { authorization: token } });
+}
 
 export {
   checkout,

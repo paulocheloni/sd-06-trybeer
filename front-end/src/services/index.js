@@ -122,41 +122,29 @@ const tokenExists = (history) => {
   }
 };
 
-const deleteItemCart = ({ item, product, setTotal, setItems }) => {
+const deleteItemCart = ({ product, setTotal, setItems }) => {
   console.log(product.name);
   localStorage.removeItem(product.name);
   const items = getItensStorage();
   setTotal(calculateTotal(items));
-  setItems(Object.values(getItensStorage()))
-}
+  setItems(Object.values(getItensStorage()));
+};
 
-const compraFinalizada = async (totalPrice, addressObject, setShowSucessMessage) => {
-  // console.log('comprafinalizada', totalPrice, address)
+const concludeOrder = async (totalPrice, addressObject, setShowSucessMessage) => {
   const { address, number } = addressObject;
-  localStorage.setItem('address', JSON.stringify(addressObject))
+  localStorage.setItem('address', JSON.stringify(addressObject));
   const token = localStorage.getItem('token');
   const user = await profile(token);
   const { id: userId } = user;
-  // const checkoutInfo = { userId, totalPrice, address, number };
 
-  // console.log('checkoutInfo?', checkoutInfo)
-
-  // checkout(userId, totalPrice, address, number).then(() => console.log('tá funcionando?'));
   checkout(userId, totalPrice, address, number).then(() => setShowSucessMessage(false));
 
   const itemsObject = getItensStorage();
   const itemNames = Object.keys(itemsObject);
-  // console.log('items', Object.keys(itemsObject))
-  itemNames.map(itemName => localStorage.removeItem(itemName))
-
-  // setTimeout(() => {console.log('Compra realizada com sucesso!')}, 2000)
-  // Ao clicar em "Finalizar pedido", deve ser feita uma requisição para o backend
-  //  para salvar o pedido no banco de dados, caso a operação dê certo, a mensagem
-  //   Compra realizada com sucesso! deve ser exibida por 2 segundos e em seguida a
-  //    pessoa deve ser redirecionada para a página Cliente - Produtos. Caso contrário,
-  //     deve ser exibido uma mensagem de erro;
-  //   Quando um pedido for finalizado, o carrinho deve ser esvaziado;
-}
+  itemNames.map((itemName) => localStorage.removeItem(itemName));
+  localStorage.removeItem('total');
+  localStorage.removeItem('address');
+};
 
 export {
   verifyEmailAndPassword,
@@ -172,5 +160,5 @@ export {
   getItensStorage,
   calculateTotal,
   deleteItemCart,
-  compraFinalizada,
+  concludeOrder,
 };
