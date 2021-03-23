@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ProductCardAdm from './ProductCardAdm';
 import currencyFormat from '../utils/currencyFormat';
 import updateStatus from '../methods/updateStatus';
 
 function OrderDetailsCard({ orderDetails }) {
-  let vissible = true;
-  if (orderDetails[0].statusSale && orderDetails[0].statusSale === 'Entregue') {
-    vissible = false;
+  // fazer um hook pra atualizar a pagina dps da requisicao
+  const [update, setUpdate] = useState(orderDetails[0]);
+  let visible = false;
+  // if (orderDetails[0].statusSale && orderDetails[0].statusSale === 'Pendente') {
+  // orderDetails[0].statusSale = status desta venda
+  // caso exista e esteja Pendente, entrar no BD e mudar para Entregue
+  //   visible = true;
+  // }
+  if (update && update.status === 'Entregue') {
+    console.log('mudou para entregue');
+    visible = true;
   }
 
-  console.log(orderDetails);
   if (orderDetails[0]) {
     return (
 
@@ -34,12 +41,12 @@ function OrderDetailsCard({ orderDetails }) {
           </p>
           <hr />
         </div>
-        { vissible
+        { visible
         && (
           <button
             data-testid="mark-as-delivered-btn"
             type="button"
-            onClick={ async () => updateStatus(orderDetails[0].id) }
+            onClick={ async () => setUpdate(await updateStatus(orderDetails[0])) }
           >
             Marcar como entregue
           </button>
