@@ -39,7 +39,7 @@ function AdminOrders() {
                 {`R$ ${sale.total_price.replace('.', ',')}`}
               </h3>
               <h3 data-testid={ `${index}-order-status` }>
-                { sale.status }
+                {sale.status}
               </h3>
             </button>
           </div>
