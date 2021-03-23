@@ -1,20 +1,43 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-export default function Sidebar() {
+import AppContext from '../context/app.context';
+
+export default function Sidebar(props) {
+  const { setToken } = useContext(AppContext);
+  const { hide } = props;
+  const className = `side-menu-container ${hide}`;
+
+  const history = useHistory();
+
+  const logOff = () => {
+    setToken({});
+    history.push('/login');
+  };
+
   return (
-    <section className="side-menu-container">
-      <button type="button" data-testid="side-menu-item-products">
+    <section className={ className }>
+      <Link to="/products" data-testid="side-menu-item-products">
         Produtos
-      </button>
-      <button type="button" data-testid="side-menu-item-my-orders">
+      </Link>
+      <Link to="/orders" data-testid="side-menu-item-my-orders">
         Meus pedidos
-      </button>
-      <button type="button" data-testid="side-menu-item-my-profile">
+      </Link>
+      <Link to="/profile" data-testid="side-menu-item-my-profile">
         Meu perfil
-      </button>
-      <button type="button" data-testid="side-menu-item-logout">
+      </Link>
+      <button type="button" onClick={ logOff } data-testid="side-menu-item-logout">
         Sair
       </button>
     </section>
   );
 }
+
+Sidebar.propTypes = {
+  hide: PropTypes.string,
+};
+
+Sidebar.defaultProps = {
+  hide: 'hidden',
+};
