@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import Header from '../../../components/Header/Header';
 import './OrderDetails.css';
 import { getSalesById } from '../../../services/Sales';
@@ -6,7 +7,7 @@ import { correctDate, parseCartPrice } from '../../../utils/parseValues';
 
 /**
  * Soma o total do pedido (quantidade * preco)
- * @param {String} products 
+ * @param {String} products
  * @returns String contendo a soma dos itens
  */
 const soma = (products) => {
@@ -17,9 +18,8 @@ const soma = (products) => {
   return totalVenda;
 };
 
-export default function Orders(props) {
+export default function Orders({ match: { params: { id } } }) {
   const [orderDetails, setOrderDetails] = useState([]);
-  const { id } = props.match.params;
 
   useEffect(() => {
     const getOrderDetails = async () => {
@@ -36,7 +36,8 @@ export default function Orders(props) {
       </div>
       {orderDetails.map((details, index) => (
         <div className="geral" key={ index }>
-          { index === 0 && (<div className="title">
+          { index === 0 && (
+            <div className="title">
               <div className="pedido">
                 <h2>Pedido</h2>
                 <h2 h2 data-testid="order-number">{details.idSales}</h2>
@@ -45,8 +46,8 @@ export default function Orders(props) {
                 <h2>Data</h2>
                 <h2 data-testid="order-date">{ correctDate(details.dateSale) }</h2>
               </div>
-            </div>)
-          }
+            </div>
+          )}
           <div className="detalhes" key={ index }>
             <p className="quantidade" data-testid={ `${index}-product-qtd` }>
               { details.quantity }
@@ -75,3 +76,11 @@ export default function Orders(props) {
     </div>
   );
 }
+
+Orders.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
