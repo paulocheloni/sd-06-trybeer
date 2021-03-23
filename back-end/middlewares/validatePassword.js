@@ -5,7 +5,9 @@ const validatePassword = async (req) => {
   console.log(email, password);
   const [user] = await getPassword(email);  
   if (password === user.password) return { valid: true };
-  return { status: 400, message: 'email ou senha incorretos' };
+  const error = new Error('not found');
+  error.status = 404;
+  throw error;
 };
 
 module.exports = validatePassword;
