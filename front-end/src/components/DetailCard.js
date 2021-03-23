@@ -5,7 +5,7 @@ export default function DetailCard(props) {
   const { index, quantity, name, price } = props;
 
   return (
-    <div>
+    <div className="salecard-card">
       <p data-testid={ `${index}-product-qtd` }>{ quantity }</p>
       <p data-testid={ `${index}-product-name` }>{ name }</p>
       <p

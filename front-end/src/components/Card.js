@@ -56,7 +56,7 @@ function Card(props) {
 
   return (
     <div className="card">
-      <p data-testid={ `${index}-product-price` }>{`R$ ${price.replace('.', ',')}`}</p>
+      <p className="btn-success price-card" data-testid={ `${index}-product-price` }>{`R$ ${price.replace('.', ',')}`}</p>
       <img
         width="111px"
         data-testid={ `${index}-product-img` }
@@ -72,7 +72,7 @@ function Card(props) {
       >
         -
       </button>
-      <span data-testid={ `${index}-product-qtd` }>{ quantity }</span>
+      <span className="quantity-card" data-testid={ `${index}-product-qtd` }>{ quantity }</span>
       <button
         className="btn-success btn-card"
         type="button"

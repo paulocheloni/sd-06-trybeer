@@ -18,7 +18,9 @@ function AdminOrders() {
   return (
     <div>
       <MenuAdmin />
-      {orders.map((order, index) => (
+      <h1 className="align-center"> Meus Pedidos</h1>
+      {orders.map((order, index) => ( 
+        <div className="order-details-card-admin">
         <OrderCard
           key={ index }
           index={ index }
@@ -28,6 +30,7 @@ function AdminOrders() {
           totalValue={ order.total_price }
           status={ order.status }
         />
+        </div>
       ))}
     </div>
   );

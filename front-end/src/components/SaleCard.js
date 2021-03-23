@@ -12,26 +12,29 @@ function SaleCard(props) {
   correctDate = `${arrayDate[1]}/${arrayDate[0]}`;
 
   return (
-    <div
-      data-testid={ `${index}-order-card-container` }
-      onClick={ () => history.push(`/orders/${saleNumber}`) }
-      aria-hidden="true"
-    >
-      <p
-        data-testid={ `${index}-order-number` }
+    <div className="salecard-card">
+      <div
+        className=""
+        data-testid={ `${index}-order-card-container` }
+        onClick={ () => history.push(`/orders/${saleNumber}`) }
+        aria-hidden="true"
       >
-        { `Pedido ${saleNumber}` }
-      </p>
-      <p
-        data-testid={ `${index}-order-date` }
-      >
-        { correctDate }
-      </p>
-      <p
-        data-testid={ `${index}-order-total-value` }
-      >
-        { `R$ ${value.replace('.', ',')}` }
-      </p>
+        <p
+          data-testid={ `${index}-order-number` }
+        >
+          { `Pedido ${saleNumber}` }
+        </p>
+        <p
+          data-testid={ `${index}-order-date` }
+        >
+          { correctDate }
+        </p>
+        <p
+          data-testid={ `${index}-order-total-value` }
+        >
+          { `R$ ${value.replace('.', ',')}` }
+        </p>
+      </div>
     </div>
   );
 }
