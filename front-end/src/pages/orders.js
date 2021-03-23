@@ -27,6 +27,7 @@ function Orders() {
           <div>
             <h2 data-testid={ `${index}-order-number` }>
               Pedido
+              {' '}
               {order.id}
             </h2>
             <h3 data-testid={ `${index}-order-date` }>
@@ -34,6 +35,7 @@ function Orders() {
             </h3>
             <h3 data-testid={ `${index}-order-total-value` }>
               R$
+              {' '}
               {(order.total_price).replace('.', ',')}
             </h3>
           </div>
