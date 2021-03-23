@@ -19,7 +19,7 @@ const Checkout = (props) => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || '');
   const [chkButton, setChkButton] = useState(true);
   const [chkForm, setChkForm] = useState({ st: '', num: '' });
-  const [statusPedido] = useState('Pendente'); // ou Entregue
+  const [statusPedido] = useState('pendente'); // ou Entregue
   const [mySum, setSum] = useState(location.state.sum || ' ');
   const [saleDone, setSaleDone] = useState(false);
 

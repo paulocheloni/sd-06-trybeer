@@ -15,20 +15,19 @@ const postSale = (token, payload, products) => fetch(`${endpoint}/sales/checkout
 const getSales = () => fetch(`${endpoint}/sales`)
   .then((response) => response.json());
 
-
 const getAdminSaleDetails = async (id) => {
-  const response = await fetch(`${endpoint}/sales/admin/details/${id}`)
+  const response = await fetch(`${endpoint}/sales/admin/details/${id}`);
   const result = await response.json();
   return result;
-}
+};
 
 const fullfilSale = (id) => fetch(`${endpoint}/sales/admin/details/${id}`, {
-  method: 'put'
-}).then(response => response.json())
+  method: 'put',
+}).then((response) => response.json());
 
 module.exports = {
   getAdminSaleDetails,
   getSales,
   postSale,
-  fullfilSale
-}
+  fullfilSale,
+};
