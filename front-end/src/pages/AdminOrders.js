@@ -36,7 +36,7 @@ function AdminOrders() {
                 {`${sale.delivery_address}, ${sale.delivery_number}`}
               </p>
               <h3 data-testid={ `${index}-order-total-value` }>
-                {`R$ ${ sale.total_price.replace('.', ',') }`}
+                {`R$ ${sale.total_price.replace('.', ',')}`}
               </h3>
               <h3 data-testid={ `${index}-order-status` }>
                 { sale.status }
