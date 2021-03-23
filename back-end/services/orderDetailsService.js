@@ -1,6 +1,6 @@
 const orderDetailsModel = require('../models/adminOrderModel');
 
-const saleDetails = () => orderDetailsModel.saleDetails();
+const saleDetails = (id) => orderDetailsModel.saleDetails(id);
 
 module.exports = {
   saleDetails,
