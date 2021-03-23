@@ -28,12 +28,11 @@ function Admin() {
       {orders.map((order, index) => (
         <Link to={ `/admin/orders/${order.id}` } key={ index }>
           <div>
-            <h3>
-              Pedido
-              {order.id}
+            <h3 data-testid={`${order.id}-order-number`}>
+              Pedido {order.id}
             </h3>
-            <h4>{order.delivery_address}</h4>
-            <h4>{order.delivery_number}</h4>
+            <h4 data-testid={`${order.id}-order-address`}>{order.delivery_address}</h4>
+            <h4 data-testid={`${order.id}-order-number`}>{order.delivery_number}</h4>
             <h3>{order.total_price}</h3>
             <h3>{order.status}</h3>
           </div>
