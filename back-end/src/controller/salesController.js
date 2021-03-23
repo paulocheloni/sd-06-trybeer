@@ -7,7 +7,7 @@ controller.get('/:id', async (req, res, next) => {
   const { id } = req.params;
   const { authorization: token } = req.headers;
 
-  const result = await salesService.getSalesByUserId(id, token);
+  const result = await salesService.getSaleById(id, token);
 
   if (result.payload) return next(result);
   return res.status(200).json(result);
@@ -15,8 +15,11 @@ controller.get('/:id', async (req, res, next) => {
 
 controller.get('/', async (req, res, next) => {
   const { authorization: token } = req.headers;
+  const { user_id } = req.body;
 
-  const result = await salesService.getAll(token);
+  const result = user_id
+    ? await salesService.getSalesByUserId(id, token)
+    : await salesService.getAll(token);
   
   if (result.payload) return next(result);
   return res.status(200).json(result);

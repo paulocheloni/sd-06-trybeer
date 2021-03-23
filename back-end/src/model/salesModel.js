@@ -26,8 +26,17 @@ const createSale = async (reqBody) => {
   return sales;
 };
 
+const getSaleById = async (saleId) => {
+  const query = 'SELECT user_id, sale_id, sale_date, delivery_address, delivery_number,status, total_price, product_id, name, quantity, price, url_image FROM sales_products INNER JOIN (SELECT * FROM sales WHERE id=?) AS userOrders ON sales_products.sale_id = userOrders.id INNER JOIN products ON products.id = sales_products.product_id';
+  
+  const [sale] = await connection.execute(query, [saleId]);
+
+  return sale;
+}
+
 module.exports = {
   createSale,
   getAll,
   getSalesByUserId,
+  getSaleById
 };
