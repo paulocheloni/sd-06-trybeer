@@ -13,7 +13,7 @@ const allOrdersByUser = async (req, res) => {
 
 const getUserOrder = async (req, res) => {
   const { id } = req.params;
-  const [[order]] = await getOrderById(id);
+  const [order] = await getOrderById(id);
   return res.status(OK).json(order);
 };
 
