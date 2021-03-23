@@ -22,7 +22,6 @@ function Checkout() {
     if (!user.token) {
       history.push('/login');
     }
-    console.log(validatePurchase);
   }, [cart, setIsFormFilled, validatePurchase, history, user.token]);
 
   const handleCheckOut = async () => {
