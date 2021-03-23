@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import AppContext from './app.context';
 
 import useStorage from '../hooks/useStorage';
+import AppContext from './app.context';
 
 const AppProvider = ({ children }) => {
-  const [token, setToken] = useState({ name: '', email: '', token: '' });
-  const setLoginStorage = useStorage('login');
+  const [token, setToken] = useState(JSON.parse(localStorage.getItem('login')));
+  const [products, setProducts] = useState([]);
+  const updateStorage = useStorage('login');
+
+  const productsContext = useMemo(() => (
+    { products, setProducts }
+  ), [products, setProducts]);
+  const tokenContext = useMemo(() => ({ token, setToken }), [token, setToken]);
 
   useEffect(() => {
-    setLoginStorage(token);
-  }, [token, setLoginStorage]);
-
-  const state = {
-    token,
-    setToken,
-  };
+    updateStorage(token);
+  }, [token, updateStorage]);
 
   return (
-    <AppContext.Provider value={ state }>
+    <AppContext.Provider value={ { productsContext, tokenContext } }>
       {children}
     </AppContext.Provider>
   );

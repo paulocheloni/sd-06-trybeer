@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import AppContext from '../context/app.context';
 
 export default function Sidebar(props) {
-  const { setToken } = useContext(AppContext);
+  const { tokenContext: { setToken } } = useContext(AppContext);
   const { hide } = props;
   const className = `side-menu-container ${hide}`;
 

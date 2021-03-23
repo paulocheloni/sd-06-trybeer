@@ -8,7 +8,7 @@ import { yupSchemas, handleSubmit } from '../utils';
 import '../styles/Forms.css';
 
 export default function Register() {
-  const { setToken } = useContext(AppContext);
+  const { tokenContext: { setToken } } = useContext(AppContext);
   const history = useHistory();
   const [login, setLogin] = useState({ name: '', email: '', password: '' });
   const [disableBtn, setDisableBtn] = useState(true);
