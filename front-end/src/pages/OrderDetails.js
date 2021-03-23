@@ -6,7 +6,6 @@ function OrderDetails(props) {
   const { match: { params } } = props;
   const { id } = params;
 
-  console.log(id);
   return (
     <div>
       <TopMenu />
