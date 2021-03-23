@@ -20,8 +20,9 @@ const OrderDetail = ({ match }) => {
       const { object, specificDate } = await getOrderInfo(match);
       setProduct(object);
       if (specificDate) {
+        const FOUR = 4;
         const filterData = `${specificDate.sale_date.split(['-'])[0]
-          .substring(2, 4)}/${specificDate.sale_date
+          .substring(2, FOUR)}/${specificDate.sale_date
           .split(['-'])[1]}`;
         setDate(filterData);
       }

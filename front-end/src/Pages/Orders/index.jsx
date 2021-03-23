@@ -30,8 +30,9 @@ const Orders = () => {
       <Menu><p data-testid="top-title">Meus Pedidos</p></Menu>
       <S.Container>
         {orders.length < 1 ? <div>No orders</div> : orders.map((order, index) => {
+          const FOUR = 4;
           const filteredDate = `${order.sale_date.split(['-'])[0]
-            .substring(2, 4)}/${order.sale_date
+            .substring(2, FOUR)}/${order.sale_date
             .split(['-'])[1]}`;
 
           return (
