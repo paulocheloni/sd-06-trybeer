@@ -27,10 +27,10 @@ const createSaleProducts = async (insertId, insertProducts) => {
     [
       insertId,
       product.id,
-      product.quantity
-    ])
+      product.quantity,
+    ]);
   });
-}
+};
 
 const getAllSales = async () => {
   const [sales] = await connection.execute('SELECT * FROM sales');
@@ -38,7 +38,7 @@ const getAllSales = async () => {
 };
 
 const getSaleById = async (saleId) => {
-  const [sale] = await connection.execute('SELECT * FROM Trybeer.sales WHERE id=?', [saleId])
+  const [sale] = await connection.execute('SELECT * FROM Trybeer.sales WHERE id=?', [saleId]);
   return sale;
 };
 
@@ -47,24 +47,23 @@ const getSaleProducts = async (saleId) => {
   SELECT sp.product_id, sp.quantity, p.name, p.price
   FROM Trybeer.sales_products AS sp
   JOIN Trybeer.products AS p
-  ON p.id = sp.product_id WHERE sp.sale_id = ?`
-  const [saleProducts] = await connection.execute(`${query}`, [saleId])
+  ON p.id = sp.product_id WHERE sp.sale_id = ?`;
+  const [saleProducts] = await connection.execute(`${query}`, [saleId]);
   return saleProducts;
-}
-
+};
 
 const fullfilSale = async (saleId) => {
-  const newStatus = 'entregue'
+  const newStatus = 'entregue';
   const query = `
-  UPDATE sales SET status = ? WHERE id=?`
-  const [saleProducts] = await connection.execute(`${query}`, [newStatus, saleId])
+  UPDATE sales SET status = ? WHERE id=?`;
+  const [saleProducts] = await connection.execute(`${query}`, [newStatus, saleId]);
   return saleProducts;
-}
+};
 module.exports = {
   getSaleById,
   getSaleProducts,
   getAllSales,
   createSale,
   fullfilSale,
-  createSaleProducts
-}
+  createSaleProducts,
+};

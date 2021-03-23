@@ -1,4 +1,3 @@
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -16,7 +15,7 @@ app.use(bodyParser.json());
 
 app.use('/user', userRouter);
 app.use('/products', productsRouter);
-app.use('/sales', salesRouter)
+app.use('/sales', salesRouter);
 app.use('/images', express.static(`${process.cwd()}/images`)); 
 
 app.use(errorMiddleware);

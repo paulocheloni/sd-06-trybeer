@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './AdminOrderCard.css';
+import capitalize from '../../utils/capitalize';
 
 export default function AdminOrderCard({ sale, index }) {
   const {
@@ -34,11 +35,11 @@ export default function AdminOrderCard({ sale, index }) {
         </span>
         <span
           className={
-            `itemStatus ${status === 'Pendente' ? 'itemPending' : 'itemDelivered'}`
+            `itemStatus ${status === 'pendente' ? 'itemPending' : 'itemDelivered'}`
           }
           data-testid={ `${index}-order-status` }
         >
-          {status}
+          {capitalize(status)}
         </span>
       </div>
     </a>

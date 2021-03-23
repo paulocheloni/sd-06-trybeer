@@ -80,8 +80,8 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
 }
 
 AdminOrdersDetail.propTypes = {
-  match: PropTypes.shapeOf({
-    params: PropTypes.shapeOf({
+  match: PropTypes.shape({
+    params: PropTypes.shape({
       id: PropTypes.number.isRequired,
     }).isRequired,
   }).isRequired,
