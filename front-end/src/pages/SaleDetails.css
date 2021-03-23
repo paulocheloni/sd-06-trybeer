@@ -6,6 +6,7 @@
 .order-data-container {
   display: flex;
   justify-content: space-around;
+  margin-left: 300px;
 }
 
 .products-details-container {
