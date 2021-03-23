@@ -1,6 +1,6 @@
 const connection = require('./connection');
 
-const saleDetails = async () => {
+const saleDetails = async (id) => {
   const [productsOfSale] = await connection.execute(
     `SELECT
     a.sale_date,
@@ -13,7 +13,8 @@ const saleDetails = async () => {
     INNER JOIN sales AS a
     ON b.sale_id = a.id
     INNER JOIN products AS c
-    ON b.product_id = c.id `,
+    ON b.product_id = c.id
+    WHERE b.sale_id = ?`, [id]
   );
   return productsOfSale;
 };
