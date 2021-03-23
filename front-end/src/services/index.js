@@ -1,4 +1,4 @@
-import { login, register, updateName } from '../api';
+import { checkout, profile, login, register, updateName } from '../api';
 
 const verifyEmailAndPassword = (email, password, setActiveBtn) => {
   const isEmailValid = email.match(/\S+@\S+\.\S+/);
@@ -71,7 +71,8 @@ const getItensStorage = () => {
   const filterKeys = Object
     .keys({ ...localStorage })
     .filter((key) => key !== 'token')
-    .filter((key) => key !== 'total');
+    .filter((key) => key !== 'total')
+    .filter((key) => key !== 'address');
   const items = Object.keys({ ...localStorage })
     .filter((key) => filterKeys.includes(key))
     .reduce((beerObject, key) => {
@@ -98,7 +99,7 @@ const calculateTotal = (items) => {
 
 const addProduct = ({ quantity, setQuantity, name, setTotal, price }) => {
   const total = quantity + 1;
-  localStorage.setItem(`${name}`, JSON.stringify({ total, price }));
+  localStorage.setItem(`${name}`, JSON.stringify({ name, total, price }));
   setQuantity(total);
   const items = getItensStorage();
   setTotal(calculateTotal(items));
@@ -121,6 +122,30 @@ const tokenExists = (history) => {
   }
 };
 
+const deleteItemCart = ({ product, setTotal, setItems }) => {
+  console.log(product.name);
+  localStorage.removeItem(product.name);
+  const items = getItensStorage();
+  setTotal(calculateTotal(items));
+  setItems(Object.values(getItensStorage()));
+};
+
+const concludeOrder = async (totalPrice, addressObject, setShowSucessMessage) => {
+  const { address, number } = addressObject;
+  localStorage.setItem('address', JSON.stringify(addressObject));
+  const token = localStorage.getItem('token');
+  const user = await profile(token);
+  const { id: userId } = user;
+
+  checkout(userId, totalPrice, address, number).then(() => setShowSucessMessage(false));
+
+  const itemsObject = getItensStorage();
+  const itemNames = Object.keys(itemsObject);
+  itemNames.map((itemName) => localStorage.removeItem(itemName));
+  localStorage.removeItem('total');
+  localStorage.removeItem('address');
+};
+
 export {
   verifyEmailAndPassword,
   handleSubmit,
@@ -134,4 +159,6 @@ export {
   tokenExists,
   getItensStorage,
   calculateTotal,
+  deleteItemCart,
+  concludeOrder,
 };

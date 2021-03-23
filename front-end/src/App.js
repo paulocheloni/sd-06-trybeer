@@ -9,6 +9,7 @@ import Products from './pages/Products';
 import ProfileClient from './pages/ProfileClient';
 import AdminOrders from './pages/AdminOrders';
 import AdminProfile from './pages/AdminProfile';
+import Checkout from './pages/Checkout';
 
 import './App.css';
 
@@ -23,6 +24,7 @@ function App() {
         <Route exact path="/profile"><ProfileClient /></Route>
         <Route exact path="/admin/orders"><AdminOrders /></Route>
         <Route exact path="/admin/profile"><AdminProfile /></Route>
+        <Route exact path="/checkout"><Checkout /></Route>
       </div>
     </BrowserRouter>
   );
