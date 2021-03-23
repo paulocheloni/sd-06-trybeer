@@ -1,12 +1,13 @@
 const { Router } = require('express');
 const usersService = require('../service/usersService');
+
 const controller = Router();
 
 // LOGIN-----------------------------------------------------------------------
 controller.post('/login', async (req, res, next) => {
   const { email, password } = req.body;
 
-  const result = await userService.loginUser({ email, password });
+  const result = await usersService.loginUser({ email, password });
   if (result.payload) return next(result);
   
   return res.status(200).json(result);

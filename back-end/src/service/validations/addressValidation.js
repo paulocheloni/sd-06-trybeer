@@ -5,8 +5,8 @@ const notValidSale = {
   status: BAD_REQUEST,
 };
 
-const addressValidation = (address, number) => {
-  if (!address || !num) return notValidSale;
+const addressValidation = ({ address, number }) => {
+  if (!address || !number) return notValidSale;
   return true;
 };
 

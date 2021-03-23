@@ -14,7 +14,7 @@ const loginUser = async ({ email, password }) => {
 
   if (userInfo.payload) return userInfo;
   const { id, name, role } = userInfo;
-  const token = Utils.generateToken(id);
+  const token = Utils.generateToken({ id, role });
 
   return ({ id, name, role, token });
 };
@@ -28,7 +28,7 @@ const createUser = async ({ name, email, password, role }) => {
   const result = await usersModel.createUser({ name, email, password, role });
 
   const { id: responseId, name: responseName, role: responseRole } = result;
-  const token = Utils.generateToken(responseId);
+  const token = Utils.generateToken({ id: responseId, role: responseRole });
 
   return ({ id: responseId, name: responseName, role: responseRole, token });
 };

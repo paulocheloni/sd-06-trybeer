@@ -7,8 +7,8 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
-const generateToken = (id) => {
-  const token = jwt.sign({ id }, secret, jwtConfig);
+const generateToken = ({ id, role }) => {
+  const token = jwt.sign({ id, role }, secret, jwtConfig);
   return token;
 };
 

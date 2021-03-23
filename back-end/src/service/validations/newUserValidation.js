@@ -12,7 +12,6 @@ const userAlredyRegistered = {
   status: BAD_REQUEST,
 };
 
-
 const newUserValidation = async (email, name) => {
   if (!email || !name) return invalidEntries;
 

@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { secret } = require('../utils')
+const { secret } = require('../utils');
 const userModel = require('../../model/usersModel');
 
 const UNAUTHORIZED = 401;
@@ -14,8 +14,8 @@ const tokenValidation = async (token) => {
       return wrongTokenInfo;
     }
 
-    const { id } = decoded;
-    return id;
+    const { id, role } = decoded;
+    return ({ id, role });
   });
 
   if (!result.payload) {

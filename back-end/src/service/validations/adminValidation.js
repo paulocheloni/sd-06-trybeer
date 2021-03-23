@@ -7,7 +7,6 @@ const notAdmin = {
   status: UNAUTHORIZED,
 };
 
-
 const adminValidation = async (email) => {
   if (!email) return notAdmin;
 
