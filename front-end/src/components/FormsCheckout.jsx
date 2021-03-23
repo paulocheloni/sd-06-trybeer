@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function FormsCheckout(props) {
   const { setAddress, address } = props;
