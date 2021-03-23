@@ -36,6 +36,7 @@ function OrderDetails() {
           <h4 data-testid={ `${index}-product-qtd` }>{product.productQty}</h4>
           <h3 data-testid={ `${index}-product-total-value` }>
             R$
+            {' '}
             {(product.totalPrice).toFixed(2).toString().replace('.', ',')}
           </h3>
         </div>
