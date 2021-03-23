@@ -21,6 +21,9 @@ class Header extends React.Component {
     if (pathname === '/checkout') {
       header.innerText = 'Finalizar Pedido';
     }
+    if (pathname === '/orders') {
+      header.innerText = 'Meus Pedidos';
+    }
   }
 
   toogleInOut() {

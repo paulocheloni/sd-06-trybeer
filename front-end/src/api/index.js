@@ -105,3 +105,18 @@ export async function finishOrders({ priceTotal, date, userID, address, number }
     }
   }
 }
+
+export async function getAllOrders() {
+  try {
+    return axios.get(`${URL_BASE}orders/get-all`)
+      .then((response) => response.data);
+  } catch (error) {
+    if (error.response) {
+      return {
+        status: error.response.status,
+        statusText: error.response.statusText,
+        message: error.response.data.message,
+      };
+    }
+  }
+}
