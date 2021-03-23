@@ -7,16 +7,17 @@ import AppContext from './app.context';
 const AppProvider = ({ children }) => {
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('login')));
   const [products, setProducts] = useState([]);
-  const updateStorage = useStorage('login');
+  const updateLogin = useStorage('login');
 
   const productsContext = useMemo(() => (
     { products, setProducts }
   ), [products, setProducts]);
+
   const tokenContext = useMemo(() => ({ token, setToken }), [token, setToken]);
 
   useEffect(() => {
-    updateStorage(token);
-  }, [token, updateStorage]);
+    updateLogin(token);
+  }, [token, updateLogin]);
 
   return (
     <AppContext.Provider value={ { productsContext, tokenContext } }>
