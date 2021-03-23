@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import './Login.css';
 import api from '../services/api';
-// import { useHistory } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -37,8 +36,9 @@ export default function Login() {
 
   const handleClick = async () => {
     const response = await api.fetchLogin(email, password);
-    localStorage.setItem('token', JSON.stringify(response.token));
-    localStorage.setItem('user', JSON.stringify(response.user));
+    localStorage.setItem('user', JSON.stringify({
+      ...response.user,
+      token: response.token }));
     if (response.user.role === 'client') {
       history.push('/products');
     } else {
