@@ -57,7 +57,7 @@ function Register() {
           <Button
             onClick={ () => signUpOnClick() }
             isDisabled={ isDisabled }
-            bgColor="green-600"
+            bgColor="bg-green-600"
             testId="signup-btn"
           >
             Cadastrar

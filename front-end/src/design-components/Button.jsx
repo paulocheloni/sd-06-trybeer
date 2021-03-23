@@ -10,7 +10,7 @@ function Button(props) {
       onClick={ onClick }
       data-testid={ testId }
       className={ `group relative w-full flex justify-center py-2 px-4 border
-        border-transparent text-sm font-medium rounded-md text-white bg-${bgColor}
+        border-transparent text-sm font-medium rounded-md text-white ${bgColor}
         hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2
         focus:ring-indigo-500` }
     >
