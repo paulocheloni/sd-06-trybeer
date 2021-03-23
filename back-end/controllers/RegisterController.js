@@ -13,7 +13,6 @@ const SECRET = 'senha';
 
 routerRegister.post('/', async (req, res, next) => {
   const { name, email, password, seller } = req.body.user;
-  console.log(name, email, password, seller);
   const role = seller ? 'administrator' : 'client';  
   
     try {    

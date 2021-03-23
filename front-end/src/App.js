@@ -3,7 +3,8 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import { Login, Register,
   Products, ClientProfile,
-  AdminProfile, Orders, OrdersAdm, Checkout, OrderDetails } from './pages';
+  AdminProfile, Orders, OrdersAdm,
+  Checkout, OrderDetails, OrdersAdmDetails } from './pages';
 
 function App() {
   return (
@@ -12,13 +13,20 @@ function App() {
       <Route path="/login" component={ Login } />
       <Route path="/register" component={ Register } />
       <Route path="/products" component={ Products } />
-      <Route path="/orders" component={ Orders } />
-      <Route path="/admin/orders" component={ OrdersAdm } />
+      {/* <Route path="/orders" component={ Orders } /> */}
       <Route path="/profile" component={ ClientProfile } />
-      <Route path="/admin/profile" component={ AdminProfile } />
-      <Route path="/checkout" component={ Checkout } />
-      <Route path="/orders/:id" component={ OrderDetails } />
-      <Route path="/orders" component={ Orders } />
+      <Route exact path="/admin/profile" component={ AdminProfile } />
+      <Route exact path="/checkout" component={ Checkout } />
+      <Route exact path="/orders" component={ Orders } />
+      <Route
+        path="/orders/:id"
+        render={ (routeProps) => <OrderDetails { ...routeProps } /> }
+      />
+      <Route exact path="/admin/orders" component={ OrdersAdm } />
+      <Route
+        path="/admin/orders/:id"
+        render={ (routeProps) => <OrdersAdmDetails { ...routeProps } /> }
+      />
     </Switch>
   );
 }
