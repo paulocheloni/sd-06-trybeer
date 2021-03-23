@@ -12,10 +12,10 @@ const createSale = async (req, res, _next) => {
     const { id: userId } = decoded.data;
     const { products, total, deliveryAddress, deliveryNumber } = req.body;
     const saleId = await create(userId, total, deliveryAddress, deliveryNumber);
-    await Promise.all(products.map( async ({ id, quantity }) => {
+    await Promise.all(products.map(async ({ id, quantity }) => {
       await insertSaleProduct(saleId, id, quantity);
-    }))
-    res.status(STATUS_OK).json({message: `Sale ${saleId} created!`});
+    }));
+    res.status(STATUS_OK).json({ message: `Sale ${saleId} created!` });
   } catch (error) {
     console.log(error.message);
     return res.status(STATUS_INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });
@@ -39,10 +39,10 @@ const getSaleById = async (req, res, _next) => {
   const { id } = req.params;
   const sale = await getById(id);
   return res.status(STATUS_OK).json(sale);
-}
+};
 
 module.exports = {
   createSale,
   getAllSales,
-  getSaleById
+  getSaleById,
 };

@@ -1,15 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function CardClient(props) {
+  const five = 5;
   const { pedido: { id, totalPrice, saleDate } } = props;
-  const formatedDate = saleDate.substr(5, 5).replace('-', '/').split("/").reverse().join("/");
+  const formatedDate = saleDate.substr(five, five).replace('-', '/').split('/').reverse()
+    .join('/');
   const formatedTotalPrice = `R$ ${totalPrice.replace('.', ',')}`;
   return (
     <div
-    className="flex flex-wrap border-2
+      className="flex flex-wrap border-2
       border-gray-800 w-96 h-64 m-5"
     >
-      <div 
+      <div
         className="flex-col"
         data-testid={ `${id - 1}-order-card-container` }
       >
@@ -36,5 +39,13 @@ function CardClient(props) {
     </div>
   );
 }
+
+CardClient.propTypes = {
+  pedido: PropTypes.shape({
+    id: PropTypes.string,
+    totalPrice: PropTypes.number,
+    saleDate: PropTypes.string,
+  }),
+}.isRequired;
 
 export default CardClient;

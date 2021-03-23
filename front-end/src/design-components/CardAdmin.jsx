@@ -9,6 +9,7 @@ function CardAdmin(props) {
     status,
     totalPrice,
   }, IndexId } = props;
+  const formatPrice = totalPrice.replace('.', ',');
   return (
     <div
       className="flex flex-wrap border-2
@@ -34,7 +35,8 @@ function CardAdmin(props) {
           className="mt-10"
           data-testid={ `${IndexId}-order-total-value` }
         >
-          R$ {totalPrice.replace('.', ',')}
+          R$
+          {formatPrice}
         </div>
       </div>
       <div className="flex-auto">
