@@ -3,14 +3,14 @@ const { Router } = require('express');
 const { OrderController } = require('../controller');
 const { authorization } = require('../middleware');
 
-const OrderRoute = Router();
+const AdminRoute = Router();
 
-OrderRoute.get('/:id',
-  authorization,
-  OrderController.getOrdersById);
+// AdminRoute.get('/:id',
+//   authorization,
+//   OrderController.getOrdersById);
 
-OrderRoute.get('/',
+AdminRoute.get('/orders',
   authorization,
   OrderController.getAllOrders);
 
-module.exports = OrderRoute;
+module.exports = AdminRoute;

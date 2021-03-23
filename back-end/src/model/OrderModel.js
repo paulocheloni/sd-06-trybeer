@@ -1,10 +1,10 @@
 const connection = require('./connection');
 
 const getAllOrders = async () => {
-  const [orders] = connection.execute(
+  const orders = connection.execute(
     'SELECT * FROM Trybeer.sales;',
   );
-
+  // console.log(orders, 'model');
   return orders;
 };
 

@@ -9,10 +9,10 @@ import Products from '../pages/Products';
 import Register from '../pages/Register';
 import Profile from '../pages/Profile';
 import Login from '../pages/Login';
-import PedidosAdmin from '../pages/PedidosAdmin';
 import ProfileAdmin from '../pages/ProfileAdmin';
 import DetalhesPedidosAdmin from '../pages/DetalhesPedidosAdmin';
 import Checkout from '../pages/Checkout';
+import AdminOrders from '../pages/AdminOrders';
 
 const Routes = () => (
   <Router>
@@ -21,7 +21,7 @@ const Routes = () => (
         <Redirect from="/" to="/login" />
       </Route>
       <Route path="/admin/orders/:id" component={ DetalhesPedidosAdmin } />
-      <Route path="/admin/orders" component={ PedidosAdmin } />
+      <Route path="/admin/orders" component={ AdminOrders } />
       <Route path="/admin/profile" component={ ProfileAdmin } />
       <Route path="/login" component={ Login } />
       <Route path="/register" component={ Register } />
