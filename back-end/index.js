@@ -4,7 +4,6 @@ const cors = require('cors');
 const userRouter = require('./src/controllers/UserController');
 const productsRouter = require('./src/controllers/ProductController');
 const errorMiddleware = require('./src/middlewares/errorMiddleware');
-const salesRouter = require('./src/controllers/SalesController');
 
 const app = express();
 const port = 3001;

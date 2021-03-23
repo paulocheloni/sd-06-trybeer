@@ -38,20 +38,20 @@
 
 .quantidade {
   font-size: 22px;
-  width: 30vh;
+  width: 25vh;
   text-align: left;
 }
 .nome {
   font-size: 22px;
-  width: 70vh;
+  width: 60vh;
   text-align: start;
 }
 .preço {
   font-size: 22px;
-  width: 10vh;
+  width: 15vh;
 }
 .subtotal {
   font-size: 22px;
-  width: 10vh;
+  width: 20vh;
   text-align: left;
 }
