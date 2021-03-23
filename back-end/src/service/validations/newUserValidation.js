@@ -12,8 +12,8 @@ const userAlredyRegistered = {
   status: BAD_REQUEST,
 };
 
-const newUserValidation = async (email, name) => {
-  if (!email || !name) return invalidEntries;
+const newUserValidation = async ({ email, name, role }) => {
+  if (!email || !name || !role) return invalidEntries;
 
   const [result] = await userModel.getUserByEmail(email);
   if (!result) return true;

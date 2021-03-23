@@ -21,7 +21,9 @@ const loginUser = async ({ email, password }) => {
 
 // CREATE USER-----------------------------------------------------------------
 const createUser = async ({ name, email, password, role }) => {
-  const validation = await Validations.newUserValidation(email);
+  const validation = await Validations.newUserValidation({
+    name, email, role,
+  });
 
   if (validation.payload) return validation;
 

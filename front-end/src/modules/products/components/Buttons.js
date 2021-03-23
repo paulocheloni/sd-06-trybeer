@@ -2,7 +2,9 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import GlobalContext from '../../../context/Context';
 
-const Buttons = ({ index, prod }) => {
+const Buttons = ({ index, product }) => {
+  const { name, price, id } = product;
+
   const {
     cartItems,
     setCartItems,
@@ -13,7 +15,7 @@ const Buttons = ({ index, prod }) => {
     const increment = type === 'add' ? 1 : subtractValue;
 
     const position = cartItems.reduce((acc, item, idx) => {
-      if (item.id === prod.id) return idx;
+      if (item.id === id) return idx;
       return acc;
     }, subtractValue);
 
@@ -21,7 +23,7 @@ const Buttons = ({ index, prod }) => {
       return setCartItems((prev) => (
         [
           ...prev,
-          { id: prod.id, quantity: 1, price: prod.price, name: prod.name },
+          { id, quantity: 1, price, name },
         ]
       ));
     }
@@ -59,7 +61,7 @@ const Buttons = ({ index, prod }) => {
     let quantity = 0;
 
     const position = cartItems.reduce((acc, item, idx) => {
-      if (item.id === prod.id) return idx;
+      if (item.id === id) return idx;
       return acc;
     }, subtractValue);
 
@@ -102,9 +104,8 @@ const Buttons = ({ index, prod }) => {
 
 Buttons.propTypes = {
   index: PropTypes.number.isRequired,
-  prod: PropTypes.shape({
+  product: PropTypes.shape({
     price: PropTypes.number,
-    img: PropTypes.string,
     name: PropTypes.string,
     id: PropTypes.number.isRequired,
   }).isRequired,

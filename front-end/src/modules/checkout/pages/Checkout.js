@@ -41,15 +41,16 @@ function Checkout() {
   const handleSubmit = () => {
     const userInfo = JSON.parse(localStorage.getItem('user'));
     const cart = JSON.parse(localStorage.getItem('cart'));
-    const products = cart.map((prd) => ({ productId: prd.id, quantity: prd.quantity }));
+    const productsOnCart = cart.map((product) => ({
+      id: product.id, quantity: product.quantity,
+    }));
 
     const reqBody = {
-      products,
-      userId: userInfo.id,
-      price: totalPrice,
+      products: productsOnCart,
+      customerId: userInfo.id,
+      total: totalPrice,
       address: stName,
-      num: adNumber,
-      status: 'pendente',
+      number: adNumber,
     };
 
     API.post('/sales', reqBody).then((res) => setReqStatus(res.data));

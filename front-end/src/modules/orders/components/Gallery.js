@@ -4,10 +4,9 @@ import OrderCard from './OrderCard';
 
 function Gallery() {
   const [orders, setOrders] = useState([]);
-  const { id } = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
-    api.get('/sales', { user_id: id }).then((resp) => setOrders(resp.data));
+    api.get('/sales').then((resp) => setOrders(resp.data));
   }, []);
 
   return (

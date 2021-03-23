@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 function OrderCard(order, index) {
   const {
     id,
-    sale_date: createdAt,
-    delivery_number: number,
-    total_price: total,
+    createdAt,
+    number,
+    total,
   } = order;
 
   return (
@@ -38,12 +38,9 @@ function OrderCard(order, index) {
 OrderCard.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    user_id: PropTypes.number.isRequired,
-    delivery_address: PropTypes.string.isRequired,
-    delivery_number: PropTypes.string.isRequired,
-    total_price: PropTypes.number.isRequired,
-    sale_date: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+    total: PropTypes.number.isRequired,
+    createdAt: PropTypes.string.isRequired,
   }).isRequired,
 };
 

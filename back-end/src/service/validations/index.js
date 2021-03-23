@@ -4,6 +4,7 @@ const loginValidation = require('./loginValidation');
 const newUserValidation = require('./newUserValidation');
 const saleValidation = require('./saleValidation');
 const tokenValidation = require('./tokenValidation');
+const productsValidation = require('./productsValidation');
 
 module.exports = {
   adminValidation,
@@ -12,4 +13,5 @@ module.exports = {
   newUserValidation,
   saleValidation,
   tokenValidation,
+  productsValidation,
 };

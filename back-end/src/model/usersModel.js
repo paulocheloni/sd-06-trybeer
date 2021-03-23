@@ -6,11 +6,11 @@ const connection = require('./connection');
 //   return users;
 // };
 
-// const getById = async (id) => {
-//   const query = 'SELECT * FROM Trybeer.users WHERE id=?';
-//   const [users] = await connection.execute(query, [id]);
-//   return users;
-// };
+const getById = async (id) => {
+  const query = 'SELECT * FROM Trybeer.users WHERE id=?';
+  const [users] = await connection.execute(query, [id]);
+  return users;
+};
 
 const getUserByEmail = async (email) => {
   const query = 'SELECT * FROM Trybeer.users WHERE email=?';
@@ -43,5 +43,5 @@ module.exports = {
   getUserByEmail,
   createUser,
   updateUser,
-  // getById,
+  getById,
 };

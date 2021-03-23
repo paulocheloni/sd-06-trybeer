@@ -6,7 +6,7 @@ import api from '../../../axios';
 import PaperContainer from '../../../design-system/containers/PaperContainer';
 
 function Products() {
-  const [prod, setProd] = useState('');
+  const [products, setProducts] = useState('');
   const [rendering, setRendering] = useState(false);
 
   const { cartItems } = useContext(GlobalContext);
@@ -18,20 +18,20 @@ function Products() {
   }, 0);
 
   useEffect(() => {
-    api.get('/products').then((resp) => setProd(resp.data));
+    api.get('/products').then((resp) => setProducts(resp.data));
   }, []);
 
   useEffect(() => {
-    if (Array.isArray(prod)) {
+    if (Array.isArray(products)) {
       setRendering(true);
     }
-  }, [prod]);
+  }, [products]);
 
   return (
     <PaperContainer>
       { rendering && (
         <div className="grid md:grid-cols-4 gap-8 align-baseline">
-          { prod.map((p, index) => (
+          { products.map((product, index) => (
             <div
               key={ index }
               className="border rounded-md border-primary p-2 flex flex-col items-center"
@@ -39,22 +39,22 @@ function Products() {
               <div className="w-50 h-50 border-gray-200 border p-2">
                 <img
                   data-testid={ `${index}-product-img` }
-                  src={ p.url_image }
+                  src={ product.photo }
                   className="round-md object-contain
                     w-80 h-80 md:w-48 md:h-48 md:object-scale-down"
-                  alt={ p.name }
+                  alt={ product.name }
                 />
               </div>
               <div className="flex flex-col">
                 <p data-testid={ `${index}-product-price` }>
-                  <strong>{ `R$ ${p.price.replace('.', ',')}` }</strong>
+                  <strong>{ `R$ ${product.price.replace('.', ',')}` }</strong>
                 </p>
                 <p data-testid={ `${index}-product-name` }>
-                  {p.name}
+                  {product.name}
                 </p>
                 <Buttons
                   index={ index }
-                  prod={ { price: p.price, img: p.url_image, name: p.name, id: p.id } }
+                  product={ product }
                 />
               </div>
             </div>

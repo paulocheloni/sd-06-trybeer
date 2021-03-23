@@ -10,7 +10,7 @@ import OrdersClient from './modules/orders/pages/OrdersClient';
 import OrdersAdmin from './modules/orders/pages/OrdersAdmin';
 import ProfileClient from './modules/profile/pages/ProfileClient';
 import ProfileAdmin from './modules/profile/pages/ProfileAdmin';
-import Checkout from './modules/products/pages/Checkout';
+import Checkout from './modules/checkout/pages/Checkout';
 import DetailedOrder from './modules/orders/pages/DetailedOrder';
 
 const Routes = () => {
