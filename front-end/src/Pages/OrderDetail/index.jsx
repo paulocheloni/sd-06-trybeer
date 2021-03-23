@@ -17,9 +17,14 @@ const OrderDetail = ({ match }) => {
   });
   useEffect(() => {
     const getProd = async () => {
-      const { object, fixDate } = await getOrderInfo(match);
+      const { object, specificDate } = await getOrderInfo(match);
       setProduct(object);
-      setDate(fixDate);
+      if (specificDate) {
+        const filterData = `${specificDate.sale_date.split(['-'])[0]
+          .substring(2, 4)}/${specificDate.sale_date
+          .split(['-'])[1]}`;
+        setDate(filterData);
+      }
     };
     getProd();
   // eslint-disable-next-line react-hooks/exhaustive-deps
