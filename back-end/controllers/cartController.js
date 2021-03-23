@@ -20,7 +20,6 @@ router.post('/saleProduct', async (req, res) => {
 
   try {
     await cartService.addSaleProduct(salesProducts);
-
     return res.status(201).json(salesProducts);
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -28,7 +27,6 @@ router.post('/saleProduct', async (req, res) => {
 });
 
 router.get('/saleProduct', async (req, res) => {
-
   try {
       const allSales = await cartService.getAllSales();
 

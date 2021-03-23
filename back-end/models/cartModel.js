@@ -20,7 +20,7 @@ const addSaleProduct = async (salesProducts) => {
 };
 
 const getAllSales = async () => {
-  const [cartSales] =  await connection.execute(
+  const [cartSales] = await connection.execute(
     'SELECT * FROM sales',
   );
   return cartSales;
