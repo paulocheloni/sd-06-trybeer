@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { allOrdersByUser, getUserOrder } = require( '../services/OrdersService' );
+const { allOrdersByUser, getUserOrder } = require('../services/OrdersService');
 
 const OrdersController = new Router();
 
