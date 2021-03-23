@@ -1,5 +1,5 @@
-import { getAllSales } from './api';
+import { getAllOrders } from './api';
 
-const getOrders = async (email) => getAllSales(email);
+const getOrders = async (email) => getAllOrders(email);
 
 export default getOrders;

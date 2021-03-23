@@ -9,6 +9,7 @@ import UserRegister from './pages/UserRegister';
 import AdminProfile from './pages/AdminProfile';
 import ClientProfile from './pages/ClientProfile';
 import Orders from './pages/Orders';
+import AdminOrdersDetails from './pages/AdminOrdersDetails';
 import OrderDetails from './pages/OrderDetails';
 import './App.css';
 
@@ -28,6 +29,7 @@ function App() {
           <Route exact path="/orders" component={ Orders } />
           <Route exact path="/checkout" component={ Checkout } />
           <Route exact path="/admin/profile" component={ AdminProfile } />
+          <Route exact path="/admin/orders/:id" component={ AdminOrdersDetails } />
           <Route exact path="/orders/:id" component={ OrderDetails } />
         </Switch>
       </BrowserRouter>
