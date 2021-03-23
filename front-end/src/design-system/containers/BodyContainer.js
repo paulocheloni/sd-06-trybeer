@@ -5,7 +5,7 @@ const BodyContainer = (props) => {
   const { children } = props;
   return (
     <div
-      className="flex items-center justify-center w-full min-h-screen bg-app-background"
+      className="flex items-center justify-center px-4 w-full relative"
     >
       { children }
     </div>
