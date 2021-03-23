@@ -29,7 +29,7 @@ function SideBarMenu() {
       <div className="bottom-12">
         <Button
           onClick={ () => onClick() }
-          bgColor="white"
+          bgColor="bg-white"
           testId="side-menu-item-logout"
         >
           Sair

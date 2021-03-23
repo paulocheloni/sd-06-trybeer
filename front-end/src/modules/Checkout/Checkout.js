@@ -91,7 +91,7 @@ function Checkout() {
           </div>
           <Button
             isDisabled={ buttonDisable }
-            bgColor="green-600"
+            bgColor="bg-green-600"
             onClick={ () => handleSubmit() }
             testId="checkout-finish-btn"
           >
