@@ -44,8 +44,7 @@ function Checkout() {
 
   return (
     <div>
-      <TopBar />
-      <h1 data-testid="top-title">Finalizar Pedido</h1>
+      <TopBar title="Finalizar Pedido"/>
       <div id="cart-checkout">
         {
           !cart.length
