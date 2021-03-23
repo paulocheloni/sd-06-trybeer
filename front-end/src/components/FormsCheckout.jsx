@@ -1,20 +1,20 @@
 import React from 'react';
 
 function FormsCheckout(props) {
-  const { setEndereco } = props;
-  const { endereco } = props;
+  const { setAddress, address } = props;
+  
   return (
     <div>
       <span>Rua:</span>
       <input
         data-testid="checkout-street-input"
         type="text"
-        onChange={ (event) => setEndereco({ rua: event.target.value, numCasa: endereco.numCasa})}
+        onChange={ (event) => setAddress({ address: event.target.value, number: address.number})}
       ></input>
       <span>Número da Casa:</span>
       <input
         data-testid="checkout-house-number-input"
-        onChange={ (event) => setEndereco({ rua: endereco.rua, numCasa: event.target.value})}
+        onChange={ (event) => setAddress({ address: address.address, number: event.target.value})}
       ></input>
     </div>
   );

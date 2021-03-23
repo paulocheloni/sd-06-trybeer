@@ -9,16 +9,16 @@ import { getItensStorage, calculateTotal } from '../services/index';
 function Checkout() {
   const [items, setItems] = useState(Object.values(getItensStorage()))
   const [total, setTotal] = useState(calculateTotal(getItensStorage()))
-  const [endereco, setEndereco] = useState({rua: '', numCasa: ''})
+  const [address, setAddress] = useState({ address: '', number: '' })
 
-  useEffect(() => {
-    console.log('refresh')
-  }, []);
+  // useEffect(() => {
+  //   console.log('refresh')
+  // }, []);
 
   return (
     <div>
       <ControllerHeader />
-      <button onClick={ ()=> console.log(items)}>Console</button>
+      {/* <button onClick={ ()=> console.log(items)}>Console</button> */}
       { items.map((obj, index) => <CheckoutCard
         key={ index }
         index = { index }
@@ -27,9 +27,9 @@ function Checkout() {
         setTotal={setTotal}
         setItems={setItems}
       />) }
-      <FormsCheckout setEndereco={setEndereco} endereco={endereco}/>
+      <FormsCheckout setAddress={setAddress} address={address}/>
       <TotalCheckout total={total}/>
-      <ButtonFinalizarPedido total={total} endereco={endereco}/>
+      <ButtonFinalizarPedido total={total} address={address}/>
     </div>
   );
 }

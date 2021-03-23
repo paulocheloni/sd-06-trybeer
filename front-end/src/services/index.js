@@ -1,4 +1,4 @@
-import { login, register, updateName } from '../api';
+import { checkout, profile, login, register, updateName } from '../api';
 
 const verifyEmailAndPassword = (email, password, setActiveBtn) => {
   const isEmailValid = email.match(/\S+@\S+\.\S+/);
@@ -72,7 +72,7 @@ const getItensStorage = () => {
     .keys({ ...localStorage })
     .filter((key) => key !== 'token')
     .filter((key) => key !== 'total')
-    .filter((key) => key !== 'endereco');
+    .filter((key) => key !== 'address');
   const items = Object.keys({ ...localStorage })
     .filter((key) => filterKeys.includes(key))
     .reduce((beerObject, key) => {
@@ -130,8 +130,26 @@ const deleteItemCart = ({ item, product, setTotal, setItems }) => {
   setItems(Object.values(getItensStorage()))
 }
 
-const compraFinalizada = () => {
-  setTimeout(() => {console.log('Compra realizada com sucesso!')}, 2000)
+const compraFinalizada = async (totalPrice, addressObject, setShowSucessMessage) => {
+  // console.log('comprafinalizada', totalPrice, address)
+  const { address, number } = addressObject;
+  localStorage.setItem('address', JSON.stringify(addressObject))
+  const token = localStorage.getItem('token');
+  const user = await profile(token);
+  const { id: userId } = user;
+  // const checkoutInfo = { userId, totalPrice, address, number };
+
+  // console.log('checkoutInfo?', checkoutInfo)
+
+  // checkout(userId, totalPrice, address, number).then(() => console.log('tá funcionando?'));
+  checkout(userId, totalPrice, address, number).then(() => setShowSucessMessage(false));
+
+  const itemsObject = getItensStorage();
+  const itemNames = Object.keys(itemsObject);
+  // console.log('items', Object.keys(itemsObject))
+  itemNames.map(itemName => localStorage.removeItem(itemName))
+
+  // setTimeout(() => {console.log('Compra realizada com sucesso!')}, 2000)
   // Ao clicar em "Finalizar pedido", deve ser feita uma requisição para o backend
   //  para salvar o pedido no banco de dados, caso a operação dê certo, a mensagem
   //   Compra realizada com sucesso! deve ser exibida por 2 segundos e em seguida a
