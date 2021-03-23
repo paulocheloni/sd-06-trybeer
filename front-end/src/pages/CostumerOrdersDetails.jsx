@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import Header from '../components/HeaderComponent';
 import CostumerOrdersDetailsCard from '../components/CostumerOrdersDetailsCard';
+import BeersAppContext from '../context/BeersAppContext';
 
 function CostumerOrdersDetails() {
   const history = useHistory();

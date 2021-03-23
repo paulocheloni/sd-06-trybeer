@@ -8,8 +8,10 @@ function CostumerOrdersDetailsCard({ element }) {
     <>
       <h1>{`Pedido ${id}`}</h1>
       <h1>{ saleDate }</h1>
-      <p>{ qnt }</p>
-      <p>{ name }</p>
+      <div>
+        <p>{ qnt }</p>
+        <p>{ name }</p>
+      </div>
       <p>{`Total: R$ ${totalPrice}`}</p>
     </>
   );
