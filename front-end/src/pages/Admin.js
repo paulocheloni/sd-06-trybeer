@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
+import TopMenu from '../components/TopMenu';
 
 function Admin() {
   const history = useHistory();
@@ -13,6 +14,7 @@ function Admin() {
 
   return (
     <div>
+      <TopMenu />
       <h1>Perfil</h1>
       <p data-testid="profile-name">
         Nome:
