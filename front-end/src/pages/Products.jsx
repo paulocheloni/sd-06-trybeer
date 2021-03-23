@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import fetchProducts from '../methods/products';
 import renderCards from '../components/RenderCards';
 import isLogged from '../components/isLogged';
@@ -19,6 +19,7 @@ const itemQty = (prod) => {
 const timeOut = 3000;
 
 function Products() {
+  const route = useHistory();
   const [allProducts, setAllProducts] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const [reload, setReload] = useState(0);
@@ -54,20 +55,20 @@ function Products() {
       {onSuccess ? <p>Compra realizada com sucesso!</p> : null}
       <section className="cards-container">
         {renderCards(allProducts, reload, setReload, itemQty)}
-        <Link to="/checkout" className="cart-link">
+        <section className="checkout-prods-container">
+          <p data-testid="checkout-bottom-btn-value" className="checkout-value">
+            {currencyFormat(cartTotal)}
+          </p>
           <button
             type="button"
-            className="cart-btn"
+            className="checkout-btn"
             disabled={ reload === 0 }
             data-testid="checkout-bottom-btn"
+            onClick={ () => route.push('/checkout') }
           >
-            <p data-testid="checkout-bottom-btn-value">
-              Ver Carrinho
-              {' '}
-              {currencyFormat(cartTotal)}
-            </p>
+            Ver Carrinho
           </button>
-        </Link>
+        </section>
       </section>
     </>
   );

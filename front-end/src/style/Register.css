@@ -1,15 +1,8 @@
-main {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: center;
-  width: 100%;
-}
-
-form {
+.register-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 40px;
 }
 
 .email-label {
@@ -20,7 +13,7 @@ form {
   width: 70%;
 }
 
-.email-input {
+.signup-email {
   border: solid 1px rgb(56, 56, 56);
   height: 30px;
   margin-top: 5px;
@@ -28,23 +21,39 @@ form {
   border-radius: 14px;
 }
 
-.password-input {
-  border: solid 1px rgb(56, 56, 56);
-  height: 30px;
-  margin-top: 5px;
-  margin-bottom: 20px;
-  border-radius: 14px;
-}
-
 .password-label {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   margin: auto;
   width: 70%;
 }
 
-.signin-btn {
+.signup-password {
+  border: solid 1px rgb(56, 56, 56);
+  height: 30px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border-radius: 14px;
+}
+
+.name-label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  margin: auto;
+  width: 70%;
+}
+
+.signup-name {
+  border: solid 1px rgb(56, 56, 56);
+  height: 30px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border-radius: 14px;
+}
+
+.signup-btn {
   background-color: rgb(0, 0, 0);
   border: none;
   font-size: 20px;
@@ -56,11 +65,9 @@ form {
   color: white;
 }
 
-.no-account-btn {
-  color: black;
+.signup-p {
+  text-align: center;
   font-size: 12px;
-  margin: auto;
-  padding: 5px 10px;
-  text-decoration: none;
-  width: fit-content;
+  margin-bottom: 20px;
+  padding: 0 48px;
 }
