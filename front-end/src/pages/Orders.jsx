@@ -5,7 +5,7 @@ import MenuTop from '../components/MenuTop';
 export default function Orders() {
   return (
     <div>
-      <MenuTop title="TryBeer" />
+      <MenuTop title="Meus Pedidos" />
       <CardOrders />
     </div>
   );
