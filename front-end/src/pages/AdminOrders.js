@@ -22,7 +22,8 @@ function AdminOrders({ history }) {
     <div>
       <TopMenu />
       {
-        orders.map(({ id, delivery_address: deliveryAddress,
+        orders
+        .map(({ id, delivery_address: deliveryAddress,
           delivery_number: deliveryNumber, total_price: totalPrice, status }, index) => (
           <div key={ id }>
             <Link to={ `/admin/orders/${id}` }>
