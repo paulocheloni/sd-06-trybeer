@@ -1,11 +1,11 @@
-// test utils file
-import {render} from '@testing-library/react'
-import {BrowserRouter} from 'react-router-dom';
-
-const renderWithRouter = (ui, route = '/') => {
-  window.history.pushState({}, 'Test page', route)
-
-  return render(ui, { wrapper: BrowserRouter })
-}
-
+import React from 'react';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
+import { render } from '@testing-library/react';
+const renderWithRouter = (component) => {
+  const history = createMemoryHistory();
+  return {
+    ...render(<Router history={ history }>{ component }</Router>), history,
+  };
+};
 export default renderWithRouter;

@@ -13,7 +13,7 @@ function ClientProfile() {
     const { name, email } = user;
     return (
       <div>
-        <MenuTop />
+        <MenuTop title="Trybeer" />
         <h1 data-testid="top-title">
           Meu perfil
         </h1>

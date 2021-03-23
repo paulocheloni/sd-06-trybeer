@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import OrderDetailsCard from '../components/OrderDetailsCard';
+import OrderAdmDetailsCard from '../components/OrderAdmDetailsCard';
 import getSaleDetails from '../methods/salesDetails';
+import MenuTop from '../components/MenuTop';
 
-function OrderDetails() {
+function OrderAdmDetails() {
   const { id } = useParams();
   const history = useHistory();
   const [orderDetails, setOrderDetails] = useState({});
@@ -20,10 +21,11 @@ function OrderDetails() {
   }, [history, id]);
   return (
     <>
+      <MenuTop title="Trybeer" />
       <h1 data-testid="top-title"> Detalhe do pedido</h1>
-      {orderDetails.length > 0 && <OrderDetailsCard orderDetails={ orderDetails } /> }
+      {orderDetails.length > 0 && <OrderAdmDetailsCard orderDetails={ orderDetails } /> }
     </>
   );
 }
 
-export default OrderDetails;
+export default OrderAdmDetails;

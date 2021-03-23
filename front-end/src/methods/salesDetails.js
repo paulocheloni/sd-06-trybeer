@@ -5,7 +5,7 @@ const getToken = () => {
   if (user && user.token) {
     return user.token;
   }
-  return null
+  return null;
 };
 
 const salesDetails = async (id) => {
@@ -20,7 +20,7 @@ const salesDetails = async (id) => {
     headers,
 
   };
-  if (!token) return {redirect: true}
+  if (!token) return { redirect: true };
   const apiRequest = await fetch(`${baseURL}/${id}`, getMethod);
   const apiResponse = await apiRequest.json();
   return apiResponse;

@@ -9,7 +9,7 @@ function AdminProfile() {
     const { name, email } = user;
     return (
       <div>
-        <MenuTop />
+        <MenuTop title="Trybeer" />
         <h1 data-testid="top-title">
           Perfil
         </h1>
