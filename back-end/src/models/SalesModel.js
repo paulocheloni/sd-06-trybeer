@@ -59,6 +59,18 @@ const fullfilSale = async (saleId) => {
   const [saleProducts] = await connection.execute(`${query}`, [newStatus, saleId]);
   return saleProducts;
 };
+
+/**
+ * Lista detalhes da venda filtrado pelo id
+ * @param {String} id 
+ * @returns Objeto contendo itens de venda detalhado
+ */
+const getSalesById = async (id) => {
+  const result = await connection.execute(
+    'select sales_products.product_id as idProduct, sales_products.quantity as quantity, sales.id as idSales, sales.sale_date as dateSale, products.name as productName, products.price as price from sales_products inner join sales on sales_products.sale_id = sales.id inner join products on sales_products.product_id = products.id WHERE idSales=?)',[id]);
+  return result;
+}
+
 module.exports = {
   getSaleById,
   getSaleProducts,
@@ -66,4 +78,5 @@ module.exports = {
   createSale,
   fullfilSale,
   createSaleProducts,
+  getSalesById,
 };

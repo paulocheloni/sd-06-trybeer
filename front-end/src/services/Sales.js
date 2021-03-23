@@ -11,6 +11,12 @@ const postSale = (token, payload, products) => fetch(`${endpoint}/sales/checkout
   body: JSON.stringify({ payload, products }),
 })
   .then((response) => response.json());
+  
+const getAllSales = () => fetch(`${endpoint}/sales`)
+  .then((response) => response.json());
+
+const getSalesById = (id) => fetch(`${endpoint}/sales/${id}`)
+  .then((response) => response.json());
 
 const getSales = () => fetch(`${endpoint}/sales`)
   .then((response) => response.json());
@@ -30,4 +36,8 @@ module.exports = {
   getSales,
   postSale,
   fullfilSale,
+  getAllSales,
+  getSalesById,
 };
+
+

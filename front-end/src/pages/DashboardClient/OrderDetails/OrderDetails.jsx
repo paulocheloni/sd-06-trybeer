@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../../components/Header/Header';
 import './OrderDetails.css';
-import { getSalesById } from '../../../services/sales';
+import { getSalesById } from '../../../services/Sales';
 import { correctDate, parseCartPrice } from '../../../utils/parseValues';
 
 const soma = (products) => {
@@ -22,7 +22,7 @@ export default function Orders(props) {
       setOrderDetails(result);
     };
     getOrderDetails();
-  }, []);
+  }, [id]);
 
   // dateSale: "2021-03-21T03:00:00.000Z"
   // idProduct: 2
