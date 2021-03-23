@@ -23,6 +23,7 @@ const getById = async (id) => {
     ON products.id = sales_products.product_id
     WHERE sales_products.sale_id = ${id}`,
     [id]);
+    console.log(order);
   return order;
 };
 

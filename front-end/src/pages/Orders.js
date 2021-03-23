@@ -20,7 +20,7 @@ function Orders({ history }) {
 
   useEffect(() => {
     fetchOrders();
-  }, [fetchOrders, setOrders, user]);
+  }, []);
 
   return (
     <div>

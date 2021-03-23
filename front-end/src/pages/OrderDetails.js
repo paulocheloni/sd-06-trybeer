@@ -31,7 +31,7 @@ function OrderDetails(props) {
   useEffect(() => {
     observeState();
     fetchOrderDetails();
-  }, [fetchOrderDetails, observeState]);
+  }, []);
 
   return (
     <div>
