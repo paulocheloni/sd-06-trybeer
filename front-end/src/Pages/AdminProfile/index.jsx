@@ -1,23 +1,21 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { BiUser } from 'react-icons/bi';
-import { FiMail } from 'react-icons/fi';
+// import { BiUser } from 'react-icons/bi';
+// import { FiMail } from 'react-icons/fi';
 import { GlobalContext } from '../../Contexts/GlobalContext';
 
 import MenuTopAdmin from '../../Components/MenuTopAdmin';
 import SideBarAdmin from '../../Components/SideBarAdmin';
-import Input from '../../Components/Input';
+// import Input from '../../Components/Input';
 // import LogoTryBeer from '../../Components/LogoTryBeer';
 
 import S from './styles';
 
-const profile = (name, email) => {
-  const theme = JSON.parse(localStorage.getItem('@trybeer:theme'));
-
-  return (
-    <S.ContextProfile>
-      <Input
+// const theme = JSON.parse(localStorage.getItem('@trybeer:theme'));
+const profile = (name, email) => (
+  <S.ContextProfile>
+    {/* <Input
         value={ name }
         label="Nome"
         width="100%"
@@ -36,11 +34,12 @@ const profile = (name, email) => {
         themeStorage={ theme && theme.title }
         icon={ FiMail }
         readOnly
-      />
+      /> */}
+    <span data-testid="profile-name">{ name }</span>
+    <span data-testid="profile-email">{ email }</span>
 
-    </S.ContextProfile>
-  );
-};
+  </S.ContextProfile>
+);
 
 const AdminProfile = () => {
   const [nameState, setNameState] = useState('');
