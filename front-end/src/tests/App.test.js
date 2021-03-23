@@ -1,6 +1,5 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { getByTestId, render, fireEvent, waitForElement } from '@testing-library/react';
+import { getByTestId, render, fireEvent, waitForElement, waitFor } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
 
@@ -62,8 +61,8 @@ test('Será validado que não é possível fazer login com uma senha com menos d
   expect(login.disabled).toBe(true);
 });
 
-test('Será validado que é possível fazer login com um cliente e ser redirecionado para tela de cliente', async () => {
-  const { getByTestId, getByText } = renderWithRouter(<App />)
+test('Será validado que é possível fazer login com um cliente e ser redirecionado para tela de cliente', () => {
+  const { getByTestId, history } = renderWithRouter(<App />)
 
   const email = getByTestId('email-input');
   const password = getByTestId('password-input');
@@ -71,31 +70,8 @@ test('Será validado que é possível fazer login com um cliente e ser redirecio
 
   fireEvent.change(email, { target: { value: 'user@test.com' } });
   fireEvent.change(password, { target: { value: 'test123' } });
-  await waitForElement(() => fireEvent.click(login));
+  fireEvent.click(login)
 
-  const skol = waitForElement(() => getByText('Skol Lata 250ml'));
-
-  // const { pathname } = history.location;
-  await expect(skol).toBe('/products');
-
+  const { pathname } = history.location;
+  expect(pathname).toBe('/products'); 
 });
-
-
-// test('Is redirected to the Fav Pokémon page, by clicking on the Fav Pokémon link', () => {
-//   const { queryAllByRole } = render(
-//     <MemoryRouter>
-//       <App />
-//     </MemoryRouter>,
-//   );
-//   const link = queryAllByRole('link');
-//   expect(link[2].pathname).toBe('/favorites');
-// });
-
-// test('app is redirected to the Not Found page when entering an unknown URL.', () => {
-//   const { getByText } = render(
-//     <MemoryRouter initialEntries={ ['/xablau'] }>
-//       <App />
-//     </MemoryRouter>,
-//   );
-//   const heading = getByText('Page requested not found');
-//   expect(heading).toBeInTheDocument();
