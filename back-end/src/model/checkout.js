@@ -8,7 +8,7 @@ exports.create = async ({ userId, totalPrice, rua, numero, status }) =>
       VALUES (?, ?, ?, ?, SYSDATE(), ?)`,
       [
         userId,
-        ++totalPrice,
+        Number(totalPrice),
         rua,
         numero,
         status,
@@ -16,19 +16,9 @@ exports.create = async ({ userId, totalPrice, rua, numero, status }) =>
     )
     .then(([result]) => ({ id: result.insertId }));
 
-exports.createSaleProduct = async (saleProducts) => {
-  let products = '';
-
-  for (let products of saleProducts) {
-    products = `${products} (
-      ${saleProducts.saleId},
-      ${saleProducts.productId},
-      ${saleProducts.quantity}
-    ),`
-  };
-
-  return connection
-    .execute(`INSERT INTO sales (sale_id, product_id, quantity) VALUES
-      ${products.substr(0, saleProducts.length - 1)}`)
-      .then(([result]) => result)
+exports.createSaleProduct = async (products) => {
+  await products.forEach((product) => connection.query(
+    'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
+    [product.saleId, product.id, product.quantity],
+  ).then((result) => result));
 };
