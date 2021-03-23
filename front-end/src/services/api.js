@@ -33,3 +33,11 @@ export const updateUser = async (newName, email) => {
 
   return requestResponse;
 };
+
+export const saveSale = async (sale) => {
+  const requestResponse = await api.post('checkout', sale)
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+
+  return requestResponse;
+};
