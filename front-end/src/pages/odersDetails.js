@@ -28,7 +28,7 @@ function OrderDetails() {
   return (
     <div>
 
-      <NavBar data-testid="top-title" content="Detalhes do Pedido" />
+      <NavBar content="Detalhes do Pedido" />
       <h1 data-testid="order-number">{`Pedido ${id}`}</h1>
       <h2 data-testid="order-date">{moment(order.saleDate).format('DD/MM')}</h2>
       {order.map((product, index) => (
@@ -37,6 +37,7 @@ function OrderDetails() {
           <h4 data-testid={ `${index}-product-qtd` }>{product.productQty}</h4>
           <h3 data-testid={ `${index}-product-total-value` }>
             R$
+            {' '}
             {(product.totalPrice).toFixed(2).toString().replace('.', ',')}
           </h3>
         </div>

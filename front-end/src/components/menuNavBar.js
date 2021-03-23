@@ -35,7 +35,7 @@ export default function ButtonAppBar({ content }) {
           >
             <Hamburguer />
           </IconButton>
-          <Typography variant="h4" className={ classes.title }>
+          <Typography data-testid="top-title" variant="h4" className={ classes.title }>
             {content}
           </Typography>
         </Toolbar>

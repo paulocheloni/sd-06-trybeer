@@ -54,6 +54,7 @@ function Admin() {
       <NavBarAdmin content="Trybeer" />
       <h1>
         Pedidos
+        {' '}
         {order.id}
       </h1>
       <h1>{order.status}</h1>
