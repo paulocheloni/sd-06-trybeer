@@ -3,14 +3,14 @@ require('dotenv/config');
 
 // const connection = mysql.createPool({
 //   user: 'root',
-//   password: 'flowbio',
+//   password: '',
 //   host: 'localhost',
 //   database: 'Trybeer',
 // });
 
 // const connection = mysql.createPool({
 //   user: 'root',
-//   password: '',
+//   password: '1234',
 //   host: 'localhost',
 //   database: 'Trybeer',
 // });

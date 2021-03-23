@@ -25,9 +25,19 @@ function Orders() {
       {orders.map((order, index) => (
         <Link to={ `/orders/${order.id}` } key={ index }>
           <div>
-            <h2 data-testid="order-number">{order.id}</h2>
-            <h3 data-testid="order-date">{moment(order.sale_date).format('DD/MM')}</h3>
-            <h3 data-testid="order-total-value">{order.total_price}</h3>
+            <h2 data-testid={ `${index}-order-number` }>
+              Pedido
+              {' '}
+              {order.id}
+            </h2>
+            <h3 data-testid={ `${index}-order-date` }>
+              {moment(order.sale_date).format('DD/MM')}
+            </h3>
+            <h3 data-testid={ `${index}-order-total-value` }>
+              R$
+              {' '}
+              {(order.total_price).replace('.', ',')}
+            </h3>
           </div>
         </Link>
       ))}

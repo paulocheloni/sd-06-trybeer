@@ -13,7 +13,8 @@ import {
   Checkout,
   Orders,
   OrderDetails,
-  ProfileAdmin } from './pages';
+  ProfileAdmin,
+  AdminOrdersDetails } from './pages';
 // CSS
 import './App.css';
 
@@ -34,6 +35,7 @@ function App() {
           <Route exact path="/checkout" component={ Checkout } />
           <Route exact path="/orders" component={ Orders } />
           <Route exact path="/orders/:id" component={ OrderDetails } />
+          <Route exact path="/admin/orders/:id" component={ AdminOrdersDetails } />
         </Switch>
       </BrowserRouter>
     </Provider>

@@ -10,7 +10,7 @@ const createSale = async (
     delivery_number, sale_date, status)VALUES (?, ?, ?, ?, SYSDATE(), ?)`,
     [userId, price, street, numberHouse, saleStatus],
   );
-  
+
   cart.forEach(async (element) => {
     await connection.execute(
       'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
