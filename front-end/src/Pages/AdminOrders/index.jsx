@@ -50,7 +50,7 @@ const AdminOrders = () => {
               orders.map((order, index) => (
                 <S.CardOrder
                   key={ index }
-                  onClick={ () => history.push(`/orders/${order.id}`) }
+                  onClick={ () => history.push(`/admin/orders/${order.id}`) }
                 >
                   <div className="div-address">
                     <span data-testid={ `${index}-order-number` }>

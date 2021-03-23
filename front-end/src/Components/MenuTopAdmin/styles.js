@@ -15,7 +15,7 @@ const CompMenuTop = styled.header`
     justify-content: flex-end;
     > button {
       background: ${theme.colors.primary};
-      padding: 3px 5px 0 5px;
+      padding: 3px 5px 3px 5px;
       border: none;
       border-radius: 3px;
       box-shadow: 0 0 5px ${theme.colors.shadowCards};

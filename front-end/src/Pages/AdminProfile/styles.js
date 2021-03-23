@@ -32,13 +32,11 @@ const ContextProfile = styled.div`
     align-items: center;
     justify-content: center;
 
-    > h1 {
+    > h2 {
       color: ${theme.colors.text};
       margin-bottom: 20px;
-      display: none;
 
       @media (max-width: 500px) {
-        display: none;
       }
     }
 

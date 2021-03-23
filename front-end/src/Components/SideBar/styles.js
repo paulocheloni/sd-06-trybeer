@@ -37,7 +37,7 @@ const CompSideBar = styled.div`
     flex-direction: column;
     align-items: center;
 
-    animation: ${animate} 0.5s;
+    animation: ${animate} 0s;
 
     @media (max-width: 500px) {
       width: 80%;

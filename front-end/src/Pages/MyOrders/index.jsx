@@ -34,7 +34,7 @@ const MyOrders = () => {
 
   return (
     <S.Container>
-      {console.log('bfhhyyht', orders)}
+
       <MenuTop />
 
       <SideBar />

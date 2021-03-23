@@ -35,6 +35,13 @@ const Form = styled.form`
         font-size: 26px;
       }
     }
+
+    > p {
+      color: ${theme.colors.text};
+      border: 1px solid red;
+      border-radius: 5px;
+      padding: 10px 20px;
+    }
     
     @media (max-width: 500px) {
       border: none;

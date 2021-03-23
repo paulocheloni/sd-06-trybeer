@@ -16,6 +16,8 @@ export default {
     backgroundDiv: '#CCCCCC',
     divCounter: '#E5E5E5',
     backgroundHtml: 'rgb(243,248,236)',
+    colorStatusGreen: '#3fb950',
+    colorStatusYellow: ' #cf8d2e',
 
     white: '#fff',
     background: '#f2f3f5',

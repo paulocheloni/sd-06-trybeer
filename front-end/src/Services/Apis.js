@@ -60,26 +60,14 @@ export const findAllProducts = async () => {
   return products;
 };
 
-// export const registerOrder = async (infosOrder) => {
-//   console.log(infosOrder);
-//   const order = await axios.post('http://localhost:3001/orders', infosOrder)
-//     .then((res) => res.data)
-//     .catch((err) => {
-//       console.error(`ops! ocorreu um erro${err}`);
-//     });
-
-//   return order;
-// };
-
 export const registerOrder = async (infosOrder) => {
-  const response = await axios({
-    method: 'post',
-    url: 'http://localhost:3001/orders',
-    data: infosOrder,
-  }).then((res) => res.data)
-    .catch((err) => err.response.data);
+  const order = await axios.post('http://localhost:3001/orders', infosOrder)
+    .then((res) => res.data)
+    .catch((err) => {
+      console.error(`ops! ocorreu um erro${err}`);
+    });
 
-  return response;
+  return order;
 };
 
 export const getAllOrders = async (email) => {

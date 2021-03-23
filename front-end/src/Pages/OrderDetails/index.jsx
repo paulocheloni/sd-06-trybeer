@@ -41,7 +41,6 @@ const OrderDetails = () => {
             ? (
               <>
                 <S.TopInfos>
-
                   <h2 data-testid="order-number">
                     {`Pedido ${id} `}
                   </h2>

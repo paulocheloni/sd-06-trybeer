@@ -60,7 +60,6 @@ const form = (params) => {
         themeStorage={ theme && theme.title }
         icon={ BiUser }
       />
-      {(emailAlreadyExists) ? <p>E-mail already in database.</p> : null}
       <Input
         id="email-input"
         label="Email"
@@ -69,6 +68,7 @@ const form = (params) => {
         themeStorage={ theme && theme.title }
         icon={ FiMail }
       />
+      {(emailAlreadyExists) ? <p>E-mail already in database.</p> : null}
       <Input
         id="password-input"
         label="Senha"
