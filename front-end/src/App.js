@@ -1,20 +1,30 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import {
+  Switch,
+  Route,
+  BrowserRouter,
+  Redirect,
+} from 'react-router-dom';
 
-import { NotFound, Login, Register } from './pages';
+import { NotFound, Login, Register, Profile, Products, Error } from './pages';
 
-import './App.css';
+import './styles/App.css';
 
 function App() {
   return (
-    <Switch>
-      <Route path="/login" component={ Login } />
-      <Route path="/register" component={ Register } />
-      <Route path="/">
-        <h1>Trybeer!</h1>
-      </Route>
-      <Route component={ NotFound } />
-    </Switch>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/login" component={ Login } />
+        <Route path="/register" component={ Register } />
+        <Route path="/products" component={ Products } />
+        <Route path="/profile" component={ Profile } />
+        <Route exact path="/">
+          <Redirect to="/login" />
+        </Route>
+        <Route path="/error" component={ Error } />
+        <Route component={ NotFound } />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
