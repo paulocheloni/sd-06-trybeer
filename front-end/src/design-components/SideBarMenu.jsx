@@ -26,13 +26,15 @@ function SideBarMenu() {
           Meu Perfil
         </Button>
       </Link>
-      <Button
-        onClick={ () => onClick() }
-        bgColor="white"
-        testId="side-menu-item-logout"
-      >
-        Sair
-      </Button>
+      <div className="bottom-12">
+        <Button
+          onClick={ () => onClick() }
+          bgColor="bg-white"
+          testId="side-menu-item-logout"
+        >
+          Sair
+        </Button>
+      </div>
     </div>
   );
 }
