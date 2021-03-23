@@ -9,12 +9,13 @@ function ButtonCheckout() {
   const generateData = () => {
     const data = new Date().toLocaleDateString('zh-Hans-CN');
     const dataFormart = String(data).replaceAll('/', '-');
-    
+
     const hora = new Date().toLocaleTimeString();
+    const numberLength = 8;
     let newHour;
-    if (hora.length > 8) {
+    if (hora.length > numberLength) {
       newHour = hora.split(' ');
-    } 
+    }
  
     const dateTime = `${dataFormart} ${newHour[0] || hora}`;
     return dateTime;
