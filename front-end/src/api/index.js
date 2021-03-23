@@ -31,7 +31,7 @@ function register(user) {
         const time = 3000;
         const elem = document.createElement('h3');
         elem.innerHTML = err.response.data.message;
-        document.querySelector('.test').append(elem);
+        document.querySelector('.register-page').append(elem);
         setTimeout(() => elem.remove(elem), time);
       }
     });

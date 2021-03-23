@@ -9,7 +9,7 @@ function AdminOrders() {
       <h1>Pedidos Pendentes</h1>
       <div>
         <AdminSideBar />
-        <section className="orders-list"></section>
+        <section className="orders-list" />
       </div>
     </div>
   );
