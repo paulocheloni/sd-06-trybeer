@@ -11,8 +11,6 @@ const Cart = () => {
 
   useEffect(() => {
     getTotalPriceCart();
-    console.log(getTotalPriceCart());
-    // console.log(getTotalPriceCart() === '0.00')
   }, [cart, getTotalPriceCart]);
 
   return (
