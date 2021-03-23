@@ -5,7 +5,6 @@ import {
   Route,
   Redirect } from 'react-router-dom';
 
-import AdminOrders from '../pages/AdminOrders';
 import Products from '../pages/Products';
 import Register from '../pages/Register';
 import Profile from '../pages/Profile';
