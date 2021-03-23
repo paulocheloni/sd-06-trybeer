@@ -6,7 +6,9 @@ import { faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 
 import AppContext from '../context/app.context';
 import productsApi from '../services/api.products';
-import { Topbar, Loading } from '../components';
+import { Topbar, Loading, CartButton } from '../components';
+import { handleProductQuantity } from '../utils';
+import useStorage from '../hooks/useStorage';
 
 import '../styles/Products.css';
 
@@ -16,7 +18,11 @@ export default function Products() {
     tokenContext: { token },
   } = useContext(AppContext);
 
-  const [cart, setCart] = useState({});
+  const updateCartStorage = useStorage('cart');
+
+  const localCart = JSON.parse(localStorage.getItem('cart')) || {};
+
+  const [cart, setCart] = useState(localCart);
 
   useEffect(() => {
     const magicTime = 1500;
@@ -28,13 +34,16 @@ export default function Products() {
     fetchProducts();
   }, [setProducts, token]);
 
-  const handleQuantity = (action, id) => {
-    const currQuantity = cart[id] || 0;
-    const newCart = { ...cart };
-    if (action === 'add') newCart[id] = currQuantity + 1;
-    if (action === 'sub' && currQuantity === 1) delete newCart[id];
-    if (action === 'sub' && currQuantity > 1) newCart[id] -= 1;
+  useEffect(() => {
+    updateCartStorage(cart);
+  }, [cart, updateCartStorage]);
 
+  const updateQuantity = (action, id, price = 0) => {
+    const newCart = handleProductQuantity({
+      action,
+      id,
+      price,
+      cart });
     setCart(newCart);
   };
 
@@ -54,26 +63,26 @@ export default function Products() {
                   data-testid={ `${index}-product-img` }
                   alt="Img do produto."
                 />
-                <section className="name" data-testid={ `${index}-product-img` }>
+                <section className="name" data-testid={ `${index}-product-name` }>
                   { name }
                 </section>
                 <section className="price" data-testid={ `${index}-product-price` }>
-                  { `R$ ${price}` }
+                  { `R$ ${price.replace('.', ',')}` }
                 </section>
                 <section className="quantity">
                   <button
                     type="button"
-                    onClick={ () => handleQuantity('sub', id) }
+                    onClick={ () => updateQuantity('sub', id) }
                     data-testid={ `${index}-product-minus` }
                   >
                     <FontAwesomeIcon icon={ faMinusCircle } className="quantity-icon" />
                   </button>
                   <span id={ `${index}-quant` } data-testid={ `${index}-product-qtd` }>
-                    { cart[id] ? cart[id] : 0 }
+                    { cart[id] ? cart[id].quantity : 0 }
                   </span>
                   <button
                     type="button"
-                    onClick={ () => handleQuantity('add', id) }
+                    onClick={ () => updateQuantity('add', id, price) }
                     data-testid={ `${index}-product-plus` }
                   >
                     <FontAwesomeIcon icon={ faPlusCircle } className="quantity-icon" />
@@ -83,6 +92,7 @@ export default function Products() {
             )) }
           </section>
         ) }
+      <CartButton cart={ cart } />
     </section>
   );
 }

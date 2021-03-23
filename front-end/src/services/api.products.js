@@ -12,13 +12,13 @@ const products = async (payload) => {
     };
     const result = await axios(request);
     console.log('Products request: ', result);
-    if (result.data) return result.data;
+    return result.data;
   } catch (error) {
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
       console.log(error.response);
-      return error.response.data;
+      return error.response;
     }
     if (error.request) {
       // The request was made but no response was received
