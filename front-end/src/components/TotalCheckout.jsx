@@ -7,14 +7,14 @@ function TotalCheckout(props) {
     <div>
       <p data-testid="order-total-value">
         Total: R$
-        { total.replace('.', ',') }
+        { ` ${total.replace('.', ',')}` }
       </p>
     </div>
   );
 }
 
 TotalCheckout.propTypes = {
-  total: PropTypes.shapeOf(PropTypes.object).isRequired,
+  total: PropTypes.number.isRequired,
 };
 
 export default TotalCheckout;

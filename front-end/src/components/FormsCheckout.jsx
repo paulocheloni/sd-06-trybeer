@@ -28,7 +28,7 @@ function FormsCheckout(props) {
 }
 
 FormsCheckout.propTypes = {
-  address: PropTypes.shapeOf(PropTypes.object).isRequired,
+  address: PropTypes.objectOf(PropTypes.string).isRequired,
   setAddress: PropTypes.func.isRequired,
 };
 
