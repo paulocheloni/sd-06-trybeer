@@ -1,9 +1,11 @@
-const LoginModel = require('./LoginModel');
-const UserModel = require('./UserModel');
 const ProductsModel = require('./ProductsModel');
+const LoginModel = require('./LoginModel');
+const OrderModel = require('./OrderModel');
+const UserModel = require('./UserModel');
 
 module.exports = {
-  LoginModel,
-  UserModel,
   ProductsModel,
+  LoginModel,
+  OrderModel,
+  UserModel,
 };

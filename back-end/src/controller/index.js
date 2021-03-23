@@ -1,9 +1,11 @@
-const LoginController = require('./LoginController');
-const UserController = require('./UserController');
 const ProductsController = require('./ProductsController');
+const LoginController = require('./LoginController');
+const OrderController = require('./OrderController');
+const UserController = require('./UserController');
 
 module.exports = {
-  UserController,
-  LoginController,
   ProductsController,
+  LoginController,
+  OrderController,
+  UserController,
 };
