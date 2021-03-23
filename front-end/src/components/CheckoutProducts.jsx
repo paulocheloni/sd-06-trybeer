@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import ParseCurrency from '../utils/parseCurrencyToBRL';
 import UserContext from '../hooks/UseContext';
 
 function CheckoutProducts() {
-  const [checkoutProducts, setCheckoutProducts] = useState([]);
-  const { setTotalPrice } = useContext(UserContext);
+  const { checkoutProducts, setCheckoutProducts, setTotalPrice } = useContext(UserContext);
   const total = JSON.parse(localStorage.getItem('total'));
 
   const purchase = () => {
@@ -12,8 +11,6 @@ function CheckoutProducts() {
     const productsSelected = products.filter((product) => product.productQuantity > 0);
     localStorage.setItem('productList', JSON.stringify(productsSelected));
 
-
-    console.log(productsSelected);
     return productsSelected;
   };
 
