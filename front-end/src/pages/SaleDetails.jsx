@@ -62,7 +62,8 @@ export default function SaleDetails() {
           <span data-testid={ `${index}-product-qtd` }>{order.quantity}</span>
           <p data-testid={ `${index}-product-name` }>{order.name}</p>
           <span data-testid={ `${index}-product-total-value` }>
-            {(Number(order.quantity) * Number(order.price)).toFixed(2).replace('.', ',')}
+            {`R$ ${(Number(order.quantity) * Number(order.price))
+              .toFixed(2).replace('.', ',')}`}
           </span>
         </div>
       ))}
