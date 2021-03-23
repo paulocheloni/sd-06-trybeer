@@ -10,7 +10,7 @@ import { verifyUser } from '../../../store/LocalStorage/actions';
 /**
  * Soma o total do pedido (quantidade * preco)
  * @param {String} products
- * @returns String contendo a soma dos itens
+ * @returns String contendo a soma dos itens teste teste
  */
 const soma = (products) => {
   let totalVenda = 0;
