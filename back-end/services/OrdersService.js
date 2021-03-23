@@ -14,7 +14,7 @@ const createOrderService = async (sale) => {
   const part2Date = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 
   const saleDate = `${part1Date} ${part2Date}`;
-  const status = 'pendente';
+  const status = 'Pendente';
   const newOrder = await ordersModel
   .createOrder({ userId, totalPrice, deliveryAddress, deliveryNumber, saleDate, status });
   
