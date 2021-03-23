@@ -14,26 +14,33 @@ export default function CardOrders() {
     fetchApiSales();
   }, []);
 
-  const DATA_MAX = 10;
-  const DATA_MIN = 5;
+  const seventeen = -17;
+  const five = 5;
+  const eigth = 8;
+  const fourteen = -14;
 
   const user = JSON.parse(localStorage.getItem('user'));
   if (!user) return <Redirect to="login" />;
 
+  const FormatDate = (date) => {
+    const month = date.slice(five, seventeen);
+    const day = date.slice(eigth, fourteen);
+
+    return `${day}/${month}`;
+  };
+
   return (
     <div>
-      { sales.map((sale, index) => (
-        // <Link to={`/order/details/${sale.id}`}>
-        <Link to="/order/details" key={ sale.id }>
+      {sales.map((sale, index) => (
+        <Link to={ `/orders/${sale.id}` } key={ sale.id }>
           <div data-testid={ `${index}-order-card-container` }>
-            <h4 data-testid={ `${index}-order-number` }>
-              { `Pedido número: ${sale.id}` }
-            </h4>
-            <h4 data-testid={ `${index}-order-date` }>
-              { `DATA: ${Object.values(sale)[5].slice(DATA_MIN, DATA_MAX)}` }
-            </h4>
+            <h4 data-testid={ `${index}-order-number` }>{`Pedido ${sale.id}`}</h4>
+            <h4 data-testid={ `${index}-order-date` }>{FormatDate(sale.sale_date)}</h4>
             <h4 data-testid={ `${index}-order-total-value` }>
-              { `Valor: ${Object.values(sale)[2]}` }
+              {Number(sale.total_price).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
             </h4>
           </div>
         </Link>

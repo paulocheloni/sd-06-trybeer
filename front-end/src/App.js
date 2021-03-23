@@ -22,7 +22,7 @@ function App() {
           <Route exact path="/orders" component={ Orders } />
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/checkout" component={ Checkout } />
-          <Route exact path="/orders/:id" component={ OrderDetails }/>
+          <Route exact path="/orders/:id" component={ OrderDetails } />
           <Redirect from="/" to="/login" />
         </Switch>
       </Provider>
