@@ -9,7 +9,7 @@ OrderRoute.get('/:id',
   authorization,
   OrderController.getOrdersById);
 
-OrderRoute.get('/:id',
+OrderRoute.get('/',
   authorization,
   OrderController.getAllOrders);
 

@@ -20,6 +20,10 @@ function Checkout() {
   //   },
 
   // ];
+
+
+  // 161
+   
   const productsList = JSON.parse(localStorage.cart);
   const newlist = productsList.map((item) => {
     item.totalValue = (item.quantity * item.price);

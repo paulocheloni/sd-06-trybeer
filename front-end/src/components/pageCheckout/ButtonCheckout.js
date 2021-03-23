@@ -8,9 +8,15 @@ function ButtonCheckout() {
 
   const generateData = () => {
     const data = new Date().toLocaleDateString('zh-Hans-CN');
-    const dataFormart = data.replaceAll('/', '-');
+    const dataFormart = String(data).replaceAll('/', '-');
+    
     const hora = new Date().toLocaleTimeString();
-    const dateTime = `${dataFormart} ${hora}`;
+    let newHour;
+    if (hora.length > 8) {
+      newHour = hora.split(' ');
+    } 
+ 
+    const dateTime = `${dataFormart} ${newHour[0] || hora}`;
     return dateTime;
   };
 
