@@ -52,13 +52,13 @@ function Login() {
           <Button
             onClick={ () => onClick() && resetFields() }
             isDisabled={ isDisabled }
-            bgColor="indigo-600"
+            bgColor="bg-black"
             testId="signin-btn"
           >
             Entrar
           </Button>
           <Link to="/register">
-            <Button bgColor="indigo-400" testId="no-account-btn">
+            <Button bgColor="bg-gray-700" testId="no-account-btn">
               Ainda não tenho conta
             </Button>
           </Link>

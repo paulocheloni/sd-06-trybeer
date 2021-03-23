@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import Provider from './context/Provider';
 import * as serviceWorker from './serviceWorker';
-import './tailwind.output.css';
+import './tailwindbuild.css';
 
 ReactDOM.render(
   <Provider>
