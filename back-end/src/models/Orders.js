@@ -18,6 +18,7 @@ const getByIdDetails = async (id) => {
       products.name AS name,
       sales_products.product_id AS productId,
       sales_products.quantity AS productQty,
+      products.price AS price,
       ROUND(products.price * sales_products.quantity, 2) AS totalPrice
     FROM sales
     JOIN sales_products
@@ -30,8 +31,23 @@ const getByIdDetails = async (id) => {
   return order;
 };
 
+const listAllOrdersAdmin = async () => {
+  const [orders] = await connection.execute('SELECT * from sales');
+  return orders;
+};
+
+const updateStatusProduct = async (id) => {
+  const [{ changedRows }] = await connection.execute(
+    'UPDATE sales SET status = ? WHERE id = ?',
+    ['Entregue', id],
+  );
+  return changedRows;
+};
+
 module.exports = {
   listAllOrders,
   getByIdOrder,
   getByIdDetails,
+  listAllOrdersAdmin,
+  updateStatusProduct,
 };

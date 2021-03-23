@@ -25,6 +25,12 @@ const listAllOrders = (email) => (api.get('/orders', { headers: { email } }));
 
 const orderDetails = (id) => (api.get(`/orders/${id}`));
 
+const listAllOrdersAdmin = () => (api.get('/orders/admin'));
+
+const getByIdOrderAdmin = (id) => (api.get(`/orders/admin/${id}`));
+
+const updateStatusProduct = (id) => (api.put(`/orders/admin/${id}`));
+
 export default {
   listLogin,
   createUser,
@@ -33,4 +39,7 @@ export default {
   createSale,
   listAllOrders,
   orderDetails,
+  listAllOrdersAdmin,
+  getByIdOrderAdmin,
+  updateStatusProduct,
 };
