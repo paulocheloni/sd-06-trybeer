@@ -43,7 +43,7 @@ function Login() {
           data-testid="signin-btn"
           onClick={ () => redirectPath(history, user) }
         >
-          ENTRAR
+          Entrar
         </button>
         <button
           type="button"
