@@ -19,8 +19,8 @@ const CardAdminDetails = () => (
 
         <S.DescriptionProducts>
           <div>
-            <span>Heineken 600ml</span>
-            <p>R$ 7,50</p>
+            {/* <span>Heineken 600ml</span>
+            <p>R$ 7,50</p> */}
           </div>
 
           <span>2 - R$ 14,00</span>
@@ -38,8 +38,8 @@ const CardAdminDetails = () => (
 
         <S.DescriptionProducts>
           <div>
-            <span>Heineken 600ml</span>
-            <p>R$ 7,50</p>
+            {/* <span>Heineken 600ml</span>
+            <p>R$ 7,50</p> */}
           </div>
 
           <span>2 - R$ 14,00</span>
@@ -57,8 +57,8 @@ const CardAdminDetails = () => (
 
         <S.DescriptionProducts>
           <div>
-            <span>Heineken 600ml</span>
-            <p>R$ 7,50</p>
+            {/* <span>Heineken 600ml</span>
+            <p>R$ 7,50</p> */}
           </div>
 
           <span>2 - R$ 14,00</span>

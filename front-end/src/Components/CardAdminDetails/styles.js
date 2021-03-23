@@ -17,7 +17,6 @@ const Container = styled.div`
     padding: 15px 20px 15px 40px;
     margin-bottom: 20px;
     font-weight: 550;
-
     /* opacity: ${stateSideBarAdmin && '0.2'}; */
     position: relative;
 
@@ -54,7 +53,6 @@ const Container = styled.div`
           animation: 0;
         }
       }
-
       .confirm {
         display: ${pending && 'flex'};
         justify-content: center;

@@ -17,6 +17,7 @@ const AdminOrderDetails = () => (
 
       <S.ContainerCard>
         <CardAdminDetails />
+
       </S.ContainerCard>
 
     </S.Context>

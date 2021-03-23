@@ -10,7 +10,7 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  ${({ theme }) => css`
+  ${() => css`
     width: 100%;
     height: 100vh;
     padding: 70px 0 0 0;
@@ -22,7 +22,7 @@ const Content = styled.div`
 `;
 
 const ContainerProducts = styled.div`
-  ${({ theme }) => css`
+  ${() => css`
     width: 60%;
     padding: 0 20px; 
     background: red;
@@ -38,7 +38,7 @@ const ContainerProducts = styled.div`
 `;
 
 const ContainerForm = styled.div`
-  ${({ theme }) => css`
+  ${() => css`
     width: 60%;
     padding: 0 20px; 
     background: blue;

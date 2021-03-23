@@ -33,9 +33,9 @@ const profile = (name, email) => {
         width="100%"
         widthDivLabel="100%"
         dataTestid="profile-email"
-        readOnly
         themeStorage={ theme && theme.title }
         icon={ FiMail }
+        readOnly
       />
 
     </S.ContextProfile>
