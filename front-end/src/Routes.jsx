@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import Checkout from './pages/Checkout';
 import CustomerOrders from './pages/CustomerOrders';
 import SaleDetails from './pages/SaleDetails';
+import AdminProfile from './pages/AdminProfile';
 
 export default function Routes() {
   return (
@@ -22,7 +23,7 @@ export default function Routes() {
       <Route path="/profile" component={ Profile } />
       <Route path="/checkout" component={ Checkout } />
       <Route exact path="/orders/:id" component={ SaleDetails } />
-      <Route path="/admin/profile" component={ Profile } />
+      <Route path="/admin/profile" component={ AdminProfile } />
       <Route path="/orders" component={ CustomerOrders } />
     </Switch>
   );
