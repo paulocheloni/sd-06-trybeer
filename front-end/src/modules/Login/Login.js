@@ -58,7 +58,7 @@ function Login() {
             Entrar
           </Button>
           <Link to="/register">
-            <Button bgColor="bg-gray-500" testId="no-account-btn">
+            <Button bgColor="bg-gray-700" testId="no-account-btn">
               Ainda não tenho conta
             </Button>
           </Link>
