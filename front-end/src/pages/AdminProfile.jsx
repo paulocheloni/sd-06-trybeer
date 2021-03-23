@@ -26,7 +26,7 @@ export default function AdminProfile() {
   return (
     <div>
       {handleRedirect(tokenFromLocalStorage)}
-      {<TopMenuAdmin pageTitle="TryBeer" />}
+      <TopMenuAdmin pageTitle="TryBeer" />
       <div>
         <span data-testid="profile-name">{`Nome: ${handleName()}`}</span>
       </div>
