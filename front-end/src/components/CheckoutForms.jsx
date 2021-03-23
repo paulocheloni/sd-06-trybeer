@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../hooks/UseContext';
+import '../styles/checkout.css';
 
 function CheckoutForms() {
   const [isVisible, setIsVisible] = useState(true);
@@ -32,20 +33,22 @@ function CheckoutForms() {
   }, [street, totalPrice]);
 
   return (
-    <div>
-      <h1>Endereço</h1>
-      <label htmlFor="streetInput">
+    <div className="checkoutcontainer">
+      <h1 className="adress">Endereço</h1>
+      <label htmlFor="streetInput" className="labelcheckout">
         Rua:
         <input
+          className="inputcheckout"
           id="streetInput"
           type="text"
           data-testid="checkout-street-input"
           onChange={ ({ target }) => setStreet({ ...street, [target.id]: target.value }) }
         />
       </label>
-      <label htmlFor="houseNumberInput">
+      <label htmlFor="houseNumberInput" className="labelcheckout">
         Número da casa:
         <input
+          className="inputcheckout"
           id="houseNumberInput"
           type="text"
           data-testid="checkout-house-number-input"
@@ -53,6 +56,7 @@ function CheckoutForms() {
         />
       </label>
       <button
+        className="buttoncheckout"
         type="submit"
         data-testid="checkout-finish-btn"
         onClick={ handleSubmit }
