@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import CheckoutContext from '../context/CheckoutContext';
-import ProductCard from '../components/pageCheckout/ProductCard';
+
 import ButtonCheckout from '../components/pageCheckout/ButtonCheckout';
 import FormCheckout from '../components/pageCheckout/FormCheckout';
+import ProductCard from '../components/pageCheckout/ProductCard';
+
+import CheckoutContext from '../context/CheckoutContext';
 import { checkoutUtils } from '../utils';
 
 function Checkout() {
@@ -34,10 +36,18 @@ function Checkout() {
   };
 
   useEffect(() => {
-    checkoutUtils.valueTotal(products, setSumTotal);
-  }, [products]);
+    if (!localStorage.user) {
+      history.push('/login');
+    }
+    const { token } = JSON.parse(localStorage.getItem('user'));
+
+    if (!token) {
+      history.push('/login');
+    }
+  }, [history]);
 
   useEffect(() => {
+    checkoutUtils.valueTotal(products, setSumTotal);
     checkoutUtils.disable(setAble, products, address);
   }, [address, products]);
 
