@@ -24,7 +24,7 @@ function Checkout() {
       userEmail: loggedUser.email,
       cart,
       totalPrice: totalCart.toFixed(2).replace('.', ','),
-      status: 'pendente',
+      status: 'Pendente',
       ...address,
     };
   }
