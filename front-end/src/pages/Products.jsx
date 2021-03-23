@@ -5,6 +5,7 @@ import Card from '../components/Card';
 import ShowCart from '../components/ShowCart';
 import { getProducts } from '../api/index';
 import { tokenExists } from '../services/index';
+import '../css/Products.css';
 
 function Products() {
   const [products, setProducts] = useState(false);
@@ -17,16 +18,18 @@ function Products() {
   }, [history]);
 
   return (
-    <div>
+    <div className="products-wrapper">
       <ControllerHeader />
-      { products && products
-        .map((prod, index) => (<Card
-          key={ prod.id }
-          product={ prod }
-          setTotal={ setCartTotal }
-          index={ index }
-        />
-        ))}
+      <section className="product-list">
+        { products && products
+          .map((prod, index) => (<Card
+            key={ prod.id }
+            product={ prod }
+            setTotal={ setCartTotal }
+            index={ index }
+          />
+          ))}
+      </section>
       <ShowCart total={ cartTotal } />
     </div>
   );

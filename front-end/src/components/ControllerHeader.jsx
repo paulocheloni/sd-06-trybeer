@@ -7,7 +7,7 @@ function ControllerHeader() {
   const [viewMenu, setViewMenu] = useState(false);
 
   return (
-    <div className="controllerheader">
+    <div className="controller-header">
       <button
         data-testid="top-hamburguer"
         type="button"
