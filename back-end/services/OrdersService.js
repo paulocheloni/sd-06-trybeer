@@ -1,5 +1,5 @@
-const { listOrdersByUser, getOrderById } = require( '../models/OrdersModel' );
-const { OK } = require( '../utils/allStatusCode' );
+const { listOrdersByUser, getOrderById } = require('../models/OrdersModel');
+const { OK } = require('../utils/allStatusCode');
 const tokenValidation = require('../utils/tokenValidation');
 
 const allOrdersByUser = async (req, res) => {
@@ -17,4 +17,4 @@ const getUserOrder = async (req, res) => {
   return res.status(OK).json(order);
 };
 
-module.exports = {allOrdersByUser, getUserOrder};
+module.exports = { allOrdersByUser, getUserOrder };
