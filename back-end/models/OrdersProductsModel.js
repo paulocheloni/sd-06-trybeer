@@ -1,4 +1,5 @@
 const connection = require('./connection');
+
 const table = 'sales_products';
 
 const createOrderProduct = async ({ item }) => {
@@ -16,8 +17,12 @@ const getAll = async () => {
 };
 
 const getById = async (id) => {
-  const [order] = await connection.execute(`SELECT * FROM ${table} WHERE sale_id=?`,
-  [id]);
+  const [order] = await connection.execute(`SELECT
+    products.name, products.price, sales_products.quantity
+    FROM sales_products INNER JOIN products
+    ON products.id = sales_products.product_id
+    WHERE sales_products.sale_id = ${id}`,
+    [id]);
   return order;
 };
 

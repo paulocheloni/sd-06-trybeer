@@ -19,6 +19,6 @@ ProductsRouter.get('/:id', async (req, res) => {
   console.log('productController', product);
   res.status(200).json(product);
   // res.status(200).end();
-})
+});
 
 module.exports = ProductsRouter;

@@ -11,9 +11,9 @@ const getPriceById = async (id) => {
   // console.log('idModel', id);
   // console.log('productPrice', product);
   return product;
-}
+};
 
 module.exports = {
   getAll,
-  getPriceById
+  getPriceById,
 };

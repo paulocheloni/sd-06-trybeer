@@ -7,12 +7,12 @@ const connection = require('./connection');
 //   return user;
 // };
 
-const getByDateAndId = async (date, id) => {
-  const [orderId] = await connection.execute(
-    'SELECT id FROM sales WHERE sale_date=? AND user_id=?', [date, id],
-  );
-  return orderId;
-};
+// const getByDateAndId = async (date, id) => {
+//   const [orderId] = await connection.execute(
+//     'SELECT id FROM sales WHERE sale_date=? AND user_id=?', [date, id],
+//   );
+//   return orderId;
+// };
 
 const columns = 'user_id, total_price, delivery_address, delivery_number, sale_date, status';
 const createOrder = async ({
@@ -34,13 +34,17 @@ const createOrder = async ({
 };
 
 const getAll = async () => {
-  const [orders] = await connection.execute('SELECT *, CONVERT_TZ (sale_date, "+00:00", "-03:00") as `date_time` FROM sales');
+  const [orders] = await connection.execute(
+    'SELECT *, CONVERT_TZ(sale_date, "+00:00", "-03:00") as `date_time` FROM sales',
+  );
   return orders;
 };
 
 const getAllByUser = async (id) => {
-  const [orders] = await connection.execute('SELECT *, CONVERT_TZ (sale_date, "+00:00", "-03:00") as `date_time` FROM sales WHERE user_id=?',
-  [id]);
+  const [orders] = await connection.execute(
+    'SELECT *, CONVERT_TZ (sale_date, "+00:00", "-03:00")as `date_time` FROM sales WHERE user_id=?',
+    [id],
+  );
   return orders;
 };
 
