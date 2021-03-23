@@ -31,10 +31,9 @@ function Admin() {
             <h3 data-testid={`${order.id}-order-number`}>
               Pedido {order.id}
             </h3>
-            <h4 data-testid={`${order.id}-order-address`}>{order.delivery_address}</h4>
-            <h4 data-testid={`${order.id}-order-number`}>{order.delivery_number}</h4>
-            <h3>{order.total_price}</h3>
-            <h3>{order.status}</h3>
+            <h4 data-testid={`${order.id}-order-address`}>{order.delivery_address} {order.delivery_number}</</h4>
+            <h3 data-testid={`${order.id}-order-total-value`}>{order.total_price}</h3>
+            <h3 data-testid={`${order.id}-order-status`}>{order.status}</h3>
           </div>
         </Link>
       ))}
