@@ -94,7 +94,7 @@ function Login() {
           disabled={ valid }
           onClick={ handleClick }
         >
-          ENTRAR
+          Entrar
         </button>
         <button
           data-testid="no-account-btn"

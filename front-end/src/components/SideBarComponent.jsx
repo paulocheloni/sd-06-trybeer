@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import BeersAppContext from '../context/BeersAppContext';
-import '../style/SideBarCostumer.css';
+// import '../style/SideBarCostumer.css';
 
 function SideBar() {
   const history = useHistory();
@@ -10,7 +10,7 @@ function SideBar() {
   } = useContext(BeersAppContext);
 
   return (
-    <div>
+    <div className="side-menu-container">
       <button
         type="button"
         data-testid="side-menu-item-products"
