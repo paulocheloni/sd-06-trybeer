@@ -1,17 +1,22 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import ParseCurrency from '../utils/parseCurrencyToBRL';
 import UserContext from '../hooks/UseContext';
 import '../styles/checkout.css';
 
 function CheckoutProducts() {
-  const [checkoutProducts, setCheckoutProducts] = useState([]);
-  const { setTotalPrice } = useContext(UserContext);
+  const {
+    checkoutProducts,
+    setCheckoutProducts,
+    setTotalPrice,
+  } = useContext(UserContext);
   const total = JSON.parse(localStorage.getItem('total'));
 
   const purchase = () => {
     const products = JSON.parse(localStorage.getItem('productList'));
+    const productsSelected = products.filter((product) => product.productQuantity > 0);
+    localStorage.setItem('productList', JSON.stringify(productsSelected));
 
-    return products.filter((product) => product.productQuantity > 0);
+    return productsSelected;
   };
 
   const deleteProduct = (name, productQuantity, price) => {
@@ -30,7 +35,8 @@ function CheckoutProducts() {
   };
 
   useEffect(() => {
-    setCheckoutProducts(purchase());
+    const products = purchase();
+    setCheckoutProducts(products);
   }, []);
 
   return !checkoutProducts ? <h1>Loading...</h1> : (

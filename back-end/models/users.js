@@ -16,6 +16,16 @@ const getUser = async (email, password) => {
   return user;
 };
 
+const getUserByEmail = async (email) => {
+  const [user] = await connection.execute(
+    `SELECT * FROM Trybeer.${coll} WHERE email = ?`, [email],
+  );
+
+  const { id, name, email: userEmail } = user[0];
+
+  return { id, name, userEmail };
+};
+
 const addUser = async (name, email, password, role) => {
   try {
     await connection.execute(
@@ -40,6 +50,7 @@ const updateUser = async (name, email) => {
 module.exports = {
   getAll,
   getUser,
+  getUserByEmail,
   addUser,
   updateUser,
 };

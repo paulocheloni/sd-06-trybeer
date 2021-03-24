@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../hooks/UseContext';
+import { createOrder } from '../services/orders';
 import '../styles/checkout.css';
 
 function CheckoutForms() {
@@ -10,14 +11,20 @@ function CheckoutForms() {
     streetInput: '',
     houseNumberInput: '',
   });
-  const { totalPrice } = useContext(UserContext);
+  const { totalPrice, setTotalPrice, checkoutProducts } = useContext(UserContext);
   const history = useHistory();
 
   const handleSubmit = async () => {
-    const visibleInterval = 2000;
+    const visibleInterval = 3000;
+
+    createOrder(totalPrice, street, checkoutProducts);
+
     setIsVisible(false);
     setTimeout(() => {
       setIsVisible(true);
+      setTotalPrice('0.00');
+      localStorage.removeItem('productList');
+      localStorage.removeItem('total');
       history.push('/products');
     }, visibleInterval);
   };

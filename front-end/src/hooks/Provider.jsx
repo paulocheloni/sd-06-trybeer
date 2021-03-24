@@ -8,6 +8,7 @@ const Provider = ({ children }) => {
   const [name, setName] = useState('');
   const [loginRequest, setLoginRequest] = useState('');
   const [totalPrice, setTotalPrice] = useState('0.00');
+  const [checkoutProducts, setCheckoutProducts] = useState([]);
 
   const contextValue = {
     name,
@@ -20,6 +21,8 @@ const Provider = ({ children }) => {
     setLoginRequest,
     totalPrice,
     setTotalPrice,
+    checkoutProducts,
+    setCheckoutProducts,
   };
 
   return (
