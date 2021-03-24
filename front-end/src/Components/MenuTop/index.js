@@ -37,6 +37,8 @@ const MenuTop = () => {
       return setPathName('Finalizar Pedido');
     case '/orders':
       return setPathName('Meus Pedidos');
+    case '/admin/profile':
+      return setPathName('Perfil');
     default:
       return setPathName('Detalhes de Pedido');
     }
@@ -49,10 +51,18 @@ const MenuTop = () => {
         data-testid="top-hamburguer"
         onClick={ () => setStateSideBar(!stateSideBar) }
       >
-        <img
-          src="/images/cardapio.png"
-          alt="Botão MenuTop"
-        />
+        {!stateSideBar
+          ? (
+            <img
+              src="/images/cardapio.png"
+              alt="Botão MenuTop"
+            />
+          ) : (
+            <img
+              src="/images/close.png"
+              alt="Botão MenuTop"
+            />
+          )}
       </button>
 
       <h2 data-testid="top-title">{pathName}</h2>

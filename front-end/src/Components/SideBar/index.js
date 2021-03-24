@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { IoIosBeer } from 'react-icons/io';
 import { FaListAlt, FaUserAlt } from 'react-icons/fa';
@@ -8,15 +9,39 @@ import { GlobalContext } from '../../Contexts/GlobalContext';
 
 import S from './styles';
 
+const navigationPages = ({
+  stateSideBar,
+  setStateSideBar,
+  history },
+route) => {
+  setStateSideBar(!stateSideBar);
+
+  if (route === '/login') localStorage.removeItem('user');
+
+  history.push(route);
+};
+
 const SideBar = () => {
-  const { stateSideBar } = useContext(GlobalContext);
+  const [route, setRoute] = useState();
+  const { stateSideBar, setStateSideBar, setStateIsOpacity } = useContext(GlobalContext);
+
+  const history = useHistory();
+
+  const params = {
+    stateSideBar,
+    setStateSideBar,
+    history,
+    setRoute,
+    route,
+    setStateIsOpacity,
+  };
 
   return (
     <div>
       {stateSideBar && (
         <S.CompSideBar className="side-menu-container">
           <S.Navigation
-            href="/products"
+            onClick={ () => navigationPages(params, '/products') }
             data-testid="side-menu-item-products"
           >
             <IoIosBeer
@@ -27,7 +52,7 @@ const SideBar = () => {
             Produtos
           </S.Navigation>
           <S.Navigation
-            href="/orders"
+            onClick={ () => navigationPages(params, '/orders') }
             data-testid="side-menu-item-my-orders"
           >
             <FaListAlt
@@ -38,7 +63,7 @@ const SideBar = () => {
             Meus pedidos
           </S.Navigation>
           <S.Navigation
-            href="/profile"
+            onClick={ () => navigationPages(params, '/profile') }
             data-testid="side-menu-item-my-profile"
           >
             <FaUserAlt
@@ -51,9 +76,8 @@ const SideBar = () => {
 
           <S.Navigation
             className="get-out"
-            href="/login"
+            onClick={ () => navigationPages(params, '/login') }
             data-testid="side-menu-item-logout"
-            onClick={ () => localStorage.removeItem('user') }
           >
             <ImExit
               className="icon"

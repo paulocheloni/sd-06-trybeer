@@ -29,7 +29,11 @@ const Container = styled.div`
 const Price = styled.div`
   ${({ theme }) => css`
     color: ${theme.colors.text};
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 8px;
+
+    text-align: center;
   `}
 `;
 
@@ -40,7 +44,8 @@ const Image = styled.div`
   justify-content: center;
 
   > img {
-    height: 120px;
+    height: 115px;
+    margin-bottom: 5px;
   }
 `;
 
@@ -49,7 +54,7 @@ const Description = styled.div`
     color: ${theme.colors.text};
     margin-bottom: 10px;
     text-align: center;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
   `}
 `;
@@ -63,33 +68,42 @@ const Counter = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
+
+    border-radius: 5px;
+    /* border: 1px solid ${theme.colors.backgroundDiv}; */
+    background: ${theme.colors.divCounter};
+    box-shadow: 0 0 5px ${theme.colors.shadowCards};
   `}
 
   > div {
     ${({ theme }) => css`
       font-size: 20px;
-      border: 1px solid ${theme.colors.text};
+      /* border: 1px solid ${theme.colors.text}; */
       border-radius: 3px;
       padding: 1px 5px;
+      margin-left: 7px;
     `}
   }
 
   > button {
     ${({ theme }) => css`
       color: ${theme.colors.text};
-
       font-size: 40px;
       background: none;
       border: none;
-
       cursor: pointer;
-
+      outline: none;
       transition: opacity 0.3s;
 
       &:hover {
         opacity: 0.8;
+        color: #cf8d2e;
       }
     `}
+  }
+
+  .minus {
+    margin-bottom: 5px;
   }
 `;
 

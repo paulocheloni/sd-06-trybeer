@@ -18,8 +18,6 @@ const handleSubmit = async (event, { name, email }, token, setUpdateMessage) => 
 
   const updated = await updateUser(name, email, token);
 
-  // console.log(updated);
-
   if (updated.message === 'Token Inválido') localStorage.setItem('user', '{}');
   if (updated.name === name) localStorage.setItem('user', JSON.stringify(updated));
 
@@ -106,7 +104,13 @@ const Profile = () => {
   }, [nameState]);
 
   const dataStorage = localStorage.getItem('user');
-  const { token } = JSON.parse(dataStorage);
+
+  let token = '';
+
+  if (dataStorage !== null) {
+    token = JSON.parse(dataStorage).token;
+  }
+
   return (
     <>
       <MenuTop dataTestid="top-title" title="Meu perfil" />

@@ -21,12 +21,18 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
 
-  const { stateSumPrice, stateSideBar, cartList } = useContext(GlobalContext);
+  const {
+    stateSumPrice,
+    stateSideBar,
+    cartList,
+  } = useContext(GlobalContext);
 
   const history = useHistory();
 
   useEffect(() => {
-    if (stateSumPrice !== 0) {
+    const priceTotal = Number(localStorage.getItem('total'));
+
+    if (priceTotal !== 0) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
@@ -49,41 +55,43 @@ const Products = () => {
 
       <SideBar />
 
-      <S.ContainerCards stateSideBar={ stateSideBar }>
-        {products && (
-          products.map((product) => (
-            <CardProducts
-              key={ product.id }
-              product={ product }
-            />
-          ))
-        )}
-      </S.ContainerCards>
+      <S.ContainerProducts className="content">
+        <S.ContainerCards stateSideBar={ stateSideBar }>
+          {products && (
+            products.map((product) => (
+              <CardProducts
+                key={ product.id }
+                product={ product }
+              />
+            ))
+          )}
+        </S.ContainerCards>
 
-      <S.ContainerButton>
-        <Button
-          type="button"
-          color="green"
-          fontSize="20px"
-          width="93%"
-          heigth="40px"
-          botton="0"
-          position="fixed"
-          marginBottom="10px"
-          disabled={ isDisabled }
-          onClick={ () => saveCart(cartList, history) }
-          dataTestid="checkout-bottom-btn"
-        >
-          Ver Carrinho -
-          {' '}
-          <span data-testid="checkout-bottom-btn-value">
-            {localStorage.getItem('total') !== null
-              ? `R$ ${(Number(localStorage.getItem('total'))
-                .toFixed(2)).replace('.', ',')}`
-              : `R$ ${(stateSumPrice.toFixed(2)).replace('.', ',')}`}
-          </span>
-        </Button>
-      </S.ContainerButton>
+        <S.ContainerButton stateSideBar={ stateSideBar }>
+          <Button
+            type="button"
+            color="green"
+            fontSize="20px"
+            width="93%"
+            heigth="40px"
+            botton="0"
+            position="fixed"
+            marginBottom="10px"
+            disabled={ isDisabled }
+            onClick={ () => saveCart(cartList, history) }
+            dataTestid="checkout-bottom-btn"
+          >
+            Ver Carrinho -
+            {' '}
+            <span data-testid="checkout-bottom-btn-value">
+              {localStorage.getItem('total') !== null
+                ? `R$ ${(Number(localStorage.getItem('total'))
+                  .toFixed(2)).replace('.', ',')}`
+                : `R$ ${(stateSumPrice.toFixed(2)).replace('.', ',')}`}
+            </span>
+          </Button>
+        </S.ContainerButton>
+      </S.ContainerProducts>
     </S.Container>
   );
 };

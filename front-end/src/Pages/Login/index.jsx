@@ -18,7 +18,6 @@ const saveLocalStorage = (res) => {
 const handleSubmit = async ([event, email, password, history]) => {
   event.preventDefault();
   const user = await loginUser(email, password);
-  // console.log(user);
   saveLocalStorage(user);
   history.push((user.role === 'client') ? '/products' : '/admin/orders');
 };
@@ -45,6 +44,7 @@ const form = (params) => {
       <Input
         id="senha"
         label="Senha"
+        width="400px"
         dataTestid="password-input"
         onChange={ ({ target }) => setPassword(target.value) }
         themeStorage={ theme && theme.title }

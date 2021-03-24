@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { FaStreetView } from 'react-icons/fa';
 import { AiOutlineFieldNumber } from 'react-icons/ai';
+import { registerOrder } from '../../Services/Apis';
 
 import MenuTop from '../../Components/MenuTop';
 import SideBar from '../../Components/SideBar';
@@ -13,11 +14,28 @@ import { GlobalContext } from '../../Contexts/GlobalContext';
 import S from './styles';
 import Input from '../../Components/Input';
 
-const checkOutRedirect = (setCheckOut, history) => {
+const mountData = (params) => {
+  const { street, numberHouse } = params;
+  const user = JSON.parse(localStorage.getItem('user'));
+  const products = JSON.parse(localStorage.getItem('infosCheckout'));
+  const orderValue = JSON.parse(localStorage.getItem('total'));
+  const order = {
+    email: user.email,
+    orderValue,
+    address: street,
+    number: numberHouse,
+    products,
+    token: user.token,
+  };
+  return order;
+};
+
+const checkOutRedirect = async (setCheckOut, history, params) => {
   const time = 2000;
+  const order = mountData(params);
 
+  await registerOrder(order);
   setCheckOut(true);
-
   setTimeout(() => {
     history.push('/products');
   }, time);
@@ -33,12 +51,13 @@ const form = (params) => {
     setNumberHouse,
     cardsProductsValues,
     checkOut,
+    stateSideBar,
   } = params;
 
   const theme = JSON.parse(localStorage.getItem('@trybeer:theme'));
 
   return (
-    <div>
+    <S.ContainerMain stateSideBar={ stateSideBar }>
       {checkOut ? (
         <S.CompletedSale>Compra realizada com sucesso!</S.CompletedSale>
       ) : (
@@ -55,25 +74,27 @@ const form = (params) => {
             <Input
               id="Rua"
               label="Rua"
+              width="100%"
               dataTestid="checkout-street-input"
               themeStorage={ theme && theme.title }
-              widthDivLabel="none"
+              widthDivLabel="100%"
               icon={ FaStreetView }
               onChange={ ({ target }) => setStreet(target.value) }
             />
             <Input
               id="Número da casa"
               label="Número da casa"
+              width="100%"
               dataTestid="checkout-house-number-input"
               themeStorage={ theme && theme.title }
-              widthDivLabel="none"
+              widthDivLabel="100%"
               icon={ AiOutlineFieldNumber }
               onChange={ ({ target }) => setNumberHouse(target.value) }
             />
           </S.ContainerAddress>
         </S.ContainerProducts>
       )}
-    </div>
+    </S.ContainerMain>
   );
 };
 
@@ -83,7 +104,7 @@ const Checkout = () => {
   const [street, setStreet] = useState('');
   const [numberHouse, setNumberHouse] = useState('');
   const [checkOut, setCheckOut] = useState(false);
-  const { setCartList } = useContext(GlobalContext);
+  const { setCartList, stateSideBar } = useContext(GlobalContext);
   const history = useHistory();
 
   const cartListLocalStorage = JSON.parse(localStorage.getItem('infosCheckout'));
@@ -158,10 +179,13 @@ const Checkout = () => {
 
   const params = {
     valueTotal,
+    street,
     setStreet,
     setNumberHouse,
+    numberHouse,
     cardsProductsValues,
     checkOut,
+    stateSideBar,
   };
 
   return (
@@ -172,17 +196,17 @@ const Checkout = () => {
 
       {form(params)}
 
-      <S.ContainerButton>
+      <S.ContainerButton stateSideBar={ stateSideBar }>
         <Button
           type="button"
           color="green"
           fontSize="20px"
-          width="91%"
+          width="100%"
           heigth="40px"
           botton="0"
           position="fixed"
           disabled={ isDisabled }
-          onClick={ () => checkOutRedirect(setCheckOut, history) }
+          onClick={ () => checkOutRedirect(setCheckOut, history, params) }
           dataTestid="checkout-finish-btn"
         >
           Finalizar Pedido

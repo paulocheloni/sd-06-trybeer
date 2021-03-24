@@ -37,7 +37,7 @@ const CompSideBar = styled.div`
     flex-direction: column;
     align-items: center;
 
-    animation: ${animate} 0.5s;      
+    animation: ${animate} 0s;
 
     @media (max-width: 500px) {
       width: 80%;
@@ -49,7 +49,7 @@ const CompSideBar = styled.div`
   `}
 `;
 
-const Navigation = styled.a`
+const Navigation = styled.span`
   ${({ theme }) => css`
     width: 100%;
 
@@ -65,6 +65,8 @@ const Navigation = styled.a`
 
     font-size: 20px;
     font-weight: 500;
+
+    cursor: pointer;
 
     .icon {
       margin-right: 15px;

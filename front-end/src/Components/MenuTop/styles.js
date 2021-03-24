@@ -30,7 +30,7 @@ const CompMenuTop = styled.header`
       box-shadow: 0 0 5px ${theme.colors.shadowCards};
 
       cursor: pointer;
-
+      outline: none;
       transition: filter 0.3s;
 
       &:hover {
