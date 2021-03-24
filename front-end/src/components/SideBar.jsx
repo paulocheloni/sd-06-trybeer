@@ -10,7 +10,7 @@ function SideBar() {
     localStorage.removeItem('total');
     localStorage.removeItem('user');
     history.push('/login');
-  }
+  };
 
   return (
     <div className="side-menu-container">

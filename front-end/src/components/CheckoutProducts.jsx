@@ -4,7 +4,11 @@ import UserContext from '../hooks/UseContext';
 import '../styles/checkout.css';
 
 function CheckoutProducts() {
-  const { checkoutProducts, setCheckoutProducts, setTotalPrice } = useContext(UserContext);
+  const {
+    checkoutProducts,
+    setCheckoutProducts,
+    setTotalPrice,
+  } = useContext(UserContext);
   const total = JSON.parse(localStorage.getItem('total'));
 
   const purchase = () => {

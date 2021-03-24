@@ -17,25 +17,22 @@ function Orders() {
     const user = localStorage.getItem('user');
 
     if (!user) history.push('/login');
-
   }, [history]);
 
   return !orders ? <h1>Loading...</h1> : (
     <div>
-      <TopBar name="Meus Pedidos"/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      {orders.map((order, index) => 
-      <OrderCard 
-        key={ order.id } 
-        orderInfo={ order } 
+      <TopBar name="Meus Pedidos" />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      {orders.map((order, index) => (<OrderCard
+        key={ order.id }
+        orderInfo={ order }
         index={ index }
-        data-testid={`${index}-order-card-container`}
-      />
-        )}
+        data-testid={ `${index}-order-card-container` }
+      />))}
     </div>
   );
 }
