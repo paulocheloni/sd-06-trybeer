@@ -1,24 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import TopBar from '../components/TopBar';
-import  { getOrderDetails } from '../services/api';
+import getOrder from '../services/orderDetailsService';
 
 function OrderDetails(props) {
   const { match: { params: { id } } } = props;
-  console.log('Param', id);
-  console.log(typeof id);
+  const [orders, setOrders] = useState([]);
 
   const loggedUser = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
-    getOrderDetails(id).then((result) => console.log(result));
-  });
+    getOrder(id).then((result) => setOrders(result));
+  }, []);
+
+  console.log(orders);
+
   return (
     <div>
-      { !loggedUser && <Redirect to="/login" /> }
+      { !loggedUser && <Redirect to="/login" />}
       <TopBar title="Detalhes do Pedido" />
-      Detalhes dos Pedidos
+      {
+        !orders.length > 0
+          ? <div>no orders</div>
+          : (
+            <div>
+              <h2 data-testid="order-number">{`Pedido ${id}`}</h2>
+              <h3 data-testid="order-date">
+                {moment(orders[0].sale_date).format('DD/MM')}
+              </h3>
+              {orders.map((order, index) => (
+                <div key={ index }>
+                  <h3 data-testid={ `${index}-product-qtd` }>{order.quantity}</h3>
+                  <h2 data-testid={ `${index}-product-name` }>{order.name}</h2>
+                  <h2 data-testid={ `${index}-product-total-value` }>
+                    {`R$ ${(order.total).toString().replace('.', ',')}`}
+                  </h2>
+                </div>
+              ))}
+              <div data-testid="order-total-value">
+                {`Total: R$ ${(orders[0].total_price).replace('.', ',')}`}
+              </div>
+            </div>
+          )
+      }
     </div>
   );
 }

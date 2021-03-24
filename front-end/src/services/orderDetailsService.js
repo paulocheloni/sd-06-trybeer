@@ -1,5 +1,5 @@
 import { getOrderDetails } from './api';
 
-const getOrderDetails = async (id) => getOrderDetails(id);
+const getOrder = async (id) => getOrderDetails(id);
 
-export default getOrderDetails;
+export default getOrder;
