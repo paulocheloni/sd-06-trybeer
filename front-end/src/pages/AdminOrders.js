@@ -14,7 +14,7 @@ class AdminOrders extends React.Component {
 
   render() {
     const { history, stateCart } = this.props;
-    console.log(stateCart)
+    // console.log(stateCart)
     return (
       <div>
         {/* <Header history={ history } /> */}
@@ -54,11 +54,11 @@ class AdminOrders extends React.Component {
 
 AdminOrders.propTypes = {
   history: PropTypes.shape().isRequired,
+  stateCart: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   stateCart: state.products.cartList,
 });
-
 
 export default connect(mapStateToProps, null)(AdminOrders);

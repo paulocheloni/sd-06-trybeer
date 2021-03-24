@@ -57,7 +57,7 @@ class Checkout extends React.Component {
     const numbers = date.split(' ')[0].split('/');
     const newDate = `${numbers[2]}/${numbers[1]}/${numbers[0]}`;
     const fullDate = date.replace(`${date.split(' ')[0]}`, `${newDate}`);
-    console.log(fullDate)
+    // console.log(fullDate)
 
     const userID = JSON.parse(localStorage.getItem('actualUser')).id;
 

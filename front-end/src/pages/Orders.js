@@ -41,11 +41,16 @@ class Orders extends React.Component {
               data-testid="0-order-card-container"
             >
               <div>
-                <h4 data-testid={ `${index}-order-number` } onClick={ () => history.push(`/orders/${index+1}`)}>
+                <button
+                  type="button"
+                  data-testid={ `${index}-order-number` }
+                  onClick={ () => history.push(`/orders/${index + 1}`) }
+                >
                   {`Pedido ${index + 1}`}
-                </h4>
+                </button>
                 <h5 data-testid={ `${index}-order-date` }>
-                  {`${element.sale_date.split('/')[2]}/${element.sale_date.split('/')[1]}`}
+                  {`${element.sale_date.split('/')[2]}/
+                  ${element.sale_date.split('/')[1]}`}
                 </h5>
               </div>
               <p data-testid={ `${index}-order-total-value` }>
@@ -67,6 +72,10 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchOrders: (array) => dispatch(allOrders(array)),
 });
 
-Orders.propTypes = {};
+Orders.propTypes = {
+  stateOrders: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dispatchOrders: PropTypes.func.isRequired,
+  history: PropTypes.shape().isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Orders);
