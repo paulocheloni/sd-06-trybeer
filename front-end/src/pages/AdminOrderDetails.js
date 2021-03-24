@@ -14,7 +14,7 @@ function AdminOrderDetails(props) {
   const { location: { state }, history } = props;
   const fetchOrderDetails = async () => {
     if (state) {
-      const order = await verifyToken(`admin/orders/${state.id}`, user, history);
+      const order = await verifyToken(`admin/orders/details/${state.id}`, user, history);
       setOrderCart(order);
     }
   };

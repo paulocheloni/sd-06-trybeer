@@ -16,9 +16,20 @@ const createOrderService = async (sale) => {
   return newOrder;
 };
 
+const createOrderProductService = async ({ cart, saleId }) => {
+  cart.forEach(async (item) => {
+    await ordersModel
+    .createOrderProduct({ item, saleId });
+  });
+};
+
+const getById = async (id) => ordersModel.getById(id);
+
 const alter = async ({ id, status }) => ordersModel.alter({ id, status });
 
 const getAll = async () => ordersModel.getAll();
+
+const getByIdAdmin = async (id) => ordersModel.getByIdAdmin(id);
 
 const getAllByUser = async (id) => ordersModel.getAllByUser(id);
 
@@ -27,4 +38,7 @@ module.exports = {
   getAll,
   getAllByUser,
   alter,
+  createOrderProductService,
+  getById,
+  getByIdAdmin,
 };

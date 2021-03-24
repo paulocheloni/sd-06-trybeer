@@ -17,6 +17,15 @@ const createOrder = async ({
   });
 };
 
+const createOrderProduct = async ({ item, saleId }) => {
+  const { id, quantity } = item;
+
+  await connection.execute(
+    'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
+    [saleId, id, quantity],
+  );
+};
+
 const getAll = async () => {
   const [orders] = await connection.execute(
     'SELECT *, CONVERT_TZ(sale_date, "+00:00", "-03:00") as `date_time` FROM sales',
@@ -38,9 +47,34 @@ const alter = async ({ id, status }) => {
   );
 };
 
+const getById = async (id) => {
+  const [order] = await connection.execute(`SELECT
+    products.name, products.price, sales_products.quantity
+    FROM sales_products INNER JOIN products
+    ON products.id = sales_products.product_id
+    WHERE sales_products.sale_id = ?`,
+    [id]);
+  return order;
+};
+
+const getByIdAdmin = async (id) => {
+  const [order] = await connection.execute(`SELECT
+    products.name, products.price, sales_products.quantity,
+    sales_products.sale_id, sales.status, sales.total_price
+    FROM sales_products INNER JOIN products
+    ON products.id = sales_products.product_id
+    INNER JOIN sales ON sales.id = sales_products.sale_id
+    WHERE sales_products.sale_id = ?`,
+    [id]);
+  return order;
+};
+
 module.exports = {
   createOrder,
   getAll,
   getAllByUser,
   alter,
+  createOrderProduct,
+  getById,
+  getByIdAdmin,
 };
