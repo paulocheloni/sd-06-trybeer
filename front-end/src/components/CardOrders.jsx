@@ -22,7 +22,7 @@ export default function CardOrders() {
   const user = JSON.parse(localStorage.getItem('user'));
   if (!user) return <Redirect to="login" />;
 
-  const FormatDate = (date) => {
+  const formatDate = (date) => {
     const month = date.slice(five, seventeen);
     const day = date.slice(eigth, fourteen);
 
@@ -35,7 +35,7 @@ export default function CardOrders() {
         <Link to={ `/orders/${sale.id}` } key={ sale.id }>
           <div data-testid={ `${index}-order-card-container` }>
             <h4 data-testid={ `${index}-order-number` }>{`Pedido ${sale.id}`}</h4>
-            <h4 data-testid={ `${index}-order-date` }>{FormatDate(sale.sale_date)}</h4>
+            <h4 data-testid={ `${index}-order-date` }>{formatDate(sale.sale_date)}</h4>
             <h4 data-testid={ `${index}-order-total-value` }>
               {Number(sale.total_price).toLocaleString('pt-BR', {
                 style: 'currency',
