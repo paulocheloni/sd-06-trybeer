@@ -40,7 +40,7 @@ function Form() {
     const response = await API.post('/sales', reqBody);
     if (response.message !== 'Sale created.') return setErrorMsg(response.message);
     setSuccess(true);
-    const delay = 1000;
+    const delay = 500;
 
     setTimeout(() => {
       setCartItems([]);
