@@ -12,7 +12,7 @@ export default function OrderDetails() {
 
   useEffect(() => {
     fetchApiProductOfSale(id);
-  }, []);
+  }, [id]);
 
   const user = JSON.parse(localStorage.getItem('user'));
   if (!user) return <Redirect to="/login" />;
