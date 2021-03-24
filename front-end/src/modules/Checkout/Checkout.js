@@ -51,7 +51,7 @@ function Checkout() {
     setSuccess(true);
     setTimeout(() => {
       initiateSale();
-      history.push('/products');
+      // history.push('/products');
     }, successTimer);
   };
 
