@@ -6,15 +6,16 @@ const ordersRouter = new Router();
 
 ordersRouter.post('/', validateToken, async (req, res) => {
   const { totalPrice, streetInput, houseNumberInput, checkoutProducts } = req.body;
-  const { id } = req.user;
-
-  console.log(req.body)
+  const { id: userId } = req.user;
   
-  const insertId = await services.createOrder(id, totalPrice, streetInput, houseNumberInput);
+  const insertId = await services.createOrder(userId, totalPrice, streetInput, houseNumberInput);
+  const productsToAdd = checkoutProducts.map(
+    ({ id: productId, productQuantity }) => [insertId, productId, productQuantity],
+  );
 
-  await services.updateSalesProduct(insertId, checkoutProducts);
+  await services.updateSalesProduct(productsToAdd);
 
-  return res.status(200).json({ message: "Order created!" });
+  return res.status(200).json({ message: 'Order created!' });
 });
 
 ordersRouter.get('/', validateToken, async (req, res) => {
@@ -23,6 +24,6 @@ ordersRouter.get('/', validateToken, async (req, res) => {
   const orders = await services.getOrdersByUser(id);
 
   return res.status(200).json(orders);
-})
+});
 
 module.exports = ordersRouter;

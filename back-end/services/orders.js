@@ -3,12 +3,12 @@ const models = require('../models/orders');
 const createOrder = async (id, totalPrice, streetInput, houseNumberInput) => {
   const { insertId } = await models.createOrder(id, totalPrice, streetInput, houseNumberInput);
   
-  return insertId
+  return insertId;
 };
 
-const updateSalesProduct = async (insertId, checkoutProducts) => {
-  models.updateSalesProduct(insertId, checkoutProducts);
-}
+const updateSalesProduct = async (productsToAdd) => {
+  models.updateSalesProduct(productsToAdd);
+};
 
 const getOrdersByUser = async (id) => models.getOrdersByUser(id);
 

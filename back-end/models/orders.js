@@ -16,23 +16,18 @@ const createOrder = async (id, totalPrice, streetInput, houseNumberInput) => {
   return result;
 };
 
-const updateSalesProduct = async (insertId, checkoutProducts) => {
-  for (const product of checkoutProducts) {
-    const { id, productQuantity } = product;
-    console.log(insertId)
-
-    await connection.execute(
-      `INSERT INTO Trybeer.sales_products (sale_id, product_id, quantity)
-      VALUES (?, ?, ?)`, [insertId, id, productQuantity],
-    );
-  }
+const updateSalesProduct = async (productsToAdd) => {
+  await connection.execute(
+    `INSERT INTO Trybeer.sales_products (sale_id, product_id, quantity)
+    VALUES (?)`, [productsToAdd],
+  );
 };
 
 const getOrdersByUser = async (id) => {
-  const [orders] = await connection.execute(`SELECT * FROM Trybeer.sales WHERE user_id = ?`, [id])
+  const [orders] = await connection.execute('SELECT * FROM Trybeer.sales WHERE user_id = ?', [id]);
 
   return orders;
-}
+};
 
 module.exports = {
   createOrder,

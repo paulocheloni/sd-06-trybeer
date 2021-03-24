@@ -24,7 +24,7 @@ const getUserByEmail = async (email) => {
   const { id, name, email: userEmail } = user[0];
 
   return { id, name, userEmail };
-}
+};
 
 const addUser = async (name, email, password, role) => {
   try {
