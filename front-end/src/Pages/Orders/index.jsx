@@ -31,6 +31,7 @@ const Orders = () => {
       <S.Container>
         {orders.length < 1 ? <div>No orders</div> : orders.map((order, index) => {
           const strToDate = new Date(order.sale_date);
+          console.log(order);
           const maxMonthOneDigitUTCformat = 8;
           const filteredDate = strToDate.getUTCMonth() > maxMonthOneDigitUTCformat
             ? `${strToDate.getUTCDate()}/${strToDate.getUTCMonth() + 1}`

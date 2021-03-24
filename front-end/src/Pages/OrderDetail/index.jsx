@@ -19,12 +19,14 @@ const OrderDetail = ({ match }) => {
     const getProd = async () => {
       const { object, specificDate } = await getOrderInfo(match);
       setProduct(object);
+      console.log(specificDate, 'orderDetail, line 22');
       if (specificDate) {
-        const FOUR = 4;
-        const filterData = `${specificDate.sale_date.split(['-'])[0]
-          .substring(2, FOUR)}/${specificDate.sale_date
-          .split(['-'])[1]}`;
-        setDate(filterData);
+        const strToDate = new Date(specificDate.sale_date);
+        const maxMonthOneDigitUTCformat = 8;
+        const filteredDate = strToDate.getUTCMonth() > maxMonthOneDigitUTCformat
+          ? `${strToDate.getUTCDate()}/${strToDate.getUTCMonth() + 1}`
+          : `${strToDate.getUTCDate()}/0${strToDate.getUTCMonth() + 1}`;
+        setDate(filteredDate);
       }
     };
     getProd();
