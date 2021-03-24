@@ -41,19 +41,26 @@ function CostumerCheckout() {
   };
 
   const redirectingFinishedOrders = async () => {
-    const salesProducts = productQuantity
-      .map((objQuantity) => [objQuantity.id, objQuantity.qnt]);
-    const returnCheckout = await fetchApiJsonBody('/checkout', {
-      deliveryAddress: inputValues.street,
-      deliveryNumber: inputValues.number,
-      salesProducts,
-    }, 'POST', user.token);
+    const salesProducts = productQuantity.map((objQuantity) => [
+      objQuantity.id,
+      objQuantity.qnt,
+    ]);
+    const returnCheckout = await fetchApiJsonBody(
+      '/checkout',
+      {
+        deliveryAddress: inputValues.street,
+        deliveryNumber: inputValues.number,
+        salesProducts,
+      },
+      'POST',
+      user.token,
+    );
     if (returnCheckout.err) return setShowMessage(returnCheckout.err);
     const time = 2000;
     setShowMessage('Compra realizada com sucesso!');
     setTimeout(() => {
       setProductQuantity([]);
-      setAmount(0.00);
+      setAmount(0.0);
       history.push('/products');
     }, time);
   };
@@ -64,58 +71,52 @@ function CostumerCheckout() {
       <div className="costumer_checkout">
         <h1>Produtos</h1>
         <div className="costumer_checkout_product">
-          {productQuantity.length === 0 && (
-            <p>Não há produtos no carrinho</p>
-          )}
+          {productQuantity.length === 0 && <p>Não há produtos no carrinho</p>}
           {productQuantity.map((element, index) => (
             <div key={ element.id }>
-              <CheckoutCards
-                element={ element }
-                index={ index }
-              />
+              <CheckoutCards element={ element } index={ index } />
             </div>
           ))}
         </div>
         <div className="costumer_checkout_total">
           <p>Total: </p>
-          <p data-testid="order-total-value">{`R$ ${commaAmount}`}</p>
+          <p data-testid="order-total-value">{ `R$ ${commaAmount}` }</p>
         </div>
         <div className="costumer_checkout_address">
           <p>Endereço</p>
-          <form action="post">
-            <label htmlFor="street">
-              Rua:
-              <br />
-              <input
-                type="text"
-                name="street"
-                id="street"
-                value={ street }
-                onChange={ handleChange }
-                data-testid="checkout-street-input"
-              />
-            </label>
-            <label htmlFor="number">
-              Número da casa:
-              <input
-                type="text"
-                name="number"
-                id="number"
-                value={ number }
-                onChange={ handleChange }
-                data-testid="checkout-house-number-input"
-              />
-            </label>
-            <button
-              type="button"
-              data-testid="checkout-finish-btn"
-              disabled={ valid }
-              onClick={ redirectingFinishedOrders }
-            >
-              Finalizar Pedido
-            </button>
-            <span>{ showMessage }</span>
-          </form>
+          <label htmlFor="street">
+            Rua:
+            <br />
+            <input
+              type="text"
+              name="street"
+              id="street"
+              value={ street }
+              onChange={ handleChange }
+              data-testid="checkout-street-input"
+            />
+          </label>
+          <label htmlFor="number">
+            Número da casa:
+            <br />
+            <input
+              type="text"
+              name="number"
+              id="number"
+              value={ number }
+              onChange={ handleChange }
+              data-testid="checkout-house-number-input"
+            />
+          </label>
+          <button
+            type="button"
+            data-testid="checkout-finish-btn"
+            disabled={ valid }
+            onClick={ redirectingFinishedOrders }
+          >
+            Finalizar Pedido
+          </button>
+          <span>{ showMessage }</span>
         </div>
       </div>
     </div>

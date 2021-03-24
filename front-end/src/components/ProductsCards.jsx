@@ -52,7 +52,7 @@ function ProductsCard({ element, index }) {
     <div>
       {/* className="productCards" */}
       <img
-        // src={ urlImage }
+        src={ urlImage }
         data-testid={ `${index}-product-img` }
         alt="beer"
       />

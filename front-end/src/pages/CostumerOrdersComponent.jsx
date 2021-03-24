@@ -28,11 +28,8 @@ function CostumerOrdersComponent() {
   return (
     <div className="costumer_orders">
       <Header text="Meus Pedidos" />
-<<<<<<< HEAD
       {console.log(orders)}
       <h1 data-testid="top-title">Meus Pedidos</h1>
-=======
->>>>>>> 576e27ab56625739440a5af321cc0b95beb6d262
       <div className="order-list">
         {orders.map((element, index) => (
           <div key={ element.id }>
