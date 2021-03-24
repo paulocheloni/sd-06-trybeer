@@ -12,7 +12,7 @@ const create = async ({ priceTotal, date, userID, address, number }) => {
   // if (findByName.length !== 0) {
   //   return { error: true, code: 'conflict', message: 'E-mail already in database.' };
   // }
-  const orders = await orderModels.create(priceTotal, date, userID, address, number);
+  const orders = await orderModels.create({ priceTotal, date, userID, address, number });
   return orders;
 };
 
