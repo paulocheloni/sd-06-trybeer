@@ -88,6 +88,12 @@ function Provider({ children }) {
     return productById;
   };
 
+  const removeProduct = (id) => {
+    const removedSale = sale.filter((prod) => prod.id !== id);
+    removedSale.sort((a, b) => a.id - b.id);
+    setSale(removedSale);
+  };
+
   const initiateSale = () => {
     const initialSale = products
       .map(({ id, quantity, price }) => ({ id, quantity, price }));
@@ -120,6 +126,7 @@ function Provider({ children }) {
     clickMinus,
     clickPlus,
     findProduct,
+    removeProduct,
     initiateSale,
     getUser,
     setUser,

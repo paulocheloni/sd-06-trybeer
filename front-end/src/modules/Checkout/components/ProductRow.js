@@ -1,22 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import * as FaIcons from 'react-icons/fa';
 import ContextBeer from '../../../context/ContextBeer';
 
 function ProductRow({ product, testIdNumber }) {
-  const { name, price, quantity, id } = product;
-  const { sale, setSale } = useContext(ContextBeer);
+  const { price, quantity, id } = product;
+  const {
+    products,
+    removeProduct,
+    findProduct,
+  } = useContext(ContextBeer);
+
+  const [productName, setProductName] = useState('');
+  const [productStringPrice, setProductStringPrice] = useState('');
+
+  const fullPrice = `R$ ${(parseFloat(price) * quantity).toFixed(2).replace('.', ',')}`;
 
   const onClick = () => {
-    const products = sale.products.filter((thisProduct) => thisProduct.id !== id);
-    const total = products
-      .reduce((acc, curr) => acc + (parseFloat(curr.price) * curr.quantity), 0)
-      .toFixed(2);
-    setSale({
-      products,
-      total,
-    });
+    removeProduct(id);
   };
+
+  useEffect(() => {
+    if (products.length !== 0) {
+      const currentProduct = findProduct(id);
+      const { name, stringPrice } = currentProduct;
+      setProductName(name);
+      setProductStringPrice(stringPrice);
+    }
+  }, [products, findProduct, id]);
 
   return (
     <div className="flex w-full justify-between">
@@ -24,16 +35,16 @@ function ProductRow({ product, testIdNumber }) {
         <p data-testid={ `${testIdNumber}-product-qtd-input` }>{ quantity }</p>
       </div>
       <div>
-        <p data-testid={ `${testIdNumber}-product-name` }>{ name }</p>
+        <p data-testid={ `${testIdNumber}-product-name` }>{ productName }</p>
       </div>
       <div>
         <p data-testid={ `${testIdNumber}-product-total-value` }>
-          { `R$ ${(parseFloat(price) * quantity).toFixed(2).replace('.', ',')}` }
+          { fullPrice }
         </p>
       </div>
       <div>
         <p data-testid={ `${testIdNumber}-product-unit-price` }>
-          { `(R$ ${price.replace('.', ',')} un)` }
+          { `(${productStringPrice} un)` }
         </p>
       </div>
       <button
