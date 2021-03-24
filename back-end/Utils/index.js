@@ -3,7 +3,7 @@ const UserModel = require('../Model/userModel');
 
 require('dotenv').config();
 
-const secret = process.env.SECRET;
+const secret = process.env.SECRET || 'secretToken';
 
 const NOT_FOUND = 404;
 const UNAUTHORIZED = 401;
