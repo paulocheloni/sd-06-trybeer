@@ -17,8 +17,8 @@ function Routes() {
       <Switch>
         <Route path="/login" component={ Login } />
         <Route path="/products" component={ Products } />
-        <Route path="/admin/orders" component={ AdminOrders } />
         <Route path="/admin/orders/:id" component={ AdminOrderDetail } />
+        <Route path="/admin/orders" component={ AdminOrders } />
         <Route path="/admin/profile" component={ AdminProfile } />
         <Route path="/register" component={ Register } />
         <Route path="/profile" component={ Profile } />

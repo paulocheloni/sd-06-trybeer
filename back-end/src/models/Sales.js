@@ -32,4 +32,11 @@ const insertSaleProduct = async (SALE_ID, PRODUCT_ID, QUANTITY) => {
     [SALE_ID, PRODUCT_ID, QUANTITY]);
 };
 
-module.exports = { getAll, create, insertSaleProduct, getById };
+const changeStatus = async (id) => {
+  await connection
+    .execute(`UPDATE sales 
+    SET status = 'Entregue'
+    WHERE sales.id=?`, [id]);
+};
+
+module.exports = { getAll, create, insertSaleProduct, getById, changeStatus };
