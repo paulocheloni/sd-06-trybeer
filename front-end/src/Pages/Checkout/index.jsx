@@ -31,10 +31,8 @@ const Checkout = () => {
   };
   const handleFinish = async () => {
     const { token } = localStorage;
-    const LESS_TWO = -2;
     const date = new Date();
-    const dateAndMonth = `${(`0${date.getDate()}`)
-      .slice(LESS_TWO)}/${(`0${date.getMonth() + 1}`).slice(LESS_TWO)}`;
+    const dateAndMonth = `${date.getUTCDate()}/${date.getUTCMonth() + 1}}`;
     const req = cartProducts.map((product) => ({
       product_id: product.id,
       quantity: product.productQuantity,
@@ -44,7 +42,7 @@ const Checkout = () => {
         totalPrice,
         deliveryAddress: street,
         deliveryNumber: number,
-        saleDate: `${dateAndMonth}/21`,
+        saleDate: `${dateAndMonth}`,
         status: 'Pendente',
       },
       productsList: req }, { headers: { authorization: token } });

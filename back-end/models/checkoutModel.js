@@ -2,7 +2,7 @@ const connection = require('./connections');
 
 const checkOrders = async (sale) => {
   const date = new Date();
-  const trustedDate = `${date.getUTCFullYear()}/${date.getUTCMonth() + 1}/${date.getUTCDate()}`
+  const trustedDate = `${date.getUTCFullYear()}/${date.getUTCMonth() + 1}/${date.getUTCDate()}`;
   sale.saleDate = trustedDate;  
   const { userId, totalPrice, deliveryAddress, deliveryNumber, saleDate, status } = sale;
   const [{ insertId }] = await connection
