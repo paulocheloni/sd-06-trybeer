@@ -39,7 +39,7 @@ function AdminOrdersDetails(props) {
                       {`R$ ${(order.total).toFixed(2).replace('.', ',')}`}
                     </h2>
                     <h2 data-testid={ `${index}-order-unit-price` }>
-                      {`(R$ ${(order.price).toFixed(2).replace('.', ',')})`}
+                      {`(R$ ${(order.price).toString().replace('.', ',')})`}
                     </h2>
                   </div>
                 ))}
