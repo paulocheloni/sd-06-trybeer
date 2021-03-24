@@ -1,12 +1,12 @@
 const { Router } = require('express');
 
-const { UserController } = require('../controller');
 const { emailAlreadyExists } = require('../middleware');
+const { UserController } = require('../controller');
 
-const RegisterRoute = Router();
+const UserRoute = Router();
 
-RegisterRoute.post('/',
-  emailAlreadyExists,
-  UserController.registerUser);
+UserRoute.post('/', emailAlreadyExists, UserController.registerUser);
 
-module.exports = RegisterRoute;
+UserRoute.put('/', UserController.updateUser);
+
+module.exports = UserRoute;

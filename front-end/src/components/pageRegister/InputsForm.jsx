@@ -2,10 +2,11 @@ import React from 'react';
 
 function InputsForm(user, handleChange) {
   return (
-    <div>
-      <label htmlFor="nome">
+    <div className="control ">
+      <label className="label length-text" htmlFor="nome">
         Nome
         <input
+          className="input"
           type="text"
           id="nome"
           name="name"
@@ -15,9 +16,10 @@ function InputsForm(user, handleChange) {
           data-testid="signup-name"
         />
       </label>
-      <label htmlFor="email">
+      <label className="label space-margin-top length-text " htmlFor="email">
         Email
         <input
+          className="input"
           type="email"
           id="email"
           name="email"
@@ -26,22 +28,26 @@ function InputsForm(user, handleChange) {
           data-testid="signup-email"
         />
       </label>
-      <label htmlFor="senha">
+      <label className="label space-margin-top length-text " htmlFor="senha">
         Senha
         <input
+          className="input"
           type="password"
+          id="senha"
           name="senha"
           value={ user.senha }
           onChange={ handleChange }
           data-testid="signup-password"
         />
       </label>
-      <label htmlFor="tipo">
+      <label className="label space-margin-top length-text" htmlFor="tipo">
         Quero vender
         <input
+          className="checkbox padding-left"
           type="checkbox"
+          id="tipo"
           name="tipo"
-          value="admin"
+          value="administrator"
           onChange={ handleChange }
           data-testid="signup-seller"
         />

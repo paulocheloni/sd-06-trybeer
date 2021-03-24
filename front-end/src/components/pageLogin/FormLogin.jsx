@@ -10,12 +10,17 @@ function FormLogin() {
     handleButton: handleClick,
     isDisabled: valid,
     router: history,
+    messageError: errMsg,
+    displayError: displayErr,
   } = useContext(LoginContext);
 
   return (
-    <div>
+    <div id="bodyForm" className="form-content">
       { InputsForm(user, handleChange) }
       { ButtonsForm(valid, handleClick, history) }
+      <div className="control-errorMsg">
+        { displayErr && <span className="error-color length-text">{errMsg}</span>}
+      </div>
     </div>
   );
 }

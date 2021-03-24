@@ -1,9 +1,13 @@
-const UserService = require('./UserService');
+const ProductsService = require('./ProductsService');
 const LoginService = require('./LoginService');
-// const ClientService = require('./ClientService');
+const OrderService = require('./OrderService');
+const UserService = require('./UserService');
+const SalesService = require('./SalesService');
 
 module.exports = {
-  UserService,
-  // ClientService,
+  ProductsService,
   LoginService,
+  OrderService,
+  SalesService,
+  UserService,
 };

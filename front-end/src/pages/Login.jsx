@@ -2,33 +2,47 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import LoginContext from '../context/LoginContext';
 import FormLogin from '../components/pageLogin/FormLogin';
-import visibilityBtnLogin from '../utils/visibilityBtnLogin';
 import api from '../services/api';
+import { loginUtils } from '../utils';
+import '../css/bulma.min.css';
+import '../css/login.css';
 
 function Login({ history }) {
   const [user, setUser] = useState({ email: '', password: '' });
   const [valid, setValid] = useState(true);
+  const [errMsg, setErrMsg] = useState('');
+  const [displayErr, setDisplayErr] = useState(false);
+
   useEffect(() => {
-    visibilityBtnLogin(user, setValid);
+    localStorage.cart = JSON.stringify([]);
+    if (!localStorage.user) localStorage.user = JSON.stringify({});
+  }, []);
+
+  useEffect(() => {
+    loginUtils.visibilityBtnLogin(user, setValid);
   }, [user]);
 
   const handleChange = ({ target }) => {
+    console.log('iniciei');
     setUser({ ...user, [target.name]: target.value });
   };
 
   const handleClick = async (e) => {
-    console.log(user.email);
     e.preventDefault();
+    const userData = await api.generateToken(user.email, user.password);
 
-    const loginValidate = await api.generateToken(user.email, user.password);
-    console.log(loginValidate);
-    const { token, role } = loginValidate;
-
-    if (role === 'admin') {
-      history.push('/admin/orders');
-    } else { history.push('/products'); }
-    localStorage.setItem('user', JSON.stringify(user.email, token));
+    if (userData.result) {
+      const { role } = userData.response;
+      setErrMsg(false);
+      if (role === 'administrator') history.push('/admin/orders');
+      else history.push('/products');
+      localStorage.user = JSON.stringify(userData.response);
+    } else {
+      setDisplayErr(true);
+      setErrMsg(userData.response.message);
+    }
   };
+
   return (
     <LoginContext.Provider
       value={ {
@@ -37,9 +51,11 @@ function Login({ history }) {
         handleIputs: handleChange,
         handleButton: handleClick,
         router: history,
+        messageError: errMsg,
+        displayError: displayErr,
       } }
     >
-      <div>
+      <div className="main-content">
         <FormLogin />
       </div>
     </LoginContext.Provider>

@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import RegisterContext from '../context/RegisterContext';
+
 import FormRegister from '../components/pageRegister/FormRegister';
-import visibilityBtnRegister from '../utils/visibilityBtnRegister';
+import { registerUtils } from '../utils';
+import RegisterContext from '../context/RegisterContext';
 import api from '../services/api';
+import '../css/register.css';
 
 function Register({ history }) {
   const [newUser, setUser] = useState({ name: '', email: '', senha: '', tipo: 'client' });
   const [valid, setValid] = useState(true);
+  const [errMsg, setErrMsg] = useState('');
+  const [displayErr, setDisplayErr] = useState(false);
 
   useEffect(() => {
-    visibilityBtnRegister(newUser, setValid);
+    registerUtils.visibilityBtnRegister(newUser, setValid);
   }, [newUser]);
 
   const handleChange = ({ target }) => {
     if (target.name === 'tipo') {
-      console.log(target.checked);
       if (target.checked === true) setUser({ ...newUser, [target.name]: target.value });
       else setUser({ ...newUser, [target.name]: 'client' });
     } else { setUser({ ...newUser, [target.name]: target.value }); }
@@ -23,14 +26,20 @@ function Register({ history }) {
 
   const handleClick = async (e) => {
     e.preventDefault();
-
     const { name, email, senha, tipo } = newUser;
-
     const registerUser = await api.registerUser(name, email, senha, tipo);
-    console.log(registerUser.message);
-    if (newUser.tipo === 'admin') history.push('/admin/orders');
-    else history.push('/products');
-    localStorage.setItem('newUser', JSON.stringify(newUser));
+
+    const token = await api.generateToken(email, senha);
+
+    if (registerUser.result) {
+      setDisplayErr(false);
+      if (newUser.tipo === 'administrator') history.push('/admin/orders');
+      else history.push('/products');
+      localStorage.user = JSON.stringify(token.response);
+    } else {
+      setErrMsg(registerUser.response.message);
+      setDisplayErr(true);
+    }
   };
 
   return (
@@ -40,9 +49,13 @@ function Register({ history }) {
         click: handleClick,
         user: newUser,
         isValid: valid,
+        messageError: errMsg,
+        displayError: displayErr,
       } }
     >
-      <FormRegister />
+      <div className="main-content-reg">
+        <FormRegister />
+      </div>
     </RegisterContext.Provider>
   );
 }
