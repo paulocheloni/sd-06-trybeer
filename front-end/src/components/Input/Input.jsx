@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Input.scss'
+import './Input.scss';
 
 /**
  * Renders default input
@@ -14,15 +14,15 @@ const Input = ({ title, type, testId, onChange, value, placeholder, isReadOnly }
     <label htmlFor={ title }>
       {title}
     </label>
-      <input
-        id={ title }
-        type={ type }
-        data-testid={ testId }
-        onChange={ (e) => onChange(title, e.target.value) }
-        value={ value }
-        readOnly={ isReadOnly }
-        placeholder={ placeholder }
-      />
+    <input
+      id={ title }
+      type={ type }
+      data-testid={ testId }
+      onChange={ (e) => onChange(title, e.target.value) }
+      value={ value }
+      readOnly={ isReadOnly }
+      placeholder={ placeholder }
+    />
   </div>
 );
 

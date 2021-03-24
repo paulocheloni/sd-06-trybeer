@@ -13,7 +13,7 @@ const Button = ({ title, isDisabled, testId, onClick, userRole, className }) => 
     disabled={ isDisabled }
     data-testid={ testId }
     onClick={ () => onClick(userRole) }
-    className={className}
+    className={ className }
   >
     {title}
   </button>

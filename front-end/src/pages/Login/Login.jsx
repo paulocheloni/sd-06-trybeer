@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../services/Users';
-import logoVerde from '../../assets/logos/logoVerde_limpa.png'
+import logoVerde from '../../assets/logos/logoVerde_limpa.png';
 
 import './Login.scss';
 
@@ -36,45 +36,45 @@ export default function Login() {
   };
   return (
     <>
-    <div className='overlay' />
-    <div className="entrance" />
-    <section className="defaultPage">
-      <form className="loginForm">
-        <img src={logoVerde} width="150px" className="logo"/>
-        <section className="loginInputs">
-        <Input
-          title="Email"
-          type="text"
-          testId="email-input"
-          value={ email }
-          onChange={ setField }
-          placeholder="Informe o email do Usuário"
-        />
-        <Input
-          title="Senha"
-          type="password"
-          testId="password-input"
-          value={ password }
-          onChange={ setField }
-          placeholder="Informe a senha"
-        />
-        </section>
-        <section className="loginButtons">
-        <Button
-          title="ENTRAR"
-          testId="signin-btn"
-          isDisabled={ isDisabled }
-          onClick={ () => userRedirect(email, password, history) }
-          className="golden"
-        />
-        <Button
-          title="CRIAR CONTA"
-          testId="no-account-btn"
-          onClick={ () => history.push('/register') }
-        />
-        </section>
-      </form>
-    </section>
+      <div className="overlay" />
+      <div className="entrance" />
+      <section className="defaultPage">
+        <form className="loginForm">
+          <img src={ logoVerde } width="150px" className="logo" alt="logo" />
+          <section className="loginInputs">
+            <Input
+              title="Email"
+              type="text"
+              testId="email-input"
+              value={ email }
+              onChange={ setField }
+              placeholder="Informe o email do Usuário"
+            />
+            <Input
+              title="Senha"
+              type="password"
+              testId="password-input"
+              value={ password }
+              onChange={ setField }
+              placeholder="Informe a senha"
+            />
+          </section>
+          <section className="loginButtons">
+            <Button
+              title="ENTRAR"
+              testId="signin-btn"
+              isDisabled={ isDisabled }
+              onClick={ () => userRedirect(email, password, history) }
+              className="golden"
+            />
+            <Button
+              title="CRIAR CONTA"
+              testId="no-account-btn"
+              onClick={ () => history.push('/register') }
+            />
+          </section>
+        </form>
+      </section>
     </>
   );
 }
