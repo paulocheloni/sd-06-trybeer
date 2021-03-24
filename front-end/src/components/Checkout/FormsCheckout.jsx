@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../../css/CheckoutCard.css';
 
 function FormsCheckout(props) {
   const { setAddress, address } = props;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { redirectMenuBar } from '../services/index';
+import { redirectMenuBar } from '../../services/index';
 
 function SideBar() {
   const history = useHistory();

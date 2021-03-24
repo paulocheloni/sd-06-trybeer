@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { concludeOrder, tokenExists } from '../services/index';
+import { concludeOrder, tokenExists } from '../../services/index';
 
 function CheckoutButton(props) {
   const history = useHistory();
