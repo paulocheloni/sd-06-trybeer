@@ -1,43 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import '../css/CheckoutCard.css';
-import { deleteItemCart } from '../services/index';
+import { Link } from 'react-router-dom';
 
 function CheckoutCard(props) {
-  const { item, index, setTotal, setItems } = props;
-  const product = JSON.parse(item);
-  const params = { item, product, setTotal, setItems };
+  const { order, index } = props;
+  const magicNumberminus2 = -2;
+  const magicNumber6 = 6;
+  const magicNumber5 = 5;
+
+  const date = JSON.stringify(order.sale_date).substr(magicNumber6, magicNumber5);
+  const formatDate = `${date.slice(magicNumberminus2)}/${date.slice(0, 2)}`;
 
   return (
-    <div className="checkout-card-container">
-      <p data-testid={ `${index}-product-qtd-input` }>
-        Quantidade:
-        {product.total}
+    <div
+      className="checkout-card-container"
+      data-testid={ `${index}-order-card-container` }
+    >
+      <Link to={ `orders/${order.id}` }>
+        <p data-testid={ `${index}-order-number` }>
+          Pedido
+          {' '}
+          {JSON.stringify(order.id)}
+        </p>
+      </Link>
+      <p data-testid={ `${index}-order-date` }>
+        Data:
+        {formatDate}
       </p>
-      <p data-testid={ `${index}-product-name` }>{product.name}</p>
-      <p data-testid={ `${index}-product-unit-price` }>
-        {`(R$ ${product.price.replace('.', ',')} un)`}
+      <p data-testid={ `${index}-order-total-value` }>
+        Preço: R$
+        {' '}
+        { order.total_price.toString().replace('.', ',') }
       </p>
-      <p data-testid={ `${index}-product-total-value` }>
-        R$
-        {` ${(parseFloat(product.price) * product.total).toFixed(2).replace('.', ',')}`}
-      </p>
-      <button
-        data-testid={ `${index}-removal-button` }
-        type="button"
-        onClick={ () => deleteItemCart(params) }
-      >
-        Excluir
-      </button>
     </div>
   );
 }
 
 CheckoutCard.propTypes = {
-  item: PropTypes.objectOf(PropTypes.string).isRequired,
+  order: PropTypes.objectOf(PropTypes.string).isRequired,
   index: PropTypes.number.isRequired,
-  setTotal: PropTypes.func.isRequired,
-  setItems: PropTypes.func.isRequired,
 };
 
 export default CheckoutCard;
