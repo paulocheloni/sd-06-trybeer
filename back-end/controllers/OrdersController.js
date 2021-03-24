@@ -23,6 +23,12 @@ OrdersRouter.get('/:id', isUserLoggedIn, async (req, res, next) => {
   }
 });
 
+OrdersRouter.get('/details/:id', async (req, res) => {
+  const { id } = req.params;
+  const order = await ordersService.getById(id);
+  res.status(200).json(order);
+});
+
 OrdersRouter.post('/', async (req, res, next) => {
   try {
     const {
@@ -30,10 +36,13 @@ OrdersRouter.post('/', async (req, res, next) => {
       totalPrice,
       deliveryAddress,
       deliveryNumber,
+      cart,
     } = req.body;
 
     const newOrder = await ordersService
     .createOrderService({ userId, totalPrice, deliveryAddress, deliveryNumber });
+    const { id: saleId } = newOrder;
+    await ordersService.createOrderProductService({cart, saleId});
     return res.status(201).json(newOrder);
   } catch (err) {
     next(err);

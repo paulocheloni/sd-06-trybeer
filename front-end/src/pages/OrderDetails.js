@@ -15,7 +15,7 @@ function OrderDetails(props) {
 
   const fetchOrderDetails = async () => {
     if (state) {
-      const order = await verifyToken(`sale_product/${state.id}`, user, history);
+      const order = await verifyToken(`orders/details/${state.id}`, user, history);
       setOrderCart(order);
     }
   };

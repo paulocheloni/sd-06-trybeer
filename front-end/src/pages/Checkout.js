@@ -31,13 +31,14 @@ function Checkout() {
       deliveryAddress: street,
       deliveryNumber: number,
       userId: user.id,
+      cart,
     };
 
     const { id } = await fetchFunctions.post('orders', salesTable);
     cart.forEach((item) => {
       item.saleId = id;
     });
-    await fetchFunctions.post('sale_product', { cart });
+    // await fetchFunctions.post('sale_product', { cart });
     eraseLocalStorage('cart');
     setTimeout(() => history.push('products'), TIME_TO_REDIRECT);
   };

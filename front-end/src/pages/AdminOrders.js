@@ -31,7 +31,7 @@ function AdminOrders({ history }) {
         }, index) => (
           <div key={ id }>
             <Link
-              to={ { pathname: `/admin/orders/${id}`, state: { id } } }
+              to={ { pathname: `/admin/orders/details/${id}`, state: { id } } }
             >
               <div data-testid={ `${index}-order-number` }>
                 {`Pedido ${id}` }
