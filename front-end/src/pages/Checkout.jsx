@@ -9,18 +9,6 @@ import CheckoutContext from '../context/CheckoutContext';
 import { checkoutUtils } from '../utils';
 
 function Checkout() {
-  // const produtos = [
-  //   {
-  //     idProduct: 1,
-  //     idUser: localStorage.user.id,
-  //     quantity: 1,
-  //     name: 'Bavaria',
-  //     totalValue: 4.99,
-  //     price: 4.99,
-  //   },
-
-  // ];
-
   const productsList = JSON.parse(localStorage.cart);
   const newlist = productsList.map((item) => {
     item.totalValue = (item.quantity * item.price);

@@ -3,13 +3,21 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
-const { UserRoute, LoginRoute, ProductsRoute, SalesRoute, OrderRoute } = require('./routes');
+const { 
+  UserRoute,
+  LoginRoute,
+  ProductsRoute,
+  SalesRoute,
+  OrderRoute,
+  AdminRoute,
+} = require('./routes');
 const { error } = require('./middleware');
 
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/admin', AdminRoute);
 app.use('/login', LoginRoute);
 app.use('/user', UserRoute);
 app.use('/products', ProductsRoute);
