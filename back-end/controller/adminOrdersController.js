@@ -6,8 +6,8 @@ const adminOrdersController = Router();
 const SUCCESS = 200;
 
 adminOrdersController.get('/', async (_req, res) => {
-  const allOrders = getAllOrders();
-  res.status(SUCCESS).json(allOrders);
+  const allOrders = await getAllOrders();
+  res.status(SUCCESS).send(allOrders);
 });
 
 module.exports = adminOrdersController;

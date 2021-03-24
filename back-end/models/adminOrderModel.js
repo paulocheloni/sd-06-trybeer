@@ -2,7 +2,8 @@ const connection = require('./connections');
 
 const allOrdersAdmin = async () => {
   try {
-    await connection.execute('SELECT * FROM sales');
+   const orders = await connection.execute('SELECT * FROM sales');
+   return orders[0];
   } catch (e) {
     return 'erro interno';
   }
