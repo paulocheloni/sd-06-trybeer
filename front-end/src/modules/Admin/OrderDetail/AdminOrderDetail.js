@@ -1,28 +1,23 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import SideBarAdmin from '../../../design-components/SideBarAdmin';
 import DetailAdminCard from './components/DetailAdminCard';
-import ContextBeer from '../../../context/ContextBeer'
+import ButtonDelivered from './components/ButtonDelivered';
 
 function AdminOrderDetail() {
   const [loading, setLoading] = useState(true);
   const [sale, setSale] = useState({});
-  // const [status, setStatus] = useState('pendente')
-  // const [deliverButton, setDeliverButton] = useState('inline')
-  const {
-    status,
-    setStatus,
-    deliverButton,
-    setDeliverButton
-  } = useContext(ContextBeer);
+  const [status, setStatus] = useState('');
 
   const { id } = useParams();
 
   useEffect(() => {
     axios.get(`http://localhost:3001/sales/${id}`)
       .then((response) => {
+        console.log(response.data);
         setSale(response.data);
+        setStatus(response.data[0].status);
         setLoading(false);
       })
       .catch((err) => console.log(err.message));
@@ -30,17 +25,11 @@ function AdminOrderDetail() {
 
   const handleClick = () => {
     axios.put(`http://localhost:3001/sales/${id}`)
-      .then((response) => {
-        console.log(response.data.status);
-        setStatus(response.data.status)
-        if (status === "Entregue") {
-          setDeliverButton('none')
-        }
-        setDeliverButton('inline')
+      .then(() => {
+        setStatus('Entregue');
+        document.getElementById('deliver-button').style.display = 'none';
       })
       .catch((err) => console.log(err.message));
-    // setStatus(<span className="text-green-400">entregue</span>);
-    // setDeliverButton("none");
   };
 
   return (
@@ -49,18 +38,11 @@ function AdminOrderDetail() {
         <SideBarAdmin />
         <DetailAdminCard sale={ sale } status={ status } />
         <div
-          className="flex justify-end mt-3 text-2xl"
+          className="flex justify-center"
         >
-          <button
-            id="deliver-button"
-            type="button"
-            style={{display: deliverButton}}
-            className="p-4 bg-green-300 hover:bg-gray-500"
-            data-testid="mark-as-delivered-btn"
-            onClick={ () => handleClick() }
-          >
-            Marcar como entregue
-          </button>
+          {(status === 'Entregue')
+            ? <span className="text-sm">Pedido Entregue!</span>
+            : <ButtonDelivered handleClick={ handleClick } />}
         </div>
       </div>
     )

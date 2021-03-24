@@ -19,8 +19,6 @@ function Provider({ children }) {
   const [sale, setSale] = useState(storedSale);
   const [total, setTotal] = useState(0);
   const [stringTotal, setStringTotal] = useState('R$ 0,00');
-  const [status, setStatus] = useState('pendente')
-  const [deliverButton, setDeliverButton] = useState("inline")
 
   useEffect(() => {
     localStorage.setItem('sale', JSON.stringify(sale));
@@ -132,10 +130,6 @@ function Provider({ children }) {
     initiateSale,
     getUser,
     setUser,
-    status,
-    setStatus,
-    deliverButton, 
-    setDeliverButton
   };
 
   return (

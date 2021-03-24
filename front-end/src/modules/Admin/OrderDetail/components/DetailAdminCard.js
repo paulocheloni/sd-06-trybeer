@@ -11,7 +11,7 @@ function DetailAdminCard(props) {
     >
       <div>
         <div
-          className="flex justify-between mb-3"
+          className="text-2xl flex justify-between m-5"
           data-testid={ `${sale[0].sale_id - 1}-order-card-container` }
         >
           <div
@@ -28,22 +28,22 @@ function DetailAdminCard(props) {
         {sale.map((product, index) => (
           <div
             key={ index }
-            className="flex justify-between text-2xl"
+            className="flex justify-between text-xl m-5"
           >
             <div
-              className="m-4"
+              className="m-5"
               data-testid={ `${index}-product-qtd` }
             >
               {product.quantity}
             </div>
             <div
-              className="m-4"
+              className="m-5"
               data-testid={ `${index}-product-name` }
             >
               {product.name}
             </div>
             <div
-              className="m-4"
+              className="m-5"
               data-testid={ `${index}-product-price` }
             >
               {`R$ ${product.price.replace('.', ',')}`}
@@ -51,7 +51,7 @@ function DetailAdminCard(props) {
           </div>
         ))}
         <div
-          className="flex justify-end mt-3 text-2xl"
+          className="m-5 flex justify-center mt-3 text-2xl"
           data-testid={ `${sale[0].sale_id - 1}-order-total-value` }
         >
           Total:
