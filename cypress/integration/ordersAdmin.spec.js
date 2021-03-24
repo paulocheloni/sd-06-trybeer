@@ -29,7 +29,7 @@ describe('Criar tela de pedidos de admin', () => {
     verifyContainsUrl(`${Cypress.config().baseUrl}/admin/orders`);
   });
 
-  it('Será validado que a tela de pedidos contém os atributos descritos no protótipo', () => {
+  it.only('Será validado que a tela de pedidos contém os atributos descritos no protótipo', () => {
     loginClientAndBuyProduct();
     logout();
     login(Cypress.env('loginAdmin'), Cypress.env('passwordAdmin'));

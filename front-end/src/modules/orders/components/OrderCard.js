@@ -2,21 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-function OrderCard(order, index) {
-
-  const user = JSON.parse(localStorage.getItem('user'));
-  const { role } = user;
-  
+function OrderCard({ order, index }) {
   const {
     id,
+    createdAt,
     total,
     number,
     address,
-    createdAt,
     status,
   } = order;
 
+  const role = JSON.parse(localStorage.getItem('user'));
   const path = role === 'administrator' ? `/admin/orders/${id}` : `/orders/${id}`;
+  const totalValue = `R$ ${total.replace('.', ',')}`;
+  let date = new Date(createdAt).toLocaleDateString();
+  date = date.split('/');
+  date = `${date[0]}/${date[1]}`;
 
   return (
     <div
@@ -30,10 +31,10 @@ function OrderCard(order, index) {
           { `Pedido ${index + 1}` }
           </p>
           <p data-testid={ `${index}-order-total-value` }>
-            <strong>{ `R$ ${total.replace('.', ',')}` }</strong>
+            <strong>{ totalValue }</strong>
           </p>
           <p data-testid={ `${index}-order-date` }>
-            { `${new Date(createdAt).getDay()}/${new Date(createdAt).getMonth()}` }
+            { date }
           </p>
           <p data-testid={ `${index}-order-address` }>
           { `${address}, ${number}` }
@@ -48,7 +49,8 @@ function OrderCard(order, index) {
 }
 
 OrderCard.propTypes = {
-  data: PropTypes.shape({
+  index: PropTypes.number.isRequired,
+  order: PropTypes.shape({
     id: PropTypes.number.isRequired,
     user_id: PropTypes.number.isRequired,
     delivery_address: PropTypes.string.isRequired,

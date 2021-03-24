@@ -4,7 +4,7 @@ import Gallery from '../components/Gallery';
 
 const OrdersClient = () => (
   <PaperContainer>
-    <p data-testid="top-title">Meus Pedidos</p>
+    <p className="hidden" data-testid="top-title">Meus Pedidos</p>
     <p>My orders</p>
     <Gallery />
   </PaperContainer>

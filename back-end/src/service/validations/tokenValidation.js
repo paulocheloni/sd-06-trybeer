@@ -19,7 +19,7 @@ const tokenValidation = async (token) => {
   });
 
   if (!result.payload) {
-    const checkUser = await userModel.getById(result);
+    const checkUser = await userModel.getById(result.id);
     const { id: storageId } = checkUser;
     const { id: idFromToken } = result;
     
