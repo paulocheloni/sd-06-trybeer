@@ -15,7 +15,6 @@ const OrdersDetails = ({ match, history }) => {
       const response = await api.getOrdersByDetails(user.token, id);
       if (response.message) return history.push('/login');
       setOrderDetails(response);
-      console.log(response);
     }
     fetchOrderDetails();
   }, [history, id]);
