@@ -21,4 +21,14 @@ router.post('/', rescue(async (req, res) => {
   }
 }));
 
+router.get('/:id', rescue(async (req, res) => {
+  try {
+    const { id } = req.params;
+    const orderInfo = await OrdersService.getDetails(id);
+    return res.status(OK).json(orderInfo);
+  } catch (error) {
+    return res.status(BAD_REQUEST).json({ message: 'No orders found' });
+  }
+}));
+
 module.exports = router;

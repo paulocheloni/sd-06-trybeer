@@ -60,7 +60,9 @@ export const getAllOrders = async (email) => {
 
 export const getOrderDetails = async (orderId) => {
   const id = parseInt(orderId, 10);
-  const requestResponse = await api.get('orders', { params: { id: 1 } })
+  console.log(typeof orderId);
+  console.log(typeof id);
+  const requestResponse = await api.get(`orders/${orderId}`)
     .then((response) => response.data)
     .catch((error) => error.response.data);
 
