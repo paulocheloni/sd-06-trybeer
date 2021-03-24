@@ -30,8 +30,11 @@ const Orders = () => {
       <Menu><p data-testid="top-title">Meus Pedidos</p></Menu>
       <S.Container>
         {orders.length < 1 ? <div>No orders</div> : orders.map((order, index) => {
-          const filteredDate = `${order.sale_date.getUTCDate()}
-            /${order.sale_date.getUTCMonth() + 1}`;
+          const strToDate = new Date(order.sale_date);
+          const maxMonthOneDigitUTCformat = 8;
+          const filteredDate = strToDate.getUTCMonth() > maxMonthOneDigitUTCformat
+            ? `${strToDate.getUTCDate()}/${strToDate.getUTCMonth() + 1}`
+            : `${strToDate.getUTCDate()}/0${strToDate.getUTCMonth() + 1}`;
           return (
             <S.Item key={ index }>
               <Link to={ `/orders/${order.id}` }>
