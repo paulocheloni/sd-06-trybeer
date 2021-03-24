@@ -63,7 +63,7 @@ export default function Checkout() {
       address: street,
       number: houseNumber,
       date: date.toISOString().slice(0, limitIndex).replace('T', ' '),
-      orderStatus: 'pendente',
+      orderStatus: 'Pendente',
       cartProducts,
     };
 

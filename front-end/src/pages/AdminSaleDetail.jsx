@@ -44,9 +44,9 @@ export default function AdminSaleDetail() {
       { handleRedirect(tokenFromLocalStorage) }
       <TopMenuAdmin pageTitle="TryBeer" />
       <div className="order-data-container">
-        <span data-testid="order-number">
+        <div data-testid="order-number">
           {orderDetail.length && `Pedido ${orderDetail[0].sale_id}`}
-        </span>
+        </div>
         <span data-testid="order-status">
           {orderDetail.length && orderDetail[0].status }
         </span>

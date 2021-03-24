@@ -67,7 +67,7 @@ const getAllSales = async () => {
 const updateSale = async (saleId) => {
   await connection.execute(
     'UPDATE Trybeer.sales SET Trybeer.sales.status=? WHERE Trybeer.sales.id=?', 
-    ['entregue', saleId],
+    ['Entregue', saleId],
   );
   // console.log('entrei no orders model', saleId);
 };
