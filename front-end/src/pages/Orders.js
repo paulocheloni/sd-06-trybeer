@@ -34,7 +34,7 @@ class Orders extends React.Component {
       <div>
         <Header history={ history } />
         <div className="orders-container">
-          {stateOrders.length > 0 && stateOrders.map((element, index) => (
+          {stateOrders.length > 0 && stateOrders.map((e, index) => (
             <div
               className="order"
               key={ index }
@@ -49,12 +49,11 @@ class Orders extends React.Component {
                   {`Pedido ${index + 1}`}
                 </button>
                 <h5 data-testid={ `${index}-order-date` }>
-                  {`${element.sale_date.split('/')[2]}/
-                  ${element.sale_date.split('/')[1]}`}
+                  {`${e.sale_date.split('/')[2]}/${e.sale_date.split('/')[1]}`}
                 </h5>
               </div>
               <p data-testid={ `${index}-order-total-value` }>
-                {`R$ ${element.total_price.replace('.', ',')}`}
+                {`R$ ${e.total_price.replace('.', ',')}`}
               </p>
             </div>
           ))}
