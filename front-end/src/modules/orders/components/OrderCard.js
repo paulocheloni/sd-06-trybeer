@@ -10,6 +10,10 @@ function OrderCard(order, index) {
     total,
   } = order;
 
+  const day = new Date(createdAt).toLocaleDateString().getDay();
+  const month = new Date(createdAt).toLocaleDateString().getMonth();
+  const totalValue = `R$ ${total.replace('.', ',')}`;
+
   return (
     <div
       className="border rounded-md border-primary p-2 flex flex-col items-center"
@@ -17,19 +21,15 @@ function OrderCard(order, index) {
     >
       <div className="flex flex-col">
         <p data-testid={ `${index}-order-total-value` }>
-          <strong>{ `R$ ${total.replace('.', ',')}` }</strong>
+          <strong>{ totalValue }</strong>
         </p>
         <p data-testid={ `${index}-order-number` }>
           { number }
         </p>
         <p data-testid={ `${index}-order-date` }>
-          { `${new Date(createdAt).getDay()}/${new Date(createdAt).getMonth()}` }
+          { `${day}/${month}` }
         </p>
-        <Link
-          to={ `/orders/${id}` }
-        >
-          Ver pedido
-        </Link>
+        <Link to={ `/orders/${id}` }>See order</Link>
       </div>
     </div>
   );
