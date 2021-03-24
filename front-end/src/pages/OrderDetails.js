@@ -15,8 +15,6 @@ function OrderDetails(props) {
     getOrder(id).then((result) => setOrders(result));
   }, []);
 
-  console.log(orders);
-
   return (
     <div>
       { !loggedUser && <Redirect to="/login" />}
@@ -39,9 +37,9 @@ function OrderDetails(props) {
                   </h2>
                 </div>
               ))}
-              <div data-testid="order-total-value">
+              <h2 data-testid="order-total-value">
                 {`Total: R$ ${(orders[0].total_price).replace('.', ',')}`}
-              </div>
+              </h2>
             </div>
           )
       }
