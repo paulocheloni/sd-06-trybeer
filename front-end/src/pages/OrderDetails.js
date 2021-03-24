@@ -5,14 +5,14 @@ import TopBar from '../components/TopBar';
 import  { getOrderDetails } from '../services/api';
 
 function OrderDetails(props) {
-  const { match: { params: { id: orderId } } } = props;
-  console.log('Param', orderId);
-  console.log(typeof orderId);
+  const { match: { params: { id } } } = props;
+  console.log('Param', id);
+  console.log(typeof id);
 
   const loggedUser = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
-    getOrderDetails(orderId).then((result) => console.log(result));
+    getOrderDetails(id).then((result) => console.log(result));
   });
   return (
     <div>
