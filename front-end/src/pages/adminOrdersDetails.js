@@ -73,7 +73,13 @@ function Admin() {
   const isSend = () => {
     if (order.status === 'Pendente') {
       return (
-        <button type="button" onClick={ sendProduct }>Marca como entregue</button>
+        <button
+          data-testid="mark-as-delivered-btn"
+          type="button"
+          onClick={ sendProduct }
+        >
+          Marcar como entregue
+        </button>
       );
     }
   };
@@ -81,28 +87,74 @@ function Admin() {
   return (
     <div>
       <NavBarAdmin content="Trybeer" />
-      <h1>
-        Pedidos
-        {order.id}
-      </h1>
-      <h1>{order.status}</h1>
-      {products.map((product, index) => (
-        <div key={ index }>
-          <h3>{product.productQty}</h3>
-          <h3>{product.name}</h3>
-          <h4>{product.totalPrice}</h4>
-          <h5>
-            R$ (
-            {product.price}
-            )
-          </h5>
-        </div>
-      ))}
-      <h1>
-        Total
-        {order.total_price}
-      </h1>
-      {isSend()}
+      <div className={classes.root}>
+        <Grid container style={ { alignContent: 'center' } } direction="column" spacing={2}>
+        <h1 data-testid="order-status">
+          {order.status}
+        </h1>
+        {products.map((product, index) => (
+          <Grid item xs={10}>
+            {console.log(product)}
+              <Paper className={classes.paper} elevation={3}>
+                <Grid container spacing={0}>
+                  <Grid item style={ { maxHeight: 100} }>
+                    <ButtonBase className={classes.number}>
+                    <img
+                      className={ classes.image }
+                      src={ product.imgUrl.replace(/ /g, '_') }
+                      data-testid={ `${index}-product-img` }
+                      alt={ product.name }
+                      style={ { maxHeight: 80 } }
+                    />
+                    </ButtonBase>
+                  </Grid>
+                  <Grid item xs={12} sm container>
+                    <Grid item xs container direction="column" spacing={0}>
+                      <Grid item xs>
+                        <Typography
+                          gutterBottom
+                          variant="subtitle1"
+                          data-testid={ `${index}-order-number` }
+                        >
+                          <h3 data-testid={ `${index}-product-qtd` }>
+                            {`${product.productQty} - `}
+                            <span data-testid={ `${index}-product-name` }>{product.name}</span>
+                          </h3>
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          gutterBottom
+                          data-testid={ `${index}-order-address` }
+                        >
+                          <h4 data-testid={ `${index}-product-total-value` }>
+                            R$
+                            {` ${product.totalPrice.toFixed(2)} `.replace('.', ',') }
+                            <span data-testid={ `${index}-order-unit-price` }>
+                              {`(R$ ${product.price})`.replace('.', ',')}
+                            </span>
+                          </h4>
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                  <Grid item>
+                    <Typography
+                      variant="subtitle1"
+                      data-testid={ `${index}-order-total-value` }
+                    >
+                      {`R$ ${order.total_price}`.replace('.', ',')}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </Grid>
+          ))}
+          <h1 data-testid="order-total-value">
+            {`Total: R$ ${order.total_price}`.replace('.', ',')}
+          </h1>
+          {isSend()}
+        </Grid>
+      </div>
     </div>
   );
 }

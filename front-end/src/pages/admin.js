@@ -62,7 +62,7 @@ function Admin() {
     <div>
       <NavBarAdmin content="Trybeer" />
       <div className={classes.root}>
-        <Grid container direction="column" spacing={0}>
+        <Grid container direction="column" spacing={2}>
           <h1>Pedidos</h1>
           {orders.map((order, index) => (
             <Grid item xs={10}>
@@ -99,7 +99,7 @@ function Admin() {
                           <Typography
                             variant="body2"
                             style={ (order.status === 'Pendente')
-                            ? { color: 'yellow' } : { color: 'green' }}
+                            ? { color: 'red' } : { color: 'green' }}
                             data-testid={ `${index}-order-status` }
                           >
                             {order.status}
