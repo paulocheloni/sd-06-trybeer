@@ -45,8 +45,7 @@ const SidebarMenu = () => {
                 data-testid="side-menu-item-logout"
                 type="button"
                 onClick={ () => {
-                  eraseLocalStorage('cart');
-                  eraseLocalStorage('user');
+                  eraseLocalStorage();
                 } }
               >
                 Sair

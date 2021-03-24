@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import TopMenu from '../components/TopMenu';
+import { TopMenu } from '../components';
 import { verifyToken } from '../utils/verifications';
 import TrybeerContext from '../context/TrybeerContext';
 import formatedPrice from '../utils/formatedPrice';

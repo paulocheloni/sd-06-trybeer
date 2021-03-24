@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
-import TopMenu from '../components/TopMenu';
+import { TopMenu } from '../components';
 import { verifyToken } from '../utils/verifications';
 import formatedPrice from '../utils/formatedPrice';
 import formatedDate from '../utils/formatedDate';
@@ -10,11 +10,10 @@ import './Orders.css';
 
 function Orders({ history }) {
   const [orders, setOrders] = useState([]);
-  const { getFromLocalStorage, user } = useContext(TrybeerContext);
-  const recoveredUser = getFromLocalStorage('user');
+  const { user } = useContext(TrybeerContext);
 
   const fetchOrders = async () => {
-    const allOrders = await verifyToken(`orders/${user.id}`, recoveredUser, history);
+    const allOrders = await verifyToken(`orders/${user.id}`, user, history);
     setOrders(allOrders);
   };
 

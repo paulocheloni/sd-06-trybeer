@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import RegisterForm from '../components/RegisterForm';
+import { RegisterForm } from '../components';
 
 function Register({ history }) {
   const [name, setName] = useState('');
