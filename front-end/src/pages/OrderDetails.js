@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import TopMenu from '../components/TopMenu';
-import SidebarMenu from '../components/SideBarMenu';
+import { TopMenu } from '../components';
 import { verifyToken } from '../utils/verifications';
 import TrybeerContext from '../context/TrybeerContext';
 import formatedDate from '../utils/formatedDate';
@@ -39,13 +38,12 @@ function OrderDetails(props) {
         hasState && (
           <div>
             <TopMenu titleMenu="Detalhes de Pedido" />
-            <SidebarMenu />
             <div className="content-panel">
               <div>
                 {
                   orderCart.map(({ quantity, name, price }, index) => (
                     <div
-                      key={ state.id }
+                      key={ index }
                       className="order-card-container"
                       data-testid={ `${index}-order-card-container` }
                     >
@@ -94,7 +92,7 @@ OrderDetails.propTypes = {
     state: PropTypes.shape({
       id: PropTypes.number.isRequired,
       saleDate: PropTypes.string.isRequired,
-      totalPrice: PropTypes.number.isRequired,
+      totalPrice: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,

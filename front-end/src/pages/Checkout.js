@@ -1,28 +1,28 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import fetchFunctions from '../api/fetchFunctions';
-import ProductListItem from '../components/ProductListItem';
-import TopMenu from '../components/TopMenu';
 import TrybeerContext from '../context/TrybeerContext';
 import formatedPrice from '../utils/formatedPrice';
-import AddressForm from '../components/AddressForm';
+import { ProductListItem, TopMenu, AddressForm } from '../components';
 
 function Checkout() {
   const [street, setStreet] = useState('');
   const [number, setNumber] = useState('');
+  const [purchaseMade, isPurchaseMade] = useState(false);
   const history = useHistory();
-  const { user, cart, getTotalPriceCart, eraseLocalStorage } = useContext(TrybeerContext);
+  const {
+    user, cart, getTotalPriceCart, cleanShoppingCart,
+  } = useContext(TrybeerContext);
   const [isFormFilled, setIsFormFilled] = useState(false);
   const TITLE_MENU_CHECKOUT = 'Finalizar Pedido';
   const TIME_TO_REDIRECT = 3000;
   const cartHasProducts = cart.length > 0;
-  const validatePurchase = cartHasProducts && isFormFilled;
 
   useEffect(() => {
     if (!user.token) {
       history.push('/login');
     }
-  }, [cart, setIsFormFilled, validatePurchase, history, user.token]);
+  }, [cart, setIsFormFilled, history, user.token]);
 
   const handleCheckOut = async () => {
     const totalValue = getTotalPriceCart();
@@ -34,12 +34,9 @@ function Checkout() {
       cart,
     };
 
-    const { id } = await fetchFunctions.post('orders', salesTable);
-    cart.forEach((item) => {
-      item.saleId = id;
-    });
-    // await fetchFunctions.post('sale_product', { cart });
-    eraseLocalStorage('cart');
+    await fetchFunctions.post('orders', salesTable);
+    isPurchaseMade(true);
+    cleanShoppingCart();
     setTimeout(() => history.push('products'), TIME_TO_REDIRECT);
   };
 
@@ -70,7 +67,7 @@ function Checkout() {
         setNumber={ setNumber }
         setIsFormFilled={ setIsFormFilled }
       />
-      <h3>{ isFormFilled && cartHasProducts ? 'Compra realizada com sucesso!' : ''}</h3>
+      <h3>{ purchaseMade ? 'Compra realizada com sucesso!' : ''}</h3>
       <button
         type="button"
         data-testid="checkout-finish-btn"

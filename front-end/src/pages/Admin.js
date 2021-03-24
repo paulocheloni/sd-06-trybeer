@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
-import TopMenu from '../components/TopMenu';
+import { TopMenu } from '../components';
 
 function Admin() {
   const history = useHistory();

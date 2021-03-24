@@ -52,13 +52,23 @@ function TrybeerProvider({ children }) {
     localStorage.setItem('cart', JSON.stringify(cartWithValidQuantitys));
   };
 
-  const eraseLocalStorage = (key) => {
+  const removeItemFromLocalStorage = (key) => {
     localStorage.removeItem(key);
+  };
+
+  const eraseLocalStorage = () => {
+    localStorage.clear();
+  };
+
+  const cleanShoppingCart = () => {
+    setCart([]);
+    removeItemFromLocalStorage('cart');
   };
 
   const contextValue = {
     cart,
     setCart,
+    cleanShoppingCart,
     updateProductQuantity,
     getFromLocalStorage,
     removeItemCart,
@@ -69,6 +79,7 @@ function TrybeerProvider({ children }) {
     eraseLocalStorage,
     isVisible,
     setVisibility,
+    removeItemFromLocalStorage,
   };
 
   return (
