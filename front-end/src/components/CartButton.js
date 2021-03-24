@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const CartButton = ({ cart, disabled, id, callback = () => {} }) => {
+const CartButton = ({ cart, disabled, id, callback }) => {
   const cartTotal = Object.keys(cart).reduce(
     (sum, curr) => (
       sum + (cart[curr].price * cart[curr].quantity)
@@ -48,5 +48,9 @@ CartButton.propTypes = {
   cart: PropTypes.objectOf(PropTypes.any).isRequired,
   disabled: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
-  callback: PropTypes.func.isRequired,
+  callback: PropTypes.func,
+};
+
+CartButton.defaultProps = {
+  callback: () => {},
 };
