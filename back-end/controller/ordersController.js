@@ -9,10 +9,8 @@ const SUCCESS = 200;
 
 orderController.get('/', checkAuthorization, async (req, res) => {
   const { email } = req.payload;
-  console.log(email);
   const [[{ id: userId }]] = await getIdByMail(email);
   const userOrder = await getOrders(userId);
-  console.log('id--', userOrder);
   // const getOrder = await getDetailOrders(userOrder.id);
   res.status(SUCCESS).json(userOrder);
 });

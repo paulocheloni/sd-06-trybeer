@@ -1,11 +1,14 @@
 const connection = require('./connections');
 
 const checkOrders = async (sale) => {
-  const { userId, totalPrice, deliveryAddress, deliveryNumber, saleDate, status } = sale;
+  const date = new Date();
+  const trustedDate = `${date.getUTCFullYear()}/${date.getUTCMonth() + 1}/${date.getUTCDate()}`;
+  // sale.saleDate = trustedDate;
+  const { userId, totalPrice, deliveryAddress, deliveryNumber, status } = sale;
   const [{ insertId }] = await connection
     .execute('INSERT INTO sales (user_id,total_price,'
       + ' delivery_address ,delivery_number , sale_date , status) VALUES(?,?,?,?,?,?)',
-      [userId, totalPrice, deliveryAddress, deliveryNumber, saleDate, status]);
+      [userId, totalPrice, deliveryAddress, deliveryNumber, trustedDate, status]); 
   return insertId;
   // pinserir e pegar o id.
 };

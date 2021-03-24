@@ -17,9 +17,17 @@ const OrderDetail = ({ match }) => {
   });
   useEffect(() => {
     const getProd = async () => {
-      const { object, fixDate } = await getOrderInfo(match);
+      const { object, specificDate } = await getOrderInfo(match);
       setProduct(object);
-      setDate(fixDate);
+      console.log(specificDate, 'orderDetail, line 22');
+      if (specificDate) {
+        const strToDate = new Date(specificDate.sale_date);
+        const maxMonthOneDigitUTCformat = 8;
+        const filteredDate = strToDate.getUTCMonth() > maxMonthOneDigitUTCformat
+          ? `${strToDate.getUTCDate()}/${strToDate.getUTCMonth() + 1}`
+          : `${strToDate.getUTCDate()}/0${strToDate.getUTCMonth() + 1}`;
+        setDate(filteredDate);
+      }
     };
     getProd();
   // eslint-disable-next-line react-hooks/exhaustive-deps
