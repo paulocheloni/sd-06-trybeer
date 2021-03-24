@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 
 function DetailAdminCard(props) {
   const { sale, status } = props;
-  console.log(sale);
+
+  const mult = (strNum1, strNum2) => {
+    const num1 = parseFloat(strNum1);
+    const num2 = parseInt(strNum2, 10);
+    const formated = (num1 * num2).toFixed(2).replace('.', ',');
+    return formated;
+  };
+
   const formatedTotalPrice = `R$ ${sale[0].total_price.replace('.', ',')}`;
   return (
     <div
@@ -11,7 +18,7 @@ function DetailAdminCard(props) {
     >
       <div>
         <div
-          className="flex justify-between mb-3"
+          className="text-2xl flex justify-between m-5"
           data-testid={ `${sale[0].sale_id - 1}-order-card-container` }
         >
           <div
@@ -28,8 +35,7 @@ function DetailAdminCard(props) {
         {
           sale.map((product, index) => {
             console.log(product);
-            const formatedProductPrice = `${(parseFloat(product.price) * parseFloat(product.quantity)).toFixed(2)}`
-              .replace('.', ',');
+            const formatedProductPrice = mult(product.price, product.quantity);
             return (
               <div
                 key={ index }
@@ -57,7 +63,7 @@ function DetailAdminCard(props) {
                   className="m-4"
                   data-testid={ `${index}-order-unit-price` }
                 >
-                  {`(R$ ${product.price.replace('.', ',')} un)`}
+                  {`(R$ ${product.price.replace('.', ',')})`}
                 </div>
               </div>
             );
