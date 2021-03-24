@@ -57,3 +57,19 @@ export const getAllOrders = async (email) => {
 
   return requestResponse;
 };
+
+export const getOrderDetails = async (id) => {
+  const requestResponse = await api.get(`orders/${id}`)
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+
+  return requestResponse;
+};
+
+export const updateOrderStatus = async (id) => {
+  const requestResponse = await api.put(`/admin/orders/${id}`, { status: 'Entregue' })
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+
+  return requestResponse;
+};

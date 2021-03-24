@@ -30,7 +30,7 @@ function AdminOrders() {
           <div key={ index }>
             <button type="button" onClick={ () => redirectDetails(sale.id) }>
               <h2 data-testid={ `${index}-order-number` }>
-                {`Pedido ${index + 1}`}
+                {`Pedido ${sale.id}`}
               </h2>
               <p data-testid={ `${index}-order-address` }>
                 {`${sale.delivery_address}, ${sale.delivery_number}`}

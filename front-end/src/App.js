@@ -27,10 +27,10 @@ function App() {
           <Route exact path="/register" component={ UserRegister } />
           <Route exact path="/profile" component={ ClientProfile } />
           <Route exact path="/orders" component={ Orders } />
+          <Route exact path="/orders/:id" component={ OrderDetails } />
           <Route exact path="/checkout" component={ Checkout } />
           <Route exact path="/admin/profile" component={ AdminProfile } />
           <Route exact path="/admin/orders/:id" component={ AdminOrdersDetails } />
-          <Route exact path="/orders/:id" component={ OrderDetails } />
         </Switch>
       </BrowserRouter>
     </LoginProvider>

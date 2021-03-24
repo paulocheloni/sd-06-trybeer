@@ -13,9 +13,19 @@ router.post('/', rescue(async (req, res) => {
     const user = req.body;
     const { id: userId } = await LoginService.getByEmail(user.email);
     const orders = await OrdersService.getAll(userId);
-    console.log(orders);
 
     return res.status(OK).json(orders);
+  } catch (error) {
+    return res.status(BAD_REQUEST).json({ message: 'No orders found' });
+  }
+}));
+
+router.get('/:id', rescue(async (req, res) => {
+  try {
+    const { id } = req.params;
+    const orderInfo = await OrdersService.getDetails(id);
+
+    return res.status(OK).json(orderInfo);
   } catch (error) {
     return res.status(BAD_REQUEST).json({ message: 'No orders found' });
   }
