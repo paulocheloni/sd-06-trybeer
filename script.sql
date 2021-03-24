@@ -1,5 +1,3 @@
-Terminal close -- exit!
-Trybeer;
 CREATE DATABASE IF NOT EXISTS Trybeer;
 
 USE Trybeer;

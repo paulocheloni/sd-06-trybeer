@@ -6,8 +6,8 @@ const createOrder = async (id, totalPrice, streetInput, houseNumberInput) => {
   return insertId;
 };
 
-const updateSalesProduct = async (productsToAdd) => {
-  models.updateSalesProduct(productsToAdd);
+const updateSalesProduct = async (insertId, checkoutProducts) => {
+  models.updateSalesProduct(insertId, checkoutProducts);
 };
 
 const getOrdersByUser = async (id) => models.getOrdersByUser(id);

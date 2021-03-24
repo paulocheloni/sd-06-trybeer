@@ -3,24 +3,28 @@ const connection = require('./connection');
 const coll = 'sales';
 
 const createOrder = async (id, totalPrice, streetInput, houseNumberInput) => {
-  const [date] = await connection.execute('SELECT SYSDATE()');
+  const date = new Date();
   const status = 'pendente';
 
   const [result] = await connection.execute(
     `INSERT INTO Trybeer.${coll}
     (user_id, total_price, delivery_address, delivery_number, sale_date, status)
     VALUES (?, ?, ?, ?, ?, ?)`,
-    [id, totalPrice, streetInput, houseNumberInput, date[0]['SYSDATE()'], status],
+    [id, totalPrice, streetInput, houseNumberInput, date, status],
   );
 
   return result;
 };
 
-const updateSalesProduct = async (productsToAdd) => {
-  await connection.execute(
+const updateSalesProduct = async (insertId, checkoutProducts) => {
+  checkoutProducts.forEach((product) => {
+    const { id: productId, productQuantity } = product;
+
+    connection.execute(
     `INSERT INTO Trybeer.sales_products (sale_id, product_id, quantity)
-    VALUES (?)`, [productsToAdd],
-  );
+    VALUES (?, ?, ?)`, [insertId, productId, productQuantity],
+    );
+  });
 };
 
 const getOrdersByUser = async (id) => {

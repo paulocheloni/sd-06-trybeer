@@ -9,11 +9,8 @@ ordersRouter.post('/', validateToken, async (req, res) => {
   const { id: userId } = req.user;
   
   const insertId = await services.createOrder(userId, totalPrice, streetInput, houseNumberInput);
-  const productsToAdd = checkoutProducts.map(
-    ({ id: productId, productQuantity }) => [insertId, productId, productQuantity],
-  );
 
-  await services.updateSalesProduct(productsToAdd);
+  await services.updateSalesProduct(insertId, checkoutProducts);
 
   return res.status(200).json({ message: 'Order created!' });
 });
