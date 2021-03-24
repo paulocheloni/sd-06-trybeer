@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../services/Users';
+import logoVerde from '../../assets/logos/logoVerde.png'
 
-import './Login.css';
+import './Login.scss';
 
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
@@ -34,8 +35,13 @@ export default function Login() {
     return setPassword(value);
   };
   return (
-    <div className="loginForm">
-      <form className="loginInput">
+    <>
+    <div className='overlay' />
+    <div className="entrance" />
+    <section className="defaultPage">
+      <form className="loginForm">
+        <img src={logoVerde} width="150px" className="logo"/>
+        <section className="loginInputs">
         <Input
           title="Email"
           type="text"
@@ -52,18 +58,23 @@ export default function Login() {
           onChange={ setField }
           placeholder="Informe a senha"
         />
+        </section>
+        <section className="loginButtons">
         <Button
-          title="Entrar"
+          title="ENTRAR"
           testId="signin-btn"
           isDisabled={ isDisabled }
           onClick={ () => userRedirect(email, password, history) }
+          className="golden"
         />
         <Button
-          title="Ainda não tenho conta"
+          title="CRIAR CONTA"
           testId="no-account-btn"
           onClick={ () => history.push('/register') }
         />
+        </section>
       </form>
-    </div>
+    </section>
+    </>
   );
 }
