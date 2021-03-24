@@ -29,7 +29,7 @@ const createUser = async ({ name, email, password, role }) => {
   };
 };
 
-const updateUser = async (name, email) => {
+const updateUser = async ({ name, email }) => {
   const query = 'UPDATE users SET name=? WHERE email=?';
   await connection.execute(query, [name, email]);
 
