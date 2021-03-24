@@ -31,7 +31,7 @@ function Card({ product, testIdNumber }) {
       className="flex flex-col items-center justify-center border-2
       border-gray-800 w-64 h-96 m-5"
     >
-      <div className="relative side-menu-container flex flex-col space-y-4 items-center">
+      <div className="relative flex flex-col space-y-4 items-center">
         <img
           src={ productUrlImage }
           alt={ productName }
@@ -43,7 +43,7 @@ function Card({ product, testIdNumber }) {
           { productStringPrice }
         </p>
       </div>
-      <div className="relative side-menu-container flex justify-center items-center">
+      <div className="relative flex justify-center items-center">
         <button
           type="button"
           onClick={ () => clickPlus(id, quantity, price) }

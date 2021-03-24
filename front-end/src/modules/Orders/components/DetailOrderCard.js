@@ -2,13 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function DetailOrderCard(props) {
-  const five = 5;
+  const nine = 9;
   const { sale } = props;
-  console.log(sale);
-  const formatDate = sale[0].sale_date
-    .substr(five, five).replace('-', '/').split('/').reverse()
-    .join('/');
+  const fullDate = new Date(sale[0].sale_date);
+  const day = fullDate.getDate();
+  const month = fullDate.getMonth();
+  const formatMonth = month < nine ? `0${month + 1}` : `${month + 1}`;
+  const formatDate = `${day}/${formatMonth}`;
   const formatedTotalPrice = `R$ ${sale[0].total_price.replace('.', ',')}`;
+
+  const mult = (strNum1, strNum2) => {
+    const num1 = parseFloat(strNum1);
+    const num2 = parseInt(strNum2, 10);
+    const formated = (num1 * num2).toFixed(2).replace('.', ',');
+    return formated;
+  };
+
   return (
     <div
       className="m-12"
@@ -19,7 +28,7 @@ function DetailOrderCard(props) {
           data-testid={ `${sale[0].sale_id - 1}-order-card-container` }
         >
           <div
-            data-testid={ `${sale[0].sale_id - 1}-order-number` }
+            data-testid="order-number"
             className="text-4xl"
           >
             Pedido
@@ -28,40 +37,44 @@ function DetailOrderCard(props) {
           </div>
           <div
             className="text-2xl"
-            data-testid={ `${sale[0].sale_id - 1}-order-date` }
+            data-testid="order-date"
           >
             {formatDate}
           </div>
         </div>
-        {sale.map((product, index) => (
-          <div
-            key={ index }
-            className="flex justify-between border-2
-      border-gray-800 text-2xl"
-          >
+        {sale.map((product, index) => {
+          const formatedPrice = `R$ ${mult(product.price, product.quantity)}`;
+          return (
             <div
-              className="m-4"
-              data-testid={ `${index}-product-qtd` }
+              key={ index }
+              className="flex justify-between border-2
+        border-gray-800 text-2xl"
             >
-              {product.quantity}
+              <div
+                className="m-4"
+                data-testid={ `${index}-product-qtd` }
+              >
+                {product.quantity}
+              </div>
+              <div
+                className="m-4"
+                data-testid={ `${index}-product-name` }
+              >
+                {product.name}
+              </div>
+              <div
+                className="m-4"
+                data-testid={ `${index}-product-total-value` }
+              >
+                {formatedPrice}
+              </div>
             </div>
-            <div
-              className="m-4"
-              data-testid={ `${index}-product-name` }
-            >
-              {product.name}
-            </div>
-            <div
-              className="m-4"
-              data-testid={ `${index}-product-price` }
-            >
-              {`R$ ${product.price.replace('.', ',')}`}
-            </div>
-          </div>
-        ))}
+
+          );
+        })}
         <div
           className="flex justify-end mt-3 text-2xl"
-          data-testid={ `${sale[0].sale_id - 1}-order-total-value` }
+          data-testid="order-total-value"
         >
           Total:
           {' '}

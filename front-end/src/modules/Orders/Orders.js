@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { Link, useHistory } from 'react-router-dom';
+import api from '../../axios/api';
 import TopBar from '../../design-components/TopBar';
 import CardClient from './components/CardClient';
 
 function Orders() {
+  const history = useHistory();
   const [loading, setLoading] = useState(true);
   const [sales, setSales] = useState([]);
+
   useEffect(() => {
-    axios.get('http://localhost:3001/sales')
+    const user = localStorage.getItem('user');
+    if (!user) history.push('/');
+  }, [history]);
+
+  useEffect(() => {
+    api
+      .get('/sales')
       .then((response) => {
         console.log(response.data);
         setSales(response.data);
