@@ -9,21 +9,24 @@ const createOrder = async (totalPrice, street, checkoutProducts) => {
   {
     method: 'POST',
     headers: {
-      ...contentType,
+      'Content-Type': 'application/json',
       'Authorization': user.token,
     },
-    body: { totalPrice, streetInput, houseNumberInput, checkoutProducts },
+    body: JSON.stringify({ totalPrice, streetInput, houseNumberInput, checkoutProducts }),
   })
   .then((response) => response.json());
 }
 
-const getOrdersByUser = () => {
+const getOrdersByUser = async () => {
   const user = JSON.parse(localStorage.getItem('user'));
   
   return fetch(`${url}`,
     {
       method: 'GET',
-      headers: { Authorization: user.token }
+      
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': user.token }
     }
   ).then((response) => response.json());
 }

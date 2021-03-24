@@ -7,6 +7,8 @@ const ordersRouter = new Router();
 ordersRouter.post('/', validateToken, async (req, res) => {
   const { totalPrice, streetInput, houseNumberInput, checkoutProducts } = req.body;
   const { id } = req.user;
+
+  console.log(req.body)
   
   const insertId = await services.createOrder(id, totalPrice, streetInput, houseNumberInput);
 
