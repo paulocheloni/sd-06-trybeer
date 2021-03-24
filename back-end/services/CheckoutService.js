@@ -29,7 +29,8 @@ const CheckoutServices = async (req, res) => {
     const unityPrice = price * productQuantity;
     return (Math.trunc(((await total) + unityPrice) * 100) / 100);
   }, 0);
-  const data = { id, totalPrice, deliveryAddress, deliveryNumber, salesProducts, saleDate, saleStatus };
+  const data = {
+    id, totalPrice, deliveryAddress, deliveryNumber, salesProducts, saleDate, saleStatus };
   await createSale(data);
 
   return res.status(OK).json(data);

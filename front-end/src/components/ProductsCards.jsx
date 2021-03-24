@@ -32,8 +32,6 @@ function ProductsCard({ element, index }) {
     else setProductQuantity(ola);
   }, [qnt]);
 
-  // url_imagea
-
   const clickPlus = () => {
     setQnt(qnt + 1);
     const priceTotal = parseFloat(amount) + parseFloat(price);
@@ -51,9 +49,10 @@ function ProductsCard({ element, index }) {
   const commaPrice = price.replace('.', ',');
 
   return (
-    <div className="productCards">
+    <div>
+      {/* className="productCards" */}
       <img
-        src={ urlImage }
+        // src={ urlImage }
         data-testid={ `${index}-product-img` }
         alt="beer"
       />

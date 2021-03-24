@@ -10,7 +10,7 @@ function SideBar() {
   } = useContext(BeersAppContext);
 
   return (
-    <div className="side-menu-container">
+    <div>
       <button
         type="button"
         data-testid="side-menu-item-products"

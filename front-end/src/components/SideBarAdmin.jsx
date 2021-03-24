@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import Header from './HeaderComponent';
+import BeersAppContext from '../context/BeersAppContext';
 
-function SideBarAdmin() {
+function AdminSideBar() {
   const history = useHistory();
+  const {
+    setUser,
+  } = useContext(BeersAppContext);
 
   return (
     <div className="admin-side-bar-container">
-      <Header text="TryBeer" />
+      <h1>TryBeer</h1>
       <button
         type="button"
         data-testid="side-menu-item-orders"
-        onClick={ () => history.push('/admin/home') }
+        onClick={ () => history.push('/admin/orders') }
         className="bttn_sidebar_admin"
 
       >
@@ -28,7 +31,10 @@ function SideBarAdmin() {
       <button
         type="button"
         data-testid="side-menu-item-logout"
-        onClick={ () => history.push('/login') }
+        onClick={ () => {
+          setUser({});
+          history.push('/login');
+        } }
         className="bttn_sidebar_admin_botton"
       >
         Sair
@@ -37,4 +43,4 @@ function SideBarAdmin() {
   );
 }
 
-export default SideBarAdmin;
+export default AdminSideBar;

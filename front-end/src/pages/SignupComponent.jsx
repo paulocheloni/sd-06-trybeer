@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import { useHistory } from 'react-router';
 
 import BeersAppContext from '../context/BeersAppContext';
 import fetchApiJsonBody from '../service/fetchApi';
@@ -9,12 +9,16 @@ import '../style/LoginRegister.css';
 
 const logo = require('../images/logo_provisorio.png');
 
-function Signup({ history }) {
+function Signup() {
+  const history = useHistory();
   const {
     setUser,
     setProductQuantity,
     setAmount,
+    user,
   } = useContext(BeersAppContext);
+
+  if (user.token) history.push('/products');
 
   const [checked, setChecked] = useState(false);
   const [valid, setValid] = useState(true);
@@ -131,9 +135,5 @@ function Signup({ history }) {
     </div>
   );
 }
-
-Signup.propTypes = {
-  history: PropTypes.node.isRequired,
-};
 
 export default Signup;
