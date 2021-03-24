@@ -1,8 +1,9 @@
 const connection = require('./connections');
 
 const checkOrders = async (sale) => {
-  console.log('sale @ checkoutModel line 4', sale)
-  console.log(Object.values(sale));
+  const date = new Date();
+  const trustedDate = `${date.getUTCFullYear()}/${date.getUTCMonth() + 1}/${date.getUTCDate()}`
+  sale.saleDate = trustedDate;  
   const { userId, totalPrice, deliveryAddress, deliveryNumber, saleDate, status } = sale;
   const [{ insertId }] = await connection
     .execute('INSERT INTO sales (user_id,total_price,'

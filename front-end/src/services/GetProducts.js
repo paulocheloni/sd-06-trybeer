@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const GetProducts = async (setProducts) => {
   const response = await axios.get('http://localhost:3001/products');
-  console.log(setProducts);
   const result = await response.data;
   await response.data.forEach((element, index) => {
     result[index] = { ...element, productQuantity: 0 };

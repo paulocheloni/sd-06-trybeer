@@ -7,7 +7,6 @@ const checkoutController = Router();
 const SUCCESS = 200;
 
 checkoutController.post('/', checkAuthorization, async (req, res) => {
-  console.log(req.body, 'linha 10 checkoutController');
   const { sale, productsList } = req.body;
   const { email } = req.payload;
   const [[{ id: userId }]] = await getIdByMail(email);
