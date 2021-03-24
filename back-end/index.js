@@ -7,6 +7,7 @@ const LoginController = require('./controllers/LoginController');
 const handleError = require('./middlewares/handleError');
 const OrdersController = require('./controllers/OrdersController');
 const OrdersProductsController = require('./controllers/OrdersProductsController');
+const AdminController = require('./controllers/AdminController');
 
 const app = express();
 const port = 3001;
@@ -19,6 +20,7 @@ app.use('/products', ProductsController);
 app.use('/login', LoginController);
 app.use('/orders', OrdersController);
 app.use('/sale_product', OrdersProductsController);
+app.use('/admin', AdminController);
 
 app.use('/images', express.static(__dirname.concat('/images')));
 

@@ -7,12 +7,16 @@ const createOrderService = async (sale) => {
     deliveryAddress,
     deliveryNumber,
   } = sale;
-  const status = 'pendente';
+
+  const status = 'Pendente';
+
   const newOrder = await ordersModel
   .createOrder({ userId, totalPrice, deliveryAddress, deliveryNumber, status });
   
   return newOrder;
 };
+
+const alter = async ({ id, status }) => ordersModel.alter({ id, status });
 
 const getAll = async () => ordersModel.getAll();
 
@@ -22,4 +26,5 @@ module.exports = {
   createOrderService,
   getAll,
   getAllByUser,
+  alter,
 };
