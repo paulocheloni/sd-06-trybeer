@@ -32,7 +32,7 @@ app.put('/profile/edit',
 app.get('/products', ProductsService.findAllProducts);
 
 app.post('/orders', 
-  // rescue(Utils.verifyToken), 
+  rescue(Utils.verifyToken), 
   rescue(SalesService.registerNewOrder));
 
 app.get('/orders/:useremail', rescue(SalesService.getOrdersByUser));

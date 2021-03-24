@@ -41,11 +41,11 @@ const CompMenuTop = styled.header`
     }
     .hamburger {
       display: none;
-      @media (max-width: 600px) {
+      @media (max-width: 940px) {
         display: flex;
       }
     }
-    @media (max-width: 600px) {
+    @media (max-width: 940px) {
       justify-content: space-between;
     }
   `}

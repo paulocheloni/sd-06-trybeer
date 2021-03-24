@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { GlobalContext } from '../../Contexts/GlobalContext';
 
 import MenuTopAdmin from '../../Components/MenuTopAdmin';
 import SideBarAdmin from '../../Components/SideBarAdmin';
@@ -6,24 +8,28 @@ import CardAdminDetails from '../../Components/CardAdminDetails';
 
 import S from './styles';
 
-const AdminOrderDetails = () => (
-  <S.Container>
+const AdminOrderDetails = () => {
+  const { stateSideBarAdmin } = useContext(GlobalContext);
 
-    <MenuTopAdmin dataTestid="top-title" title="Meu perfil" />
+  return (
+    <S.Container>
 
-    <S.Context>
+      <MenuTopAdmin dataTestid="top-title" title="Meu perfil" />
 
-      <SideBarAdmin />
+      <S.Context>
 
-      <S.ContainerCard>
+        <SideBarAdmin />
 
-        <CardAdminDetails />
+        <S.ContainerCard stateSideBarAdmin={ stateSideBarAdmin }>
 
-      </S.ContainerCard>
+          <CardAdminDetails />
 
-    </S.Context>
+        </S.ContainerCard>
 
-  </S.Container>
-);
+      </S.Context>
+
+    </S.Container>
+  );
+};
 
 export default AdminOrderDetails;

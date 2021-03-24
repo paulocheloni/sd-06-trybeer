@@ -111,7 +111,7 @@ const ColorStatus = styled.div`
 
     position: absolute;
 
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 0 0 5px;
     
     background: ${pending
     ? theme.colors.colorStatusYellow

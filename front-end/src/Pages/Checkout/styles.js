@@ -5,6 +5,8 @@ const Container = styled.div`
     background-color: ${theme.colors.primary};
     width: 100%;
     height: 100vh;
+
+    padding-bottom: 70px;
     
   `}
 `;

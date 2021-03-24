@@ -15,7 +15,6 @@ const Container = styled.div`
   ${({ theme, pending, stateSideBarAdmin }) => css`
     width: 70%;
     padding: 15px 20px 15px 40px;
-    margin-bottom: 20px;
     font-weight: 550;
     /* opacity: ${stateSideBarAdmin && '0.2'}; */
     position: relative;
@@ -71,14 +70,34 @@ const Content = styled.div`
 `;
 
 const ContentLeft = styled.div`
-  ${() => css`
+  ${({ theme, pending }) => css`
     margin-bottom: 30px;
 
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+
+    > div {
+      display: flex;
+      justify-content: space-between;
+
+      > h1 {
+        font-size: 22px;
+        font-weight: 500;
+      }
+      > h2 {
+        font-size: 22px;
+        font-weight: 500;
+        color: ${pending
+    ? theme.colors.colorStatusYellow
+    : theme.colors.colorStatusGreen};
+      }
+    }
 
     > h3 {
       margin-top: 10px;
+      font-size: 16px;
+      font-weight: 400;
     }
   `}
 `;
@@ -92,8 +111,17 @@ const ContentRight = styled.div`
     align-items: center;
 
     > h1 {
+      font-size: 22px;  
+      font-weight: 500;
+
       > span {
-        font-size: 22px;  
+        font-size: 16px;  
+        font-weight: 400;
+      }
+
+      @media (max-width: 480px) {
+        display: flex;
+        flex-direction: column;
       }
     }
   `}

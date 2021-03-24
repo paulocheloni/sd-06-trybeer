@@ -8,16 +8,18 @@ import { GlobalContext } from '../../Contexts/GlobalContext';
 
 import S from './styles';
 
-const navigationPages = ({ history }, route) => {
+const navigationPages = ({ history }, route, setStateSideBarAdmin) => {
   if (route === '/login') localStorage.removeItem('user');
 
   history.push(route);
+
+  setStateSideBarAdmin(true);
 };
 
 const SideBarAdmin = () => {
   const [route, setRoute] = useState();
 
-  const { stateSideBarAdmin } = useContext(GlobalContext);
+  const { stateSideBarAdmin, setStateSideBarAdmin } = useContext(GlobalContext);
 
   const history = useHistory();
 
@@ -34,7 +36,7 @@ const SideBarAdmin = () => {
         className="admin-side-bar-container"
       >
         <S.Navigation
-          onClick={ () => navigationPages(params, '/admin/orders') }
+          onClick={ () => navigationPages(params, '/admin/orders', setStateSideBarAdmin) }
           data-testid="side-menu-item-orders"
         >
           <FaListAlt
@@ -45,7 +47,9 @@ const SideBarAdmin = () => {
           Pedidos
         </S.Navigation>
         <S.Navigation
-          onClick={ () => navigationPages(params, '/admin/profile') }
+          onClick={
+            () => navigationPages(params, '/admin/profile', setStateSideBarAdmin)
+          }
           data-testid="side-menu-item-profile"
         >
           <FaUserAlt

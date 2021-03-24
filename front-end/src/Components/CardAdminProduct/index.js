@@ -10,8 +10,7 @@ const CardAdminProduct = ({ product, index }) => (
       <img src="/images/image-heineken.png" alt="Heineken 600ml" />
 
       <S.DescriptionProducts>
-        <div>
-
+        <div className="content-left-product">
           <span data-testid={ `${index}-product-name` }>
             {product.description}
           </span>
@@ -19,18 +18,19 @@ const CardAdminProduct = ({ product, index }) => (
           <p data-testid={ `${index}-order-unit-price` }>
             {`(R$ ${(product.valueTotal).replace('.', ',')})`}
           </p>
-
         </div>
 
-        <span data-testid={ `${index}-product-qtd` }>
-          {product.quantity}
-        </span>
-        -
-        <span data-testid={ `${index}-product-total-value` }>
-          {`R$ ${((product.valueTotal * product.quantity)
-            .toFixed(2))
-            .replace('.', ',')}`}
-        </span>
+        <div className="content-right-product">
+          <span data-testid={ `${index}-product-qtd` }>
+            {product.quantity}
+          </span>
+          -
+          <p data-testid={ `${index}-product-total-value` }>
+            {`R$ ${((product.valueTotal * product.quantity)
+              .toFixed(2))
+              .replace('.', ',')}`}
+          </p>
+        </div>
 
       </S.DescriptionProducts>
 

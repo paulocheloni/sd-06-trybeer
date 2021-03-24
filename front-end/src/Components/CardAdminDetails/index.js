@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+// import { useHistory } from 'react-router-dom';
 
 import { GlobalContext } from '../../Contexts/GlobalContext';
 import { getAdminOrderById, updateStatus } from '../../Services/Apis';
@@ -8,9 +9,15 @@ import CardAdminProduct from '../CardAdminProduct';
 import S from './styles';
 
 const modifyStatus = async (setPending, id) => {
+  // const time = 1000;
+
   setPending(false);
 
   await updateStatus(id);
+
+  // setTimeout(() => {
+  //   history.push('/admin/orders');
+  // }, time);
 };
 
 const CardAdminDetails = () => {
@@ -21,12 +28,12 @@ const CardAdminDetails = () => {
 
   const { id } = stateDetailsSale;
 
+  // const history = useHistory();
+
   useEffect(() => {
     const fetchMyOrders = async () => {
       const fetchData = await getAdminOrderById(id);
       setOrders(fetchData);
-
-      console.log(fetchData.status);
 
       if (fetchData.status === 'Pendente') {
         setPending(true);
@@ -42,17 +49,19 @@ const CardAdminDetails = () => {
     <S.Container pending={ pending }>
       <S.ColorStatus pending={ pending } />
       <S.ColorStatusBottom pending={ pending } />
-      {console.log(pending)}
+
       {orders && (
         <S.Content>
-          <S.ContentLeft>
-            <h1 data-testid="order-number">
-              {`Pedido ${stateDetailsSale.id}`}
-            </h1>
+          <S.ContentLeft pending={ pending }>
+            <div>
+              <h1 data-testid="order-number">
+                {`Pedido ${stateDetailsSale.id}`}
+              </h1>
 
-            <h2 data-testid="order-status">
-              {pending ? 'Pendente' : 'Entregue'}
-            </h2>
+              <h2 data-testid="order-status">
+                {pending ? 'Pendente' : 'Entregue'}
+              </h2>
+            </div>
 
             <h3>{`${stateDetailsSale.address}, ${stateDetailsSale.number}`}</h3>
           </S.ContentLeft>

@@ -15,7 +15,7 @@ const Context = styled.div`
 `;
 const ContainerCard = styled.div`
   ${({ theme, stateSideBarAdmin }) => css`
-    opacity: ${stateSideBarAdmin && '0.2'};
+    opacity: ${!stateSideBarAdmin && '0.2'};
     width: 100%;
     height: 100%;
     padding: 70px 0;
