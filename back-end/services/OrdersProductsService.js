@@ -9,8 +9,11 @@ const getAll = async () => ordersProductsModel.getAll();
 
 const getById = async (id) => ordersProductsModel.getById(id);
 
+const getByIdAdmin = async (id) => ordersProductsModel.getByIdAdmin(id);
+
 module.exports = {
   createOrderProductService,
   getAll,
   getById,
+  getByIdAdmin,
 };

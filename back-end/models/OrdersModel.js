@@ -32,8 +32,15 @@ const getAllByUser = async (id) => {
   return orders;
 };
 
+const alter = async ({ id, status }) => {
+  await connection.execute(
+    'UPDATE sales SET status = ? WHERE id = ?', [status, id],
+  );
+};
+
 module.exports = {
   createOrder,
   getAll,
   getAllByUser,
+  alter,
 };

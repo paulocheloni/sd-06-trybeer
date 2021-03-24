@@ -23,6 +23,18 @@ const getById = async (id) => {
     ON products.id = sales_products.product_id
     WHERE sales_products.sale_id = ${id}`,
     [id]);
+  return order;
+};
+
+const getByIdAdmin = async (id) => {
+  const [order] = await connection.execute(`SELECT
+    products.name, products.price, sales_products.quantity,
+    sales_products.sale_id, sales.status, sales.total_price
+    FROM sales_products INNER JOIN products
+    ON products.id = sales_products.product_id
+    INNER JOIN sales ON sales.id = sales_products.sale_id
+    WHERE sales_products.sale_id = ?`,
+    [id]);
     console.log(order);
   return order;
 };
@@ -31,4 +43,5 @@ module.exports = {
   createOrderProduct,
   getAll,
   getById,
+  getByIdAdmin,
 };

@@ -10,7 +10,7 @@ function AdminOrders({ history }) {
   const [orders, setOrders] = useState([]);
   const { user } = useContext(TrybeerContext);
   const fetchOrders = async () => {
-    const allOrders = await verifyToken('orders/', user, history);
+    const allOrders = await verifyToken('admin/orders/', user, history);
     setOrders(allOrders);
   };
 
@@ -22,10 +22,17 @@ function AdminOrders({ history }) {
     <div>
       <TopMenu />
       {
-        orders.map(({ id, delivery_address: deliveryAddress,
-          delivery_number: deliveryNumber, total_price: totalPrice, status }, index) => (
+        orders.map(({
+          id,
+          delivery_address: deliveryAddress,
+          delivery_number: deliveryNumber,
+          total_price: totalPrice,
+          status,
+        }, index) => (
           <div key={ id }>
-            <Link to={ `/admin/orders/${id}` }>
+            <Link
+              to={ { pathname: `/admin/orders/${id}`, state: { id } } }
+            >
               <div data-testid={ `${index}-order-number` }>
                 {`Pedido ${id}` }
               </div>
