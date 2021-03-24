@@ -1,91 +1,92 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+
+import { GlobalContext } from '../../Contexts/GlobalContext';
+import { getAdminOrderById, updateStatus } from '../../Services/Apis';
+
+import CardAdminProduct from '../CardAdminProduct';
 
 import S from './styles';
 
-const CardAdminDetails = () => (
-  <S.Container>
+const modifyStatus = async (setPending, id) => {
+  setPending(false);
 
-    <S.ColorStatus />
-    <S.ColorStatusBottom />
+  await updateStatus(id);
+};
 
-    <S.Content>
-      <S.ContentLeft>
-        <h1>Pedido 1</h1>
-        <h3>Rua Santa Ana, 340</h3>
-      </S.ContentLeft>
+const CardAdminDetails = () => {
+  const [orders, setOrders] = useState();
+  const [pending, setPending] = useState(true);
 
-      <S.Products>
-        <img src="/images/image-heineken.png" alt="Heineken 600ml" />
+  const { stateDetailsSale } = useContext(GlobalContext);
 
-        <S.DescriptionProducts>
-          <div>
-            {/* <span>Heineken 600ml</span>
-            <p>R$ 7,50</p> */}
-          </div>
+  const { id } = stateDetailsSale;
 
-          <span>2 - R$ 14,00</span>
-        </S.DescriptionProducts>
+  useEffect(() => {
+    const fetchMyOrders = async () => {
+      const fetchData = await getAdminOrderById(id);
+      setOrders(fetchData);
 
-        <S.ButtonProduct
-          type="button"
-        >
-          Ver Produto
-        </S.ButtonProduct>
-      </S.Products>
+      console.log(fetchData.status);
 
-      <S.Products>
-        <img src="/images/image-heineken.png" alt="Heineken 600ml" />
+      if (fetchData.status === 'Pendente') {
+        setPending(true);
+      } else {
+        setPending(false);
+      }
+    };
 
-        <S.DescriptionProducts>
-          <div>
-            {/* <span>Heineken 600ml</span>
-            <p>R$ 7,50</p> */}
-          </div>
+    fetchMyOrders();
+  }, [id]);
 
-          <span>2 - R$ 14,00</span>
-        </S.DescriptionProducts>
+  return (
+    <S.Container pending={ pending }>
+      <S.ColorStatus pending={ pending } />
+      <S.ColorStatusBottom pending={ pending } />
+      {console.log(pending)}
+      {orders && (
+        <S.Content>
+          <S.ContentLeft>
+            <h1 data-testid="order-number">
+              {`Pedido ${stateDetailsSale.id}`}
+            </h1>
 
-        <S.ButtonProduct
-          type="button"
-        >
-          Ver Produto
-        </S.ButtonProduct>
-      </S.Products>
+            <h2 data-testid="order-status">
+              {pending ? 'Pendente' : 'Entregue'}
+            </h2>
 
-      <S.Products>
-        <img src="/images/image-heineken.png" alt="Heineken 600ml" />
+            <h3>{`${stateDetailsSale.address}, ${stateDetailsSale.number}`}</h3>
+          </S.ContentLeft>
 
-        <S.DescriptionProducts>
-          <div>
-            {/* <span>Heineken 600ml</span>
-            <p>R$ 7,50</p> */}
-          </div>
+          {orders.products.map((product, index) => (
+            <CardAdminProduct
+              key={ index }
+              product={ product }
+              index={ index }
+            />
+          ))}
 
-          <span>2 - R$ 14,00</span>
-        </S.DescriptionProducts>
+          <S.ContentRight>
+            <h1 data-testid="order-total-value">
+              <span>Valor total:</span>
+              {' '}
+              R$
+              {' '}
+              {(!orders.valueTotal ? '' : orders.valueTotal).replace('.', ',')}
+            </h1>
 
-        <S.ButtonProduct
-          type="button"
-        >
-          Ver Produto
-        </S.ButtonProduct>
-      </S.Products>
+            <S.ConfirmButton
+              type="button"
+              pending={ pending }
+              data-testid="mark-as-delivered-btn"
+              onClick={ () => modifyStatus(setPending, id) }
+            >
+              Marcar como entregue
+            </S.ConfirmButton>
+          </S.ContentRight>
+        </S.Content>
+      )}
 
-      <S.ContentRight>
-        <h1>
-          <span>Valor total:</span>
-          {' '}
-          R$ 2,20
-        </h1>
-        <h2>Entregue</h2>
-      </S.ContentRight>
-    </S.Content>
-
-    <S.ConfirmButton>
-      Confirmar entrega
-    </S.ConfirmButton>
-
-  </S.Container>
-);
-
+    </S.Container>
+  );
+};
 export default CardAdminDetails;

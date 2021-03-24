@@ -1,14 +1,22 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { GlobalContext } from '../../Contexts/GlobalContext';
+import { updateStatus } from '../../Services/Apis';
 
 import S from './styles';
 
-const redirectOrderDetails = (setPending, history, id) => {
-  setPending(false);
+const redirectOrderDetails = ({ history, id, address, number, setStateDetailsSale }) => {
+  setStateDetailsSale({ id, address, number });
+
   history.push(`/admin/orders/${id}`);
+};
+
+const modifyStatus = async (setPending, id) => {
+  setPending(false);
+
+  await updateStatus(id);
 };
 
 const CardAdminStatus = ({
@@ -20,14 +28,26 @@ const CardAdminStatus = ({
   index,
 }) => {
   const [pending, setPending] = useState(true);
-  const { stateSideBarAdmin } = useContext(GlobalContext);
+  const { stateSideBarAdmin, setStateDetailsSale } = useContext(GlobalContext);
+
+  useEffect(() => {
+    if (status === 'Entregue') setPending(false);
+  }, [status]);
 
   const history = useHistory();
+
+  const params = {
+    id,
+    number,
+    address,
+    history,
+    setStateDetailsSale,
+  };
 
   return (
     <S.Container
       pending={ pending }
-      onClick={ () => history.push(`/admin/orders/${id}`) }
+      onClick={ () => redirectOrderDetails(params) }
     >
 
       <S.ColorStatus
@@ -63,7 +83,7 @@ const CardAdminStatus = ({
 
       <S.ConfirmButton
         className="confirm"
-        onClick={ () => redirectOrderDetails(setPending, history, id) }
+        onClick={ () => modifyStatus(setPending, id) }
       >
         Confirmar entrega
       </S.ConfirmButton>

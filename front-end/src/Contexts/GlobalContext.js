@@ -12,6 +12,7 @@ export const GlobalProvider = ({ children }) => {
   const [stateIsFixed, setStateIsFixed] = useState('fixed');
   const [stateIsOpacity, setStateIsOpacity] = useState('1');
   const [stateSaleProduct, setStateSaleProduct] = useState([]);
+  const [stateDetailsSale, setStateDetailsSale] = useState({});
 
   const context = {
     stateSideBar,
@@ -30,6 +31,8 @@ export const GlobalProvider = ({ children }) => {
     setStateIsOpacity,
     stateSaleProduct,
     setStateSaleProduct,
+    stateDetailsSale,
+    setStateDetailsSale,
   };
 
   return (

@@ -49,6 +49,16 @@ export const updateUser = async (name, email, token) => {
   return response;
 };
 
+export const updateStatus = async (id) => {
+  const response = await axios({
+    method: 'PUT',
+    url: `http://localhost:3001/admin/orders/${id}`,
+  }).then((res) => res.data)
+    .catch((err) => err.response.data);
+
+  return response;
+};
+
 export const findAllProducts = async () => {
   const products = await axios({
     url: 'http://localhost:3001/products',

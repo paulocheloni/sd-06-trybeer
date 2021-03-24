@@ -26,7 +26,6 @@ const AdminOrders = () => {
   useEffect(() => {
     const fetchMyOrders = async () => {
       const fetchData = await getAllAdminOrders();
-      console.log(fetchData);
       setOrders(fetchData);
     };
     fetchMyOrders();

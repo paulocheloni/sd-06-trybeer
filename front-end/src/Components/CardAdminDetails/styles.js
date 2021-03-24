@@ -43,8 +43,6 @@ const Container = styled.div`
     transition: background 0.3s;
 
     &:hover {
-      background: ${pending && theme.colors.borderInput};
-
       .content-left {
         margin-left: ${pending && '200px'};
 
@@ -101,50 +99,6 @@ const ContentRight = styled.div`
   `}
 `;
 
-const Products = styled.div`
-  ${({ theme }) => css`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid ${theme.colors.borderInput}; 
-
-    > img {
-      height: 100px;
-      margin-left: 20px;
-      margin-right: 40px;
-    }
-  `}
-`;
-
-const DescriptionProducts = styled.div`
-  ${() => css`
-    width: 100%;
-    height: 100%;
-    margin-right: 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    > div {
-      height: 100%;
-      padding: 20px 0;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    > span {
-      font-size: 22px;
-    }
-  `}
-`;
-
 const ColorStatus = styled.div`
   ${({ theme, pending }) => css`
     width: 20px;
@@ -180,46 +134,7 @@ const ColorStatusBottom = styled.div`
 `;
 
 const ConfirmButton = styled.button`
-  ${({ theme }) => css`
-    width: 180px;
-    height: 70px;
-
-    font-size: 18px;
-    font-weight: 550;
-    color: #353535;
-
-    position: absolute;
-    /* left: 50%;
-    transform: translateX(-50%); */
-
-    opacity: 1;
-
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 0 5px ${theme.colors.shadowCards};
-    
-    background: ${theme.colors.colorStatusYellow};
-
-    animation: ${animate} 0.2s;
-
-    @media (max-width: 900px) {
-      animation: ${animate} 0.5s;
-    }
-
-    display: none;
-
-    cursor: pointer;
-    outline: none;
-    transition: filter 0.3s;
-
-    &:hover {
-      filter: brightness(0.9);
-    }
-  `}
-`;
-
-const ButtonProduct = styled.button`
-  ${({ theme }) => css`
+  ${({ theme, pending }) => css`
     width: 180px;
     height: 50px;
 
@@ -231,7 +146,21 @@ const ButtonProduct = styled.button`
     border-radius: 5px;
     box-shadow: 0 0 5px ${theme.colors.shadowCards};
     
-    background: yellow;
+    background: ${theme.colors.colorStatusYellow};
+
+    display: ${!pending && 'none'};
+
+    @media (max-width: 900px) {
+      animation: ${animate} 0.5s;
+    }
+
+    cursor: pointer;
+    outline: none;
+    transition: filter 0.3s;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
   `}
 `;
 
@@ -241,9 +170,6 @@ export default {
   ColorStatus,
   ConfirmButton,
   ColorStatusBottom,
-  Products,
   ContentLeft,
   ContentRight,
-  DescriptionProducts,
-  ButtonProduct,
 };

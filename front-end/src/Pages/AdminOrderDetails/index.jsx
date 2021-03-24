@@ -16,6 +16,7 @@ const AdminOrderDetails = () => (
       <SideBarAdmin />
 
       <S.ContainerCard>
+
         <CardAdminDetails />
 
       </S.ContainerCard>
