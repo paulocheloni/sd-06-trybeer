@@ -34,14 +34,17 @@ const ContainerOrders = styled.div`
 const CardOrder = styled.div`
   ${({ theme }) => css`
     width: 60%;
-    height: 200px;
+    height: 100px;
     margin-bottom: 20px;
     font-size: 20px;
     color: ${theme.colors.text};
     background: ${theme.colors.primary};
     box-shadow: 0 0 5px ${theme.colors.shadowCards};
     border-radius: 5px;
-    padding: 20px;
+    padding: 15px 20px 15px 40px;
+
+    border-bottom: 10px solid ${theme.colors.borderInput};
+    position: relative;
 
     cursor: pointer;
 
@@ -50,30 +53,30 @@ const CardOrder = styled.div`
     &:hover {
       opacity: 0.7;
     }
-
     @media (max-width: 1000px) {
       width: 70%;
     }
-
     @media (max-width: 700px) {
       width: 100%;
     }
-
     @media (max-width: 600px) {
       width: 100%;
       margin-bottom: 10px;
     }
-
     > p {
       text-align: right;
-      margin-top: 115px;
+      margin-top: 10px;
       font-size: 24px;
       font-weight: 600;
     }
-
     > div {
       display: flex;
       justify-content: space-between;
+
+      .order-number {
+        font-weight: 600;
+        font-size: 24px;
+      }
 
       > h2 {
         font-size: 20px;
@@ -83,8 +86,26 @@ const CardOrder = styled.div`
   `}
 `;
 
+const ColorStatus = styled.div`
+  ${({ theme, pending }) => css`
+    width: 20px;
+    height: 100px;
+    left: 0;
+    top: 0;
+
+    position: absolute;
+
+    border-radius: 5px 0 0 5px;
+    
+    background: ${pending
+    ? theme.colors.colorStatusYellow
+    : theme.colors.colorStatusGreen};
+  `}
+`;
+
 export default {
   Container,
   ContainerOrders,
   CardOrder,
+  ColorStatus,
 };

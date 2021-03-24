@@ -38,7 +38,7 @@ const Container = styled.div`
 
     border-bottom: 10px solid ${theme.colors.borderInput};
     border-radius: 5px;
-    box-shadow: 0 0 5px black;
+    box-shadow: 0 0 5px ${theme.colors.shadowCards};
 
     display: flex;
     justify-content: space-between;

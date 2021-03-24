@@ -48,8 +48,14 @@ const MyOrders = () => {
                 testid={ `${index}-order-card-container` }
                 onClick={ () => history.push(`/orders/${order.id}`) }
               >
+
+                <S.ColorStatus />
+
                 <div>
-                  <span data-testid={ `${index}-order-number` }>
+                  <span
+                    className="order-number"
+                    data-testid={ `${index}-order-number` }
+                  >
                     {`Pedido ${order.id}`}
                   </span>
                   <span data-testid={ `${index}-order-date` }>

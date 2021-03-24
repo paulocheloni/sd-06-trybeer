@@ -13,8 +13,7 @@ import Checkout from './Pages/Checkout';
 import MyOrders from './Pages/OrderDetails';
 import OrderDetails from './Pages/MyOrders';
 import AdminProfile from './Pages/AdminProfile';
-// import AdminOrders from './Pages/AdminOrders';
-import AdminOrdersTest from './Pages/AdminOrdersTest';
+import AdminOrders from './Pages/AdminOrders';
 import AdminOrderDetails from './Pages/AdminOrderDetails';
 
 const Routes = () => (
@@ -33,8 +32,7 @@ const Routes = () => (
     <Route exact path="/orders" component={ OrderDetails } />
     <Route path="/orders/:id" component={ MyOrders } />
     <Route path="/admin/profile" component={ AdminProfile } />
-    {/* <Route exact path="/admin/orders" component={ AdminOrders } /> */}
-    <Route exact path="/admin/orders" component={ AdminOrdersTest } />
+    <Route exact path="/admin/orders" component={ AdminOrders } />
     <Route path="/admin/orders/:id" component={ AdminOrderDetails } />
   </Switch>
 );
