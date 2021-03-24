@@ -30,22 +30,17 @@ const AdminOrders = ({ history }) => {
         <div key={ index }>
           <button type="button" onClick={ () => handleClick(order.id) }>
             <p data-testid={ `${index}-order-number` }>
-              {/* aqui ele quer espaço depois do pedido */}
-              Pedido
-              {order.id}
+              {`Pedido ${order.id}`}
             </p>
             <p data-testid={ `${index}-order-address` }>
-              {/* aqui ele quer uma vírgula e espaço depois da vírgula */}
-              {order.delivery_address}
-              {order.delivery_number}
+              {`${order.delivery_address}, ${order.delivery_number}`}
             </p>
             <p data-testid={ `${index}-order-total-value` }>
-              {/* aqui ele quer espaço depois do R$ */}
-              R$
-              {order.total_price}
+              {`R$ ${order.total_price.replace('.', ',')}`}
             </p>
-            {/* aqui ele quer uma vírgula, ao invés de ponto */}
-            <p data-testid={ `${index}-order-status` }>{order.status}</p>
+            <p data-testid={ `${index}-order-status` }>
+              {order.status}
+            </p>
           </button>
         </div>
       ))}
