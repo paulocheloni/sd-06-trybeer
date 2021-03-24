@@ -7,7 +7,7 @@ const secret = 'prjetoTrybeerGrupo1';
 
 async function validateToken(req, res, next) {
   const token = req.headers.authorization;
-
+  
   if (!token) {
     return res.status(NOT_FOUND).json({ message: 'Token not found' });
   }
