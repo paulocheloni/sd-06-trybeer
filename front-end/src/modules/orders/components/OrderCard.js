@@ -2,17 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-function OrderCard(order, index) {
+function OrderCard({ order, index }) {
   const {
     id,
     createdAt,
-    number,
     total,
   } = order;
 
-  const day = new Date(createdAt).toLocaleDateString().getDay();
-  const month = new Date(createdAt).toLocaleDateString().getMonth();
+  const day = new Date(createdAt).getDate();
+  const month = new Date(createdAt).getMonth();
   const totalValue = `R$ ${total.replace('.', ',')}`;
+  let date = new Date(createdAt).toLocaleDateString();
+  date = date.split('/');
+  date = `${date[0]}/${date[1]}`;
 
   return (
     <div
@@ -23,11 +25,15 @@ function OrderCard(order, index) {
         <p data-testid={ `${index}-order-total-value` }>
           <strong>{ totalValue }</strong>
         </p>
-        <p data-testid={ `${index}-order-number` }>
-          { number }
-        </p>
+        <Link
+          data-testid={ `${index}-order-number` }
+          to={ `/orders/${id}` }
+        >
+          <span className="hidden">{ `Pedido ${index + 1}` }</span>
+          <span>{ `Order N. ${index + 1}` }</span>
+        </Link>
         <p data-testid={ `${index}-order-date` }>
-          { `${day}/${month}` }
+          { date }
         </p>
         <Link to={ `/orders/${id}` }>See order</Link>
       </div>
@@ -36,9 +42,9 @@ function OrderCard(order, index) {
 }
 
 OrderCard.propTypes = {
-  data: PropTypes.shape({
+  index: PropTypes.number.isRequired,
+  order: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    number: PropTypes.string.isRequired,
     total: PropTypes.number.isRequired,
     createdAt: PropTypes.string.isRequired,
   }).isRequired,

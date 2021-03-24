@@ -12,7 +12,7 @@ function Gallery() {
   return (
     <div className="grid md:grid-cols-4 gap-8 align-baseline">
       { orders.length > 0 && orders.map((order, index) => (
-        <OrderCard key={ index } order={ order } />
+        <OrderCard key={ index } order={ order } index={ index } />
       )) }
       { orders.length === 0 && 'you dont have orders yet.'}
     </div>
