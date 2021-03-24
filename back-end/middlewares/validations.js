@@ -43,7 +43,7 @@ const isUserLoggedIn = async (req, res, next) => {
 
 const isUserAdmin = async (req, res, next) => {
   const { user: { role } } = req;
-  if (role!=='administrator') return res.status(401).json({ message: 'User is not an Admin' });
+  if (role !== 'administrator') return res.status(401).json({ message: 'User is not an Admin' });
   next();
 };
 

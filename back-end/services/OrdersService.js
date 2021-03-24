@@ -16,10 +16,8 @@ const createOrderService = async (sale) => {
   return newOrder;
 };
 
-const createOrderProductService = async ({cart, saleId}) => {
-  console.log(saleId, cart, 'oi')
+const createOrderProductService = async ({ cart, saleId }) => {
   cart.forEach(async (item) => {
-    console.log(saleId)
     await ordersModel
     .createOrderProduct({ item, saleId });
   });

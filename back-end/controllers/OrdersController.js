@@ -42,7 +42,7 @@ OrdersRouter.post('/', async (req, res, next) => {
     const newOrder = await ordersService
     .createOrderService({ userId, totalPrice, deliveryAddress, deliveryNumber });
     const { id: saleId } = newOrder;
-    await ordersService.createOrderProductService({cart, saleId});
+    await ordersService.createOrderProductService({ cart, saleId });
     return res.status(201).json(newOrder);
   } catch (err) {
     next(err);

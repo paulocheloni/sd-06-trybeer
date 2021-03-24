@@ -21,7 +21,7 @@ const createOrderProduct = async ({ item, saleId }) => {
   const { id, quantity } = item;
 
   await connection.execute(
-    `INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)`,
+    'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
     [saleId, id, quantity],
   );
 };
