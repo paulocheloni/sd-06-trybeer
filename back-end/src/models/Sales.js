@@ -33,10 +33,11 @@ const insertSaleProduct = async (SALE_ID, PRODUCT_ID, QUANTITY) => {
 };
 
 const changeStatus = async (id) => {
-  await connection
+  const status = await connection
     .execute(`UPDATE sales 
     SET status = 'Entregue'
     WHERE sales.id=?`, [id]);
+  return status;
 };
 
 module.exports = { getAll, create, insertSaleProduct, getById, changeStatus };

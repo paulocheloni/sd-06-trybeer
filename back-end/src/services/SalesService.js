@@ -48,8 +48,8 @@ const getSaleById = async (req, res, _next) => {
 
 const changeSaleStatus = async (req, res, _next) => {
   const { id } = req.params;
-  const newStatus = await changeStatus(id);
-  return res.status(STATUS_OK).json(newStatus);
+  await changeStatus(id);
+  return res.status(STATUS_OK).json({ status: 'Entregue' });
 };
 
 module.exports = {
