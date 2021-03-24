@@ -57,3 +57,12 @@ export const getAllOrders = async (email) => {
 
   return requestResponse;
 };
+
+export const getOrderDetails = async (orderId) => {
+  const id = parseInt(orderId, 10);
+  const requestResponse = await api.get('orders', { params: { id: 1 } })
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+
+  return requestResponse;
+};
