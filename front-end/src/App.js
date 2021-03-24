@@ -9,6 +9,8 @@ import {
   Products,
   Checkout,
   DetailsOrder,
+  DetailsOrderAdm,
+  ProfileAdm,
 } from './pages/index';
 import Provider from './hooks/Provider';
 import './App.css';
@@ -26,6 +28,8 @@ function App() {
           <Route path="/profile" component={ Profile } />
           <Route path="/checkout" component={ Checkout } />
           <Route path="/admin/orders" component={ Admin } />
+          <Route path="/admin/orders/orderId" component={ DetailsOrderAdm } />
+          <Route path="/admin/profile" component={ ProfileAdm } />
           <Redirect from="/" to="/login" />
         </Switch>
       </Provider>
