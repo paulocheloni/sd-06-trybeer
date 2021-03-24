@@ -35,17 +35,19 @@ const Checkout = () => {
     const date = new Date();
     const dateAndMonth = `${(`0${date.getDate()}`)
       .slice(LESS_TWO)}/${(`0${date.getMonth() + 1}`).slice(LESS_TWO)}`;
-    const request = await Axios.post('http://localhost:3001/checkout', {
-      sale: {
+    const req = cartProducts.map((product) => ({
+      product_id: product.id,
+      quantity: product.productQuantity,
+    }));
+    const request = await Axios.post('http://localhost:3001/checkout',
+      { sale: {
         totalPrice,
         deliveryAddress: street,
         deliveryNumber: number,
         saleDate: `${dateAndMonth}/21`,
         status: 'Pendente',
       },
-      product_id: cartProducts[0].id,
-      quantity: cartProducts[0].productQuantity,
-    }, { headers: { authorization: token } });
+      productsList: req }, { headers: { authorization: token } });
     const resp = await request.data;
     /*
       const multRequest = cartProducts.map(async (element) => {
