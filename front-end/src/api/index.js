@@ -56,12 +56,12 @@ async function getProducts(setProducts) {
     } }).then((response) => setProducts(response.data));
 }
 
-async function checkout(userId, totalPrice, address, number) {
+async function checkout(userId, totalPrice, address, number, items) {
   const axios = buildAxiosHandler();
   const token = localStorage.getItem('token');
 
   axios.post('/sales/checkout',
-    { userId, totalPrice, address, number },
+    { userId, totalPrice, address, number, items },
     { headers: { authorization: token } });
 }
 
@@ -73,6 +73,7 @@ async function getOrders(setOrders) {
       authorization: token,
     } }).then((response) => setOrders(response.data));
 }
+
 
 export {
   checkout,

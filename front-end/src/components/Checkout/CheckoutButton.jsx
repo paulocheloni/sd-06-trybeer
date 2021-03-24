@@ -5,7 +5,7 @@ import { concludeOrder, tokenExists } from '../../services/index';
 
 function CheckoutButton(props) {
   const history = useHistory();
-  const { total, address } = props;
+  const { total, address, items } = props;
   const [activeBtn, setActiveBtn] = useState(false);
   const [activeText, setActiveText] = useState(false);
   const [showSucessMessage, setShowSucessMessage] = useState(true);
@@ -41,7 +41,7 @@ function CheckoutButton(props) {
         data-testid="checkout-finish-btn"
         type="button"
         disabled={ !activeBtn }
-        onClick={ () => concludeOrder(total, address, setShowSucessMessage) }
+        onClick={ () => concludeOrder(total, address, setShowSucessMessage, items) }
       >
         Finalizar Pedido
       </button>
@@ -52,7 +52,7 @@ function CheckoutButton(props) {
 }
 
 CheckoutButton.propTypes = {
-  total: PropTypes.number.isRequired,
+  total: PropTypes.number,
   address: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 

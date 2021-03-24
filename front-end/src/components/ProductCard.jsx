@@ -8,7 +8,7 @@ function ProductCard(props) {
   const quantityStorage = localStorage.getItem(product.name);
   const [quantity, setQuantity] = useState(0);
   const { id, name, price, url_image: urlImage } = product;
-  const params = { quantity, setQuantity, name, setTotal, price };
+  const params = { quantity, setQuantity, name, setTotal, price, id };
 
   useEffect(() => {
     if (JSON.parse(quantityStorage) !== null) {

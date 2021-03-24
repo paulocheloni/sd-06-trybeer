@@ -1,32 +1,42 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import '../css/CheckoutCard.css';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import BeerContext from '../context/BeerContext'
 
 function CheckoutCard(props) {
+  const history = useHistory()
   const { order, index } = props;
-  const magicNumberminus2 = -2;
-  const magicNumber6 = 6;
-  const magicNumber5 = 5;
+  const firstPositionMonth = 6;
+  const firstPositionDay = 9;
+  const length = 2;
 
-  const date = JSON.stringify(order.sale_date).substr(magicNumber6, magicNumber5);
-  const formatDate = `${date.slice(magicNumberminus2)}/${date.slice(0, 2)}`;
+  const {
+    idOrder,
+    setIdOrder,
+  } = useContext(BeerContext);
+
+  const date = JSON.stringify(order.sale_date);
+  const formatDate = `${date
+    .substr(firstPositionDay,length)}/${date.substr(firstPositionMonth,length)}`;
+
+    const handleClick = () => {
+      setIdOrder(order.id)
+      history.push(`orders/${order.id}`)
+    }
 
   return (
     <div
       className="checkout-card-container"
       data-testid={ `${index}-order-card-container` }
     >
-      <Link to={ `orders/${order.id}` }>
-        <p data-testid={ `${index}-order-number` }>
-          Pedido
-          {' '}
-          {JSON.stringify(order.id)}
-        </p>
-      </Link>
+      <p data-testid={ `${index}-order-number` } onClick={() => handleClick()}>
+        Pedido
+        {' '}
+        {JSON.stringify(order.id)}
+      </p>
       <p data-testid={ `${index}-order-date` }>
-        Data:
-        {formatDate}
+        {`Data: ${formatDate}`}
       </p>
       <p data-testid={ `${index}-order-total-value` }>
         Preço: R$
@@ -38,7 +48,7 @@ function CheckoutCard(props) {
 }
 
 CheckoutCard.propTypes = {
-  order: PropTypes.objectOf(PropTypes.string).isRequired,
+  order: PropTypes.objectOf(PropTypes.number, PropTypes.string).isRequired,
   index: PropTypes.number.isRequired,
 };
 
