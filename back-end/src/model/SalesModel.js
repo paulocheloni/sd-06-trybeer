@@ -26,7 +26,7 @@ const fieldSalesP = 'sale_id, product_id, quantity';
     [params.idSale, params.idProduct, params.quantity],
   );
   return {
-    ok: true,
+    messasge: 'Compra realizada com sucesso!',
   };
 };
 

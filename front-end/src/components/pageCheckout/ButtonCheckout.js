@@ -7,17 +7,11 @@ function ButtonCheckout() {
   const [message, setMessage] = useState(false);
 
   const generateData = () => {
-    const data = new Date().toLocaleDateString('zh-Hans-CN');
-    const dataFormart = String(data).replaceAll('/', '-');
+    const data = new Date();
+    const dataFormart = `${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()}`;
+    const hora = new Date().toLocaleTimeString('pt-BR', { hour12: false });
 
-    const hora = new Date().toLocaleTimeString();
-    const numberLength = 8;
-    let newHour;
-    if (hora.length > numberLength) {
-      newHour = hora.split(' ');
-    }
-
-    const dateTime = `${dataFormart} ${newHour[0] || hora}`;
+    const dateTime = `${dataFormart} ${hora}`;
     return dateTime;
   };
 
@@ -36,7 +30,6 @@ function ButtonCheckout() {
     setTimeout(() => history.push('/products'), timeout);
     setMessage(true);
     const result = await api.registerSales(params);
-    console.log(result.response);
 
     if (result.response.id) {
       products.forEach((element) => {
@@ -45,7 +38,6 @@ function ButtonCheckout() {
           idProduct: element.id,
           quantity: element.quantity,
         };
-        console.log(objtProd);
 
         api.regSalesProducts(objtProd);
       });
