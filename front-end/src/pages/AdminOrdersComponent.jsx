@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import { AdminSideBar, AdminOrdersCards } from '../components';
+import React, { useContext, useEffect, useState } from 'react';
+import { SideBarAdmin, AdminOrdersCards } from '../components';
+import BeersAppContext from '../context/BeersAppContext';
 
 function AdminOrders() {
-  const [orders] = useState([]);
+  const {
+    user,
+  } = useContext(BeersAppContext);
+
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:3001/orders', {
@@ -16,7 +21,7 @@ function AdminOrders() {
 
   return (
     <div className="admin_orders">
-      <AdminSideBar />
+      <SideBarAdmin />
       <h1>Pedidos</h1>
       <div className="order-list">
         {orders.map((element, index) => (
