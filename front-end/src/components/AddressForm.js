@@ -43,7 +43,7 @@ const AddressForm = (props) => {
 
 AddressForm.propTypes = {
   setIsFormFilled: PropTypes.func.isRequired,
-  number: PropTypes.number.isRequired,
+  number: PropTypes.string.isRequired,
   street: PropTypes.string.isRequired,
   setNumber: PropTypes.func.isRequired,
   setStreet: PropTypes.func.isRequired,

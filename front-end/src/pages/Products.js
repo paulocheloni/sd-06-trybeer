@@ -1,26 +1,19 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
-import TopMenu from '../components/TopMenu';
-import ProductCard from '../components/ProductCard';
-import Cart from '../components/Cart';
+import { TopMenu, ProductCard, Cart } from '../components';
 import TrybeerContext from '../context/TrybeerContext';
-import fetchFunctions from '../api/fetchFunctions';
+import { verifyToken } from '../utils/verifications';
 
-function Products() {
-  const history = useHistory();
+function Products({ history }) {
   const [products, setProducts] = useState([]);
   const { user } = useContext(TrybeerContext);
 
   const fetchProducts = async () => {
-    const allProducts = await fetchFunctions.get('products', user.token);
+    const allProducts = await verifyToken('products', user, history);
     setProducts(allProducts);
   };
 
   useEffect(() => {
-    if (!user.token) {
-      history.push('/login');
-    }
     fetchProducts();
   }, []);
 

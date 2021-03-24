@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import TopMenu from '../components/TopMenu';
+import { TopMenu } from '../components';
 import fetchFunctions from '../api/fetchFunctions';
 import TrybeerContext from '../context/TrybeerContext';
 
@@ -31,12 +31,13 @@ function Profile(props) {
     await fetchFunctions.put('register', token, { name: e.target.form[0].value, email });
     const { history } = props;
     setIsUpdated(true);
-    eraseLocalStorage('cart');
-    eraseLocalStorage('user');
+    eraseLocalStorage();
     setTimeout(() => history.push('/login'), TIME_TO_REDIRECT);
   };
 
-  useEffect(() => { setConfig(); }, [isUpdated, setConfig]);
+  useEffect(() => {
+    setConfig();
+  }, [isUpdated, setConfig]);
 
   return (
     <div>
