@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import { CheckoutCards, Header } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
 import fetchApiJsonBody from '../service/fetchApi';
+import '../style/CostumerCheckout.css';
 
 function CostumerCheckout() {
   const history = useHistory();
@@ -60,57 +61,63 @@ function CostumerCheckout() {
   return (
     <div>
       <Header text="Finalizar Pedido" id="top-title" />
-      <h1>Produtos</h1>
-      <div>
-        {productQuantity.length === 0 && (
-          <p>Não há produtos no carrinho</p>
-        )}
-        {productQuantity.map((element, index) => (
-          <div key={ element.id }>
-            <CheckoutCards
-              element={ element }
-              index={ index }
-            />
-          </div>
-        ))}
+      <div className="costumer_checkout">
+        <h1>Produtos</h1>
+        <div className="costumer_checkout_product">
+          {productQuantity.length === 0 && (
+            <p>Não há produtos no carrinho</p>
+          )}
+          {productQuantity.map((element, index) => (
+            <div key={ element.id }>
+              <CheckoutCards
+                element={ element }
+                index={ index }
+              />
+            </div>
+          ))}
+        </div>
+        <div className="costumer_checkout_total">
+          <p>Total: </p>
+          <p data-testid="order-total-value">{`R$ ${commaAmount}`}</p>
+        </div>
+        <div className="costumer_checkout_address">
+          <p>Endereço</p>
+          <form action="post">
+            <label htmlFor="street">
+              Rua:
+              <br />
+              <input
+                type="text"
+                name="street"
+                id="street"
+                value={ street }
+                onChange={ handleChange }
+                data-testid="checkout-street-input"
+              />
+            </label>
+            <label htmlFor="number">
+              Número da casa:
+              <input
+                type="text"
+                name="number"
+                id="number"
+                value={ number }
+                onChange={ handleChange }
+                data-testid="checkout-house-number-input"
+              />
+            </label>
+            <button
+              type="button"
+              data-testid="checkout-finish-btn"
+              disabled={ valid }
+              onClick={ redirectingFinishedOrders }
+            >
+              Finalizar Pedido
+            </button>
+            <span>{ showMessage }</span>
+          </form>
+        </div>
       </div>
-      <p>Total: </p>
-      <p data-testid="order-total-value">{`R$ ${commaAmount}`}</p>
-
-      <p>Endereço</p>
-      <form action="post">
-        <label htmlFor="street">
-          Rua:
-          <input
-            type="text"
-            name="street"
-            id="street"
-            value={ street }
-            onChange={ handleChange }
-            data-testid="checkout-street-input"
-          />
-        </label>
-        <label htmlFor="number">
-          Número da casa:
-          <input
-            type="text"
-            name="number"
-            id="number"
-            value={ number }
-            onChange={ handleChange }
-            data-testid="checkout-house-number-input"
-          />
-        </label>
-        <button
-          type="button"
-          data-testid="checkout-finish-btn"
-          disabled={ valid }
-          onClick={ redirectingFinishedOrders }
-        >
-          Finalizar Pedido
-        </button>
-        <span>{ showMessage }</span>
-      </form>
     </div>
   );
 }

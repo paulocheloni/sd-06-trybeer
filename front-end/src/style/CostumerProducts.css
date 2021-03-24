@@ -3,7 +3,6 @@
 .product-list {
   align-items: center;
   align-content: center;
-  background-color: #ffff;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
@@ -29,7 +28,6 @@
   width: 100%;
   z-index: 100;
 }
-
 
 .product-bottom:hover {
   background-color: #008200;

@@ -5,15 +5,17 @@ function CostumerOrdersDetailsCard({ element }) {
   const { id, sale_date: saleDate, total_price: totalPrice, name, qnt } = element;
 
   return (
-    <>
-      <h1>{`Pedido ${id}`}</h1>
-      <h1>{ saleDate }</h1>
-      <div>
+    <div className="detailsOrders">
+      <div className="detailsOrders_title">
+        <h1>{`Pedido ${id}`}</h1>
+        <h1>{ saleDate }</h1>
+      </div>
+      <div className="detailsOrders_product">
         <p>{ qnt }</p>
         <p>{ name }</p>
+        <p>{`Total: R$ ${totalPrice}`}</p>
       </div>
-      <p>{`Total: R$ ${totalPrice}`}</p>
-    </>
+    </div>
   );
 }
 
