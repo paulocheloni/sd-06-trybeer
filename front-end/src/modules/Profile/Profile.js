@@ -76,7 +76,7 @@ function Profile() {
       <Button
         onClick={ () => saveOnClick() }
         isDisabled={ isDisabled }
-        bgColor="green-600"
+        bgColor="bg-green-600"
         testId="profile-save-btn"
       >
         Salvar

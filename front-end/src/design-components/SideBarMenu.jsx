@@ -26,10 +26,10 @@ function SideBarMenu() {
           Meu Perfil
         </Button>
       </Link>
-      <div className="absolute bottom-12">
+      <div className="bottom-12">
         <Button
           onClick={ () => onClick() }
-          bgColor="white"
+          bgColor="bg-white"
           testId="side-menu-item-logout"
         >
           Sair
