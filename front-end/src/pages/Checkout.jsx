@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import TopMenu from '../components/TopMenu';
+import TopMenu from '../components/TopMenu/TopMenu';
 import CheckoutProductsCard from '../components/CheckoutProductsCard';
 import productsContext from '../context/productsContext';
 import fetches from '../services/fetches';
@@ -17,7 +17,6 @@ export default function Checkout() {
   useEffect(() => {
     const cartLS = JSON.parse(localStorage.getItem('cartProducts'));
     if (!cartLS) return;
-    console.log(cartLS);
     setCartProducts(cartLS.filter((product) => product.quantityItem !== 0));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

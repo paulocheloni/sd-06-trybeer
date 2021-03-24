@@ -4,6 +4,7 @@ import productsContext from '../context/productsContext';
 
 export default function OrderCard() {
   const { orders } = useContext(productsContext);
+  console.log('pedidos orderCard', orders);
 
   const formatDate = (date) => {
     const dateInMiliseconds = 60000;

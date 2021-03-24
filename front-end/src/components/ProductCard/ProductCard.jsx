@@ -16,7 +16,6 @@ import productsContext from '../../context/productsContext';
 
 export default function ProductCard() {
   const { products, cartProducts, setCartProducts } = useContext(productsContext);
-  console.log('products no provider', products);
   const classes = useStyles();
   const history = useHistory();
 
@@ -65,7 +64,6 @@ export default function ProductCard() {
       .find((product) => parseInt(product.id, 10) === parseInt(productId, 10));
 
     if (cartProducts.length && productExists) {
-      // console.log('caiu no if');
       return setCartProducts([...cartProducts.map((product) => {
         if (product.id !== Number(productId)) {
           return product;
@@ -79,7 +77,6 @@ export default function ProductCard() {
         return product;
       })]);
     }
-    // console.log('nao caiu no if');
     const newCartProduct = [...cartProducts, {
       id: parseInt(productId, 10),
       name: products[productId].name,

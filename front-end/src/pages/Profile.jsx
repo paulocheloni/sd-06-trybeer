@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
-import TopMenu from '../components/TopMenu';
+import TopMenu from '../components/TopMenu/TopMenu';
+// import { useHistory } from 'react-router-dom';
 import TopMenuAdmin from '../components/TopMenuAdmin';
 import { isTheNewNameDifferent, nameValidation } from '../utils/validations';
 import useInput from '../hooks/useInput';
