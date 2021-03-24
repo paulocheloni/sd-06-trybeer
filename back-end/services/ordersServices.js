@@ -7,7 +7,7 @@ const getAll = async () => {
 };
 
 // Create a order
-const create = async (priceTotal, date, userID, address, number) => {
+const create = async ({ priceTotal, date, userID, address, number }) => {
   // Achar se existe a ordem
   // if (findByName.length !== 0) {
   //   return { error: true, code: 'conflict', message: 'E-mail already in database.' };
