@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import BeerContext from '../context/BeerContext'
-// import { getOrdersById } from '../api/index'
+import ControllerHeader from '../components/Header-SideBar/ControllerHeader'
+import CardClientDetailsOrder from '../components/ClientDetailsOrder/CardClientDetailsOrder'
 import * as axiosHandler from 'axios';
+import { date } from 'faker';
 
 function ClientDetailsOrder() {
   const {
@@ -9,6 +11,21 @@ function ClientDetailsOrder() {
     setIdOrder,
   } = useContext(BeerContext);
   const [order, setOrder] = useState('')
+  const [date, setDate] = useState('')
+   
+  const [formattedDate, setFormattedDate] = useState(false)
+  // const formattedDate = `${date.substr(9,2)}/${date.substr(6,2)}`;
+
+  const items = [
+    { name: 'Brahma 600ml', total: 2, price: '7.50', id: 4 },
+    { name: 'Antarctica Pilsen 300ml', total: 2, price: '2.49', id: 3 },
+    {
+      name: 'Brahma Duplo Malte 350ml',
+      total: 2,
+      price: '2.79',
+      id: 8
+    }
+  ]
 
   useEffect(() => {
     const buildAxiosHandler = () => {
@@ -31,12 +48,20 @@ function ClientDetailsOrder() {
         });
     }
     getOrdersById()
+    setDate(order?.sale?.saleDate)
   }, []);
+
+  useEffect(() => {
+    console.log("aqui",date)
+  }, [date]);
+
 
   return (
     <div>
-      <h1>{JSON.stringify(idOrder)}</h1>
-      <button onClick={() => console.log('api', order) }>console</button>
+      <ControllerHeader />
+      <h1>{`Pedido: ${idOrder}`}</h1>
+      <p>{ formattedDate && `Pedido: ${formattedDate}` }</p>
+      <button onClick={() => console.log(order?.sale?.saleDate) }>console</button>
     </div>
   );
 }
