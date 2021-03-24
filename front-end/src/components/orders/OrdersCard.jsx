@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const OrdersCard = ({ orders }) => {
-  const handleDate = (dataTime) => {
-    const date = new Date(dataTime);
+  const handleDate = (dateTime) => {
+    const date = new Date(dateTime);
     const twoNumber = -2;
     const day = (`0${date.getDate()}`).slice(twoNumber);
     const month = (`0${(date.getMonth() + 1)}`).slice(twoNumber);
