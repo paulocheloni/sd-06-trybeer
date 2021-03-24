@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import ProductRow from './ProductRow';
+import ContextBeer from '../../../context/ContextBeer';
 
-function ProductsList({ sale }) {
-  const { products, total } = sale;
+function ProductsList({ products }) {
+  const {
+    stringTotal,
+  } = useContext(ContextBeer);
   return (
     <div className="flex flex-col items-center mx-auto w-96">
       { products.length === 0
@@ -16,23 +19,18 @@ function ProductsList({ sale }) {
           />
         ))}
       <div>
-        <p data-testid="order-total-value">{ `R$ ${total.replace('.', ',')}` }</p>
+        <p data-testid="order-total-value">{ stringTotal }</p>
       </div>
     </div>
   );
 }
 
 ProductsList.propTypes = {
-  sale: PropTypes.shape({
-    products: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
-      name: PropTypes.string,
-      price: PropTypes.string,
-      quantity: PropTypes.number,
-      urlImage: PropTypes.string,
-    })),
-    total: PropTypes.number,
-  }).isRequired,
+  products: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    price: PropTypes.string,
+    quantity: PropTypes.number,
+  })).isRequired,
 };
 
 export default ProductsList;

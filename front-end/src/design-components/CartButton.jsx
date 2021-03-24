@@ -1,38 +1,35 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import ContextBeer from '../context/ContextBeer';
 
 function CartButton() {
   const history = useHistory();
-  const noProduct = 0;
   const {
-    sale,
+    total,
+    stringTotal,
   } = useContext(ContextBeer);
-  const [localTotal, setLocalTotal] = useState(sale.total);
 
-  useEffect(() => setLocalTotal(sale.total), [sale]);
+  console.log('total number: ', total);
+  console.log('total string: ', stringTotal);
 
   const onClick = () => {
     history.push('/checkout');
   };
 
   return (
-    <div
+    <button
       className="flex items-center justify-center fixed left-1/2 bg-green-700
       rounded-md bottom-12 w-48 h-20"
+      type="button"
+      data-testid="checkout-bottom-btn"
+      onClick={ () => onClick() }
+      disabled={ stringTotal === 'R$ 0,00' }
     >
-      <button
-        type="button"
-        data-testid="checkout-bottom-btn"
-        onClick={ () => onClick() }
-        disabled={ localTotal === noProduct }
-      >
-        <h1>Ver Carrinho</h1>
-        <span data-testid="checkout-bottom-btn-value">
-          { localTotal === 0 ? 'R$ 0,00' : `R$ ${localTotal.replace('.', ',')}` }
-        </span>
-      </button>
-    </div>
+      <h1>Ver Carrinho</h1>
+      <span data-testid="checkout-bottom-btn-value">
+        { stringTotal }
+      </span>
+    </button>
   );
 }
 

@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const products = require('../services/ProductsService');
-const { TokenValidation } = require('../Auth/TokenValidation');
 
 const STATUS_OK = 200;
 const STATUS_INTERNAL_SERVER_ERROR = 500;
@@ -8,7 +7,7 @@ const STATUS_INTERNAL_SERVER_ERROR = 500;
 const ProductsController = new Router();
 
 ProductsController
-  .get('/', TokenValidation, async (_req, res) => {
+  .get('/', async (_req, res) => {
     try {
       const allProducts = await products.getAll();
   
