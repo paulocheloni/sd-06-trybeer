@@ -40,7 +40,7 @@ class Orders extends React.Component {
               className="order"
               key={ index }
               data-testid={ `${index}-order-card-container` }
-              >
+            >
               <div>
                 <button
                   type="button"
