@@ -9,8 +9,6 @@ function OrderCard({ order, index }) {
     total,
   } = order;
 
-  const day = new Date(createdAt).getDate();
-  const month = new Date(createdAt).getMonth();
   const totalValue = `R$ ${total.replace('.', ',')}`;
   let date = new Date(createdAt).toLocaleDateString();
   date = date.split('/');
