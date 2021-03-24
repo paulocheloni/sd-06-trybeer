@@ -8,8 +8,9 @@ import {
   CostumerProducts,
   CostumerCheckout,
   CostumerOrders,
-  AdminProfile,
   CostumerOrdersDetails,
+  AdminProfile,
+  AdminOrders,
 } from './pages';
 
 function App() {
@@ -30,16 +31,19 @@ function App() {
             />
             <Route
               exact
-              path="/orders/:numberOrder"
+              path="/orders/:id"
               component={ CostumerOrdersDetails }
             />
             <Route exact path="/admin/profile" component={ AdminProfile } />
             <Route
               exact
+              path="/admin/orders"
+              component={ () => <p>oi</p> }
+            />
+            <Route
+              exact
               path="/admin/orders/:id"
-              component={
-                () => <h1>/admin/orders id</h1>
-              }
+              component={ AdminOrders }
             />
             <Route exact path="/" component={ () => <Redirect to="/login" /> } />
           </Switch>

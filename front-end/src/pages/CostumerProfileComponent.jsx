@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import Header from '../components/HeaderComponent';
+import Header from '../components/Header';
 import fetchApiJsonBody from '../service/fetchApi';
 import BeersAppContext from '../context/BeersAppContext';
 import funcValidations from '../service/funcValidations';

@@ -5,5 +5,5 @@ export { default as CostumerProducts } from './CostumerProductsComponent';
 export { default as CostumerCheckout } from './CostumerCheckout';
 export { default as CostumerOrders } from './CostumerOrdersComponent';
 export { default as AdminOrders } from './AdminOrdersComponent';
-export { default as AdminProfile } from './AdminProfileComponent';
-export { default as CostumerOrdersDetails } from './CostumerOrdersDetails';
+export { default as AdminProfile } from './AdminProfile';
+export { default as CostumerOrdersDetails } from './CostumerOrdersDetailsComponent';

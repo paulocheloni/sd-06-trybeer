@@ -10,17 +10,19 @@ import '../style/LoginRegister.css';
 const logo = require('../images/logo_provisorio.png');
 
 function Login() {
+  const history = useHistory();
   const {
     setUser,
     setProductQuantity,
     setAmount,
+    user,
   } = useContext(BeersAppContext);
+
+  if (user.token) history.push('/products');
 
   const [valid, setValid] = useState(true);
   const [inputValues, setInputValues] = useState({ email: '', password: '' });
   const [errMessage, setErrMessage] = useState('');
-
-  const history = useHistory();
 
   const isValid = async () => {
     const email = funcValidations.validateEmail(inputValues.email);
