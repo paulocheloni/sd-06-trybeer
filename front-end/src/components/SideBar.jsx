@@ -1,12 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import '../styles/sidebar.css';
 
 function SideBar() {
   const history = useHistory();
   return (
     <div className="side-menu-container">
-      <div>SideBar</div>
       <button
+        className="buttonside"
         type="button"
         data-testid="side-menu-item-products"
         onClick={ () => history.push('/products') }
@@ -14,6 +15,7 @@ function SideBar() {
         Produtos
       </button>
       <button
+        className="buttonside"
         type="button"
         data-testid="side-menu-item-my-orders"
         onClick={ () => history.push('/orders') }
@@ -21,6 +23,7 @@ function SideBar() {
         Meus Pedidos
       </button>
       <button
+        className="buttonside"
         type="button"
         data-testid="side-menu-item-my-profile"
         onClick={ () => history.push('profile') }
@@ -28,6 +31,7 @@ function SideBar() {
         Meu Perfil
       </button>
       <button
+        className="buttonside"
         type="button"
         data-testid="side-menu-item-logout"
         onClick={ () => history.push('/login') }

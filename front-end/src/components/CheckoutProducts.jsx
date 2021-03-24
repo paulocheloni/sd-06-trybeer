@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import ParseCurrency from '../utils/parseCurrencyToBRL';
 import UserContext from '../hooks/UseContext';
+import '../styles/checkout.css';
 
 function CheckoutProducts() {
   const { checkoutProducts, setCheckoutProducts, setTotalPrice } = useContext(UserContext);
@@ -35,40 +36,42 @@ function CheckoutProducts() {
   }, []);
 
   return !checkoutProducts ? <h1>Loading...</h1> : (
-    <div>
+    <div className="checkoutproducts">
       <h1>Produtos</h1>
       <ul>
         {(checkoutProducts.length > 0)
           ? checkoutProducts.map(({ productQuantity, price, name }, index) => (
             <li key={ index }>
-              <span
-                data-testid={ `${index}-product-qtd-input` }
-              >
-                {productQuantity}
-              </span>
-              <span
-                data-testid={ `${index}-product-name` }
-              >
-                {` - ${name}`}
-              </span>
-              <span
-                data-testid={ `${index}-product-total-value` }
-              >
-                {`  ${ParseCurrency((price * productQuantity).toFixed(2))}`}
-              </span>
-              <span
-                data-testid={ `${index}-product-unit-price` }
-              >
-                {`(${ParseCurrency(price)} un)`}
-              </span>
-              <button
-                type="button"
-                data-testid={ `${index}-removal-button` }
-                onClick={ () => deleteProduct(name, productQuantity, price) }
-              >
-                {' '}
-                X
-              </button>
+              <div className="productcart">
+                <span
+                  data-testid={ `${index}-product-qtd-input` }
+                >
+                  {productQuantity}
+                </span>
+                <span
+                  data-testid={ `${index}-product-name` }
+                >
+                  {` - ${name}`}
+                </span>
+                <span
+                  data-testid={ `${index}-product-total-value` }
+                >
+                  {`  ${ParseCurrency((price * productQuantity).toFixed(2))}`}
+                </span>
+                <span
+                  data-testid={ `${index}-product-unit-price` }
+                >
+                  {`(${ParseCurrency(price)} un)`}
+                </span>
+                <button
+                  type="button"
+                  data-testid={ `${index}-removal-button` }
+                  onClick={ () => deleteProduct(name, productQuantity, price) }
+                >
+                  {' '}
+                  X
+                </button>
+              </div>
             </li>
           ))
           : <spam> Não há produtos no carrinho </spam>}

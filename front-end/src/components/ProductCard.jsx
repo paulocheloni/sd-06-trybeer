@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import parseCurrency from '../utils/parseCurrencyToBRL';
 import Context from '../hooks/UseContext';
+import '../styles/productcard.css';
 
 function ProductCard({ productInfo, index }) {
   const { totalPrice, setTotalPrice } = useContext(Context);
@@ -19,6 +20,7 @@ function ProductCard({ productInfo, index }) {
     } else {
       setProductQuantity(item.productQuantity);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleQuantity = (operation) => {
@@ -41,10 +43,11 @@ function ProductCard({ productInfo, index }) {
     productList[index].productQuantity = productQuantity;
 
     localStorage.setItem('productList', JSON.stringify(productList));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productQuantity]);
 
   return (
-    <div>
+    <div className="card">
       <img
         data-testid={ `${index}-product-img` }
         src={ urlImage }
@@ -53,8 +56,9 @@ function ProductCard({ productInfo, index }) {
       />
       <div data-testid={ `${index}-product-name` }>{name}</div>
       <div data-testid={ `${index}-product-price` }>{parseCurrency(price)}</div>
-      <div>
+      <div className="quantitycontainer">
         <button
+          className="quantitybutton"
           type="button"
           data-testid={ `${index}-product-minus` }
           onClick={ () => handleQuantity('minus') }
@@ -62,12 +66,14 @@ function ProductCard({ productInfo, index }) {
           -
         </button>
         <span
+          className="quantityvalue"
           data-testid={ `${index}-product-qtd` }
           value={ productQuantity }
         >
           { productQuantity }
         </span>
         <button
+          className="quantitybutton"
           type="button"
           data-testid={ `${index}-product-plus` }
           onClick={ () => handleQuantity('plus') }

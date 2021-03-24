@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TopBar from '../components/TopBar';
 import { updateUser } from '../services/users';
+import '../styles/profile.css';
 
 function Profile() {
   const { name, email, token, role } = JSON.parse(localStorage.getItem('user'));
@@ -31,33 +32,40 @@ function Profile() {
   return (
     <div>
       <TopBar name="Meu perfil" />
-      <label htmlFor="profileNameInput">
-        Nome
-        <input
-          id="profileNameInput"
-          data-testid="profile-name-input"
-          value={ userName }
-          onChange={ (e) => setUserName(e.target.value) }
-        />
-      </label>
-      <label htmlFor="profileEmailInput">
-        Email
-        <input
-          id="profileEmailInput"
-          data-testid="profile-email-input"
-          value={ email }
-          readOnly
-        />
-      </label>
-      <button
-        type="button"
-        data-testid="profile-save-btn"
-        disabled={ isDisabled }
-        onClick={ handleSubmit }
-      >
-        Salvar
-      </button>
-      <div hidden={ isVisible }>Atualização concluída com sucesso</div>
+      <div className="profilecontainer">
+        <div className="profileinformations">
+          <label className="labelprofile" htmlFor="profileNameInput">
+            Nome
+            <input
+              id="profileNameInput"
+              data-testid="profile-name-input"
+              className="inputprofile"
+              value={ userName }
+              onChange={ (e) => setUserName(e.target.value) }
+            />
+          </label>
+          <label className="labelprofile" htmlFor="profileEmailInput">
+            Email
+            <input
+              id="profileEmailInput"
+              data-testid="profile-email-input"
+              className="inputprofile"
+              value={ email }
+              readOnly
+            />
+          </label>
+          <button
+            type="button"
+            className="buttonprofile"
+            data-testid="profile-save-btn"
+            disabled={ isDisabled }
+            onClick={ handleSubmit }
+          >
+            Salvar
+          </button>
+          <div hidden={ isVisible }>Atualização concluída com sucesso</div>
+        </div>
+      </div>
     </div>
   );
 }
