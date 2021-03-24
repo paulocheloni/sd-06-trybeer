@@ -27,7 +27,7 @@ function ProductsList({ products }) {
 
 ProductsList.propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     price: PropTypes.string,
     quantity: PropTypes.number,
   })).isRequired,

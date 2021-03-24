@@ -26,36 +26,6 @@ function Card({ product, testIdNumber }) {
     }
   }, [products, id, findProduct]);
 
-  // const handleClickPlus = () => {
-  //   const quantity = localQuantity + 1;
-  //   setLocalQuantity(quantity);
-  //   const products = sale.products.filter((thisProduct) => thisProduct.id !== id);
-  //   const currentProduct = { id, name, urlImage, price, quantity };
-  //   products.push(currentProduct);
-  //   const total = products
-  //     .reduce((acc, curr) => acc + (parseFloat(curr.price) * curr.quantity), 0)
-  //     .toFixed(2);
-  //   setSale({
-  //     products,
-  //     total,
-  //   });
-  // };
-  // const handleClickMinus = () => {
-  //   if (localQuantity <= 0) return;
-  //   const quantity = localQuantity - 1;
-  //   setLocalQuantity(quantity);
-  //   const products = sale.products.filter((thisProduct) => thisProduct.id !== id);
-  //   const currentProduct = { id, name, urlImage, price, quantity };
-  //   products.push(currentProduct);
-  //   const total = products
-  //     .reduce((acc, curr) => (acc + (parseFloat(curr.price) * curr.quantity)), 0)
-  //     .toFixed(2);
-  //   setSale({
-  //     products,
-  //     total,
-  //   });
-  // };
-
   return (
     <div
       className="flex flex-col items-center justify-center border-2
@@ -103,7 +73,7 @@ Card.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.number,
     quantity: PropTypes.number,
-    price: PropTypes.number,
+    price: PropTypes.string,
   }).isRequired,
   testIdNumber: PropTypes.number.isRequired,
 };

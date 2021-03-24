@@ -39,17 +39,20 @@ function Checkout() {
   const handleSubmit = () => {
     const bodyObj = {
       products,
-      total,
+      total: parseFloat(total),
       deliveryAddress,
       deliveryNumber,
     };
 
     api
       .post('/sales', bodyObj)
-      .then(() => initiateSale())
-      .then(() => setSuccess(true))
-      .then(() => setTimeout(() => history.push('/products'), successTimer))
       .catch((err) => console.log(err.message));
+
+    setSuccess(true);
+    setTimeout(() => {
+      initiateSale();
+      history.push('/products');
+    }, successTimer);
   };
 
   return (
