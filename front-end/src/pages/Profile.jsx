@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import TopMenu from '../components/TopMenu';
 import TopMenuAdmin from '../components/TopMenuAdmin';
@@ -8,7 +7,6 @@ import useInput from '../hooks/useInput';
 import fetches from '../services/fetches';
 
 export default function Profile() {
-  // const history = useHistory();
   const tokenFromLocalStorage = localStorage.getItem('token');
   const tokenDecoded = jwtDecode(tokenFromLocalStorage);
   const oldName = tokenDecoded.name;
@@ -21,11 +19,6 @@ export default function Profile() {
     await fetches.updateUserName(email, name);
     setNewInfo('Atualização concluída com sucesso');
   };
-
-  // useEffect(() => {
-  //   if (!tokenFromLocalStorage) history.push('/login');
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   return (
     <div>

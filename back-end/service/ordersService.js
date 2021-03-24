@@ -22,10 +22,24 @@ const getSaleDetail = async (saleId) => {
   return saleDetail;
 };
 
+const getAllSales = async () => {
+  const allSales = await ordersModel.getAllSales();
+  // console.log('entrei no service', allSales);
+  return allSales;
+};
+
+const updateSale = async (saleId) => {
+  await ordersModel.updateSale(saleId);
+
+  // console.log('entrei no orders service', saleId);
+};
+
 module.exports = {
   createOrders,
   getOrders,
   getLastSaleId,
   createProductsSales,
   getSaleDetail,
+  getAllSales,
+  updateSale,
 };

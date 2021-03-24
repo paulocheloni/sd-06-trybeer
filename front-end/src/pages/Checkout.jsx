@@ -26,19 +26,18 @@ export default function Checkout() {
     if (!token) return history.push('/login');
   };
 
-  // aqui é uma validação tem que mandar la pra pasta validations?
   const isTotalNotPriceZero = () => {
     if (totalPrice === '0,00') {
       return false;
     }
     return true;
   };
-  // aqui é uma validação tem que mandar la pra pasta validations?
+
   const streetValidation = () => {
     const isStreetFilled = street.length > 0;
     return isStreetFilled;
   };
-  // aqui é uma validação tem que mandar la pra pasta validations?
+
   const houseNumberValidation = () => {
     const ishouseNumberFilled = houseNumber.length > 0;
     return ishouseNumberFilled;
@@ -63,7 +62,7 @@ export default function Checkout() {
       address: street,
       number: houseNumber,
       date: date.toISOString().slice(0, limitIndex).replace('T', ' '),
-      orderStatus: 'pendente',
+      orderStatus: 'Pendente',
       cartProducts,
     };
 
@@ -72,33 +71,14 @@ export default function Checkout() {
         if (!response) {
           return (setOrderSuccess('Algum erro aconteceu na realização do seu pedido!'));
         }
-        // console.log('mensagem sucesso', response.message);
         (setOrderSuccess(response.message));
         setTimeout(() => {
-          // setOrderSuccess('');
           setCartProducts([]);
           localStorage.removeItem('cartProducts');
           history.push('/products');
         }, SUCCESSMESSAGEDESAPEAR);
       });
-
-    // setTimeout(() => {
-    //   setCartProducts([]);
-    //   localStorage.removeItem('cartProducts');
-    //   history.push('/products');
-    // }, SUCCESSMESSAGEDESAPEAR);
   };
-
-  // const sendProductsFromSale = () => {
-  //   cartProducts.map((product) => {
-  //     const mySaleProducts = {
-  //       productId: product.id,
-  //       quantity: product.quantityItem,
-  //     };
-  //     // console.log('frontend myProductsSale checkout', mySaleProducts);
-  //     return fetches.createSaleProducts(tokenFromLocalStorage, mySaleProducts);
-  //   });
-  // };
 
   return (
     <div>

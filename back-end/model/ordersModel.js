@@ -56,10 +56,28 @@ const getSaleDetail = async (saleId) => {
   return saleDetail;
 };
 
+const getAllSales = async () => {
+  const [allSales] = await connection.execute(
+    'SELECT * FROM Trybeer.sales ',
+  );
+  // console.log('entrei nos detalhes dos produtos', allSales);
+  return allSales;
+};
+
+const updateSale = async (saleId) => {
+  await connection.execute(
+    'UPDATE Trybeer.sales SET Trybeer.sales.status=? WHERE Trybeer.sales.id=?', 
+    ['Entregue', saleId],
+  );
+  // console.log('entrei no orders model', saleId);
+};
+
 module.exports = {
   createOrders,
   getOrders,
   getLastSaleId,
   createProductsSales,
   getSaleDetail,
+  getAllSales,
+  updateSale,
 };
