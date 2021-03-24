@@ -10,9 +10,9 @@ const create = async ({ priceTotal, date, userID, address, number }) => {
   try {
     await connection.execute(
       `INSERT INTO sales
-        (total_price, sale_date, user_id, delivery_address, delivery_number, status)
+        (user_id, total_price, delivery_address, delivery_number, sale_date, status)
         VALUES (?, ?, ?, ?, ?, ?)`,
-      [priceTotal, date, userID, address, number, 'Pendente'],
+      [userID, priceTotal, address, number, date, 'Pendente'],
     );
   } catch (error) {
     console.error(error);

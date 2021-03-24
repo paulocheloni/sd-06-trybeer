@@ -13,6 +13,10 @@ class Orders extends React.Component {
 
   async componentDidMount() {
     this.separateDate(await getAllOrders());
+    const { history } = this.props;
+    if (!localStorage.token) {
+      history.push('/login');
+    }
   }
 
   separateDate(array) {
@@ -31,17 +35,21 @@ class Orders extends React.Component {
         <Header history={ history } />
         <div className="orders-container">
           {stateOrders.length > 0 && stateOrders.map((element, index) => (
-            <div className="order" key={ index } data-testid="0-order-card-container">
+            <div
+              className="order"
+              key={ index }
+              data-testid="0-order-card-container"
+            >
               <div>
-                <h4 data-testid={ `${index}-order-number` }>
+                <h4 data-testid={ `${index}-order-number` } onClick={ () => history.push(`/orders/${index+1}`)}>
                   {`Pedido ${index + 1}`}
                 </h4>
                 <h5 data-testid={ `${index}-order-date` }>
-                  {element.sale_date.split('2021/')[1]}
+                  {`${element.sale_date.split('/')[2]}/${element.sale_date.split('/')[1]}`}
                 </h5>
               </div>
               <p data-testid={ `${index}-order-total-value` }>
-                {`R$ ${element.total_price}`}
+                {`R$ ${element.total_price.replace('.', ',')}`}
               </p>
             </div>
           ))}

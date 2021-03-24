@@ -52,15 +52,16 @@ class Checkout extends React.Component {
     const { history } = this.props;
     const { address, number } = this.state;
     const priceTotal = Number(localStorage.getItem('price')).toFixed(2);
-    const now = JSON.stringify(new Date()).split('"')[1].split('T');
-    const date = `${now[0]} ${now[1].split('.')[0]}`;
+    const date = new Date().toLocaleString('pt-BR');
 
-    // const date = (`${now.getDate()}-${now.getMonth() + 1}`);
-    // const date = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDay()}`;
+    const numbers = date.split(' ')[0].split('/');
+    const newDate = `${numbers[2]}/${numbers[1]}/${numbers[0]}`;
+    const fullDate = date.replace(`${date.split(' ')[0]}`, `${newDate}`);
+    console.log(fullDate)
 
     const userID = JSON.parse(localStorage.getItem('actualUser')).id;
 
-    await finishOrders({ priceTotal, date, userID, address, number });
+    await finishOrders({ priceTotal, date: fullDate, userID, address, number });
 
     history.push('/products', { purchase: true });
   }
