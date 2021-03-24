@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
-import { SideBarAdmin, OrdersCards } from '../components';
+import { AdminSideBar, AdminOrdersCards } from '../components';
 
 function AdminOrders() {
   const [orders] = useState([]);
 
+  useEffect(() => {
+    fetch('http://localhost:3001/orders', {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: user.token,
+      },
+    }).then((response) => response.json())
+      .then((data) => setOrders(data));
+  }, []);
+
   return (
     <div className="admin_orders">
-      <SideBarAdmin />
+      <AdminSideBar />
       <h1>Pedidos</h1>
       <div className="order-list">
         {orders.map((element, index) => (
           <div key={ element.id }>
-            <OrdersCards
+            <AdminOrdersCards
               element={ element }
               index={ index }
             />

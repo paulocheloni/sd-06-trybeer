@@ -1,27 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function OrdersCards({ index }) {
+function AdminOrdersCards({ element, index }) {
+  // const { id, total_price: totalPrice, status } = element;
+
   return (
     <div className="orderCards">
       <h4 data-testid={ `${index}-order-number` }>
-        {/* Pedido { numberOrder } */}
+        {/* { `Pedido ${ id }` } */}
       </h4>
       <p data-testid={ `${index}-order-address` }>
-        {/* { adress } */}
+        {/* {` ${ address }`  } */}
       </p>
       <h4 data-testid={ `${index}-order-total-value` }>
-        {/* R${ price } */}
+        {/* { ` R$ ${ totalPrice.replace('.', ',') }` } */}
       </h4>
       <h3 data-testid={ `${index}-order-status` }>
-        {/* { status } */}
+        {/* { `${ status }` } */}
       </h3>
     </div>
   );
 }
 
-OrdersCards.propTypes = {
+AdminOrdersCards.propTypes = {
   index: PropTypes.number.isRequired,
 };
 
-export default OrdersCards;
+export default AdminOrdersCards;

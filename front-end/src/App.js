@@ -31,10 +31,15 @@ function App() {
             />
             <Route
               exact
-              path="/orders/:numberOrder"
+              path="/orders/:id"
               component={ CostumerOrdersDetails }
             />
             <Route exact path="/admin/profile" component={ AdminProfile } />
+            <Route
+              exact
+              path="/admin/orders"
+              component={ () => <p>oi</p> }
+            />
             <Route
               exact
               path="/admin/orders/:id"

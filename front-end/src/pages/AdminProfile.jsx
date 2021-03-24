@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import SideBarAdmin from '../components/SideBarAdminComponent';
+import SideBarAdmin from '../components/SideBarAdmin';
 import BeersAppContext from '../context/BeersAppContext';
 
 function AdminProfile() {

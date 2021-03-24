@@ -1,13 +1,24 @@
 import React from 'react';
-import { SideBarAdmin } from '../components';
+import {
+  // AdminDetailsOrdersCards,
+  SideBarAdmin,
+} from '../components';
 
-function AdminOrdersDetails() {
+function AdminOrdersDetailsPage() {
   return (
     <div className="admin_orders_details">
       <SideBarAdmin />
-      <h1>Pedido </h1>
+      {/* {"AdminOrders".map((element, index) => (
+        <div key={ index }>
+          <AdminDetailsOrdersCards
+            element={ element }
+            index={ index }
+          />
+        </div>
+      ))} */}
+      <button type="button">Marcar como entregue</button>
     </div>
   );
 }
 
-export default AdminOrdersDetails;
+export default AdminOrdersDetailsPage;

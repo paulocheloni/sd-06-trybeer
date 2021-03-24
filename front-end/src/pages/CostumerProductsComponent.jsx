@@ -59,7 +59,8 @@ function CostumerProducts() {
   // console.log();
 
   return (
-    <div className="product-page">
+    <div>
+      {/* className="product-page" */}
       <Header text="TryBeer" id="top-title" />
       <div className="product-list">
         {products.map((element, index) => (
