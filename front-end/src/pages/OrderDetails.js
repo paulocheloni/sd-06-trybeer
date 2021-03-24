@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import TopBar from '../components/TopBar';
-import getOrder from '../services/orderDetailsService';
+import { getOrder } from '../services/orderDetailsService';
 
 function OrderDetails(props) {
   const { match: { params: { id } } } = props;

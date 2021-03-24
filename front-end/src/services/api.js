@@ -65,3 +65,11 @@ export const getOrderDetails = async (id) => {
 
   return requestResponse;
 };
+
+export const updateOrderStatus = async (id) => {
+  const requestResponse = await api.put(`/admin/orders/${id}`, { status: 'Entregue' })
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+
+  return requestResponse;
+};

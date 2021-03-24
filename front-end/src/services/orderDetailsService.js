@@ -1,5 +1,9 @@
-import { getOrderDetails } from './api';
+import { getOrderDetails, updateOrderStatus } from './api';
 
-const getOrder = async (id) => getOrderDetails(id);
+export const getOrder = async (id) => getOrderDetails(id);
 
-export default getOrder;
+export const updateStatus = async (id, setOrder) => {
+  const newOrder = await updateOrderStatus(id);
+
+  setOrder(newOrder);
+};

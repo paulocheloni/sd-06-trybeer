@@ -24,7 +24,6 @@ router.get('/:id', rescue(async (req, res) => {
   try {
     const { id } = req.params;
     const orderInfo = await OrdersService.getDetails(id);
-    console.log(orderInfo);
 
     return res.status(OK).json(orderInfo);
   } catch (error) {

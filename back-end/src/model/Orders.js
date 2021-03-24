@@ -10,7 +10,9 @@ exports.getAll = async (userId) =>
   exports.getDetails = async (orderId) => (
     connection.execute(
       `SELECT
-        s.id, s.sale_date, s.total_price, p.name, sp.quantity,
+        s.id, s.sale_date,
+        s.total_price, s.status,
+        p.name, p.price, sp.quantity,
         ROUND((p.price * sp.quantity), 2) as total
       FROM sales as s
       JOIN sales_products as sp
@@ -20,3 +22,8 @@ exports.getAll = async (userId) =>
       WHERE s.id = ?;`, [orderId],
     ).then(([orderInfo]) => orderInfo || null)
   );
+
+  exports.update = async (id, status) =>
+  connection
+    .execute('UPDATE sales SET status = ? WHERE id = ?', [status, id])
+    .then(([_]) => this.getDetails(id));
