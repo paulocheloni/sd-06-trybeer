@@ -25,13 +25,14 @@ Button.propTypes = {
   testId: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   userRole: PropTypes.string,
-
+  className: PropTypes.string,
 };
 
 Button.defaultProps = {
   isDisabled: false,
   onClick: () => {},
   userRole: '',
+  className: '',
 };
 
 export default Button;
