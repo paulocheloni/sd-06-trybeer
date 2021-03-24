@@ -50,7 +50,8 @@ function Form() {
 
   return (
     <form
-      className={ `${numberOfItems > 0 ? '' : 'hidden'} w-1/3 flex flex-col mt-10` }
+      className={ `${(numberOfItems > 0 || success) ? '' : 'hidden'}
+        w-1/3 flex flex-col mt-10` }
       onSubmit={ handleSubmit }
     >
       <div className={ `${success ? '' : 'hidden'} bg-primary` }>

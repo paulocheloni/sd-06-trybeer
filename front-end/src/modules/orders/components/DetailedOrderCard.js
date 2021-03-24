@@ -11,28 +11,36 @@ function DetailedOrderCard(props) {
     api.get(`/sales/${id}`).then((resp) => setOrder(resp.data));
   }, []);
 
+  let date = '';
+  if (order && order.createdAt) {
+    date = new Date(order.createdAt).toLocaleDateString();
+    date = date.split('/');
+    date = `${date[0]}/${date[1]}`;
+  }
+
   return (
     <div className="flex flex-col">
       <p
         className="flex items-center space-x-2"
         data-testid="order-number"
+        to={ `/orders/${id}` }
       >
-        Número do pedido:
-        { order ? order.number : '' }
+        <span className="hidden">{ `Pedido ${id}` }</span>
+        <span>{ `Order N. ${id}` }</span>
       </p>
       <p
         className="flex items-center space-x-2"
         data-testid="order-date"
       >
-        Data do pedido:
-        { order ? order.createdAt : '' }
+        Order date:
+        { date }
       </p>
       <p
         className="flex items-center space-x-2"
         data-testid="order-total-value"
       >
-        Total do pedido:
-        { order ? order.total : '' }
+        Total:
+        { order ? `R$ ${order.total.replace('.', ',')}` : '' }
       </p>
       { order && order.products.map((product, index) => (
         <div
@@ -56,6 +64,9 @@ function DetailedOrderCard(props) {
             </p>
             <p data-testid={ `${index}-product-qtd` }>
               { product.quantity }
+            </p>
+            <p data-testid={ `${index}-product-total-value` }>
+              { `R$ ${(product.price * product.quantity).toFixed(2).replace('.', ',')}` }
             </p>
           </div>
         </div>
