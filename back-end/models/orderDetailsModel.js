@@ -14,7 +14,7 @@ const saleDetails = async (id) => {
     ON b.sale_id = a.id
     INNER JOIN products AS c
     ON b.product_id = c.id
-    WHERE b.sale_id = ?`, [id]
+    WHERE b.sale_id = ?`, [id],
   );
   return productsOfSale;
 };

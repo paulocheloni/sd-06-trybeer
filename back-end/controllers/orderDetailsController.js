@@ -4,7 +4,7 @@ const orderDetailsService = require('../services/orderDetailsService');
 const router = Router();
 
 router.get('/orderDetails/:id', async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
   try {
     const productsOfSale = await orderDetailsService.saleDetails(id);
 
