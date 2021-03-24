@@ -37,4 +37,14 @@ controller.post('/', async (req, res, next) => {
   return res.status(200).json({ message: 'Sale created.' });
 });
 
+controller.put('/:id', async (req, res, next) => {
+  const { id } = req.params;
+  const { authorization: token } = req.headers;
+
+  const result = await salesService.updateSale({ id, token });
+  console.log(result[0]);
+  if (result.payload) return next(result);
+  return res.status(200).json({ message: 'Sale updated.' });
+});
+
 module.exports = controller;

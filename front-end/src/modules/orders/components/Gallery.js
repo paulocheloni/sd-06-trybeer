@@ -10,8 +10,6 @@ function Gallery() {
     api.get('/sales').then((resp) => setOrders(resp.data));
   }, []);
 
-  console.log(orders);
-
   return (
     <div className="grid md:grid-cols-4 gap-8 align-baseline">
       { orders.length > 0 && orders.map((order, index) => (

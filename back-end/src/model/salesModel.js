@@ -91,10 +91,20 @@ const createSalesProducts = async ({ id, products }) => {
   return ({ id: insertId });
 };
 
+const updateSale = async ({ id }) => {
+  const query = `UPDATE Trybeer.sales SET status = ? WHERE id = ? `;
+  const values = ['delivered', id];
+
+  const result = await connection.execute(query, values)
+
+  return result;
+}
+
 module.exports = {
   createSale,
   createSalesProducts,
   getAll,
   getSalesByUserId,
   getSaleById,
+  updateSale,
 };

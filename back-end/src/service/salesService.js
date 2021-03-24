@@ -47,8 +47,19 @@ const createSale = async ({ total, address, number,
   return result;
 };
 
+const updateSale = async ({ id, token }) => {
+  const validateToken = await Validations.tokenValidation(token);
+
+  if (validateToken.payload) return validateToken;
+
+  const result = await salesModel.updateSale({ id });
+  
+  return result;
+};
+
 module.exports = {
   createSale,
   getAll,
   getSaleById,
+  updateSale,
 };

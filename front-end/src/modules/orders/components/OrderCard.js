@@ -12,7 +12,8 @@ function OrderCard({ order, index }) {
     status,
   } = order;
 
-  const role = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { role } = user;
   const path = role === 'administrator' ? `/admin/orders/${id}` : `/orders/${id}`;
   const totalValue = `R$ ${total.replace('.', ',')}`;
   let date = new Date(createdAt).toLocaleDateString();
