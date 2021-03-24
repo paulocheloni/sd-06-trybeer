@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import * as FaIcons from 'react-icons/fa';
 import ContextBeer from '../context/ContextBeer';
@@ -9,10 +9,22 @@ function Card({ product, testIdNumber }) {
     products,
     clickMinus,
     clickPlus,
+    findProduct,
   } = useContext(ContextBeer);
 
-  const currentProduct = products.find((prod) => prod.id === id);
-  const { name, stringPrice, urlImage } = currentProduct;
+  const [productName, setProductName] = useState('');
+  const [productStringPrice, setProductStringPrice] = useState('');
+  const [productUrlImage, setProductUrlImage] = useState('');
+
+  useEffect(() => {
+    if (products.length !== 0) {
+      const currentProduct = findProduct(id);
+      const { name, stringPrice, urlImage } = currentProduct;
+      setProductName(name);
+      setProductStringPrice(stringPrice);
+      setProductUrlImage(urlImage);
+    }
+  }, [products, id, findProduct]);
 
   // const handleClickPlus = () => {
   //   const quantity = localQuantity + 1;
@@ -51,14 +63,14 @@ function Card({ product, testIdNumber }) {
     >
       <div className="relative side-menu-container flex flex-col space-y-4 items-center">
         <img
-          src={ urlImage }
-          alt={ name }
+          src={ productUrlImage }
+          alt={ productName }
           className="mx-auto h-24 w-24 w-auto"
           data-testid={ `${testIdNumber}-product-img` }
         />
-        <p data-testid={ `${testIdNumber}-product-name` }>{ name }</p>
+        <p data-testid={ `${testIdNumber}-product-name` }>{ productName }</p>
         <p data-testid={ `${testIdNumber}-product-price` }>
-          { stringPrice }
+          { productStringPrice }
         </p>
       </div>
       <div className="relative side-menu-container flex justify-center items-center">
@@ -91,6 +103,7 @@ Card.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.number,
     quantity: PropTypes.number,
+    price: PropTypes.number,
   }).isRequired,
   testIdNumber: PropTypes.number.isRequired,
 };

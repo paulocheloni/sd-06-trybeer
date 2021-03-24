@@ -5,6 +5,7 @@ import api from '../axios/api';
 
 function Provider({ children }) {
   const storedSale = JSON.parse(localStorage.getItem('sale'));
+  const isSaleStored = storedSale && storedSale.length !== 0;
   const initialReduce = 0;
 
   const [loginEmail, setLoginEmail] = useState('');
@@ -15,33 +16,33 @@ function Provider({ children }) {
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [registerIsDisabled, setRegisterIsDisabled] = useState('');
-  const [sale, setSale] = useState([]);
+  const [sale, setSale] = useState(storedSale);
   const [total, setTotal] = useState(0);
   const [stringTotal, setStringTotal] = useState('R$ 0,00');
-
-  console.log(storedSale);
 
   useEffect(() => {
     localStorage.setItem('sale', JSON.stringify(sale));
   }, [sale]);
 
   useEffect(() => {
-    if (!storedSale || storedSale.length === 0) {
+    if (!isSaleStored) {
       const initialSale = products
         .map(({ id, quantity, price }) => ({ id, quantity, price }));
       setSale(initialSale);
     }
-  }, [products, storedSale]);
+  }, [products, isSaleStored]);
 
   useEffect(() => {
-    const sumTotal = sale
-      .reduce((acc, curr) => (acc + (curr.price) * curr.quantity), initialReduce)
-      .toFixed(2);
-    setTotal(sumTotal);
-    if (sumTotal === 0) setStringTotal('R$ 0,00');
-    else {
-      const formatTotal = `R$ ${sumTotal.replace('.', ',')}`;
-      setStringTotal(formatTotal);
+    if (sale && sale.length !== 0) {
+      const sumTotal = sale
+        .reduce((acc, curr) => (acc + (curr.price) * curr.quantity), initialReduce)
+        .toFixed(2);
+      setTotal(sumTotal);
+      if (sumTotal === 0) setStringTotal('R$ 0,00');
+      else {
+        const formatTotal = `R$ ${sumTotal.replace('.', ',')}`;
+        setStringTotal(formatTotal);
+      }
     }
   }, [sale]);
 
@@ -82,6 +83,17 @@ function Provider({ children }) {
     setSale(newSale);
   };
 
+  const findProduct = (id) => {
+    const productById = products.find((prod) => prod.id === id);
+    return productById;
+  };
+
+  const initiateSale = () => {
+    const initialSale = products
+      .map(({ id, quantity, price }) => ({ id, quantity, price }));
+    setSale(initialSale);
+  };
+
   const contextData = {
     loginEmail,
     setLoginEmail,
@@ -107,6 +119,8 @@ function Provider({ children }) {
     setStringTotal,
     clickMinus,
     clickPlus,
+    findProduct,
+    initiateSale,
     getUser,
     setUser,
   };

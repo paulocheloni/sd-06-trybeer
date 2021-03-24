@@ -36,6 +36,7 @@ function Login() {
         if (response.data.role === 'client') history.push('/products');
       })
       .catch((err) => console.error(err));
+    resetFields();
     return token;
   };
 
@@ -50,7 +51,7 @@ function Login() {
           {/* <input type="hidden" name="remember" value="true" /> */}
           <LoginInputs />
           <Button
-            onClick={ () => onClick() && resetFields() }
+            onClick={ () => onClick() }
             isDisabled={ isDisabled }
             bgColor="bg-black"
             testId="signin-btn"
