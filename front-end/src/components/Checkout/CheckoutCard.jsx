@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../css/CheckoutCard.css';
-import { deleteItemCart } from '../services/index';
+import { deleteItemCart } from '../../services/index';
 
 function CheckoutCard(props) {
   const { item, index, setTotal, setItems } = props;

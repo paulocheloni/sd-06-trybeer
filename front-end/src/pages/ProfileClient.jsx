@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { handleUpdate } from '../services/index';
 import { profile } from '../api/index';
-import ControllerHeader from '../components/ControllerHeader';
+import ControllerHeader from '../components/Header-SideBar/ControllerHeader';
 import '../css/General.css';
 
 function ProfileClient() {

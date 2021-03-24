@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import '../css/Header.css';
+import '../../css/Header.css';
 
 function Header() {
   const [title, setTitle] = useState('');
@@ -18,6 +18,9 @@ function Header() {
       break;
     case '/checkout':
       setTitle('Finalizar Pedido');
+      break;
+    case '/orders':
+      setTitle('Meus Pedidos');
       break;
     default:
       setTitle('Erro');

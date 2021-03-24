@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { addProduct, reduceProduct } from '../services/index';
-import '../css/Card.css';
+import '../css/ProductCard.css';
 
-function Card(props) {
+function ProductCard(props) {
   const { product, setTotal } = props;
   const quantityStorage = localStorage.getItem(product.name);
   const [quantity, setQuantity] = useState(0);
@@ -54,7 +54,7 @@ function Card(props) {
   );
 }
 
-Card.propTypes = {
+ProductCard.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -64,4 +64,4 @@ Card.propTypes = {
   setTotal: PropTypes.func.isRequired,
 };
 
-export default Card;
+export default ProductCard;

@@ -72,7 +72,8 @@ const getItensStorage = () => {
     .keys({ ...localStorage })
     .filter((key) => key !== 'token')
     .filter((key) => key !== 'total')
-    .filter((key) => key !== 'address');
+    .filter((key) => key !== 'address')
+    .filter((key) => key !== 'user');
   const items = Object.keys({ ...localStorage })
     .filter((key) => filterKeys.includes(key))
     .reduce((beerObject, key) => {

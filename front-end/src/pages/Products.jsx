@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import ControllerHeader from '../components/ControllerHeader';
-import Card from '../components/Card';
+import ControllerHeader from '../components/Header-SideBar/ControllerHeader';
+import ProductCard from '../components/ProductCard';
 import ShowCart from '../components/ShowCart';
 import { getProducts } from '../api/index';
 import { tokenExists } from '../services/index';
@@ -22,7 +22,7 @@ function Products() {
       <ControllerHeader />
       <section className="product-list">
         { products && products
-          .map((prod, index) => (<Card
+          .map((prod, index) => (<ProductCard
             key={ prod.id }
             product={ prod }
             setTotal={ setCartTotal }

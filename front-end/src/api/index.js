@@ -65,6 +65,15 @@ async function checkout(userId, totalPrice, address, number) {
     { headers: { authorization: token } });
 }
 
+async function getOrders(setOrders) {
+  const axios = buildAxiosHandler();
+  const token = localStorage.getItem('token');
+  axios.get('/sales', {
+    headers: {
+      authorization: token,
+    } }).then((response) => setOrders(response.data));
+}
+
 export {
   checkout,
   getProducts,
@@ -72,4 +81,5 @@ export {
   profile,
   register,
   updateName,
+  getOrders,
 };
