@@ -31,6 +31,12 @@ const filterByUserId = async (saleId, userId) => {
     value: saleId,
   });
   authDetailsSale(result, userId);
+  const addSaleDetails = await utils.getByFilter({
+    table: 'sales_products',
+    filter: 'sale_id',
+    value: saleId,
+  });
+  result.sale = addSaleDetails;
   return result;
 };
 
