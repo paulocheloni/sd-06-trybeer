@@ -3,7 +3,7 @@ const cors = require('cors');
 const RegisterController = require('./controllers/RegistersController');
 const ProductsController = require('./controllers/ProductsController');
 const LoginController = require('./controllers/LoginController');
-// const { validateLogin } = require('./middlewares/validations');
+const { isUserLoggedIn, isUserAdmin } = require('./middlewares/validations');
 const handleError = require('./middlewares/handleError');
 const OrdersController = require('./controllers/OrdersController');
 const AdminController = require('./controllers/AdminController');
@@ -18,7 +18,7 @@ app.use('/register', RegisterController);
 app.use('/products', ProductsController);
 app.use('/login', LoginController);
 app.use('/orders', OrdersController);
-app.use('/admin', AdminController);
+app.use('/admin', isUserLoggedIn, isUserAdmin, AdminController);
 
 app.use('/images', express.static(__dirname.concat('/images')));
 
