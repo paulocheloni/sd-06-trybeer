@@ -37,6 +37,13 @@ const isUserLoggedIn = async (req, res, next) => {
   const { authorization } = req.headers;
   const loggedIn = validateToken(authorization);
   if (!loggedIn) return res.status(401).json({ message: 'Operation not authorized' });
+  req.user = loggedIn;
+  next();
+};
+
+const isUserAdmin = async (req, res, next) => {
+  const { user: { role } } = req;
+  if (role!=='administrator') res.status(401).json({ message: 'User is not an Admin' })
   next();
 };
 
@@ -45,4 +52,5 @@ module.exports = {
   validateEmailDatabase,
   validateLogin,
   isUserLoggedIn,
+  isUserAdmin,
 };
