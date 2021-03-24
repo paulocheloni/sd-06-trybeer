@@ -33,6 +33,7 @@ export async function validate(email, password) {
     })
       .then((response) => response.data);
     localStorage.setItem('token', JSON.stringify(result.token));
+    // console.log(result);
     return result;
   } catch (error) {
     if (error.response) {
@@ -75,6 +76,40 @@ export async function getProducts() {
       )
       .then((response) => response.data);
     return products;
+  } catch (error) {
+    if (error.response) {
+      return {
+        status: error.response.status,
+        statusText: error.response.statusText,
+        message: error.response.data.message,
+      };
+    }
+  }
+}
+
+export async function finishOrders({ priceTotal, date, userID, address, number }) {
+  try {
+    await axios
+      .post(
+        `${URL_BASE}orders/create`,
+        { priceTotal, date, userID, address, number },
+      );
+    // .then((response) => console.log(response));
+  } catch (error) {
+    if (error.response) {
+      return {
+        status: error.response.status,
+        statusText: error.response.statusText,
+        message: error.response.data.message,
+      };
+    }
+  }
+}
+
+export async function getAllOrders() {
+  try {
+    return axios.get(`${URL_BASE}orders/get-all`)
+      .then((response) => response.data);
   } catch (error) {
     if (error.response) {
       return {
