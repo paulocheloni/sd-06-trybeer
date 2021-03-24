@@ -12,7 +12,7 @@ const getAllOrders = rescue(async (req, res) => {
 const getOrdersByDetails = rescue(async (req, res) => {
   const { id } = req.params;
 
-  const orders = await OrderService.getOrdersByDetails(id);
+  const [orders] = await OrderService.getOrdersByDetails(id);
 
   return res
     .status(200)
