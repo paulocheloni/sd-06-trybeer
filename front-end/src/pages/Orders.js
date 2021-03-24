@@ -30,6 +30,7 @@ class Orders extends React.Component {
 
   render() {
     const { history, stateOrders } = this.props;
+    console.log(stateOrders);
     return (
       <div>
         <Header history={ history } />
