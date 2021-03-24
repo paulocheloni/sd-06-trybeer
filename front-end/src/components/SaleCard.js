@@ -14,7 +14,6 @@ function SaleCard(props) {
   return (
     <div className="salecard-card">
       <div
-        className=""
         data-testid={ `${index}-order-card-container` }
         onClick={ () => history.push(`/orders/${saleNumber}`) }
         aria-hidden="true"

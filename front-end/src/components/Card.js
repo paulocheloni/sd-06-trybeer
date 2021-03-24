@@ -64,23 +64,25 @@ function Card(props) {
         alt="product"
       />
       <h4 data-testid={ `${index}-product-name` }>{ name }</h4>
-      <button
-        className="btn-success btn-card"
-        type="button"
-        onClick={ handleClickMinus }
-        data-testid={ `${index}-product-minus` }
-      >
-        -
-      </button>
-      <span className="quantity-card" data-testid={ `${index}-product-qtd` }>{ quantity }</span>
-      <button
-        className="btn-success btn-card"
-        type="button"
-        onClick={ handleClickPlus }
-        data-testid={ `${index}-product-plus` }
-      >
-        +
-      </button>
+      <div className="button-value-card">
+        <button
+          className="btn-success btn-card"
+          type="button"
+          onClick={ handleClickMinus }
+          data-testid={ `${index}-product-minus` }
+        >
+          -
+        </button>
+        <span className="quantity-card" data-testid={ `${index}-product-qtd` }>{ quantity }</span>
+        <button
+          className="btn-success btn-card"
+          type="button"
+          onClick={ handleClickPlus }
+          data-testid={ `${index}-product-plus` }
+        >
+          +
+        </button>
+      </div>
     </div>
   );
 }
