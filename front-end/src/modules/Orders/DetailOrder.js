@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { useParams, useHistory } from 'react-router-dom';
+import api from '../../axios/api';
 import TopBar from '../../design-components/TopBar';
 import DetailOrderCard from './components/DetailOrderCard';
 
 function DetailOrder() {
+  const history = useHistory();
   const [loading, setLoading] = useState(true);
   const [sale, setSale] = useState({});
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/sales/${id}`)
+    const user = localStorage.getItem('user');
+    if (!user) history.push('/');
+  }, [history]);
+
+  useEffect(() => {
+    api
+      .get(`/sales/${id}`)
       .then((response) => {
         setSale(response.data);
         setLoading(false);

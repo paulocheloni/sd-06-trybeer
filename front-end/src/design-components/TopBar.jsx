@@ -7,13 +7,13 @@ function TopBar(props) {
   const { title } = props;
   const [sidebar, setSidebar] = useState(false);
   return (
-    <header className="w-full bg-black flex">
-      { sidebar && <SideBarMenu /> }
+    <header className="relative w-full bg-black flex">
+      <SideBarMenu visible={ sidebar } />
       <button
         type="button"
         data-testid="top-hamburguer"
         onClick={ () => setSidebar(!sidebar) }
-        className="bg-gray-200 h-12 w-12"
+        className="bg-gray-200 h-12 w-12 flex justify-center items-center"
       >
         <FaIcons.FaBars />
       </button>

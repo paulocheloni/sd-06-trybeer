@@ -21,10 +21,6 @@ function Provider({ children }) {
   const [stringTotal, setStringTotal] = useState('R$ 0,00');
 
   useEffect(() => {
-    localStorage.setItem('sale', JSON.stringify(sale));
-  }, [sale]);
-
-  useEffect(() => {
     if (!isSaleStored) {
       const initialSale = products
         .map(({ id, quantity, price }) => ({ id, quantity, price }));
@@ -44,6 +40,7 @@ function Provider({ children }) {
         setStringTotal(formatTotal);
       }
     }
+    localStorage.setItem('sale', JSON.stringify(sale));
   }, [sale]);
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../../axios/api';
 import SideBarAdmin from '../../../design-components/SideBarAdmin';
 import CardAdmin from '../../../design-components/CardAdmin';
 // import mockPedidos from '../../../services/mockPedidos'
@@ -8,7 +8,8 @@ import CardAdmin from '../../../design-components/CardAdmin';
 function AdminOrders() {
   const [sales, setSales] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:3001/sales')
+    api
+      .get('/sales')
       .then((response) => {
         setSales(response.data);
       })
