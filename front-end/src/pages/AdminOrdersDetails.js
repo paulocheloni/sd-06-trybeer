@@ -36,10 +36,10 @@ function AdminOrdersDetails(props) {
                     <h2 data-testid={ `${index}-product-qtd` }>{order.quantity}</h2>
                     <h2 data-testid={ `${index}-product-name` }>{order.name}</h2>
                     <h2 data-testid={ `${index}-product-total-value` }>
-                      {`R$ ${(order.total).toString().replace('.', ',')}`}
+                      {`R$ ${(order.total).toFixed(2).replace('.', ',')}`}
                     </h2>
                     <h2 data-testid={ `${index}-order-unit-price` }>
-                      {`(R$ ${(order.price).toString().replace('.', ',')})`}
+                      {`(R$ ${(order.price).toFixed(2).replace('.', ',')})`}
                     </h2>
                   </div>
                 ))}
