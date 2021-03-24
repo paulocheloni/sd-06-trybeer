@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Redirect } from 'react-router-dom';
 import api from '../services/api';
+import MenuTopAdmin from '../components/MenuTopAdmin';
 
 export default function AdminOrdersDetails() {
   const { id } = useParams();
   const [productsOfSale, setProductsOfSale] = useState([]);
+  const [buttonDisabled, setButtonDisabled] = useState(null);
   const fetchApiProductOfSale = async (idFetch) => {
     const productDetails = await api.fetchSaleProduct(idFetch);
     setProductsOfSale(productDetails);
@@ -12,11 +14,17 @@ export default function AdminOrdersDetails() {
 
   useEffect(() => {
     fetchApiProductOfSale(id);
-  }, [id]);
+    if (productsOfSale.length !== 0 && productsOfSale[0].status === 'Entregue') {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [id, productsOfSale]);
 
-  const handleClick = () => {
-    
-  }
+  const handleClick = async () => {
+    await api.fetchChangeStatus(id);
+    setButtonDisabled(false);
+  };
 
   const user = JSON.parse(localStorage.getItem('user'));
   if (!user) return <Redirect to="/login" />;
@@ -25,8 +33,9 @@ export default function AdminOrdersDetails() {
 
   return (
     <div>
+      <MenuTopAdmin />
       <h1 data-testid="top-title">Detalhes de Pedido</h1>
-      <h2 data-testid="order-number">{ `Pedido ${id}` }</h2>
+      <h2 data-testid="order-number">{`Pedido ${id}`}</h2>
       <h2 data-testid="order-status">
         {productsOfSale.length !== 0 && productsOfSale[0].status}
       </h2>
@@ -43,10 +52,10 @@ export default function AdminOrdersDetails() {
             </div>
             <div data-testid={ `${index}-order-unit-price` }>
               (
-                  {Number(produto.price).toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                })}
+              {Number(produto.price).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
               )
             </div>
           </div>
@@ -57,9 +66,11 @@ export default function AdminOrdersDetails() {
           .reduce(sumOfCart, 0)
           .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
       </h2>
-      <button data-testid="mark-as-delivered-btn" onClick={handleClick}>
-        Marcar como entregue
-      </button>
+      {buttonDisabled && (
+        <button type="button" data-testid="mark-as-delivered-btn" onClick={ handleClick }>
+          Marcar como entregue
+        </button>
+      )}
     </div>
   );
 }

@@ -103,11 +103,12 @@ const fetchSaleProduct = async (id) => {
   return productsOfSale;
 };
 
-const fetchChangeStatus = async (id) => {
+const fetchChangeStatus = async (idModified) => {
+  const data = { id: idModified };
   await fetch('http://localhost:3001/changeStatus', {
     method: 'PUT',
     headers: contentType,
-    body: JSON.stringify(id),
+    body: JSON.stringify(data),
   });
 };
 
