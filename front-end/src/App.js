@@ -8,6 +8,7 @@ import {
   Register,
   Products,
   Checkout,
+  DetailsOrder,
 } from './pages/index';
 import Provider from './hooks/Provider';
 import './App.css';
@@ -19,7 +20,8 @@ function App() {
         <Switch>
           <Route path="/login" component={ Login } />
           <Route path="/register" component={ Register } />
-          <Route path="/orders" component={ Orders } />
+          <Route path="/orders/:orderId" component={ DetailsOrder } />
+          <Route exact path="/orders" component={ Orders } />
           <Route path="/products" component={ Products } />
           <Route path="/profile" component={ Profile } />
           <Route path="/checkout" component={ Checkout } />

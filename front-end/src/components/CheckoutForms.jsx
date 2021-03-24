@@ -11,17 +11,20 @@ function CheckoutForms() {
     streetInput: '',
     houseNumberInput: '',
   });
-  const { totalPrice, checkoutProducts } = useContext(UserContext);
+  const { totalPrice, setTotalPrice, checkoutProducts } = useContext(UserContext);
   const history = useHistory();
 
   const handleSubmit = async () => {
     const visibleInterval = 2000;
 
     createOrder(totalPrice, street, checkoutProducts);
-
+    
     setIsVisible(false);
     setTimeout(() => {
       setIsVisible(true);
+      setTotalPrice('0.00');
+      localStorage.removeItem('productList');
+      localStorage.removeItem('total');
       history.push('/products');
     }, visibleInterval);
   };

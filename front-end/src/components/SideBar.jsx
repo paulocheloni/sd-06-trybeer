@@ -4,6 +4,14 @@ import '../styles/sidebar.css';
 
 function SideBar() {
   const history = useHistory();
+
+  const handleLogout = async () => {
+    localStorage.removeItem('productList');
+    localStorage.removeItem('total');
+    localStorage.removeItem('user');
+    history.push('/login');
+  }
+
   return (
     <div className="side-menu-container">
       <button
@@ -34,7 +42,7 @@ function SideBar() {
         className="buttonside"
         type="button"
         data-testid="side-menu-item-logout"
-        onClick={ () => history.push('/login') }
+        onClick={ handleLogout }
       >
         Sair
       </button>
