@@ -24,6 +24,7 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 - [Como desenvolver](#como-desenvolver)
 - [Requisitos do projeto](#requisitos-do-projeto)
   - [Linter](#linter)
+  - [Execução de testes de requisito](#execução-de-testes-de-requisito)
   - [Lista de requisitos](#lista-de-requisitos)
 
     `Requisitos Entrega 1:`
@@ -146,7 +147,7 @@ Para que seu projeto seja corretamente avaliado, siga as orientações a seguir:
 
 ### Data de Entrega
 
-Data de entrega para avaliação final do projeto: `DD/MM/YYYY - 14:00h`.
+Data de entrega para avaliação final do projeto: `31/03/2021 - 14:00h`.
 
 # Instruções para entregar seu projeto
 
@@ -154,7 +155,7 @@ Data de entrega para avaliação final do projeto: `DD/MM/YYYY - 14:00h`.
 
 1. Clone o repositório
 
-- `git clone https://github.com/betrybe/sd-06-trybeer.git`.
+- `git clone https://github.com/tryber/sd-06-trybeer.git`.
 - Entre na pasta do repositório que você acabou de clonar:
   - `cd sd-06-trybeer`
 
@@ -248,7 +249,7 @@ Vamos pedir que você adicione `data-testid` em alguns elementos, além de algum
 
 O não cumprimento de um requisito, total ou parcialmente, impactará na sua avaliação.
 
-⚠️ Lembre-se de que o seu projeto só será avaliado se estiver passando pelos _checks_ do **ESLint** e se estiver, também, seguindo corretamente os padrões REST para rotas e MSC para o back-end. Além disso, você deve também disponibilizar um script contendo a criação do seu banco de dados, das tabelas e inserção de dados iniciais.
+⚠️ Lembre-se de que o seu projeto só será avaliado se estiver passando pelos _checks_ do **ESLint** e se estiver, também, seguindo corretamente os padrões REST para rotas e MSC para o back-end.
 
 ⚠️ A criação dos endpoints da API, a modelagem do banco e a estrutura geral do projeto é livre, desde que os requisitos especificados na seção `Requisitos Gerais` sejam cumpridos.
 
@@ -278,7 +279,7 @@ Haverá um arquivo no caminho: `sd-06-trybeer/cypress/plugins/index.js`. Neste a
 
 **Faça essas configurações também para as variáveis de ambiente usadas nesses arquivos:**
 
-`sd-0x-cookmaster/config/config.js`
+`sd-06-trybeer/config/config.js`
 
 ```
 module.exports = {
@@ -356,6 +357,16 @@ Usaremos também o [StyleLint](https://stylelint.io/) para fazer a análise est�
 
 Para poder rodar o `StyleLint` em um projeto basta executar o comando `npm install` dentro do projeto e depois `npm run lint:styles`. Se a análise do `StyleLint` encontrar problemas no seu código, tais problemas serão mostrados no seu terminal. Se não houver problema no seu código, nada será impresso no seu terminal.
 
+### Execução de testes de requisito
+
+Para o projeto ser validado, todos os testes de comportamento devem passar. É possível testar isso local rodando `npm run cy`. Esse comando roda a suite de testes do Cypress que valida se o fluxo geral e os requisitos funcionais estão funcionando como deveriam. Você pode também executar o comando `npm run cy:open` para ter um resultado visual dos testes executados.
+
+Esses testes não consideram o layout de maneira geral, mas sim os atributos e informações corretas, então preste atenção nisso! Os testes te darão uma mensagem de erro caso não estejam passando (seja qual for o motivo). 😉
+
+**Atenção:** Sua aplicação deve estar rodando para o Cypress no terminal poder testar.
+
+#### Além dos testes da avaliação automatizada, o requisito bônus do projeto se baseia em **escrever testes unitários que cubram pelo menos 90% do projeto**. Na [documentação do Jest CLI](https://jestjs.io/docs/en/cli) é possível ver como essa cobertura é coletada.
+
 ### Requisitos Gerais
 
 - Os `endpoints` da API devem ser criados utilizando o padrão REST;
@@ -377,6 +388,8 @@ Esta tela possui o nome `Login` no protótipo.
 - Todos os elementos da tela devem respeitar os atributos descritos no protótipo;
 
 - A rota da tela deve ser `/login`;
+
+- A rota `/` da aplicação deve redirecionar para a rota `/login`;
 
 - A pessoa deve conseguir escrever seu email no input de email;
 
@@ -561,7 +574,7 @@ Esta tela possui o nome `Cliente - Meu Perfil` no protótipo.
 
 - Deve ter um botão `"Salvar"`". Caso o usuário tenha editado o nome, o botão deve ser habilitado. Caso contrário, o botão deve estar desabilitado;
 
-- Ao clicar no botão `"Salvar"`, uma requisição deve ser feita à API e o nome da pessoa deve ser atualizado no banco de dados;
+- Ao clicar no botão `"Salvar"`, uma requisição deve ser feita à API e o nome da pessoa deve ser atualizado no banco de dados. Quando a atualização terminar, deve-se exibir a mensagem `Atualização concluída com sucesso` na tela;
 
 - Ao entrar na tela, se o usuário não estiver logado, deve ser redirecionado para a tela **Login**.
 
@@ -731,7 +744,7 @@ Esta tela possui o nome `Cliente - Checkout` no protótipo.
 
 - Deve ter um botão `"Finalizar Pedido"`. O botão deve estar habilitado **apenas** se o valor total do pedido for **maior que zero** e o endereço de entrega estiver preenchido;
 
-- Ao clicar em "`Finalizar pedido`", caso a operação dê certo, uma mensagem de sucesso deve ser exibida por **2 segundos** e em seguida a pessoa deve ser redirecionada para a página **Cliente - Produtos**. Caso contrário, deve ser exibido uma mensagem de erro;
+- Ao clicar em "`Finalizar pedido`", deve ser feita uma requisição para o backend para salvar o pedido no banco de dados, caso a operação dê certo, a mensagem `Compra realizada com sucesso!` deve ser exibida por **2 segundos** e em seguida a pessoa deve ser redirecionada para a página **Cliente - Produtos**. Caso contrário, deve ser exibido uma mensagem de erro;
 
 - Quando um pedido for finalizado, o carrinho deve ser esvaziado;
 
@@ -823,7 +836,7 @@ Esta tela possui o nome `Cliente - Meus Pedidos` no protótipo.
 
 - A rota da tela deve ser `/orders`;
 
-- Deve conter uma lista de cards, onde cada card é um pedido. Cada card deve conter as seguintes informações: `número do pedido`, `data de realização` e `valor total do pedido`. Para a data de realização do pedido, mostre apenas o dia e o mês;
+- Deve conter uma lista de cards, onde cada card é um pedido. Cada card deve conter as seguintes informações: `número do pedido`, `data de realização` e `valor total do pedido`. Para a data de realização do pedido, mostre **apenas o dia e o mês**;
 
 - A listagem deve mostrar os pedidos ordenados por id;
 
