@@ -33,9 +33,21 @@ const Routes = () => {
           <Route exact path="/register" component={ Register } />
         </BodyContainer>
       </Route>
+      {/* ROTAS PRIVADAS - USUÁRIO ADMIN */}
+      <Route path={ ['/admin/orders', '/admin/profile'] }>
+        { !existToken && <Redirect to="/" /> }
+        { role === 'client' && <Redirect to="/" /> }
+        <Menu />
+        <BodyContainer>
+          <Route path="/admin/profile" component={ ProfileAdmin } />
+          <Route exact path="/admin/orders/:id" component={ DetailedOrder } />
+          <Route exact path="/admin/orders" component={ OrdersAdmin } />
+        </BodyContainer>
+      </Route>
       {/* ROTAS PRIVADAS - USUÁRIO CLIENT */}
       <Route path={ ['/profile', '/products', '/orders', '/checkout'] }>
         { !existToken && <Redirect to="/" /> }
+        { !role === 'client' && <Redirect to="/" /> }
         <Menu />
         <BodyContainer>
           <Route path="/profile" component={ ProfileClient } />
@@ -43,15 +55,6 @@ const Routes = () => {
           <Route exact path="/checkout" component={ Checkout } />
           <Route exact path="/orders/:id" component={ DetailedOrder } />
           <Route exact path="/orders" component={ OrdersClient } />
-        </BodyContainer>
-      </Route>
-      {/* ROTAS PRIVADAS - USUÁRIO ADMIN */}
-      <Route path={ ['/admin/orders', '/admin/profile'] }>
-        { !existToken && <Redirect to="/" /> }
-        <Menu />
-        <BodyContainer>
-          <Route path="/admin/profile" component={ ProfileAdmin } />
-          <Route exact path="/admin/orders" component={ OrdersAdmin } />
         </BodyContainer>
       </Route>
       {/* ROTA RAIZ - RESPONSÁVEL POR FAZER DIRECIONAMENTO */}

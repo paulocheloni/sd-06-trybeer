@@ -13,6 +13,9 @@ function OrderCard({ order, index }) {
   let date = new Date(createdAt).toLocaleDateString();
   date = date.split('/');
   date = `${date[0]}/${date[1]}`;
+  const user = JSON.parse(localStorage.getItem('user'));
+  const role = user ? user.role : 'client';
+  const pre = role === 'client' ? '' : '/admin';
 
   return (
     <div
@@ -33,7 +36,7 @@ function OrderCard({ order, index }) {
         <p data-testid={ `${index}-order-date` }>
           { date }
         </p>
-        <Link to={ `/orders/${id}` }>See order</Link>
+        <Link to={ `${pre}/orders/${id}` }>See order</Link>
       </div>
     </div>
   );
