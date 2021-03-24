@@ -23,7 +23,6 @@ export default function CheckoutProductsCard() {
   };
 
   return (
-
     <div className="cart-products-container">
       { !cartProducts.length
         ? <h1>Não há produtos no carrinho</h1>

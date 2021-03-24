@@ -27,7 +27,7 @@ export default function Orders() {
 
   return (
     <div>
-      <TopMenu pageTitle="Meus Pedidos" />
+      <TopMenu pageTitle="Meus Pedidos" />      
       <OrderCard />
       { handleRedirect(tokenFromLocalStorage) }
     </div>

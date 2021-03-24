@@ -5,7 +5,7 @@ const ZERO = 0;
 const EIGHT = 8;
 const FOUR = 4;
 const SIX = 6;
-
+const TEN = 10;
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(TWO),
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(FOUR),
   },
   cardGrid: {
-    paddingTop: theme.spacing(EIGHT),
+    paddingTop: theme.spacing(TEN),
     paddingBottom: theme.spacing(EIGHT),
   },
   card: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   cardMedia: {
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '89%', // 16:9 // 50.25
   },
   cardContent: {
     flexGrow: 1,

@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 180;
-const TWO = 2;
+const TWO = 20;
 const ZERO = 0;
 const ONE = 1;
 const THREE = 3;
