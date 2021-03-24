@@ -39,21 +39,21 @@ class Orders extends React.Component {
             <div
               className="order"
               key={ index }
-              data-testid="0-order-card-container"
-            >
+              data-testid={ `${index}-order-card-container` }
+              >
               <div>
                 <button
                   type="button"
-                  data-testid={ `"${index}-order-number"` }
+                  data-testid={ `${index}-order-number` }
                   onClick={ () => history.push(`/orders/${index + 1}`) }
                 >
                   {`Pedido ${index + 1}`}
                 </button>
-                <h5 data-testid={ `"${index}-order-date"` }>
+                <h5 data-testid={ `${index}-order-date` }>
                   {`${e.sale_date.split('/')[2]}/${e.sale_date.split('/')[1]}`}
                 </h5>
               </div>
-              <p data-testid={ `"${index}-order-total-value"` }>
+              <p data-testid={ `${index}-order-total-value` }>
                 {`R$ ${e.total_price.replace('.', ',')}`}
               </p>
             </div>
