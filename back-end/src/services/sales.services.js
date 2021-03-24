@@ -14,7 +14,7 @@ const validateTotalPrice = async (sale, salePrice) => {
   const totalPrice = Number(sale.reduce((acc, { productId, quantity }) =>
     acc + Number(products.find((el) => el.id === productId).price) * quantity, 0).toFixed(2));
 
-  if (salePrice !== totalPrice) throw new Error('C_ERR_PRICE');
+  if (Number(salePrice) !== totalPrice) throw new Error('C_ERR_PRICE');
 };
 
 const create = async (body, userId) => {

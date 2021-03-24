@@ -1,63 +1,54 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
-import { yupSchemas, handleSaveUser } from '../utils';
+import { Redirect } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
-import { Topbar, TextInput, SubmitButton } from '../components';
+import { Topbar, Loading } from '../components';
+import salesApi from '../services/api.sales';
 
 export default function Profile() {
-  const { tokenContext: { token, setToken } } = useContext(AppContext);
-  const history = useHistory();
-  const [name, setName] = useState(token.name);
-  const [disableBtn, setDisableBtn] = useState(true);
-  const [success, setSuccess] = useState(false);
-
-  const updateName = (target) => setName(target.value);
-
-  const submit = async (e) => {
-    e.preventDefault();
-
-    const payload = { ...token, newName: name };
-    const result = await handleSaveUser(payload, setToken, history);
-    if (result.success) setSuccess(true);
-  };
+  const { tokenContext: { token } } = useContext(AppContext);
+  const [orders, setOrders] = useState();
 
   useEffect(() => {
-    const validateForm = async () => yupSchemas.update.validate({ name })
-      .then((valid) => (valid.name) && setDisableBtn(false))
-      .catch((error) => {
-        if (disableBtn === false) setDisableBtn(true);
-        return error;
-      });
+    const magicTime = 100;
+    const fetchOrders = async () => {
+      const ordersArray = await salesApi(token).catch((error) => error);
+      setTimeout(() => setOrders(ordersArray), magicTime);
+      // setOrders(ordersArray);
+    };
+    fetchOrders();
+  }, [setOrders, token]);
 
-    const nameChanged = (name.normalize() !== token.name.normalize());
-    if (!nameChanged) setDisableBtn(true);
-    if (nameChanged) validateForm();
-  }, [name, token, disableBtn]);
-
+  if (!token) return <Redirect to="/login" />;
+  console.log(orders);
   return (
     <section>
-      { (!token.token) && <Redirect to="/login" /> }
-      <Topbar title="Meu perfil" />
-      <form onSubmit={ submit }>
-        <fieldset>
-          <legend>Registro</legend>
-          <TextInput
-            name="name"
-            testId="profile"
-            value={ name }
-            callback={ updateName }
-          />
-          <TextInput
-            name="email"
-            testId="profile"
-            value={ token.email }
-            readonly
-          />
-        </fieldset>
-        <SubmitButton type="profile" disabled={ disableBtn } />
-      </form>
-      { (success) ? <p>Atualização concluída com sucesso.</p> : null }
+      <Topbar title="Meus Pedidos" />
+      { (!orders)
+        ? <Loading />
+        : (
+          <section className="orders-container">
+            { orders.map(({ id, total_price: totalPrice, sale_date: date }, index) => (
+              <section
+                className="order-card"
+                key={ `${index}-${id}` }
+                data-testid={ `${index}-order-card-container` }
+              >
+                <section className="name" data-testid={ `${index}-product-name` }>
+                  Pedido
+                  <strong>{ id }</strong>
+                </section>
+                <section className="total" data-testid={ `${index}-order-date` }>
+                  { `R$ ${totalPrice.replace('.', ',')}` }
+                </section>
+                <section className="date" data-testid={ `${id}-order-date` }>
+                  { `${date.getDate()}/${date.getMonth()}` }
+                  { date.getFullYear() }
+                </section>
+              </section>
+            )) }
+          </section>
+        ) }
     </section>
   );
 }

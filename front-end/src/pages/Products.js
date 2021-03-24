@@ -21,7 +21,7 @@ export default function Products() {
   useEffect(() => {
     const magicTime = 100;
     const fetchProducts = async () => {
-      const productsArray = await productsApi(token);
+      const productsArray = await productsApi(token).catch((error) => error);
       setTimeout(() => setProducts(productsArray), magicTime);
       // setProducts(productsArray);
     };

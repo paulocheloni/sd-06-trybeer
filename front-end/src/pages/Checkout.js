@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
 import { Topbar, CartButton, TextInput } from '../components';
+import salesApi from '../services/api.sales';
 import { handleProductQuantity } from '../utils';
 
 import '../styles/Products.css';
@@ -35,7 +36,25 @@ export default function Checkout() {
     setAddress({ ...address, [target.name]: target.value });
   };
 
-  const checkout = () => setSuccess(true);
+  const checkout = async () => {
+    const sale = Object.keys(cart).map((curr) => (
+      { productId: parseInt(curr, 10), quantity: parseInt(cart[curr].quantity, 10) }
+    ));
+
+    const delivery = {
+      address: address.street,
+      number: address.number,
+    };
+
+    const order = {
+      sale,
+      delivery,
+      salePrice: cartTotal.replace(',', '.'),
+    };
+
+    await salesApi({ ...token, order }).catch((error) => error);
+    setSuccess(true);
+  };
 
   const disabled = useMemo(() => {
     if (address.street.length === 0
