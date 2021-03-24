@@ -15,4 +15,15 @@ router.get('/adminOrders', async (req, res) => {
   }
 });
 
+router.put('/changeStatus', async (req, res) => {
+  try {
+    const { id } = req.body;
+    if (!id) return res.status(404).json({ message: 'Pedido não encontrado.' });
+    await adminOrderService.changeStatus(id);
+    return res.status(200).json({ message: 'Alterado com Sucesso.' });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;

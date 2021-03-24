@@ -7,6 +7,11 @@ const allOrders = async () => {
   return orders;
 };
 
+const changeStatus = async (id) => {
+  await connection.execute('UPDATE sales SET status = "Entregue" WHERE id = ?', [id]);
+}
+
 module.exports = {
   allOrders,
+  changeStatus,
 };
