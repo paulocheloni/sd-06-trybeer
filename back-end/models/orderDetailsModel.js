@@ -4,6 +4,7 @@ const saleDetails = async (id) => {
   const [productsOfSale] = await connection.execute(
     `SELECT
     a.sale_date,
+    a.status,
     b.sale_id,
     b.product_id,
     b.quantity,

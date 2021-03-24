@@ -103,6 +103,15 @@ const fetchSaleProduct = async (id) => {
   return productsOfSale;
 };
 
+const fetchChangeStatus = async (idModified) => {
+  const data = { id: idModified };
+  await fetch('http://localhost:3001/changeStatus', {
+    method: 'PUT',
+    headers: contentType,
+    body: JSON.stringify(data),
+  });
+};
+
 module.exports = {
   fetchLogin,
   fetchRegister,
@@ -113,4 +122,5 @@ module.exports = {
   fetchSales,
   fetchAllOrders,
   fetchSaleProduct,
+  fetchChangeStatus,
 };
