@@ -28,9 +28,7 @@ export default function SaleDetails() {
       const fullDate = orderDetail[0].sale_date.substr(five, five);
       const month = fullDate.substr(0, 2);
       const day = fullDate.substr(three);
-
       const saleDate = `${day}/${month}`;
-      // console.log(saleDate);
       return saleDate;
     }
   };

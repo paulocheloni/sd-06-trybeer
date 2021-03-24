@@ -1,11 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-// import { useHistory } from 'react-router-dom';
 import OrderCard from '../components/OrderCard';
 import TopMenu from '../components/TopMenu';
 import fetches from '../services/fetches';
 import productsContext from '../context/productsContext';
-// import productsContext from '../context/productsContext';
 
 export default function Orders() {
   const { setOrders } = useContext(productsContext);
@@ -15,7 +13,6 @@ export default function Orders() {
   useEffect(() => {
     const fetch = async () => {
       const allOrders = await fetches.getSales(tokenFromLocalStorage);
-      // console.log('orders provider', allOrders.data);
       setOrders(allOrders.data);
     };
     fetch();

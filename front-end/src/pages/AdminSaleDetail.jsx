@@ -14,7 +14,6 @@ export default function AdminSaleDetail() {
   const history = useHistory();
 
   useEffect(() => {
-    // console.log('meu pathName', adminPathName);
     fetches.getSaleById(tokenFromLocalStorage, adminPathName)
       .then((response) => setOrderDetail(response.data));
     // eslint-disable-next-line react-hooks/exhaustive-deps

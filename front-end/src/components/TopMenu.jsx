@@ -9,19 +9,13 @@ export default function TopMenu({ pageTitle }) {
   const [asideClass, setasideClass] = useState('aside-menu-off');
 
   const handleOnClickHamburguerButton = () => {
-    // console.log('click');
     const asideOn = 'aside-menu-on';
     const asideOff = 'aside-menu-off';
-    if (asideClass === asideOn) {
-      setasideClass(asideOff);
-    }
-    if (asideClass === asideOff) {
-      setasideClass(asideOn);
-    }
+    if (asideClass === asideOn) setasideClass(asideOff);
+    if (asideClass === asideOff) setasideClass(asideOn);
   };
 
   const handleOnClickAsideButton = (e) => {
-    // console.log(e.target.value);
     if (e.target.value === 'Produtos') { history.push('/products'); }
     if (e.target.value === 'Meus Pedidos') { history.push('/orders'); }
     if (e.target.value === 'Meu Perfil') { history.push('/profile'); }
@@ -43,7 +37,6 @@ export default function TopMenu({ pageTitle }) {
           &nbsp;
         </button>
         <h1 data-testid="top-title" className="page-title">{ pageTitle }</h1>
-        {/* <div className="side-menu-container"> */}
         <aside id="aside" className={ asideClass }>
           <div className="side-menu-container">
             <button
