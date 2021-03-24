@@ -20,13 +20,13 @@ export default function Routes() {
       <Route path="/login" component={ Login } />
       <Route path="/products" component={ Products } />
       <Route path="/register" component={ Register } />
+      <Route exact path="/orders/:id" component={ SaleDetails } />
+      <Route path="/orders" component={ CustomerOrders } />
       <Route exact path="/admin/orders/:id" component={ AdminSaleDetail } />
       <Route path="/admin/orders" component={ AdminOrders } />
       <Route path="/profile" component={ Profile } />
       <Route path="/checkout" component={ Checkout } />
-      <Route exact path="/orders/:id" component={ SaleDetails } />
       <Route path="/admin/profile" component={ AdminProfile } />
-      <Route path="/orders" component={ CustomerOrders } />
     </Switch>
   );
 }
