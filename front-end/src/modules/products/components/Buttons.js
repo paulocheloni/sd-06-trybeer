@@ -24,7 +24,7 @@ const Buttons = ({ index, product }) => {
 
     const increment = operationsIncrements[type];
 
-    if (position === initialValue) {
+    if (position === initialValue && type === 'increment') {
       return setCartItems((prev) => (
         [
           ...prev,
@@ -32,6 +32,8 @@ const Buttons = ({ index, product }) => {
         ]
       ));
     }
+
+    if (position === initialValue && type === 'decrement') return true;
 
     if (cartItems[position].quantity === 1 && type === 'decrement') {
       return setCartItems((prev) => (
@@ -61,7 +63,7 @@ const Buttons = ({ index, product }) => {
         type="button"
         name="decrement"
         onClick={ ({ target }) => handleClick(target.name) }
-        disabled={ quantity === 0 }
+        // disabled={ quantity === 0 }
       >
         -
       </button>
