@@ -63,7 +63,7 @@ const SideBarAdmin = () => {
         <S.Navigation
           className="get-out"
           href="/login"
-          onClick={ () => navigationPages(params, '/login') }
+          onClick={ () => navigationPages(params, '/login', setStateSideBarAdmin) }
           data-testid="side-menu-item-logout"
         >
           <ImExit
