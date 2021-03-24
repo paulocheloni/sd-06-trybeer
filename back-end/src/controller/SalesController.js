@@ -12,9 +12,10 @@ const registerSale = rescue(async (req, res) => {
 });
 
 const regSalesProducts = rescue(async (req, res) => {
-const params = req.body;
- const salesProducts = await SalesService.regSalesProducts(params);
-    console.log(salesProducts);
+  const params = req.body;
+
+  const salesProducts = await SalesService.regSalesProducts(params);
+
   return res
     .status(201)
     .json(salesProducts);

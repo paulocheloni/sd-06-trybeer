@@ -13,6 +13,8 @@ import ProfileAdmin from '../pages/ProfileAdmin';
 import DetalhesPedidosAdmin from '../pages/DetalhesPedidosAdmin';
 import Checkout from '../pages/Checkout';
 import AdminOrders from '../pages/AdminOrders';
+import Orders from '../pages/Orders';
+import OrdersDetails from '../pages/OrdersDetails';
 
 const Routes = () => (
   <Router>
@@ -28,7 +30,8 @@ const Routes = () => (
       <Route path="/products" component={ Products } />
       <Route path="/profile" component={ Profile } />
       <Route path="/checkout" component={ Checkout } />
-
+      <Route path="/orders/:id" component={ OrdersDetails } />
+      <Route path="/orders" component={ Orders } />
     </Switch>
   </Router>
 );

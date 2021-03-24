@@ -1,10 +1,10 @@
 const { OrderModel } = require('../model');
 
-const getAllOrders = async () => OrderModel.getAllOrders();
+const getAllOrders = async (id) => OrderModel.getAllOrders(id);
 
-const getOrdersById = async (id) => OrderModel.getOrdersById(id);
+const getOrdersByDetails = async (id) => OrderModel.getOrdersByDetails(id);
 
 module.exports = {
-  getOrdersById,
+  getOrdersByDetails,
   getAllOrders,
 };

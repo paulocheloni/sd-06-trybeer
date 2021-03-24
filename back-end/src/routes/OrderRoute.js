@@ -7,7 +7,7 @@ const OrderRoute = Router();
 
 OrderRoute.get('/:id',
   authorization,
-  OrderController.getOrdersById);
+  OrderController.getOrdersByDetails);
 
 OrderRoute.get('/',
   authorization,

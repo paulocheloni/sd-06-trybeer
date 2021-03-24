@@ -38,7 +38,16 @@ const getAllProducts = async (token) => axios
   .catch((err) => err.response.data);
 
 const getAllOrders = async (token) => axios
-  .get(`${baseUrl}/admin/orders`, {
+  .get(`${baseUrl}/orders`, {
+    headers: {
+      authorization: token,
+    },
+  })
+  .then((res) => res.data)
+  .catch((err) => err.response.data);
+
+const getOrdersByDetails = async (token, id) => axios
+  .get(`${baseUrl}/orders/${id}`, {
     headers: {
       authorization: token,
     },
@@ -75,4 +84,5 @@ module.exports = {
   getAllOrders,
   regSalesProducts,
   registerSales,
+  getOrdersByDetails,
 };
