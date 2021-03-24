@@ -1,8 +1,12 @@
-const { listOrders, getAdminOrderById, updateStatusOrder } = require('../models/AdminOrdersModel');
+const {
+  listAllOrders,
+  getAdminOrderById,
+  updateStatusOrder,
+} = require('../models/AdminOrdersModel');
 const { OK } = require('../utils/allStatusCode');
 
 const allOrders = async (req, res) => {
-  const [ordersList] = await listOrders();
+  const [ordersList] = await listAllOrders();
   return res.status(OK).json(ordersList);
 };
 

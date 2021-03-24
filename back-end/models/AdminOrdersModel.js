@@ -1,6 +1,6 @@
 const connection = require('../database/connection');
 
-const listOrders = async () => connection
+const listAllOrders = async () => connection
   .execute('SELECT * FROM sales');
 const getAdminOrderById = async (id) => connection
   .execute(
@@ -16,4 +16,4 @@ const updateStatusOrder = async (id, status) => connection
     [status, id],
   );
 
-module.exports = { listOrders, getAdminOrderById, updateStatusOrder };
+module.exports = { listAllOrders, getAdminOrderById, updateStatusOrder };
