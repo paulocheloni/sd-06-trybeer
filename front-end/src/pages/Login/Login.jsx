@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../services/Users';
-import logoVerde from '../../assets/logos/logoVerde.png'
+import logoVerde from '../../assets/logos/logoVerde_limpa.png'
 
 import './Login.scss';
 
