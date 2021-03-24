@@ -6,21 +6,29 @@ import AppContext from './app.context';
 
 const AppProvider = ({ children }) => {
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('login')));
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || {});
   const [products, setProducts] = useState([]);
   const updateLogin = useStorage('login');
+  const updateCart = useStorage('cart');
+
+  const tokenContext = useMemo(() => ({ token, setToken }), [token, setToken]);
 
   const productsContext = useMemo(() => (
     { products, setProducts }
   ), [products, setProducts]);
 
-  const tokenContext = useMemo(() => ({ token, setToken }), [token, setToken]);
+  const cartContext = useMemo(() => ({ cart, setCart }), [cart, setCart]);
 
   useEffect(() => {
     updateLogin(token);
   }, [token, updateLogin]);
 
+  useEffect(() => {
+    updateCart(cart);
+  }, [cart, updateCart]);
+
   return (
-    <AppContext.Provider value={ { productsContext, tokenContext } }>
+    <AppContext.Provider value={ { productsContext, tokenContext, cartContext } }>
       {children}
     </AppContext.Provider>
   );

@@ -20,6 +20,14 @@ const TextInput = (props) => {
     type = 'password';
     label = 'Senha';
     break;
+  case 'street':
+    type = 'text';
+    label = 'Rua';
+    break;
+  case 'house-number':
+    type = 'number';
+    label = 'Número';
+    break;
   default: break;
   }
 
@@ -34,6 +42,9 @@ const TextInput = (props) => {
     break;
   case 'profile':
     dataTestId = `profile-${name}-input`;
+    break;
+  case 'checkout':
+    dataTestId = `checkout-${name}-input`;
     break;
   default: return null;
   }

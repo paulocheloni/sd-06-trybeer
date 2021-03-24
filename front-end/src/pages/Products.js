@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,7 +8,6 @@ import AppContext from '../context/app.context';
 import productsApi from '../services/api.products';
 import { Topbar, Loading, CartButton } from '../components';
 import { handleProductQuantity } from '../utils';
-import useStorage from '../hooks/useStorage';
 
 import '../styles/Products.css';
 
@@ -16,16 +15,11 @@ export default function Products() {
   const {
     productsContext: { products, setProducts },
     tokenContext: { token },
+    cartContext: { cart, setCart },
   } = useContext(AppContext);
 
-  const updateCartStorage = useStorage('cart');
-
-  const localCart = JSON.parse(localStorage.getItem('cart')) || {};
-
-  const [cart, setCart] = useState(localCart);
-
   useEffect(() => {
-    const magicTime = 1500;
+    const magicTime = 100;
     const fetchProducts = async () => {
       const productsArray = await productsApi(token);
       setTimeout(() => setProducts(productsArray), magicTime);
@@ -34,18 +28,16 @@ export default function Products() {
     fetchProducts();
   }, [setProducts, token]);
 
-  useEffect(() => {
-    updateCartStorage(cart);
-  }, [cart, updateCartStorage]);
-
-  const updateQuantity = (action, id, price = 0) => {
+  const updateQuantity = (action, id, data = {}) => {
     const newCart = handleProductQuantity({
       action,
       id,
-      price,
+      data,
       cart });
     setCart(newCart);
   };
+
+  const disabled = useMemo(() => (Object.keys(cart).length === 0), [cart]);
 
   if (!token) return <Redirect to="/login" />;
 
@@ -82,7 +74,7 @@ export default function Products() {
                   </span>
                   <button
                     type="button"
-                    onClick={ () => updateQuantity('add', id, price) }
+                    onClick={ () => updateQuantity('add', id, { name, price }) }
                     data-testid={ `${index}-product-plus` }
                   >
                     <FontAwesomeIcon icon={ faPlusCircle } className="quantity-icon" />
@@ -92,7 +84,7 @@ export default function Products() {
             )) }
           </section>
         ) }
-      <CartButton cart={ cart } />
+      <CartButton cart={ cart } id="cart" disabled={ disabled } />
     </section>
   );
 }
