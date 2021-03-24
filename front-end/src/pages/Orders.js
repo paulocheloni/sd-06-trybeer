@@ -1,13 +1,17 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
+import { Redirect, useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
 import { Topbar, Loading } from '../components';
 import salesApi from '../services/api.sales';
 
-export default function Profile() {
+import '../styles/Orders.css';
+
+export default function Orders() {
   const { tokenContext: { token } } = useContext(AppContext);
   const [orders, setOrders] = useState();
+
+  const history = useHistory();
 
   useEffect(() => {
     const magicTime = 100;
@@ -19,8 +23,22 @@ export default function Profile() {
     fetchOrders();
   }, [setOrders, token]);
 
+  const convertDate = (date) => {
+    const orderDate = new Date(date);
+    const month = orderDate.getMonth() + 1;
+    const min = 10;
+    return [
+      `${orderDate.getDate()}/${(month < min) ? `0${month}` : month}`,
+      orderDate.getFullYear(),
+    ];
+  };
+
+  const getOrderDetails = useCallback((id) => {
+    history.push(`/orders/${id}`);
+  }, [history]);
+
   if (!token) return <Redirect to="/login" />;
-  console.log(orders);
+
   return (
     <section>
       <Topbar title="Meus Pedidos" />
@@ -28,25 +46,31 @@ export default function Profile() {
         ? <Loading />
         : (
           <section className="orders-container">
-            { orders.map(({ id, total_price: totalPrice, sale_date: date }, index) => (
-              <section
-                className="order-card"
-                key={ `${index}-${id}` }
-                data-testid={ `${index}-order-card-container` }
-              >
-                <section className="name" data-testid={ `${index}-product-name` }>
-                  Pedido
-                  <strong>{ id }</strong>
+            { (orders.length < 1)
+              ? 'Você ainda não tem pedidos.'
+              : orders.map(({ id, total_price: totalPrice, sale_date: date }, index) => (
+                <section
+                  className="order-card"
+                  role="link"
+                  onClick={ () => getOrderDetails(id) }
+                  onKeyDown={ () => getOrderDetails(id) }
+                  tabIndex={ index }
+                  key={ `${index}-${id}` }
+                  data-testid={ `${index}-order-card-container` }
+                >
+                  <section className="name" data-testid={ `${index}-order-number` }>
+                    { `Pedido ${id}` }
+                  </section>
+                  <section className="total" data-testid={ `${index}-order-total-value` }>
+                    { `R$ ${totalPrice.replace('.', ',')}` }
+                  </section>
+                  <section className="date" data-testid={ `${index}-order-date` }>
+                    { convertDate(date)[0] }
+                    <br />
+                    { convertDate(date)[1] }
+                  </section>
                 </section>
-                <section className="total" data-testid={ `${index}-order-date` }>
-                  { `R$ ${totalPrice.replace('.', ',')}` }
-                </section>
-                <section className="date" data-testid={ `${id}-order-date` }>
-                  { `${date.getDate()}/${date.getMonth()}` }
-                  { date.getFullYear() }
-                </section>
-              </section>
-            )) }
+              )) }
           </section>
         ) }
     </section>

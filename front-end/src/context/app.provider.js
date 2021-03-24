@@ -7,7 +7,7 @@ import AppContext from './app.context';
 const AppProvider = ({ children }) => {
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('login')));
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || {});
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState();
   const updateLogin = useStorage('login');
   const updateCart = useStorage('cart');
 

@@ -49,15 +49,21 @@ const TextInput = (props) => {
   default: return null;
   }
 
+  const inputProps = {
+    type,
+    id: name,
+    name,
+    value,
+    'data-testid': dataTestId,
+  };
+
+  if (type === 'number') inputProps.min = 0;
+
   return (
     <label htmlFor={ name } className="inputError">
       { label }
       <input
-        type={ type }
-        id={ name }
-        name={ name }
-        value={ value }
-        data-testid={ dataTestId }
+        { ...inputProps }
         onChange={ (e) => callback(e.target) }
         readOnly={ readonly }
       />
@@ -67,7 +73,7 @@ const TextInput = (props) => {
 
 TextInput.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   testId: PropTypes.string.isRequired,
   callback: PropTypes.func,
   readonly: PropTypes.bool,
@@ -75,7 +81,7 @@ TextInput.propTypes = {
 
 TextInput.defaultProps = {
   callback: () => {},
-  value: '',
+  value: undefined,
   readonly: false,
 };
 

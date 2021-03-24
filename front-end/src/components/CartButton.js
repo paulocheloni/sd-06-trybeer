@@ -16,7 +16,7 @@ const CartButton = ({ cart, disabled, id, callback }) => {
 
   const goCheckout = () => {
     if (id === 'cart') return history.push('/checkout');
-    const timeout = 2500;
+    const timeout = 2000;
     setTimeout(() => {
       history.push('/products');
     }, timeout);

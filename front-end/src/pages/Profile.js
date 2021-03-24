@@ -35,9 +35,10 @@ export default function Profile() {
     if (nameChanged) validateForm();
   }, [name, token, disableBtn]);
 
+  if (!token) return <Redirect to="/login" />;
+
   return (
     <section>
-      { (!token.token) && <Redirect to="/login" /> }
       <Topbar title="Meu perfil" />
       <form onSubmit={ submit }>
         <fieldset>

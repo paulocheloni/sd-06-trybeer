@@ -1,5 +1,5 @@
 import React, { useContext, useState, useMemo, useCallback } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
 import { Topbar, CartButton, TextInput } from '../components';
@@ -14,6 +14,8 @@ export default function Checkout() {
     cartContext: { cart, setCart } } = useContext(AppContext);
   const [address, setAddress] = useState({ street: '', number: undefined });
   const [success, setSuccess] = useState(false);
+
+  const history = useHistory();
 
   const cartTotal = useMemo(() => Object.keys(cart).reduce(
     (sum, curr) => (
@@ -52,8 +54,11 @@ export default function Checkout() {
       salePrice: cartTotal.replace(',', '.'),
     };
 
-    await salesApi({ ...token, order }).catch((error) => error);
+    await salesApi({ ...token, order }).catch(
+      (error) => history.push({ pathname: '/error', state: { error } }),
+    );
     setSuccess(true);
+    setCart({});
   };
 
   const disabled = useMemo(() => {
