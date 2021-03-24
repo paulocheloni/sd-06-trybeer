@@ -3,7 +3,7 @@ import React from 'react';
 function ClientDetailsOrder() {
   return (
     <div>
-        <h1>Card detealhes das ordens</h1>
+      <h1>Card detealhes das ordens</h1>
     </div>
   );
 }
