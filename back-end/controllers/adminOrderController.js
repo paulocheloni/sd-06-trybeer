@@ -19,7 +19,8 @@ router.put('/changeStatus', async (req, res) => {
   try {
     const { id } = req.body;
     if (!id) return res.status(404).json({ message: 'Pedido não encontrado.' });
-    await adminOrderService.changeStatus(id);
+    const idModified = Number(id);
+    await adminOrderService.changeStatus(idModified);
     return res.status(200).json({ message: 'Alterado com Sucesso.' });
   } catch (error) {
     return res.status(500).json({ message: error.message });
