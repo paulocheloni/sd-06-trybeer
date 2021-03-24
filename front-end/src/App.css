@@ -13,6 +13,7 @@
   }
 }
 
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -35,4 +36,27 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* MATERIAL-IU CSS */
+
+.MuiTypography-body1 {
+  font-weight: bold !important
+}
+
+.MuiAppBar-colorPrimary {
+  background-color: #0063cc !important;
+}
+
+.makeStyles-img-4 {
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.MuiGrid-container{
+  flex-wrap: inherit !important;
+}
+
+.makeStyles-root-1 {
+  height: max-content;
 }

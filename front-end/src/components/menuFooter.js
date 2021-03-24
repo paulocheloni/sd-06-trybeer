@@ -75,10 +75,11 @@ export default function MenuFooter() {
   };
 
   return (
-    <h1>
-      <CssBaseline />
+      <div>
+
+
       <Paper square className={ classes.paper } />
-      <AppBar position="fixed" color="primary" className={ classes.appBar }>
+      <AppBar position="fixed" buttom='0' color="primary" className={ classes.appBar }>
         <Toolbar>
 
           <Fab color="secondary" aria-label="add" className={ classes.fabButton }>
@@ -105,6 +106,6 @@ export default function MenuFooter() {
           </IconButton>
         </Toolbar>
       </AppBar>
-    </h1>
+      </div>
   );
 }

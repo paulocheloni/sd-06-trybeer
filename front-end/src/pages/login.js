@@ -1,21 +1,57 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router';
 
-// Components
+// Material-IU
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import OpenSnackBar from '../components/OpenSnackBar'
+import Grow from '@material-ui/core/Grow';
+
+// Componentes
 import validateEmailAndPassword from '../resources/validateEmailAndPassword';
+import { useHistory } from 'react-router';
+import logoBeerIce from '../images/logo.png'
 
-// Services
+// Servicos  
 import { saveState } from '../services/localStorage';
 import api from '../services/api';
 import RedirectPage from '../components/redirectPage';
 
+// CSS - Material-Ui
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      display: 'flex',
+      width: '25ch',
+      justifyContent: 'center'
+    },
+    height: '100vh',
+  },
+  buttom: {
+    '& > *': {
+
+      margin: theme.spacing(1),
+    },
+  },
+  textInput: {
+    justifyContent: 'center'
+  }
+
+}));
+
+
+
 function Login() {
+  const classes = useStyles();
+  const [checked, setChecked] = React.useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
-
+  const [errorLogin, setErrorLogin] = useState(false);
   const history = useHistory();
 
+  // Validacao
   const validates = (userEmail, userPassword) => {
     if (!validateEmailAndPassword(userEmail, userPassword)) {
       return setDisabled(false);
@@ -23,10 +59,18 @@ function Login() {
     return setDisabled(true);
   };
 
+  // Material - IU Renderizacao 
+  setTimeout(() => {
+    setChecked(true)
+  }, 1000)
+
+  // Renderizacao
   useEffect(() => {
     validates(email, password);
+
   }, [email, password]);
 
+  // Funcao de Redirecionamento
   const InsertUserLocalStorage = () => {
     api.listLogin(email, password)
       .then((response) => {
@@ -38,45 +82,87 @@ function Login() {
           history.push('/products');
         }
       }).catch((err) => {
-        console.log(err.response.data);
+        setErrorLogin(true)
+        setTimeout(() => {
+          if (errorLogin) setErrorLogin(false)
+        }, 400)
       });
   };
 
   return (
-    <div className="App">
-      <h1>Login</h1>
-      <label htmlFor="email-input">
-        Email
-        <input
-          type="text"
-          data-testid="email-input"
-          placeholder="digite seu Email"
-          onChange={ (e) => setEmail(e.target.value) }
+    <div>
+      <form
+        style={{
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)'
+        }}
+        className={classes.root} noValidate autoComplete="off">
+        <Grow in={checked}>
+          <img src={logoBeerIce} alt="LogoBeerIce" />
+        </Grow>
+        <Grow in={checked}>
+          <p>Login</p>
+        </Grow>
+
+        <Grow in={checked}>
+          <TextField
+            className={classes.textInput}
+            type="text"
+            data-testid="email-input"
+            placeholder="digite seu Email"
+            onChange={(e) => setEmail(e.target.value)}
+            id="standard-basic"
+            label="Email"
+            variant="outlined" />
+        </Grow>
+
+        <Grow in={checked}>
+          <TextField
+            type="password"
+            data-testid="password-input"
+            placeholder="Digite sua Senha"
+            onChange={(e) => setPassword(e.target.value)}
+            id="filled-basic"
+            label="Senha"
+            variant="outlined" />
+        </Grow>
+
+        <Grow in={checked}>
+          <Button
+            className={classes.buttom}
+            type="button"
+            size="large"
+            color="primary"
+            data-testid="signin-btn"
+            disabled={disabled}
+            onClick={InsertUserLocalStorage}
+            variant="outlined"
+            style={{
+              left: '3%',
+            }}
+          >
+            Entrar
+      </Button>
+        </Grow>
+
+
+        <RedirectPage
+          rota="/register"
+          id="no-account-btn"
+          conteudo="Cadastre-se"
+          data-testid="no-account-btn"
+          style={{
+            left: '5%',
+          }}
         />
-      </label>
-      <label htmlFor="password-input">
-        Senha
-        <input
-          type="text"
-          data-testid="password-input"
-          placeholder="digite seu Password"
-          onChange={ (e) => setPassword(e.target.value) }
-        />
-      </label>
-      <button
-        type="button"
-        data-testid="signin-btn"
-        disabled={ disabled }
-        onClick={ InsertUserLocalStorage }
-      >
-        Entrar
-      </button>
-      <RedirectPage
-        rota="/register"
-        id="no-account-btn"
-        conteudo="Ainda não tenho conta"
-        data-testid="no-account-btn"
-      />
+
+      </form>
+      {
+        errorLogin && <OpenSnackBar data={'Usuario ou Senha invalidos'}/>
+      }
+
     </div>
   );
 }
