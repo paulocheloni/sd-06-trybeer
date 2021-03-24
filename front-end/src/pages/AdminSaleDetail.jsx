@@ -9,7 +9,6 @@ export default function AdminSaleDetail() {
   const location = useLocation();
   const [orderDetail, setOrderDetail] = useState([]);
   // const [saleStatus, setSaleStatus] = useState('pendente');
-
   const SIX = 6;
   const pathName = location.pathname;
   const adminPathName = pathName.substr(SIX);
