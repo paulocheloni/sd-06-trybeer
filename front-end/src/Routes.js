@@ -51,6 +51,7 @@ const Routes = () => {
         <Menu />
         <BodyContainer>
           <Route path="/admin/profile" component={ ProfileAdmin } />
+          <Route path="/admin/orders/:id" component={ DetailedOrder } />
           <Route exact path="/admin/orders" component={ OrdersAdmin } />
         </BodyContainer>
       </Route>

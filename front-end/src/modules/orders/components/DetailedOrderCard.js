@@ -18,7 +18,7 @@ function DetailedOrderCard(props) {
         data-testid="order-number"
       >
         Número do pedido:
-        { order ? order.number : '' }
+        { order ? order.saleNumber : '' }
       </p>
       <p
         className="flex items-center space-x-2"
@@ -32,7 +32,7 @@ function DetailedOrderCard(props) {
         data-testid="order-total-value"
       >
         Total do pedido:
-        { order ? order.total : '' }
+        { order ? order.totalPrice : '' }
       </p>
       { order && order.products.map((product, index) => (
         <div

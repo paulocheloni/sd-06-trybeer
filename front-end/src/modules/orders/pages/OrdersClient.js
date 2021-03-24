@@ -4,10 +4,12 @@ import Gallery from '../components/Gallery';
 
 const OrdersClient = () => (
   <PaperContainer>
-    <p className="hidden" data-testid="top-title">Meus pedidos</p>
+    <p data-testid="top-title">Meus Pedidos</p>
     <p>My orders</p>
     <Gallery />
   </PaperContainer>
 );
 
 export default OrdersClient;
+
+//
