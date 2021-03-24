@@ -78,7 +78,6 @@ test('Realize as seguintes verificações nos campos de email, senha e botão:',
 
 test('Salve o email no estado da aplicação, com a chave email, assim que o usuário logar.', async () => {
   const {history, getByTestId, findByText} = renderWithRouter(<App />);
-  console.log(history.location.pathname)
   const email = getByTestId('email-input');
   const senha = getByTestId('password-input');
   
