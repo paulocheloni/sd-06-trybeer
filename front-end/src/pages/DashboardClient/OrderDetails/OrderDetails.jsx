@@ -8,7 +8,6 @@ import { correctDate, parseCartPrice } from '../../../utils/parseValues';
 import { verifyUser } from '../../../store/LocalStorage/actions';
 import dateIcon from './dateIcon.png';
 import totalPrice from './totalPrice.png';
-
 /**
  * Soma o total do pedido (quantidade * preco)
  * @param {String} products
