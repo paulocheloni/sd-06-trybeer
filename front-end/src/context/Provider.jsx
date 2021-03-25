@@ -2,8 +2,16 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { saveStorage, loadStorage } from '../service/localStorage';
 import BeersAppContext from './BeersAppContext';
+import { useLocation } from 'react-router-dom'
 
 function Provider({ children }) {
+  const location = useLocation();
+  console.log(location);
+  const [referenceSetTimeout, setReferenceSetTimeout] = useState();
+
+  if (location.pathname !== '/checkout') {
+    clearTimeout(referenceSetTimeout);
+  }
   const [user, setUser] = useState(loadStorage('user', {}));
   const [
     productQuantity,
@@ -31,6 +39,7 @@ function Provider({ children }) {
     setProductQuantity,
     amount,
     setAmount,
+    setReferenceSetTimeout,
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Header } from '../components';
-import CostumerOrdersDetailsCards from '../components/CostumerOrdersDetailsCards';
+import { CostumerOrdersDetailsCards } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
 
 function CostumerOrdersDetails() {
@@ -51,7 +51,7 @@ function CostumerOrdersDetails() {
 
   return (
     <>
-      <Header text="Detalhes de Pedido" data-testid="top-title" />
+      <Header text="Detalhes de Pedido" id="top-title" />
       <div className="order-list">
         <h1 data-testid="order-number">{`Pedido ${id}`}</h1>
         <h1 data-testid="order-date">{ date() }</h1>

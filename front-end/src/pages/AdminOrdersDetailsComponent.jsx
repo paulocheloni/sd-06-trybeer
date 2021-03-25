@@ -75,7 +75,7 @@ function AdminOrdersDetailsPage() {
           />
         </div>
       ))}
-      <p data-testid="order-total-value">{ totalPrice.replace('.', ',') }</p>
+      <p data-testid="order-total-value">{ `R$ ${totalPrice.replace('.', ',')}` }</p>
       {statusOrder() === 'Pendente' && (
         <button
           type="button"
