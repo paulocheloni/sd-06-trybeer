@@ -3,9 +3,8 @@ import { useHistory } from 'react-router-dom';
 import SideBarAdm from '../components/SideBarAdm';
 
 function ProfileAdm() {
-  // const { name, email } = JSON.parse(localStorage.getItem('user'));
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('');
   const history = useHistory();
 
   useEffect(() => {
@@ -13,7 +12,7 @@ function ProfileAdm() {
 
     if (!user) {
       history.push('/login');
-    } else { 
+    } else {
       setName(user.name);
       setEmail(user.email);
     }
@@ -23,14 +22,12 @@ function ProfileAdm() {
     <div>
       <h1> Perfil </h1>
       <SideBarAdm />
-      <label htmlFor="nameAdm">
-        Nome
-        <input id="nameAdm" data-testid="profile-name" value={ name } readOnly />
-      </label>
-      <label htmlFor="emailAdm">
-        Email
-        <input id="emailAdm" data-testid="profile-email" value={ email } readOnly />
-      </label>
+      <div data-testid="profile-name">
+        {`Nome: ${name}`}
+      </div>
+      <div data-testid="profile-email">
+        {`Email: ${email}`}
+      </div>
     </div>
   );
 }
