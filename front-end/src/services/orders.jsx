@@ -30,7 +30,20 @@ const getOrdersByUser = async () => {
     }).then((response) => response.json());
 };
 
+const getOrderDetails = async (path) => {
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  return fetch(`${path}`,
+    {
+      method: 'GET',
+
+      headers: {
+        Authorization: user.token },
+    }).then((response) => response.json());
+};
+
 module.exports = {
   createOrder,
   getOrdersByUser,
+  getOrderDetails,
 };
