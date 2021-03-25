@@ -2,8 +2,7 @@ const lengthName = 12;
 const lengthPassword = 6;
 
 const validateEmail = (email) => {
-  const mailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
-  // const mailRegex = /\S+@\S+/;
+  const mailRegex = /^(?!_)\w+([.-]?\w+)*@(?!_)\w+([.-]?\w+)*(\.\w{2,3})+$/;
   return mailRegex.test(email);
 };
 
