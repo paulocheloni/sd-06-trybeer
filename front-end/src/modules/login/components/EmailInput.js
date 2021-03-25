@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 function EmailInput(setError, setInputValue, inputValue) {
   const [errorLabel, setErrorLabel] = useState();
-  const pattern = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+  const pattern = /\S+@\S+\.\S+/;
   const delay = 0;
 
   const useDebounce = (value, delayValue) => {
