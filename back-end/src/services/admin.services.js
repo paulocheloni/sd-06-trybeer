@@ -1,4 +1,5 @@
 const { utils, admin } = require('../models');
+const { authStatusUpdate } = require('../schemas');
 
 const getAll = async () => utils.getAll('sales');
 
@@ -7,14 +8,14 @@ const getSaleById = async (id) => {
   return sale;
 };
 
-const changeSaleStatus = async (id, boolean) => {
+const updateSaleStatus = async (saleId, boolean) => {
+  authStatusUpdate(saleId, boolean);
   const status = (boolean) ? 'Entregue' : 'Pendente';
-  await admin.updateSaleStatus(status, id);
-  return { status };
+  return admin.updateSaleStatus(status, saleId);
 };
 
 module.exports = {
   getAll,
   getSaleById,
-  changeSaleStatus,
+  updateSaleStatus,
 };

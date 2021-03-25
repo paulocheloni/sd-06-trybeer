@@ -6,7 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import { NotFound, Login, Register, Profile,
+import { NotFound, Login, Register, Profile, AdminProfile,
   Products, Checkout, OrderDetails, Error, Orders } from './pages';
 
 import './styles/App.css';
@@ -22,6 +22,9 @@ function App() {
         <Route path="/profile" component={ Profile } />
         <Route path="/orders/:id" component={ OrderDetails } />
         <Route path="/orders" component={ Orders } />
+        <Route path="/admin/orders/:id" component={ OrderDetails } />
+        <Route path="/admin/orders" component={ Orders } />
+        <Route path="/admin/profile" component={ AdminProfile } />
         <Route exact path="/">
           <Redirect to="/login" />
         </Route>

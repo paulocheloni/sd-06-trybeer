@@ -4,8 +4,8 @@ const { salesError } = require('./error');
 
 module.exports = async (req, res, next) => {
   try {
-    const { userId, userRole, params: { saleId } } = req;
-    const mySale = await sales.filterByUserId(saleId, userId, userRole);
+    const { userRole, params: { saleId } } = req;
+    const mySale = await sales.updateById(saleId, userRole);
     return res.status(StatusCodes.OK).json(mySale);
   } catch (err) {
     return next({ ...salesError, err });

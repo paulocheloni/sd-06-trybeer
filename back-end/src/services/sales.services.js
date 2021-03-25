@@ -7,6 +7,22 @@ const getById = async (userId) => utils.getByFilter({
   value: userId,
 });
 
+const updateById = async (saleId, userRole) => {
+  const error = {
+    invalidCredentials: 'C_ERR_INVALID_CRED',
+  };
+  if (userRole !== 'administrator') throw new Error(error);
+  const [result] = await utils.getByFilter({
+    table: 'sales',
+    filter: 'id',
+    value: saleId,
+  });
+  if (result.status && result.status !== 'Entregue') {
+    await sales.updateSaleStatus(saleId);
+    return { status: 'OK', message: 'Success. Status changed to \'Entregue\'' };
+  }
+};
+
 const validateTotalPrice = async (sale, salePrice) => {
   const promise = sale.map(async (prod) => utils.queryById('products', prod.productId));
   const products = await Promise.all(promise);
@@ -24,13 +40,13 @@ const create = async (body, userId) => {
   await sales.insertNewSale(body, userId);
 };
 
-const filterByUserId = async (saleId, userId) => {
+const filterByUserId = async (saleId, userId, userRole) => {
   const [result] = await utils.getByFilter({
     table: 'sales',
     filter: 'id',
     value: saleId,
   });
-  authDetailsSale(result, userId);
+  authDetailsSale(result, userId, userRole);
   const addSaleDetails = await utils.getByFilter({
     table: 'sales_products',
     filter: 'sale_id',
@@ -42,6 +58,7 @@ const filterByUserId = async (saleId, userId) => {
 
 module.exports = {
   create,
+  updateById,
   filterByUserId,
   getById,
 };

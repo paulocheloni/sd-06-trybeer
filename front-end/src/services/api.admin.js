@@ -7,19 +7,19 @@ const sales = async (payload) => {
 
     const request = {
       method: 'get',
-      url: `http://${localhost}:3001/sales`,
+      url: `http://${localhost}:3001/admin/sales`,
       headers,
     };
 
-    if (payload.order) {
-      request.method = 'post';
-      request.url = `http://${localhost}:3001/sales/create`;
-      request.data = payload.order;
+    if (payload.delivered) {
+      const delivered = (payload.delivered) ? 'true' : 'false';
+      request.method = 'put';
+      request.url = `http://${localhost}:3001/admin/sales/${payload.saleId}`;
+      request.data = { delivered };
     }
-    if (payload.saleId) request.url = `http://${localhost}:3001/sales/${payload.saleId}`;
 
     const result = await axios(request);
-    console.log('Sales request: ', result);
+    console.log('Admin request: ', result);
     return result.data;
   } catch (error) {
     if (error.response) {

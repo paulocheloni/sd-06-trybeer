@@ -14,9 +14,17 @@ const querySaleById = async (id) => {
   }
 };
 
-const updateSaleStatus = async (status, id) => {
+const updateSaleStatus = async (status, saleId) => {
   const QUERY = 'UPDATE sales SET status = ? WHERE id = ?';
-  await connection.query(QUERY, [status, id]);
+  const [result] = await connection.query(QUERY, [status, saleId]);
+  if (result.changedRows > 0) {
+     return { status: 'OK',
+    message: 'Status equals request. Not changed.' };
+  }
+  if (result.affectedRows < 1) {
+      return { status: 'ERROR',
+     message: 'Sale not found.' };
+  }
 };
 
 module.exports = {

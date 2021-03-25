@@ -1,5 +1,7 @@
 export { default as Topbar } from './Topbar';
-export { default as Sidebar } from './Sidebar';
+export { default as ClientMenu } from './ClientSideMenu';
+export { default as AdminMenu } from './AdminSideMenu';
+export { default as OrderDetails } from './OrderDetails';
 export { default as TextInput } from './TextInput';
 export { default as CheckBox } from './CheckBox';
 export { default as SubmitButton } from './SubmitButton';

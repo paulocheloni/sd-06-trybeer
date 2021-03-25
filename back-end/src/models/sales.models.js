@@ -7,6 +7,18 @@ const handleItermediateTable = async (saleId, products) => {
   });
 };
 
+const updateSaleStatus = async (saleId) => {
+  const QUERY_CMD = 'UPDATE sales ';
+  const QUERY_COL = 'SET status=\'Entregue\'';
+  const QUERY_WHERE = 'WHERE id = ?';
+  const QUERY = QUERY_CMD + QUERY_COL + QUERY_WHERE;
+  const result = await connection.query(QUERY, [
+    saleId,
+  ]);
+
+  console.log(result);
+};
+
 const insertNewSale = async ({ delivery, salePrice, sale }, userId) => {
   const { address, number } = delivery;
   const QUERY_CMD = 'INSERT INTO sales ';
@@ -26,4 +38,5 @@ const insertNewSale = async ({ delivery, salePrice, sale }, userId) => {
 
 module.exports = {
   insertNewSale,
+  updateSaleStatus,
 };

@@ -33,7 +33,7 @@ const AppProvider = ({ children }) => {
       const productsArray = await productsApi(token).catch((error) => error);
       setProducts(productsArray);
     };
-    if (token) fetchProducts();
+    if (token && token.email) fetchProducts();
   }, [setProducts, token]);
 
   return (

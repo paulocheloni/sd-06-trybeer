@@ -81,7 +81,7 @@ TextInput.propTypes = {
 
 TextInput.defaultProps = {
   callback: () => {},
-  value: undefined,
+  value: '',
   readonly: false,
 };
 

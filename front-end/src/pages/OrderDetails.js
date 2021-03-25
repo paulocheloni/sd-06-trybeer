@@ -1,69 +1,60 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
-
+import { Redirect, useParams, useHistory } from 'react-router-dom';
 import AppContext from '../context/app.context';
-import { Topbar, Loading } from '../components';
+
+import { Topbar, Loading, OrderDetails as OrderDetailComponent } from '../components';
 import salesApi from '../services/api.sales';
-import { convertDate } from '../utils';
+import adminApi from '../services/api.admin';
 
 export default function OrderDetails() {
-  const {
-    tokenContext: { token },
-    productsContext: { products } } = useContext(AppContext);
+  const { tokenContext: { token } } = useContext(AppContext);
+
+  const history = useHistory();
   const params = useParams();
   const [order, setOrder] = useState();
 
-  const calcProductTotal = (productId, quantity) => (
-    (products.find((el) => el.id === productId).price * quantity).toFixed(2)
-  );
-
-  const getProductName = (productId) => products.find((el) => el.id === productId).name;
+  const updateStatus = async (saleId, bool) => {
+    try {
+      await adminApi({ ...token, saleId, delivered: bool });
+      setOrder({ ...order, status: 'Entregue' });
+      return { status: 'OK', message: 'Sale status updated' };
+    } catch (error) {
+      return error;
+    }
+  };
 
   useEffect(() => {
-    const magicTime = 100;
     const fetchOrder = async () => {
-      const orderArray = await salesApi({
-        ...token,
-        saleId: params.id,
-      }).catch((error) => error);
-      setOrder(orderArray);
+      try {
+        const currOrder = await salesApi({
+          ...token,
+          saleId: params.id,
+        });
+        if (currOrder.code) {
+          history.push({
+            pathname: '/error',
+            state: { ...currOrder } });
+        }
+        setOrder(currOrder);
+      } catch (error) {
+        if (error.code) {
+          history.push({
+            pathname: '/error',
+            state: { ...error } });
+        }
+      }
     };
-    const timeOut = setTimeout(() => fetchOrder(), magicTime);
-    return () => {
-      clearTimeout(timeOut);
-    };
-  }, [setOrder, params, token]);
+    fetchOrder();
+  }, [setOrder, params, token, history]);
 
   if (!token) return <Redirect to="/login" />;
 
   return (
     <section>
       <Topbar title="Detalhes de Pedido" />
-      { (!order)
+      { (!order || !order.sale)
         ? <Loading />
-        : (
-          <>
-            <h3 data-testid="order-number">{ `Pedido ${order.id}` }</h3>
-            <p data-testid="order-date">{ convertDate(order.sale_date)[0] }</p>
-            { order.sale.map((curr, index) => (
-              <section key={ index }>
-                <p data-testid={ `${index}-product-qtd` }>
-                  { curr.quantity }
-                </p>
-                <p data-testid={ `${index}-product-name` }>
-                  { getProductName(curr.product_id) }
-                </p>
-                <p data-testid={ `${index}-product-total-value` }>
-                  { `R$ ${calcProductTotal(curr.product_id, curr.quantity)
-                    .replace('.', ',')}` }
-                </p>
-              </section>
-            )) }
-            <p data-testid="order-total-value">
-              { `Total: R$ ${order.total_price.replace('.', ',')}` }
-            </p>
-          </>
-        ) }
+        : <OrderDetailComponent order={ order } callback={ updateStatus } /> }
     </section>
   );
 }
