@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import TopMenu from '../components/TopMenu/TopMenu';
-import CheckoutProductsCard from '../components/CheckoutProductsCard';
+import CheckoutProductsCard from '../components/checkoutCard/CheckoutProductsCard';
 import CheckoutDetails from '../components/checkoutDetails/CheckoutDetails';
 import productsContext from '../context/productsContext';
 // import fetches from '../services/fetches';
