@@ -1,29 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import fetches from '../services/fetches';
+// import fetches from '../services/fetches';
 import TopMenuAdmin from '../components/TopMenuAdmin/TopMenu';
+import AdminOrderDetail from '../components/AdminOrderDetail/AdminOrderDetail';
 import './AdminSaleDetail.css';
 
 export default function AdminSaleDetail() {
   const tokenFromLocalStorage = localStorage.getItem('token');
-  const location = useLocation();
-  const [orderDetail, setOrderDetail] = useState([]);
-  const SIX = 6;
-  const pathName = location.pathname;
-  const adminPathName = pathName.substr(SIX);
+  // const location = useLocation();
+  // const [orderDetail, setOrderDetail] = useState([]);
+  // const SIX = 6;
+  // const pathName = location.pathname;
+  // const adminPathName = pathName.substr(SIX);
   const history = useHistory();
 
-  useEffect(() => {
+  /*   useEffect(() => {
     fetches.getSaleById(tokenFromLocalStorage, adminPathName)
       .then((response) => setOrderDetail(response.data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); */
 
   const handleRedirect = (token) => {
     if (!token) return history.push('/login');
   };
 
-  const handletotalValue = () => {
+  /*   const handletotalValue = () => {
     if (orderDetail.length) {
       const totalPrice = orderDetail
         .reduce((accumulator, current) => accumulator
@@ -37,12 +38,13 @@ export default function AdminSaleDetail() {
     fetches.updateSale(tokenFromLocalStorage, adminPathName);
     window.location.reload();
   };
-
+ */
   return (
     <div>
       { handleRedirect(tokenFromLocalStorage) }
       <TopMenuAdmin pageTitle="TryBeer" />
-      <div className="order-data-container">
+      <AdminOrderDetail />
+      {/*  <div className="order-data-container">
         <div data-testid="order-number">
           {orderDetail.length && `Pedido ${orderDetail[0].sale_id}`}
         </div>
@@ -73,7 +75,7 @@ export default function AdminSaleDetail() {
         onClick={ handleChangeStatusButton }
       >
         Marcar como entregue
-      </button>
+      </button> */}
     </div>
   );
 }
