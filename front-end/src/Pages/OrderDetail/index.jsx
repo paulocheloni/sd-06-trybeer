@@ -8,7 +8,7 @@ import ProductItemOrdered from '../../Components/ProductItemOrdered';
 import * as S from './style';
 
 const OrderDetail = ({ match }) => {
-  const [product, setProduct] = useState({});
+  const [products, setProducts] = useState({});
   const [date, setDate] = useState('');
   const history = useHistory();
   useEffect(() => {
@@ -20,8 +20,8 @@ const OrderDetail = ({ match }) => {
     const getProd = async () => {
       const object = await getOrderInfo(match);
       const { data, saleDate } = object;
-      console.log(data, saleDate);
-      setProduct(data);
+      console.log(data.reduce((acc, pr) => acc + (pr.price * pr.quantity), 0));
+      setProducts(data);
       if (saleDate) {
         const strToDate = new Date(saleDate);
         const maxMonthOneDigitUTCformat = 8;
@@ -41,23 +41,25 @@ const OrderDetail = ({ match }) => {
         <p data-testid="order-number">
           Pedido
           {' '}
-          { product.sale_id }
+          { products.sale_id }
         </p>
         <p data-testid="order-date">
           Data
           {' '}
           { date }
         </p>
-        {product.length > 1
-          ? product
+        {products.length > 1
+          ? products
             .map((p, index) => <ProductItemOrdered key={ index } product={ p } />)
-          : <div>Loading</div>
-        }
+          : <div>Loading</div>}
         <p data-testid="order-total-value">
           Valor total
           R$
           {' '}
-          { (product.price * product.quantity).toFixed(2).replace(/\./g, ',') }
+          { (products.length > 1
+            ? products.reduce((acc, pr) => acc + pr.price * pr.quantity, 0)
+              .toFixed(2).replace(/\./g, ',')
+            : <div>Loading</div>)}
         </p>
       </S.Wrapper>
     </S.Container>
