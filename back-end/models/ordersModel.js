@@ -11,7 +11,6 @@ const getOrder = async (userId) => {
 };
 
 const getDetailOrder = async (saleId) => {
-  console.log(saleId)
   try {
     const [product] = await connection.execute(
       'SELECT * FROM sales_products LEFT JOIN products ON products.id = sales_products'
