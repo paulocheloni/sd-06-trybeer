@@ -29,7 +29,7 @@ function App() {
           <Route exact path="/checkout" component={ Checkout } />
           <Route exact path="/orders" component={ Orders } />
           <Route path="/orders/:orderId" exact component={ OrderDetail } />
-          <Route exact path="/admin/orders" component={ AdminOrders } />
+          <Route path="/admin/orders" component={ AdminOrders } />
           <Route exact path="/admin/profile" component={ AdminProfile } />
         </Switch>
       </BrowserRouter>

@@ -3,7 +3,7 @@ const connection = require('./connections');
 const getOrder = async (userId) => {
   try {
     const [data] = await connection
-      .execute('SELECT id, total_price, sale_date FROM sales WHERE user_id=?', [userId]);
+      .execute('SELECT id, total_price, sale_date, delivery_address FROM sales WHERE user_id=?', [userId]);
     return data;
   } catch (e) {
     return 'erro interno';
