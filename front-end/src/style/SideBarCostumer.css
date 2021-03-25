@@ -5,16 +5,16 @@
   align-content: center;
   background-color: #205527;
   display: flex;
-  height: 580px;
   flex-flow: column wrap;
-  justify-content: center;
-  margin: auto;
-  margin-top: 300px;
-  padding-top: 100px;
+  justify-content: flex-start;
+  padding-bottom: 25px;
+  margin-top: -30px;
+  position: fixed;
   width: 250px;
+  z-index: 0;
 }
 
-.bttn_sidebar_costumer {
+.side-menu-container button {
   background-color: #ff4000;
   border: none;
   border-radius: 5px;
@@ -23,15 +23,11 @@
   font-size: 16pt;
   font-weight: 700;
   height: 40px;
-  margin-top: 10px;
-  width: 240px;
+  margin-top: 30px;
+  width: 200px;
 }
 
 .bttn_sidebar_costumer:hover {
   background-color: #ff6e3d;
   cursor: pointer;
-}
-
-.bttn_sidebar_bottom {
-  margin-top: 200px;
 }

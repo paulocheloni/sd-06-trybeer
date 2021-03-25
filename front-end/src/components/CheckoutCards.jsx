@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import BeersAppContext from '../context/BeersAppContext';
 // import dataFalse from '../dataFalse';
+import '../style/CheckoutCard.css';
 
 function CheckoutCards({ element, index }) {
   const {
@@ -53,7 +54,7 @@ function CheckoutCards({ element, index }) {
     .replace('.', ',');
 
   return (
-    <div>
+    <div className="checkout_card">
       <p data-testid={ `${index}-product-qtd-input` }>{qnt}</p>
       <p data-testid={ `${index}-product-name` }>{products.name}</p>
       <p data-testid={ `${index}-product-total-value` }>

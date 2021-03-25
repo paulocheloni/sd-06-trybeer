@@ -11,6 +11,7 @@ import {
   CostumerOrdersDetails,
   AdminProfile,
   AdminOrders,
+  AdminOrdersDetailsPage,
 } from './pages';
 
 function App() {
@@ -38,12 +39,12 @@ function App() {
             <Route
               exact
               path="/admin/orders"
-              component={ () => <p>oi</p> }
+              component={ AdminOrders }
             />
             <Route
               exact
               path="/admin/orders/:id"
-              component={ AdminOrders }
+              component={ AdminOrdersDetailsPage }
             />
             <Route exact path="/" component={ () => <Redirect to="/login" /> } />
           </Switch>

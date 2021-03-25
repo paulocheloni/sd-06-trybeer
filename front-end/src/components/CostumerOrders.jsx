@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../style/OrderCards.css';
 
 function CostumerOrdersCards({ element, index }) {
   const { id, total_price: totalPrice, sale_date: saleDate } = element;

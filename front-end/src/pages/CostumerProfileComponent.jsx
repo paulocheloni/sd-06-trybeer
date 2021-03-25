@@ -46,37 +46,39 @@ function CostumerProfile() {
   };
 
   return (
-    <div className="costumer_profile">
+    <div>
       <Header text="Meu perfil" id="top-title" />
-      <p>Nome</p>
-      <input
-        type="text"
-        name="p-name"
-        id="p-name"
-        disable={ valid }
-        data-testid="profile-name-input"
-        onChange={ ({ target }) => setInputName(target.value) }
-        value={ inputName }
-      />
-      <p>Email</p>
-      <input
-        type="text"
-        name="p-email"
-        id="p-email"
-        data-testid="profile-email-input"
-        readOnly
-        value={ email }
-      />
-      <button
-        type="button"
-        data-testid="profile-save-btn"
-        className="bttn_costumer_profile"
-        disabled={ valid }
-        onClick={ onClickSave }
-      >
-        Salvar
-      </button>
-      <span>{ showSuccess }</span>
+      <div className="costumer_profile">
+        <p>Nome</p>
+        <input
+          type="text"
+          name="p-name"
+          id="p-name"
+          disable={ valid }
+          data-testid="profile-name-input"
+          onChange={ ({ target }) => setInputName(target.value) }
+          value={ inputName }
+        />
+        <p>Email</p>
+        <input
+          type="text"
+          name="p-email"
+          id="p-email"
+          data-testid="profile-email-input"
+          readOnly
+          value={ email }
+        />
+        <button
+          type="button"
+          data-testid="profile-save-btn"
+          className="bttn_costumer_profile"
+          disabled={ valid }
+          onClick={ onClickSave }
+        >
+          Salvar
+        </button>
+        <span>{ showSuccess }</span>
+      </div>
     </div>
   );
 }
