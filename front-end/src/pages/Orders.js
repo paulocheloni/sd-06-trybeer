@@ -43,17 +43,17 @@ class Orders extends React.Component {
             >
               <button
                 type="button"
-                data-testid={ `${index}-order-number` }
+                data-testid={ `${index + 1}-order-number` }
                 onClick={ () => history.push(`/orders/${index + 1}`) }
               >
                 {`Pedido ${index + 1}`}
                 <div
-                  data-testid={ `${index}-order-date` }
+                  data-testid={ `${index + 1}-order-date` }
                 >
                   {`${e.sale_date.split('/')[2]}/${e.sale_date.split('/')[1]}`}
                 </div>
                 <div
-                  data-testid={ `${index}-order-total-value` }
+                  data-testid={ `${index + 1}-order-total-value` }
                 >
                   {`R$ ${e.total_price.replace('.', ',')}`}
                 </div>
