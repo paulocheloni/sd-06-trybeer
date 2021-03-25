@@ -17,7 +17,7 @@ function OrderCard({ order, index }) {
   const magicNumber = 9;
   let day = date.getDate();
   day = day > magicNumber ? day : `0${day}`;
-  let month = date.getMonth();
+  let month = date.getMonth() + 1;
   month = month > magicNumber ? month : `0${month}`;
   const dayAndMonth = `${day}/${month}`;
 
@@ -26,29 +26,27 @@ function OrderCard({ order, index }) {
   const pre = role === 'client' ? '' : '/admin';
 
   return (
-    <div
+    <Link
+      to={ `${pre}/orders/${id}` }
       className="border rounded-md border-primary p-2 flex flex-col items-center"
       data-testid={ `${index}-order-card-container` }
     >
-      <div className="flex flex-col">
-        <p data-testid={ `${index}-order-number` }>
-          { `Pedido ${index + 1}` }
-        </p>
-        <p data-testid={ `${index}-order-total-value` }>
-          <strong>{ totalValue }</strong>
-        </p>
-        <p data-testid={ `${index}-order-date` }>
-          { dayAndMonth }
-        </p>
-        <p data-testid={ `${index}-order-address` }>
-          { `${address}, ${number}` }
-        </p>
-        <p data-testid={ `${index}-order-status` }>
-          { status === 'pending' ? 'Pendente' : 'Entregue' }
-        </p>
-        <Link to={ `${pre}/orders/${id}` }>See order</Link>
-      </div>
-    </div>
+      <p data-testid={ `${index}-order-number` }>
+        { `Pedido ${index + 1}` }
+      </p>
+      <p data-testid={ `${index}-order-total-value` }>
+        <strong>{ totalValue }</strong>
+      </p>
+      <p data-testid={ `${index}-order-date` }>
+        { dayAndMonth }
+      </p>
+      <p data-testid={ `${index}-order-address` }>
+        { `${address}, ${number}` }
+      </p>
+      <p data-testid={ `${index}-order-status` }>
+        { status === 'pending' ? 'Pendente' : 'Entregue' }
+      </p>
+    </Link>
   );
 }
 
