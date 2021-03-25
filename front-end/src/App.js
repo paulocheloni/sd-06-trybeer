@@ -27,8 +27,8 @@ function App() {
           <Route path="/products" component={ Products } />
           <Route path="/profile" component={ Profile } />
           <Route path="/checkout" component={ Checkout } />
+          <Route path="/admin/orders/:id" component={ DetailsOrderAdm } />
           <Route exact path="/admin/orders" component={ OrdersAdm } />
-          <Route path="/admin/orders/:orderId" component={ DetailsOrderAdm } />
           <Route path="/admin/profile" component={ ProfileAdm } />
           <Redirect from="/" to="/login" />
         </Switch>
