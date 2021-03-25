@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
+
 import { saveStorage, loadStorage } from '../service/localStorage';
 import BeersAppContext from './BeersAppContext';
-import { useLocation } from 'react-router-dom'
 
 function Provider({ children }) {
   const location = useLocation();
-  console.log(location);
   const [referenceSetTimeout, setReferenceSetTimeout] = useState();
 
   if (location.pathname !== '/checkout') {

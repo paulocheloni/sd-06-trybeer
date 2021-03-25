@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { Header } from '../components';
-import { CostumerOrdersDetailsCards } from '../components';
+import { Header, CostumerOrdersDetailsCards } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
 
 function CostumerOrdersDetails() {

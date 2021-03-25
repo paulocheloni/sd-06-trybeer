@@ -28,7 +28,6 @@ function CostumerOrdersComponent() {
   return (
     <div className="costumer_orders">
       <Header text="Meus Pedidos" />
-      {console.log(orders)}
       <h1 data-testid="top-title">Meus Pedidos</h1>
       <div className="order-list">
         {orders.map((element, index) => (
