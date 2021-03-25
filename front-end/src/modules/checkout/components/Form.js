@@ -48,6 +48,8 @@ function Form() {
     }, delay);
   };
 
+  clearTimeout(handleSubmit);
+
   return (
     <form
       className={ `${(numberOfItems > 0 || success) ? '' : 'hidden'}
