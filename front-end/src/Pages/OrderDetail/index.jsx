@@ -19,9 +19,9 @@ const OrderDetail = ({ match }) => {
   useEffect(() => {
     const getProd = async () => {
       const object = await getOrderInfo(match);
-      console.log(object);
-      const { saleDate } = object;
-      setProduct(object);
+      const { data, saleDate } = object;
+      console.log(data, saleDate);
+      setProduct(data);
       if (saleDate) {
         const strToDate = new Date(saleDate);
         const maxMonthOneDigitUTCformat = 8;

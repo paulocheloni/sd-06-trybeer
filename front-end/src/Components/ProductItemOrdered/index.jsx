@@ -1,6 +1,6 @@
 import React from 'react';
-import * as S from './style';
 import PropTypes from 'prop-types';
+import * as S from './style';
 
 const ProductItemOrdered = ({ product }) => (
   <S.Products>
@@ -15,11 +15,11 @@ const ProductItemOrdered = ({ product }) => (
 );
 
 ProductItemOrdered.propTypes = {
-  ObjectWithShape: PropTypes.exact({
+  product: PropTypes.shape({
     quantity: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-  }),
+  }).isRequired,
 
 };
 
