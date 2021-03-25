@@ -48,7 +48,7 @@ export default function SaleDetails() {
   return (
     <div>
       { handleRedirect(tokenFromLocalStorage) }
-      <TopMenu pageTitle="Detalhes de Pedido" />
+      {/* <TopMenu pageTitle="Detalhes de Pedido" /> */}
       <div className="order-data-container">
         <span data-testid="order-number">
           {orderDetail.length && `Pedido ${orderDetail[0].sale_id}`}

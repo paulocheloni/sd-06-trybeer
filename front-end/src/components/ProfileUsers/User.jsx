@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import jwtDecode from 'jwt-decode';
-import { isTheNewNameDifferent, nameValidation } from '../../utils/validations';
-import useInput from '../../hooks/useInput';
-import fetches from '../../services/fetches';
 import TextField from '@material-ui/core/TextField';
-import useStyles from './styles';
 import Button from '@material-ui/core/Button';
-// import Box from '@material-ui/core/Box'; 
+// import Box from '@material-ui/core/Box';
 // import { FormControl } from '@material-ui/core'
-import Container from '@material-ui/core/Container';import { FormControl } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography'; 
+import Container from '@material-ui/core/Container';
+import { FormControl } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import useStyles from './styles';
+import fetches from '../../services/fetches';
+import useInput from '../../hooks/useInput';
+import { isTheNewNameDifferent, nameValidation } from '../../utils/validations';
 
 export default function User() {
   const tokenFromLocalStorage = localStorage.getItem('token');
@@ -19,13 +20,13 @@ export default function User() {
   const [name, setName] = useInput(tokenDecoded.name);
 
   const [newInfo, setNewInfo] = useState('');
- console.log(isTheNewNameDifferent(name, oldName));
+  console.log(isTheNewNameDifferent(name, oldName));
   const handleUpdateInfo = async (email) => {
     await fetches.updateUserName(email, name);
     setNewInfo('Atualização concluída com sucesso');
   };
 
-  return(
+  return (
     // <Box justifyContent="flex-end">
     <Container className={classes.container}>
     <FormControl className={classes.root} noValidate autoComplete="off">
