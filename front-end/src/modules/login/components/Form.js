@@ -20,6 +20,10 @@ function Form() {
     setTimeout(() => setToken(true), delay);
   };
 
+  useEffect(() => {
+    return () => clearTimeout(handleSubmit);
+  }, []);
+
   return (
     <form className="flex flex-col mt-10" onSubmit={ handleSubmit }>
       <div className="flex flex-col space-y-4">

@@ -21,6 +21,10 @@ function Form() {
     const delay = 500;
     setTimeout(() => setToken(true), delay);
   };
+  
+  useEffect(() => {
+    return () => clearTimeout(handleSubmit);
+  }, []);
 
   return (
     <form className="flex flex-col mt-10" onSubmit={ handleSubmit }>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as API from '../../../utils';
 import ButtonCheckout from './ButtonCheckout';
@@ -48,7 +48,9 @@ function Form() {
     }, delay);
   };
 
-  clearTimeout(handleSubmit);
+  useEffect(() => {
+    return () => clearTimeout(handleSubmit);
+  }, []);
 
   return (
     <form
