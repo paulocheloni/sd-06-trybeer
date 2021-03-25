@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import * as API from '../../../utils';
 import Buttons from './Buttons';
 import EmailInput from './EmailInput';
