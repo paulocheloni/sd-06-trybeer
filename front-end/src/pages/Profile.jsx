@@ -7,7 +7,6 @@ import User from '../components/ProfileUsers/User';
 export default function Profile() {
   const tokenFromLocalStorage = localStorage.getItem('token');
   const tokenDecoded = jwtDecode(tokenFromLocalStorage);
-
   return (
     <div>
       {tokenDecoded.role === 'client' ? (

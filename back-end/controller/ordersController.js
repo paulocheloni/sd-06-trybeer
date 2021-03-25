@@ -39,4 +39,18 @@ router.post('/orders', validateToken, rescue(async (req, res) => {
     res.status(200).json(mySaleDetail);
   }));
 
+  router.get('/admin/orders', validateToken, rescue(async (req, res) => {
+    const allSales = await ordersService.getAllSales();
+    // console.log('entrei no controller', allSales);
+    res.status(200).json(allSales);
+  }));
+
+  router.put('/orders/:id', validateToken, rescue(async (req, res) => {
+    const saleId = req.params.id;
+    // console.log('entrei no orders controller', saleId);
+    await ordersService.updateSale(saleId);
+
+    return res.status(201).json({ message: 'Sale atualizada com sucesso!' });
+  }));
+
   module.exports = router;

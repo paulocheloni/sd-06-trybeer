@@ -10,19 +10,17 @@ export default function Login() {
   const history = useHistory();
   const [email, setEmail] = useInput('');
   const [password, setPassword] = useInput('');
+
   const handleOnClik = async () => {
     fetches.fetchUserByEmail(email, password)
       .then((response) => {
-        // console.log(response);
-        if (!response) {
-          return;
-        }
+        if (!response) return;
         localStorage.setItem('token', response[1]);
-        if (response[0].role === 'client') {
-          history.push('/products');
-        } else history.push('/admin/orders');
+        if (response[0].role === 'client') history.push('/products');
+        else history.push('/admin/orders');
       });
   };
+
   return (
     <div className="main-container">
       <div className="image-container">

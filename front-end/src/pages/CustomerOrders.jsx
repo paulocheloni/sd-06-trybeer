@@ -5,7 +5,6 @@ import OrderCard from '../components/orderCard/OrderCard';
 import TopMenu from '../components/TopMenu/TopMenu';
 import fetches from '../services/fetches';
 import productsContext from '../context/productsContext';
-// import productsContext from '../context/productsContext';
 
 export default function Orders() {
   const { setOrders } = useContext(productsContext);
@@ -27,7 +26,7 @@ export default function Orders() {
 
   return (
     <div>
-      <TopMenu pageTitle="Meus Pedidos" />      
+      <TopMenu pageTitle="Meus Pedidos" />
       <OrderCard />
       { handleRedirect(tokenFromLocalStorage) }
     </div>

@@ -1,36 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import fetches from '../services/fetches';
-// import TopMenu from '../components/TopMenu';
-import './SaleDetails.css';
+import TopMenuAdmin from '../components/TopMenuAdmin';
+import './AdminSaleDetail.css';
 
-export default function SaleDetails() {
+export default function AdminSaleDetail() {
   const tokenFromLocalStorage = localStorage.getItem('token');
   const location = useLocation();
   const [orderDetail, setOrderDetail] = useState([]);
+  const SIX = 6;
+  const pathName = location.pathname;
+  const adminPathName = pathName.substr(SIX);
   const history = useHistory();
 
   useEffect(() => {
-    const pathName = location.pathname;
-    fetches.getSaleById(tokenFromLocalStorage, pathName)
+    fetches.getSaleById(tokenFromLocalStorage, adminPathName)
       .then((response) => setOrderDetail(response.data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleRedirect = (token) => {
     if (!token) return history.push('/login');
-  };
-
-  const handleDate = () => {
-    const five = 5;
-    const three = 3;
-    if (orderDetail.length) {
-      const fullDate = orderDetail[0].sale_date.substr(five, five);
-      const month = fullDate.substr(0, 2);
-      const day = fullDate.substr(three);
-      const saleDate = `${day}/${month}`;
-      return saleDate;
-    }
   };
 
   const handletotalValue = () => {
@@ -43,16 +33,21 @@ export default function SaleDetails() {
     }
   };
 
+  const handleChangeStatusButton = () => {
+    fetches.updateSale(tokenFromLocalStorage, adminPathName);
+    window.location.reload();
+  };
+
   return (
     <div>
       { handleRedirect(tokenFromLocalStorage) }
-      {/* <TopMenu pageTitle="Detalhes de Pedido" /> */}
+      <TopMenuAdmin pageTitle="TryBeer" />
       <div className="order-data-container">
-        <span data-testid="order-number">
+        <div data-testid="order-number">
           {orderDetail.length && `Pedido ${orderDetail[0].sale_id}`}
-        </span>
-        <span data-testid="order-date">
-          {orderDetail.length && handleDate() }
+        </div>
+        <span data-testid="order-status">
+          {orderDetail.length && orderDetail[0].status }
         </span>
       </div>
       {orderDetail.length && orderDetail.map((order, index) => (
@@ -63,11 +58,22 @@ export default function SaleDetails() {
             {`R$ ${(Number(order.quantity) * Number(order.price))
               .toFixed(2).replace('.', ',')}`}
           </span>
+          <span data-testid={ `${index}-order-unit-price` }>
+            {`(R$ ${(Number(order.price)).toFixed(2).replace('.', ',')})`}
+          </span>
         </div>
       ))}
       <div className="total-value-container">
         <span data-testid="order-total-value">{`Total: R$ ${handletotalValue()}`}</span>
       </div>
+      <button
+        className={ orderDetail.length && orderDetail[0].status }
+        data-testid="mark-as-delivered-btn"
+        type="button"
+        onClick={ handleChangeStatusButton }
+      >
+        Marcar como entregue
+      </button>
     </div>
   );
 }

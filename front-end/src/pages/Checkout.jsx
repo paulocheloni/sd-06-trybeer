@@ -4,7 +4,6 @@ import TopMenu from '../components/TopMenu/TopMenu';
 import CheckoutProductsCard from '../components/checkoutCard/CheckoutProductsCard';
 import CheckoutDetails from '../components/checkoutDetails/CheckoutDetails';
 import productsContext from '../context/productsContext';
-// import fetches from '../services/fetches';
 
 export default function Checkout() {
   const { setCartProducts } = useContext(productsContext);

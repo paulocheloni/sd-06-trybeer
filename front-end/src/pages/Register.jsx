@@ -7,7 +7,6 @@ import { nameValidation,
   passwordValidation,
   emailValidation } from '../utils/validations';
 import fetches from '../services/fetches';
-// const createToken = require('../auth/createToken');
 
 export default function Register() {
   const history = useHistory();
