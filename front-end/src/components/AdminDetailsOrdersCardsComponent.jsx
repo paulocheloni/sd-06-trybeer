@@ -6,7 +6,7 @@ function AdminDetailsOrdersCardsComponent({ element, index }) {
   const { productPrice, quantity, name, price } = element;
   return (
     <>
-      <p data-testid={ `${index}-product-qnt` }>{ quantity }</p>
+      <p data-testid={ `${index}-product-qtd` }>{ quantity }</p>
       <p data-testid={ `${index}-product-name` }>{ name }</p>
       <p data-testid={ `${index}-product-total-value` }>
         { `R$ ${commaAmount(productPrice)}` }

@@ -13,6 +13,7 @@ function CostumerCheckout() {
     amount,
     setProductQuantity,
     setAmount,
+    setReferenceSetTimeout,
   } = useContext(BeersAppContext);
 
   if (!user.token) history.push('/login');
@@ -58,11 +59,14 @@ function CostumerCheckout() {
     if (returnCheckout.err) return setShowMessage(returnCheckout.err);
     const time = 2000;
     setShowMessage('Compra realizada com sucesso!');
-    setTimeout(() => {
-      setProductQuantity([]);
-      setAmount(0.0);
+    setProductQuantity([]);
+    setAmount(0.0);
+    
+    const referenceSetTimeout = setTimeout(() => {
       history.push('/products');
     }, time);
+    console.log('referenceSetTimeout', referenceSetTimeout);
+    setReferenceSetTimeout(referenceSetTimeout);
   };
 
   return (

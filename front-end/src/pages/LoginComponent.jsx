@@ -52,6 +52,7 @@ function Login() {
     setUser(returnLogin);
     setProductQuantity([]);
     setAmount(0.00);
+    console.log('returnLogin', returnLogin);
     if (returnLogin.role === 'administrator') {
       history.push('/admin/orders');
     } else if (returnLogin.role === 'client') {
