@@ -43,19 +43,19 @@ function Login() {
   };
 
   const handleClick = async () => {
-    const ola = await fetchApiJsonBody('/login', inputValues);
-    if (ola.err) {
+    const returnLogin = await fetchApiJsonBody('/login', inputValues);
+    if (returnLogin.err) {
       console.log('entrou no erro');
-      setErrMessage(ola.err);
+      setErrMessage(returnLogin.err);
       return;
     }
-    setUser(ola);
+    setUser(returnLogin);
     setProductQuantity([]);
     setAmount(0.00);
-    if (ola.role === 'administrator') {
+    if (returnLogin.role === 'administrator') {
       history.push('/admin/orders');
-    } else if (ola.role === 'client') {
-      history.push('products');
+    } else if (returnLogin.role === 'client') {
+      history.push('/products');
     }
   };
 

@@ -7,3 +7,4 @@ export { default as CostumerOrders } from './CostumerOrdersComponent';
 export { default as AdminOrders } from './AdminOrdersComponent';
 export { default as AdminProfile } from './AdminProfile';
 export { default as CostumerOrdersDetails } from './CostumerOrdersDetailsComponent';
+export { default as AdminOrdersDetailsPage } from './AdminOrdersDetailsComponent';

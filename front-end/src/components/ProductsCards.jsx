@@ -49,8 +49,7 @@ function ProductsCard({ element, index }) {
   const commaPrice = price.replace('.', ',');
 
   return (
-    <div>
-      {/* className="productCards" */}
+    <div className="productCards">
       <img
         src={ urlImage }
         data-testid={ `${index}-product-img` }

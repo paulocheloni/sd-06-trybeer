@@ -58,18 +58,18 @@ function Signup() {
   };
 
   const handleClick = async () => {
-    const ola = await fetchApiJsonBody('/register', inputValues);
-    if (ola.err) {
-      setErrMessage(ola.err);
+    const returnSignup = await fetchApiJsonBody('/register', inputValues);
+    if (returnSignup.err) {
+      setErrMessage(returnSignup.err);
       return;
     }
-    setUser(ola);
+    setUser(returnSignup);
     setProductQuantity([]);
     setAmount(0.00);
-    if (ola.role === 'administrator') {
+    if (returnSignup.role === 'administrator') {
       history.push('/admin/orders');
-    } else if (ola.role === 'client') {
-      history.push('products');
+    } else if (returnSignup.role === 'client') {
+      history.push('/products');
     }
   };
 
