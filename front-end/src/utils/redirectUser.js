@@ -1,4 +1,4 @@
-const handleUser = (user, history, callback) => {
+export default (user, history, callback) => {
   if (user.code) {
     history.push({
       pathname: '/error',
@@ -10,5 +10,3 @@ const handleUser = (user, history, callback) => {
     if (user.role === 'client') history.push('/products');
   }
 };
-
-export default handleUser;

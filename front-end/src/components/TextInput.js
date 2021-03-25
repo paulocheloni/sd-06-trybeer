@@ -20,6 +20,14 @@ const TextInput = (props) => {
     type = 'password';
     label = 'Senha';
     break;
+  case 'street':
+    type = 'text';
+    label = 'Rua';
+    break;
+  case 'house-number':
+    type = 'number';
+    label = 'Número';
+    break;
   default: break;
   }
 
@@ -35,18 +43,27 @@ const TextInput = (props) => {
   case 'profile':
     dataTestId = `profile-${name}-input`;
     break;
+  case 'checkout':
+    dataTestId = `checkout-${name}-input`;
+    break;
   default: return null;
   }
+
+  const inputProps = {
+    type,
+    id: name,
+    name,
+    value,
+    'data-testid': dataTestId,
+  };
+
+  if (type === 'number') inputProps.min = 0;
 
   return (
     <label htmlFor={ name } className="inputError">
       { label }
       <input
-        type={ type }
-        id={ name }
-        name={ name }
-        value={ value }
-        data-testid={ dataTestId }
+        { ...inputProps }
         onChange={ (e) => callback(e.target) }
         readOnly={ readonly }
       />
@@ -56,7 +73,7 @@ const TextInput = (props) => {
 
 TextInput.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   testId: PropTypes.string.isRequired,
   callback: PropTypes.func,
   readonly: PropTypes.bool,

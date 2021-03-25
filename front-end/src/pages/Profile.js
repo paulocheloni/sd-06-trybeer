@@ -12,12 +12,12 @@ export default function Profile() {
   const [disableBtn, setDisableBtn] = useState(true);
   const [success, setSuccess] = useState(false);
 
-  const updateName = (target) => setName(target.value);
+  const handleNameInput = (target) => setName(target.value);
 
   const submit = async (e) => {
     e.preventDefault();
 
-    const payload = { ...token, newName: name };
+    const payload = { ...token, name };
     const result = await handleSaveUser(payload, setToken, history);
     if (result.success) setSuccess(true);
   };
@@ -35,9 +35,10 @@ export default function Profile() {
     if (nameChanged) validateForm();
   }, [name, token, disableBtn]);
 
+  if (!token) return <Redirect to="/login" />;
+
   return (
     <section>
-      { (!token.token) && <Redirect to="/login" /> }
       <Topbar title="Meu perfil" />
       <form onSubmit={ submit }>
         <fieldset>
@@ -46,7 +47,7 @@ export default function Profile() {
             name="name"
             testId="profile"
             value={ name }
-            callback={ updateName }
+            callback={ handleNameInput }
           />
           <TextInput
             name="email"

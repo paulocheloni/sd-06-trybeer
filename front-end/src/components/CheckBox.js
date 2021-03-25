@@ -7,6 +7,7 @@ const CheckBox = (props) => {
   return (
     <label htmlFor="quero-vender" className="inputError">
       <input
+        id="quero-vender"
         type="checkbox"
         data-testid="signup-seller"
         onClick={ (e) => callback(e.target) }
