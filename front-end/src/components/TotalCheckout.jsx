@@ -14,7 +14,7 @@ function TotalCheckout(props) {
 }
 
 TotalCheckout.propTypes = {
-  total: PropTypes.shapeOf(PropTypes.object).isRequired,
+  total: PropTypes.number.isRequired,
 };
 
 export default TotalCheckout;

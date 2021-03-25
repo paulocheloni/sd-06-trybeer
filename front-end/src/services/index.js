@@ -136,11 +136,12 @@ const concludeOrder = async (totalPrice, addressObject, setShowSucessMessage) =>
   const token = localStorage.getItem('token');
   const user = await profile(token);
   const { id: userId } = user;
-
-  checkout(userId, totalPrice, address, number).then(() => setShowSucessMessage(false));
-
   const itemsObject = getItensStorage();
   const itemNames = Object.keys(itemsObject);
+  console.log(itemNames)
+
+  checkout(userId, totalPrice, address, number, itemsObject).then(() => setShowSucessMessage(false));
+
   itemNames.map((itemName) => localStorage.removeItem(itemName));
   localStorage.removeItem('total');
   localStorage.removeItem('address');
