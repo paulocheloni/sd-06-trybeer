@@ -2,9 +2,9 @@ const mailer = require('./mailer.services');
 
 const welcomeEmail = (email, name) => {
   mailer.sendMail({
-    text: "Boas vindas!",
-    subject: "Bem vindo(a) ao OpenBeer!",
-    from: "OpenBeer <comercial.openbeer@gmail.com",
+    text: 'Boas vindas!',
+    subject: 'Bem vindo(a) ao OpenBeer!',
+    from: 'OpenBeer <comercial.openbeer@gmail.com',
     to: [email],
     html: `
       <html>
