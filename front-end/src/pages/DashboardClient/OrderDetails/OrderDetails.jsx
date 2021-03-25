@@ -6,12 +6,8 @@ import './OrderDetails.css';
 import { getSalesById } from '../../../services/Sales';
 import { correctDate, parseCartPrice } from '../../../utils/parseValues';
 import { verifyUser } from '../../../store/LocalStorage/actions';
-<<<<<<< HEAD
 import dateIcon from './dateIcon.png';
 import totalPrice from './totalPrice.png';
-=======
->>>>>>> e703f6dad79cfaa3b0c8cb395d77216aafbc12b2
-
 /**
  * Soma o total do pedido (quantidade * preco)
  * @param {String} products
@@ -77,15 +73,9 @@ export default function Orders({ match: { params: { id } } }) {
         </div>
       ))}
       <div className="resumo">
-<<<<<<< HEAD
         <img className="total-price" src={ totalPrice } alt="conta final" />
         <h2 className="value-price" data-testid="order-total-value">
           {parseCartPrice(soma(orderDetails))}
-=======
-        <h2>total</h2>
-        <h2 data-testid="order-total-value">
-          { parseCartPrice(soma(orderDetails)) }
->>>>>>> e703f6dad79cfaa3b0c8cb395d77216aafbc12b2
         </h2>
       </div>
     </div>
