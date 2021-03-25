@@ -29,7 +29,7 @@ function OrderCard({ order, index }) {
         <div className="flex flex-col">
 
           <p data-testid={ `${index}-order-number` }>
-          { `Pedido ${index + 1}` }
+            { `Pedido ${index + 1}` }
           </p>
           <p data-testid={ `${index}-order-total-value` }>
             <strong>{ totalValue }</strong>
@@ -38,10 +38,10 @@ function OrderCard({ order, index }) {
             { date }
           </p>
           <p data-testid={ `${index}-order-address` }>
-          { `${address}, ${number}` }
+            { `${address}, ${number}` }
           </p>
           <p data-testid={ `${index}-order-status` }>
-          { status === 'pending' ? 'Pendente' : 'Entregue' }
+            { status === 'pending' ? 'Pendente' : 'Entregue' }
           </p>
         </div>
       </Link>
@@ -54,10 +54,10 @@ OrderCard.propTypes = {
   order: PropTypes.shape({
     id: PropTypes.number.isRequired,
     user_id: PropTypes.number.isRequired,
-    delivery_address: PropTypes.string.isRequired,
-    delivery_number: PropTypes.string.isRequired,
-    total_price: PropTypes.number.isRequired,
-    sale_date: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+    total: PropTypes.number.isRequired,
+    createdAt: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
   }).isRequired,
 };

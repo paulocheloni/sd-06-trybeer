@@ -24,7 +24,21 @@ function DetailedOrderCard(props) {
   }
 
   const handleClick = () => {
-     update(`/sales/${id}`).then((resp) => setSaleStatus(resp.message));
+    update(`/sales/${id}`).then((resp) => setSaleStatus(resp.message));
+  };
+
+  const renderButton = () => {
+    const button = (
+      <button
+        type="button"
+        data-testid="mark-as-delivered-btn"
+        onClick={ () => handleClick() }
+      >
+        Marcar como entregue
+      </button>
+    );
+
+    if (orderStatus === 'pending') return button;
   };
 
   return (
@@ -51,17 +65,11 @@ function DetailedOrderCard(props) {
         Total:
         { order ? `R$ ${order.total.replace('.', ',')}` : '' }
       </p>
-      <p data-testid="order-status" >
-          { orderStatus === 'pending' ? 'Pendente' : 'Entregue' }
+      <p data-testid="order-status">
+        { orderStatus === 'pending' ? 'Pendente' : 'Entregue' }
       </p>
       {
-        orderStatus === 'pending' && 
-        <button 
-          data-testid="mark-as-delivered-btn"
-          onClick={ () => handleClick() }
-        >
-          Marcar como entregue
-        </button>
+        renderButton()
       }
       { order && order.products.map((product, index) => (
         <div
