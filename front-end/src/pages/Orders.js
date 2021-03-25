@@ -17,10 +17,12 @@ export default function Orders() {
     const magicTime = 100;
     const fetchOrders = async () => {
       const ordersArray = await salesApi(token).catch((error) => error);
-      setTimeout(() => setOrders(ordersArray), magicTime);
-      // setOrders(ordersArray);
+      setOrders(ordersArray);
     };
-    fetchOrders();
+    const timeOut = setTimeout(() => fetchOrders(), magicTime);
+    return () => {
+      clearTimeout(timeOut);
+    };
   }, [setOrders, token]);
 
   const convertDate = (date) => {

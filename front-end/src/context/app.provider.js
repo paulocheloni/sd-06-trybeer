@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import useStorage from '../hooks/useStorage';
 import AppContext from './app.context';
+import productsApi from '../services/api.products';
 
 const AppProvider = ({ children }) => {
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('login')));
@@ -26,6 +27,14 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     updateCart(cart);
   }, [cart, updateCart]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const productsArray = await productsApi(token).catch((error) => error);
+      setProducts(productsArray);
+    };
+    if (token) fetchProducts();
+  }, [setProducts, token]);
 
   return (
     <AppContext.Provider value={ { productsContext, tokenContext, cartContext } }>

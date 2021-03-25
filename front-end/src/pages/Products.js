@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useMemo } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useContext, useMemo } from 'react';
+import { Redirect, useHistory } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 
 import AppContext from '../context/app.context';
-import productsApi from '../services/api.products';
 import { Topbar, Loading, CartButton } from '../components';
 import { handleProductQuantity } from '../utils';
 
@@ -13,20 +12,12 @@ import '../styles/Products.css';
 
 export default function Products() {
   const {
-    productsContext: { products, setProducts },
+    productsContext: { products },
     tokenContext: { token },
     cartContext: { cart, setCart },
   } = useContext(AppContext);
 
-  useEffect(() => {
-    const magicTime = 100;
-    const fetchProducts = async () => {
-      const productsArray = await productsApi(token).catch((error) => error);
-      setTimeout(() => setProducts(productsArray), magicTime);
-      // setProducts(productsArray);
-    };
-    fetchProducts();
-  }, [setProducts, token]);
+  const history = useHistory();
 
   const updateQuantity = (action, id, data = {}) => {
     const newCart = handleProductQuantity({
@@ -36,6 +27,8 @@ export default function Products() {
       cart });
     setCart(newCart);
   };
+
+  const goCheckout = () => history.push('/checkout');
 
   const disabled = useMemo(() => (Object.keys(cart).length === 0), [cart]);
 
@@ -92,7 +85,12 @@ export default function Products() {
                   </section>
                 )) }
             </section>
-            <CartButton cart={ cart } id="cart" disabled={ disabled } />
+            <CartButton
+              cart={ cart }
+              id="cart"
+              callback={ goCheckout }
+              disabled={ disabled }
+            />
           </>
         ) }
     </section>

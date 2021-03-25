@@ -20,6 +20,14 @@ const sales = async (payload) => {
       };
     }
 
+    if (payload.saleId) {
+      request = {
+        method: 'get',
+        url: `http://${localhost}:3001/sales/${payload.saleId}`,
+        headers,
+      };
+    }
+
     const result = await axios(request);
     console.log('Sales request: ', result);
     return result.data;

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useMemo, useCallback } from 'react';
+import React, { useContext, useState, useMemo, useEffect, useCallback } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
@@ -6,7 +6,7 @@ import { Topbar, CartButton, TextInput } from '../components';
 import salesApi from '../services/api.sales';
 import { handleProductQuantity } from '../utils';
 
-import '../styles/Products.css';
+import '../styles/Checkout.css';
 
 export default function Checkout() {
   const {
@@ -42,23 +42,24 @@ export default function Checkout() {
     const sale = Object.keys(cart).map((curr) => (
       { productId: parseInt(curr, 10), quantity: parseInt(cart[curr].quantity, 10) }
     ));
-
     const delivery = {
       address: address.street,
       number: address.number,
     };
-
     const order = {
       sale,
       delivery,
       salePrice: cartTotal.replace(',', '.'),
     };
 
-    await salesApi({ ...token, order }).catch(
-      (error) => history.push({ pathname: '/error', state: { error } }),
-    );
-    setSuccess(true);
-    setCart({});
+    await salesApi({ ...token, order })
+      .then(() => {
+        setSuccess(true);
+        setCart({});
+      })
+      .catch(
+        (error) => history.push({ pathname: '/error', state: { error } }),
+      );
   };
 
   const disabled = useMemo(() => {
@@ -68,38 +69,49 @@ export default function Checkout() {
     return false;
   }, [address, cart]);
 
+  useEffect(() => {
+    let timeOut;
+    if (success) {
+      const magicTime = 2000;
+      timeOut = setTimeout(() => history.push('/products'), magicTime);
+    }
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, [history, success]);
+
   if (!token) return <Redirect to="/login" />;
 
   return (
     <section>
       <Topbar title="Finalizar Pedido" />
-      { (success) ? <section>Compra realizada com sucesso!</section> : null }
-      <section className="checkout-container">
-        { (Object.keys(cart) < 1)
-          ? <h3>Não há produtos no carrinho.</h3>
-          : (
-            <table>
-              <tbody>
-                { Object.keys(cart).map((id, index) => (
-                  <tr className="product-row" key={ `${id}-{index}` }>
-                    <td data-testid={ `${index}-product-qtd-input` }>
+      { (success)
+        ? <section>Compra realizada com sucesso!</section>
+        : (
+          <section className="checkout-container">
+            { (Object.keys(cart) < 1)
+              ? <h3>Não há produtos no carrinho.</h3>
+              : (
+                Object.keys(cart).map((id, index) => (
+                  <section className="product-row" key={ `${id}-{index}` }>
+                    <section data-testid={ `${index}-product-qtd-input` }>
                       { cart[id].quantity }
-                    </td>
-                    <td data-testid={ `${index}-product-name` }>
+                    </section>
+                    <section className="name" data-testid={ `${index}-product-name` }>
                       { cart[id].name }
-                    </td>
-                    <td>
+                    </section>
+                    <section>
                       <span data-testid={ `${index}-product-total-value` }>
                         { `R$ ${(cart[id].price * cart[id].quantity)
                           .toFixed(2).replace('.', ',')}` }
                       </span>
-                    </td>
-                    <td>
+                    </section>
+                    <section>
                       <span data-testid={ `${index}-product-unit-price` }>
                         { `(R$ ${cart[id].price.replace('.', ',')} un)` }
                       </span>
-                    </td>
-                    <td>
+                    </section>
+                    <section>
                       <button
                         type="button"
                         onClick={ () => removeItem(id) }
@@ -108,40 +120,39 @@ export default function Checkout() {
                       >
                         Remover
                       </button>
-                    </td>
-                  </tr>
-                )) }
-              </tbody>
-            </table>
-          ) }
+                    </section>
+                  </section>
+                ))
+              ) }
 
-        <section data-testid="order-total-value">
-          { `Total: R$ ${cartTotal.replace('.', ',')}` }
-        </section>
-        <form>
-          <fieldset>
-            <legend>Endereço de entrega</legend>
-            <TextInput
-              name="street"
-              testId="checkout"
-              value={ address.street }
-              callback={ updateAddress }
+            <section data-testid="order-total-value">
+              { `Total: R$ ${cartTotal.replace('.', ',')}` }
+            </section>
+            <form>
+              <fieldset>
+                <legend>Endereço de entrega</legend>
+                <TextInput
+                  name="street"
+                  testId="checkout"
+                  value={ address.street }
+                  callback={ updateAddress }
+                />
+                <TextInput
+                  name="house-number"
+                  testId="checkout"
+                  value={ address.number }
+                  callback={ updateAddress }
+                />
+              </fieldset>
+            </form>
+            <CartButton
+              cart={ cart }
+              id="checkout"
+              disabled={ disabled }
+              callback={ checkout }
             />
-            <TextInput
-              name="house-number"
-              testId="checkout"
-              value={ address.number }
-              callback={ updateAddress }
-            />
-          </fieldset>
-        </form>
-      </section>
-      <CartButton
-        cart={ cart }
-        id="checkout"
-        disabled={ disabled }
-        callback={ checkout }
-      />
+          </section>
+        ) }
     </section>
   );
 }
