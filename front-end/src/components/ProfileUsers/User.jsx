@@ -61,8 +61,8 @@ export default function User() {
       onClick={ () => handleUpdateInfo(tokenDecoded.email) }
      >
        Salvar
-       <Typography>{newInfo}</Typography>
     </Button>
+       <Typography>{newInfo}</Typography>
      </div>
     </Container>
     // </Box>
