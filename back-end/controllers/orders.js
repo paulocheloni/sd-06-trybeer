@@ -40,4 +40,13 @@ ordersRouter.put('/:orderId', validateToken, async (req, res) => {
   return res.status(200).json({ message: 'order marked as delivered' });
 });
 
+ordersRouter.get('/:id', validateToken, async (req, res) => {
+  const { id } = req.params;
+
+  const orderDetails = await services.getOrderDetailsById(id);
+
+  res.status(200).json(orderDetails);
+
+});
+
 module.exports = ordersRouter;

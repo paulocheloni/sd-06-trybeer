@@ -18,6 +18,8 @@ const getProductsByOrderId = async (orderId) => models.getProductsByOrderId(orde
 
 const markAsDelivered = async (orderId) => models.markAsDelivered(orderId);
 
+const getOrderDetailsById = async (id) => models.getOrderDetailsById(id);
+
 module.exports = {
   createOrder,
   updateSalesProduct,
@@ -25,4 +27,5 @@ module.exports = {
   getOrderById,
   getProductsByOrderId,
   markAsDelivered,
+  getOrderDetailsById,
 };
