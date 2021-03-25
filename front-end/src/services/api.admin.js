@@ -11,6 +11,8 @@ const sales = async (payload) => {
       headers,
     };
 
+    if (payload.saleId) request.url = `http://${localhost}:3001/admin/sales/${payload.saleId}`;
+
     if (payload.delivered) {
       const delivered = (payload.delivered) ? 'true' : 'false';
       request.method = 'put';

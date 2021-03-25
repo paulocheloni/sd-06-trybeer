@@ -8,10 +8,12 @@ import adminApi from '../services/api.admin';
 
 export default function OrderDetails() {
   const { tokenContext: { token } } = useContext(AppContext);
+  const [order, setOrder] = useState();
+  const params = useParams();
 
   const history = useHistory();
-  const params = useParams();
-  const [order, setOrder] = useState();
+
+  const title = (token.role === 'administrator') ? 'Detalhes de Pedido' : 'Meu Pedido';
 
   const updateStatus = async (saleId, bool) => {
     try {
@@ -26,10 +28,10 @@ export default function OrderDetails() {
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        const currOrder = await salesApi({
-          ...token,
-          saleId: params.id,
-        });
+        const currOrder = (token.role === 'administrator')
+          ? await adminApi({ ...token, saleId: params.id })
+          : await salesApi({ ...token, saleId: params.id });
+        console.log('order detail fetch', currOrder);
         if (currOrder.code) {
           history.push({
             pathname: '/error',
@@ -37,22 +39,20 @@ export default function OrderDetails() {
         }
         setOrder(currOrder);
       } catch (error) {
-        if (error.code) {
-          history.push({
-            pathname: '/error',
-            state: { ...error } });
-        }
+        console.log(error);
       }
     };
     fetchOrder();
   }, [setOrder, params, token, history]);
 
+  console.log('render', order);
+
   if (!token) return <Redirect to="/login" />;
 
   return (
     <section>
-      <Topbar title="Detalhes de Pedido" />
-      { (!order || !order.sale)
+      <Topbar title={ title } />
+      { (!order)
         ? <Loading />
         : <OrderDetailComponent order={ order } callback={ updateStatus } /> }
     </section>

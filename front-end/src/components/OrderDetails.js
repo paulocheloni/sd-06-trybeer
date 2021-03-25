@@ -18,6 +18,8 @@ export default function OrderDetails({ order, callback }) {
 
   if (!order.sale || !products) return 'Loading order...';
 
+  console.log('component', order);
+
   return (
     <>
       <h3 data-testid="order-number">{ `Pedido ${order.id}` }</h3>

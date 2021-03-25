@@ -10,7 +10,7 @@ const querySaleById = async (id) => {
     const [results] = await connection.query(QUERY, [id]);
     return results;
   } catch (err) {
-    return {};
+    return { error: err };
   }
 };
 
