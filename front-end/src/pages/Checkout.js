@@ -3,15 +3,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Header } from '../components';
 import { cartList, globalID, globalQuantity, removeCartItem } from '../actions';
+import { finishOrders } from '../api/index';
 
 class Checkout extends React.Component {
   constructor() {
     super();
     this.state = {
       validAdress: false,
+      address: '',
       validNumber: false,
+      number: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.storageToRedux = this.storageToRedux.bind(this);
     this.exclude = this.exclude.bind(this);
   }
 
@@ -25,20 +30,40 @@ class Checkout extends React.Component {
 
   handleChange({ target: { name, value } }) {
     const minLength = 0;
+
     if (name === 'adress') {
+      console.log(value);
       if (value.length > minLength) {
-        this.setState({ validAdress: true });
+        this.setState({ validAdress: true, address: value });
       } else {
         this.setState({ validAdress: false });
       }
     }
     if (name === 'number') {
       if (value.length > minLength) {
-        this.setState({ validNumber: true });
+        this.setState({ validNumber: true, number: value });
       } else {
         this.setState({ validNumber: false });
       }
     }
+  }
+
+  async handleClick() {
+    const { history } = this.props;
+    const { address, number } = this.state;
+    const priceTotal = Number(localStorage.getItem('price')).toFixed(2);
+    const date = new Date().toLocaleString('pt-BR');
+
+    const numbers = date.split(' ')[0].split('/');
+    const newDate = `${numbers[2]}/${numbers[1]}/${numbers[0]}`;
+    const fullDate = date.replace(`${date.split(' ')[0]}`, `${newDate}`);
+    // console.log(fullDate)
+
+    const userID = JSON.parse(localStorage.getItem('actualUser')).id;
+
+    await finishOrders({ priceTotal, date: fullDate, userID, address, number });
+
+    history.push('/products', { purchase: true });
   }
 
   async storageToRedux() {
@@ -84,6 +109,7 @@ class Checkout extends React.Component {
   }
 
   render() {
+    // console.log(stateCart);
     const { history, stateCart } = this.props;
     const { validAdress, validNumber } = this.state;
     return (
@@ -146,7 +172,8 @@ class Checkout extends React.Component {
             <button
               type="button"
               data-testid="checkout-finish-btn"
-              onClick={ () => history.push('/products', { purchase: true }) }
+              // onClick={ () => history.push('/products', { purchase: true }) }
+              onClick={ this.handleClick }
               disabled={ !validAdress || !validNumber }
             >
               Finalizar Pedido

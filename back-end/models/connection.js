@@ -8,4 +8,5 @@ module.exports = mysql.createPool({
   user: MYSQL_USER,
   password: MYSQL_PASSWORD,
   database: 'Trybeer',
+  timezone: 'UTC',
 });

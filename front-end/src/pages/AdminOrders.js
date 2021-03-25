@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-// import { Header } from '../components';
 import SideBarAdmin from '../components/SideBarAdmin';
-import './AdminOrders.css';
 
 class AdminOrders extends React.Component {
   constructor() {
@@ -12,53 +9,62 @@ class AdminOrders extends React.Component {
     this.state = {};
   }
 
+  async componentDidMount() {
+    const { history } = this.props;
+    if (!localStorage.token) {
+      history.push('/login');
+    }
+  }
+
   render() {
-    const { history, stateCart } = this.props;
-    console.log(stateCart)
+    const { history, stateOrders } = this.props;
+    console.log(stateOrders);
     return (
       <div>
-        {/* <Header history={ history } /> */}
         <SideBarAdmin history={ history } />
-        { console.log(this.state) }
-        <h1>Olá</h1>
-        { stateCart.map((el, index) => (
-          <Link key={ el.orderNumber } to={ `/orders/:${el.orderNumber}` }>
-            <div key={ el.orderNumber } className="cart-item" product>
-              <h4 data-testid={ `${index}-order-number` }>
-                {' '}
-                { el.orderNumber }
-                {' '}
-              </h4>
-              <p data-testid={ `${index}-order-address` }>
-                {' '}
-                { el.deliveryOrder }
-                {' '}
-              </p>
-              <h4 data-testid={ `${index}-product-price` }>
-                {' '}
-                { el.totalPrice }
-                {' '}
-              </h4>
-              <p data-testid={ `${index}-order-status` }>
-                {' '}
-                { el.statusOrder }
-                {' '}
-              </p>
+        <div className="orders-container">
+          {stateOrders.length > 0 && stateOrders.map((e, index) => (
+            <div
+              className="order"
+              key={ index }
+            >
+              <button
+                type="button"
+                data-testid={ `${index}-order-number` }
+                onClick={ () => history.push(`/orders/${index + 1}`) }
+              >
+                {`Pedido ${index + 1}`}
+                <div
+                  data-testid={ `${index}-order-address` }
+                >
+                  {`${e.delivery_address}, ${e.delivery_number}`}
+                </div>
+                <div
+                  data-testid={ `${index}-order-total-value` }
+                >
+                  {`R$ ${e.total_price.replace('.', ',')}`}
+                </div>
+                <div
+                  data-testid={ `${index}-order-status` }
+                >
+                  {e.status}
+                </div>
+              </button>
             </div>
-          </Link>
-        ))}
+          ))}
+        </div>
       </div>
     );
   }
 }
 
-AdminOrders.propTypes = {
-  history: PropTypes.shape().isRequired,
-};
-
 const mapStateToProps = (state) => ({
-  stateCart: state.products.cartList,
+  stateOrders: state.orders.orders,
 });
 
+AdminOrders.propTypes = {
+  stateOrders: PropTypes.arrayOf(PropTypes.object).isRequired,
+  history: PropTypes.shape().isRequired,
+};
 
 export default connect(mapStateToProps, null)(AdminOrders);
