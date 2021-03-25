@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import Menu from '../../Components/Menu';
 import getOrderInfo from '../../services/getOrderInfo';
+import ProductItemOrdered from '../../Components/ProductItemOrdered';
 import * as S from './style';
 
 const OrderDetail = ({ match }) => {
@@ -17,11 +18,12 @@ const OrderDetail = ({ match }) => {
   });
   useEffect(() => {
     const getProd = async () => {
-      const { object, specificDate } = await getOrderInfo(match);
+      const object = await getOrderInfo(match);
+      console.log(object);
+      const { saleDate } = object;
       setProduct(object);
-      console.log(specificDate, 'orderDetail, line 22');
-      if (specificDate) {
-        const strToDate = new Date(specificDate.sale_date);
+      if (saleDate) {
+        const strToDate = new Date(saleDate);
         const maxMonthOneDigitUTCformat = 8;
         const filteredDate = strToDate.getUTCMonth() > maxMonthOneDigitUTCformat
           ? `${strToDate.getUTCDate()}/${strToDate.getUTCMonth() + 1}`
@@ -46,15 +48,11 @@ const OrderDetail = ({ match }) => {
           {' '}
           { date }
         </p>
-        <S.Products>
-          <p data-testid="0-product-qtd">{ product.quantity }</p>
-          <p data-testid="0-product-name">{ product.name }</p>
-          <p data-testid="0-product-total-value">
-            R$
-            {' '}
-            { (product.price * product.quantity).toFixed(2).replace(/\./g, ',') }
-          </p>
-        </S.Products>
+        {product.length > 1
+          ? product
+            .map((p, index) => <ProductItemOrdered key={ index } product={ p } />)
+          : <div>Loading</div>
+        }
         <p data-testid="order-total-value">
           Valor total
           R$
