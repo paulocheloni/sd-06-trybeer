@@ -17,9 +17,7 @@ const getOrderInfo = async (match) => {
   const dated = await request.data;
   const specificDate = await dated.find((el) => el.id === object.sale_id);
   // formata a data para DD/MM
-  const fixDate = `${specificDate.sale_date
-    .split('-')[2].split('T')[0]}/${specificDate.sale_date.split('-')[1]}`;
-  return { object, fixDate };
+  return { object, specificDate };
 };
 
 export default getOrderInfo;

@@ -7,6 +7,7 @@ import menuOpened from '../../images/beer.svg';
 import * as S from './style';
 
 const Menu = ({ children }) => {
+  console.log(children.props, 'components -> Menu');
   const history = useHistory();
   const [menuOn, setMenuOn] = useState(false);
   const handleRoute = (path) => {

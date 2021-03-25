@@ -26,7 +26,6 @@ const findUserByEmail = async (email) => {
   try {
     const user = await connection
       .execute('SELECT *  FROM Trybeer.users WHERE email=?', [email]);
-    //  console.log('model', user);
     return user;
   } catch (e) {
     return e.message;
