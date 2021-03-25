@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import api from '../../../axios';
 import OrderCard from './OrderCard';
 
@@ -18,5 +19,9 @@ function Gallery() {
     </div>
   );
 }
+
+PropTypes.Gallery = {
+  admin: PropTypes.bool.isRequired,
+};
 
 export default Gallery;

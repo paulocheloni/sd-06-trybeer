@@ -20,7 +20,10 @@ const Routes = () => {
   const role = storage ? storage.role : 'client';
   const tokenFromStorage = storage ? storage.token : false;
   const existToken = storage ? tokenFromStorage : token;
-  let baseRoute = role === 'client' ? '/products' : '/admin/orders';
+  const adminOrdersRoute = '/admin/orders';
+  const productRoute = '/products';
+
+  let baseRoute = role === 'client' ? productRoute : adminOrdersRoute;
   baseRoute = existToken ? baseRoute : '/login';
 
   return (
@@ -34,14 +37,14 @@ const Routes = () => {
         </BodyContainer>
       </Route>
       {/* ROTAS PRIVADAS - USUÁRIO ADMIN */}
-      <Route path={ ['/admin/orders', '/admin/profile'] }>
+      <Route path={ [adminOrdersRoute, '/admin/profile'] }>
         { !existToken && <Redirect to="/" /> }
         { role === 'client' && <Redirect to="/" /> }
         <Menu />
         <BodyContainer>
           <Route path="/admin/profile" component={ ProfileAdmin } />
           <Route exact path="/admin/orders/:id" component={ DetailedOrder } />
-          <Route exact path="/admin/orders" component={ OrdersAdmin } />
+          <Route exact path={ adminOrdersRoute } component={ OrdersAdmin } />
         </BodyContainer>
       </Route>
       {/* ROTAS PRIVADAS - USUÁRIO CLIENT */}
@@ -55,6 +58,16 @@ const Routes = () => {
           <Route exact path="/checkout" component={ Checkout } />
           <Route exact path="/orders/:id" component={ DetailedOrder } />
           <Route exact path="/orders" component={ OrdersClient } />
+        </BodyContainer>
+      </Route>
+      {/* ROTAS PRIVADAS - USUÁRIO ADMIN */}
+      <Route path={ ['/admin/orders', '/admin/profile'] }>
+        { !existToken && <Redirect to="/" /> }
+        <Menu />
+        <BodyContainer>
+          <Route path="/admin/profile" component={ ProfileAdmin } />
+          <Route path="/admin/orders/:id" component={ DetailedOrder } />
+          <Route exact path="/admin/orders" component={ OrdersAdmin } />
         </BodyContainer>
       </Route>
       {/* ROTA RAIZ - RESPONSÁVEL POR FAZER DIRECIONAMENTO */}

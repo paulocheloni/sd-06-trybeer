@@ -7,6 +7,9 @@ function OrderCard({ order, index }) {
     id,
     createdAt,
     total,
+    number,
+    address,
+    status,
   } = order;
 
   const totalValue = `R$ ${total.replace('.', ',')}`;
@@ -28,18 +31,20 @@ function OrderCard({ order, index }) {
       data-testid={ `${index}-order-card-container` }
     >
       <div className="flex flex-col">
+        <p data-testid={ `${index}-order-number` }>
+          { `Pedido ${index + 1}` }
+        </p>
         <p data-testid={ `${index}-order-total-value` }>
           <strong>{ totalValue }</strong>
         </p>
-        <Link
-          data-testid={ `${index}-order-number` }
-          to={ `/orders/${id}` }
-        >
-          <span className="hidden">{ `Pedido ${index + 1}` }</span>
-          <span>{ `Order N. ${index + 1}` }</span>
-        </Link>
         <p data-testid={ `${index}-order-date` }>
           { dayAndMonth }
+        </p>
+        <p data-testid={ `${index}-order-address` }>
+          { `${address}, ${number}` }
+        </p>
+        <p data-testid={ `${index}-order-status` }>
+          { status === 'pending' ? 'Pendente' : 'Entregue' }
         </p>
         <Link to={ `${pre}/orders/${id}` }>See order</Link>
       </div>
@@ -51,8 +56,12 @@ OrderCard.propTypes = {
   index: PropTypes.number.isRequired,
   order: PropTypes.shape({
     id: PropTypes.number.isRequired,
+    user_id: PropTypes.number.isRequired,
+    address: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
     total: PropTypes.number.isRequired,
     createdAt: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
   }).isRequired,
 };
 

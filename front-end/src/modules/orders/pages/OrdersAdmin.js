@@ -1,11 +1,11 @@
 import React from 'react';
-import PaperContainer from '../../../design-system/containers/PaperContainer';
 import Gallery from '../components/Gallery';
+import PaperContainer from '../../../design-system/containers/PaperContainer';
 
 const OrdersAdmin = () => (
   <PaperContainer>
-    <p className="hidden" data-testid="top-title">Pedidos</p>
-    <p>Orders</p>
+    <p className="hidden" data-testid="top-title">Admin - Pedidos</p>
+    <p>My orders</p>
     <Gallery />
   </PaperContainer>
 );
