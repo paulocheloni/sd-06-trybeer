@@ -27,16 +27,12 @@ SalesController.get('/products/:saleId', verifyLogin, async (req, res) => {
 
 // Store request
 SalesController.post('/checkout', verifyLogin, async (req, res) => {
-  const { userId, totalPrice, address, number } = req.body;
+  const { userId, totalPrice, address, number, items } = req.body;
   const { insertId } = await SalesService.storeRequest(userId, totalPrice, address, number);
-  res.status(OK).json(insertId);
-});
 
-// Store sales products
-SalesController.post('/products', verifyLogin, async (req, res) => {
-  const { saleId, productId, quantity } = req.body;
-  const sale = await SalesService.storeSaleProducts(saleId, productId, quantity);
-  res.status(OK).json(sale);
+  items.map((elem) => SalesService.storeSaleProducts(insertId, elem.id, elem.total));
+
+  res.status(OK).json({ saleId: insertId });
 });
 
 module.exports = SalesController;

@@ -31,7 +31,7 @@ function register(user) {
         const time = 3000;
         const elem = document.createElement('h3');
         elem.innerHTML = err.response.data.message;
-        document.querySelector('.test').append(elem);
+        document.querySelector('.register-page').append(elem);
         setTimeout(() => elem.remove(elem), time);
       }
     });
@@ -56,13 +56,22 @@ async function getProducts(setProducts) {
     } }).then((response) => setProducts(response.data));
 }
 
-async function checkout(userId, totalPrice, address, number) {
+async function checkout(userId, totalPrice, address, number, items) {
   const axios = buildAxiosHandler();
   const token = localStorage.getItem('token');
 
   axios.post('/sales/checkout',
-    { userId, totalPrice, address, number },
+    { userId, totalPrice, address, number, items },
     { headers: { authorization: token } });
+}
+
+async function getOrders(setOrders) {
+  const axios = buildAxiosHandler();
+  const token = localStorage.getItem('token');
+  axios.get('/sales', {
+    headers: {
+      authorization: token,
+    } }).then((response) => setOrders(response.data));
 }
 
 export {
@@ -72,4 +81,5 @@ export {
   profile,
   register,
   updateName,
+  getOrders,
 };

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import ControllerHeader from '../components/ControllerHeader';
-import CheckoutCard from '../components/CheckoutCard';
-import TotalCheckout from '../components/TotalCheckout';
-import FormsCheckout from '../components/FormsCheckout';
-import CheckoutButton from '../components/CheckoutButton';
+import ControllerHeader from '../components/Header-SideBar/ControllerHeader';
+import CheckoutCard from '../components/Checkout/CheckoutCard';
+import TotalCheckout from '../components/Checkout/TotalCheckout';
+import FormsCheckout from '../components/Checkout/FormsCheckout';
+import CheckoutButton from '../components/Checkout/CheckoutButton';
 import { getItensStorage, calculateTotal } from '../services/index';
 
 function Checkout() {
@@ -22,9 +22,10 @@ function Checkout() {
         setTotal={ setTotal }
         setItems={ setItems }
       />)) }
+      <button onClick={ () => console.log(items) }>console</button>
       <FormsCheckout setAddress={ setAddress } address={ address } />
       <TotalCheckout total={ total } />
-      <CheckoutButton total={ total } address={ address } />
+      <CheckoutButton total={ total } address={ address } items={ items } />
     </div>
   );
 }

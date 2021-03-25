@@ -60,7 +60,7 @@ const storeRequest = async (userId, totalPrice, address, number) => {
 
 const storeSaleProducts = async (saleId, productId, quantity) => {
   const [sales] = await connection
-    .execute(`INSERT INTO Trybeer.sales_products VALUES (?, ?, ?)`, [saleId, productId, quantity]);
+    .execute('INSERT INTO Trybeer.sales_products VALUES (?, ?, ?)', [saleId, productId, quantity]);
 
   return sales;
 };

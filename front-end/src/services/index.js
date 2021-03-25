@@ -72,7 +72,8 @@ const getItensStorage = () => {
     .keys({ ...localStorage })
     .filter((key) => key !== 'token')
     .filter((key) => key !== 'total')
-    .filter((key) => key !== 'address');
+    .filter((key) => key !== 'address')
+    .filter((key) => key !== 'user');
   const items = Object.keys({ ...localStorage })
     .filter((key) => filterKeys.includes(key))
     .reduce((beerObject, key) => {
@@ -97,18 +98,18 @@ const calculateTotal = (items) => {
   return total.toFixed(2);
 };
 
-const addProduct = ({ quantity, setQuantity, name, setTotal, price }) => {
+const addProduct = ({ quantity, setQuantity, name, setTotal, price, id }) => {
   const total = quantity + 1;
-  localStorage.setItem(`${name}`, JSON.stringify({ name, total, price }));
+  localStorage.setItem(`${name}`, JSON.stringify({ name, total, price, id }));
   setQuantity(total);
   const items = getItensStorage();
   setTotal(calculateTotal(items));
 };
 
-const reduceProduct = ({ quantity, setQuantity, name, setTotal, price }) => {
+const reduceProduct = ({ quantity, setQuantity, name, setTotal, price, id }) => {
   if (quantity > 0) {
     const total = quantity - 1;
-    localStorage.setItem(`${name}`, JSON.stringify({ total, price }));
+    localStorage.setItem(`${name}`, JSON.stringify({ total, price, id }));
     setQuantity(total);
     const items = getItensStorage();
     setTotal(calculateTotal(items));
@@ -130,18 +131,19 @@ const deleteItemCart = ({ product, setTotal, setItems }) => {
   setItems(Object.values(getItensStorage()));
 };
 
-const concludeOrder = async (totalPrice, addressObject, setShowSucessMessage) => {
+const concludeOrder = async (totalPrice, addressObject, setShowSucessMessage, unformatedItems) => {
   const { address, number } = addressObject;
   localStorage.setItem('address', JSON.stringify(addressObject));
   const token = localStorage.getItem('token');
   const user = await profile(token);
   const { id: userId } = user;
+  const items = unformatedItems.map((item) => JSON.parse(item));
+
+  console.log(items);
+  checkout(userId, totalPrice, address, number, items).then(() => setShowSucessMessage(false));
+
   const itemsObject = getItensStorage();
   const itemNames = Object.keys(itemsObject);
-  console.log(itemNames)
-
-  checkout(userId, totalPrice, address, number, itemsObject).then(() => setShowSucessMessage(false));
-
   itemNames.map((itemName) => localStorage.removeItem(itemName));
   localStorage.removeItem('total');
   localStorage.removeItem('address');

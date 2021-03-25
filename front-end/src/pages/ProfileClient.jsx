@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { handleUpdate } from '../services/index';
 import { profile } from '../api/index';
-import ControllerHeader from '../components/ControllerHeader';
-import '../css/Util.css';
+import ControllerHeader from '../components/Header-SideBar/ControllerHeader';
+import '../css/General.css';
 
 function ProfileClient() {
   const [user, setUser] = useState({ name: '', email: '' });

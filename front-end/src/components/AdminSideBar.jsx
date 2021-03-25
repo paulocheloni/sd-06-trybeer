@@ -1,11 +1,15 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import '../css/ControllerHeader.css';
+import '../css/Sidebar.css';
 
 function AdminSideBar() {
   const history = useHistory();
   return (
-    <div data-testid="admin-side-bar-container">
+    <div
+      className="sidebar"
+      data-testid="admin-side-bar-container"
+    >
       <h3>Trybeer</h3>
       <button
         type="button"
