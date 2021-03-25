@@ -2,7 +2,7 @@ import React, { useContext, useState, useMemo, useEffect, useCallback } from 're
 import { Redirect, useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
-import { Topbar, CartButton, TextInput } from '../components';
+import { Topbar, Button, TextInput } from '../components';
 import salesApi from '../services/api.sales';
 import { handleProductQuantity } from '../utils';
 
@@ -145,7 +145,7 @@ export default function Checkout() {
                 />
               </fieldset>
             </form>
-            <CartButton
+            <Button
               cart={ cart }
               id="checkout"
               disabled={ disabled }

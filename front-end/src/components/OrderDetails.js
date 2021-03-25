@@ -2,63 +2,48 @@ import React, { useContext } from 'react';
 import { PropTypes } from 'prop-types';
 import AppContext from '../context/app.context';
 
+import OrderCard from './OrderCardDetail';
+import Button from './Button';
 import { convertDate } from '../utils';
+import adminApi from '../services/api.admin';
 
 export default function OrderDetails({ order, callback }) {
   const {
     tokenContext: { token },
     productsContext: { products } } = useContext(AppContext);
 
-  const calcProductTotal = (productId, quantity) => (
-    (products.find((el) => el.id === productId).price * quantity).toFixed(2)
-  );
-
-  const getProductName = (productId) => products.find((el) => el.id === productId).name;
-  const getProductPrice = (productId) => products.find((el) => el.id === productId).price;
+  const updateStatus = async () => {
+    try {
+      await adminApi({ ...token, saleId: order.id, delivered: true });
+      callback({ ...order, status: 'Entregue' });
+      return { status: 'OK', message: 'Sale status updated' };
+    } catch (error) {
+      return error;
+    }
+  };
 
   if (!order.sale || !products) return 'Loading order...';
 
-  console.log('component', order);
-
   return (
-    <>
+    <section className="order-detail-wrapper">
       <h3 data-testid="order-number">{ `Pedido ${order.id}` }</h3>
       <p data-testid="order-date">{ convertDate(order.sale_date)[0] }</p>
       { (token.role === 'administrator')
-        && <p data-testid="order-status">{ order.status }</p> }
+        && (
+          <section>
+            <p>{ `Cliente: ${order.user_name}` }</p>
+            <p data-testid="order-status">{ order.status }</p>
+          </section>
+        ) }
       { order.sale.map((curr, index) => (
-        <section key={ index }>
-          <p data-testid={ `${index}-product-qtd` }>
-            { curr.quantity }
-          </p>
-          <p data-testid={ `${index}-product-name` }>
-            { getProductName(curr.product_id) }
-          </p>
-          { (token.role === 'administrator') && (
-            <p data-testid={ `${index}-order-unit-price` }>
-              { `(R$ ${getProductPrice(curr.product_id)
-                .replace('.', ',')})` }
-            </p>
-          ) }
-          <p data-testid={ `${index}-product-total-value` }>
-            { `R$ ${calcProductTotal(curr.product_id, curr.quantity)
-              .replace('.', ',')}` }
-          </p>
-        </section>
+        <OrderCard index={ index } order={ curr } key={ index } />
       )) }
       <p data-testid="order-total-value">
         { `Total: R$ ${order.total_price.replace('.', ',')}` }
       </p>
-      { (token.role === 'administrator' && order.status === 'Pendente') && (
-        <button
-          type="button"
-          onClick={ () => callback(order.id, true) }
-          data-testid="mark-as-delivered-btn"
-        >
-          Marcar como entregue
-        </button>
-      ) }
-    </>
+      { (token.role === 'administrator' && order.status === 'Pendente')
+      && (<Button callback={ updateStatus } id="updateDeliver" />) }
+    </section>
   );
 }
 

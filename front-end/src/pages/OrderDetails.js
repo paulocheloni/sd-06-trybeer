@@ -6,6 +6,8 @@ import { Topbar, Loading, OrderDetails as OrderDetailComponent } from '../compon
 import salesApi from '../services/api.sales';
 import adminApi from '../services/api.admin';
 
+import '../styles/OrderDetails.css';
+
 export default function OrderDetails() {
   const { tokenContext: { token } } = useContext(AppContext);
   const [order, setOrder] = useState();
@@ -13,17 +15,9 @@ export default function OrderDetails() {
 
   const history = useHistory();
 
-  const title = (token.role === 'administrator') ? 'Detalhes de Pedido' : 'Meu Pedido';
-
-  const updateStatus = async (saleId, bool) => {
-    try {
-      await adminApi({ ...token, saleId, delivered: bool });
-      setOrder({ ...order, status: 'Entregue' });
-      return { status: 'OK', message: 'Sale status updated' };
-    } catch (error) {
-      return error;
-    }
-  };
+  const title = (token && token.role === 'administrator')
+    ? 'Detalhes de Pedido'
+    : 'Meu Pedido';
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -31,7 +25,6 @@ export default function OrderDetails() {
         const currOrder = (token.role === 'administrator')
           ? await adminApi({ ...token, saleId: params.id })
           : await salesApi({ ...token, saleId: params.id });
-        console.log('order detail fetch', currOrder);
         if (currOrder.code) {
           history.push({
             pathname: '/error',
@@ -45,8 +38,6 @@ export default function OrderDetails() {
     fetchOrder();
   }, [setOrder, params, token, history]);
 
-  console.log('render', order);
-
   if (!token) return <Redirect to="/login" />;
 
   return (
@@ -54,7 +45,7 @@ export default function OrderDetails() {
       <Topbar title={ title } />
       { (!order)
         ? <Loading />
-        : <OrderDetailComponent order={ order } callback={ updateStatus } /> }
+        : <OrderDetailComponent order={ order } callback={ setOrder } /> }
     </section>
   );
 }
