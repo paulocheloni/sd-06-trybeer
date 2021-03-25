@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import './Login.css';
 import api from '../services/api';
+import '../styles/login.css';
+import beerPremium from '../styles/beerPremium.jpg';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -47,46 +48,51 @@ export default function Login() {
   };
 
   return (
-    <div className="login">
-      <h1>Login</h1>
-      <label htmlFor="email">
-        Email
-        <input
-          className="user"
-          placeholder="E-mail"
-          type="email"
-          id="email"
-          data-testid="email-input"
-          onChange={ handleChangeEmail }
-        />
-      </label>
-      <label htmlFor="password">
-        Senha
-        <input
-          className="boxsign"
-          placeholder="Senha"
-          type="password"
-          id="password"
-          data-testid="password-input"
-          onChange={ handleChangePassword }
-        />
-      </label>
-      <button
-        className="go"
-        type="button"
-        data-testid="signin-btn"
-        disabled={ !(isEmailValid && isPasswordValid) }
-        onClick={ handleClick }
-      >
-        <span>Entrar</span>
-      </button>
-      <Link
-        to="/register"
-        data-testid="no-account-btn"
-        className="cadastrar"
-      >
-        Ainda não tenho conta!
-      </Link>
+    <div className="text-center">
+      <form className="form-signin">
+        <img className="mb-4" src={ beerPremium } width="170" height="170" alt="Logo" />
+        <h1 className="h1 mb-3 font-weight-normal">Login</h1>
+        <label htmlFor="email" className="sr-only">
+          Email
+          <input
+            className="form-control"
+            placeholder="E-mail"
+            type="email"
+            id="email"
+            data-testid="email-input"
+            onChange={ handleChangeEmail }
+          />
+        </label>
+        <label htmlFor="password" className="sr-only">
+          Senha
+          <input
+            className="form-control"
+            placeholder="Senha"
+            type="password"
+            id="password"
+            data-testid="password-input"
+            onChange={ handleChangePassword }
+          />
+        </label>
+        <button
+          className="btn btn-lg btn-danger btn-block"
+          type="button"
+          data-testid="signin-btn"
+          disabled={ !(isEmailValid && isPasswordValid) }
+          onClick={ handleClick }
+        >
+          Entrar
+        </button>
+        <br />
+        <Link
+          to="/register"
+          data-testid="no-account-btn"
+          className="cadastrar"
+        >
+          Ainda não tenho conta!
+        </Link>
+        <p className="mt-5 mb-3 text-muted">© Mar de Minas 2021</p>
+      </form>
     </div>
   );
 }
