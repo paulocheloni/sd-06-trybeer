@@ -49,7 +49,8 @@ function Form() {
   };
 
   useEffect(() => {
-    return () => clearTimeout(handleSubmit);
+    const clear = () => clearTimeout(handleSubmit);
+    return clear;
   }, []);
 
   return (

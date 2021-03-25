@@ -21,9 +21,10 @@ function Form() {
     const delay = 500;
     setTimeout(() => setToken(true), delay);
   };
-  
+
   useEffect(() => {
-    return () => clearTimeout(handleSubmit);
+    const clear = () => clearTimeout(handleSubmit);
+    return clear;
   }, []);
 
   return (
