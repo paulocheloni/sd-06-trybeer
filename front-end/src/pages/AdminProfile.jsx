@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
-import TopMenuAdmin from '../components/TopMenuAdmin';
+import TopMenuAdmin from '../components/TopMenuAdmin/TopMenu';
 
 export default function AdminProfile() {
   const history = useHistory();
