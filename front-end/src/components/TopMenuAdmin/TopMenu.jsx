@@ -36,18 +36,6 @@ export default function TopMenu({ pageTitle }) {
     setOpen(false);
   };
 
-  // const handleClick = (e) => {
-  //   if (e.target.value === 'Pedidos') {
-  //     history.push('/admin/orders');
-  //   }
-  //   if (e.target.value === 'Perfil') {
-  //     history.push('/admin/profile');
-  //   }
-  //   if (e.target.value === 'Sair') {
-  //     localStorage.setItem('token', '');
-  //     history.push('/login');
-  //   }
-  // };
   return (
     <div className={ classes.root }>
       <CssBaseline />
