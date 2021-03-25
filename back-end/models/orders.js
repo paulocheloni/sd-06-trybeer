@@ -33,23 +33,8 @@ const getOrdersByUser = async (id) => {
   return orders;
 };
 
-const getOrderDetailsById = async (id) => {
-  const [orderDetails] = await connection.execute(
-    `SELECT sales.id, sales.total_price, sales.sale_date, sp.quantity, prod.name, prod.price
-    FROM trybeer.sales
-    INNER JOIN trybeer.sales_products as sp
-    on sales.id = sp.sale_id
-    INNER JOIN trybeer.products as prod
-    on sp.product_id = prod.id
-    WHERE sales.id = ?;`, [id],
-  );
-
-  return orderDetails;
-};
-
 module.exports = {
   createOrder,
   updateSalesProduct,
   getOrdersByUser,
-  getOrderDetailsById,
 };
