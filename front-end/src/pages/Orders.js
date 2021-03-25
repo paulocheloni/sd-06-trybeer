@@ -35,9 +35,7 @@ class Orders extends React.Component {
       <div>
         <Header history={ history } />
         <div className="orders-container">
-          {stateOrders.length > 0 && stateOrders.map((e, index) => 
-          (
-            console.log(`"${index + 1}-order-number"`),
+          {stateOrders.length > 0 && stateOrders.map((e, index) => (
             <div
               className="order"
               key={ index }
