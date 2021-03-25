@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import Menu from '../../Components/Menu';
-import CardOrders from '../../Components/cardOrders';
-import * as S from './style';
+import CardOrders from '../../Components/cardOrdersAdmin';
 
 const AdminOrders = () => {
   const history = useHistory();
@@ -14,10 +13,10 @@ const AdminOrders = () => {
   });
 
   return (
-    <S.Container>
+    <div>
       <Menu><p data-testid="top-title">Admin Pedido</p></Menu>
       <CardOrders />
-    </S.Container>
+    </div>
   );
 };
 
