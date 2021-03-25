@@ -13,7 +13,7 @@ function ProfileAdm() {
     if (!user) {
       history.push('/login');
     } else if (user.role !== 'administrator') {
-      history.push('/profile')
+      history.push('/profile');
     } else {
       setName(user.name);
       setEmail(user.email);
