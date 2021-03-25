@@ -46,7 +46,6 @@ ordersRouter.get('/:id', validateToken, async (req, res) => {
   const orderDetails = await services.getOrderDetailsById(id);
 
   res.status(200).json(orderDetails);
-
 });
 
 module.exports = ordersRouter;
