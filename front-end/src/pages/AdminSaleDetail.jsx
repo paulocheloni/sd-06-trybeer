@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import fetches from '../services/fetches';
-import TopMenuAdmin from '../components/TopMenuAdmin';
+import TopMenuAdmin from '../components/TopMenuAdmin/TopMenu';
 import './AdminSaleDetail.css';
 
 export default function AdminSaleDetail() {

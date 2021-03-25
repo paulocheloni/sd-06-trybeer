@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import jwtDecode from 'jwt-decode';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-// import Box from '@material-ui/core/Box';
-// import { FormControl } from '@material-ui/core'
 import Container from '@material-ui/core/Container';
 import { FormControl } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
@@ -20,14 +18,13 @@ export default function User() {
   const [name, setName] = useInput(tokenDecoded.name);
 
   const [newInfo, setNewInfo] = useState('');
-  console.log(isTheNewNameDifferent(name, oldName));
+
   const handleUpdateInfo = async (email) => {
     await fetches.updateUserName(email, name);
     setNewInfo('Atualização concluída com sucesso');
   };
 
   return (
-    // <Box justifyContent="flex-end">
     <Container className={ classes.container }>
       <FormControl className={ classes.root } noValidate autoComplete="off">
         <div>
@@ -64,10 +61,9 @@ export default function User() {
           onClick={ () => handleUpdateInfo(tokenDecoded.email) }
         >
           Salvar
-          <Typography>{newInfo}</Typography>
         </Button>
+        <Typography>{newInfo}</Typography>
       </div>
     </Container>
-    // </Box>
   );
 }

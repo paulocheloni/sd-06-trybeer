@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import fetches from '../services/fetches';
-// import TopMenu from '../components/TopMenu';
+import TopMenu from '../components/TopMenu/TopMenu';
 import './SaleDetails.css';
 
 export default function SaleDetails() {
@@ -46,7 +46,7 @@ export default function SaleDetails() {
   return (
     <div>
       { handleRedirect(tokenFromLocalStorage) }
-      {/* <TopMenu pageTitle="Detalhes de Pedido" /> */}
+      <TopMenu pageTitle="Detalhes de Pedido" />
       <div className="order-data-container">
         <span data-testid="order-number">
           {orderDetail.length && `Pedido ${orderDetail[0].sale_id}`}

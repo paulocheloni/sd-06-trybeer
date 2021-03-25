@@ -1,7 +1,7 @@
 import React from 'react';
 import jwtDecode from 'jwt-decode';
 import TopMenu from '../components/TopMenu/TopMenu';
-import TopMenuAdmin from '../components/TopMenuAdmin';
+import TopMenuAdmin from '../components/TopMenuAdmin/TopMenu';
 import User from '../components/ProfileUsers/User';
 
 export default function Profile() {
