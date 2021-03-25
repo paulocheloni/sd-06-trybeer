@@ -18,5 +18,4 @@ app.use('/sales', salesRouter);
 app.use('/images', express.static(`${process.cwd()}/images`)); 
 
 app.use(errorMiddleware);
-
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

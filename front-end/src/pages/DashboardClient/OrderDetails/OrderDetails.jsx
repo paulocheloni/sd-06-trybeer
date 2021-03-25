@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import Header from '../../../components/Header/Header';
 import './OrderDetails.css';
 import { getSalesById } from '../../../services/Sales';
 import { correctDate, parseCartPrice } from '../../../utils/parseValues';
+import { verifyUser } from '../../../store/LocalStorage/actions';
+import dateIcon from './dateIcon.png';
+import totalPrice from './totalPrice.png';
 
 /**
  * Soma o total do pedido (quantidade * preco)
  * @param {String} products
- * @returns String contendo a soma dos itens
+ * @returns String contendo a soma dos itens teste teste
  */
 const soma = (products) => {
   let totalVenda = 0;
@@ -20,6 +24,11 @@ const soma = (products) => {
 
 export default function Orders({ match: { params: { id } } }) {
   const [orderDetails, setOrderDetails] = useState([]);
+  const history = useHistory();
+
+  useEffect(() => {
+    verifyUser(history);
+  }, [history]);
 
   useEffect(() => {
     const getOrderDetails = async () => {
@@ -35,30 +44,27 @@ export default function Orders({ match: { params: { id } } }) {
         <Header title="Detalhes de Pedido" user="client" />
       </div>
       {orderDetails.map((details, index) => (
-        <div className="geral" key={ index }>
+        <div className="geral" key={index}>
           { index === 0 && (
-            <div className="title">
-              <div className="pedido">
-                <h2>Pedido</h2>
-                <h2 h2 data-testid="order-number">{details.idSales}</h2>
-              </div>
-              <div className="data">
-                <h2>Data</h2>
-                <h2 data-testid="order-date">{ correctDate(details.dateSale) }</h2>
+            <div className="title-div">
+              <h2 data-testid="order-number">{`Pedido ${details.idSales}`}</h2>
+              <div className='div-date-details'>
+                <img className="calendario-details" src={dateIcon} alt="calendário" />
+                <h2 data-testid="order-date">{correctDate(details.dateSale)}</h2>
               </div>
             </div>
           )}
-          <div className="detalhes" key={ index }>
-            <p className="quantidade" data-testid={ `${index}-product-qtd` }>
-              { details.quantity }
+          <div className="detalhes" key={index}>
+            <p className="quantidade" data-testid={`${index}-product-qtd`}>
+              {details.quantity}
             </p>
-            <p className="nome" data-testid={ `${index}-product-name` }>
-              { details.productName }
+            <p className="nome" data-testid={`${index}-product-name`}>
+              {details.productName}
             </p>
-            <p className="preço">{ parseCartPrice(details.price) }</p>
+            <p className="preço">{parseCartPrice(details.price)}</p>
             <p
               className="subtotal"
-              data-testid={ `${index}-product-total-value` }
+              data-testid={`${index}-product-total-value`}
             >
               {
                 parseCartPrice(details.quantity * details.price)
@@ -68,9 +74,9 @@ export default function Orders({ match: { params: { id } } }) {
         </div>
       ))}
       <div className="resumo">
-        <h2>total</h2>
-        <h2>
-          { parseCartPrice(soma(orderDetails)) }
+        <img className="total-price" src={ totalPrice } alt="conta final" />
+        <h2 className="value-price" data-testid="order-total-value">
+          {parseCartPrice(soma(orderDetails))}
         </h2>
       </div>
     </div>
