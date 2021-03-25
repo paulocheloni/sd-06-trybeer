@@ -5,20 +5,20 @@ import EmailInput from './EmailInput';
 import PasswordInput from './PasswordInput';
 import GlobalContext from '../../../context/Context';
 
-function Form() {
+function Form(match) {
   const [form, setForm] = useState({ email: '', password: '' });
   const [errorForm, setErrorForm] = useState({ email: true, password: true });
   const [errorMsg, setErrorMsg] = useState('');
   const { setToken } = useContext(GlobalContext);
+  console.log(match.match.location.pathname)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await API.post('/users/login', form);
     if (response.message) return setErrorMsg(response.message);
     localStorage.setItem('user', JSON.stringify({ ...response, email: form.email }));
-    // const delay = 500;
-    // setTimeout(() => , delay);
-    setToken(true);
+    const delay = 500;
+    if (match.match.location.pathname === '/login') setTimeout(() => setToken(true), delay);
   };
 
   return (
