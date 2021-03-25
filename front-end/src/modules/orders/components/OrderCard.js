@@ -10,9 +10,14 @@ function OrderCard({ order, index }) {
   } = order;
 
   const totalValue = `R$ ${total.replace('.', ',')}`;
-  let date = new Date(createdAt).toLocaleDateString();
-  date = date.split('/');
-  date = `${date[0]}/${date[1]}`;
+  const date = new Date(createdAt);
+  const magicNumber = 9;
+  let day = date.getDate();
+  day = day > magicNumber ? day : `0${day}`;
+  let month = date.getMonth();
+  month = month > magicNumber ? month : `0${month}`;
+  const dayAndMonth = `${day}/${month}`;
+
   const user = JSON.parse(localStorage.getItem('user'));
   const role = user ? user.role : 'client';
   const pre = role === 'client' ? '' : '/admin';
@@ -34,7 +39,7 @@ function OrderCard({ order, index }) {
           <span>{ `Order N. ${index + 1}` }</span>
         </Link>
         <p data-testid={ `${index}-order-date` }>
-          { date }
+          { dayAndMonth }
         </p>
         <Link to={ `${pre}/orders/${id}` }>See order</Link>
       </div>
