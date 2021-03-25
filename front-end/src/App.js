@@ -1,7 +1,6 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import {
-  Admin,
   Login,
   Orders,
   Profile,
@@ -11,6 +10,7 @@ import {
   DetailsOrder,
   DetailsOrderAdm,
   ProfileAdm,
+  OrdersAdm,
 } from './pages/index';
 import Provider from './hooks/Provider';
 import './App.css';
@@ -27,7 +27,7 @@ function App() {
           <Route path="/products" component={ Products } />
           <Route path="/profile" component={ Profile } />
           <Route path="/checkout" component={ Checkout } />
-          <Route path="/admin/orders" component={ Admin } />
+          <Route path="/admin/orders" component={ OrdersAdm } />
           <Route path="/admin/orders/orderId" component={ DetailsOrderAdm } />
           <Route path="/admin/profile" component={ ProfileAdm } />
           <Redirect from="/" to="/login" />
