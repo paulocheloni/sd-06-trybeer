@@ -4,7 +4,7 @@ const coll = 'sales';
 
 const createOrder = async (id, totalPrice, streetInput, houseNumberInput) => {
   const date = new Date();
-  const status = 'pendente';
+  const status = 'Pendente';
 
   const [result] = await connection.execute(
     `INSERT INTO Trybeer.${coll}
@@ -33,8 +33,30 @@ const getOrdersByUser = async (id) => {
   return orders;
 };
 
+const getOrderById = async (orderId) => {
+  const [order] = await connection.execute(`SELECT * FROM Trybeer.${coll} WHERE id = ?`, [orderId]);
+
+  return order[0];
+};
+
+const getProductsByOrderId = async (orderId) => {
+  const [products] = await connection.execute(
+    'SELECT * FROM Trybeer.sales_products WHERE sale_id = ?',
+    [orderId],
+  );
+
+  return products;
+};
+
+const markAsDelivered = async (orderId) => {
+  connection.execute(`UPDATE Trybeer.${coll} SET status = 'Entregue' WHERE id = ?`, [orderId]);
+};
+
 module.exports = {
   createOrder,
   updateSalesProduct,
   getOrdersByUser,
+  getOrderById,
+  getProductsByOrderId,
+  markAsDelivered,
 };

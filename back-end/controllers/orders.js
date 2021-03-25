@@ -23,4 +23,21 @@ ordersRouter.get('/', validateToken, async (req, res) => {
   return res.status(200).json(orders);
 });
 
+ordersRouter.get('/:orderId', validateToken, async (req, res) => {
+  const { orderId } = req.params;
+
+  const order = await services.getOrderById(orderId);
+  const orderProducts = await services.getProductsByOrderId(orderId);
+
+  return res.status(200).json({ order, orderProducts });
+});
+
+ordersRouter.put('/:orderId', validateToken, async (req, res) => {
+  const { orderId } = req.params;
+
+  await services.markAsDelivered(orderId);
+
+  return res.status(200).json({ message: 'order marked as delivered' });
+});
+
 module.exports = ordersRouter;

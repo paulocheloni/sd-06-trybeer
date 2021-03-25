@@ -12,8 +12,17 @@ const updateSalesProduct = async (insertId, checkoutProducts) => {
 
 const getOrdersByUser = async (id) => models.getOrdersByUser(id);
 
+const getOrderById = async (orderId) => models.getOrderById(orderId);
+
+const getProductsByOrderId = async (orderId) => models.getProductsByOrderId(orderId);
+
+const markAsDelivered = async (orderId) => models.markAsDelivered(orderId);
+
 module.exports = {
   createOrder,
   updateSalesProduct,
   getOrdersByUser,
+  getOrderById,
+  getProductsByOrderId,
+  markAsDelivered,
 };
