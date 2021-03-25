@@ -13,6 +13,8 @@ function Orders() {
 
   const history = useHistory();
 
+  console.log(orders);
+
   useEffect(() => {
     const user = localStorage.getItem('user');
 
