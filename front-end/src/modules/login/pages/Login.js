@@ -6,7 +6,7 @@ const Login = (props) => (
   <div>
     <PaperContainer>
       <p>Login</p>
-      <Form match={props}/>
+      <Form match={ props } />
     </PaperContainer>
   </div>
 );

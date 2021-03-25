@@ -10,7 +10,6 @@ function Form(match) {
   const [errorForm, setErrorForm] = useState({ email: true, password: true });
   const [errorMsg, setErrorMsg] = useState('');
   const { setToken } = useContext(GlobalContext);
-  console.log(match.match.location.pathname)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,7 +17,9 @@ function Form(match) {
     if (response.message) return setErrorMsg(response.message);
     localStorage.setItem('user', JSON.stringify({ ...response, email: form.email }));
     const delay = 500;
-    if (match.match.location.pathname === '/login') setTimeout(() => setToken(true), delay);
+    if (match.match.location.pathname === '/login') {
+      setTimeout(() => setToken(true), delay);
+    }
   };
 
   return (
