@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import BeersAppContext from '../context/BeersAppContext';
-// import '../style/SideBarCostumer.css';
 
 function SideBar() {
   const history = useHistory();

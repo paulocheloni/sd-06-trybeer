@@ -61,11 +61,10 @@ function CostumerCheckout() {
     setShowMessage('Compra realizada com sucesso!');
     setProductQuantity([]);
     setAmount(0.0);
-    
+
     const referenceSetTimeout = setTimeout(() => {
       history.push('/products');
     }, time);
-    console.log('referenceSetTimeout', referenceSetTimeout);
     setReferenceSetTimeout(referenceSetTimeout);
   };
 

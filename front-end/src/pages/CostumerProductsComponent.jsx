@@ -3,11 +3,8 @@ import { useHistory } from 'react-router-dom';
 
 import { Header, ProductsCards } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
-// import fetchApiJsonBody from '../service/fetchApi';
 
 import '../style/CostumerProducts.css';
-
-// const dataFalse = require('../dataFalse');
 
 function CostumerProducts() {
   const history = useHistory();
@@ -19,14 +16,6 @@ function CostumerProducts() {
   if (!token) history.push('/login');
 
   const [products, setProducts] = useState([]);
-
-  // useEffect(() => {
-  //   const totalPrice = productQuantity.reduce((total, element) => {
-  //     const unityPrice = element.qnt * element.price;
-  //     return total + unityPrice;
-  //   }, 0);
-  //   setAmount(totalPrice.toFixed(2));
-  // }, [productQuantity]);
 
   useEffect(() => {
     const url = '/products';
@@ -43,20 +32,9 @@ function CostumerProducts() {
       }));
   }, []);
 
-  // const priceAmount = (price, qnt) => {
-  //   setAmount(price * qnt);
-  // };
-
   const clickRedirect = () => history.push('/checkout');
 
   const commaAmount = `${amount.toFixed(2)}`.replace('.', ',');
-
-  // const buttonValid = () => {
-  //   if (amount === 0.00) return true;
-  //   return false;
-  // };
-
-  // console.log();
 
   return (
     <div>

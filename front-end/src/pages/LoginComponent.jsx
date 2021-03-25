@@ -45,14 +45,12 @@ function Login() {
   const handleClick = async () => {
     const returnLogin = await fetchApiJsonBody('/login', inputValues);
     if (returnLogin.err) {
-      console.log('entrou no erro');
       setErrMessage(returnLogin.err);
       return;
     }
     setUser(returnLogin);
     setProductQuantity([]);
     setAmount(0.00);
-    console.log('returnLogin', returnLogin);
     if (returnLogin.role === 'administrator') {
       history.push('/admin/orders');
     } else if (returnLogin.role === 'client') {

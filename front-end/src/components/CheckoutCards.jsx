@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import BeersAppContext from '../context/BeersAppContext';
-// import dataFalse from '../dataFalse';
 import '../style/CheckoutCard.css';
 
 function CheckoutCards({ element, index }) {
@@ -16,11 +15,7 @@ function CheckoutCards({ element, index }) {
   const { id, qnt } = element;
 
   const [products, setProducts] = useState({});
-  // const [totalPrice, setTotalPrice] = useState(0.00);
 
-  // const sumPrices = (qnt, productPrice) => {
-
-  // };
   useEffect(() => {
     const url = `/products/${id}`;
     fetch(

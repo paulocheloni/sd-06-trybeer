@@ -12,9 +12,6 @@ function ProductsCard({ element, index }) {
   } = useContext(BeersAppContext);
 
   const { name, url_image: urlImage, price, id } = element;
-  // console.log(element);
-
-  // const [image, setImage] = useState('');
 
   const storageInitialState = () => {
     const objQuantity = productQuantity
