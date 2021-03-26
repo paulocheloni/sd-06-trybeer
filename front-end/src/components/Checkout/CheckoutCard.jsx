@@ -10,8 +10,7 @@ function CheckoutCard(props) {
   return (
     <div className="checkout-card-container">
       <p data-testid={ `${index}-product-qtd-input` }>
-        Quantidade:
-        {product.total}
+        { `Quantidade: ${product.total}` }
       </p>
       <p data-testid={ `${index}-product-name` }>{product.name}</p>
       <p data-testid={ `${index}-product-unit-price` }>

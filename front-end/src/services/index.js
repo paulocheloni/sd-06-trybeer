@@ -131,7 +131,8 @@ const deleteItemCart = ({ product, setTotal, setItems }) => {
   setItems(Object.values(getItensStorage()));
 };
 
-const concludeOrder = async (totalPrice, addressObject, setShowSucessMessage, unformatedItems) => {
+const concludeOrder = async (totalPrice, addressObject, setShowSucessMessage,
+  unformatedItems) => {
   const { address, number } = addressObject;
   localStorage.setItem('address', JSON.stringify(addressObject));
   const token = localStorage.getItem('token');
@@ -140,7 +141,9 @@ const concludeOrder = async (totalPrice, addressObject, setShowSucessMessage, un
   const items = unformatedItems.map((item) => JSON.parse(item));
 
   console.log(items);
-  checkout(userId, totalPrice, address, number, items).then(() => setShowSucessMessage(false));
+  const params = { userId, totalPrice, address, number, items };
+  checkout(params)
+    .then(() => setShowSucessMessage(false));
 
   const itemsObject = getItensStorage();
   const itemNames = Object.keys(itemsObject);

@@ -23,7 +23,7 @@ function Products() {
       <section className="product-list">
         { products && products
           .map((prod, index) => (<ProductCard
-            key={ prod.id }
+            key={ index }
             product={ prod }
             setTotal={ setCartTotal }
             index={ index }

@@ -22,7 +22,6 @@ function Checkout() {
         setTotal={ setTotal }
         setItems={ setItems }
       />)) }
-      <button onClick={ () => console.log(items) }>console</button>
       <FormsCheckout setAddress={ setAddress } address={ address } />
       <TotalCheckout total={ total } />
       <CheckoutButton total={ total } address={ address } items={ items } />

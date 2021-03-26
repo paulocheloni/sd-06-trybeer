@@ -22,6 +22,9 @@ function Header() {
     case '/orders':
       setTitle('Meus Pedidos');
       break;
+    case '/orders/:id':
+      setTitle('Detalhes de Pedido');
+      break;
     default:
       setTitle('Erro');
       break;

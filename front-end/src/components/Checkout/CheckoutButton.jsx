@@ -52,8 +52,9 @@ function CheckoutButton(props) {
 }
 
 CheckoutButton.propTypes = {
-  total: PropTypes.number,
+  total: PropTypes.number.isRequired,
   address: PropTypes.objectOf(PropTypes.string).isRequired,
+  items: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default CheckoutButton;
