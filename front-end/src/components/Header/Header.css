@@ -1,5 +1,6 @@
 .isAdmin {
     /* border: 1px solid blue; */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
@@ -11,13 +12,13 @@
   /* position: relative; */
   position: fixed;
   top: 78px;
-  width: 15vw;
+  width: 200px;
   /* border: 1px solid red; */
   background-color: #255923;
   height: 100vh;
   /* left: -90vw; */
-  transition: 2s ease;
-  visibility: hidden;
+  /* transition: 2s ease; */
+  /* visibility: hidden; */
 }
 
 .spacer-admin {
