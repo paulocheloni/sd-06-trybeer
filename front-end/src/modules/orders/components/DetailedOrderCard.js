@@ -26,18 +26,18 @@ function DetailedOrderCard(props) {
   //   }
   // });
 
-  const renderDate = (order) => {
+  const renderDate = () => {
     if (order && order.createdAt) {
       let date = new Date(order.createdAt).toLocaleDateString();
       date = date.split('/');
       date = `${date[0]}/${date[1]}`;
-  
+
       return date;
     }
   };
 
   const handleClick = () => {
-    update(`/sales/${id}`).then((resp) => setOrder({ ...order, status: 'entregue' }));
+    update(`/sales/${id}`).then(() => setOrder({ ...order, status: 'entregue' }));
   };
 
   const renderButton = () => {
@@ -69,7 +69,7 @@ function DetailedOrderCard(props) {
         data-testid="order-date"
       >
         Order date:
-        { renderDate(order) }
+        { renderDate() }
       </p>
       <p
         className="flex items-center space-x-2"
