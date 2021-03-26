@@ -1,42 +1,53 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import '../css/CheckoutCard.css';
-import { useHistory } from 'react-router-dom';
-import BeerContext from '../context/BeerContext'
+import { Link } from 'react-router-dom';
+import BeerContext from '../context/BeerContext';
+import { getproductsBySaleId } from '../api/index';
 
 function CheckoutCard(props) {
-  const history = useHistory()
   const { order, index } = props;
   const firstPositionMonth = 6;
   const firstPositionDay = 9;
   const length = 2;
 
   const {
-    idOrder,
-    setIdOrder,
+    setProductsOrder,
+    setSaleIdOrder,
+    setDateOrder,
+    setTotalprice,
   } = useContext(BeerContext);
 
   const date = JSON.stringify(order.sale_date);
-  const formatDate = `${date
-    .substr(firstPositionDay,length)}/${date.substr(firstPositionMonth,length)}`;
+  const formattedDate = `${date
+    .substr(firstPositionDay, length)}/${date.substr(firstPositionMonth, length)}`;
 
-    const handleClick = () => {
-      setIdOrder(order.id)
-      history.push(`orders/${order.id}`)
+  const handleClick = () => {
+    async function setInfoProvider() {
+      await getproductsBySaleId(setProductsOrder, order.id);
+      setSaleIdOrder(order.id);
+      setDateOrder(formattedDate);
+      setTotalprice(order.total_price.toString().replace('.', ','));
     }
+    setInfoProvider();
+  };
 
   return (
     <div
       className="checkout-card-container"
       data-testid={ `${index}-order-card-container` }
     >
-      <p data-testid={ `${index}-order-number` } onClick={() => handleClick()}>
-        Pedido
-        {' '}
-        {JSON.stringify(order.id)}
-      </p>
+      <Link to={ `orders/${order.id}` }>
+        <p
+          data-testid={ `${index}-order-number` }
+          onClick={ () => handleClick() }
+          role="link"
+        >
+          { `Pedido ${JSON.stringify(order.id)}` }
+        </p>
+      </Link>
       <p data-testid={ `${index}-order-date` }>
-        {`Data: ${formatDate}`}
+        {`Data: ${formattedDate}`}
       </p>
       <p data-testid={ `${index}-order-total-value` }>
         Preço: R$

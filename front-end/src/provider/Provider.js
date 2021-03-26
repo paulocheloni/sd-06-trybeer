@@ -7,11 +7,20 @@ import PropTypes from 'prop-types';
 import BeerContext from '../context/BeerContext';
 
 export default function BeerProvider({ children }) {
-  const [idOrder, setIdOrder] = useState('');
+  const [productsOrder, setProductsOrder] = useState('');
+  const [saleIdOrder, setSaleIdOrder] = useState('');
+  const [dateOrder, setDateOrder] = useState('');
+  const [totalPriceOrder, setTotalprice] = useState('');
 
   const context = {
-    idOrder,
-    setIdOrder,
+    productsOrder,
+    setProductsOrder,
+    saleIdOrder,
+    setSaleIdOrder,
+    dateOrder,
+    setDateOrder,
+    totalPriceOrder,
+    setTotalprice,
   };
 
   return (

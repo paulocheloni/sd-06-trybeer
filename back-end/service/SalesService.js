@@ -24,9 +24,16 @@ const storeRequest = async (userId, totalPrice, address, number) => {
   return sales;
 };
 
+// store sales products
+const storeSaleProducts = async (saleId, productId, quantity) => {
+  const sales = await salesModel.storeSaleProducts(saleId, productId, quantity);
+  return sales;
+};
+
 module.exports = {
   getAll,
   getByUserId,
   getSalesProductsBySaleId,
   storeRequest,
+  storeSaleProducts,
 };

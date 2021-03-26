@@ -27,9 +27,12 @@ SalesController.get('/products/:saleId', verifyLogin, async (req, res) => {
 
 // Store request
 SalesController.post('/checkout', verifyLogin, async (req, res) => {
-  const { userId, totalPrice, address, number } = req.body;
-  await SalesService.storeRequest(userId, totalPrice, address, number);
-  res.status(OK).json({ message: 'Compra realizada com sucesso!' });
+  const { userId, totalPrice, address, number, items } = req.body;
+  const { insertId } = await SalesService.storeRequest(userId, totalPrice, address, number);
+
+  items.map((elem) => SalesService.storeSaleProducts(insertId, elem.id, elem.total));
+
+  res.status(OK).json({ saleId: insertId });
 });
 
 module.exports = SalesController;

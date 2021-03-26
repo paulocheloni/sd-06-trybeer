@@ -53,8 +53,15 @@ const storeRequest = async (userId, totalPrice, address, number) => {
     .execute(
       `INSERT INTO Trybeer.sales
       (user_id, total_price, delivery_address, delivery_number, sale_date, status)
-      VALUES (?, ?, ?, ?, NOW(), 'Pendente')`, [userId, totalPrice, address, number],
+      VALUES (?, ?, ?, ?, CURRENT_DATE(), 'Pendente')`, [userId, totalPrice, address, number],
     );
+  return sales;
+};
+
+const storeSaleProducts = async (saleId, productId, quantity) => {
+  const [sales] = await connection
+    .execute('INSERT INTO Trybeer.sales_products VALUES (?, ?, ?)', [saleId, productId, quantity]);
+
   return sales;
 };
 
@@ -64,4 +71,5 @@ module.exports = {
   getByUserId,
   getSalesProductsBySaleId,
   storeRequest,
+  storeSaleProducts,
 };

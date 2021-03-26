@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { debugContextDevtool } from 'react-context-devtool';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { debugContextDevtool } from 'react-context-devtool';
 
-const container = document.getElementById("root");
+const container = document.getElementById('root');
 const options = {
   debugReducer: true,
   debugContext: true,
   disable: false,
   disableAutoMode: false,
-}
+};
 
 ReactDOM.render(
   <React.StrictMode>

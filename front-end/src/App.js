@@ -1,9 +1,9 @@
 import React from 'react';
-import BeerProvider from './provider/Provider';
 import {
   BrowserRouter,
   Route,
 } from 'react-router-dom';
+import BeerProvider from './provider/Provider';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Products from './pages/Products';
@@ -12,7 +12,7 @@ import AdminOrders from './pages/AdminOrders';
 import AdminProfile from './pages/AdminProfile';
 import Checkout from './pages/Checkout';
 import Orders from './pages/Orders';
-import ClientDetailsOrder from './pages/ClientDetailsOrder'
+import ClientDetailsOrder from './pages/ClientDetailsOrder';
 
 import './App.css';
 
