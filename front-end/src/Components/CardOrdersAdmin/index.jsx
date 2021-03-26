@@ -25,18 +25,17 @@ const CardOrders = () => {
               data-testid={ `${idx}-order-number` }
             >
               Pedido
-              { el.id }
+              {`Pedido ${el.id}` }
             </S.Pedido>
             <S.Endereco
               data-testid={ `${idx}-order-address` }
             >
-              { el.delivery_address }
+              { `${el.delivery_address}, ${el.delivery_number}` }
             </S.Endereco>
             <S.ValorTotal
               data-testid={ `${idx}-order-total-value` }
             >
-              R$
-              { el.total_price }
+              { `R$ ${el.total_price}` }
             </S.ValorTotal>
             <S.Status
               data-testid={ `${idx}-order-status` }

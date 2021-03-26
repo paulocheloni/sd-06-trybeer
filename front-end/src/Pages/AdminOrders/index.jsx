@@ -14,7 +14,7 @@ const AdminOrders = () => {
     if (!window.localStorage.token) {
       history.push('/login');
     }
-  }, []);
+  }, [setEmail, setPassword]);
 
   return (
     <div>
