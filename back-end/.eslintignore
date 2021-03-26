@@ -3,5 +3,4 @@ node_modules/
 reports/
 cypress/
 models/index.js
-src/test/user.test.js
 src/test
