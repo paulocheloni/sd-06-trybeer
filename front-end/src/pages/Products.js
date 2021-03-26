@@ -29,7 +29,7 @@ export default function Products() {
         : (
           <>
             <section className="products-container">
-              { (products.length === 0)
+              { (products && products.length === 0)
                 ? 'Não há produtos no banco de dados.'
                 : products.map((product, index) => (
                   <ProductCard

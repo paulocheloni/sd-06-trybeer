@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import useStorage from '../hooks/useStorage';
@@ -8,17 +8,9 @@ import productsApi from '../services/api.products';
 const AppProvider = ({ children }) => {
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('login')));
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || {});
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState(null);
   const updateLogin = useStorage('login');
   const updateCart = useStorage('cart');
-
-  const tokenContext = useMemo(() => ({ token, setToken }), [token, setToken]);
-
-  const productsContext = useMemo(() => (
-    { products, setProducts }
-  ), [products, setProducts]);
-
-  const cartContext = useMemo(() => ({ cart, setCart }), [cart, setCart]);
 
   useEffect(() => {
     updateLogin(token);
@@ -30,14 +22,25 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const productsArray = await productsApi(token).catch((error) => error);
-      setProducts(productsArray);
+      try {
+        const productsArray = await productsApi(token);
+        setProducts(productsArray);
+      } catch (error) {
+        console.log('error caught:', error);
+        return null;
+      }
     };
-    if (token && token.email) fetchProducts();
-  }, [setProducts, token]);
+    if (token.token) fetchProducts();
+  }, [token]);
 
   return (
-    <AppContext.Provider value={ { productsContext, tokenContext, cartContext } }>
+    <AppContext.Provider
+      value={ {
+        productsContext: { products },
+        tokenContext: { token, setToken },
+        cartContext: { cart, setCart },
+      } }
+    >
       {children}
     </AppContext.Provider>
   );
