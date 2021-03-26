@@ -4,7 +4,7 @@ const { throwThisError } = require('../Utils');
 
 require('dotenv').config();
 
-const secret = process.env.SECRET;
+const secret = process.env.SECRET || 'secretToken';
 const NOT_FOUND = 404;
 
 const loginUser = async (req, res) => {
