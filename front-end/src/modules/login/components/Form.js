@@ -5,7 +5,7 @@ import EmailInput from './EmailInput';
 import PasswordInput from './PasswordInput';
 import GlobalContext from '../../../context/Context';
 
-function Form(match) {
+function Form() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [errorForm, setErrorForm] = useState({ email: true, password: true });
   const [errorMsg, setErrorMsg] = useState('');
@@ -16,10 +16,8 @@ function Form(match) {
     const response = await API.post('/users/login', form);
     if (response.message) return setErrorMsg(response.message);
     localStorage.setItem('user', JSON.stringify({ ...response, email: form.email }));
-    const delay = 500;
-    if (match.match.location.pathname === '/login') {
-      setTimeout(() => setToken(true), delay);
-    }
+    const delay = 50;
+    setTimeout(() => setToken(true), delay);
   };
 
   return (
