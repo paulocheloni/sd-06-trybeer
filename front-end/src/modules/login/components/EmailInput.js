@@ -3,33 +3,34 @@ import React, { useEffect, useState } from 'react';
 function EmailInput(setError, setInputValue, inputValue) {
   const [errorLabel, setErrorLabel] = useState();
   const pattern = /\S+@\S+\.\S+/;
-  const delay = 500;
+  const delay = 0;
 
-  const useDebounce = (value, delayValue) => {
-    const [debouncedValue, setDebouncedValue] = useState(value);
+  // const useDebounce = (value, delayValue) => {
+  //   const [debouncedValue, setDebouncedValue] = useState(value);
 
-    useEffect(() => {
-      const handler = setTimeout(() => setDebouncedValue(value), delayValue);
-      return () => clearTimeout(handler);
-    }, [value, delayValue]);
+  //   useEffect(() => {
+  //     const handler = setTimeout(() => setDebouncedValue(value), delayValue);
+  //     return () => clearTimeout(handler);
+  //   }, [value, delayValue]);
 
-    return debouncedValue;
-  };
+  //   return debouncedValue;
+  // };
 
-  const debounceValue = useDebounce(inputValue, delay);
+  // const debounceValue = useDebounce(inputValue, delay);
 
   const handleChange = ({ target }) => {
+    console.log(target.name)
     const { name, value } = target;
     const validation = pattern.test(value);
     setInputValue((prev) => ({ ...prev, [name]: value }));
     setError((prev) => ({ ...prev, [name]: !validation }));
   };
 
-  useEffect(() => {
-    if (errorLabel !== undefined && inputValue !== '') {
-      setErrorLabel(!pattern.test(inputValue));
-    }
-  }, [debounceValue]);
+  // useEffect(() => {
+  //   if (errorLabel !== undefined && inputValue !== '') {
+  //     setErrorLabel(!pattern.test(inputValue));
+  //   }
+  // }, [debounceValue]);
 
   return (
     <div className="flex flex-col space-y-2">
@@ -40,7 +41,7 @@ function EmailInput(setError, setInputValue, inputValue) {
           data-testid="email-input"
           name="email"
           type="text"
-          value={ inputValue }
+          // value={ inputValue }
           onChange={ handleChange }
           className="border rounded-md p-2 focus:outline-none
           focus:border-secondary-dark"
@@ -49,9 +50,6 @@ function EmailInput(setError, setInputValue, inputValue) {
           onKeyUp={ () => setErrorLabel(false) }
         />
       </label>
-      <p className={ errorLabel ? 'text-xs text-red-500' : 'hidden' }>
-        Email should be like name@domain.com
-      </p>
     </div>
   );
 }

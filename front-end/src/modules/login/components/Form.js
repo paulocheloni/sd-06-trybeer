@@ -30,7 +30,7 @@ function Form() {
       <div className="flex flex-col space-y-4">
         { EmailInput(setErrorForm, setForm, form.email) }
         { PasswordInput(setErrorForm, setForm, form.password) }
-        { Buttons(errorMsg, errorForm) }
+        <Buttons errorMsg={ errorMsg } errorForm={ errorForm } />
       </div>
     </form>
   );
