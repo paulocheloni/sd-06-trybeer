@@ -1,6 +1,6 @@
 const { StatusCodes } = require('http-status-codes');
 const { admin } = require('../../services');
-const { salesError } = require('./error');
+const { editError } = require('./error');
 
 module.exports = async (req, res, next) => {
   try {
@@ -8,6 +8,6 @@ module.exports = async (req, res, next) => {
     const status = await admin.updateSaleStatus(saleId, delivered);
     return res.status(StatusCodes.OK).json({ message: 'Success', ...status });
   } catch (err) {
-    return next({ ...salesError, err });
+    return next({ ...editError, err });
   }
 };
