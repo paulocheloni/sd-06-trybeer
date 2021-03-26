@@ -4,9 +4,11 @@ const { profileError } = require('./error');
 
 module.exports = async (req, res, next) => {
   try {
-    const { body, userId } = req;
-    await users.updateName(body, userId);
-    return res.status(StatusCodes.OK).json({ message: 'Name updated successfully.' });
+    const { body: { name }, userId } = req;
+    await users.updateName(name, userId);
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: 'Name updated successfully.' });
   } catch (err) {
     return next({ ...profileError, err });
   }
