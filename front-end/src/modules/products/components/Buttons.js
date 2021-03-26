@@ -2,39 +2,40 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import GlobalContext from '../../../context/Context';
 
-const Buttons = ({ index, prod }) => {
-  const {
-    cartItems,
-    setCartItems,
-  } = useContext(GlobalContext);
+const Buttons = ({ index, product }) => {
+  const { name, price, id, photo } = product;
+
+  const { cartItems, setCartItems } = useContext(GlobalContext);
+
+  const initialValue = -1;
+
+  const position = cartItems.reduce((acc, item, idx) => {
+    if (item.id === id) return idx;
+    return acc;
+  }, initialValue);
+
+  const quantity = (position === initialValue) ? 0 : cartItems[position].quantity;
 
   const handleClick = (type) => {
-    const subtractValue = -1;
-    const increment = type === 'add' ? 1 : subtractValue;
+    const operationsIncrements = {
+      increment: 1,
+      decrement: -1,
+    };
 
-    const position = cartItems.reduce((acc, item, idx) => {
-      if (item.id === prod.id) return idx;
-      return acc;
-    }, subtractValue);
+    const increment = operationsIncrements[type];
 
-    if (position === subtractValue && type === 'add') {
+    if (position === initialValue && type === 'increment') {
       return setCartItems((prev) => (
         [
           ...prev,
-          { id: prod.id, quantity: 1, price: prod.price, name: prod.name },
+          { id, quantity: 1, price, name, photo },
         ]
       ));
     }
 
-    if (position === subtractValue && type === 'sub') {
-      return setCartItems((prev) => (
-        [
-          ...prev,
-        ]
-      ));
-    }
+    if (position === initialValue && type === 'decrement') return true;
 
-    if (cartItems[position].quantity === 1 && type === 'sub') {
+    if (cartItems[position].quantity === 1 && type === 'decrement') {
       return setCartItems((prev) => (
         [
           ...prev.slice(0, position),
@@ -54,45 +55,27 @@ const Buttons = ({ index, prod }) => {
     ));
   };
 
-  const getQuantityById = () => {
-    const subtractValue = -1;
-    let quantity = 0;
-
-    const position = cartItems.reduce((acc, item, idx) => {
-      if (item.id === prod.id) return idx;
-      return acc;
-    }, subtractValue);
-
-    if (position === subtractValue) {
-      return quantity;
-    }
-
-    quantity = cartItems[position].quantity;
-    return quantity;
-  };
-
   return (
     <div className="flex items-center space-x-1">
       <button
         data-testid={ `${index}-product-minus` }
         className="bg-gray-200 mr-2 w-6 h-6 flex items-center justify-center rounded-full"
         type="button"
-        name="-"
-        onClick={ () => handleClick('sub') }
+        name="decrement"
+        onClick={ ({ target }) => handleClick(target.name) }
+        // disabled={ quantity === 0 }
       >
         -
       </button>
-
       <p data-testid={ `${index}-product-qtd` } className="mr-2">
-        { getQuantityById() }
+        { quantity }
       </p>
-
       <button
         data-testid={ `${index}-product-plus` }
         className="bg-gray-200 mr-2 w-6 h-6 flex items-center justify-center rounded-full"
         type="button"
-        name="+"
-        onClick={ () => handleClick('add') }
+        name="increment"
+        onClick={ ({ target }) => handleClick(target.name) }
       >
         +
       </button>
@@ -102,10 +85,10 @@ const Buttons = ({ index, prod }) => {
 
 Buttons.propTypes = {
   index: PropTypes.number.isRequired,
-  prod: PropTypes.shape({
+  product: PropTypes.shape({
     price: PropTypes.number,
-    img: PropTypes.string,
     name: PropTypes.string,
+    photo: PropTypes.string,
     id: PropTypes.number.isRequired,
   }).isRequired,
 };

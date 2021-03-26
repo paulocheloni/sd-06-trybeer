@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 function PasswordInput(setError, setInputValue, inputValue) {
-  const [errorLabel, setErrorLabel] = useState(false);
   const [seePassword, setSeePassword] = useState(true);
   const pattern = /^[0-9]{6,}$/;
-  const delay = 500;
+  // const delay = 500;
 
-  const useDebounce = (value, delayValue) => {
-    const [debouncedValue, setDebouncedValue] = useState(value);
+  // const useDebounce = (value, delayValue) => {
+  //   const [debouncedValue, setDebouncedValue] = useState(value);
 
-    useEffect(() => {
-      const handler = setTimeout(() => setDebouncedValue(value), delayValue);
-      return () => clearTimeout(handler);
-    }, [value, delayValue]);
+  //   useEffect(() => {
+  //     const handler = setTimeout(() => setDebouncedValue(value), delayValue);
+  //     return () => clearTimeout(handler);
+  //   }, [value, delayValue]);
 
-    return debouncedValue;
-  };
+  //   return debouncedValue;
+  // };
 
-  const debounceValue = useDebounce(inputValue, delay);
+  // const debounceValue = useDebounce(inputValue, delay);
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -26,11 +25,11 @@ function PasswordInput(setError, setInputValue, inputValue) {
     setError((prev) => ({ ...prev, [name]: !validation }));
   };
 
-  useEffect(() => {
-    if (errorLabel !== undefined && inputValue !== '') {
-      setErrorLabel(!pattern.test(inputValue));
-    }
-  }, [debounceValue]);
+  // useEffect(() => {
+  //   if (errorLabel !== undefined && inputValue !== '') {
+  //     setErrorLabel(!pattern.test(inputValue));
+  //   }
+  // }, [debounceValue]);
 
   return (
     <div className="flex flex-col space-y-2">
@@ -50,7 +49,6 @@ function PasswordInput(setError, setInputValue, inputValue) {
             focus:border-secondary-dark"
             placeholder="Enter your password..."
             required
-            onKeyUp={ () => setErrorLabel(false) }
           />
           <button
             className="w-4 h-4 rounded-full bg-secondary focus:outline-none"
@@ -61,9 +59,6 @@ function PasswordInput(setError, setInputValue, inputValue) {
           </button>
         </div>
       </label>
-      <p className={ errorLabel ? 'text-xs text-red-500' : 'hidden' }>
-        At least  6 numbers
-      </p>
     </div>
   );
 }
