@@ -1,40 +1,42 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const TWO = 2;
-const ZERO = 0;
 const EIGHT = 8;
-const FOUR = 4;
-const SIX = 6;
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(TWO),
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(EIGHT, ZERO, SIX),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(FOUR),
+  root: {
+    flexGrow: 1,
+    marginTop: 20,
   },
   cardGrid: {
     paddingTop: theme.spacing(EIGHT),
     paddingBottom: theme.spacing(EIGHT),
+    margin: 15,
   },
   card: {
     height: '100%',
+    width: '80%',
     display: 'flex',
     flexDirection: 'column',
-  },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
+    justifyContent: 'center',
+    padding: theme.spacing(TWO),
   },
   cardContent: {
     flexGrow: 1,
   },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(SIX),
+  orderContainer: {
+    display: 'flex',
+    paddingTop: theme.spacing(TWO),
+    paddingBottom: theme.spacing(TWO),
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    padding: theme.spacing(2),
+  },
+  orderDetails: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    paddingBottom: theme.spacing(TWO),
+    direction: 'row',
   },
 }));
 

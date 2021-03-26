@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import { Container } from '@material-ui/core';
 import fetches from '../../services/fetches';
 import useStyles from './styles';
 
@@ -38,44 +40,65 @@ export default function AdminOrderDetail() {
   };
 
   return (
-    <main className={ classes.cardGrid } maxWidth="md">
-      <Grid container spacing={ 4 }>
-        <CardContent>
-          <Typography
-            data-testid="order-number"
-           >
-            {orderDetail.length && `Pedido ${orderDetail[0].sale_id}`}
-          </Typography>
-          <Typography
+    <main className={ classes.root }>
+      <Container className={ classes.cardGrid } maxWidth="md">
+        <Grid container spacing={ 4 }>
+          <Grid container className={ classes.orderContainer }>
+            <Typography
+              data-testid="order-number"
+              variant="h6"
+              component="h2"
+            >
+              {orderDetail.length && `Pedido ${orderDetail[0].sale_id}`}
+            </Typography>
+            <Typography
               data-testid="order-status"
-          >
-            {orderDetail.length && orderDetail[0].status }
-          </Typography>
-      </CardContent>
-      <CardContent>
-        {orderDetail.length && orderDetail.map((order, index) => (
-        <Grid item key={ order.id } xs={ 12 } md={ 4 }>
-          <Typography data-testid={ `${index}-product-qtd` }>
-            {order.quantity}
-          </Typography>
-          <Typography data-testid={ `${index}-product-total-value` }>
-            {`R$ ${(Number(order.quantity) * Number(order.price))
-              .toFixed(2).replace('.', ',')}`}
-          </Typography>
-        </Grid>)) }
-        <Typography data-testid="order-total-value">
-              {`Total: R$ ${handletotalValue()}`}
-        </Typography>
-     </CardContent>
+              variant="h6"
+              component="h2"
+            >
+              { orderDetail.length && orderDetail[0].status }
+            </Typography>
+          </Grid>
+          <Card className={ classes.card }>
+            <CardContent>
+              {orderDetail.length && orderDetail.map((order, index) => (
+                <Grid container key={ order.id } className={ classes.orderDetails }>
+                  <Typography data-testid={ `${index}-product-qtd` }>
+                    {order.quantity}
+                  </Typography>
+                  <Typography data-testid={ `${index}-product-name` }>
+                    {order.name}
+                  </Typography>
+                  <Typography data-testid={ `${index}-product-total-value` }>
+                    {`R$ ${(Number(order.quantity) * Number(order.price))
+                      .toFixed(2).replace('.', ',')}`}
+                  </Typography>
+                </Grid>)) }
+            </CardContent>
+            <Grid container justify="flex-end">
+              <Typography
+                data-testid="order-total-value"
+                variant="h6"
+                component="h2"
+              >
+                {`Total: R$ ${handletotalValue()}`}
+              </Typography>
+            </Grid>
+          </Card>
+        </Grid>
+      </Container>
+      <Grid container justify="center">
+        <Button
+          variant="outlined"
+          color="primary"
+          className={ orderDetail.length && orderDetail[0].status }
+          data-testid="mark-as-delivered-btn"
+          type="button"
+          onClick={ handleChangeStatusButton }
+        >
+          Marcar como entregue
+        </Button>
       </Grid>
-      <Button variant="outlined" color="primary"
-        className={ orderDetail.length && orderDetail[0].status }
-        data-testid="mark-as-delivered-btn"
-        type="button"
-        onClick={ handleChangeStatusButton }
-      >
-        Marcar como entregue
-      </Button>
     </main>
   );
 }

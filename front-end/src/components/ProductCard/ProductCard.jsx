@@ -91,7 +91,7 @@ export default function ProductCard() {
 
   return (
     <main>
-      <Container className={ classes.cardGrid } maxWidth="md">
+      <Container justify="center" className={ classes.cardGrid } maxWidth="md">
         <Grid container spacing={ 4 }>
           { products.length && products.map((product, index) => (
             <Grid item key={ product.id } xs={ 12 } md={ 4 }>
@@ -117,37 +117,39 @@ export default function ProductCard() {
                     { `R$ ${(product.price).replace('.', ',')}` }
                   </Typography>
                 </CardContent>
-                <CardActions>
-                  <IconButton
-                    data-testid={ `${index}-product-plus` }
-                    value="Plus"
-                    id={ index }
-                    size="small"
-                    color="primary"
-                    onClick={ (e) => handleChangeQuantityButton(e, ONE) }
-                  >
-                    <AddCircleIcon />
-                  </IconButton>
-                  <Typography data-testid={ `${index}-product-qtd` }>
-                    { showQuantity(index) }
-                  </Typography>
-                  <IconButton
-                    data-testid={ `${index}-product-minus` }
-                    size="small"
-                    color="primary"
-                    onClick={ (e) => handleChangeQuantityButton(e, MINUSONE) }
-                    value="Minus"
-                    id={ index }
-                  >
-                    <RemoveCircleIcon />
-                  </IconButton>
-                </CardActions>
+                <Grid container justify="center">
+                  <CardActions>
+                    <IconButton
+                      data-testid={ `${index}-product-plus` }
+                      value="Plus"
+                      id={ index }
+                      size="small"
+                      color="primary"
+                      onClick={ (e) => handleChangeQuantityButton(e, ONE) }
+                    >
+                      <AddCircleIcon />
+                    </IconButton>
+                    <Typography data-testid={ `${index}-product-qtd` }>
+                      { showQuantity(index) }
+                    </Typography>
+                    <IconButton
+                      data-testid={ `${index}-product-minus` }
+                      size="small"
+                      color="primary"
+                      onClick={ (e) => handleChangeQuantityButton(e, MINUSONE) }
+                      value="Minus"
+                      id={ index }
+                    >
+                      <RemoveCircleIcon />
+                    </IconButton>
+                  </CardActions>
+                </Grid>
               </Card>
             </Grid>
           )) }
         </Grid>
       </Container>
-      <Container>
+      <Grid container className={ classes.buttonContainer }>
         <Button
           data-testid="checkout-bottom-btn"
           variant="contained"
@@ -160,7 +162,7 @@ export default function ProductCard() {
         <Typography data-testid="checkout-bottom-btn-value">
           { `R$ ${handleTotalPrice()}` }
         </Typography>
-      </Container>
+      </Grid>
     </main>
   );
 }

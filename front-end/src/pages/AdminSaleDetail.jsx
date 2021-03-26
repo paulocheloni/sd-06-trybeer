@@ -1,8 +1,7 @@
-import React  from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import TopMenuAdmin from '../components/TopMenuAdmin/TopMenu';
 import AdminOrderDetail from '../components/AdminOrderDetail/AdminOrderDetail';
-
 
 export default function AdminSaleDetail() {
   const tokenFromLocalStorage = localStorage.getItem('token');

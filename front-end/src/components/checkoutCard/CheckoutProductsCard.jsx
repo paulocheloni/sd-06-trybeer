@@ -29,53 +29,53 @@ export default function CheckoutProductsCard() {
 
   return (
     <div className={ classes.root }>
-      <Grid container>
-        {
-          !cartProducts.length
-            ? <Typography>Não há produtos no carrinho</Typography>
-            : cartProducts.map((product, index) => (
-              <Paper key={ product.id } className={ classes.paper }>
-                <Grid xs={ 12 } sm container>
-                  <Grid item xs container direction="column" spacing={ 2 }>
-                    <Grid item xs>
-                      <Typography
-                        gutterBottom
-                        variant="subtitle1"
-                        data-testid={ `${index}-product-qtd-input` }
+      {
+        !cartProducts.length
+          ? <Typography>Não há produtos no carrinho</Typography>
+          : cartProducts.map((product, index) => (
+            <Paper key={ product.id } className={ classes.paper }>
+              <Grid container>
+                <Grid item xs container direction="column" spacing={ 2 }>
+                  <Grid item xs>
+                    <Typography
+                      gutterBottom
+                      variant="subtitle1"
+                      data-testid={ `${index}-product-qtd-input` }
+                    >
+                      { product.quantityItem }
+                    </Typography>
+                    <Typography
+                      data-testid={ `${index}-product-name` }
+                      variant="h6"
+                    >
+                      { product.name }
+                    </Typography>
+                    <Grid item container direction="row">
+                      <IconButton
+                        data-testid={ `${index}-removal-button` }
+                        type="submit"
+                        onClick={ (event) => removeProductFromCart(event) }
+                        id={ index }
                       >
-                        { product.quantityItem }
-                      </Typography>
-                      <Typography
-                        data-testid={ `${index}-product-name` }
-                        variant="h6"
-                      >
-                        { product.name }
-                      </Typography>
-                      <Grid item container direction="row">
-                        <IconButton
-                          data-testid={ `${index}-removal-button` }
-                          type="submit"
-                          onClick={ (event) => removeProductFromCart(event) }
-                          id={ index }
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Grid>
+                        <DeleteIcon />
+                        {' '}
+                        Deletar
+                      </IconButton>
                     </Grid>
                   </Grid>
-                  <Grid item>
-                    <Typography
-                      variant="subtitle1"
-                      data-testid={ `${index}-product-unit-price` }
-                    >
-                      { `(R$ ${(product.price).replace('.', ',')} un)` }
-                    </Typography>
-                  </Grid>
                 </Grid>
-              </Paper>
-            ))
-        }
-      </Grid>
+                <Grid item>
+                  <Typography
+                    variant="subtitle1"
+                    data-testid={ `${index}-product-unit-price` }
+                  >
+                    { `(R$ ${(product.price).replace('.', ',')} un)` }
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Paper>
+          ))
+      }
     </div>
   );
 }

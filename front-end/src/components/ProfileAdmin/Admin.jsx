@@ -25,9 +25,9 @@ export default function Admin() {
   };
   return (
     <Container className={ classes.container }>
-    <div className={ classes.root }>
-      <Grid direction="column" container spacing={ 3 }>
-        <Grid item xs={ 6 }>
+      {/* <div className={ classes.root }> */}
+      <Grid className={ classes.infoContainer } container spacing={ 3 }>
+        <Grid item>
           <Paper className={ classes.paper }>
             <Typography
               data-testid="profile-name"
@@ -36,7 +36,7 @@ export default function Admin() {
             </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={ 6 }>
+        <Grid item>
           <Paper className={ classes.paper }>
             <Typography
               data-testid="profile-email"
@@ -46,7 +46,7 @@ export default function Admin() {
           </Paper>
         </Grid>
       </Grid>
-    </div>
+      {/* </div> */}
     </Container>
   );
 }

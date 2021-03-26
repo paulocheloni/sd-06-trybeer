@@ -63,11 +63,18 @@ export default function CheckoutDetails() {
 
   return (
     <Container className={ classes.container }>
-      <Typography data-testid="order-total-value">
-        { `R$ ${handleTotalPrice()}` }
+      <Typography
+        data-testid="order-total-value"
+        variant="h5"
+        component="h4"
+      >
+        { `Total: R$ ${handleTotalPrice()}` }
       </Typography>
       <FormControl className={ classes.root } noValidate autoComplete="off">
-        <Typography>
+        <Typography
+          variant="h5"
+          component="h4"
+        >
           Endereço
         </Typography>
         <div>
