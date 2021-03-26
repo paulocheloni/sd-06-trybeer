@@ -21,7 +21,7 @@ const Routes = () => {
   const tokenFromStorage = storage ? storage.token : false;
   const existToken = storage ? tokenFromStorage : userData.token;
 
-  const role = storage ? storage.role : 'client';
+  const role = storage ? storage.role : userData.role;
   const adminOrdersRoute = '/admin/orders';
   const productRoute = '/products';
 
