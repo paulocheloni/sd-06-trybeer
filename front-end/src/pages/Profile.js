@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import { yupSchemas, handleSaveUser } from '../utils';
 
@@ -12,7 +12,7 @@ export default function Profile() {
   const [disableBtn, setDisableBtn] = useState(true);
   const [success, setSuccess] = useState(false);
 
-  const handleNameInput = (target) => setName(target.value);
+  const handleNameInput = useCallback((target) => setName(target.value), []);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -58,7 +58,7 @@ export default function Profile() {
         </fieldset>
         <SubmitButton type="profile" disabled={ disableBtn } />
       </form>
-      { (success) ? <p>Atualização concluída com sucesso.</p> : null }
+      { (success) && <p>Atualização concluída com sucesso.</p> }
     </section>
   );
 }

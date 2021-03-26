@@ -33,9 +33,9 @@ export default function Checkout() {
 
   const updateAddress = (target) => {
     if (target.name === 'house-number') {
-      return setAddress({ ...address, number: target.value });
+      return setAddress((prevAdress) => ({ ...prevAdress, number: target.value }));
     }
-    setAddress({ ...address, [target.name]: target.value });
+    setAddress((prevAddress) => ({ ...prevAddress, [target.name]: target.value }));
   };
 
   const checkout = async () => {

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { PropTypes } from 'prop-types';
 import AppContext from '../context/app.context';
 
-export default function OrderCard({ order, index }) {
+export default function OrderProduct({ order, index }) {
   const {
     tokenContext: { token },
     productsContext: { products } } = useContext(AppContext);
@@ -36,11 +36,11 @@ export default function OrderCard({ order, index }) {
   );
 }
 
-OrderCard.propTypes = {
+OrderProduct.propTypes = {
   order: PropTypes.objectOf(PropTypes.any),
   index: PropTypes.number.isRequired,
 };
 
-OrderCard.defaultProps = {
+OrderProduct.defaultProps = {
   order: {},
 };

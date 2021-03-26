@@ -1,0 +1,61 @@
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
+
+import AppContext from '../context/app.context';
+import { convertDate } from '../utils';
+
+export default function OrderCard({ order, index }) {
+  const { tokenContext: { token } } = useContext(AppContext);
+  const {
+    id,
+    total_price: totalPrice,
+    sale_date: date,
+    status,
+    delivery_address: street,
+    delivery_number: number } = order;
+
+  const history = useHistory();
+
+  const getOrderDetails = () => {
+    if (token.role === 'administrator') return history.push(`/admin/orders/${id}`);
+    history.push(`/orders/${id}`);
+  };
+
+  return (
+    <section
+      className="order-card"
+      role="link"
+      onClick={ getOrderDetails }
+      onKeyDown={ getOrderDetails }
+      tabIndex={ index }
+      key={ `${index}-${id}` }
+      data-testid={ `${index}-order-card-container` }
+    >
+      <section className="name" data-testid={ `${index}-order-number` }>
+        { `Pedido ${id}` }
+      </section>
+      { (token.role === 'administrator') && (
+        <span data-testid={ `${index}-order-address` }>
+          { `${street}, ${number}` }
+        </span>
+      ) }
+      <section className="total" data-testid={ `${index}-order-total-value` }>
+        { `R$ ${totalPrice.replace('.', ',')}` }
+      </section>
+      <section className="date" data-testid={ `${index}-order-date` }>
+        { convertDate(date)[0] }
+        <br />
+        { convertDate(date)[1] }
+      </section>
+      { (token.role === 'administrator') && (
+        <span data-testid={ `${index}-order-status` }>{status}</span>
+      ) }
+    </section>
+  );
+}
+
+OrderCard.propTypes = {
+  order: PropTypes.objectOf(PropTypes.any).isRequired,
+  index: PropTypes.number.isRequired,
+};

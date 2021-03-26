@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
@@ -14,7 +14,8 @@ export default function Login() {
 
   const history = useHistory();
 
-  const updateLogin = (target) => setLogin({ ...login, [target.name]: target.value });
+  const updateLogin = useCallback((target) => setLogin((prevLogin) => (
+    { ...prevLogin, [target.name]: target.value })), []);
 
   const submit = (e) => {
     e.preventDefault();

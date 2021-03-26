@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
@@ -13,13 +13,13 @@ export default function Register() {
   const [login, setLogin] = useState({ name: '', email: '', password: '' });
   const [disableBtn, setDisableBtn] = useState(true);
 
-  const updateLogin = (target) => {
+  const updateLogin = useCallback((target) => {
     if (target.type === 'checkbox') {
-      setLogin({ ...login, isVendor: target.checked });
+      setLogin((prevLogin) => ({ ...prevLogin, isVendor: target.checked }));
     } else {
-      setLogin({ ...login, [target.name]: target.value });
+      setLogin((prevLogin) => ({ ...prevLogin, [target.name]: target.value }));
     }
-  };
+  }, []);
 
   const submit = (e) => {
     e.preventDefault();
