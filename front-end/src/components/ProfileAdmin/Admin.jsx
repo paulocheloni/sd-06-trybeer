@@ -3,6 +3,7 @@ import jwtDecode from 'jwt-decode';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
 import useStyles from './styles';
 
 export default function Admin() {
@@ -23,6 +24,7 @@ export default function Admin() {
     }
   };
   return (
+    <Container className={ classes.container }>
     <div className={ classes.root }>
       <Grid direction="column" container spacing={ 3 }>
         <Grid item xs={ 6 }>
@@ -45,5 +47,6 @@ export default function Admin() {
         </Grid>
       </Grid>
     </div>
+    </Container>
   );
 }
