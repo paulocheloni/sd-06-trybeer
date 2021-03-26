@@ -56,12 +56,13 @@ async function getProducts(setProducts) {
     } }).then((response) => setProducts(response.data));
 }
 
-async function checkout(userId, totalPrice, address, number) {
+async function checkout(params) {
+  const { userId, totalPrice, address, number, items } = params;
   const axios = buildAxiosHandler();
   const token = localStorage.getItem('token');
 
   axios.post('/sales/checkout',
-    { userId, totalPrice, address, number },
+    { userId, totalPrice, address, number, items },
     { headers: { authorization: token } });
 }
 
@@ -74,6 +75,15 @@ async function getOrders(setOrders) {
     } }).then((response) => setOrders(response.data));
 }
 
+async function getproductsBySaleId(setProductsOrder, saleId) {
+  const axios = buildAxiosHandler();
+  const token = localStorage.getItem('token');
+  axios.get(`/sales/products/${saleId}`, {
+    headers: {
+      authorization: token,
+    } }).then((response) => setProductsOrder(response.data.products));
+}
+
 export {
   checkout,
   getProducts,
@@ -82,4 +92,5 @@ export {
   register,
   updateName,
   getOrders,
+  getproductsBySaleId,
 };

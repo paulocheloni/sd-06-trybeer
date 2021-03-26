@@ -4,11 +4,11 @@ import { addProduct, reduceProduct } from '../services/index';
 import '../css/ProductCard.css';
 
 function ProductCard(props) {
-  const { product, setTotal } = props;
+  const { product, setTotal, index } = props;
   const quantityStorage = localStorage.getItem(product.name);
   const [quantity, setQuantity] = useState(0);
   const { id, name, price, url_image: urlImage } = product;
-  const params = { quantity, setQuantity, name, setTotal, price };
+  const params = { quantity, setQuantity, name, setTotal, price, id };
 
   useEffect(() => {
     if (JSON.parse(quantityStorage) !== null) {
@@ -23,26 +23,26 @@ function ProductCard(props) {
         <img
           src={ `${urlImage}` }
           alt="imagem cerveja"
-          data-testid={ `${id - 1}-product-img` }
+          data-testid={ `${index}-product-img` }
         />
       </div>
       <section className="product-info">
-        <p data-testid={ `${id - 1}-product-price` }>
+        <p data-testid={ `${index}-product-price` }>
           R$
           { ` ${price.replace('.', ',')}` }
         </p>
-        <p data-testid={ `${product.id - 1}-product-name` }>{ product.name }</p>
+        <p data-testid={ `${index}-product-name` }>{ product.name }</p>
         <section>
           <button
-            data-testid={ `${product.id - 1}-product-minus` }
+            data-testid={ `${index}-product-minus` }
             type="button"
             onClick={ () => reduceProduct(params) }
           >
             -
           </button>
-          <span data-testid={ `${id - 1}-product-qtd` }>{quantity}</span>
+          <span data-testid={ `${index}-product-qtd` }>{quantity}</span>
           <button
-            data-testid={ `${id - 1}-product-plus` }
+            data-testid={ `${index}-product-plus` }
             type="button"
             onClick={ () => addProduct(params) }
           >
@@ -62,6 +62,7 @@ ProductCard.propTypes = {
     url_image: PropTypes.string.isRequired,
   }).isRequired,
   setTotal: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default ProductCard;

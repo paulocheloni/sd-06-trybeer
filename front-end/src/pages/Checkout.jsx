@@ -24,7 +24,7 @@ function Checkout() {
       />)) }
       <FormsCheckout setAddress={ setAddress } address={ address } />
       <TotalCheckout total={ total } />
-      <CheckoutButton total={ total } address={ address } />
+      <CheckoutButton total={ total } address={ address } items={ items } />
     </div>
   );
 }
