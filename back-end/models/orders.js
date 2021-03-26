@@ -33,28 +33,10 @@ const getOrdersByUser = async (id) => {
   return orders;
 };
 
-const getOrderById = async (orderId) => {
-  const [order] = await connection.execute(`SELECT * FROM Trybeer.${coll} WHERE id = ?`, [orderId]);
-
-  return order[0];
-};
-
-const getProductsByOrderId = async (orderId) => {
-  const [products] = await connection.execute(
-    'SELECT * FROM Trybeer.sales_products WHERE sale_id = ?',
-    [orderId],
-  );
-
-  return products;
-};
-
-const markAsDelivered = async (orderId) => {
-  connection.execute(`UPDATE Trybeer.${coll} SET status = 'Entregue' WHERE id = ?`, [orderId]);
-};
-
 const getOrderDetailsById = async (id) => {
   const [orderDetails] = await connection.execute(
-    `SELECT sales.id, sales.total_price, sales.sale_date, sp.quantity, prod.name, prod.price
+    `SELECT 
+    sales.id, sales.total_price, sales.sale_date, sales.status, sp.quantity, prod.name, prod.price
     FROM Trybeer.sales
     INNER JOIN Trybeer.sales_products as sp
     on sales.id = sp.sale_id
@@ -70,8 +52,5 @@ module.exports = {
   createOrder,
   updateSalesProduct,
   getOrdersByUser,
-  getOrderById,
-  getProductsByOrderId,
-  markAsDelivered,
   getOrderDetailsById,
 };
