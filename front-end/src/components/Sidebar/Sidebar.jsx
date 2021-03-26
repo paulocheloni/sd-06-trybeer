@@ -44,20 +44,23 @@ const adminOptions = [
   },
 ];
 
-export default function Sidebar({ user, isSidebarOpen }) {
+export default function Sidebar({ user, isSidebarOpen, setIsSidebarOpen }) {
   const history = useHistory();
   const options = user === 'client' ? [...clientOptions] : [...adminOptions];
   const clicked = isSidebarOpen ? 'move-menu' : '';
   
   return (
-    <aside className={`aside-menu ${clicked}`}>
+    <aside className={`${clicked}`}>
       <ul>
         {options.map(({ name, redirect, testId }) => (
           <li key={ name }>
             <button
               className="menu-button"
               type="button"
-              onClick={ () => history.push(`${redirect}`) }
+              onClick={ () => {
+                setIsSidebarOpen = false
+                history.push(`${redirect}`)
+              } }
               data-testid={ testId }
             >
               {name}

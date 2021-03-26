@@ -32,8 +32,12 @@ export default function Header({ title, user }) {
       </h1>
       {/* <div class="spacer-admin"></div> */}
       {
-        (isSidebarOpen || user === 'admin') && (
-          <SideBar user={ user } isSidebarOpen={ isSidebarOpen } />
+        (
+          <SideBar 
+            user={ user } 
+            isSidebarOpen={ isSidebarOpen } 
+            setIsSidebarOpen={setIsSidebarOpen} 
+          />
         )
       }
     </div>
