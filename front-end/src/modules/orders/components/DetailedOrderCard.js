@@ -9,6 +9,7 @@ function DetailedOrderCard(props) {
   const [saleStatus, setSaleStatus] = useState(false);
   const { match: { params: { id } } } = props;
 
+  // Get Sales
   useEffect(() => {
     api.get(`/sales/${id}`).then((resp) => setOrder(resp.data));
   }, [saleStatus]);
