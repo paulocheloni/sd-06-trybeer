@@ -19,12 +19,8 @@ function DetailsOrderAdm({ match }) {
     getOrderDetails(id).then((response) => { setOrderDetails(response); });
   }, []);
 
-  useEffect(() => {
-    getOrderDetails(id).then((response) => { setOrderDetails(response); });
-  }, [status]);
-
-  const handleClick = () => {
-    markAsDelivered(id);
+  const handleClick = async () => {
+    await markAsDelivered(id);
     setStatus('Entregue');
   };
 
@@ -69,7 +65,7 @@ function DetailsOrderAdm({ match }) {
         onClick={ handleClick }
         hidden={ status === 'Entregue' }
       >
-        Marcar pedido como entregue
+        Marcar como entregue
       </button>
     </div>
   );
@@ -77,7 +73,9 @@ function DetailsOrderAdm({ match }) {
 
 DetailsOrderAdm.propTypes = {
   match: PropTypes.shape({
-    id: PropTypes.number,
+    params: PropTypes.shape({
+      id: PropTypes.number,
+    }),
   }).isRequired,
 };
 
