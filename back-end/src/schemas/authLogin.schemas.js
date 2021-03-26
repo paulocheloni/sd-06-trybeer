@@ -6,17 +6,17 @@ const error = {
   userNotFound: 'C_ERR_USER_NOT_FOUND',
 };
 
-const authUser = (email, pass, user) => {
+const authUser = (email, user, matchPassword) => {
   switch (true) {
     case isBlank(user): throw new Error(error.userNotFound);
     case isNotEqual(email, user.email): throw new Error(error.invalidCredentials);
-    case isNotEqual(pass, user.password): throw new Error(error.invalidCredentials);
+    case isBlank(matchPassword): throw new Error(error.invalidCredentials);
     default: return null;
-  }
+  };
 };
 
-module.exports = (email, pass, user) => {
+module.exports = ({ email, password, user, matchPassword }) => {
   validateEmailField(email);
-  validatePasswordField(pass);
-  authUser(email, pass, user);
+  validatePasswordField(password);
+  authUser(email, user, matchPassword);
 };
