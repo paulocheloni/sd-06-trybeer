@@ -5,7 +5,6 @@ function EmailInput(setError, setInputValue, inputValue) {
   const pattern = /\S+@\S+\.\S+/;
   const delay = 0;
 
-
   const useDebounce = (value, delayValue) => {
     const [debouncedValue, setDebouncedValue] = useState(value);
 
