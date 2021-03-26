@@ -38,13 +38,13 @@ function CheckoutCard(props) {
       data-testid={ `${index}-order-card-container` }
     >
       <Link to={ `orders/${order.id}` }>
-        <p
+        <a
+          href="orders/:id"
           data-testid={ `${index}-order-number` }
           onClick={ () => handleClick() }
-          role="link"
         >
           { `Pedido ${JSON.stringify(order.id)}` }
-        </p>
+        </a>
       </Link>
       <p data-testid={ `${index}-order-date` }>
         {`Data: ${formattedDate}`}

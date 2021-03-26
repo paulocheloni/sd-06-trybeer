@@ -6,7 +6,6 @@ function ClientDetailsOrder(props) {
   const { product, index } = props;
   return (
     <div className="ClientDetailsOrder-container">
-      <p data-testid={ `${index}order-number` }>{ `Pedido ${product.productId}` }</p>
       <p data-testid={ `${index}-product-qtd` }>
         { `Quantidade: ${product.quantity}` }
       </p>
