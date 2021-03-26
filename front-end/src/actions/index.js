@@ -11,6 +11,7 @@ export const ID = 'ID';
 export const QUANTITY = 'QUANTITY';
 export const REMOVE = 'REMOVE';
 export const PRICE = 'PRICE';
+export const ORDERS = 'ORDERS';
 
 export const validEmail = (boolean) => ({
   type: EMAIL,
@@ -76,4 +77,9 @@ export const removeCartItem = (array) => ({
 export const updatePrice = (number) => ({
   type: PRICE,
   number,
+});
+
+export const allOrders = (array) => ({
+  type: ORDERS,
+  array,
 });
