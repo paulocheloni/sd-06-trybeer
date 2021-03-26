@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import './ComponentsCSS/AddressForm.css'
 
 const AddressForm = (props) => {
   const {
@@ -16,7 +17,8 @@ const AddressForm = (props) => {
   }, [street, number, setIsFormFilled]);
 
   return (
-    <form>
+    <form class="addresForm">
+      <h3>Endereço:</h3>
       <label htmlFor="street">
         Rua:
         <input
@@ -24,7 +26,7 @@ const AddressForm = (props) => {
           type="text"
           name="street"
           value={ street }
-          onChange={ (e) => setStreet(e.target.value) }
+          onChange={ (e) => setStreet(e.target.value) }  
         />
       </label>
       <label htmlFor="street">
@@ -35,6 +37,7 @@ const AddressForm = (props) => {
           name="street"
           value={ number }
           onChange={ (e) => setNumber(e.target.value) }
+          class="inputAdress"
         />
       </label>
     </form>

@@ -1,0 +1,49 @@
+
+.btn {
+  margin-right: 30px;
+  margin-left: 30px;
+  background-color:rgb(165, 88, 0);
+  width: 40px;
+  color: white;
+}
+.cardFooter{
+  background-color:rgb(255, 136, 0) ;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-card{
+  background-color: white;
+  float: left;
+  width: 50%;
+  padding: 5%;
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  
+}
+
+.card-img-top {
+  max-width:200px;
+  max-height:150px;
+  width: auto;
+  height: auto;
+}
+.product-card-image {
+  max-width:400px;
+  max-height:280px;
+  width: auto;
+  height: auto;
+}
+.totalValue{
+  margin: 10px;
+  margin-left: 10px;
+  text-align: justify;
+  color: white;
+  
+}
+.card-body {
+  font-size: larger;
+  font-weight: bold;
+}

@@ -6,7 +6,7 @@ import { TopMenu } from '../components';
 import { verifyToken } from '../utils/verifications';
 import formatedPrice from '../utils/formatedPrice';
 import formatedDate from '../utils/formatedDate';
-import './Orders.css';
+import './PagesCSS/Orders.css'
 
 function Orders({ history }) {
   const [orders, setOrders] = useState([]);
@@ -26,7 +26,7 @@ function Orders({ history }) {
       <TopMenu
         titleMenu="Meus Pedidos"
       />
-      <div className="content-panel">
+      <div className="content-panel" class="panel-orders">
         <div className="container">
           {
             orders.map(({ id, date_time: saleDate, total_price: totalPrice }, index) => (

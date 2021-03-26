@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { TopMenu } from '../components';
 import fetchFunctions from '../api/fetchFunctions';
 import TrybeerContext from '../context/TrybeerContext';
+import './PagesCSS/Profile.css'
+
 
 function Profile(props) {
   const { user, eraseLocalStorage } = useContext(TrybeerContext);
@@ -45,7 +47,7 @@ function Profile(props) {
         titleMenu="Meu perfil"
       />
       <form method="put">
-        <div className="content-panel">
+        <div className="content-panel" class="panel-profile">
           <label htmlFor="name">
             Name
             <input
@@ -55,6 +57,7 @@ function Profile(props) {
               placeholder="Nome"
               id="name"
               onChange={ onChangeName }
+              class="inputProfile"
             />
           </label>
           <label htmlFor="email">
@@ -67,6 +70,7 @@ function Profile(props) {
               name="email"
               placeholder="Email"
               id="email"
+              class="inputProfile"
             />
           </label>
           <button
@@ -74,6 +78,7 @@ function Profile(props) {
             type="submit"
             disabled={ disabled }
             onClick={ handleSubmit }
+            class="saveButton"
           >
             Salvar
           </button>

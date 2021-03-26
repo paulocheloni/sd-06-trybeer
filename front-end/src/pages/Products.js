@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { TopMenu, ProductCard, Cart } from '../components';
 import TrybeerContext from '../context/TrybeerContext';
 import { verifyToken } from '../utils/verifications';
+import './PagesCSS/Products.css'
+
 
 function Products({ history }) {
   const [products, setProducts] = useState([]);

@@ -6,6 +6,7 @@ import { IconContext } from 'react-icons';
 import TrybeerContext from '../context/TrybeerContext';
 import SidebarMenu from './SideBarMenu';
 import SidebarMenuAdmin from './SideBarMenuAdmin';
+import './ComponentsCSS/TopMenu.css'
 
 const TopMenu = ({ titleMenu }) => {
   const { user, isVisible, setVisibility } = useContext(TrybeerContext);
@@ -26,11 +27,12 @@ const TopMenu = ({ titleMenu }) => {
           onClick={ setVisibility }
           data-testid="top-hamburguer"
         >
-          <IconContext.Provider value={ { size: '3em' } }>
+          <IconContext.Provider value={ { size: '2em' } }>
             <GiHamburgerMenu />
           </IconContext.Provider>
         </button>
-        <p data-testid="top-title">{ titleMenu }</p>
+        <p class="Trybeer"
+        data-testid="top-title">{ titleMenu }</p>
         <IconContext.Provider value={ { size: '3em' } }>
           <IoBeerOutline />
         </IconContext.Provider>

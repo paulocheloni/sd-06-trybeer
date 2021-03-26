@@ -4,6 +4,7 @@ import fetchFunctions from '../api/fetchFunctions';
 import TrybeerContext from '../context/TrybeerContext';
 import formatedPrice from '../utils/formatedPrice';
 import { ProductListItem, TopMenu, AddressForm } from '../components';
+import './PagesCSS/Checkout.css'
 
 function Checkout() {
   const [street, setStreet] = useState('');
@@ -45,7 +46,7 @@ function Checkout() {
       <TopMenu titleMenu={ TITLE_MENU_CHECKOUT } />
       <br />
       <br />
-      <h2>Produtos</h2>
+      <h2 class="titleProducts">Produtos</h2>
       {cartHasProducts ? cart.map(({ id, name, quantity, price }, index) => (
         <ProductListItem
           key={ index }
@@ -54,9 +55,10 @@ function Checkout() {
           id={ id }
           quantity={ quantity }
           price={ price }
+        
         />
-      )) : <h3>Não há produtos no carrinho</h3>}
-      <p data-testid="order-total-value">
+      )) : <h3 class="noProducts">Não há produtos no carrinho</h3>}
+      <p data-testid="order-total-value" class="finalValue">
         Total:
         {formatedPrice(getTotalPriceCart())}
       </p>
@@ -73,6 +75,7 @@ function Checkout() {
         data-testid="checkout-finish-btn"
         disabled={ !(isFormFilled && cartHasProducts) }
         onClick={ handleCheckOut }
+        class="finalBuy"
       >
         Finalizar pedido
       </button>

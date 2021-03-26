@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TrybeerContext from '../context/TrybeerContext';
 import formatedPrice from '../utils/formatedPrice';
+import './ComponentsCSS/ProductCard.css'
 
 const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
   const [quantity, setQuantity] = useState(0);
@@ -31,31 +32,38 @@ const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
 
   return (
     <div className="product-card">
-      <img
-        data-testid={ `${index}-product-img` }
-        className="product-card-image"
-        alt={ name }
-        src={ urlImage }
-      />
-      <p data-testid={ `${index}-product-name` }>{name}</p>
-      <p data-testid={ `${index}-product-price` }>{formatedPrice(price)}</p>
-      {/* <p data-testid={ `${index}-product-price` }>{`R$ ${formatedPrice}`}</p> */}
-      <div className="quantity-controller">
-        <button
-          onClick={ decreaseQuantity }
-          data-testid={ `${index}-product-minus` }
-          type="button"
-        >
-          -
-        </button>
-        <p data-testid={ `${index}-product-qtd` }>{quantity}</p>
-        <button
-          onClick={ increaseQuantity }
-          data-testid={ `${index}-product-plus` }
-          type="button"
-        >
-          +
-        </button>
+      <div class="card-deck">
+        <img
+          class="card-img-top"
+          data-testid={ `${index}-product-img` }
+          className="product-card-image"
+          alt={ name }
+          src={ urlImage }
+        />
+        <div class="card-body">
+        <p data-testid={ `${index}-product-name` }>{name}</p>
+        <p data-testid={ `${index}-product-price` }>{formatedPrice(price)}</p>
+        {/* <p data-testid={ `${index}-product-price` }>{`R$ ${formatedPrice}`}</p> */}
+        </div>
+        <div className="quantity-controller" class="cardFooter">
+          <button
+            onClick={ decreaseQuantity }
+            data-testid={ `${index}-product-minus` }
+            type="button"
+            class="btn"
+          >
+            -
+          </button>
+          <p data-testid={ `${index}-product-qtd` } class="totalValue">Unidades: {quantity}</p>
+          <button
+            onClick={ increaseQuantity }
+            data-testid={ `${index}-product-plus` }
+            type="button"
+            class="btn"
+          >
+            +
+          </button>
+        </div>
       </div>
     </div>
   );
