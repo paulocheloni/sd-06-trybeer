@@ -44,14 +44,9 @@ function Form() {
 
     setTimeout(() => {
       setCartItems([]);
-      history.push('/products');
+      if (history.location.pathname === '/checkout') history.push('/products');
     }, delay);
   };
-
-  useEffect(() => {
-    const clear = () => clearTimeout(handleSubmit);
-    return clear;
-  }, []);
 
   return (
     <form
