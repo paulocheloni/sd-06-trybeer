@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 function PasswordInput(setError, setInputValue, inputValue) {
-  const [errorLabel, setErrorLabel] = useState(false);
   const [seePassword, setSeePassword] = useState(true);
   const pattern = /^[0-9]{6,}$/;
   // const delay = 500;
@@ -50,7 +49,6 @@ function PasswordInput(setError, setInputValue, inputValue) {
             focus:border-secondary-dark"
             placeholder="Enter your password..."
             required
-            onKeyUp={ () => setErrorLabel(false) }
           />
           <button
             className="w-4 h-4 rounded-full bg-secondary focus:outline-none"

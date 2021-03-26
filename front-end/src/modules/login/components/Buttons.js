@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Buttons({ errorMsg, errorForm }) {
+function Buttons(errorMsg, errorForm) {
   return (
     <div className="w-full mt-10 flex flex-col space-y-2">
       <p

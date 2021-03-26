@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-function EmailInput(setError, setInputValue, inputValue) {
-  const [errorLabel, setErrorLabel] = useState();
+function EmailInput(setError, setInputValue) {
   const pattern = /\S+@\S+\.\S+/;
-  const delay = 0;
 
   // const useDebounce = (value, delayValue) => {
   //   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -19,7 +17,6 @@ function EmailInput(setError, setInputValue, inputValue) {
   // const debounceValue = useDebounce(inputValue, delay);
 
   const handleChange = ({ target }) => {
-    console.log(target.name)
     const { name, value } = target;
     const validation = pattern.test(value);
     setInputValue((prev) => ({ ...prev, [name]: value }));
@@ -47,7 +44,6 @@ function EmailInput(setError, setInputValue, inputValue) {
           focus:border-secondary-dark"
           placeholder="Enter your email..."
           required
-          onKeyUp={ () => setErrorLabel(false) }
         />
       </label>
     </div>
