@@ -6,6 +6,7 @@ function Provider({ children }) {
   const [products, setProducts] = useState([]);
   const [token, setToken] = useState();
   const [cartItems, setCartItems] = useState([]);
+  const [userData, setUserData] = useState('');
 
   const value = {
     products,
@@ -14,6 +15,8 @@ function Provider({ children }) {
     setCartItems,
     token,
     setToken,
+    setUserData,
+    userData,
   };
 
   function saveCart() {
@@ -26,13 +29,28 @@ function Provider({ children }) {
     if (cart) setCartItems(cart);
   }
 
+  function saveUser() {
+    const userToSave = JSON.stringify(userData);
+    localStorage.setItem('user', userToSave);
+  }
+
+  function recoveryUser() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) setUserData(user);
+  }
+
   useEffect(() => {
     recoveryCart();
+    recoveryUser();
   }, []);
 
   useEffect(() => {
     saveCart();
   }, [cartItems]);
+
+  useEffect(() => {
+    saveUser();
+  }, [userData]);
 
   return (
     <GlobalContext.Provider value={ value }>

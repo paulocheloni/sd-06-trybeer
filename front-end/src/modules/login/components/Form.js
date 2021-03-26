@@ -9,13 +9,14 @@ function Form() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [errorForm, setErrorForm] = useState({ email: true, password: true });
   const [errorMsg, setErrorMsg] = useState('');
-  const { setToken } = useContext(GlobalContext);
+  const { setToken, setUserData } = useContext(GlobalContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await API.post('/users/login', form);
     if (response.message) return setErrorMsg(response.message);
-    localStorage.setItem('user', JSON.stringify({ ...response, email: form.email }));
+    setUserData({ ...response, email: form.email });
+    // localStorage.setItem('user', JSON.stringify({ ...response, email: form.email }));
     const delay = 1000;
     setTimeout(() => setToken(true), delay);
   };

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import GlobalContext from '../../../context/Context';
 
 function OrderCard({ order, index }) {
   const {
@@ -12,6 +13,8 @@ function OrderCard({ order, index }) {
     status,
   } = order;
 
+  const { userData } = useContext(GlobalContext);
+
   const totalValue = `R$ ${total.replace('.', ',')}`;
   const date = new Date(createdAt);
   const magicNumber = 9;
@@ -21,7 +24,8 @@ function OrderCard({ order, index }) {
   month = month > magicNumber ? month : `0${month}`;
   const dayAndMonth = `${day}/${month}`;
 
-  const user = JSON.parse(localStorage.getItem('user'));
+  // const user = JSON.parse(localStorage.getItem('user'));
+  const user = userData;
   const role = user ? user.role : 'client';
   const pre = role === 'client' ? '' : '/admin';
 
