@@ -12,7 +12,7 @@ const RemoveConfirmation = ({ item, open, setOpen, handleRemove }) => {
   return (
     <div
       className={ `${open ? '' : 'hidden'} w-full h-full absolute left-0 top-0
-      rounded-md bg-gray-200 bg-opacity-70 z-10 flex items-center justify-center` }
+        rounded-md bg-red-200 bg-opacity-70 z-10 flex items-center justify-center` }
     >
       <div
         className="bg-white min-w-min max-w-1/2 absolute rounded-md

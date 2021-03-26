@@ -38,7 +38,6 @@ function Form() {
     };
 
     const response = await API.post('/sales', reqBody);
-    console.log(response);
     if (response.message !== 'Sale created.') return setErrorMsg(response.message);
     setSuccess(true);
     const delay = 500;

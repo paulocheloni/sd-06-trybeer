@@ -11,16 +11,17 @@ function Form() {
   const [form, setForm] = useState({ email: '', password: '', name: '', role: 'client' });
   const [errorForm, setErrorForm] = useState({ email: true, password: true, name: true });
   const [errorMsg, setErrorMsg] = useState('');
-  const { setToken, setUserData } = useContext(GlobalContext);
+  const { setUserData } = useContext(GlobalContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await API.post('/users', form);
     if (response.message) return setErrorMsg('E-mail already in database.');
-    setUserData({ ...response, email: form.email });
+    // setUserData({ ...response, email: form.email });
     // localStorage.setItem('user', JSON.stringify(response));
     const delay = 500;
-    setTimeout(() => setToken(true), delay);
+    // setTimeout(() => setToken(true), delay);
+    setTimeout(() => setUserData({ ...response, email: form.email }), delay);
   };
 
   useEffect(() => {

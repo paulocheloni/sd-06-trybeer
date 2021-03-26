@@ -3,18 +3,12 @@ import PropTypes from 'prop-types';
 import GlobalContext from './Context';
 
 function Provider({ children }) {
-  const [products, setProducts] = useState([]);
-  const [token, setToken] = useState();
   const [cartItems, setCartItems] = useState([]);
-  const [userData, setUserData] = useState('');
+  const [userData, setUserData] = useState({});
 
   const value = {
-    products,
-    setProducts,
     cartItems,
     setCartItems,
-    token,
-    setToken,
     setUserData,
     userData,
   };
@@ -49,7 +43,7 @@ function Provider({ children }) {
   }, [cartItems]);
 
   useEffect(() => {
-    saveUser();
+    if (userData.token) saveUser();
   }, [userData]);
 
   return (

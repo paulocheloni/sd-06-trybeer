@@ -14,12 +14,14 @@ import Checkout from './modules/checkout/pages/Checkout';
 import DetailedOrder from './modules/orders/pages/DetailedOrder';
 
 const Routes = () => {
-  const { token } = useContext(GlobalContext);
+  const { userData } = useContext(GlobalContext);
 
   const storage = JSON.parse(localStorage.getItem('user'));
-  const role = storage ? storage.role : 'client';
+
   const tokenFromStorage = storage ? storage.token : false;
-  const existToken = storage ? tokenFromStorage : token;
+  const existToken = storage ? tokenFromStorage : userData.token;
+
+  const role = storage ? storage.role : 'client';
   const adminOrdersRoute = '/admin/orders';
   const productRoute = '/products';
 
@@ -37,20 +39,20 @@ const Routes = () => {
         </BodyContainer>
       </Route>
       {/* ROTAS PRIVADAS - USUÁRIO ADMIN */}
-      <Route path={ [adminOrdersRoute, '/admin/profile'] }>
+      <Route path={ ['/admin/orders', '/admin/profile'] }>
         { !existToken && <Redirect to="/" /> }
         { role === 'client' && <Redirect to="/" /> }
         <Menu />
         <BodyContainer>
           <Route path="/admin/profile" component={ ProfileAdmin } />
           <Route exact path="/admin/orders/:id" component={ DetailedOrder } />
-          <Route exact path={ adminOrdersRoute } component={ OrdersAdmin } />
+          <Route exact path="/admin/orders" component={ OrdersAdmin } />
         </BodyContainer>
       </Route>
       {/* ROTAS PRIVADAS - USUÁRIO CLIENT */}
       <Route path={ ['/profile', '/products', '/orders', '/checkout'] }>
         { !existToken && <Redirect to="/" /> }
-        { !role === 'client' && <Redirect to="/" /> }
+        { role !== 'client' && <Redirect to="/" /> }
         <Menu />
         <BodyContainer>
           <Route path="/profile" component={ ProfileClient } />
@@ -58,16 +60,6 @@ const Routes = () => {
           <Route exact path="/checkout" component={ Checkout } />
           <Route exact path="/orders/:id" component={ DetailedOrder } />
           <Route exact path="/orders" component={ OrdersClient } />
-        </BodyContainer>
-      </Route>
-      {/* ROTAS PRIVADAS - USUÁRIO ADMIN */}
-      <Route path={ ['/admin/orders', '/admin/profile'] }>
-        { !existToken && <Redirect to="/" /> }
-        <Menu />
-        <BodyContainer>
-          <Route path="/admin/profile" component={ ProfileAdmin } />
-          <Route path="/admin/orders/:id" component={ DetailedOrder } />
-          <Route exact path="/admin/orders" component={ OrdersAdmin } />
         </BodyContainer>
       </Route>
       {/* ROTA RAIZ - RESPONSÁVEL POR FAZER DIRECIONAMENTO */}
