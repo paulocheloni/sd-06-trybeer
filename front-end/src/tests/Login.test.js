@@ -1,24 +1,19 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render, fireEvent, waitForElement } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import renderWithRouter from './RenderWithRouter';
 import App from '../App';
 
+
+
+// 3 steps for mock with React and Jest using axios
+// 1º Import dependencies
+// import axios from 'axios';
+// 2º Mock the dependency
+// jest.mock('axios);
+// 3º Fake the function outputs
+// axios.get.mockResolvedValue({data: fakeOutput})
+
 describe('1 - Teste tela de Login.', () => {
-  // const fakeAxios = {
-  //   get: jest.fn(() => Promise.resolve({ data: "Token" }))
-  // };
-
-  // beforeEach(() => {
-  //   Object.defineProperty(window, "localStorage", {
-  //     value: {
-  //       getItem: jest.fn(() => null),
-  //       setItem: jest.fn(() => null)
-  //     },
-  //     writable: true
-  //   });
-  // });
-
   it('Será testado que a página de Login é renderizada.', () => {
     // Acessar elemnetos da tela
     const { getByText, history } = renderWithRouter(<App />);
@@ -122,18 +117,19 @@ describe('1 - Teste tela de Login.', () => {
   });
 
   it('Será testado que é gerado um Token ao clicar no button Entrar', async () => {
-    const { getByTestId } = renderWithRouter (<App />);
+    const { getByTestId, history } = renderWithRouter (<App />);
+
     const emailInput = getByTestId('email-input');
     const passwordInput = getByTestId('password-input');
     const buttonEntrar = getByTestId('signin-btn');
 
-    fireEvent.change(emailInput, { target: { value: 'teste@teste.com' } });
-    fireEvent.change(passwordInput, { target: { value: '123456' } });
+    fireEvent.change(emailInput, { target: { value: 'user@test.com' } });
+    fireEvent.change(passwordInput, { target: { value: 'test123' } });
     fireEvent.click(buttonEntrar);
 
-    // expect(window.localStorage.setItem).toHaveBeenCalledTimes(1);
-    // const token = storageMock().getItem('token');
-    // console.log(token);
-    // expect(token).toBe('my Token');
+    const { pathname } = history.location;
+
+    expect(pathname).toBe('/products');
+    // expect(fakeAxios.post).toHaveBeenCalledTimes(1);
   });
 });

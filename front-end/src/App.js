@@ -9,5 +9,4 @@ function App() {
     </ProductsProvider>
   );
 }
-
 export default App;
