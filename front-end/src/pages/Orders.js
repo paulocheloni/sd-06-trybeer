@@ -12,7 +12,8 @@ class Orders extends React.Component {
   }
 
   async componentDidMount() {
-    this.separateDate(await getAllOrders());
+    const orders = await getAllOrders();
+    this.separateDate(orders);
     const { history } = this.props;
     if (!localStorage.token) {
       history.push('/login');
@@ -22,15 +23,14 @@ class Orders extends React.Component {
   separateDate(array) {
     const { dispatchOrders } = this.props;
     for (let index = 0; index < array.length; index += 1) {
-      const newDate = array[index].sale_date.split('T')[0].replaceAll('-', '/');
-      array[index].sale_date = newDate;
+      const newDate = array[index].sale_date.split('T')[0].split('-');
+      array[index].sale_date = `${newDate[2]}/${newDate[1]}`;
     }
     dispatchOrders(array);
   }
 
   render() {
     const { history, stateOrders } = this.props;
-
     return (
       <div>
         <Header history={ history } />
@@ -50,7 +50,7 @@ class Orders extends React.Component {
                   {`Pedido ${index + 1}`}
                 </button>
                 <h5 data-testid={ `${index}-order-date` }>
-                  {`${e.sale_date.split('/')[2]}/${e.sale_date.split('/')[1]}`}
+                  {`${e.sale_date}`}
                 </h5>
               </div>
               <p data-testid={ `${index}-order-total-value` }>
