@@ -1,21 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router';
-import Menu from '../../Components/Menu';
-import CardOrders from '../../Components/cardOrdersAdmin';
+import MenuAdmin from '../../Components/MenuAdmin';
+import CardOrdersAdmin from '../../Components/CardOrdersAdmin';
+import AppContext from '../../context/AppContext';
 
 const AdminOrders = () => {
   const history = useHistory();
+  const { setEmail, setPassword } = useContext(AppContext);
 
   useEffect(() => {
+    setEmail('');
+    setPassword('');
     if (!window.localStorage.token) {
       history.push('/login');
     }
-  });
+  },[]);
 
   return (
     <div>
-      <Menu><p data-testid="top-title">Admin Pedido</p></Menu>
-      <CardOrders />
+      <MenuAdmin><p data-testid="top-title">Admin Pedido</p></MenuAdmin>
+      <h1>Pedidos</h1>
+      <CardOrdersAdmin />
     </div>
   );
 };
