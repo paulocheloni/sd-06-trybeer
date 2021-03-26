@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import '../Header/Header.css';
 
 const clientOptions = [
   {
@@ -43,15 +44,18 @@ const adminOptions = [
   },
 ];
 
-export default function Sidebar({ user }) {
+export default function Sidebar({ user, isSidebarOpen }) {
   const history = useHistory();
   const options = user === 'client' ? [...clientOptions] : [...adminOptions];
+  const clicked = isSidebarOpen ? 'move-menu' : '';
+  
   return (
-    <aside className="side-menu-container">
+    <aside className={`aside-menu ${clicked}`}>
       <ul>
         {options.map(({ name, redirect, testId }) => (
           <li key={ name }>
             <button
+              className="menu-button"
               type="button"
               onClick={ () => history.push(`${redirect}`) }
               data-testid={ testId }
