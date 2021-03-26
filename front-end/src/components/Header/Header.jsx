@@ -11,18 +11,18 @@ export default function Header({ title, user }) {
 
   // const isAdmin = user === 'admin' ? 'side-menu-admin' : 'side-menu-user';
   return (
-    <div className={user === 'admin' ? 'isAdmin' : 'isUser'}>
+    <div className={ user === 'admin' ? 'isAdmin' : 'isUser' }>
       {
         user === 'client' && (
           <button
             type="button"
-            className={`hamburger hamburger--stand ${isSidebarOpen ? 'is-active' : ''}`}
+            className={ `hamburger hamburger--stand ${isSidebarOpen ? 'is-active' : ''}` }
             data-testid="top-hamburguer"
             onClick={ () => setIsSidebarOpen(!isSidebarOpen) }
           >
             {/* <FontAwesomeIcon icon={ faBars } size="lg" />  */}
-            <span class="hamburger-box">
-              <span class="hamburger-inner"></span>
+            <span className="hamburger-box">
+              <span className="hamburger-inner" />
             </span>
           </button>
         )
@@ -31,15 +31,11 @@ export default function Header({ title, user }) {
         { title }
       </h1>
       {/* <div class="spacer-admin"></div> */}
-      {
-        (
-          <SideBar 
-            user={ user } 
-            isSidebarOpen={ isSidebarOpen } 
-            setIsSidebarOpen={setIsSidebarOpen} 
-          />
-        )
-      }
+      <SideBar
+        user={ user }
+        isSidebarOpen={ isSidebarOpen }
+        setIsSidebarOpen={ setIsSidebarOpen }
+      />
     </div>
   );
 }

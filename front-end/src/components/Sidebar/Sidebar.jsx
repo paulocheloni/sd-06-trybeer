@@ -48,9 +48,9 @@ export default function Sidebar({ user, isSidebarOpen, setIsSidebarOpen }) {
   const history = useHistory();
   const options = user === 'client' ? [...clientOptions] : [...adminOptions];
   const clicked = isSidebarOpen ? 'move-menu' : '';
-  
+
   return (
-    <aside className={`${clicked}`}>
+    <aside className={ `${clicked}` }>
       <ul>
         {options.map(({ name, redirect, testId }) => (
           <li key={ name }>
@@ -58,8 +58,8 @@ export default function Sidebar({ user, isSidebarOpen, setIsSidebarOpen }) {
               className="menu-button"
               type="button"
               onClick={ () => {
-                setIsSidebarOpen = false
-                history.push(`${redirect}`)
+                setIsSidebarOpen(false);
+                history.push(`${redirect}`);
               } }
               data-testid={ testId }
             >
@@ -74,5 +74,6 @@ export default function Sidebar({ user, isSidebarOpen, setIsSidebarOpen }) {
 
 Sidebar.propTypes = {
   user: PropTypes.string.isRequired,
-
+  isSidebarOpen: PropTypes.func.isRequired,
+  setIsSidebarOpen: PropTypes.func.isRequired,
 };
