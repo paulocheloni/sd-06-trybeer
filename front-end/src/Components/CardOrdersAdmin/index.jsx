@@ -24,7 +24,6 @@ const CardOrders = () => {
             <S.Pedido
               data-testid={ `${idx}-order-number` }
             >
-              Pedido
               {`Pedido ${el.id}` }
             </S.Pedido>
             <S.Endereco
@@ -35,7 +34,7 @@ const CardOrders = () => {
             <S.ValorTotal
               data-testid={ `${idx}-order-total-value` }
             >
-              { `R$ ${el.total_price}` }
+              { `R$ ${el.total_price.toString().replace('.', ',')}` }
             </S.ValorTotal>
             <S.Status
               data-testid={ `${idx}-order-status` }
