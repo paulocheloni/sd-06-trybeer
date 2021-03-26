@@ -38,8 +38,16 @@ const validatePasswordField = (pass) => {
   }
 };
 
+const validateSaleTotal = async (sale, products, salePrice) => {
+  const totalPrice = Number(sale.reduce((acc, { productId, quantity }) =>
+    acc + Number(products.find((el) => el.id === productId).price) * quantity, 0).toFixed(2));
+
+  if (Number(salePrice) !== totalPrice) throw new Error('C_ERR_PRICE');
+};
+
 module.exports = {
   validateUserName,
   validateEmailField,
   validatePasswordField,
+  validateSaleTotal,
 };

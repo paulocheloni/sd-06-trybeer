@@ -31,13 +31,22 @@ const validateDelivery = ({ address, number }) => {
   }
 };
 
-module.exports = ({ sale = [], delivery = {} }, userId) => {
+const validateSaleTotal = async (sale, products, salePrice) => {
+  const totalPrice = Number(sale.reduce((acc, { productId, quantity }) =>
+    acc + Number(products.find((el) => el.id === productId).price) * quantity, 0).toFixed(2));
+
+  if (Number(salePrice) !== totalPrice) throw new Error('C_ERR_PRICE');
+};
+
+module.exports = ({ sale = [], delivery = {}, products = [] }, userId) => {
   switch (true) {
     case isNotEqual(typeof sale, 'object'): throw new Error(error.invalidProdInput);
     case isNotEqual(typeof delivery, 'object'): throw new Error(error.invalidProdInput);
+    case isNotEqual(typeof products, 'object'): throw new Error(error.noUserId);
     case isNotEqual(typeof userId, 'number'): throw new Error(error.noUserId);
     default: break;
   }
   validateSale(sale);
   validateDelivery(delivery);
+  validateSaleTotal(sale, products, sale.salePrice);
 };
