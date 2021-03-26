@@ -1,16 +1,16 @@
-const { Router } = require('express');
+// const { Router } = require('express');
 
-const { OrderController } = require('../controller');
-const { authorization } = require('../middleware');
+// const { OrderController } = require('../controller');
+// const { authorization } = require('../middleware');
 
-const AdminRoute = Router();
+// const AdminRoute = Router();
 
-// AdminRoute.get('/:id',
+// // AdminRoute.get('/:id',
+// //   authorization,
+// //   OrderController.getOrdersById);
+
+// AdminRoute.get('/orders',
 //   authorization,
-//   OrderController.getOrdersById);
+//   OrderController.getAllOrders);
 
-AdminRoute.get('/orders',
-  authorization,
-  OrderController.getAllOrders);
-
-module.exports = AdminRoute;
+// module.exports = AdminRoute;

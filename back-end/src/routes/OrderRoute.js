@@ -9,6 +9,9 @@ OrderRoute.get('/:id',
   authorization,
   OrderController.getOrdersByDetails);
 
+OrderRoute.put('/:id',
+  OrderController.updateStatusOrder);
+
 OrderRoute.get('/',
   authorization,
   OrderController.getAllOrders);

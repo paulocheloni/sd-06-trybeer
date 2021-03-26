@@ -25,7 +25,18 @@ const getOrdersByDetails = async (id) => {
   return orders;
 };
 
+const updateStatusOrder = async (status, id) => {
+  await connection.execute(
+  'UPDATE Trybeer.sales SET status=? WHERE id=?', [status, id],
+  );
+  
+  return {
+    message: 'Atualizado com sucesso!',
+  };
+};
+
 module.exports = {
   getAllOrders,
   getOrdersByDetails,
+  updateStatusOrder,
 };

@@ -55,6 +55,13 @@ const getOrdersByDetails = async (token, id) => axios
   .then((res) => res.data)
   .catch((err) => err.response.data);
 
+const updateStatusOrder = async (status, id) => axios
+  .put(`${baseUrl}/orders/${id}`, {
+    status,
+  })
+  .then((res) => res.data)
+  .catch((err) => err.response.data);
+
 const regSalesProducts = async (params) => axios
   .post(`${baseUrl}/sales/products`, {
     idSale: params.idSale,
@@ -82,6 +89,7 @@ module.exports = {
   updateNameOfUser,
   getAllProducts,
   getAllOrders,
+  updateStatusOrder,
   regSalesProducts,
   registerSales,
   getOrdersByDetails,

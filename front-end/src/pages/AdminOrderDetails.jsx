@@ -32,8 +32,14 @@ function AdminOrderDetails({ match, history }) {
       setChange(false);
     }
     setChange(true);
-    /* const changeBackStatus = await api.changeStatus(estado); */
   };
+
+  useEffect(() => {
+    const teste = async () => {
+      await api.updateStatusOrder(estado, id);
+    };
+    teste();
+  });
 
   return (
     <div>
