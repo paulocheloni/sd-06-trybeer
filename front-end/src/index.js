@@ -7,11 +7,13 @@ import * as serviceWorker from './serviceWorker';
 import Provider from './context/Provider';
 
 ReactDOM.render(
+  <React.StrictMode>
   <BrowserRouter>
     <Provider>
       <App />
     </Provider>
-  </BrowserRouter>,
+  </BrowserRouter>
+  </React.StrictMode>,
   document.getElementById('root'),
 );
 
