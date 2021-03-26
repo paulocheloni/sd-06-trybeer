@@ -47,7 +47,7 @@ describe('Testing sales endpoint', () => {
 
   it('Should be able to get a sale by userId', async () => {
     await frisby
-      .get(`${url}/sales/2`)
+      .get(`${url}/sales/1`)
       .expect('status', StatusCodes.OK)
       .then((response) => {
         const { body } = response;
