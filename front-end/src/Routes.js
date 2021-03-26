@@ -62,11 +62,12 @@ const Routes = () => (
 //                 <Route path="/register" component={ Register } />
 //                 <Route path="/profile" component={ Profile } />
 //                 <Route path="/products" component={ Products } />
-//                 <Route path="/checkout" component={ CheckoutTest } />
+//                 <Route path="/checkout" component={ Checkout } />
 //                 <Route exact path="/orders" component={ OrderDetails } />
 //                 <Route path="/orders/:id" component={ MyOrders } />
 //                 <Route path="/admin/profile" component={ AdminProfile } />
-//                 <Route path="/admin/orders" component={ AdminOrders } />
+//                 <Route exact path="/admin/orders" component={ AdminOrders } />
+//                 <Route path="/admin/orders/:id" component={ AdminOrderDetails } />
 //               </Switch>
 //             </Transition>
 //           </TransitionGroup>
