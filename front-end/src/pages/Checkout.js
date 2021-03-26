@@ -32,7 +32,6 @@ class Checkout extends React.Component {
     const minLength = 0;
 
     if (name === 'adress') {
-      console.log(value);
       if (value.length > minLength) {
         this.setState({ validAdress: true, address: value });
       } else {
@@ -63,7 +62,12 @@ class Checkout extends React.Component {
 
     await finishOrders({ priceTotal, date: fullDate, userID, address, number });
 
-    history.push('/products', { purchase: true });
+    const TWOTHOUSAND = 2000;
+    setTimeout(() => {}, TWOTHOUSAND);
+
+    if (history.location.pathname === '/checkout') {
+      history.push('/products', { purchase: true });
+    }
   }
 
   async storageToRedux() {
