@@ -25,7 +25,7 @@
   padding: 4px 3px;
 }
 
-.side-menu-container {
+.side-menu-container, .admin-side-bar-container {
   background-color: slategray;
   display: flex;
   flex-flow: row nowrap;
@@ -33,7 +33,7 @@
   padding: 5px;
 }
 
-.side-menu-container a {
+.side-menu-container a, .admin-side-bar-container a {
   margin: 0 6px;
 }
 

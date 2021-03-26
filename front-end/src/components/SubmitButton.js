@@ -23,7 +23,12 @@ const SubmitButton = (props) => {
   }
 
   return (
-    <button type="submit" data-testid={ dataTestId } disabled={ disabled }>
+    <button
+      type="submit"
+      className="green"
+      data-testid={ dataTestId }
+      disabled={ disabled }
+    >
       { label }
     </button>
   );

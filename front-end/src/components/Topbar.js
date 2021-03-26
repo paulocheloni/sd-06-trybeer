@@ -1,34 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-import Sidebar from './Sidebar';
+import AppContext from '../context/app.context';
+
+import AdminMenu from './AdminSideMenu';
+import ClientMenu from './ClientSideMenu';
 
 import '../styles/Topbar.css';
 
 export default function Topbar(props) {
-  const [hidden, setHidden] = useState(true);
+  const { tokenContext: { setToken, token } } = useContext(AppContext);
+  const [hidden, setHidden] = useState('hide');
   const { title } = props;
 
+  const history = useHistory();
+
+  const logOff = () => {
+    setToken({});
+    history.push('/login');
+  };
+
+  const className = (token.role && token.role === 'administrator')
+    ? 'admin-side-bar-container'
+    : `side-menu-container ${hidden}`;
+
   const triggerSidebar = () => {
-    setHidden(!hidden);
+    const toggleHidden = (hidden === 'hide') ? 'show' : 'hide';
+    setHidden(toggleHidden);
+  };
+
+  const menuProps = {
+    className,
+    callback: logOff,
   };
 
   return (
     <section className="topbar">
       <section className="header">
-        <button
-          type="button"
-          onClick={ triggerSidebar }
-          className="hamburguer"
-          data-testid="top-hamburguer"
-        >
-          <FontAwesomeIcon icon={ faBars } className="icon" />
-        </button>
+        { (token.role && token.role === 'client') && (
+          <button
+            type="button"
+            onClick={ triggerSidebar }
+            className="hamburguer"
+            data-testid="top-hamburguer"
+          >
+            <FontAwesomeIcon icon={ faBars } className="icon" />
+          </button>
+        ) }
         <h1 data-testid="top-title" className="title">{ title }</h1>
       </section>
-      <Sidebar hide={ (hidden) ? 'hide' : 'show' } />
+      { (token.role && token.role === 'administrator')
+        ? <AdminMenu { ...menuProps } />
+        : <ClientMenu { ...menuProps } /> }
     </section>
   );
 }

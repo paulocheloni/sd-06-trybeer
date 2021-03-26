@@ -9,6 +9,7 @@ const isUserNameValid = (name) => !userNameRegex.test(name);
 const isEmailValid = (email) => !emailRegex.test(email.toLowerCase());
 const isDateValid = (date) => !dateRegex.test(date.datedAt);
 const isNotEqual = (value1, value2) => value1 !== value2;
+const isNotBool = (value) => (typeof value === 'boolean');
 
 module.exports = {
   isBlank,
@@ -18,4 +19,5 @@ module.exports = {
   isEmailValid,
   isDateValid,
   isNotEqual,
+  isNotBool,
 };
