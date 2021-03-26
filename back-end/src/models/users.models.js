@@ -1,8 +1,8 @@
 const connection = require('./connection');
 
-const insertNewUser = async ({ name, email, password, role }) => {
+const insertNewUser = async ({ name, email, passwordHash, role }) => {
   const QUERY = 'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)';
-  const [{ insertId }] = await connection.query(QUERY, [name, email, password, role]);
+  const [{ insertId }] = await connection.query(QUERY, [name, email, passwordHash, role]);
   return insertId;
 };
 
