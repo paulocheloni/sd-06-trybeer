@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-// const path = require('path');
 const bodyParser = require('body-parser');
 const userController = require('./controller/usercontroller');
 const registerController = require('./controller/registerController');
@@ -10,6 +9,7 @@ const orderController = require('./controller/ordersController');
 const adminOrdersController = require('./controller/adminOrdersController');
 
 const app = express();
+app.use('/images',express.static('images'));
 app.use(cors());
 app.use(bodyParser.json());
 

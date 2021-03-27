@@ -36,6 +36,22 @@ const CardProduct = ({ products, setProducts }) => {
               { `${item.name}` }
             </span>
             <S.Container>
+            <S.Buttons>
+                <Button
+                  dataTestId={ `${index}-product-minus` }
+                  onClick={ () => {
+                    const it = products.map((el) => {
+                      if (el.id === index + 1 && el.productQuantity > 0) {
+                        return { ...el, productQuantity: el.productQuantity - 1 };
+                      }
+                      return el;
+                    });
+                    setProducts(it);
+                  } }
+                >
+                  -
+                </Button>
+              </S.Buttons>
               <S.Buttons>
                 <Button
                   dataTestId={ `${index}-product-plus` }
@@ -52,22 +68,7 @@ const CardProduct = ({ products, setProducts }) => {
                   +
                 </Button>
               </S.Buttons>
-              <S.Buttons>
-                <Button
-                  dataTestId={ `${index}-product-minus` }
-                  onClick={ () => {
-                    const it = products.map((el) => {
-                      if (el.id === index + 1 && el.productQuantity > 0) {
-                        return { ...el, productQuantity: el.productQuantity - 1 };
-                      }
-                      return el;
-                    });
-                    setProducts(it);
-                  } }
-                >
-                  -
-                </Button>
-              </S.Buttons>
+             
             </S.Container>
             Valor total:
             <span data-testid="checkout-bottom-btn-value">
