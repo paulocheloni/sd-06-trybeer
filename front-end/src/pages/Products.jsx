@@ -3,6 +3,7 @@ import { Redirect, useHistory } from 'react-router';
 import MenuTop from '../components/MenuTop';
 import Cards from '../components/Cards';
 import contextTrybeer from '../Context/ContextAPI';
+import '../styles/cards.css';
 
 export default function Products() {
   const { setProductsCart } = useContext(contextTrybeer);
@@ -37,23 +38,26 @@ export default function Products() {
     <div>
       <MenuTop title="TryBeer" />
       <Cards />
-      <button
-        type="button"
-        disabled={ isDisabled }
-        data-testid="checkout-bottom-btn"
-        onClick={ handleClick }
-      >
-        Ver Carrinho
-        <span
-          data-testid="checkout-bottom-btn-value"
+      <div className="container">
+        <button
+          type="button"
+          className="btn btn-danger button-cart"
+          disabled={ isDisabled }
+          data-testid="checkout-bottom-btn"
+          onClick={ handleClick }
         >
-          {
-            ((productsCart && productsCart.length > 0
-              ? productsCart.reduce(sumOfCart, 0) : 0))
-              .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-          }
-        </span>
-      </button>
+          Ver Carrinho
+          <span
+            data-testid="checkout-bottom-btn-value"
+          >
+            {
+              ` ${((productsCart && productsCart.length > 0
+                ? productsCart.reduce(sumOfCart, 0) : 0))
+                .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`
+            }
+          </span>
+        </button>
+      </div>
     </div>
   );
 }

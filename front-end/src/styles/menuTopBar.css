@@ -1,0 +1,33 @@
+/* .div-container {
+  display: flex;
+  width: 100%;
+  background-color: red;
+  height: 80px;
+} */
+
+.top-bar {
+  display: flex;
+  width: 100%;
+  align-self: flex-start;
+  background-color: red;
+}
+
+.button-title {
+  height: 100%;
+}
+
+.h1-title{
+  align-self: center;
+  text-align: center;
+  width: 100%;
+  color: white;
+}
+
+.button-title button {
+  padding: 20px 40px;
+}
+
+.menu-side-bar {
+  position: fixed;
+  width: 100%;
+}
