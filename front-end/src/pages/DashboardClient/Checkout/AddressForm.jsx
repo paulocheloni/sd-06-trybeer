@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkedAlt, faHome } from '@fortawesome/free-solid-svg-icons';
 
-import './Checkout.css'
+import './Checkout.css';
 
 const AddressForm = ({ handleChange }) => (
-  <form >
+  <form>
     <label htmlFor="st">
       <h4>Rua:</h4>
-      <FontAwesomeIcon icon={ faMapMarkedAlt } style={{color:"#F29F05"}} size="1x" />
+      <FontAwesomeIcon icon={ faMapMarkedAlt } style={ { color: '#F29F05' } } size="1x" />
       <input
         data-testid="checkout-street-input"
         type="text"
@@ -21,7 +21,7 @@ const AddressForm = ({ handleChange }) => (
     <br />
     <label htmlFor="numero">
       <h4>Número da casa:</h4>
-      <FontAwesomeIcon icon={ faHome } style={{color:"#F29F05"}} size="1x" />
+      <FontAwesomeIcon icon={ faHome } style={ { color: '#F29F05' } } size="1x" />
       <input
         data-testid="checkout-house-number-input"
         type="text"

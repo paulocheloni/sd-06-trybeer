@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCompass, faCoins } from '@fortawesome/free-solid-svg-icons';
 import Header from '../../../components/Header/Header';
 import Button from '../../../components/Button/Button';
 import { verifyUser } from '../../../store/LocalStorage/actions';
@@ -10,9 +12,6 @@ import CheckoutCard from '../../../components/checkoutCard/CheckoutCard';
 import AddressForm from './AddressForm';
 import { parseCartPrice } from '../../../utils/parseValues';
 import { TWO_THOUSAND, NINETEEN } from '../../../services/magicNumbers';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCompass, faCoins } from '@fortawesome/free-solid-svg-icons';
-
 
 import './Checkout.css';
 
@@ -111,12 +110,20 @@ const Checkout = (props) => {
                   : (<h3> Não há produtos no carrinho </h3>)
               }
               <span className="span-total" data-testid="order-total-value">
-              <FontAwesomeIcon icon={ faCoins } style={{color:"#F29F05", padding:" 3px"}} size="1x"  />
+                <FontAwesomeIcon
+                  icon={ faCoins }
+                  style={ { color: '#F29F05', padding: ' 3px' } }
+                  size="1x"
+                />
                 Total:
                 {mySum}
               </span>
               <h3 className="address-title">
-              <FontAwesomeIcon icon={ faCompass } style={{color:"#F29F05", padding:" 3px"}} size="1x"  />
+                <FontAwesomeIcon
+                  icon={ faCompass }
+                  style={ { color: '#F29F05', padding: ' 3px' } }
+                  size="1x"
+                />
                 Endereço:
               </h3>
               <AddressForm handleChange={ handleChange } />

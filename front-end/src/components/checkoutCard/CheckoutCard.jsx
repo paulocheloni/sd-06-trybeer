@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-import './CheckoutCard.css'
+import './CheckoutCard.css';
 
 const deleteProduct = (product, changeState) => {
   const storage = JSON.parse(localStorage.getItem('cart'));
@@ -43,7 +43,7 @@ const CheckoutCard = ({ product, changeState, specialNumber }) => {
         onClick={ () => deleteProduct(product, changeState) }
       >
         EXCLUIR
-        <FontAwesomeIcon icon={ faTrash } style={{marginLeft:"20px"}}/>
+        <FontAwesomeIcon icon={ faTrash } style={ { marginLeft: '20px' } } />
       </button>
     </div>
   );
