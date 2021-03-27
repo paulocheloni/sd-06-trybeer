@@ -36,3 +36,11 @@
   box-shadow: 2px 4px 4px #999;
   font-size: 20px;
 }
+
+.addres-form {
+  display: flex;
+
+}
+.input-form {
+  margin: 0 2%;
+}

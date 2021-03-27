@@ -87,7 +87,7 @@ function Login() {
                   <button 
                     type="button"
                     data-testid="no-account-btn"
-                    disabled={ handleRegister }
+                    onClick={ handleRegister }
                     class="btn1 mt-3 mb-5"
                   >
                     Ainda não tenho conta

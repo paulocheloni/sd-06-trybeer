@@ -19,27 +19,34 @@ const AddressForm = (props) => {
   return (
     <form class="addresForm">
       <h3>Endereço:</h3>
-      <label htmlFor="street">
-        Rua:
-        <input
-          data-testid="checkout-street-input"
-          type="text"
-          name="street"
-          value={ street }
-          onChange={ (e) => setStreet(e.target.value) }  
-        />
-      </label>
-      <label htmlFor="street">
-        Número da casa:
-        <input
-          data-testid="checkout-house-number-input"
-          type="text"
-          name="street"
-          value={ number }
-          onChange={ (e) => setNumber(e.target.value) }
-          class="inputAdress"
-        />
-      </label>
+      <div className="addres-form">
+        <div className="input-form">
+          <label htmlFor="street">
+            Rua:
+            <input
+              data-testid="checkout-street-input"
+              type="text"
+              name="street"
+              value={ street }
+              onChange={ (e) => setStreet(e.target.value) }
+              class="form-control mt-0 y-3 p-4"
+            />
+          </label>
+        </div>
+        <div className="input-form">
+          <label htmlFor="street">
+            Número da casa:
+            <input
+              data-testid="checkout-house-number-input"
+              type="text"
+              name="street"
+              value={ number }
+              onChange={ (e) => setNumber(e.target.value) }
+              class="form-control mt-0 y-3 p-4"
+            />
+          </label>
+        </div>
+      </div>
     </form>
   );
 };
