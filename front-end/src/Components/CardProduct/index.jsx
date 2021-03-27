@@ -22,19 +22,19 @@ const CardProduct = ({ products, setProducts }) => {
       <S.CardContainer>
         {products.length < 1 ? <div>Loading...</div> : products.map((item, index) => (
           <S.Card key={ index }>
-            <span data-testid={ `${index}-product-price` }>
+            <S.Text data-testid={ `${index}-product-price` }>
               R$
               {' '}
               {item.price.replace(/\./g, ',')}
-            </span>
+            </S.Text>
             <S.ItemImage
               data-testid={ `${index}-product-img` }
               src={ item.url_image }
               alt="beer"
             />
-            <span data-testid={ `${index}-product-name` }>
+            <S.Text data-testid={ `${index}-product-name` }>
               { `${item.name}` }
-            </span>
+            </S.Text>
             <S.Container>
             <S.Buttons>
                 <Button
@@ -68,21 +68,17 @@ const CardProduct = ({ products, setProducts }) => {
                   +
                 </Button>
               </S.Buttons>
-             
             </S.Container>
-            Valor total:
-            <span data-testid="checkout-bottom-btn-value">
-              R$
-              {' '}
-              { (item.price * item.productQuantity).toFixed(2).replace(/\./g, ',') }
-            </span>
+            <S.Text data-testid="checkout-bottom-btn-value">
+              { `Total: R$ ${(item.price * item.productQuantity).toFixed(2).replace(/\./g, ',')}` }
+            </S.Text>
             <br />
-            <span data-testid={ `${index}-product-qtd` }>
+            <S.QTD data-testid={ `${index}-product-qtd` }>
               { item.productQuantity }
-            </span>
+            </S.QTD>
           </S.Card>
         ))}
-        <S.Buttons>
+        <S.Cart>
           <Button
             dataTestId="checkout-bottom-btn"
             onClick={ () => history.push('/checkout') }
@@ -90,7 +86,7 @@ const CardProduct = ({ products, setProducts }) => {
           >
             Ver Carrinho
           </Button>
-        </S.Buttons>
+        </S.Cart>
       </S.CardContainer>
     </div>
   );

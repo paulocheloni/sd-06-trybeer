@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 import Input from '../../Components/Input';
@@ -19,6 +19,14 @@ const Login = () => {
     alert('E-mail ou senha incorreta');
     localStorage.removeItem('token');
   };
+  const storageClear = () => {
+    if (localStorage.products) {
+      return localStorage.removeItem('products');
+    }
+  }
+  useEffect(() => {
+    storageClear();
+  }, []);
   return (
     <S.Container>
       <S.Title color="#6665DD">Login</S.Title>
