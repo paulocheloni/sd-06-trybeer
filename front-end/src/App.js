@@ -31,7 +31,6 @@ function App() {
           <Route exact path="/checkout" component={ Checkout } />
           <Route exact path="/admin/profile" component={ AdminProfile } />
           <Route exact path="/admin/orders" component={ AdminOrders } />
-          <Route exact path="/erro" component={ ErroPage } />
         </Switch>
       </Provider>
     </div>
