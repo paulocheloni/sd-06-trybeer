@@ -36,7 +36,7 @@ const CardProduct = ({ products, setProducts }) => {
               { `${item.name}` }
             </S.Text>
             <S.Container>
-            <S.Buttons>
+              <S.Buttons>
                 <Button
                   dataTestId={ `${index}-product-minus` }
                   onClick={ () => {
@@ -70,7 +70,8 @@ const CardProduct = ({ products, setProducts }) => {
               </S.Buttons>
             </S.Container>
             <S.Text data-testid="checkout-bottom-btn-value">
-              { `Total: R$ ${(item.price * item.productQuantity).toFixed(2).replace(/\./g, ',')}` }
+              { `Total: R$ ${(item.price * item.productQuantity)`
+                +`.toFixed(2).replace(/\./g, ',')}` }
             </S.Text>
             <br />
             <S.QTD data-testid={ `${index}-product-qtd` }>

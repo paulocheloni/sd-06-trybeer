@@ -23,7 +23,7 @@ const Login = () => {
     if (localStorage.products) {
       return localStorage.removeItem('products');
     }
-  }
+  };
   useEffect(() => {
     storageClear();
   }, []);
