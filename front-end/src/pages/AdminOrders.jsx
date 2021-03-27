@@ -29,7 +29,9 @@ export default function AdminOrders() {
             key={ order.id }
           >
             <div>
-              <span data-testid={ `${index}-order-number` }>{ `Pedido ${order.id}` }</span>
+              <span data-testid={ `${index}-order-number` }>
+                { `Pedido ${order.id}` }
+              </span>
               <br />
               <span data-testid={ `${index}-order-address` }>
                 { `${order.delivery_address}, ${order.delivery_number}` }

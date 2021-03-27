@@ -96,20 +96,20 @@ export default function Checkout() {
           </span>
           <span data-testid={ `${index}-removal-button` }>
             <button
-            type="button"
-            onClick={ () => removeProduct(item) }
-            className="btn btn-danger"
-          >X</button>
+              type="button"
+              onClick={ () => removeProduct(item) }
+              className="btn btn-danger"
+            >
+              X
+            </button>
           </span>
         </div>
       ))}
       { productIsInCart && <p>Não há produtos no carrinho</p> }
       <div className="total-price">
         <p data-testid="order-total-value">
-          {`Total: 
-            ${ products
-              .reduce(sumOfCart, 0)
-              .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
+          {`Total: ${products.reduce(sumOfCart, 0)
+            .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
           `}
         </p>
       </div>
