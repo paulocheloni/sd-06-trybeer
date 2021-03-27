@@ -11,7 +11,6 @@ import Profile from './pages/Profile';
 import Register from './pages/Register';
 import history from './utilities/History';
 import Provider from './context/Provider';
-import ErroPage from './pages/ErroPage';
 
 // import {
 //   Login, Register, Profile, Products, Orders, AdminOrders, Home, Checkout, AdminProfile,
