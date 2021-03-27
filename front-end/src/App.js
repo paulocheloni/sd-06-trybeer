@@ -10,6 +10,8 @@ import Products from './pages/Products';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
 import history from './utilities/History';
+import Provider from './context/Provider';
+import ErroPage from './pages/ErroPage';
 
 // import {
 //   Login, Register, Profile, Products, Orders, AdminOrders, Home, Checkout, AdminProfile,
@@ -18,17 +20,20 @@ import history from './utilities/History';
 function App() {
   return (
     <div className="App" history={ history }>
-      <Switch>
-        <Route exact path="/" component={ Home } />
-        <Route exact path="/login" component={ Login } />
-        <Route exact path="/register" component={ Register } />
-        <Route exact path="/profile" component={ Profile } />
-        <Route exact path="/orders" component={ AdminOrders } />
-        <Route exact path="/products" component={ Products } />
-        <Route exact path="/checkout" component={ Checkout } />
-        <Route exact path="/admin/profile" component={ AdminProfile } />
-        <Route exact path="/admin/orders" component={ AdminOrders } />
-      </Switch>
+      <Provider>
+        <Switch>
+          <Route exact path="/" component={ Home } />
+          <Route exact path="/login" component={ Login } />
+          <Route exact path="/register" component={ Register } />
+          <Route exact path="/profile" component={ Profile } />
+          <Route exact path="/orders" component={ AdminOrders } />
+          <Route exact path="/products" component={ Products } />
+          <Route exact path="/checkout" component={ Checkout } />
+          <Route exact path="/admin/profile" component={ AdminProfile } />
+          <Route exact path="/admin/orders" component={ AdminOrders } />
+          <Route exact path="/erro" component={ ErroPage } />
+        </Switch>
+      </Provider>
     </div>
   );
 }

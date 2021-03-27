@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
-export default function Home() {
+
+
+
+
+export default function Home(props) {
+  const { history } = props
+
+  useEffect(() => {
+    history.push('./login');
+  }, [])
   return (
+   
     <div>
-      <p>Your Code Here</p>
+      <p>Teste</p>
     </div>
+    
+   
   );
 }

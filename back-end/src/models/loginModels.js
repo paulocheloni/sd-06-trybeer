@@ -1,7 +1,7 @@
-const connection = require('./connection');
+const connection = require('../database/connection');
 
 const validateLogin = async (email, password) => {
-  const [user] = await connection.execute(
+  const user = await connection.execute(
     'SELECT * FROM users WHERE email = ? AND password = ?', [email, password],
   );
   return user;

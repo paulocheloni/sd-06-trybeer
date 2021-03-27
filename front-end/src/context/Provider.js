@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TrybeerContext from './TrybeerContext';
 
 const Provider = ({ children }) => {
-  const context = {};
+  const [loginUser, setLoginUser] = useState({email: '', password: '', erro: false })
 
   return (
-    <TrybeerContext.Provider value={ context }>
+    <TrybeerContext.Provider
+      value={ {
+         loginUser,
+         setLoginUser,
+      } }>
       {children}
     </TrybeerContext.Provider>
   );
