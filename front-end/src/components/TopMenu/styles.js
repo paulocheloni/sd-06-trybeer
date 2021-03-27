@@ -7,12 +7,15 @@ const ONE = 1;
 const THREE = 3;
 
 const useStyles = makeStyles((theme) => ({
-  root: { display: 'flex' },
+  root: {
+    display: 'flex',
+  },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    backgroundColor: '#32325b',
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -22,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  menuButton: { marginRight: theme.spacing(TWO) },
+  menuButton:
+  { marginRight: theme.spacing(TWO) },
   hide: { display: 'none' },
   drawer: {
     width: drawerWidth,
