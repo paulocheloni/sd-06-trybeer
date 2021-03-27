@@ -7,7 +7,7 @@ import api from '../services/api';
 export default function Checkout() {
   const [productIsInCart, setProductIsInCart] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [succesMessage, setSuccesMessage] = useState(false);
+  const [message, setMessage] = useState(false);
   const [rua, setRua] = useState('');
   const [numero, setNumero] = useState('');
 
@@ -45,7 +45,7 @@ export default function Checkout() {
 
   const finalizar = async () => {
     const time = 2500;
-    setSuccesMessage(true);
+    setMessage(true);
     localStorage.setItem('productsCart', JSON.stringify([]));
 
     const total = products.reduce(sumOfCart, 0);
@@ -151,7 +151,7 @@ export default function Checkout() {
           Finalizar Pedido
         </button>
       </div>
-      { succesMessage && <p>Compra realizada com sucesso!</p> }
+      { message && <p className="alert alert-danger">Compra realizada com sucesso!</p> }
     </div>
   );
 }
