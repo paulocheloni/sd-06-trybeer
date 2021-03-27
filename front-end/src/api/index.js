@@ -84,6 +84,15 @@ async function getproductsBySaleId(setProductsOrder, saleId) {
     } }).then((response) => setProductsOrder(response.data.products));
 }
 
+async function getSalesProductsBySaleId(setSaleDetail, saleId) {
+  const axios = buildAxiosHandler();
+  const token = localStorage.getItem('token');
+  await axios.get(`/sales/products/${saleId}`, {
+    headers: {
+      authorization: token,
+    } }).then((response) => setSaleDetail(response.data));
+}
+
 export {
   checkout,
   getProducts,
@@ -93,4 +102,5 @@ export {
   updateName,
   getOrders,
   getproductsBySaleId,
+  getSalesProductsBySaleId,
 };

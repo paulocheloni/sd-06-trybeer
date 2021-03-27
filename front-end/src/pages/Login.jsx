@@ -29,7 +29,7 @@ function Login() {
           />
           <span>Senha</span>
           <input
-            type="text"
+            type="password"
             data-testid="password-input"
             className="input-form-login"
             onChange={ ({ target }) => setUser({ ...user, password: target.value }) }

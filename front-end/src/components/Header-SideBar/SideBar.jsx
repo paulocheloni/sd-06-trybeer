@@ -15,14 +15,14 @@ function SideBar() {
       </button>
       <button
         data-testid="side-menu-item-my-orders"
-        onClick={ () => redirectMenuBar(history, 'orders') }
+        onClick={ () => redirectMenuBar(history, '/orders') }
         type="button"
       >
         Meus Pedidos
       </button>
       <button
         data-testid="side-menu-item-my-profile"
-        onClick={ () => redirectMenuBar(history, 'profile') }
+        onClick={ () => redirectMenuBar(history, '/profile') }
         type="button"
       >
         Meu Perfil
