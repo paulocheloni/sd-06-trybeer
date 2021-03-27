@@ -8,9 +8,10 @@
   box-shadow: 20px 20px 22px rgb(0, 0, 0);
 }
 .saveButton {
-  inline-size: 100px;
+  inline-size: 300px;
   font-size: 15px;
   cursor: pointer;
+  margin-top: 20px;
   text-align: center;	
   text-decoration: none;
   outline: none;

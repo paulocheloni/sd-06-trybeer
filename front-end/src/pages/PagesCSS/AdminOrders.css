@@ -1,0 +1,85 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.panel-orders {
+  background-color: white ;
+  color: black;
+  margin: 2%;
+  padding: 3%;
+  border-width:thin;
+  border-radius: 20px;
+  box-shadow: 20px 20px 22px rgb(0, 0, 0);
+  width: 33%;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.title {
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 3%;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.container-detail {
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.order-card-container {
+  width: 100%;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 1%;
+}
+
+.order-card-detail-container {
+  width: 100%;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  background-color: blue;
+}
+
+.panel-orders-detail {
+  background-color: white ;
+  color: black;
+  margin: 2%;
+  padding: 3%;
+  border-width:thin;
+  border-radius: 20px;
+  box-shadow: 20px 20px 22px rgb(0, 0, 0);
+  width: 80%;
+}
+
+.order-total-value {
+  display: flex;
+  justify-content: flex-end;
+  font-weight: bold;
+  margin-top: 5%;
+}
+
+.btn-delivery {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -34,9 +34,9 @@ const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
     <div className="product-card">
       <div class="card-deck">
         <img
-          class="card-img-top"
+          // class="card-img-top"
           data-testid={ `${index}-product-img` }
-          className="product-card-image"
+          className="product-card-image card-img-top"
           alt={ name }
           src={ urlImage }
         />

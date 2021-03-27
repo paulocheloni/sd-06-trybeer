@@ -25,6 +25,8 @@
 }
 
 .card-img-top {
+  display: flex;
+  justify-content: center;
   max-width:200px;
   max-height:150px;
   width: auto;
@@ -35,6 +37,8 @@
   max-height:280px;
   width: auto;
   height: auto;
+  display: flex;
+  justify-content: center;
 }
 .totalValue{
   margin: 10px;

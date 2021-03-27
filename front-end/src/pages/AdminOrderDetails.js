@@ -41,85 +41,81 @@ function AdminOrderDetails(props) {
   return (
     <div>
       <TopMenu />
-      {
-        hasState && (
-          <div>
-            <div className="content-panel">
+      <div className="container-detail">
+        <div className="order-card-detail-container panel-orders-detail">
+          {
+            hasState && (
               <div>
-                {
-                  orderCart[0] && (
-                    <div>
-                      <div data-testid="order-status">
-                        {`Status: ${orderCart[0].status}` }
-                      </div>
-                      <div data-testid="order-number">
-                        {`Pedido ${orderCart[0].sale_id}` }
-                      </div>
-                    </div>
-                  )
-                }
-                {
-                  orderCart.map(({
-                    quantity,
-                    name,
-                    price,
-                    sale_id: saleId,
-                    total_price: totalPrice,
-                  }, index) => (
-                    <div
-                      key={ saleId }
-                      className="order-card-container"
-                      data-testid={ `${index}-order-card-container` }
-                    >
-                      <div data-testid={ `${index}-product-name` }>
-                        {`Nome: ${name}` }
-                      </div>
-                      <div data-testid={ `${index}-product-qtd` }>
-                        {`Quantidade: ${quantity}` }
-                      </div>
-                      <div
-                        className="card-total"
-                        data-testid={ `${index}-order-unit-price` }
-                      >
-                        {`Valor Unitário: (${formatedPrice(price)})` }
-                      </div>
-                      <div
-                        className="card-total"
-                        data-testid={ `${index}-product-total-value` }
-                      >
-                        { `${formatedPrice((price * quantity).toFixed(2))}` }
-                      </div>
-                      <div
-                        className="card-total"
-                        data-testid="order-total-value"
-                      >
-                        { `Valor Total: ${formatedPrice(totalPrice)}` }
-                      </div>
-                    </div>
-                  ))
-                }
+                <div className="content-panel">
+                  <div>
+                    {
+                      orderCart[0] && (
+                        <div className="title-card">
+                          <div data-testid="order-number" className="title">
+                            {`Pedido ${orderCart[0].sale_id}` }
+                          </div>
+                          <div data-testid="order-status">
+                            { orderCart[0].status }
+                          </div>
+                        </div>
+                      )
+                    }
+                    {
+                      orderCart.map(({
+                        quantity,
+                        name,
+                        price,
+                        sale_id: saleId,
+                        // total_price: totalPrice,
+                      }, index) => (
+                        <div
+                          key={ saleId }
+                          className="order-card-container"
+                          data-testid={ `${index}-order-card-container` }
+                        >
+                          <div data-testid={ `${index}-product-name` }>
+                            {`Nome: ${name}` }
+                          </div>
+                          <div data-testid={ `${index}-product-qtd` }>
+                            {`Quantidade: ${quantity}` }
+                          </div>
+                          <div
+                            data-testid={ `${index}-order-unit-price` }
+                          >
+                            {`Valor Unitário: (${formatedPrice(price)})` }
+                          </div>
+                          <div
+                            data-testid={ `${index}-product-total-value` }
+                          >
+                            { `${formatedPrice((price * quantity).toFixed(2))}` }
+                          </div>
+                        </div>
+                      ))
+                    }
+                  </div>
+                  <div data-testid="order-total-value" className="order-total-value">
+                    { orderCart[0] && formatedPrice(orderCart[0].total_price) }
+                  </div>
+                </div>
               </div>
-              <div data-testid="order-status">
-                {/* { status } */}
+            )
+          }
+          {
+            isShowing && (
+              <div className="btn-delivery">
+                <button
+                  type="button"
+                  data-testid="mark-as-delivered-btn"
+                  onClick={ markAsDone }
+                  class="btn1 saveButton"
+                >
+                  Marcar como entregue
+                </button>
               </div>
-              <div data-testid="order-total-value">
-                {/* { formatedPrice(totalPrice) } */}
-              </div>
-            </div>
-          </div>
-        )
-      }
-      {
-        isShowing && (
-          <button
-            type="button"
-            data-testid="mark-as-delivered-btn"
-            onClick={ markAsDone }
-          >
-            Marcar como entregue
-          </button>
-        )
-      }
+            )
+          }
+        </div>
+      </div>
     </div>
   );
 }

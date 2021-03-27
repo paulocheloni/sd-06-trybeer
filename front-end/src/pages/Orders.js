@@ -26,13 +26,13 @@ function Orders({ history }) {
       <TopMenu
         titleMenu="Meus Pedidos"
       />
-      <div className="content-panel" class="panel-orders">
+      <div className="content-panel">
         <div className="container">
           {
             orders.map(({ id, date_time: saleDate, total_price: totalPrice }, index) => (
               <div
                 key={ id }
-                className="order-card-container"
+                className="panel-orders"
                 data-testid={ `${index}-order-card-container` }
               >
                 <Link

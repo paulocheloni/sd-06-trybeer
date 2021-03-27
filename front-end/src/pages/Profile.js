@@ -46,42 +46,54 @@ function Profile(props) {
       <TopMenu
         titleMenu="Meu perfil"
       />
-      <form method="put">
+      <form method="put" class="container">
         <div className="content-panel" class="panel-profile">
-          <label htmlFor="name">
-            Name
-            <input
-              data-testid="profile-name-input"
-              type="text"
-              name="name"
-              placeholder="Nome"
-              id="name"
-              onChange={ onChangeName }
-              class="inputProfile"
-            />
-          </label>
-          <label htmlFor="email">
-            Email
-            <input
-              value={ email }
-              readOnly="readonly"
-              data-testid="profile-email-input"
-              type="text"
-              name="email"
-              placeholder="Email"
-              id="email"
-              class="inputProfile"
-            />
-          </label>
-          <button
-            data-testid="profile-save-btn"
-            type="submit"
-            disabled={ disabled }
-            onClick={ handleSubmit }
-            class="saveButton"
-          >
-            Salvar
-          </button>
+            <div class="form-row">
+              <label htmlFor="name">
+                Name
+                <div class="col-lg-20">
+                  <input
+                    data-testid="profile-name-input"
+                    type="text"
+                    name="name"
+                    placeholder="Nome"
+                    id="name"
+                    onChange={ onChangeName }
+                    class="form-control mt-0 y-3 p-4"
+                  />
+                </div>
+              </label>
+            </div>
+            <div class="form-row">
+              <label htmlFor="email">
+                Email
+                <div class="col-lg-20">
+                  <input
+                    value={ email }
+                    readOnly="readonly"
+                    data-testid="profile-email-input"
+                    type="text"
+                    name="email"
+                    placeholder="Email"
+                    id="email"
+                    class="form-control mt-0 y-3 p-4"
+                  />
+                </div>
+              </label>
+            </div>
+            <div class="form-row">
+              <div class="col-lg-20">
+                <button
+                  data-testid="profile-save-btn"
+                  type="submit"
+                  disabled={ disabled }
+                  onClick={ handleSubmit }
+                  class="btn1 saveButton"
+                >
+                  Salvar
+                </button>
+              </div>
+            </div>
           {
             isUpdated && (<div> Atualização concluída com sucesso </div>)
           }
