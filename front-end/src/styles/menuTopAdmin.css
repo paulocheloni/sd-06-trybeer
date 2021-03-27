@@ -7,13 +7,9 @@ body {
 
 .top-bar {
   display: flex;
-  width: 100%;
+  width: 20%;
   align-self: flex-start;
   background-color: red;
-}
-
-.button-title {
-  height: 100%;
 }
 
 .h1-title{
@@ -21,6 +17,10 @@ body {
   text-align: center;
   width: 100%;
   color: white;
+}
+
+.button-title {
+  height: 100%;
 }
 
 .button-title button {
