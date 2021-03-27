@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { allOrders } from '../actions';
 import { getAllOrders } from '../api';
 import SideBarAdmin from '../components/SideBarAdmin';
-import Orders from './AdminOrders.css';
+import './AdminOrders.css';
 
 class AdminOrders extends React.Component {
   constructor() {
