@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import TrybeerContext from '../context/TrybeerContext';
 import login from '../api/axiosApi';
-import ErroPage from './ErroPage';
+// import ErroPage from './ErroPage';
 
 export default function Login(props) {
   const { history } = props;
@@ -24,11 +24,11 @@ export default function Login(props) {
     }
   };
 
-  if (loginUser.erro) {
-    return (
-      <ErroPage />
-    );
-  }
+  // if (loginUser.erro) {
+  //   return (
+  //     <ErroPage />
+  //   );
+  // }
 
   return (
     <section>
