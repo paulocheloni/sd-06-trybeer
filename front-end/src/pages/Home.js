@@ -1,21 +1,19 @@
-import React, { useContext, useEffect } from 'react';
-
-
-
-
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 export default function Home(props) {
-  const { history } = props
+  const { history } = props;
 
   useEffect(() => {
     history.push('./login');
-  }, [])
+  }, []);
   return (
-   
     <div>
       <p>Teste</p>
     </div>
-    
-   
   );
 }
+
+Home.propTypes = {
+  history: PropTypes.shape().isRequired,
+};
