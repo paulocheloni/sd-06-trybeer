@@ -17,7 +17,7 @@ export default function Orders() {
   }, []);
 
   return (
-    <div>
+    <div className="page-with-menu-admin">
       <Header title="TryBeer" user="admin" />
       <div className="content-order-admin">
         {(sales.length && sales.map((sale, index) => (

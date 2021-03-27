@@ -27,7 +27,7 @@ export default function Orders() {
   const redirectOrder = (id) => history.push(`/orders/${id}`);
 
   return (
-    <div className="div-pedidos">
+    <div className="div-pedidos page-with-menu">
       <Header title="Meus Pedidos" user="client" />
       <div>
         {orders.map((order, index) => (

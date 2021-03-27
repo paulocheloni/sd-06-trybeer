@@ -6,6 +6,8 @@ import DrinkCard from '../../components/DrinkCard/DrinkCard';
 import { verifyUser } from '../../store/LocalStorage/actions';
 import { getFullCartPrice, getCart } from '../../store/LocalStorage/provider';
 import './Products.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 // O botão 'Ver Carrinho' deverá conter a tag data-testid="checkout-bottom-btn"
 
@@ -57,11 +59,11 @@ export default function Products() {
           type="button"
           disabled={ !getCart() || !getCart().length }
         >
-          Ver Carrinho
-          <p data-testid="checkout-bottom-btn-value">
-            {cartSum || 'R$ 0,00'}
-          </p>
+          <FontAwesomeIcon icon={ faShoppingCart } />
         </button>
+        <p data-testid="checkout-bottom-btn-value">
+            {cartSum || 'R$ 0,00'}
+        </p>
       </div>
     </div>
   );

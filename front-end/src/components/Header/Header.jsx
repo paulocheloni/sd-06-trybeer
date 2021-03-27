@@ -16,7 +16,7 @@ export default function Header({ title, user }) {
         user === 'client' && (
           <button
             type="button"
-            className={ `hamburger hamburger--stand ${isSidebarOpen ? 'is-active' : ''}` }
+            className={ `hamburger btn-burguer hamburger--stand ${isSidebarOpen ? 'is-active' : ''}` }
             data-testid="top-hamburguer"
             onClick={ () => setIsSidebarOpen(!isSidebarOpen) }
           >

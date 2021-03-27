@@ -100,8 +100,7 @@
 
 .isUser aside li:first-child {
   margin-top: 10vh;
-}
-
+}golden
 .isUser aside li:last-child {
   margin-top: 50vh;
 }
@@ -118,4 +117,13 @@
   width: 100%;
   text-align: center;
   color: white;
+}
+
+.btn-burguer:hover, .btn-burguer:active {
+  background-color: #255923;
+  box-shadow: none;
+}
+
+.btn-burguer {
+  box-shadow: none;
 }

@@ -85,7 +85,7 @@ const Checkout = (props) => {
   };
 
   return (
-    <div className="checkout-general">
+    <div className="checkout-general page-with-menu">
       <Header title="Finalizar Pedido" user="client" />
       <div className="checkout-container">
         <h2 className="products-title">Produtos</h2>

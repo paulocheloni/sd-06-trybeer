@@ -99,3 +99,13 @@ button.golden {
     @extend button:disabled
   }
 }
+
+.page-with-menu {
+  padding-top: 80px;
+  padding-left: 20%;
+}
+
+.page-with-menu-admin {
+  padding-top: 80px;
+  padding-left: 0;
+}
