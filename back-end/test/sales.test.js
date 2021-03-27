@@ -4,11 +4,11 @@ const { StatusCodes } = require('http-status-codes');
 const { generateToken } = require('../src/security');
 const url = 'http://localhost:3001';
 
-const adminUser = {
-  email: 'tryber@trybe.com.br',
-  password: '123456',
-  userId: 1,
-  isVendor: true
+const clientUser = {
+  email: 'user@test.com',
+  password: 'test123',
+  userId: 2,
+  isVendor: false
 };
 
 describe('Testing sales endpoint', () => {
@@ -16,12 +16,113 @@ describe('Testing sales endpoint', () => {
     frisby.globalSetup({
       request: {
         headers: {
-          'Authorization': generateToken(adminUser.userId, adminUser.isVendor),
+          'Authorization': generateToken(clientUser.userId, clientUser.isVendor),
           'Content-Type': 'application/json',
         }
       }
     });
     connection.end();
+  });
+
+  it('Should not be able to create a sale without productId', async () => {
+    await frisby
+        .post(`${url}/sales/create`, {
+          sale: [
+            { quantity: 2 },
+          ],
+          delivery: {
+            address: "Rua das Pamonhas",
+            number: "315"
+          },
+          salePrice: 15.00
+        })
+      .expect('status', StatusCodes.BAD_REQUEST)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        expect(result.message).toBe('Invalid products id or quantity');
+      });
+  });
+
+  it('Should not be able to create a sale without quantity', async () => {
+    await frisby
+        .post(`${url}/sales/create`, {
+          sale: [
+            { productId: 2 },
+          ],
+          delivery: {
+            address: "Rua das Pamonhas",
+            number: "315"
+          },
+          salePrice: 15.00
+        })
+      .expect('status', StatusCodes.BAD_REQUEST)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        expect(result.message).toBe('Invalid products id or quantity');
+      });
+  });
+
+  it('Should not be able to create a sale without address', async () => {
+    await frisby
+        .post(`${url}/sales/create`, {
+          sale: [
+            { productId: 2, quantity: 2 },
+            { productId: 3, quantity: 5 }
+          ],
+          delivery: {
+            number: "315"
+          },
+          salePrice: 15.00
+        })
+      .expect('status', StatusCodes.BAD_REQUEST)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        expect(result.message).toBe('Invalid delivery adress or number');
+      });
+  });
+
+  it('Should not be able to create a sale without number', async () => {
+    await frisby
+        .post(`${url}/sales/create`, {
+          sale: [
+            { productId: 2, quantity: 2 },
+            { productId: 3, quantity: 5 }
+          ],
+          delivery: {
+            address: "Rua das Pamonhas"
+          },
+          salePrice: 15.00
+        })
+      .expect('status', StatusCodes.BAD_REQUEST)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        expect(result.message).toBe('Invalid delivery adress or number');
+      });
+  });
+
+  it('Should not be able to create a sale with price inconsistency', async () => {
+    await frisby
+        .post(`${url}/sales/create`, {
+          sale: [
+            { productId: 2, quantity: 2 },
+            { productId: 3, quantity: 5 }
+          ],
+          delivery: {
+            address: "Rua das Pamonhas",
+            number: "315"
+          },
+          salePrice: 27.00
+        })
+      .expect('status', StatusCodes.BAD_REQUEST)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        expect(result.message).toBe('price inconsistency');
+      });
   });
 
   it('Should be able to create a sale', async () => {
