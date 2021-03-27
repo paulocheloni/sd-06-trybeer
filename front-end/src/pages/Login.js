@@ -16,9 +16,9 @@ export default function Login(props) {
     const user = await login(dataUser);
     localStorage.setItem('user', JSON.stringify(user));
     if (user.role === 'client') {
-      history.push('/products');
+      history.push({ pathname: '/products' });
     } else if (user.role === 'administrator') {
-      history.push('/admin/orders');
+      history.push({ pathname: '/admin/orders' });
     } else {
       setLoginUser({ ...loginUser, erro: true });
     }
