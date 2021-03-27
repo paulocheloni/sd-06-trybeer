@@ -6,7 +6,7 @@ export default function Home(props) {
 
   useEffect(() => {
     history.push('./login');
-  }, []);
+  }, [history]);
   return (
     <div>
       <p>Teste</p>
