@@ -52,22 +52,20 @@ export default function Login() {
       <form className="form-signin">
         <img className="mb-4" src={ beerPremium } width="170" height="170" alt="Logo" />
         <h1 className="h1 mb-3 font-weight-normal">Login</h1>
-        <label htmlFor="email" className="sr-only">
+        <label htmlFor="email">
           Email
           <input
             className="form-control"
-            placeholder="E-mail"
             type="email"
             id="email"
             data-testid="email-input"
             onChange={ handleChangeEmail }
           />
         </label>
-        <label htmlFor="password" className="sr-only">
+        <label htmlFor="password">
           Senha
           <input
             className="form-control"
-            placeholder="Senha"
             type="password"
             id="password"
             data-testid="password-input"
