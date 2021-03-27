@@ -13,7 +13,7 @@ export default function Login(props) {
   const validPassword = loginUser.password.length > CINCO;
 
   const handleLogin = async (dataUser) => {
-    const user = await login({ dataUser });
+    const user = await login(dataUser);
     localStorage.setItem('user', JSON.stringify(user));
     if (user.role === 'client') {
       history.push('/products');
@@ -58,7 +58,7 @@ export default function Login(props) {
           type="button"
           data-testid="signin-btn"
           disabled={ !validEmail || !validPassword }
-          onClick={ () => handleLogin(dataUser) }
+          onClick={ () => handleLogin(loginUser) }
         >
           Entrar
         </button>
