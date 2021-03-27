@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import { useHistory } from 'react-router';
 import TrybeerContext from '../context/TrybeerContext';
 import login from '../api/axiosApi';
 // import ErroPage from './ErroPage';
 
-export default function Login(props) {
-  const { history } = props;
+export default function Login() {
+  // const { history } = props;
+  const history = useHistory();
   const CINCO = 5;
   const { loginUser, setLoginUser } = useContext(TrybeerContext);
   const regexEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
@@ -13,6 +15,8 @@ export default function Login(props) {
   const validPassword = loginUser.password.length > CINCO;
 
   const handleLogin = async (dataUser) => {
+    // console.log(props.location)
+    // console.log(history)
     const user = await login(dataUser);
     localStorage.setItem('user', JSON.stringify(user));
     if (user.role === 'client') {
@@ -20,7 +24,8 @@ export default function Login(props) {
     } else if (user.role === 'administrator') {
       history.push({ pathname: '/admin/orders' });
     } else {
-      setLoginUser({ ...loginUser, erro: true });
+      // setLoginUser({ ...loginUser, erro: true });
+      history.push({ pathname: '/register' });
     }
   };
 
@@ -74,6 +79,6 @@ export default function Login(props) {
   );
 }
 
-Login.propTypes = {
-  history: PropTypes.shape().isRequired,
-};
+// Login.propTypes = {
+//   history: PropTypes.shape().isRequired,
+// };
