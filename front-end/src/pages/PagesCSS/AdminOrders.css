@@ -81,5 +81,9 @@
 
 .btn-delivery {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-around;
+}
+
+.btn-cancel {
+  background-color: red;
 }

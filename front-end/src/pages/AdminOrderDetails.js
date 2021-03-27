@@ -27,8 +27,8 @@ function AdminOrderDetails(props) {
     }
   };
 
-  const markAsDone = async () => {
-    await put(`admin/orders/${state.id}`, user.token, { status: 'Entregue' });
+  const markAsDone = async (status) => {
+    await put(`admin/orders/${state.id}`, user.token, { status });
     fetchOrderDetails();
     setIsShowing(false);
   };
@@ -105,8 +105,15 @@ function AdminOrderDetails(props) {
               <div className="btn-delivery">
                 <button
                   type="button"
+                  onClick={ () => markAsDone('Cancelado') }
+                  class="btn1 saveButton btn-cancel"
+                >
+                  Cancelar Pedido
+                </button>
+                <button
+                  type="button"
                   data-testid="mark-as-delivered-btn"
-                  onClick={ markAsDone }
+                  onClick={ () => markAsDone('Entregue') }
                   class="btn1 saveButton"
                 >
                   Marcar como entregue
