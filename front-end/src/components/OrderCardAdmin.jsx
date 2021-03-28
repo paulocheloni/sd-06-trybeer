@@ -21,7 +21,6 @@ function OrderCardAdmin(props) {
     <Link to={ `/admin/orders/${order.id}` }>
       <a
         href="/admin/orders/:id"
-        // data-testid={ `${index}-order-number` }
         onClick={ () => handleClick() }
       >
         <div

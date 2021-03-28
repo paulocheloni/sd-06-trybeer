@@ -1,7 +1,9 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import '../css/ControllerHeader.css';
 import '../css/Sidebar.css';
+import '../css/AdminSidebar.css';
+import beerLogo from '../img/beer.png'
 
 function AdminSideBar() {
   const history = useHistory();
@@ -10,7 +12,12 @@ function AdminSideBar() {
       className="sidebar"
       data-testid="admin-side-bar-container"
     >
-      <h3>Trybeer</h3>
+      <Link to="/products" className="products-link">
+        <section>
+          <img src={beerLogo} alt=""/>
+          <h3>Trybeer</h3>
+        </section>
+      </Link>
       <button
         type="button"
         data-testid="side-menu-item-orders"

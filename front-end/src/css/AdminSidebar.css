@@ -1,0 +1,19 @@
+.products-link {
+  align-items: center;
+  display: flex;
+  color: white;
+  height: 100px;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.products-link section {
+  align-items: center;
+  background-color: #004370;
+  border: solid 2px #061A40;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  width: 50%;
+}
