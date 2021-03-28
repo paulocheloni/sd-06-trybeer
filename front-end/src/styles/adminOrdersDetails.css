@@ -25,3 +25,9 @@
 .main-page-adm {
   height: 85%;
 }
+
+.title-adm-details{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 30px;
+}

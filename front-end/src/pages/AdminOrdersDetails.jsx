@@ -42,46 +42,53 @@ export default function AdminOrdersDetails() {
           <h1 data-testid="top-title">Detalhes de Pedido</h1>
         </div>
         <div className="main-page-adm">
-          <h2 data-testid="order-number">{`Pedido ${id}`}</h2>
-          <h2 data-testid="order-status">
-            {productsOfSale.length !== 0 && productsOfSale[0].status}
-          </h2>
+          <div className="title-adm-details">
+            <h2 data-testid="order-number">{`Pedido ${id}`}</h2>
+            <h2 data-testid="order-status">
+              {productsOfSale.length !== 0 && productsOfSale[0].status}
+            </h2>
+          </div>
           <div>
             {productsOfSale.map((produto, index) => (
-              <div key={ produto.id }>
-                <div data-testid={ `${index}-product-qtd` }>{produto.quantity}</div>
-                <div data-testid={ `${index}-product-name` }>{produto.name}</div>
-                <div data-testid={ `${index}-product-total-value` }>
-                  {(produto.price * produto.quantity).toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  })}
-                </div>
-                <div data-testid={ `${index}-order-unit-price` }>
-                  (
-                  {Number(produto.price).toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  })}
-                  )
+              <div key={ produto.id } className="cada-venda-adm">
+                <div className="venda-adm">
+                  <div data-testid={ `${index}-product-qtd` }>{produto.quantity}</div>
+                  <div data-testid={ `${index}-product-name` }>{produto.name}</div>
+                  <div data-testid={ `${index}-product-total-value` }>
+                    {(produto.price * produto.quantity).toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                    })}
+                    <div data-testid={ `${index}-order-unit-price` }>
+                      (
+                      {Number(produto.price).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })}
+                      )
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-          <h2 data-testid="order-total-value">
+          <h2 data-testid="order-total-value" className="total-price">
             {productsOfSale
               .reduce(sumOfCart, 0)
               .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
           </h2>
-          {buttonDisabled && (
-            <button
-              type="button"
-              data-testid="mark-as-delivered-btn"
-              onClick={ handleClick }
-            >
-              Marcar como entregue
-            </button>
-          )}
+          <div className="button-register">
+            {buttonDisabled && (
+              <button
+                className="btn btn-danger "
+                type="button"
+                data-testid="mark-as-delivered-btn"
+                onClick={ handleClick }
+              >
+                Marcar como entregue
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
