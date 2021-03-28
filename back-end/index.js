@@ -9,7 +9,7 @@ const orderController = require('./controller/ordersController');
 const adminOrdersController = require('./controller/adminOrdersController');
 
 const app = express();
-app.use('/images',express.static('images'));
+app.use('/images', express.static('images'));
 app.use(cors());
 app.use(bodyParser.json());
 
