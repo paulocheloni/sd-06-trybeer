@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import MenuTop from '../components/MenuTop';
 import api from '../services/api';
+import '../styles/profile.css';
 
 export default function Profile() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -31,37 +32,43 @@ export default function Profile() {
   return (
     <div>
       <MenuTop title="Meu perfil" />
-      <label htmlFor="email">
-        Email
-        <input
-          data-testid="profile-email-input"
-          className="inputProfile"
-          type="text"
-          id="email"
-          name="email"
-          value={ user.email }
-          readOnly
-        />
-      </label>
-      <label htmlFor="name">
-        Name
-        <input
-          data-testid="profile-name-input"
-          type="text"
-          id="name"
-          name="name"
-          value={ name }
-          onChange={ (e) => handleChange(e) }
-        />
-      </label>
-      <button
-        data-testid="profile-save-btn"
-        type="button"
-        disabled={ isEnabled }
-        onClick={ handleClick }
-      >
-        Salvar
-      </button>
+      <div className="form-group container-profile">
+        <label htmlFor="email">
+          Email
+          <input
+            data-testid="profile-email-input"
+            readOnly
+            className="form-control"
+            type="text"
+            id="email"
+            name="email"
+            value={ user.email }
+          />
+        </label>
+        <label htmlFor="name">
+          Name
+          <input
+            data-testid="profile-name-input"
+            className="form-control"
+            type="text"
+            id="name"
+            name="name"
+            value={ name }
+            onChange={ (e) => handleChange(e) }
+          />
+        </label>
+      </div>
+      <div className="button-profile">
+        <button
+          data-testid="profile-save-btn"
+          className="btn btn-danger"
+          type="button"
+          disabled={ isEnabled }
+          onClick={ handleClick }
+        >
+          Salvar
+        </button>
+      </div>
       <div>{message}</div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import '../styles/cardOrders.css';
 import api from '../services/api';
 
 export default function CardOrders() {
@@ -30,18 +31,20 @@ export default function CardOrders() {
   };
 
   return (
-    <div>
+    <div className="main-container">
       {sales.map((sale, index) => (
         <Link to={ `/orders/${sale.id}` } key={ sale.id }>
-          <div data-testid={ `${index}-order-card-container` }>
-            <h4 data-testid={ `${index}-order-number` }>{`Pedido ${sale.id}`}</h4>
-            <h4 data-testid={ `${index}-order-date` }>{formatDate(sale.sale_date)}</h4>
-            <h4 data-testid={ `${index}-order-total-value` }>
-              {Number(sale.total_price).toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              })}
-            </h4>
+          <div className="cada-compra">
+            <div data-testid={ `${index}-order-card-container` } className="compra">
+              <h4 data-testid={ `${index}-order-number` }>{`Pedido ${sale.id}`}</h4>
+              <h4 data-testid={ `${index}-order-date` }>{formatDate(sale.sale_date)}</h4>
+              <h4 data-testid={ `${index}-order-total-value` }>
+                {Number(sale.total_price).toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                })}
+              </h4>
+            </div>
           </div>
         </Link>
       ))}
