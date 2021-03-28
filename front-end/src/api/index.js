@@ -120,3 +120,20 @@ export async function getAllOrders() {
     }
   }
 }
+
+export async function sendProductSale(saleId, productId, quantity) {
+  try {
+    await axios.post(
+      `${URL_BASE}orders/sale`,
+      { saleId, productId, quantity },
+    );
+  } catch (error) {
+    if (error.response) {
+      return {
+        status: error.response.status,
+        statusText: error.response.statusText,
+        message: error.response.data.message,
+      };
+    }
+  }
+}

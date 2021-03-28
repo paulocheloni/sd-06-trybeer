@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Header } from '../components';
 import { cartList, globalID, globalQuantity, removeCartItem } from '../actions';
-import { finishOrders } from '../api/index';
+import { finishOrders, getAllOrders, sendProductSale } from '../api/index';
 
 class Checkout extends React.Component {
   constructor() {
@@ -20,8 +20,8 @@ class Checkout extends React.Component {
     this.exclude = this.exclude.bind(this);
   }
 
-  componentDidMount() {
-    this.storageToRedux();
+  async componentDidMount() {
+    await this.storageToRedux();
     const { history } = this.props;
     if (!localStorage.token) {
       history.push('./login');
@@ -48,7 +48,7 @@ class Checkout extends React.Component {
   }
 
   async handleClick() {
-    const { history } = this.props;
+    const { history, stateCart } = this.props;
     const { address, number } = this.state;
     const priceTotal = Number(localStorage.getItem('price')).toFixed(2);
     const date = new Date().toLocaleString('pt-BR');
@@ -56,8 +56,6 @@ class Checkout extends React.Component {
     const numbers = date.split(' ')[0].split('/');
     const newDate = `${numbers[2]}/${numbers[1]}/${numbers[0]}`;
     const fullDate = date.replace(`${date.split(' ')[0]}`, `${newDate}`);
-    // console.log(fullDate)
-
     const userID = JSON.parse(localStorage.getItem('actualUser')).id;
 
     await finishOrders({ priceTotal, date: fullDate, userID, address, number });
@@ -65,9 +63,14 @@ class Checkout extends React.Component {
     const TWOTHOUSAND = 2000;
     setTimeout(() => {}, TWOTHOUSAND);
 
-    if (history.location.pathname === '/checkout') {
-      history.push('/products', { purchase: true });
-    }
+    // if (history.location.pathname === '/checkout') {
+    //   history.push('/products', { purchase: true });
+    // }
+    const orders = await getAllOrders();
+    console.log(orders.length)
+    stateCart.forEach((element) => {
+      sendProductSale(orders.length, element.id, element.quantity);
+    });
   }
 
   async storageToRedux() {

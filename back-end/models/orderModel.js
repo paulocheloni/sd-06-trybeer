@@ -19,7 +19,21 @@ const create = async ({ priceTotal, date, userID, address, number }) => {
   }
 };
 
+const createSaleProduct = async (saleId, productId, quantity) => {
+  try {
+    await connection.execute(
+      `INSERT INTO sales_products
+        (sale_id, product_id, quantity)
+        VALUES (?, ?, ?)`,
+      [saleId, productId, quantity],
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 module.exports = {
   create,
   getAll,
+  createSaleProduct,
 };
