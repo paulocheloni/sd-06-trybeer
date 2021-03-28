@@ -17,9 +17,19 @@ export default function AdminProfile() {
         <div className="page-title-adm">
           <h1>Perfil</h1>
         </div>
-        <div className="main-page-adm">
-          <p data-testid="profile-name">{`Nome: ${user.name}`}</p>
-          <p data-testid="profile-email">{`Email: ${user.email}`}</p>
+        <div className="main-page-adm form-group">
+          <p
+            className="form-control"
+            data-testid="profile-name"
+          >
+            {`Nome: ${user.name}`}
+          </p>
+          <p
+            className="form-control"
+            data-testid="profile-email"
+          >
+            {`Email: ${user.email}`}
+          </p>
         </div>
       </div>
     </div>
