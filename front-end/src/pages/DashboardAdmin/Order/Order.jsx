@@ -18,7 +18,7 @@ export default function Orders() {
 
   return (
     <div className="page-with-menu-admin">
-      <Header title="TryBeer" user="admin" />
+      <Header title=".comCerveja" user="admin" />
       <div className="content-order-admin">
         {(sales.length && sales.map((sale, index) => (
           <AdminOrderCard

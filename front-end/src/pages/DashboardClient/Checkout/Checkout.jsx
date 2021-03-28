@@ -12,6 +12,7 @@ import CheckoutCard from '../../../components/checkoutCard/CheckoutCard';
 import AddressForm from './AddressForm';
 import { parseCartPrice } from '../../../utils/parseValues';
 import { TWO_THOUSAND, NINETEEN } from '../../../services/magicNumbers';
+import Loading from '../../../components/Loading/Loading'
 
 import './Checkout.css';
 
@@ -80,20 +81,25 @@ const Checkout = (props) => {
         return history.push('/products');
       }, TWO_THOUSAND);
     } else {
+      console.log(saleResponse)
       setSaleDone(saleResponse);
     }
   };
 
   return (
-    <div className="checkout-general page-with-menu">
+    <div className={saleDone ? 'loading' : `checkout-general page-with-menu`}>
       <Header title="Finalizar Pedido" user="client" />
       <div className="checkout-container">
-        <h2 className="products-title">Produtos</h2>
         {(saleDone)
           ? (
-            <h1>{saleDone}</h1>
-          )
-          : (
+            <>
+            <Loading />
+            <h1 className='saleDone'>{saleDone}</h1>
+            </>
+            )
+            : (
+            <>
+            <h2 className="products-title">Produtos</h2>
             <div>
               {
                 (cart.length)
@@ -134,6 +140,7 @@ const Checkout = (props) => {
                 onClick={ () => makeSale() }
               />
             </div>
+            </>
           )}
       </div>
     </div>

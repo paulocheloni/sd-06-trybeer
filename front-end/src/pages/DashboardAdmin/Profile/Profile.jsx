@@ -17,7 +17,7 @@ export default function Profile() {
 
   return (
     <div className="container">
-      <Header title="TryBeer" user="admin" />
+      <Header title=".comCerveja" user="admin" />
       <div className="perfil">
         <h1>Perfil</h1>
       </div>

@@ -39,7 +39,7 @@ export default function Products() {
   return (
     <div className="container">
       <div className="head">
-        <Header title="TryBeer" user="client" />
+        <Header title=".comCerveja" user="client" />
       </div>
       <div className="main">
         {products.map((product, index) => (

@@ -33,7 +33,7 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
   return (
 
     <div className="page-with-menu-admin">
-      <Header title="TryBeer" user="admin" />
+      <Header title=".comCerveja" user="admin" />
       <div className="sale-details">
       {saleProducts && (
         <>
