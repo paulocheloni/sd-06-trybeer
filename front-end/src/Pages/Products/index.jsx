@@ -1,12 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router';
 import GetProducts from '../../services/GetProducts';
 import CardProduct from '../../Components/CardProduct';
+import AppContext from '../../context/AppContext';
 import Menu from '../../Components/Menu';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const { setEmail, setPassword } = useContext(AppContext);
   const history = useHistory();
   useEffect(() => {
     if (localStorage.products && localStorage.products !== '[]') {
@@ -21,6 +23,8 @@ const Products = () => {
     }
   }, []);
   useEffect(() => {
+    setPassword('');
+    setEmail('');
     const amountInCart = products
       .reduce((acc, product) => acc + product.productQuantity, 0);
     if (amountInCart !== 0) {
