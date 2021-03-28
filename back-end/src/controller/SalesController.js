@@ -5,7 +5,7 @@ const { SalesService } = require('../service');
 const registerSale = rescue(async (req, res) => {
   const params = req.body;
   const registeredSale = await SalesService.registerSale(params);
-  console.log(registerSale);
+
   return res
     .status(201)
     .json(registeredSale);

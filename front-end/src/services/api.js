@@ -38,6 +38,15 @@ const getAllProducts = async (token) => axios
   .catch((err) => err.response.data);
 
 const getAllOrders = async (token) => axios
+  .get(`${baseUrl}/orders/admin`, {
+    headers: {
+      authorization: token,
+    },
+  })
+  .then((res) => res.data)
+  .catch((err) => err.response.data);
+
+const getAllOrdersByUser = async (token) => axios
   .get(`${baseUrl}/orders`, {
     headers: {
       authorization: token,
@@ -46,11 +55,18 @@ const getAllOrders = async (token) => axios
   .then((res) => res.data)
   .catch((err) => err.response.data);
 
-const getOrdersByDetails = async (token, id) => axios
+const getOrdersById = async (token, id) => axios
   .get(`${baseUrl}/orders/${id}`, {
     headers: {
       authorization: token,
     },
+  })
+  .then((res) => res.data)
+  .catch((err) => err.response.data);
+
+const updateStatusOrder = async (status, id) => axios
+  .put(`${baseUrl}/orders/${id}`, {
+    status,
   })
   .then((res) => res.data)
   .catch((err) => err.response.data);
@@ -77,12 +93,14 @@ const registerSales = async (params) => axios
   .catch((err) => ({ response: err.response, result: false }));
 
 module.exports = {
-  generateToken,
-  registerUser,
+  getAllOrdersByUser,
+  updateStatusOrder,
   updateNameOfUser,
-  getAllProducts,
-  getAllOrders,
   regSalesProducts,
+  getAllProducts,
+  generateToken,
   registerSales,
-  getOrdersByDetails,
+  getOrdersById,
+  registerUser,
+  getAllOrders,
 };
