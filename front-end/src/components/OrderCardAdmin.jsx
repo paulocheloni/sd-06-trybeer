@@ -41,7 +41,7 @@ function OrderCardAdmin(props) {
           </p>
 
           <p data-testid={ `${index}-order-status` }>
-            {`R$ ${order.status}`}
+            {`${order.status}`}
           </p>
         </div>
       </a>

@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { verifyLogin } = require('../middlewares/authToken');
 const SalesService = require('../service/SalesService');
-const { OK } = require('../schema/statusSchema');
+const { OK, BAD_REQUEST } = require('../schema/statusSchema');
 
 const SalesController = new Router();
 
@@ -33,6 +33,15 @@ SalesController.post('/checkout', verifyLogin, async (req, res) => {
   items.map((elem) => SalesService.storeSaleProducts(insertId, elem.id, elem.total));
 
   res.status(OK).json({ saleId: insertId });
+});
+
+// Update
+SalesController.put('/status/:id', async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  await SalesService.updateStatus(id, status);  
+  res.status(OK).json({ Message: 'Updated status' });
 });
 
 module.exports = SalesController;

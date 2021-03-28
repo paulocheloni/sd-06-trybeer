@@ -10,6 +10,11 @@
   display: flex;
 }
 
+.admin-container-detail {
+  margin-left: 200px;
+  flex-direction: column;
+}
+
 .admin-container h1 {
   margin-left: 15%;
   margin-top: 40px;

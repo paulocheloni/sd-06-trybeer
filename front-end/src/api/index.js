@@ -93,6 +93,12 @@ async function getSalesProductsBySaleId(setSaleDetail, saleId) {
     } }).then((response) => setSaleDetail(response.data));
 }
 
+async function updateStatusSale(status, id) {
+  const axios = buildAxiosHandler();
+
+  await axios.put(`/sales/status/${id}`, { status });
+}
+
 export {
   checkout,
   getProducts,
@@ -103,4 +109,5 @@ export {
   getOrders,
   getproductsBySaleId,
   getSalesProductsBySaleId,
+  updateStatusSale,
 };

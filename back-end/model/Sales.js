@@ -65,6 +65,14 @@ const storeSaleProducts = async (saleId, productId, quantity) => {
   return sales;
 };
 
+// Update name
+const updateStatus = async (id, status) => {
+  const [sale] = await connection
+    .execute('UPDATE Trybeer.sales SET status = ? WHERE id = ?', [status, id]);
+
+  return sale;
+};
+
 module.exports = {
   getAll,
   getById,
@@ -72,4 +80,5 @@ module.exports = {
   getSalesProductsBySaleId,
   storeRequest,
   storeSaleProducts,
+  updateStatus,
 };
