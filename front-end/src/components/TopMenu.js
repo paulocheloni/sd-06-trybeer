@@ -27,11 +27,11 @@ const TopMenu = ({ titleMenu }) => {
           </IconContext.Provider>
         </button>
         <p
-          class="Trybeer"
+          className="Trybeer"
           data-testid="top-title"
         >
-            { titleMenu }
-          </p>
+          { titleMenu }
+        </p>
         <IconContext.Provider value={ { size: '3em' } }>
           <IoBeerOutline />
         </IconContext.Provider>
@@ -41,7 +41,7 @@ const TopMenu = ({ titleMenu }) => {
 };
 
 TopMenu.propTypes = {
-  titleMenu: PropTypes.string,
+  titleMenu: PropTypes.string.isRequired,
 };
 
 export default TopMenu;

@@ -58,7 +58,7 @@ const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
             className="totalValue"
           >
             Unidades:
-              {quantity}
+            { quantity }
           </p>
           <button
             onClick={ increaseQuantity }

@@ -4,29 +4,27 @@ import TrybeerContext from '../context/TrybeerContext';
 import formatedPrice from '../utils/formatedPrice';
 import './ComponentsCSS/ProductListItem.css';
 
-
-
 const ProductListItem = ({ index, id, name, quantity, price }) => {
   const totalPrice = (quantity * price).toFixed(2);
   const { removeItemCart } = useContext(TrybeerContext);
 
   return (
-    <div class="containerList">
+    <div className="containerList">
       <p data-testid={ `${index}-product-qtd-input` }>
         Unidades:
-          {quantity}
+        { quantity }
       </p>
       <p data-testid={ `${index}-product-name` }>
         Nome do Produto:
-          {name}
+        { name }
       </p>
       <p data-testid={ `${index}-product-total-value` }>
         Valor:
-          {formatedPrice(totalPrice)}
+        { formatedPrice(totalPrice) }
       </p>
       <p data-testid={ `${index}-product-unit-price` }>
         Preço da unidade:
-          { `(${formatedPrice(price)} un)` }
+        { `(${formatedPrice(price)} un)` }
       </p>
       <button
         data-testid={ `${index}-removal-button` }

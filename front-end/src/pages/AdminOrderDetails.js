@@ -13,12 +13,11 @@ function AdminOrderDetails(props) {
   const [isShowing, setIsShowing] = useState(true);
   const { location: { state }, history } = props;
   
-  
   const fetchOrderDetails = async () => {
     if (state) {
       const order = await verifyToken(`admin/orders/details/${state.id}`, user, history);
       setOrderCart(order);
-      if(order[0].status !== 'Pendente') setIsShowing(false);
+      if (order[0].status !== 'Pendente') setIsShowing(false);
     }
   };
 

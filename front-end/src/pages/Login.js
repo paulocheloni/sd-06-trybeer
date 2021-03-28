@@ -37,7 +37,7 @@ function Login() {
   };
 
   return (
-    <section className="login-form" class="Form">
+    <section className="login-form Form">
       <div className="container">
         <div className="row">
           <div className="col-lg-5">
@@ -63,7 +63,7 @@ function Login() {
               </div>
               <div className="form-row">
                 <div className="col-lg-7">
-                  <input 
+                  <input
                     type="password"
                     placeholder="Senha"
                     name="password"
