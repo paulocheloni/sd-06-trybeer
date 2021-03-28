@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Redirect } from 'react-router-dom';
 import api from '../services/api';
+import MenuTop from '../components/MenuTop';
 
 export default function OrderDetails() {
   const { id } = useParams();
@@ -32,6 +33,7 @@ export default function OrderDetails() {
 
   return (
     <div>
+      <MenuTop title="Detalhes de Pedido" />
       <h1 data-testid="top-title">Detalhes de Pedido</h1>
       <h2 data-testid="order-number">{ `Pedido ${id}` }</h2>
       <h2 data-testid="order-date">

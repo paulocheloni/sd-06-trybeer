@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import MenuTop from '../components/MenuTop';
 import api from '../services/api';
+import '../styles/profile.css';
 
 export default function Profile() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -35,7 +36,6 @@ export default function Profile() {
         Email
         <input
           data-testid="profile-email-input"
-          className="inputProfile"
           type="text"
           id="email"
           name="email"
@@ -56,6 +56,7 @@ export default function Profile() {
       </label>
       <button
         data-testid="profile-save-btn"
+        className="btn btn-danger"
         type="button"
         disabled={ isEnabled }
         onClick={ handleClick }
