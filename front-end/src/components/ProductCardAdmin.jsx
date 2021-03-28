@@ -13,13 +13,15 @@ function ProductCardAdmin(props) {
       <div>
         <p
           data-testid={ `${index}-product-qtd` }
-          className="quantity-width"  
-        >{ quantity }</p>
+          className="quantity-width"
+        >
+          { quantity }
+        </p>
         <p data-testid={ `${index}-product-name` }>{ ` - ${productName}` }</p>
-        <p data-testid={ `${index}-product-total-value` } >
+        <p data-testid={ `${index}-product-total-value` }>
           {`R$ ${productTotal.toFixed(2).toString().replace('.', ',')}`}
         </p>
-        <p data-testid={ `${index}-order-unit-price` } >
+        <p data-testid={ `${index}-order-unit-price` }>
           {`(R$ ${productPrice.replace('.', ',')})`}
         </p>
       </div>

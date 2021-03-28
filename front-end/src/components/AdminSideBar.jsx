@@ -3,7 +3,7 @@ import { useHistory, Link } from 'react-router-dom';
 import '../css/ControllerHeader.css';
 import '../css/Sidebar.css';
 import '../css/AdminSidebar.css';
-import beerLogo from '../img/beer.png'
+import beerLogo from '../img/beer.png';
 
 function AdminSideBar() {
   const history = useHistory();
@@ -14,7 +14,7 @@ function AdminSideBar() {
     >
       <Link to="/products" className="products-link">
         <section>
-          <img src={beerLogo} alt=""/>
+          <img src={ beerLogo } alt="" />
           <h3>Trybeer</h3>
         </section>
       </Link>
