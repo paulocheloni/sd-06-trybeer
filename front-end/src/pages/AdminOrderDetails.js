@@ -12,7 +12,7 @@ function AdminOrderDetails(props) {
   const [hasState, setHasState] = useState(false);
   const [isShowing, setIsShowing] = useState(true);
   const { location: { state }, history } = props;
-  
+
   const fetchOrderDetails = async () => {
     if (state) {
       const order = await verifyToken(`admin/orders/details/${state.id}`, user, history);
