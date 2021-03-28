@@ -17,7 +17,7 @@ const Login = () => {
     if (data.userLogin.role === 'client') return history.push('/products');
     if (data.userLogin.role === 'administrator') return history.push('/admin/orders');
     alert('E-mail ou senha incorreta');
-    localStorage.removeItem('token');
+    //  localStorage.removeItem('token');
   };
   const storageClear = () => {
     if (localStorage.products) {
