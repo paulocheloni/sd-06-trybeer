@@ -16,14 +16,15 @@ const Cart = () => {
   return (
     <div className="cart-container">
       <p data-testid="checkout-bottom-btn-value">
-        Valor : { formatedPrice(getTotalPriceCart()) }
+        Valor :
+        { formatedPrice(getTotalPriceCart()) }
       </p>
       <button
         data-testid="checkout-bottom-btn"
         type="button"
         onClick={ () => history.push('/checkout') }
         disabled={ disabledButton }
-        class='cartButton'
+        className="cartButton"
       >
         Ver Carrinho
       </button>

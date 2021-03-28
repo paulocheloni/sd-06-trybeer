@@ -4,8 +4,8 @@ import { useHistory } from 'react-router-dom';
 import { verifyEmailAndPassword } from '../utils/verifications';
 import fetchFunctions from '../api/fetchFunctions';
 import TrybeerContext from '../context/TrybeerContext';
-import image from '../imagens/brinde3.jpg'
-import './PagesCSS/Login.css'
+import image from '../imagens/brinde3.jpg';
+import './PagesCSS/Login.css';
 
 function Login() {
   const history = useHistory();
@@ -38,57 +38,57 @@ function Login() {
 
   return (
     <section className="login-form" class="Form">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-5">
-            <img src={image} class="img-fluid" alt="cerveja"/>
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-5">
+            <img src={ image } className="img-fluid" alt="cerveja" />
           </div>
-          <div class="col-lg-7 px-4 pt-5">
+          <div className="col-lg-7 px-4 pt-5">
             <h1>TryBeer</h1>
             <h4>Encontre aqui a sua cerveja!</h4>
-            <h2 class="login">Login</h2> 
-            <form class="formContainer" onSubmit={ handleSignUp }>
-              <div class="form-row">
-                <div class="col-lg-7">
-                  <input 
-                    type="text" 
+            <h2 className="login">Login</h2>
+            <form className="formContainer" onSubmit={ handleSignUp }>
+              <div className="form-row">
+                <div className="col-lg-7">
+                  <input
+                    type="text"
                     placeholder="E-mail"
                     name="email"
                     value={ email }
-                    data-testid="email-input" 
-                    class="form-control mt-0 y-3 p-4"
-                    onChange={ (e) => setEmail(e.target.value) } 
+                    data-testid="email-input"
+                    className="form-control mt-0 y-3 p-4"
+                    onChange={ (e) => setEmail(e.target.value) }
                   />
                 </div>
               </div>
-              <div class="form-row">
-                <div class="col-lg-7">
+              <div className="form-row">
+                <div className="col-lg-7">
                   <input 
                     type="password"
                     placeholder="Senha"
                     name="password"
                     value={ password }
                     data-testid="password-input"
-                    class="form-control my-3 p-4"
-                    onChange={ (e) => setPassword(e.target.value) } 
+                    className="form-control my-3 p-4"
+                    onChange={ (e) => setPassword(e.target.value) }
                   />
                 </div>
               </div>
-              <div class="form-row">
-                <div class="col-lg-7">
-                  <button 
+              <div className="form-row">
+                <div className="col-lg-7">
+                  <button
                     type="submit"
                     data-testid="signin-btn"
                     disabled={ isDisabled }
-                    class="btn1 mt-3 mb-0"
+                    className="btn1 mt-3 mb-0"
                   >
                     Entrar
                   </button>
-                  <button 
+                  <button
                     type="button"
                     data-testid="no-account-btn"
                     onClick={ handleRegister }
-                    class="btn1 mt-3 mb-5"
+                    className="btn1 mt-3 mb-5"
                   >
                     Ainda não tenho conta
                   </button>
@@ -110,6 +110,3 @@ Login.propTypes = {
 };
 
 export default Login;
-
-
-

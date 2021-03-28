@@ -6,7 +6,7 @@ import { TopMenu } from '../components';
 import { verifyToken } from '../utils/verifications';
 import formatedPrice from '../utils/formatedPrice';
 import formatedDate from '../utils/formatedDate';
-import './PagesCSS/Orders.css'
+import './PagesCSS/Orders.css';
 
 function Orders({ history }) {
   const [orders, setOrders] = useState([]);

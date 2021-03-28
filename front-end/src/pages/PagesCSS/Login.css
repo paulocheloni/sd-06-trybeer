@@ -47,3 +47,9 @@ h4 {
   padding-top: 5px;
  
 } 
+
+@media screen and (max-width: 990px) {
+  img {
+    display: none;
+  }
+}

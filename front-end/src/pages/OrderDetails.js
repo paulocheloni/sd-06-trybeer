@@ -71,7 +71,8 @@ function OrderDetails(props) {
                         <div
                           data-testid={ `${index}-product-total-value` }
                         >
-                          {`Valor Total: ${formatedPrice((price * quantity).toFixed(2))}` }
+                          { `Valor Total:
+                            ${formatedPrice((price * quantity).toFixed(2))}` }
                         </div>
                       </div>
                     ))

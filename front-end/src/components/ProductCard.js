@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TrybeerContext from '../context/TrybeerContext';
 import formatedPrice from '../utils/formatedPrice';
-import './ComponentsCSS/ProductCard.css'
+import './ComponentsCSS/ProductCard.css';
 
 const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
   const [quantity, setQuantity] = useState(0);
@@ -32,7 +32,7 @@ const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
 
   return (
     <div className="product-card">
-      <div class="card-deck">
+      <div className="card-deck">
         <img
           // class="card-img-top"
           data-testid={ `${index}-product-img` }
@@ -40,26 +40,31 @@ const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
           alt={ name }
           src={ urlImage }
         />
-        <div class="card-body">
-        <p data-testid={ `${index}-product-name` }>{name}</p>
-        <p data-testid={ `${index}-product-price` }>{formatedPrice(price)}</p>
-        {/* <p data-testid={ `${index}-product-price` }>{`R$ ${formatedPrice}`}</p> */}
+        <div className="card-body">
+          <p data-testid={ `${index}-product-name` }>{name}</p>
+          <p data-testid={ `${index}-product-price` }>{formatedPrice(price)}</p>
         </div>
-        <div className="quantity-controller" class="cardFooter">
+        <div className="quantity-controller cardFooter">
           <button
             onClick={ decreaseQuantity }
             data-testid={ `${index}-product-minus` }
             type="button"
-            class="btn"
+            className="btn"
           >
             -
           </button>
-          <p data-testid={ `${index}-product-qtd` } class="totalValue">Unidades: {quantity}</p>
+          <p
+            data-testid={ `${index}-product-qtd` }
+            className="totalValue"
+          >
+            Unidades:
+              {quantity}
+          </p>
           <button
             onClick={ increaseQuantity }
             data-testid={ `${index}-product-plus` }
             type="button"
-            class="btn"
+            className="btn"
           >
             +
           </button>

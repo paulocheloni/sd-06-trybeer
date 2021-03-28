@@ -12,10 +12,13 @@ function AdminOrderDetails(props) {
   const [hasState, setHasState] = useState(false);
   const [isShowing, setIsShowing] = useState(true);
   const { location: { state }, history } = props;
+  
+  
   const fetchOrderDetails = async () => {
     if (state) {
       const order = await verifyToken(`admin/orders/details/${state.id}`, user, history);
       setOrderCart(order);
+      if(order[0].status !== 'Pendente') setIsShowing(false);
     }
   };
 
@@ -106,7 +109,7 @@ function AdminOrderDetails(props) {
                 <button
                   type="button"
                   onClick={ () => markAsDone('Cancelado') }
-                  class="btn1 saveButton btn-cancel"
+                  className="btn1 saveButton btn-cancel"
                 >
                   Cancelar Pedido
                 </button>
@@ -114,7 +117,7 @@ function AdminOrderDetails(props) {
                   type="button"
                   data-testid="mark-as-delivered-btn"
                   onClick={ () => markAsDone('Entregue') }
-                  class="btn1 saveButton"
+                  className="btn1 saveButton"
                 >
                   Marcar como entregue
                 </button>

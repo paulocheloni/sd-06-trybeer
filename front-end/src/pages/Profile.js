@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { TopMenu } from '../components';
 import fetchFunctions from '../api/fetchFunctions';
 import TrybeerContext from '../context/TrybeerContext';
-import './PagesCSS/Profile.css'
-
+import './PagesCSS/Profile.css';
 
 function Profile(props) {
   const { user, eraseLocalStorage } = useContext(TrybeerContext);
@@ -46,12 +45,12 @@ function Profile(props) {
       <TopMenu
         titleMenu="Meu perfil"
       />
-      <form method="put" class="container">
-        <div className="content-panel" class="panel-profile">
-            <div class="form-row">
+      <form method="put" className="container">
+        <div className="panel-profile">
+            <div className="form-row">
               <label htmlFor="name">
                 Name
-                <div class="col-lg-20">
+                <div className="col-lg-20">
                   <input
                     data-testid="profile-name-input"
                     type="text"
@@ -59,15 +58,15 @@ function Profile(props) {
                     placeholder="Nome"
                     id="name"
                     onChange={ onChangeName }
-                    class="form-control mt-0 y-3 p-4"
+                    className="form-control mt-0 y-3 p-4"
                   />
                 </div>
               </label>
             </div>
-            <div class="form-row">
+            <div className="form-row">
               <label htmlFor="email">
                 Email
-                <div class="col-lg-20">
+                <div className="col-lg-20">
                   <input
                     value={ email }
                     readOnly="readonly"
@@ -76,19 +75,19 @@ function Profile(props) {
                     name="email"
                     placeholder="Email"
                     id="email"
-                    class="form-control mt-0 y-3 p-4"
+                    className="form-control mt-0 y-3 p-4"
                   />
                 </div>
               </label>
             </div>
-            <div class="form-row">
-              <div class="col-lg-20">
+            <div className="form-row">
+              <div className="col-lg-20">
                 <button
                   data-testid="profile-save-btn"
                   type="submit"
                   disabled={ disabled }
                   onClick={ handleSubmit }
-                  class="btn1 saveButton"
+                  className="btn1 saveButton"
                 >
                   Salvar
                 </button>

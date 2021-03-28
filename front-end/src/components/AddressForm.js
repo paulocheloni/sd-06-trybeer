@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import './ComponentsCSS/AddressForm.css'
+import './ComponentsCSS/AddressForm.css';
 
 const AddressForm = (props) => {
   const {
@@ -17,7 +17,7 @@ const AddressForm = (props) => {
   }, [street, number, setIsFormFilled]);
 
   return (
-    <form class="addresForm">
+    <form className="addresForm">
       <h3>Endereço:</h3>
       <div className="addres-form">
         <div className="input-form">
@@ -29,7 +29,7 @@ const AddressForm = (props) => {
               name="street"
               value={ street }
               onChange={ (e) => setStreet(e.target.value) }
-              class="form-control mt-0 y-3 p-4"
+              className="form-control mt-0 y-3 p-4"
             />
           </label>
         </div>
@@ -42,7 +42,7 @@ const AddressForm = (props) => {
               name="street"
               value={ number }
               onChange={ (e) => setNumber(e.target.value) }
-              class="form-control mt-0 y-3 p-4"
+              className="form-control mt-0 y-3 p-4"
             />
           </label>
         </div>
