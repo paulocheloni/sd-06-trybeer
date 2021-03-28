@@ -5,7 +5,7 @@ function CostumerOrdersDetailsCard({ element }) {
   const { id, sale_date: saleDate, total_price: totalPrice, name, qnt } = element;
 
   return (
-    <div className="detailsOrders">
+    <div>
       <div className="detailsOrders_title">
         <h1>{`Pedido ${id}`}</h1>
         <h1>{ saleDate }</h1>

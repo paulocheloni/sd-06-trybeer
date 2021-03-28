@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Header, CostumerOrdersDetailsCards } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
+import '../style/CostumerOrderDetails.css';
 
 function CostumerOrdersDetails() {
   const history = useHistory();
@@ -49,22 +50,28 @@ function CostumerOrdersDetails() {
   const commaAmount = (price) => `${price}`.replace('.', ',');
 
   return (
-    <>
+    <div>
       <Header text="Detalhes de Pedido" id="top-title" />
       <div className="order-list">
-        <h1 data-testid="order-number">{`Pedido ${id}`}</h1>
-        <h1 data-testid="order-date">{ date() }</h1>
-        {orders.map((element, index) => (
-          <div key={ index }>
-            <CostumerOrdersDetailsCards
-              element={ element }
-              index={ index }
-            />
-          </div>
-        ))}
-        <p data-testid="order-total-value">{`Total: R$ ${commaAmount(totalPrice)}`}</p>
+        <div className="order-list-title">
+          <h1 data-testid="order-number">{`Pedido ${id}`}</h1>
+          <h1 data-testid="order-date">{ date() }</h1>
+        </div>
+        <div className="order-list-list">
+          {orders.map((element, index) => (
+            <div key={ index }>
+              <CostumerOrdersDetailsCards
+                element={ element }
+                index={ index }
+              />
+            </div>
+          ))}
+        </div>
+        <div className="order-list-price">
+          <p data-testid="order-total-value">{`Total: R$ ${commaAmount(totalPrice)}`}</p>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 

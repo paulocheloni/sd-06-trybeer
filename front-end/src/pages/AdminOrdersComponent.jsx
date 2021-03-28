@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SideBarAdmin, AdminOrdersCards } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
+import '../style/AdminOrder.css';
 
 function AdminOrders() {
   const {
@@ -21,20 +22,22 @@ function AdminOrders() {
   }, []);
 
   return (
-    <div className="admin_orders">
+    <div>
       <SideBarAdmin />
-      <h1>Pedidos</h1>
-      <div className="order-list">
-        {orders.map((element, index) => (
-          <div key={ element.id }>
-            <Link to={ `/admin/orders/${element.id}` }>
-              <AdminOrdersCards
-                element={ element }
-                index={ index }
-              />
-            </Link>
-          </div>
-        ))}
+      <div className="admin_orders">
+        <h1>Pedidos</h1>
+        <div className="order-list">
+          {orders.map((element, index) => (
+            <div key={ element.id }>
+              <Link to={ `/admin/orders/${element.id}` }>
+                <AdminOrdersCards
+                  element={ element }
+                  index={ index }
+                />
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

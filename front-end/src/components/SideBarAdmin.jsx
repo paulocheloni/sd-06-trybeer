@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import BeersAppContext from '../context/BeersAppContext';
+import '../style/SideBarAdmin.css';
 
 function AdminSideBar() {
   const history = useHistory();
@@ -15,8 +16,6 @@ function AdminSideBar() {
         type="button"
         data-testid="side-menu-item-orders"
         onClick={ () => history.push('/admin/orders') }
-        className="bttn_sidebar_admin"
-
       >
         Pedidos
       </button>
@@ -24,7 +23,6 @@ function AdminSideBar() {
         type="button"
         data-testid="side-menu-item-profile"
         onClick={ () => history.push('/admin/profile') }
-        className="bttn_sidebar_admin"
       >
         Perfil
       </button>
@@ -35,7 +33,7 @@ function AdminSideBar() {
           setUser({});
           history.push('/login');
         } }
-        className="bttn_sidebar_admin_botton"
+        className="bttn_sidebar_admin_bottom"
       >
         Sair
       </button>

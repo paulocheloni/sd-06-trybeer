@@ -63,7 +63,7 @@ function CheckoutCards({ element, index }) {
         data-testid={ `${index}-removal-button` }
         onClick={ deleteItem }
       >
-        Remover
+        X
       </button>
     </div>
   );

@@ -5,6 +5,7 @@ import {
   AdminDetailsOrdersCards,
   SideBarAdmin,
 } from '../components';
+import '../style/AdminOrderDetails.css';
 
 function AdminOrdersDetailsPage() {
   const { id } = useParams();
@@ -65,27 +66,37 @@ function AdminOrdersDetailsPage() {
   return (
     <div className="admin_orders_details">
       <SideBarAdmin />
-      <h1 data-testid="order-number">{ `Pedido ${id}` }</h1>
-      <h1 data-testid="order-status">{ statusOrder() }</h1>
-      {AdminOrders.map((element, index) => (
-        <div key={ index }>
-          <AdminDetailsOrdersCards
-            element={ element }
-            index={ index }
-          />
+      <div className="admin_orders_details_title">
+        <h1 data-testid="order-number">{ `Pedido ${id}` }</h1>
+        <h1 data-testid="order-status">{ statusOrder() }</h1>
+      </div>
+      <div className="admin_orders_details_list">
+        <div className="admin_orders_details_product">
+          {AdminOrders.map((element, index) => (
+            <div key={ index }>
+              <AdminDetailsOrdersCards
+                element={ element }
+                index={ index }
+              />
+            </div>
+          ))}
         </div>
-      ))}
-      <p data-testid="order-total-value">{ `R$ ${totalPrice.replace('.', ',')}` }</p>
-      {statusOrder() === 'Pendente' && (
-        <button
-          type="button"
-          data-testid="mark-as-delivered-btn"
-          onClick={ updateStatus }
-        >
-          Marcar como entregue
-        </button>
-      )}
-      <span>{ messageError }</span>
+        <div className="admin_orders_details_price">
+          <p data-testid="order-total-value">{ `R$ ${totalPrice.replace('.', ',')}` }</p>
+        </div>
+      </div>
+      <div className="admin_orders_details_button">
+        {statusOrder() === 'Pendente' && (
+          <button
+            type="button"
+            data-testid="mark-as-delivered-btn"
+            onClick={ updateStatus }
+          >
+            Marcar como entregue
+          </button>
+        )}
+        <span>{ messageError }</span>
+      </div>
     </div>
   );
 }

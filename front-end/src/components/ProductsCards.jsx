@@ -53,13 +53,13 @@ function ProductsCard({ element, index }) {
         alt="beer"
       />
       <div className="productCards_title">
-        <p data-testid={ `${index}-product-name` }>{ name }</p>
-        <p
+        <h3
           className="txt-productCards"
           data-testid={ `${index}-product-price` }
         >
           { `R$ ${commaPrice}` }
-        </p>
+        </h3>
+        <p data-testid={ `${index}-product-name` }>{ name }</p>
       </div>
       <div className="productCards-qtt">
         <button
