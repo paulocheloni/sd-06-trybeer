@@ -13,6 +13,7 @@ const registerSale = async (params) => {
     params.date,
     params.status],
   );
+
   return {
     ok: true,
     id: insertId,

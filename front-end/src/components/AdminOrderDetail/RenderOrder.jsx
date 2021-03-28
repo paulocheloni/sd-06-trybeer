@@ -4,34 +4,46 @@ import PropTypes from 'prop-types';
 function RenderOrder({ productDetail }) {
   return (
     <div>
-      {productDetail.map((item, index) => (
-        <div key={ index }>
-          <p data-testid={ `${index}-product-qtd` }>{item.productQuantity}</p>
-          <span data-testid={ `${index}-product-name` }>{item.productName}</span>
-          <p
+      {productDetail.map(({ productQuantity, productName, productPrice }, index) => (
+        <div
+          key={ index }
+        >
+          <span
+            data-testid={ `${index}-product-qtd` }
+          >
+            { `${productQuantity} - ` }
+          </span>
+          <span
+            data-testid={ `${index}-product-name` }
+          >
+            { productName }
+          </span>
+          <span
             data-testid={ `${index}-product-total-value` }
           >
-            {`R$ ${(item.productPrice * item.productQuantity)
+            {`R$ ${(productPrice * productQuantity)
               .toFixed(2).replace('.', ',')}`}
-          </p>
+          </span>
           <span
             data-testid={ `${index}-order-unit-price` }
           >
-            {`(R$ ${item.productPrice.replace('.', ',')})`}
+            {`(R$ ${productPrice.replace('.', ',')})`}
           </span>
         </div>
       ))}
       <p
         data-testid="order-total-value"
       >
-        {`Total: R$ ${productDetail.map((item) => item.totalPrice.replace('.', ','))[0]}`}
+        {`Total: R$ ${productDetail[0]
+          ? productDetail[0].totalPrice.replace('.', ',')
+          : true}`}
       </p>
     </div>
   );
 }
 
 RenderOrder.propTypes = {
-  productDetail: PropTypes.objectOf(Object).isRequired,
+  productDetail: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default RenderOrder;

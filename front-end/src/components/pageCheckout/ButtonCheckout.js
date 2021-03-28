@@ -30,6 +30,7 @@ function ButtonCheckout() {
     setTimeout(() => history.push('/products'), timeout);
     setMessage(true);
     const result = await api.registerSales(params);
+    localStorage.cart = JSON.stringify([]);
 
     if (result.response.id) {
       products.forEach((element) => {

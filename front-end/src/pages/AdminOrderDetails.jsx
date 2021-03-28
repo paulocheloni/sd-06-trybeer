@@ -6,49 +6,46 @@ import RenderOrder from '../components/AdminOrderDetail/RenderOrder';
 
 function AdminOrderDetails({ match, history }) {
   const [productDetail, setProductDetail] = useState([]);
-  const [estado, setEstado] = useState([]);
+  const [status, setStatus] = useState('');
   const [change, setChange] = useState(false);
   const { params: { id } } = match;
 
   useEffect(() => {
-    const productDetails = async () => {
+    const fetchProductDetails = async () => {
       const user = JSON.parse(localStorage.getItem('user'));
       const { token } = user;
-      if (!user) {
-        history.push('/login');
-      }
-      const orders = await api.getAllOrders(token);
-      const findStatus = orders.map((item) => item.status);
-      setEstado(findStatus);
-      const details = await api.getOrdersByDetails(token, id);
-      setProductDetail(details);
+      const response = await api.getOrdersById(token, id);
+      if (response.message) history.push('/login');
+      response.map((item) => setStatus(item.productStatus));
+      setProductDetail(response);
     };
-    productDetails();
+    fetchProductDetails();
   }, [history, id]);
 
-  const handleClick = async () => {
-    setEstado('Entregue');
-    if (estado === 'Pendente') {
-      setChange(false);
-    }
+  const handleClick = () => {
+    setStatus('Entregue');
     setChange(true);
   };
 
   useEffect(() => {
-    const teste = async () => {
-      await api.updateStatusOrder(estado, id);
+    const fetchStatusOrder = async () => {
+      await api.updateStatusOrder(status, id);
+      if (status === 'Entregue') setChange(true);
     };
-    teste();
+    fetchStatusOrder();
   });
 
   return (
     <div>
       <MenuSideBar />
-      <h1 data-testid="order-number">
-        {`Pedido ${id}`}
-        -
-      </h1>
-      <h1 data-testid="order-status">{`${estado}`}</h1>
+      <span data-testid="order-number">
+        {`Pedido ${id} - `}
+      </span>
+      <span
+        data-testid="order-status"
+      >
+        { status }
+      </span>
       <RenderOrder productDetail={ productDetail } />
       <button
         type="button"

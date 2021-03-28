@@ -5,15 +5,19 @@ const { authorization } = require('../middleware');
 
 const OrderRoute = Router();
 
+OrderRoute.get('/admin',
+  authorization,
+  OrderController.getAllOrders);
+
 OrderRoute.get('/:id',
   authorization,
-  OrderController.getOrdersByDetails);
+  OrderController.getOrdersById);
 
 OrderRoute.put('/:id',
   OrderController.updateStatusOrder);
 
 OrderRoute.get('/',
   authorization,
-  OrderController.getAllOrders);
+  OrderController.getAllOrdersByUser);
 
 module.exports = OrderRoute;

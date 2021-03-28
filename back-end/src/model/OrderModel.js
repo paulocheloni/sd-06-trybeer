@@ -1,13 +1,6 @@
 const connection = require('./connection');
 
-const getAllOrders = async () => {
-  const orders = connection.execute(
-    'SELECT * FROM Trybeer.sales;',
-  );
-  return orders;
-};
-
-const getOrdersByDetails = async (id) => {
+const getOrdersById = async (id) => {
   const orders = connection.execute(
     `SELECT 
       SP.sale_id AS saleId,
@@ -15,7 +8,8 @@ const getOrdersByDetails = async (id) => {
       SP.quantity AS productQuantity,
       P.name AS productName,
       P.price AS productPrice,
-      S.total_price AS totalPrice
+      S.total_price AS totalPrice,
+      S.status AS productStatus
     FROM Trybeer.sales AS S
     INNER JOIN Trybeer.sales_products AS SP ON S.id = SP.sale_id
     INNER JOIN Trybeer.products AS P ON P.id = SP.product_id
@@ -35,8 +29,24 @@ const updateStatusOrder = async (status, id) => {
   };
 };
 
+const getAllOrders = async () => {
+  const orders = connection.execute(
+    'SELECT * FROM Trybeer.sales;',
+  );
+  return orders;
+};
+
+const getAllOrdersByUser = async (id) => {
+  const orders = connection.execute(
+    'SELECT * FROM Trybeer.sales WHERE user_id=?;', [id],
+  );
+
+  return orders;
+};
+
 module.exports = {
-  getAllOrders,
-  getOrdersByDetails,
+  getAllOrdersByUser,
   updateStatusOrder,
+  getOrdersById,
+  getAllOrders,
 };
