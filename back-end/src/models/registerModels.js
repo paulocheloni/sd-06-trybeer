@@ -26,5 +26,5 @@ const editUser = async (nextName, prevName) => {
 module.exports = { 
   createUser,
   excludeUser,
-  editUser 
+  editUser,
 };

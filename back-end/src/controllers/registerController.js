@@ -1,5 +1,5 @@
 const registerRouter = require('express').Router();
-const Service = require('../services/registerServices');
+const registerService = require('../services/registerServices');
 const httpStatusCode = require('../utils/httpStatusCode');
 
 // Create a user
