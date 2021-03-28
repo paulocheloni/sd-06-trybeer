@@ -5,7 +5,7 @@ import ProductCard from '../components/ProductCard';
 import ShowCart from '../components/ShowCart';
 import { getProducts } from '../api/index';
 import { tokenExists } from '../services/index';
-import '../css/Products.css';
+import '../css/General.css';
 
 function Products() {
   const [products, setProducts] = useState(false);
@@ -20,7 +20,7 @@ function Products() {
   return (
     <div className="products-wrapper">
       <ControllerHeader />
-      <section className="product-list">
+      <section className="list">
         { products && products
           .map((prod, index) => (<ProductCard
             key={ index }

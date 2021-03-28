@@ -1,20 +1,10 @@
 import React, { useContext } from 'react';
-// import { useHistory } from 'react-router-dom';
 import BeerContext from '../context/BeerContext';
-// import CardClientDetailsOrder from '../components/ClientDetailsOrder/CardClientOrder';
-// import { tokenExists } from '../services/index';
 import ProductCardAdmin from '../components/ProductCardAdmin';
 
 function AdminDetailsOrder() {
-  // const history = useHistory();
   const { saleDetail } = useContext(BeerContext);
   const { sale, products } = saleDetail;
-  // const total = sale.saleTotal.replace('.', ',');
-
-  // useEffect(() => {
-  //   tokenExists(history);
-  //   setProducts(productsOrder);
-  // }, [productsOrder, history]);
 
   return (
     <div>
@@ -25,7 +15,7 @@ function AdminDetailsOrder() {
             <spam data-testid="order-number">{`Pedido ${sale.saleId}`}</spam>
             <spam data-testid="order-status">{` - ${sale.saleStatus}`}</spam>
           </div>
-          <section className="product-list">
+          <section className="list">
             { products && products
               .map((prod, index) => (<ProductCardAdmin
                 key={ index }

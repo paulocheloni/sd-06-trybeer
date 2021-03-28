@@ -7,6 +7,7 @@
   color: #003559;
   display: flex;
   font-size: large;
+  height: 165px;
   margin: 30px auto;
   max-width: 50%; 
   padding: 10px;
@@ -28,6 +29,11 @@
 
 .checkout-card-container p:first-of-type {
   border-bottom: 1px solid #046868;
+  font-size: x-large;
+}
+
+.checkout-card-container p:last-of-type {
+  width: 100%;
 }
 
 .checkout-card-container p {

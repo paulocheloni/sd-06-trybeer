@@ -20,7 +20,7 @@ function Orders() {
   return (
     <div>
       <ControllerHeader />
-      <section>
+      <section className="list">
         { orders && orders.map((order, index) => (<OrderCard
           key={ index }
           index={ index }

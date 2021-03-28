@@ -19,32 +19,30 @@ function OrderCardAdmin(props) {
   };
 
   return (
-    <Link to={ `/admin/orders/${order.id}` } className="checkout-card-container" onClick={ () => handleClick() }>
-      {/* <a
-        href="/admin/orders/:id"
-        
-      > */}
-        <div
-          // className="checkout-card-container"
-          data-testid={ `${index}-order-card-container` }
-        >
-          <p data-testid={ `${index}-order-number` }>
-            {`Pedido ${order.id}`}
-          </p>
+    <Link
+      to={ `/admin/orders/${order.id}` }
+      className="checkout-card-container"
+      onClick={ () => handleClick() }
+    >
+      <div
+        data-testid={ `${index}-order-card-container` }
+      >
+        <p data-testid={ `${index}-order-number` }>
+          {`Pedido ${order.id}`}
+        </p>
 
-          <p data-testid={ `${index}-order-address` }>
-            {`${order.delivery_address}, ${order.delivery_number}`}
-          </p>
+        <p data-testid={ `${index}-order-address` }>
+          {`${order.delivery_address}, ${order.delivery_number}`}
+        </p>
 
-          <p data-testid={ `${index}-order-total-value` }>
-            {`R$ ${total}`}
-          </p>
+        <p data-testid={ `${index}-order-total-value` }>
+          {`R$ ${total}`}
+        </p>
 
-          <p data-testid={ `${index}-order-status` }>
-            {`${order.status}`}
-          </p>
-        </div>
-      {/* </a> */}
+        <p data-testid={ `${index}-order-status` }>
+          {`${order.status}`}
+        </p>
+      </div>
     </Link>
   );
 }

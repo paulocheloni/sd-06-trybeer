@@ -33,28 +33,27 @@ function CheckoutCard(props) {
   };
 
   return (
-    <div
+    <Link
+      to={ `orders/${order.id}` }
       className="checkout-card-container"
-      data-testid={ `${index}-order-card-container` }
+      onClick={ () => handleClick() }
     >
-      <Link to={ `orders/${order.id}` }>
-        <a
-          href="orders/:id"
-          data-testid={ `${index}-order-number` }
-          onClick={ () => handleClick() }
-        >
+      <div
+        data-testid={ `${index}-order-card-container` }
+      >
+        <p data-testid={ `${index}-order-number` }>
           { `Pedido ${JSON.stringify(order.id)}` }
-        </a>
-      </Link>
-      <p data-testid={ `${index}-order-date` }>
-        {`Data: ${formattedDate}`}
-      </p>
-      <p data-testid={ `${index}-order-total-value` }>
-        Preço: R$
-        {' '}
-        { order.total_price.toString().replace('.', ',') }
-      </p>
-    </div>
+        </p>
+        <p data-testid={ `${index}-order-date` }>
+          {`Data: ${formattedDate}`}
+        </p>
+        <p data-testid={ `${index}-order-total-value` }>
+          Preço: R$
+          {' '}
+          { order.total_price.toString().replace('.', ',') }
+        </p>
+      </div>
+    </Link>
   );
 }
 
