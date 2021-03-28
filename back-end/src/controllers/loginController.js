@@ -18,7 +18,6 @@ loginRouter.post('/', async (req, res, next) => {
   
     return res.status(200).json(user);
   } catch (error) {
-    console.log(error.message, "passei aqui");
     return next({
       statusCode: 500,
       errorMessage: error.message,
