@@ -1,6 +1,5 @@
 .admin-container {
-  background-color: #047575;
-  color: white;
+  color: rgb(0, 117, 117);
   display: flex;
   flex-flow: column;
   height: 100vh;
@@ -18,6 +17,8 @@
 }
 
 .orders-list {
+  display: flex;
+  flex-flow: row wrap;
   margin-left: 15%;
-  width: 75%;
+  width: 85%;
 }
