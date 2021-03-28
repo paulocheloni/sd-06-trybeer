@@ -13,6 +13,7 @@ import AdminProfile from './pages/AdminProfile';
 import Checkout from './pages/Checkout';
 import Orders from './pages/Orders';
 import ClientDetailsOrder from './pages/ClientDetailsOrder';
+import AdminDetailsOrder from './pages/AdminDetailsOrder';
 
 import './App.css';
 
@@ -31,6 +32,7 @@ function App() {
           <Route exact path="/checkout"><Checkout /></Route>
           <Route exact path="/orders"><Orders /></Route>
           <Route exact path="/orders/:id"><ClientDetailsOrder /></Route>
+          <Route exact path="/admin/orders/:id"><AdminDetailsOrder /></Route>
         </div>
       </BeerProvider>
     </BrowserRouter>

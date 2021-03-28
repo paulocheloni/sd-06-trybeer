@@ -11,6 +11,7 @@ export default function BeerProvider({ children }) {
   const [saleIdOrder, setSaleIdOrder] = useState('');
   const [dateOrder, setDateOrder] = useState('');
   const [totalPriceOrder, setTotalprice] = useState('');
+  const [saleDetail, setSaleDetail] = useState('');
 
   const context = {
     productsOrder,
@@ -21,6 +22,8 @@ export default function BeerProvider({ children }) {
     setDateOrder,
     totalPriceOrder,
     setTotalprice,
+    saleDetail,
+    setSaleDetail,
   };
 
   return (
