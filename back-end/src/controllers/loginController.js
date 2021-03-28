@@ -1,5 +1,8 @@
 const loginRouter = require('express').Router();
 const Service = require('../services/loginService');
+// const { Router } = require('express');
+
+// const loginRouter = new Router();
 
 loginRouter.post('/', async (req, res, next) => {
   try {
@@ -15,7 +18,7 @@ loginRouter.post('/', async (req, res, next) => {
   
     return res.status(200).json(user);
   } catch (error) {
-    console.log(error);
+    console.log(error.message, "passei aqui");
     return next({
       statusCode: 500,
       errorMessage: error.message,

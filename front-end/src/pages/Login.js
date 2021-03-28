@@ -19,6 +19,7 @@ export default function Login() {
     // console.log(history)
     const user = await login(dataUser);
     localStorage.setItem('user', JSON.stringify(user));
+    console.log(user.role);
     if (user.role === 'client') {
       history.push({ pathname: '/products' });
     } else if (user.role === 'administrator') {
