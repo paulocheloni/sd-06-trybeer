@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import api from '../services/api';
+import '../styles/register.css';
 
 export default function Register() {
   const [email, setEmail] = useState('');
@@ -76,51 +77,67 @@ export default function Register() {
 
   return (
     <div>
-      <h1>Register</h1>
-      <label htmlFor="name">
-        Nome
-        <input
-          type="text"
-          id="name"
-          data-testid="signup-name"
-          onChange={ handleChangeName }
-        />
-      </label>
-      <label htmlFor="email">
-        Email
-        <input
-          type="email"
-          id="email"
-          data-testid="signup-email"
-          onChange={ handleChangeEmail }
-        />
-      </label>
-      <label htmlFor="password">
-        Senha
-        <input
-          type="password"
-          id="password"
-          data-testid="signup-password"
-          onChange={ handleChangePassword }
-        />
-      </label>
-      <label htmlFor="checkbox">
-        Quero vender
+      <div className="title-register">
+        <h1>Registro</h1>
+      </div>
+      <div className="form-register">
+        <div className="form-group">
+          <label htmlFor="name">
+            Nome
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              data-testid="signup-name"
+              onChange={ handleChangeName }
+            />
+          </label>
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">
+            Email
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              data-testid="signup-email"
+              onChange={ handleChangeEmail }
+            />
+          </label>
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">
+            Senha
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              data-testid="signup-password"
+              onChange={ handleChangePassword }
+            />
+          </label>
+        </div>
+      </div>
+      <label htmlFor="checkbox" className="check-button">
         <input
           type="checkbox"
           id="checkbox"
           data-testid="signup-seller"
           onChange={ handleChangeCheckbox }
         />
+        Quero vender
       </label>
-      <button
-        type="button"
-        data-testid="signup-btn"
-        disabled={ !(isEmailValid && isPasswordValid && isNameValid) }
-        onClick={ handleClick }
-      >
-        Cadastrar
-      </button>
+      <div className="button-register">
+        <button
+          type="button"
+          className="btn btn-danger"
+          data-testid="signup-btn"
+          disabled={ !(isEmailValid && isPasswordValid && isNameValid) }
+          onClick={ handleClick }
+        >
+          Cadastrar
+        </button>
+      </div>
       { userExist && <p>E-mail already in database.</p> }
     </div>
   );

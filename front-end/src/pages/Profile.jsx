@@ -49,7 +49,6 @@ export default function Profile() {
           Name
           <input
             data-testid="profile-name-input"
-            readOnly
             className="form-control"
             type="text"
             id="name"
