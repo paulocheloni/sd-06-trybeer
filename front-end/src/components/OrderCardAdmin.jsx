@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../css/CheckoutCard.css';
+import '../css/ProductCard.css';
 import BeerContext from '../context/BeerContext';
 import { getSalesProductsBySaleId } from '../api/index';
 
@@ -18,13 +19,13 @@ function OrderCardAdmin(props) {
   };
 
   return (
-    <Link to={ `/admin/orders/${order.id}` }>
-      <a
+    <Link to={ `/admin/orders/${order.id}` } className="checkout-card-container" onClick={ () => handleClick() }>
+      {/* <a
         href="/admin/orders/:id"
-        onClick={ () => handleClick() }
-      >
+        
+      > */}
         <div
-          className="checkout-card-container"
+          // className="checkout-card-container"
           data-testid={ `${index}-order-card-container` }
         >
           <p data-testid={ `${index}-order-number` }>
@@ -40,10 +41,10 @@ function OrderCardAdmin(props) {
           </p>
 
           <p data-testid={ `${index}-order-status` }>
-            {`R$ ${order.status}`}
+            {`${order.status}`}
           </p>
         </div>
-      </a>
+      {/* </a> */}
     </Link>
   );
 }
