@@ -2,7 +2,8 @@ import fetchFunctions from '../api/fetchFunctions';
 
 const messageError = 'Operation not authorized';
 const messageErrorAdmin = 'User is not an Admin';
-const invalidMessage = (m) => (m.message === messageError) || (m.message === messageErrorAdmin);
+const invalidMessage = (m) => (m.message === messageError)
+  || (m.message === messageErrorAdmin);
 
 export const verifyToken = async (endpoint, user, history) => {
   if (user.token) {
