@@ -17,7 +17,7 @@ const CardProduct = ({ products, setProducts }) => {
       SetCartDisabled(true);
     }
   }, [products]);
-  console.log('resultado aki',products);
+
   return (
     <div>
       <S.CardContainer>
@@ -71,7 +71,10 @@ const CardProduct = ({ products, setProducts }) => {
               </S.Buttons>
             </S.Container>
             <S.Text data-testid="checkout-bottom-btn-value">
-            Total:{' '}R${' '}
+              Total:
+              {' '}
+              R$
+              {' '}
               { (item.price * item.productQuantity).toFixed(2).replace(/\./g, ',') }
             </S.Text>
             <br />
