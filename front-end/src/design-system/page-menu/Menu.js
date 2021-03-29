@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import GlobalContext from '../../context/Context';
+
 function Menu(props) {
   const [menuStatus, setMenuStatus] = useState(false);
   const { setToken } = useContext(GlobalContext);
@@ -81,9 +82,11 @@ function Menu(props) {
         <div
           clasName={ classToTest }
           style={
-            { display: `${menuStatus ? 'flex' : 'hidden'}`, width: '100px', height: '100px' }
+            {
+              display: `${menuStatus ? 'flex' : 'hidden'}`,
+              width: '100px',
+              height: '100px' }
           }
-          // className={ `${classToTest} h-1 w-1 ${menuStatus ? '' : 'hidden'}` }
         />
         { links.map((link, index) => (
           <Link
