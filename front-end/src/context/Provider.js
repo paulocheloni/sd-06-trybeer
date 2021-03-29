@@ -3,7 +3,15 @@ import PropTypes from 'prop-types';
 import TrybeerContext from './TrybeerContext';
 
 const Provider = ({ children }) => {
-  const [loginUser, setLoginUser] = useState({ email: '', password: '', erro: false });
+  const [loginUser, setLoginUser] = useState(
+    {
+      name: '',
+      email: '',
+      password: '',
+      error: false,
+      wantToSell: false,
+    },
+  );
 
   return (
     <TrybeerContext.Provider value={ { loginUser, setLoginUser } }>

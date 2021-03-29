@@ -1,24 +1,28 @@
-const registerModel = require('../models/registerModels');
-
+const Model = require('../models/registerModels');
+const httpResponse = require('../utils/httpResponses');
+const validators = require('../utils/validationsEntries');
 // Create a user
 const create = async (name, email, password, role) => {
-  const findByName = await registerModel.findByEmail(email);
-  if (findByName.length !== 0) {
-    return { error: true, code: 'conflict', message: 'E-mail already in database.' };
-  }
-  const users = await registerModel.create(name, email, password, role);
-  return users;
+  if (!validators.validName(name)
+  || !validators.validEmail(email)
+  || !validators.validPassword(password)) return httpResponse.INVALID_DATA;
+
+  const userCreated = await Model.createUser(name, email, password, role);
+  
+  if (!userCreated.insertId) return httpResponse.INVALID_DATA;
+  
+  return { name, email, role };
 };
 
 // Delete a user
 const exclude = async (id) => {
-  const users = await registerModel.exclude(id);
+  const users = await Model.exclude(id);
   return users;
 };
 
 // Edit a user
 const edit = async (prevName, nextName) => {
-  const users = await registerModel.edit(nextName, prevName);
+  const users = await Model.edit(nextName, prevName);
   return users;
 };
 

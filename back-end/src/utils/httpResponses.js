@@ -4,7 +4,7 @@ module.exports = {
     error: true,
   },
   EMAIL_ALREADY_EXISTS: {
-    message: 'Email já cadastrado',
+    message: 'E-mail already in database.',
     error: true,
   },
   USER_NOT_FOUND: {

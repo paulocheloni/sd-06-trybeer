@@ -2,11 +2,11 @@ const connection = require('../database/connection');
 
 // Create a user
 const createUser = async (name, email, password, role) => {
-  const [users] = await connection.execute(
+  const [user] = await connection.execute(
     'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)',
     [name, email, password, role],
   );
-  return users;
+  return user;
 };
 
 // Delete a user

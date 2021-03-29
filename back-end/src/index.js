@@ -6,9 +6,9 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
-const error = require('./src/middlewares/error.js');
-const loginRouter = require('./src/controllers/loginController.js');
-const registerRouter = require('./src/controllers/registerController');
+const error = require('./middlewares/error.js');
+const loginRouter = require('./controllers/loginController.js');
+const registerRouter = require('./controllers/registerController');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
