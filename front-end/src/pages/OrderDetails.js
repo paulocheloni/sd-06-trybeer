@@ -56,22 +56,21 @@ function OrderDetails(props) {
                         className="order-card-container"
                         data-testid={ `${index}-order-card-container` }
                       >
-
-                        <div data-testid={ `${index}-product-name` }>
-                          {`Nome: ${name}` }
-                        </div>
                         <div data-testid={ `${index}-product-qtd` }>
-                          {`Quantidade: ${quantity}` }
+                          {`${quantity}` }
+                        </div>
+                        <div data-testid={ `${index}-product-name` }>
+                          {`${name}` }
                         </div>
                         <div
                           data-testid={ `${index}-order-total-value` }
                         >
-                          {`Valor Unitário: ${formatedPrice(price)}` }
+                          {`${formatedPrice(price)}` }
                         </div>
                         <div
                           data-testid={ `${index}-product-total-value` }
                         >
-                          { `Valor Total:
+                          { `
                             ${formatedPrice((price * quantity).toFixed(2))}` }
                         </div>
                       </div>

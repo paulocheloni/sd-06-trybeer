@@ -4,6 +4,16 @@
   width: 100%;
 }
 
+.quantity-item {
+  background-color: white ;
+}
+
+.headers {
+  color: gray;
+  display: flex;
+  justify-content: space-around;
+}
+
 .container-detail {
   align-items: center;
   flex-direction: column;
@@ -11,12 +21,13 @@
   flex-wrap: wrap;
   width: 100%;
 }
+
 .order-card-container {
   width: 100%;
   border: 1px solid white;
+  background-color: yellow;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
   padding: 1%;
   /* margin: 5%; */
   /* background-color: blue; */

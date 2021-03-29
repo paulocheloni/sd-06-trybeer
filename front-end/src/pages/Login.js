@@ -46,7 +46,6 @@ function Login() {
           <div className="col-lg-7 px-4 pt-5">
             <h1>TryBeer</h1>
             <h4>Encontre aqui a sua cerveja!</h4>
-            <h2 className="login">Login</h2>
             <form className="formContainer" onSubmit={ handleSignUp }>
               <div className="form-row">
                 <div className="col-lg-7">

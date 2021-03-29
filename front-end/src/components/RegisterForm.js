@@ -36,38 +36,35 @@ const RegisterForm = (props) => {
   return (
     <form className="register-form">
       <label htmlFor="name" className="form-label">
-        Nome:
+        Nome
         <input
           data-testid="signup-name"
           className="form-control"
           type="text"
           name="name"
-          placeholder="Jose da Silva"
           id="name"
           onChange={ onChangeName }
         />
       </label>
       <label htmlFor="email" className="form-label">
-        Email:
+        Email
         <input
           data-testid="signup-email"
           className="form-control"
           type="email"
           name="email"
           id="email"
-          placeholder="Email"
           onChange={ onChangeEmail }
         />
       </label>
       <label htmlFor="password" className="form-label">
-        Senha:
+        Senha
         <input
           data-testid="signup-password"
           className="form-control"
           type="password"
           name="password"
           id="password"
-          placeholder="Senha"
           onChange={ onChangePassword }
         />
       </label>
@@ -80,11 +77,14 @@ const RegisterForm = (props) => {
           id="checkbox"
           onChange={ onCheck }
         />
+        {' '}
         Quero vender
       </label>
+      <br/>
       <button
         data-testid="signup-btn"
         type="button"
+        className="btn2"
         disabled={ disabled }
         onClick={ onHandleClick }
       >

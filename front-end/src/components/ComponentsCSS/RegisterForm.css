@@ -25,3 +25,26 @@
     width:80%;
   }
 }
+
+.btn2{
+  margin: 3px;
+  border: 1px solid;
+  outline: none;
+  height: 50px;
+  width: fit-content;
+  background: rgb(255, 136, 0);
+  color: rgb(0, 0, 0);
+  border-radius: 4px;
+  font-weight:inherit;
+}
+
+.btn2:disabled{
+  border: 1px solid;
+  outline: none;
+  height: 50px;
+  width: fit-content;
+  background-color: gray;
+  color: rgb(163, 163, 163);
+  border-radius: 4px;
+  font-weight:inherit;
+}

@@ -7,7 +7,6 @@ import './ComponentsCSS/ProductCard.css';
 const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
   const [quantity, setQuantity] = useState(0);
   const { cart, updateProductQuantity } = useContext(TrybeerContext);
-  // const formatedPrice = price.replace('.', ',');
 
   useEffect(() => {
     const productById = cart.find((item) => item.id === id);
@@ -34,7 +33,6 @@ const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
     <div className="product-card">
       <div className="card-deck">
         <img
-          // class="card-img-top"
           data-testid={ `${index}-product-img` }
           className="product-card-image card-img-top"
           alt={ name }
@@ -49,7 +47,7 @@ const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
             onClick={ decreaseQuantity }
             data-testid={ `${index}-product-minus` }
             type="button"
-            className="btn"
+            className="quantityBtn"
           >
             -
           </button>
@@ -57,14 +55,13 @@ const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
             data-testid={ `${index}-product-qtd` }
             className="totalValue"
           >
-            Unidades:
             { quantity }
           </p>
           <button
             onClick={ increaseQuantity }
             data-testid={ `${index}-product-plus` }
             type="button"
-            className="btn"
+            className="quantityBtn"
           >
             +
           </button>

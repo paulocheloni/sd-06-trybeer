@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoBeerOutline } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
@@ -32,16 +33,18 @@ const TopMenu = ({ titleMenu }) => {
         >
           { titleMenu }
         </p>
-        <IconContext.Provider value={ { size: '3em' } }>
+        <Link to="/products">
+        <IconContext.Provider value={ { size: '3em', color: 'white' } }>
           <IoBeerOutline />
         </IconContext.Provider>
+        </Link>
       </header>
     </div>
   );
 };
 
 TopMenu.propTypes = {
-  titleMenu: PropTypes.string.isRequired,
+  titleMenu: PropTypes.string,
 };
 
 export default TopMenu;

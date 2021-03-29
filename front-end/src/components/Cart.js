@@ -15,10 +15,6 @@ const Cart = () => {
 
   return (
     <div className="cart-container">
-      <p data-testid="checkout-bottom-btn-value">
-        Valor :
-        { formatedPrice(getTotalPriceCart()) }
-      </p>
       <button
         data-testid="checkout-bottom-btn"
         type="button"
@@ -27,6 +23,8 @@ const Cart = () => {
         className="cartButton"
       >
         Ver Carrinho
+        {' - '}
+        { formatedPrice(getTotalPriceCart()) }
       </button>
     </div>
   );

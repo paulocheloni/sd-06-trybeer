@@ -68,23 +68,22 @@ function AdminOrderDetails(props) {
                         name,
                         price,
                         sale_id: saleId,
-                        // total_price: totalPrice,
                       }, index) => (
                         <div
                           key={ saleId }
                           className="order-card-container"
                           data-testid={ `${index}-order-card-container` }
                         >
-                          <div data-testid={ `${index}-product-name` }>
-                            {`Nome: ${name}` }
-                          </div>
                           <div data-testid={ `${index}-product-qtd` }>
-                            {`Quantidade: ${quantity}` }
+                            {`${quantity}` }
+                          </div>
+                          <div data-testid={ `${index}-product-name` }>
+                            {`${name}` }
                           </div>
                           <div
                             data-testid={ `${index}-order-unit-price` }
                           >
-                            {`Valor Unitário: (${formatedPrice(price)})` }
+                            {`(${formatedPrice(price)}) un` }
                           </div>
                           <div
                             data-testid={ `${index}-product-total-value` }

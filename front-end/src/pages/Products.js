@@ -20,7 +20,7 @@ function Products({ history }) {
 
   return (
     <div>
-      <TopMenu />
+      <TopMenu titleMenu="TryBeer"/>
       <div className="products-container">
         {products && products.map(({ id, name, price, url_image: urlImage }, index) => (
           <ProductCard
