@@ -90,28 +90,28 @@ export default function ProductCard() {
   };
 
   return (
-    <main>
-      <Container justify="center" className={ classes.cardGrid } maxWidth="md">
-        <Grid container spacing={ 4 }>
+    <main className={ classes.mainContainer }>
+      <div>
+        <Grid className={ classes.cardGrid }>
           { products.length && products.map((product, index) => (
-            <Grid item key={ product.id } xs={ 12 } md={ 4 }>
+            <Grid item key={ product.id }>
               <Card className={ classes.card }>
                 <CardMedia
+                  image={ product.url_image }
                   data-testid={ `${index}-product-img` }
                   className={ classes.cardMedia }
-                  image={ product.url_image }
                   title="Produto"
+                  alt="Imagem do Produto"
                 />
                 <CardContent>
                   <Typography
+                    className={ classes.titleContainer }
                     data-testid={ `${index}-product-name` }
-                    variant="h5"
-                    component="h2"
                   >
                     { product.name }
                   </Typography>
                   <Typography
-                    variant="subtitle1"
+                    className={ classes.priceContainer }
                     data-testid={ `${index}-product-price` }
                   >
                     { `R$ ${(product.price).replace('.', ',')}` }
@@ -120,27 +120,28 @@ export default function ProductCard() {
                 <Grid container justify="center">
                   <CardActions>
                     <IconButton
-                      data-testid={ `${index}-product-plus` }
-                      value="Plus"
-                      id={ index }
-                      size="small"
-                      color="primary"
-                      onClick={ (e) => handleChangeQuantityButton(e, ONE) }
-                    >
-                      <AddCircleIcon />
-                    </IconButton>
-                    <Typography data-testid={ `${index}-product-qtd` }>
-                      { showQuantity(index) }
-                    </Typography>
-                    <IconButton
+                      className={ classes.quantityButton }
                       data-testid={ `${index}-product-minus` }
-                      size="small"
-                      color="primary"
                       onClick={ (e) => handleChangeQuantityButton(e, MINUSONE) }
                       value="Minus"
                       id={ index }
                     >
-                      <RemoveCircleIcon />
+                      <RemoveCircleIcon style={ { fontSize: '45px', color: '#32325b' } } />
+                    </IconButton>
+                    <Typography
+                      data-testid={ `${index}-product-qtd` }
+                      style={ { fontSize: '35px' } }
+                    >
+                      { showQuantity(index) }
+                    </Typography>
+                    <IconButton
+                      className={ classes.quantityButton }
+                      data-testid={ `${index}-product-plus` }
+                      value="Plus"
+                      id={ index }
+                      onClick={ (e) => handleChangeQuantityButton(e, ONE) }
+                    >
+                      <AddCircleIcon style={ { fontSize: '45px', color: '#32325b' } } />
                     </IconButton>
                   </CardActions>
                 </Grid>
@@ -148,21 +149,27 @@ export default function ProductCard() {
             </Grid>
           )) }
         </Grid>
-      </Container>
-      <Grid container className={ classes.buttonContainer }>
-        <Button
-          data-testid="checkout-bottom-btn"
-          variant="contained"
-          color="primary"
-          disabled={ isCartWithoutProducts() }
-          onClick={ () => { history.push('/checkout'); } }
-        >
-          Ver Carrinho
-        </Button>
-        <Typography data-testid="checkout-bottom-btn-value">
-          { `R$ ${handleTotalPrice()}` }
-        </Typography>
-      </Grid>
+        <div>
+          <Button
+            className={ classes.totalpriceButton }
+            data-testid="checkout-bottom-btn"
+            variant="contained"
+            color="primary"
+            disabled={ isCartWithoutProducts() }
+            onClick={ () => { history.push('/checkout'); } }
+          >
+            Ver Carrinho
+            {' '}
+            { `R$ ${handleTotalPrice()}` }
+          </Button>
+          {/* <Typography
+            data-testid="checkout-bottom-btn-value"
+            className={ classes.totalpriceValue }
+          >
+            { `R$ ${handleTotalPrice()}` }
+          </Typography> */}
+        </div>
+      </div>
     </main>
   );
 }

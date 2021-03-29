@@ -45,20 +45,20 @@ export default function TopMenu({ pageTitle }) {
           [classes.appBarShift]: open,
         }) }
       >
-        <Toolbar>
+        <Toolbar className={ classes.toolBarMenu }>
           <IconButton
+            fontSize="large"
             color="inherit"
-            aria-label="open drawer"
+            // aria-label="open drawer"
             onClick={ handleDrawerOpen }
-            edge="start"
+            // edge="start"
             className={ clsx(classes.menuButton, open && classes.hide) }
           >
-            <MenuIcon data-testid="top-hamburguer" />
+            <MenuIcon style={ { fontSize: '45px' } } data-testid="top-hamburguer" />
           </IconButton>
           <Typography
+            className={ classes.topMenuTitle }
             data-testid="top-menu"
-            variant="h5"
-            noWrap
           >
             { pageTitle }
           </Typography>
@@ -66,19 +66,15 @@ export default function TopMenu({ pageTitle }) {
       </AppBar>
       <Drawer
         className={ classes.drawer }
-        variant="persistent"
-        anchor="left"
         open={ open }
-        classes={ {
-          paper: classes.drawerPaper,
-        } }
       >
-        <div>
+        <div className={ classes.drawerContainer }>
           <IconButton onClick={ handleDrawerClose }>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {theme.direction === 'ltr' ? <ChevronLeftIcon style={ { fontSize: '40px' } } />
+              : <ChevronRightIcon />}
           </IconButton>
           <Divider />
-          <List>
+          <List className={ classes.listContainer }>
             <ListItem
               button
               data-testid="side-menu-item-orders"
@@ -86,7 +82,7 @@ export default function TopMenu({ pageTitle }) {
               onClick={ () => history.push('/admin/orders') }
             >
               <ListItemIcon>
-                <ShoppingCartIcon />
+                <ShoppingCartIcon style={ { fontSize: '40px' } } />
               </ListItemIcon>
               Pedidos
             </ListItem>
@@ -96,7 +92,7 @@ export default function TopMenu({ pageTitle }) {
               onClick={ () => history.push('/admin/profile') }
             >
               <ListItemIcon>
-              <PersonIcon />
+                <PersonIcon style={ { fontSize: '40px' } } />
               </ListItemIcon>
               Perfil
             </ListItem>
@@ -106,7 +102,7 @@ export default function TopMenu({ pageTitle }) {
               onClick={ () => history.push('/login') }
             >
               <ListItemIcon>
-              <ExitToAppIcon />
+                <ExitToAppIcon style={ { fontSize: '40px' } } />
               </ListItemIcon>
               Sair
             </ListItem>

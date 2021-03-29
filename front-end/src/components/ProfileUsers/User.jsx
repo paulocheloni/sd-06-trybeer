@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import jwtDecode from 'jwt-decode';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
 import { FormControl } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './styles';
@@ -25,12 +24,12 @@ export default function User() {
   };
 
   return (
-    <Container className={ classes.container }>
-      <FormControl className={ classes.root } noValidate autoComplete="off">
-        <div>
+    <div className={ classes.container }>
+      <FormControl>
+        <div className={ classes.nameContainer }>
           <TextField
+            className={ classes.nameField }
             id="name"
-            size="medium"
             variant="filled"
             label="Nome"
             defaultValue={ name }
@@ -38,10 +37,9 @@ export default function User() {
             onChange={ setName }
           />
         </div>
-        <div>
+        <div className={ classes.nameContainer }>
           <TextField
             id="email"
-            size="medium"
             variant="filled"
             label="Email"
             defaultValue={ tokenDecoded.email }
@@ -51,19 +49,21 @@ export default function User() {
             } }
           />
         </div>
+        <div className={ classes.buttonContainer }>
+          <Button
+            className={ classes.buttonField }
+            type="button"
+            variant="contained"
+            color="primary"
+            data-testid="profile-save-btn"
+            disabled={ !(nameValidation(name) && isTheNewNameDifferent(oldName, name)) }
+            onClick={ () => handleUpdateInfo(tokenDecoded.email) }
+          >
+            Salvar
+          </Button>
+          <Typography>{newInfo}</Typography>
+        </div>
       </FormControl>
-      <div>
-        <Button
-          variant="contained"
-          color="primary"
-          data-testid="profile-save-btn"
-          disabled={ !(nameValidation(name) && isTheNewNameDifferent(oldName, name)) }
-          onClick={ () => handleUpdateInfo(tokenDecoded.email) }
-        >
-          Salvar
-        </Button>
-        <Typography>{newInfo}</Typography>
-      </div>
-    </Container>
+    </div>
   );
 }

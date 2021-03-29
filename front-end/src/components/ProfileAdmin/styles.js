@@ -1,26 +1,15 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const EIGHT = 8;
-const TEN = 10;
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
+const useStyles = makeStyles(() => ({
+  container: {
+    backgroundColor: '#fbb80f',
+    height: '100vh',
+    textAlign: 'center',
+    paddingTop: '100px',
   },
   paper: {
-    padding: theme.spacing(2),
-    color: theme.palette.text.secondary,
-    width: '100%',
-  },
-  infoContainer: {
-    display: 'flex',
-    direction: 'column',
-    justifyContent: 'flex-start',
-  },
-  container: {
-    paddingTop: theme.spacing(TEN),
-    paddingBottom: theme.spacing(EIGHT),
-    display: 'flex',
+    margin: '10px 10px 10px 10px',
+    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)',
   },
 }));
 

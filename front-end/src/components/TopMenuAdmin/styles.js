@@ -1,57 +1,52 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const drawerWidth = 180;
-const TWO = 20;
-const ZERO = 0;
-const ONE = 1;
-const THREE = 3;
+// const drawerWidth = 180;
 
 const useStyles = makeStyles((theme) => ({
-  root: { display: 'flex' },
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+  toolBarMenu: {
+    display: 'flex',
+    backgroundColor: '#32325b',
+    height: '70px',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  menuButton: {
+    display: 'flex',
+    position: 'relative',
+    zIndex: '1',
+    marginRight: '92vw',
+    '&:focus': {
+      outline: 'none',
+    },
+  },
+  topMenuTitle: {
+    display: 'flex',
+    fontSize: '30px',
+    fontWeight: '700',
+    position: 'absolute',
+    zIndex: '2',
   },
   appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
+    // width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  menuButton: { marginRight: theme.spacing(TWO) },
   hide: { display: 'none' },
   drawer: {
-    width: drawerWidth,
-    flexShrink: ZERO,
+    background: 'transparent',
   },
-  drawerPaper: { width: drawerWidth },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(ZERO, ONE),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+  drawerContainer: {
+    backgroundColor: '#fbb80f',
+    height: '100%',
+    width: '40vw',
+    borderRight: '2px solid #32325b',
   },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(THREE),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: ZERO,
+  listContainer: {
+    fontSize: '20px',
+    fontWeight: '800',
+    color: 'white',
   },
 }));
 

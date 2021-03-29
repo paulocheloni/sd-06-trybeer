@@ -1,40 +1,42 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const TWO = 2;
-const ZERO = 0;
-const EIGHT = 8;
-const FOUR = 4;
-const SIX = 6;
-
-const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(TWO),
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(EIGHT, ZERO, SIX),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(FOUR),
+const useStyles = makeStyles(() => ({
+  mainContainer: {
+    display: 'flex',
+    backgroundColor: '#fbb80f',
+    paddingBottom: '100px',
+    height: '100vh',
+    justifyContent: 'center',
   },
   cardGrid: {
-    paddingTop: theme.spacing(EIGHT),
-    paddingBottom: theme.spacing(EIGHT),
-  },
-  card: {
-    height: '100%',
     display: 'flex',
     flexDirection: 'column',
   },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
+  card: {
+    display: 'flex',
+    // Os 3 primeiros ajeitam o card com header/entre si
+    padding: '0px 10px 0px 10px',
+    margin: '20px 10px auto 10px',
+    transform: 'translateY(70px)',
+    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)',
+    '&:hover': {
+      backgroundColor: '#32325b',
+      color: 'white',
+    },
   },
-  cardContent: {
-    flexGrow: 1,
+  titleContainer: {
+    fontSize: '25px',
+    fontWeight: '600',
+    // justifyContent: 'flex-start',
   },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(SIX),
+  dateContainer: {
+    fontSize: '25px',
+    fontWeight: '600',
+    // justifyContent: 'center',
+  },
+  priceContainer: {
+    fontSize: '25px',
+    fontWeight: '600',
   },
 }));
 
