@@ -87,16 +87,12 @@ async function getproductsBySaleId(setProductsOrder, saleId) {
 async function getSalesProductsBySaleId(setSaleDetail, saleId) {
   const axios = buildAxiosHandler();
   const token = localStorage.getItem('token');
+  const status = 'Entregue';
   await axios.get(`/sales/products/${saleId}`, {
     headers: {
       authorization: token,
     } }).then((response) => setSaleDetail(response.data));
-}
-
-async function updateStatusSale(status, id) {
-  const axios = buildAxiosHandler();
-
-  await axios.put(`/sales/status/${id}`, { status });
+  await axios.put(`/sales/status/${saleId}`, { status });
 }
 
 export {
@@ -109,5 +105,4 @@ export {
   getOrders,
   getproductsBySaleId,
   getSalesProductsBySaleId,
-  updateStatusSale,
 };

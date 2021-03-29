@@ -2,22 +2,16 @@ import React, { useContext } from 'react';
 import AdminSideBar from '../components/AdminSideBar';
 import BeerContext from '../context/BeerContext';
 import ProductCardAdmin from '../components/ProductCardAdmin';
-import { updateStatusSale, getSalesProductsBySaleId } from '../api/index';
-// import '../css/General.css';
-// import '../css/AdminOrders.css';
+import { getSalesProductsBySaleId } from '../api/index';
 
 function AdminDetailsOrder() {
   const { saleDetail, setSaleDetail } = useContext(BeerContext);
   const { sale, products } = saleDetail;
 
   const handleClick = () => {
-    async function updateStatus() {
-      await updateStatusSale('Entregue', sale.saleId);
-    }
     async function getSaleDetail() {
       await getSalesProductsBySaleId(setSaleDetail, sale.saleId);
     }
-    updateStatus();
     getSaleDetail();
   };
 
@@ -51,7 +45,7 @@ function AdminDetailsOrder() {
             { sale.saleStatus === 'Pendente' && (
               <button
                 type="button"
-                onClick={ () => handleClick() }
+                onClick={ async () => handleClick() }
                 data-testid="mark-as-delivered-btn"
                 // className="button"
               >
