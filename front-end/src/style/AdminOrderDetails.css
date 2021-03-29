@@ -21,6 +21,16 @@ admin_orders_details {
   width: 100% !important;
 }
 
+.greenStatus {
+  background-color: none !important;
+  color: #21a809;
+}
+
+.redStatus {
+  background-color: none !important;
+  color: #eb0e0e;
+}
+
 .admin_orders_details_list {
   align-items: center !important;
   align-content: center !important;

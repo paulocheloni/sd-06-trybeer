@@ -17,14 +17,17 @@ function AdminOrdersDetailsPage() {
   const [messageError, setMessageError] = useState('');
 
   useEffect(() => {
-    fetch(`http://
-    calhost:3001/admin/orders/${id}`, {
+    fetch(`http://localhost:3001/admin/orders/${id}`, {
       headers: {
         'Content-Type': 'application/json',
         authorization: user.token,
       },
     }).then((response) => response.json())
-      .then((data) => setAdminOrders(data));
+      .then((data) => {
+        if (data.err) return setMessageError(data.err);
+        setMessageError('');
+        setAdminOrders(data);
+      });
   }, []);
 
   const totalPrice = AdminOrders
@@ -69,7 +72,12 @@ function AdminOrdersDetailsPage() {
       <AdminSideBarComponent />
       <div className="admin_orders_details_title">
         <h1 data-testid="order-number">{ `Pedido ${id}` }</h1>
-        <h1 data-testid="order-status">{ statusOrder() }</h1>
+        <h1 
+          data-testid="order-status" 
+          className={(statusOrder() === 'Entregue') ? "greenStatus" : "redStatus"}
+        >
+          { statusOrder() }
+        </h1>
       </div>
       <div className="admin_orders_details_list">
         <div className="admin_orders_details_product">
@@ -96,8 +104,8 @@ function AdminOrdersDetailsPage() {
             Marcar como entregue
           </button>
         )}
-        <span>{ messageError }</span>
       </div>
+      <span>{ messageError }</span>
     </div>
   );
 }

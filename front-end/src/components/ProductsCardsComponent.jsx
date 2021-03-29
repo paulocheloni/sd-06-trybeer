@@ -64,18 +64,18 @@ function ProductsCardsComponent({ element, index }) {
       <div className="productCards-qtt">
         <button
           type="button"
-          data-testid={ `${index}-product-plus` }
-          onClick={ clickPlus }
-        >
-          +
-        </button>
-        <p data-testid={ `${index}-product-qtd` }>{ qnt }</p>
-        <button
-          type="button"
           data-testid={ `${index}-product-minus` }
           onClick={ clickMinus }
         >
           -
+        </button>
+        <p data-testid={ `${index}-product-qtd` }>{ qnt }</p>
+        <button
+          type="button"
+          data-testid={ `${index}-product-plus` }
+          onClick={ clickPlus }
+        >
+          +
         </button>
       </div>
     </div>
