@@ -13,7 +13,7 @@ function SideBarMenu({ visible }) {
 
   return (
     <div
-      className={ `${visible ? '' : 'invisible'} absolute top-12 left-0 w-32 lg:w-64 z-30
+      className={ `${visible ? '' : 'invisible'} absolute top-16 left-0 w-32 lg:w-64 z-30
       min-h-screen side-menu-container flex flex-col space-y-16 items-center bg-black` }
     >
       <Link to="/products">

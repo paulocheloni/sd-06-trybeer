@@ -8,7 +8,7 @@ function ProductsList({ products }) {
     stringTotal,
   } = useContext(ContextBeer);
   return (
-    <div className="flex flex-col items-center mx-auto w-96">
+    <div className="flex flex-col items-center justify-center mx-auto w-full lg:w-3/5">
       { products.length === 0
         ? <p className="text-xl font-bold">Não há produtos no carrinho</p>
         : products.map((product, index) => (
@@ -18,8 +18,13 @@ function ProductsList({ products }) {
             product={ product }
           />
         ))}
-      <div>
-        <p data-testid="order-total-value">{ stringTotal }</p>
+      <div className="w-full">
+        <p
+          className="text-3xl font-bold text-right lg:mt-4 lg:mr-6"
+          data-testid="order-total-value"
+        >
+          { stringTotal }
+        </p>
       </div>
     </div>
   );

@@ -29,7 +29,7 @@ function Card({ product, testIdNumber }) {
   return (
     <div
       className="flex flex-col items-center justify-center border-2
-      border-gray-800 w-64 h-96 m-5"
+      border-gray-800 w-36 h-56 rounded-md shadow-md p-2 font-sans lg:w-64 lg:h-96 m-5"
     >
       <div className="relative flex flex-col space-y-4 items-center">
         <img
@@ -38,27 +38,30 @@ function Card({ product, testIdNumber }) {
           className="mx-auto h-24 w-24 w-auto"
           data-testid={ `${testIdNumber}-product-img` }
         />
-        <p data-testid={ `${testIdNumber}-product-name` }>{ productName }</p>
+        <p className="text-center" data-testid={ `${testIdNumber}-product-name` }>
+          { productName }
+        </p>
         <p data-testid={ `${testIdNumber}-product-price` }>
           { productStringPrice }
         </p>
       </div>
-      <div className="relative flex justify-center items-center">
+      <div className="relative mt-2 flex justify-center items-center">
         <button
           type="button"
+          className="focus:outline-none"
           onClick={ () => clickPlus(id, quantity, price) }
           data-testid={ `${testIdNumber}-product-plus` }
         >
           <FaIcons.FaPlusSquare />
         </button>
         <p
-          className=""
           data-testid={ `${testIdNumber}-product-qtd` }
         >
           { quantity }
         </p>
         <button
           type="button"
+          className="focus:outline-none"
           onClick={ () => clickMinus(id, quantity, price) }
           data-testid={ `${testIdNumber}-product-minus` }
         >

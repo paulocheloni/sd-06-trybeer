@@ -30,31 +30,50 @@ function ProductRow({ product, testIdNumber }) {
   }, [products, findProduct, id]);
 
   return (
-    <div className="flex w-full justify-between">
-      <div>
-        <p data-testid={ `${testIdNumber}-product-qtd-input` }>{ quantity }</p>
-      </div>
-      <div>
-        <p data-testid={ `${testIdNumber}-product-name` }>{ productName }</p>
-      </div>
-      <div>
-        <p data-testid={ `${testIdNumber}-product-total-value` }>
-          { fullPrice }
+    <div
+      className="flex m-2 w-full px-4 py-2 shadow-md lg:py-4 rounded-md lg:rounded-xl
+      bg-gray-100 justify-between items-center"
+    >
+      <div className="w-1/5 bg-yellow-200 py-2 rounded-xl">
+        <p
+          className="text-3xl text-center font-semibold"
+          data-testid={ `${testIdNumber}-product-qtd-input` }
+        >
+          { quantity }
         </p>
       </div>
-      <div>
-        <p data-testid={ `${testIdNumber}-product-unit-price` }>
-          { `(${productStringPrice} un)` }
-        </p>
+      <div className="flex text-xl flex-col px-4 w-3/5">
+        <div className="flex justify-center items-center">
+          <p data-testid={ `${testIdNumber}-product-name` }>{ productName }</p>
+        </div>
+        <div
+          className="flex justify-between items-baseline lg:justify-around items-center"
+        >
+          <div>
+            <p data-testid={ `${testIdNumber}-product-total-value` }>
+              { fullPrice }
+            </p>
+          </div>
+          <div>
+            <p
+              className="text-gray-700 text-sm"
+              data-testid={ `${testIdNumber}-product-unit-price` }
+            >
+              { `(${productStringPrice} un)` }
+            </p>
+          </div>
+        </div>
       </div>
-      <button
-        data-testid={ `${testIdNumber}-removal-button` }
-        type="button"
-        className="focus:outline-none"
-        onClick={ () => onClick() }
-      >
-        <FaIcons.FaWindowClose />
-      </button>
+      <div className="w-1/5 flex justify-center items-center">
+        <button
+          data-testid={ `${testIdNumber}-removal-button` }
+          type="button"
+          className="text-red-600 text-4xl text-right focus:outline-none"
+          onClick={ () => onClick() }
+        >
+          <FaIcons.FaWindowClose />
+        </button>
+      </div>
     </div>
   );
 }

@@ -58,7 +58,10 @@ function Checkout() {
   return (
     <div>
       <TopBar title="Finalizar Pedido" />
-      <div className="flex flex-col mt-12 mx-auto space-y-12 max-w-6xl items-center">
+      <div
+        className="flex flex-col font-sans mt-12 lg:mx-auto space-y-12 px-4 lg:max-w-5xl
+        items-center"
+      >
         <ProductsList products={ products } />
         <div className="w-full space-y-12">
           <LabeledInput
@@ -83,14 +86,16 @@ function Checkout() {
         >
           Compra realizada com sucesso!
         </div>
-        <Button
-          isDisabled={ buttonDisable }
-          bgColor="bg-green-600"
-          onClick={ () => handleSubmit() }
-          testId="checkout-finish-btn"
-        >
-          Finalizar Pedido
-        </Button>
+        <div className="lg:w-1/3">
+          <Button
+            isDisabled={ buttonDisable }
+            bgColor="bg-green-600"
+            onClick={ () => handleSubmit() }
+            testId="checkout-finish-btn"
+          >
+            Finalizar Pedido
+          </Button>
+        </div>
       </div>
     </div>
   );

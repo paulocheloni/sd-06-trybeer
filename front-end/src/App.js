@@ -3,7 +3,9 @@ import Routes from './Routes';
 
 function App() {
   return (
-    <Routes />
+    <div className="font-sans">
+      <Routes />
+    </div>
   );
 }
 
