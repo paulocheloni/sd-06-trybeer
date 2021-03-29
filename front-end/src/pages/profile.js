@@ -61,7 +61,7 @@ function Profile() {
   // Material-Iu Renderizacao
   setTimeout(() => {
     setChecked(true)
-  }, 1000)
+  }, 300)
 
 
   // Renderizacao

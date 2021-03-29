@@ -6,17 +6,18 @@ import { Link } from 'react-router-dom';
 // Components
 import NavBarAdmin from '../components/menuNavBarAdmin';
 
+
 // Services
 import { loadState } from '../services/localStorage';
 import api from '../services/api';
 
 // Material-UI
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-
+import ButtonBase from '@material-ui/core/ButtonBase';
+import Grow from '@material-ui/core/Grow';
+import { makeStyles } from '@material-ui/core/styles';
 
 // CSS - Material-UI
 const useStyles = makeStyles((theme) => ({
@@ -25,8 +26,13 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
+    alignItems: 'center',
     margin: 'auto',
-    maxWidth: 500,
+    marginTop: 15,
+    minWidth: 1000,
+    "@media (max-width: 1250px)": {
+      minWidth: 'auto'
+    }
   },
   number: {
     width: 128,
@@ -42,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 // React Component Ddefinition
 function Admin() {
+  const [checked, setChecked] = React.useState(false);
   const classes = useStyles();
   const [orders, setOrders] = useState([]);
   const history = useHistory();
@@ -58,16 +65,24 @@ function Admin() {
       .catch((err) => console.log(err));
   }, []);
 
+    // Material-Iu Renderizacao
+    setTimeout(() => {
+      setChecked(true)
+    }, 300)
+  
+
   return (
+
     <div>
       <NavBarAdmin content="Trybeer" />
-      <div className={classes.root}>
-        <Grid container direction="column" spacing={2}>
-          <h1>Pedidos</h1>
+      <div className={`${classes.root} marginTop`}>
+          <Typography  style={{textAlign:'center'}} variant="h3" component="h2">
+              Pedidos 
+            </Typography>
           {orders.map((order, index) => (
-            <Grid item xs={10}>
-                <Paper className={classes.paper} elevation={3}>
-                  <Grid container spacing={3}>
+    <Grow  in={checked}>  
+                <Paper className={`${classes.paper} ordersAdmin`} elevation={3}>
+                  <Grid  container spacing={3}>
                     <Grid item>
                       <ButtonBase className={classes.number}>
                         <Link
@@ -117,11 +132,11 @@ function Admin() {
                     </Grid>
                   </Grid>
                 </Paper>
-              </Grid>
+    </Grow>
           ))}
-        </Grid>
       </div>
     </div>
+
   );
 }
 

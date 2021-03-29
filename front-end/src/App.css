@@ -57,7 +57,7 @@
   flex-wrap: inherit !important;
 }
 
-.productsCliente {
+.marginTop {
   margin-top: 70px;
 }
 
@@ -71,4 +71,9 @@
 
 .carrinhoStyleContainer {
   margin-top: 60px;
+}
+
+.ordersAdmin {
+  max-width: 1000px !important;
+  text-align: center;
 }

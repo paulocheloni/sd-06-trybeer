@@ -73,7 +73,7 @@ export default function Hamburguer() {
       <div className={classes.root}>
         <MenuItem
           data-testid="side-menu-item-orders"
-          onClick={() => handleRedirect('pedidos')}
+          onClick={() => handleRedirect('Pedidos')}
         >
           Pedidos
         </MenuItem>

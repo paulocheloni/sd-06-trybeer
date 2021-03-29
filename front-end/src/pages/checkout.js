@@ -104,8 +104,6 @@ function Checkout() {
   } = useContext(context);
   const classes = useStyles();
   const [pagamento, setPagamento] = React.useState('female');
-
-
   const [checked, setChecked] = React.useState(false);
   const [value, setValue] = React.useState(0);
   const [hidden, setHidden] = useState(true);
@@ -173,7 +171,7 @@ function Checkout() {
   // Material-Iu Renderizacao
   setTimeout(() => {
     setChecked(true)
-  }, 200)
+  }, 300)
 
   // Material-Iu Formulario Pagamento
   const formPagamento = (event) => {

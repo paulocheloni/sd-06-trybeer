@@ -7,7 +7,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
-import Fab from '@material-ui/core/Fab';
 import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
 
 // Componentes
@@ -15,7 +14,7 @@ import { loadState, saveState } from '../services/localStorage';
 import sumTotal from '../resources/sumTotal';
 import context from '../Context/ContextAPI';
 import HamburguerFooter from './hamburguerFooter';
-import SearchProduct from './searchProduct';
+// import SearchProduct from './searchProduct';
 
 // CSS - Material-Ui
 const useStyles = makeStyles((theme) => ({

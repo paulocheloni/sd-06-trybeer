@@ -95,7 +95,7 @@ function Cliente() {
   return (
     <div>
       <NavBar  content="BEER - ICE" />
-      <div className={`${classes.root} productsCliente `}>
+      <div className={`${classes.root} marginTop `}>
         {products.map((title, index) => (
           <Paper key={index} elevation={3} className={classes.paper}>
             <Grid container spacing={2}>

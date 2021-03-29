@@ -67,7 +67,7 @@ function Register() {
   // Material-Iu Renderizacao
   setTimeout(() => {
     setChecked(true)
-  }, 1000)
+  }, 300)
 
   // Renderizacao
   useEffect(() => {
