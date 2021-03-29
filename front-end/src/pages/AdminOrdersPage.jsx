@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { SideBarAdmin, AdminOrdersCards } from '../components';
+import { AdminSideBarComponent, AdminOrdersCardsComponent } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
 import '../style/AdminOrder.css';
 
-function AdminOrders() {
+function AdminOrdersPage() {
   const {
     user,
   } = useContext(BeersAppContext);
@@ -23,14 +23,14 @@ function AdminOrders() {
 
   return (
     <div>
-      <SideBarAdmin />
+      <AdminSideBarComponent />
       <div className="admin_orders">
         <h1>Pedidos</h1>
         <div className="order-list">
           {orders.map((element, index) => (
             <div key={ element.id }>
               <Link to={ `/admin/orders/${element.id}` }>
-                <AdminOrdersCards
+                <AdminOrdersCardsComponent
                   element={ element }
                   index={ index }
                 />
@@ -43,4 +43,4 @@ function AdminOrders() {
   );
 }
 
-export default AdminOrders;
+export default AdminOrdersPage;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import BeersAppContext from '../context/BeersAppContext';
 import '../style/CheckoutCard.css';
 
-function CheckoutCards({ element, index }) {
+function CheckoutCardsComponent({ element, index }) {
   const {
     user: { token },
     productQuantity,
@@ -69,7 +69,7 @@ function CheckoutCards({ element, index }) {
   );
 }
 
-CheckoutCards.propTypes = {
+CheckoutCardsComponent.propTypes = {
   index: PropTypes.number.isRequired,
   element: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -77,4 +77,4 @@ CheckoutCards.propTypes = {
   }).isRequired,
 };
 
-export default CheckoutCards;
+export default CheckoutCardsComponent;

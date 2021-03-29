@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { Header, CostumerOrdersDetailsCards } from '../components';
+import { HeaderComponent, CostumerOrdersDetailsCardsComponent } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
 import '../style/CostumerOrderDetails.css';
 
-function CostumerOrdersDetails() {
+function CostumerOrdersDetailsPage() {
   const history = useHistory();
   const { id } = useParams();
   const {
@@ -51,7 +51,7 @@ function CostumerOrdersDetails() {
 
   return (
     <div>
-      <Header text="Detalhes de Pedido" id="top-title" />
+      <HeaderComponent text="Detalhes de Pedido" id="top-title" />
       <div className="order-list">
         <div className="order-list-title">
           <h1 data-testid="order-number">{`Pedido ${id}`}</h1>
@@ -60,7 +60,7 @@ function CostumerOrdersDetails() {
         <div className="order-list-list">
           {orders.map((element, index) => (
             <div key={ index }>
-              <CostumerOrdersDetailsCards
+              <CostumerOrdersDetailsCardsComponent
                 element={ element }
                 index={ index }
               />
@@ -75,4 +75,4 @@ function CostumerOrdersDetails() {
   );
 }
 
-export default CostumerOrdersDetails;
+export default CostumerOrdersDetailsPage;

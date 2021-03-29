@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
-import SideBarAdmin from '../components/SideBarAdmin';
+import AdminSideBarComponent from '../components/AdminSideBarComponent';
 import BeersAppContext from '../context/BeersAppContext';
 import '../style/AdminProfile.css';
 
-function AdminProfile() {
+function AdminProfilePage() {
   const history = useHistory();
   const {
     user: { name, email, token },
@@ -14,7 +14,7 @@ function AdminProfile() {
 
   return (
     <div>
-      <SideBarAdmin />
+      <AdminSideBarComponent />
       <div className="admin_profile">
         <p data-testid="profile-name">
           Nome:
@@ -29,4 +29,4 @@ function AdminProfile() {
   );
 }
 
-export default AdminProfile;
+export default AdminProfilePage;

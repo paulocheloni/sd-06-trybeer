@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router';
 import BeersAppContext from '../context/BeersAppContext';
 import {
-  AdminDetailsOrdersCards,
-  SideBarAdmin,
+  AdminDetailsOrdersCardsComponent,
+  AdminSideBarComponent,
 } from '../components';
 import '../style/AdminOrderDetails.css';
 
@@ -17,7 +17,8 @@ function AdminOrdersDetailsPage() {
   const [messageError, setMessageError] = useState('');
 
   useEffect(() => {
-    fetch(`http://localhost:3001/admin/orders/${id}`, {
+    fetch(`http://
+    calhost:3001/admin/orders/${id}`, {
       headers: {
         'Content-Type': 'application/json',
         authorization: user.token,
@@ -65,7 +66,7 @@ function AdminOrdersDetailsPage() {
 
   return (
     <div className="admin_orders_details">
-      <SideBarAdmin />
+      <AdminSideBarComponent />
       <div className="admin_orders_details_title">
         <h1 data-testid="order-number">{ `Pedido ${id}` }</h1>
         <h1 data-testid="order-status">{ statusOrder() }</h1>
@@ -74,7 +75,7 @@ function AdminOrdersDetailsPage() {
         <div className="admin_orders_details_product">
           {AdminOrders.map((element, index) => (
             <div key={ index }>
-              <AdminDetailsOrdersCards
+              <AdminDetailsOrdersCardsComponent
                 element={ element }
                 index={ index }
               />

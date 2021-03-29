@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import SideBar from './SideBarComponent';
+import SideBarComponent from './SideBarComponent';
 import { Logo, Menu } from '../images';
 import '../style/HeaderCostumer.css';
 
-function Header({ text, id }) {
+function HeaderComponent({ text, id }) {
   const [renderSideBar, setRenderSideBar] = useState(false);
 
   return (
@@ -34,19 +34,19 @@ function Header({ text, id }) {
         />
       </div>
       <div className="sidebar">
-        {(renderSideBar) && <SideBar text="TryBeer" id="top-title" />}
+        {(renderSideBar) && <SideBarComponent text="TryBeer" id="top-title" />}
       </div>
     </div>
   );
 }
 
-Header.propTypes = {
+HeaderComponent.propTypes = {
   text: PropTypes.string.isRequired,
   id: PropTypes.string,
 };
 
-Header.defaultProps = {
+HeaderComponent.defaultProps = {
   id: '',
 };
 
-export default Header;
+export default HeaderComponent;

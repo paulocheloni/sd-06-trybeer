@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../style/OrderCards.css';
 
-function CostumerOrdersCards({ element, index }) {
+function CostumerOrdersCardsComponent({ element, index }) {
   const { id, total_price: totalPrice, sale_date: saleDate } = element;
 
   const parseDate = () => {
@@ -32,7 +32,7 @@ function CostumerOrdersCards({ element, index }) {
   );
 }
 
-CostumerOrdersCards.propTypes = {
+CostumerOrdersCardsComponent.propTypes = {
   index: PropTypes.number.isRequired,
   element: PropTypes.shape({
     replace: PropTypes.func,
@@ -42,4 +42,4 @@ CostumerOrdersCards.propTypes = {
   }).isRequired,
 };
 
-export default CostumerOrdersCards;
+export default CostumerOrdersCardsComponent;

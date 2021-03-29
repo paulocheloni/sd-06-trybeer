@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import BeersAppContext from '../context/BeersAppContext';
 import '../style/SideBarCostumer.css';
 
-function SideBar() {
+function SideBarComponent() {
   const history = useHistory();
   const {
     setUser,
@@ -47,4 +47,4 @@ function SideBar() {
   );
 }
 
-export default SideBar;
+export default SideBarComponent;

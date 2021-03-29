@@ -9,7 +9,7 @@ import '../style/LoginRegister.css';
 
 const logo = require('../images/logo.png');
 
-function Login() {
+function LoginPage() {
   const history = useHistory();
   const {
     setUser,
@@ -109,4 +109,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;
