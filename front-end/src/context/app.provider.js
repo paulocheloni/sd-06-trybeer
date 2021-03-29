@@ -30,7 +30,7 @@ const AppProvider = ({ children }) => {
         return null;
       }
     };
-    if (token.token) fetchProducts();
+    if (token && token.token) fetchProducts();
   }, [token]);
 
   return (
