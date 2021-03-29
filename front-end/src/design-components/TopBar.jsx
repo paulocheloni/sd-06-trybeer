@@ -13,7 +13,7 @@ function TopBar(props) {
         type="button"
         data-testid="top-hamburguer"
         onClick={ () => setSidebar(!sidebar) }
-        className="absolute top-0 left-0 bg-gray-200 h-16  w-16 flex justify-center
+        className="absolute top-0 left-0 bg-gray-200 h-16 w-16 text-3xl flex justify-center
         items-center"
       >
         <FaIcons.FaBars />
