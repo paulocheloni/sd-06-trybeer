@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { verifyLogin } = require('../middlewares/authToken');
 const SalesService = require('../service/SalesService');
-const { OK, BAD_REQUEST } = require('../schema/statusSchema');
+const { OK } = require('../schema/statusSchema');
 
 const SalesController = new Router();
 
