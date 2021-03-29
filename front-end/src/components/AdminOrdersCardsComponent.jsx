@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function AdminOrdersCards({ element, index }) {
+function AdminOrdersCardsComponent({ element, index }) {
   const {
     id,
     total_price: totalPrice,
@@ -36,7 +36,7 @@ function AdminOrdersCards({ element, index }) {
   );
 }
 
-AdminOrdersCards.propTypes = {
+AdminOrdersCardsComponent.propTypes = {
   index: PropTypes.number.isRequired,
   element: PropTypes.shape({
     id: PropTypes.number,
@@ -47,4 +47,4 @@ AdminOrdersCards.propTypes = {
   }).isRequired,
 };
 
-export default AdminOrdersCards;
+export default AdminOrdersCardsComponent;

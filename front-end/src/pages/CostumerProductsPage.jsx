@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { Header, ProductsCards } from '../components';
+import { HeaderComponent, ProductsCardsComponent } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
 
 import '../style/CostumerProducts.css';
 
-function CostumerProducts() {
+function CostumerProductsPage() {
   const history = useHistory();
   const {
     user: { token },
@@ -39,11 +39,11 @@ function CostumerProducts() {
   return (
     <div>
       {/* className="product-page" */}
-      <Header text="TryBeer" id="top-title" />
+      <HeaderComponent text="TryBeer" id="top-title" />
       <div className="product-list">
         {products.map((element, index) => (
           <div key={ element.id }>
-            <ProductsCards
+            <ProductsCardsComponent
               element={ element }
               index={ index }
             />
@@ -72,4 +72,4 @@ function CostumerProducts() {
   );
 }
 
-export default CostumerProducts;
+export default CostumerProductsPage;

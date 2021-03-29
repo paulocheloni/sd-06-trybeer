@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
-import Header from '../components/Header';
+import HeaderComponent from '../components/HeaderComponent';
 import fetchApiJsonBody from '../service/fetchApi';
 import BeersAppContext from '../context/BeersAppContext';
 import funcValidations from '../service/funcValidations';
 import '../style/CostumerProfile.css';
 
-function CostumerProfile() {
+function CostumerProfilePage() {
   const {
     user,
     setUser,
@@ -47,7 +47,7 @@ function CostumerProfile() {
 
   return (
     <div>
-      <Header text="Meu perfil" id="top-title" />
+      <HeaderComponent text="Meu perfil" id="top-title" />
       <div className="costumer_profile">
         <p>Nome</p>
         <input
@@ -83,4 +83,4 @@ function CostumerProfile() {
   );
 }
 
-export default CostumerProfile;
+export default CostumerProfilePage;

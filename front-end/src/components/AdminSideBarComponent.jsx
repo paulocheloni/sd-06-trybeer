@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import BeersAppContext from '../context/BeersAppContext';
 
-function AdminSideBar() {
+function AdminSideBarComponent() {
   const history = useHistory();
   const {
     setUser,
@@ -43,4 +43,4 @@ function AdminSideBar() {
   );
 }
 
-export default AdminSideBar;
+export default AdminSideBarComponent;
