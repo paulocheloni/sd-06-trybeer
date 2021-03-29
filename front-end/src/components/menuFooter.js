@@ -1,17 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+
+// Material-IU
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Fab from '@material-ui/core/Fab';
-import SearchIcon from '@material-ui/icons/Search';
+import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
+
+// Componentes
 import { loadState, saveState } from '../services/localStorage';
 import sumTotal from '../resources/sumTotal';
 import context from '../Context/ContextAPI';
+import HamburguerFooter from './hamburguerFooter';
+import SearchProduct from './searchProduct';
 
+// CSS - Material-Ui
 const useStyles = makeStyles((theme) => ({
   text: {
     padding: theme.spacing(2, 2, 0),
@@ -46,12 +52,12 @@ export default function MenuFooter() {
   const classes = useStyles();
   const { setPrice, cart } = useContext(context);
   const [disabled, setDisabled] = useState(true);
-
   const history = useHistory();
 
   const allValues = cart.map((elem) => parseFloat(elem.totalPrice));
   const totalSum = sumTotal(allValues).toFixed(2);
 
+  // Renderizacao
   useEffect(() => {
     if (!loadState('user')) return history.push('/login');
     const { email } = loadState('user');
@@ -62,6 +68,7 @@ export default function MenuFooter() {
     return saveState(`${email}_price`, 0);
   }, [history, setPrice]);
 
+  // Renderizacao
   useEffect(() => {
     setPrice(totalSum);
     if (totalSum > 0) return setDisabled(false);
@@ -74,38 +81,34 @@ export default function MenuFooter() {
     history.push('/checkout');
   };
 
+
   return (
-      <div>
-
-
-      <Paper square className={ classes.paper } />
-      <AppBar position="fixed" buttom='0' color="primary" className={ classes.appBar }>
+    <div>
+      <Paper square className={classes.paper} />
+      <AppBar position="fixed" buttom='0' color="primary" className={`${classes.appBar} footerCliente`}>
         <Toolbar>
-
-          <Fab color="secondary" aria-label="add" className={ classes.fabButton }>
-
-            <SearchIcon />
-
-          </Fab>
-
-          <div className={ classes.grow } />
+          <HamburguerFooter />
+          {/* <Fab color="secondary" aria-label="add" className={classes.fabButton}>
+              <SearchProduct/>
+          </Fab> */}
+          <div className={classes.grow} />
           <IconButton
-            disabled={ disabled }
+            disabled={disabled}
             edge="start"
             color="inherit"
             aria-label="open drawer"
             data-testid="checkout-bottom-btn"
-            onClick={ checkoutButton }
+            onClick={checkoutButton}
           >
-            Ver Carrinho
+            <LocalGroceryStoreIcon />
             <span
               data-testid="checkout-bottom-btn-value"
             >
-              {`R$ ${totalSum.replace('.', ',')}`}
+              {' '}{` R$ ${totalSum.replace('.', ',')}`}
             </span>
           </IconButton>
         </Toolbar>
       </AppBar>
-      </div>
+    </div>
   );
 }

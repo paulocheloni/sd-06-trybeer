@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useHistory, useParams } from 'react-router';
 
+// Componentes
 import NavBar from '../components/menuNavBar';
+
+// Services
 import api from '../services/api';
 import { loadState } from '../services/localStorage';
 
@@ -11,11 +14,13 @@ function OrderDetails() {
   const { id } = useParams();
   const history = useHistory();
 
+  // Renderizacao
   useEffect(() => {
     const logon = loadState('user');
     if (!logon) return history.push('/login');
   }, [history]);
 
+  // Api
   useEffect(() => {
     api.orderDetails(id)
       .then((response) => {

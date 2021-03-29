@@ -57,6 +57,18 @@
   flex-wrap: inherit !important;
 }
 
-.makeStyles-root-1 {
-  height: max-content;
+.productsCliente {
+  margin-top: 70px;
+}
+
+.orders-0 {
+  margin-top: 70px;
+}  
+
+.buttomStyleNone{
+  text-decoration:none; 
+}
+
+.carrinhoStyleContainer {
+  margin-top: 60px;
 }

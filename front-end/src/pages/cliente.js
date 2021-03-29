@@ -6,8 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
-// import GridListTile from '@material-ui/core/GridListTile';
-// import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 // Componentes
 import NavBar from '../components/menuNavBar';
@@ -96,14 +94,14 @@ function Cliente() {
 
   return (
     <div>
-      <NavBar content="BEER - ICE" />
-      <div className={classes.root}>
+      <NavBar  content="BEER - ICE" />
+      <div className={`${classes.root} productsCliente `}>
         {products.map((title, index) => (
-          <Paper elevation={3} className={classes.paper}>
+          <Paper key={index} elevation={3} className={classes.paper}>
             <Grid container spacing={2}>
               <Grid item>
                 <ButtonBase className={classes.image}>
-                  <img className={classes.img} src={title.url_image.replace(/ /g, '_')} alt="complex" />
+                  <img className={classes.img} src={title.url_image.replace(/ /g, '_')} alt="imageProduct" />
                 </ButtonBase>
               </Grid>
               <Grid item xs={12} sm container>

@@ -26,31 +26,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Hamburguer() {
+export default function HamburguerFooter() {
   const classes = useStyles();
+
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const history = useHistory();
 
-      // Renderizacao
+    // Renderizacao
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
+  const prevOpen = React.useRef(open);
 
-      // Redirecionar
+    // Redirecionar
   const handleRedirect = (event) => {
     switch (event) {
-    case 'Produtos':
-      history.push('/products');
-      break;
-    case 'Meus Pedidos':
-      history.push('/orders');
-      break;
-    case 'Meu Perfil':
-      history.push('/profile');
-      break;
-    case 'Sair':
-      history.push('/login');
+    case 'Devs deste projeto':
+      history.push('/Devs');
       break;
     default:
       break;
@@ -61,7 +54,7 @@ export default function Hamburguer() {
     setOpen(false);
   };
 
-        // Open Hamburguer
+      // Open Hamburguer
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -70,18 +63,17 @@ export default function Hamburguer() {
   }
 
     // Material-Iu
-  const prevOpen = React.useRef(open);
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
-
     prevOpen.current = open;
   }, [open]);
 
+  
   return (
     <div className={ classes.root }>
-
+      <div>
         <Button
           ref={ anchorRef }
           aria-controls={ open ? 'menu-list-grow' : undefined }
@@ -115,40 +107,20 @@ export default function Hamburguer() {
                     id="menu-list-grow"
                     onKeyDown={ handleListKeyDown }
                   >
-
                     <MenuItem
                       data-testid="side-menu-item-products"
-                      onClick={ () => handleRedirect('Produtos') }
+                      onClick={ () => handleRedirect('Devs deste projeto') }
                     >
-                      Produtos
+                      Devs deste projeto
                     </MenuItem>
 
-                    <MenuItem
-                      data-testid="side-menu-item-my-orders"
-                      onClick={ () => handleRedirect('Meus Pedidos') }
-                    >
-                      Meus Pedidos
-                    </MenuItem>
-
-                    <MenuItem
-                      data-testid="side-menu-item-my-profile"
-                      onClick={ () => handleRedirect('Meu Perfil') }
-                    >
-                      Meu Perfil
-                    </MenuItem>
-
-                    <MenuItem
-                      data-testid="side-menu-item-logout"
-                      onClick={ () => handleRedirect('Sair') }
-                    >
-                      Sair
-                    </MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
             </Grow>
           )}
         </Popper>
+      </div>
     </div>
   );
 }

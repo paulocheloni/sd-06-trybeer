@@ -10,7 +10,6 @@ import Grow from '@material-ui/core/Grow';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-
 // Componentes
 import validateEmailAndPassword from '../resources/validateEmailAndPassword';
 import logoBeerIce from '../images/logo.png'

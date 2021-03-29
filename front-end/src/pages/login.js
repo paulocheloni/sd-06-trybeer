@@ -23,14 +23,13 @@ const useStyles = makeStyles((theme) => ({
     '& > *': {
       margin: theme.spacing(1),
       display: 'flex',
-      width: '25ch',
       justifyContent: 'center'
     },
     height: '100vh',
   },
   buttom: {
     '& > *': {
-
+      width: '30ch',
       margin: theme.spacing(1),
     },
   },
@@ -139,9 +138,6 @@ function Login() {
             disabled={disabled}
             onClick={InsertUserLocalStorage}
             variant="outlined"
-            style={{
-              left: '3%',
-            }}
           >
             Entrar
       </Button>

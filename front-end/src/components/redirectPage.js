@@ -16,10 +16,10 @@ const BootstrapButton = withStyles({
     boxShadow: 'none',
     textTransform: 'none',
     fontSize: 16,
-    width: '30ch',
+    width: '35ch',
     padding: '6px 12px',
     border: '1px solid',
-    lineHeight: 1.5,
+    lineHeight: 3,
     backgroundColor: '#0063cc',
     borderColor: '#0063cc',
     fontFamily: [
@@ -81,9 +81,10 @@ function RedirectPage({ rota, id, conteudo }) {
     color="primary"
     disableRipple
     className={classes.margin}
-    style={{
-      left: '3%',
-    }}>
+    // style={{
+    //   left: '3%',
+    // }}
+    >
     { conteudo }
   </BootstrapButton>
   </Grow>

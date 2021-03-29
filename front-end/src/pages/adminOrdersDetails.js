@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
-import NavBarAdmin from '../components/menuNavBarAdmin';
-import api from '../services/api';
-import { loadState } from '../services/localStorage';
 
 // Material-UI
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,6 +7,12 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
+
+// Componentes
+import NavBarAdmin from '../components/menuNavBarAdmin';
+import api from '../services/api';
+import { loadState } from '../services/localStorage';
+
 
 // CSS - Material-UI
 const useStyles = makeStyles((theme) => ({
