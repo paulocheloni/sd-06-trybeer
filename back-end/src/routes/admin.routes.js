@@ -7,6 +7,21 @@ const admin = express.Router();
 
 // Swagger Schemas
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Update Status:
+ *       type: object
+ *       required:
+ *         - delivered
+ *       properties:
+ *         delivered:
+ *           type: boolean
+ *       example:
+ *         delivered: true     
+ */
+
 // Swagger tags
 
 /**
@@ -59,7 +74,30 @@ admin.get('/sales/:id', middlewares.authToken, middlewares.authAdmin, controller
 
 admin.get('/sales', middlewares.authToken, middlewares.authAdmin, controllers.sales);
 
-
+/**
+ * @swagger
+ * /admin/sales/{id}:
+ *   put:
+ *     security:
+ *      - apiKeyAuth: []
+ *     summary: Update sale status
+ *     tags: [Admin]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Update Status'
+ *     responses:
+ *       200:
+ *         description: The status was successfully updated
+ *       500:
+ *         description: Update profile failed. Please, contact support or try again later.
+ */
 
 admin.put('/sales/:id', middlewares.authToken, middlewares.authAdmin, controllers.editSale);
 
