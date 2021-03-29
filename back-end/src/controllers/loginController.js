@@ -1,8 +1,5 @@
 const loginRouter = require('express').Router();
 const Service = require('../services/loginService');
-// const { Router } = require('express');
-
-// const loginRouter = new Router();
 
 loginRouter.post('/', async (req, res, next) => {
   try {
