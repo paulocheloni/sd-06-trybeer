@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router';
-import { localStorageCart } from '../services/ProductCardService';
 import CheckoutItem from '../components/Checkout/CheckoutItem';
 import Address from '../components/Checkout/Address';
 import TrybeerContext from '../context/TrybeerContext';
@@ -31,6 +30,7 @@ function Checkout() {
 
   useEffect(() => {
     if (!loggedUser || !loggedUser.token) history.push('/login');
+    const localStorageCart = JSON.parse(localStorage.getItem('cart'));
     if (localStorageCart) setCart(localStorageCart);
   }, []);
 
@@ -40,6 +40,7 @@ function Checkout() {
       totalValue += parseFloat(cartItem.price) * Number(cartItem.quantity);
     });
     setTotalCart(totalValue);
+    localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
   return (

@@ -4,12 +4,11 @@ import ProductCard from '../components/Products/ProductCard';
 import Cart from '../components/Products/Cart';
 import TopBar from '../components/TopBar';
 import { getAllProducts } from '../services/api';
-import { localStorageCart } from '../services/ProductCardService';
 import TrybeerContext from '../context/TrybeerContext';
 
 function Products() {
   const {
-    products, setProducts, setCart,
+    products, setProducts, cart, setCart,
   } = useContext(TrybeerContext);
   const loggedUser = JSON.parse(localStorage.getItem('user'));
 
@@ -17,10 +16,13 @@ function Products() {
     getAllProducts()
       .then((product) => setProducts(product));
 
-    if (localStorageCart) {
-      setCart(localStorageCart);
-    }
+    const localStorageCart = JSON.parse(localStorage.getItem('cart'));
+    if (localStorageCart) setCart(localStorageCart);
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   return (
     loggedUser
