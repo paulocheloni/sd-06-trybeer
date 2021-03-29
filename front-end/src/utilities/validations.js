@@ -1,7 +1,8 @@
 const minLengthPassword = 5;
 const minLengthName = 11;
 const regexName = /^[a-z ,.'-]+$/i;
-const regexEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+// const regexEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{3}$/i;
 
 export const validateName = (
   value,
