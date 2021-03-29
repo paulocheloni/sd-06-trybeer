@@ -12,7 +12,6 @@
 .order-status-adm {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
 
 .order-items-adm {

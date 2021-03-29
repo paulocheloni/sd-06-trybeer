@@ -33,6 +33,7 @@ function DetailsOrderAdm({ match }) {
           <span data-testid="order-number">
             {`Pedido ${id}`}
           </span>
+          <span>-</span>
           <span data-testid="order-status">
             {status}
           </span>
