@@ -88,23 +88,24 @@ function Profile() {
   };
 
   return (
-    <div>
-      <NavBar content="Meu perfil" />
-      <form
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: '40%',
-          transform: 'translate(-50%, -50%)',
-          marginTop: '50px',
-        }}
-        className={classes.root} noValidate autoComplete="off">
+    <Grow in={checked}>
+      <div>
+        <NavBar content="Meu perfil" />
+        <form
+          style={{
+            position: 'absolute',
+            left: '50%',
+            top: '40%',
+            transform: 'translate(-50%, -50%)',
+            marginTop: '50px',
+          }}
+          className={classes.root} noValidate autoComplete="off">
 
-        <Grow in={checked}>
+
           <p>Altere seu Nome</p>
-        </Grow>
 
-        <Grow in={checked}>
+
+
           <TextField
             className={classes.textInput}
             type="text"
@@ -114,9 +115,8 @@ function Profile() {
             id="standard-basic"
             label="Nome"
             variant="outlined" />
-        </Grow>
 
-        <Grow in={checked}>
+
           <TextField
             className={classes.textInput}
             type="text"
@@ -126,9 +126,9 @@ function Profile() {
             id="standard-basic"
             label="Email"
             variant="outlined" />
-        </Grow>
 
-        <Grow in={checked}>
+
+
           <Button
             className={classes.buttom}
             type="button"
@@ -141,11 +141,11 @@ function Profile() {
           >
             Mudar Nome
       </Button>
-        </Grow>
 
 
-      </form>
-      <Grow in={checked}>
+
+        </form>
+
         <img
           style={{
             position: 'absolute',
@@ -155,11 +155,12 @@ function Profile() {
             transform: 'translate(-50%, -50%)',
             marginTop: '50px',
           }} width="300px" src={imagePerfil} alt="imagePerfil" />
-      </Grow>
-      {
-        attSucess && <OpenSnackBar data={'Usuario alterado com sucesso'} />
-      }
-    </div>
+
+        {
+          attSucess && <OpenSnackBar data={'Usuario alterado com sucesso'} />
+        }
+      </div>
+    </Grow>
   );
 }
 
