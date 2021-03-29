@@ -86,7 +86,9 @@ function Menu(props) {
           md:justify-end md:px-2` }
       >
         <div
-          style={{ visibility: menuStatus ? 'visible' : 'hidden', width: '100px', height: '100px' }}
+          style={ {
+            visibility: menuStatus ? 'visible' : 'hidden', width: '100px', height: '100px',
+          } }
           className={ `${classToTest} h-1 w-1 ${menuStatus ? '' : 'hidden'}` }
         />
         { links.map((link, index) => (
