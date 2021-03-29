@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import BeersAppContext from '../context/BeersAppContext';
 import '../style/ProductCard.css';
 
-function ProductsCard({ element, index }) {
+function ProductsCardsComponent({ element, index }) {
   const {
     productQuantity,
     setProductQuantity,
@@ -82,7 +82,7 @@ function ProductsCard({ element, index }) {
   );
 }
 
-ProductsCard.propTypes = {
+ProductsCardsComponent.propTypes = {
   element: PropTypes.shape({
     name: PropTypes.string,
     price: PropTypes.string,
@@ -92,4 +92,4 @@ ProductsCard.propTypes = {
   index: PropTypes.number.isRequired,
 };
 
-export default ProductsCard;
+export default ProductsCardsComponent;

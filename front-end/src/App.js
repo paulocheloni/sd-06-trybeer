@@ -2,15 +2,15 @@ import React from 'react';
 import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 import Provider from './context/Provider';
 import {
-  Login,
-  Signup,
-  CostumerProfile,
-  CostumerProducts,
-  CostumerCheckout,
-  CostumerOrders,
-  CostumerOrdersDetails,
-  AdminProfile,
-  AdminOrders,
+  LoginPage,
+  SignupPage,
+  CostumerProfilePage,
+  CostumerProductsPage,
+  CostumerCheckoutPage,
+  CostumerOrdersPage,
+  CostumerOrdersDetailsPage,
+  AdminProfilePage,
+  AdminOrdersPage,
   AdminOrdersDetailsPage,
 } from './pages';
 
@@ -20,26 +20,26 @@ function App() {
       <BrowserRouter>
         <Provider>
           <Switch>
-            <Route exact path="/login" component={ Login } />
-            <Route exact path="/register" component={ Signup } />
-            <Route exact path="/profile" component={ CostumerProfile } />
-            <Route exact path="/products" component={ CostumerProducts } />
-            <Route exact path="/checkout" component={ CostumerCheckout } />
+            <Route exact path="/login" component={ LoginPage } />
+            <Route exact path="/register" component={ SignupPage } />
+            <Route exact path="/profile" component={ CostumerProfilePage } />
+            <Route exact path="/products" component={ CostumerProductsPage } />
+            <Route exact path="/checkout" component={ CostumerCheckoutPage } />
             <Route
               exact
               path="/orders"
-              component={ CostumerOrders }
+              component={ CostumerOrdersPage }
             />
             <Route
               exact
               path="/orders/:id"
-              component={ CostumerOrdersDetails }
+              component={ CostumerOrdersDetailsPage }
             />
-            <Route exact path="/admin/profile" component={ AdminProfile } />
+            <Route exact path="/admin/profile" component={ AdminProfilePage } />
             <Route
               exact
               path="/admin/orders"
-              component={ AdminOrders }
+              component={ AdminOrdersPage }
             />
             <Route
               exact

@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { CheckoutCards, Header } from '../components';
+import { CheckoutCardsComponent, HeaderComponent } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
 import fetchApiJsonBody from '../service/fetchApi';
 import '../style/CostumerCheckout.css';
 
-function CostumerCheckout() {
+function CostumerCheckoutPage() {
   const history = useHistory();
   const {
     user,
@@ -70,14 +70,14 @@ function CostumerCheckout() {
 
   return (
     <div>
-      <Header text="Finalizar Pedido" id="top-title" />
+      <HeaderComponent text="Finalizar Pedido" id="top-title" />
       <div className="costumer_checkout">
         <h1>Produtos</h1>
         <div className="costumer_checkout_product">
           {productQuantity.length === 0 && <p>Não há produtos no carrinho</p>}
           {productQuantity.map((element, index) => (
             <div key={ element.id }>
-              <CheckoutCards element={ element } index={ index } />
+              <CheckoutCardsComponent element={ element } index={ index } />
             </div>
           ))}
         </div>
@@ -126,4 +126,4 @@ function CostumerCheckout() {
   );
 }
 
-export default CostumerCheckout;
+export default CostumerCheckoutPage;

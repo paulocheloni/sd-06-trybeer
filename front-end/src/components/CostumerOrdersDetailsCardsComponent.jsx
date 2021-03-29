@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function CostumerOrdersDetailsCard({ element, index }) {
+function CostumerOrdersDetailsCardsComponent({ element, index }) {
   const { name, quantity, productPrice } = element;
 
   const commaAmount = (price) => `${price}`.replace('.', ',');
@@ -19,7 +19,7 @@ function CostumerOrdersDetailsCard({ element, index }) {
   );
 }
 
-CostumerOrdersDetailsCard.propTypes = {
+CostumerOrdersDetailsCardsComponent.propTypes = {
   index: PropTypes.number.isRequired,
   element: PropTypes.shape({
     name: PropTypes.string,
@@ -28,4 +28,4 @@ CostumerOrdersDetailsCard.propTypes = {
   }).isRequired,
 };
 
-export default CostumerOrdersDetailsCard;
+export default CostumerOrdersDetailsCardsComponent;

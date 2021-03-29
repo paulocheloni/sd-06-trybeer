@@ -9,7 +9,7 @@ import '../style/LoginRegister.css';
 
 const logo = require('../images/logo_provisorio.png');
 
-function Signup() {
+function SignupPage() {
   const history = useHistory();
   const {
     setUser,
@@ -136,4 +136,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default SignupPage;
