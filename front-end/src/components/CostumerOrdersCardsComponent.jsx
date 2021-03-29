@@ -15,15 +15,19 @@ function CostumerOrdersCardsComponent({ element, index }) {
 
   return (
     <div className="orderCards">
-      <h4 data-testid={ `${index}-order-number` }>
-        {`Pedido ${id}`}
-      </h4>
-      <h4 data-testid={ `${index}-order-date` }>
-        { parseDate() }
-      </h4>
-      <h3 data-testid={ `${index}-order-total-value` }>
-        { `R$ ${totalPrice.replace('.', ',')}` }
-      </h3>
+      <div className="orderCards_title">
+        <h4 data-testid={ `${index}-order-number` }>
+          {`Pedido ${id}`}
+        </h4>
+        <p data-testid={ `${index}-order-date` }>
+          { parseDate() }
+        </p>
+      </div>
+      <div className="orderCards_price">
+        <h4 data-testid={ `${index}-order-total-value` }>
+          { `R$ ${totalPrice.replace('.', ',')}` }
+        </h4>
+      </div>
     </div>
   );
 }

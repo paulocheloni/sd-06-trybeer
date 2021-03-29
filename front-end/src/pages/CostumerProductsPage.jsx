@@ -37,8 +37,7 @@ function CostumerProductsPage() {
   const commaAmount = `${amount.toFixed(2)}`.replace('.', ',');
 
   return (
-    <div>
-      {/* className="product-page" */}
+    <div className="product-page">
       <HeaderComponent text="TryBeer" id="top-title" />
       <div className="product-list">
         {products.map((element, index) => (

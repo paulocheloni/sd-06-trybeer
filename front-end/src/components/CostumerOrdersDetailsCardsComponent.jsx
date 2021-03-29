@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../style/OrdersDetails.css';
 
 function CostumerOrdersDetailsCardsComponent({ element, index }) {
   const { name, quantity, productPrice } = element;
@@ -7,7 +8,7 @@ function CostumerOrdersDetailsCardsComponent({ element, index }) {
   const commaAmount = (price) => `${price}`.replace('.', ',');
 
   return (
-    <div className="detailsOrders">
+    <div className="ordersDetails">
       <p data-testid={ `${index}-product-qtd` }>{ quantity }</p>
       <p data-testid={ `${index}-product-name` }>{ name }</p>
       <p

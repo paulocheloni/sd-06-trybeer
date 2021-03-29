@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { CostumerOrdersCardsComponent } from '../components';
 import HeaderComponent from '../components/HeaderComponent';
 import BeersAppContext from '../context/BeersAppContext';
+import '../style/CostumerOrder.css';
 
 function CostumerOrdersPage() {
   const history = useHistory();
@@ -26,20 +27,22 @@ function CostumerOrdersPage() {
   }, []);
 
   return (
-    <div className="costumer_orders">
+    <div>
       <HeaderComponent text="Meus Pedidos" />
-      <h1 data-testid="top-title">Meus Pedidos</h1>
-      <div className="order-list">
-        {orders.map((element, index) => (
-          <div key={ element.id }>
-            <Link to={ `/orders/${element.id}` }>
-              <CostumerOrdersCardsComponent
-                element={ element }
-                index={ index }
-              />
-            </Link>
-          </div>
-        ))}
+      <div className="costumer_orders">
+        <h1 data-testid="top-title">Meus Pedidos</h1>
+        <div className="order-list">
+          {orders.map((element, index) => (
+            <div key={ element.id }>
+              <Link to={ `/orders/${element.id}` }>
+                <CostumerOrdersCardsComponent
+                  element={ element }
+                  index={ index }
+                />
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

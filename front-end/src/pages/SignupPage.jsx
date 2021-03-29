@@ -7,7 +7,7 @@ import funcValidations from '../service/funcValidations';
 
 import '../style/LoginRegister.css';
 
-const logo = require('../images/logo_provisorio.png');
+const logo = require('../images/logo.png');
 
 function SignupPage() {
   const history = useHistory();

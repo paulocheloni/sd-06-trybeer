@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
-.side-menu-container {
+.admin-side-bar-container {
   align-items: center;
   align-content: center;
   background-color: #205527;
   display: flex;
   flex-flow: column wrap;
-  height: 600px;
+  height: 100%;
   justify-content: flex-start;
   padding-bottom: 25px;
   margin-top: -30px;
@@ -15,7 +15,17 @@
   z-index: 100;
 }
 
-.side-menu-container button {
+.admin-side-bar-container h1 {
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20pt;
+  font-weight: 900;
+  height: 40px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.admin-side-bar-container button {
   background-color: #ff4000;
   border: none;
   border-radius: 10px 0px;
@@ -28,17 +38,17 @@
   width: 200px;
 }
 
-.side-menu-container button:hover {
+.admin-side-bar-container button:hover {
   background-color: #ff6e3d;
   cursor: pointer;
 }
 
-.side-menu-container-logout {
+.bttn_sidebar_admin_bottom {
   background-color: #000000 !important;
-  margin-top: 150px !important;
+  margin-top: 650px !important;
 }
 
-.side-menu-container-logout:hover {
+.bttn_sidebar_admin_bottom:hover {
   background-color: #3f3e3e !important;
   cursor: pointer;
 }

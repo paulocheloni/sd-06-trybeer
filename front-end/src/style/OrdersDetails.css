@@ -1,21 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
-.orderCards {
+.ordersDetails {
   align-items: center;
   align-content: center;
-  background-color: #ffff;
-  border: 5px double #205527;
-  border-radius: 25px 0px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #205527;
   display: flex;
-  flex-flow: column nowrap;
-  height: 150px !important;
-  justify-content: center;
-  margin: 10px;
-  width: 180px !important;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin: auto;
+  margin-top: 10px;
+  padding: 5px 15px;
+  width: 350px;
 }
 
-.orderCards:hover {
-  background-color: #d6d6d6;
+.ordersDetails p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14pt !important;
+  font-weight: 900;
+  margin: 1px;
+  text-align: center;
+  padding: 5px;
 }
 
 a:link {

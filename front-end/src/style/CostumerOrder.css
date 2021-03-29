@@ -20,16 +20,7 @@
   align-items: center;
   align-content: center;
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap !important;
   justify-content: center;
   width: 100%;
-}
-
-.order-list div {
-  background-color: #ffffff;
-}
-
-.order-list div:hover {
-  background-color: #a0a0a0;
-  cursor: pointer;
 }

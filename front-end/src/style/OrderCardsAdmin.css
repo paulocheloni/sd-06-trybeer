@@ -8,10 +8,10 @@
   border-radius: 25px 0px;
   display: flex;
   flex-flow: column nowrap;
-  height: 150px !important;
+  height: 250px !important;
   justify-content: center;
   margin: 10px;
-  width: 180px !important;
+  width: 250px !important;
 }
 
 .orderCards:hover {
@@ -27,32 +27,59 @@ a:visited {
   color: #000000;
 }
 
-.orderCards_title {
+.orderCards-first {
   align-items: center;
   align-content: center;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-around;
-  margin: 20px 10px -20px 10px;
+  flex-flow: column wrap;
+  justify-content: center;
   width: 100%;
 }
 
-.orderCards_title h4 {
+.orderCards-first h4 {
   font-family: 'Poppins', sans-serif;
   font-size: 18pt;
   font-weight: 900;
   text-decoration: none;
 }
 
-.orderCards_title p {
+.orderCards-first p {
   font-family: 'Poppins', sans-serif;
   font-size: 14pt;
   text-decoration: none;
 }
 
-.orderCards_price h4 {
+.orderCards-second {
+  align-items: center;
+  align-content: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.orderCards-second h4 {
   font-family: 'Poppins', sans-serif;
-  font-size: 18pt;
+  font-size: 16pt;
   font-weight: 900;
   text-decoration: none;
+}
+
+.orderCards-second h3 {
+  color: #000 !important;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16pt;
+  font-weight: 900;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.greenStatusComponent {
+  background-color: #21a809 !important;
+  color: #ffffff !important;
+}
+
+.redStatusComponent {
+  background-color: #eb0e0e !important;
+  color: #ffffff !important;
 }

@@ -53,29 +53,29 @@ function ProductsCardsComponent({ element, index }) {
         alt="beer"
       />
       <div className="productCards_title">
-        <p data-testid={ `${index}-product-name` }>{ name }</p>
-        <p
+        <h3
           className="txt-productCards"
           data-testid={ `${index}-product-price` }
         >
           { `R$ ${commaPrice}` }
-        </p>
+        </h3>
+        <p data-testid={ `${index}-product-name` }>{ name }</p>
       </div>
       <div className="productCards-qtt">
-        <button
-          type="button"
-          data-testid={ `${index}-product-plus` }
-          onClick={ clickPlus }
-        >
-          +
-        </button>
-        <p data-testid={ `${index}-product-qtd` }>{ qnt }</p>
         <button
           type="button"
           data-testid={ `${index}-product-minus` }
           onClick={ clickMinus }
         >
           -
+        </button>
+        <p data-testid={ `${index}-product-qtd` }>{ qnt }</p>
+        <button
+          type="button"
+          data-testid={ `${index}-product-plus` }
+          onClick={ clickPlus }
+        >
+          +
         </button>
       </div>
     </div>
