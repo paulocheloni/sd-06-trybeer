@@ -5,13 +5,14 @@
   box-shadow: 20px 20px 22px rgb(0, 0, 0);
   
 }
+
 img {
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px ;
   margin-top: 10px;
   margin-bottom: 10px;
-
 }
+
 .btn1{
   border: 1px solid;
   outline: none;
@@ -22,6 +23,7 @@ img {
   border-radius: 4px;
   font-weight:inherit;
 }
+
 .btn1:disabled{
   border: 1px solid;
   outline: none;
@@ -32,15 +34,15 @@ img {
   border-radius: 4px;
   font-weight:inherit;
 }
+
 h1 {
   font-size: 70px;
   font-family: sans-serif;	
 }
 h4 {
   color: rgb(241, 133, 9);
-  
-  
 }
+
 .login {
   font-family: sans-serif;
   padding-top: 60px;
@@ -53,8 +55,15 @@ h4 {
  
 } 
 
-@media screen and (max-width: 990px) {
-  img {
-    display: none;
-  }
+.login-form {
+  margin: auto;
+  width: 30%;
+  margin-top: 20%;
+  flex-direction: column;
+  display: flex;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 5%;
 }

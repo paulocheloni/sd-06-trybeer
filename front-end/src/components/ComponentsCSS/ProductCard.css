@@ -55,3 +55,26 @@
 .card-body {
   font-size: larger;
 }
+
+.quantity-controller {
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-around;
+}
+
+.quantity-controller button{
+  width: 15%;
+  border-radius: 50%;
+  background-color:black;
+}
+
+.product-card-image {
+  height: 300px;
+}
+
+.product-card {
+  width: 300px;
+  padding: 0.3%;
+  border: 1px solid black;
+  margin: 0.2%;
+}

@@ -46,7 +46,7 @@ function AdminOrders({ history }) {
                     </div>
                   </div>
                   <div data-testid={ `${index}-order-address` }>
-                    { `Address: ${deliveryAddress}, ${deliveryNumber}` }
+                    { `Endereço: ${deliveryAddress}, ${deliveryNumber}` }
                   </div>
                   <div data-testid={ `${index}-order-total-value` }>
                     { `Total: ${formatedPrice(totalPrice)}` }

@@ -16,19 +16,20 @@ const TopMenu = ({ titleMenu }) => {
     <div>
       { isVisible && user.role === 'client' && <SidebarMenu /> }
       { isVisible && user.role === 'administrator' && <SidebarMenuAdmin /> }
-      <header>
+      <header className="top-menu">
         <button
           type="button"
           id="side-menu"
           onClick={ setVisibility }
           data-testid="top-hamburguer"
+          className="menu-hamburguer-btn"
         >
           <IconContext.Provider value={ { size: '2em' } }>
             <GiHamburgerMenu />
           </IconContext.Provider>
         </button>
         <p
-          className="Trybeer"
+          className="title-top-menu"
           data-testid="top-title"
         >
           { titleMenu }

@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import { verifyEmailAndPassword } from '../utils/verifications';
 import fetchFunctions from '../api/fetchFunctions';
 import TrybeerContext from '../context/TrybeerContext';
-import image from '../imagens/brinde3.jpg';
 import './PagesCSS/Login.css';
 
 function Login() {
@@ -40,9 +39,6 @@ function Login() {
     <section className="login-form Form">
       <div className="container">
         <div className="row">
-          <div className="col-lg-5">
-            <img src={ image } className="img-fluid" alt="cerveja" />
-          </div>
           <div className="col-lg-7 px-4 pt-5">
             <h1>TryBeer</h1>
             <h4>Encontre aqui a sua cerveja!</h4>

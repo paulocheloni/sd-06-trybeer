@@ -4,16 +4,6 @@
   width: 100%;
 }
 
-.quantity-item {
-  background-color: white ;
-}
-
-.headers {
-  color: gray;
-  display: flex;
-  justify-content: space-around;
-}
-
 .container-detail {
   align-items: center;
   flex-direction: column;
@@ -29,16 +19,12 @@
   display: flex;
   flex-direction: row;
   padding: 1%;
-  /* margin: 5%; */
-  /* background-color: blue; */
 }
 .order-card-detail-container {
-  /* align-items: center; */
   width: 100%;
   border: 1px solid white;
   display: flex;
   flex-direction: column;
-  /* margin: 5%; */
   background-color: blue;
 }
 .card-id-date {
@@ -57,7 +43,6 @@
 .panel-orders {
   background-color: white ;
   color: black;
-  /* display: flex; */
   margin: 2%;
   padding: 3%;
   border-width:thin;
@@ -69,7 +54,6 @@
 .panel-orders-detail {
   background-color: white ;
   color: black;
-  /* display: flex; */
   margin: 2%;
   padding: 3%;
   border-width:thin;
@@ -82,8 +66,6 @@
   flex-direction: row;
   justify-content: flex-start;
   margin-bottom: 3%;
-  /* padding: 10%; */
-  /* background-color: blue; */
   font-weight: bold;
   font-size: 18px;
 }
@@ -91,15 +73,6 @@
 .title {
   margin: 0 5%;
 }
-
-/* .order-card-container {
-  width: 33%;
-  border: 1px solid white;
-  display: flex;
-  flex-direction: column;
-  /* margin: 5%; */
-  /* background-color: blue; */
-/* } */
 
 .order-total-value {
   display: flex;

@@ -49,7 +49,7 @@ function Profile(props) {
         <div className="panel-profile">
           <div className="form-row">
             <label htmlFor="name">
-              Name
+              Nome
               <div className="col-lg-20">
                 <input
                   data-testid="profile-name-input"
