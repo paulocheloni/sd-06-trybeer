@@ -19,8 +19,6 @@ function OrderAdm() {
     if (!user) history.push('/login');
   }, [history]);
 
-  console.log(allOrders);
-
   return !allOrders ? <h1>Loading...</h1> : (
     <div>
       <SideBarAdm />
