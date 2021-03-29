@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import '../css/CheckoutCard.css';
 import BeerContext from '../context/BeerContext';
 import { getSalesProductsBySaleId } from '../api/index';
+import '../css/OrderCardAdmin.css';
 
 function OrderCardAdmin(props) {
   const { order, index } = props;
@@ -18,31 +18,38 @@ function OrderCardAdmin(props) {
   };
 
   return (
-    <Link to={ `/admin/orders/${order.id}` }>
+    <Link to={ `/admin/orders/${order.id}` } className="admin-order-card">
       <a
         href="/admin/orders/:id"
-        // data-testid={ `${index}-order-number` }
         onClick={ () => handleClick() }
       >
-        <div
-          className="checkout-card-container"
-          data-testid={ `${index}-order-card-container` }
-        >
-          <p data-testid={ `${index}-order-number` }>
+        <div data-testid={ `${index}-order-card-container` }>
+          <p
+            data-testid={ `${index}-order-number` }
+            className="admin-order-number"
+          >
             {`Pedido ${order.id}`}
           </p>
-
-          <p data-testid={ `${index}-order-address` }>
+          <p
+            data-testid={ `${index}-order-address` }
+            className="admin-order-address"  
+          >
             {`${order.delivery_address}, ${order.delivery_number}`}
           </p>
-
-          <p data-testid={ `${index}-order-total-value` }>
-            {`R$ ${total}`}
-          </p>
-
-          <p data-testid={ `${index}-order-status` }>
-            {`${order.status}`}
-          </p>
+          <div className="total-and-status">
+            <p
+              data-testid={ `${index}-order-total-value` }
+              className="admin-order-value"
+            >
+              {`R$ ${total}`}
+            </p>
+            <p
+              data-testid={ `${index}-order-status` }
+              className="admin-order-status"
+            >
+              {`${order.status}`}
+            </p>
+          </div>
         </div>
       </a>
     </Link>

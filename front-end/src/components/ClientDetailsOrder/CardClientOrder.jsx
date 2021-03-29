@@ -5,7 +5,7 @@ import '../../css/CardDetailsOrder.css';
 function ClientDetailsOrder(props) {
   const { product, index } = props;
   return (
-    <div className="ClientDetailsOrder-container">
+    <div className="client-details-card">
       <p data-testid={ `${index}-product-qtd` }>
         { `Quantidade: ${product.quantity}` }
       </p>
