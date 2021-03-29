@@ -2,10 +2,12 @@
 
 body {
   background: #000000 url('../images/background_01.gif') center center no-repeat fixed; 
+  background-blend-mode: lighten;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-color: rgba(255, 255, 255, 0.7)
 }
 
 .login-register {
@@ -20,6 +22,7 @@ body {
 }
 
 .img-logo-login {
+  border-radius: 50%;
   height: 150px;
   margin-bottom: 20px;
 }

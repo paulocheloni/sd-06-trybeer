@@ -47,7 +47,7 @@ function CostumerProfile() {
 
   return (
     <div>
-      <Header text="Meu perfil" id="top-title" />
+      <Header text="Meu Perfil" id="top-title" />
       <div className="costumer_profile">
         <p>Nome</p>
         <input

@@ -8,10 +8,10 @@
   border-radius: 25px 0px;
   display: flex;
   flex-flow: column nowrap;
-  height: 250px;
+  /* height: 250px !important; */
   justify-content: center;
   margin: 10px;
-  width: 250px;
+  /* width: 250px !important; */
 }
 
 .orderCards:hover {

@@ -10,9 +10,8 @@
   justify-content: space-between;
   margin: auto;
   margin-top: 10px;
-  width: 470px;
+  width: 350px;
 }
-
 
 .checkout_card table {
   align-items: center;
@@ -49,4 +48,10 @@
 .checkout_card button:hover {
   background-color: #ff6e3d;
   cursor: pointer;
+}
+
+@media screen and ( min-width: 800px ) {
+  .checkout_card {
+    width: 700px;
+  }
 }
