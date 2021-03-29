@@ -30,10 +30,10 @@ function ClientDetailsOrder() {
         <p data-testid="order-date">{`Data: ${dateOrder}`}</p>
         <p data-testid="order-total-value">{`Total: R$ ${totalPriceOrder}`}</p>
         <section className="list">
-        { products && products
-          .map((obj, index) => (
-            <CardClientDetailsOrder key={ index } product={ obj } index={ index } />
-          ))}
+          { products && products
+            .map((obj, index) => (
+              <CardClientDetailsOrder key={ index } product={ obj } index={ index } />
+            ))}
         </section>
       </section>
     </div>

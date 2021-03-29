@@ -32,7 +32,7 @@ function OrderCardAdmin(props) {
           </p>
           <p
             data-testid={ `${index}-order-address` }
-            className="admin-order-address"  
+            className="admin-order-address"
           >
             {`${order.delivery_address}, ${order.delivery_number}`}
           </p>
