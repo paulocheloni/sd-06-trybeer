@@ -4,15 +4,15 @@ import React, { useEffect, useState, useCallback } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import OpenSnackBar from '../components/OpenSnackBar'
 import Grow from '@material-ui/core/Grow';
 
 // Componentes
 import { useHistory } from 'react-router';
+import OpenSnackBar from '../components/OpenSnackBar';
 import { loadState } from '../services/localStorage';
 import api from '../services/api';
 import NavBar from '../components/menuNavBar';
-import imagePerfil from '../images/image-perfil.png'
+import imagePerfil from '../images/image-perfil.png';
 
 // CSS - Material-Ui
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   textInput: {
     width: '30ch',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 }));
 
@@ -60,9 +60,8 @@ function Profile() {
 
   // Material-Iu Renderizacao
   setTimeout(() => {
-    setChecked(true)
-  }, 300)
-
+    setChecked(true);
+  }, 300);
 
   // Renderizacao
   useEffect(() => {
@@ -88,76 +87,77 @@ function Profile() {
   };
 
   return (
-    <Grow in={checked}>
+    <Grow in={ checked }>
       <div>
         <NavBar content="Meu perfil" />
         <form
-          style={{
+          style={ {
             position: 'absolute',
             left: '50%',
             top: '40%',
             transform: 'translate(-50%, -50%)',
             marginTop: '50px',
-          }}
-          className={classes.root} noValidate autoComplete="off">
-
+          } }
+          className={ classes.root }
+          noValidate
+          autoComplete="off"
+        >
 
           <p>Altere seu Nome</p>
 
-
-
           <TextField
-            className={classes.textInput}
+            className={ classes.textInput }
             type="text"
             data-testid="profile-name-input"
             placeholder="digite seu Nome"
-            onChange={(e) => setName(e.target.value)}
+            onChange={ (e) => setName(e.target.value) }
             id="standard-basic"
             label="Nome"
-            variant="outlined" />
-
+            variant="outlined"
+          />
 
           <TextField
-            className={classes.textInput}
+            className={ classes.textInput }
             type="text"
             data-testid="profile-email-input"
-            value={email}
+            value={ email }
             readOnly
             id="standard-basic"
             label="Email"
-            variant="outlined" />
-
-
+            variant="outlined"
+          />
 
           <Button
-            className={classes.buttom}
+            className={ classes.buttom }
             type="button"
             size="large"
             color="primary"
             data-testid="profile-save-btn"
-            disabled={disabled}
-            onClick={updateUserName}
+            disabled={ disabled }
+            onClick={ updateUserName }
             variant="outlined"
           >
             Mudar Nome
-      </Button>
-
-
+          </Button>
 
         </form>
 
         <img
-          style={{
+          style={ {
             position: 'absolute',
             left: '50%',
             top: '70%',
             zIndex: '-1',
             transform: 'translate(-50%, -50%)',
             marginTop: '50px',
-          }} width="300px" src={imagePerfil} alt="imagePerfil" />
+          } }
+          width="300px"
+          src={ imagePerfil }
+          alt="imagePerfil"
+        />
 
         {
-          attSucess && <OpenSnackBar data={'Usuario alterado com sucesso'} />
+          attSucess && <OpenSnackBar data="Usuario alterado com sucesso" />
         }
       </div>
     </Grow>

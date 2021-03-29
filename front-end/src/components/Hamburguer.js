@@ -32,12 +32,12 @@ export default function Hamburguer() {
   const anchorRef = React.useRef(null);
   const history = useHistory();
 
-      // Renderizacao
+  // Renderizacao
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-      // Redirecionar
+  // Redirecionar
   const handleRedirect = (event) => {
     switch (event) {
     case 'Produtos':
@@ -61,7 +61,7 @@ export default function Hamburguer() {
     setOpen(false);
   };
 
-        // Open Hamburguer
+  // Open Hamburguer
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -69,7 +69,7 @@ export default function Hamburguer() {
     }
   }
 
-    // Material-Iu
+  // Material-Iu
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
@@ -82,73 +82,73 @@ export default function Hamburguer() {
   return (
     <div className={ classes.root }>
 
-        <Button
-          ref={ anchorRef }
-          aria-controls={ open ? 'menu-list-grow' : undefined }
-          aria-haspopup="true"
-          onClick={ handleToggle }
-          color="inherit"
-          data-testid="top-hamburguer"
-        >
-          <MenuIcon />
-        </Button>
-        <Popper
-          open={ open }
-          anchorEl={ anchorRef.current }
-          role={ undefined }
-          transition
-          disablePortal
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              { ...TransitionProps }
-              style={
-                { transformOrigin: placement === 'bottom'
-                  ? 'center top' : 'center bottom' }
-              }
-            >
-              <Paper>
-                <ClickAwayListener onClickAway={ handleRedirect }>
-                  <MenuList
-                    className="side-menu-container"
-                    autoFocusItem={ open }
-                    id="menu-list-grow"
-                    onKeyDown={ handleListKeyDown }
+      <Button
+        ref={ anchorRef }
+        aria-controls={ open ? 'menu-list-grow' : undefined }
+        aria-haspopup="true"
+        onClick={ handleToggle }
+        color="inherit"
+        data-testid="top-hamburguer"
+      >
+        <MenuIcon />
+      </Button>
+      <Popper
+        open={ open }
+        anchorEl={ anchorRef.current }
+        role={ undefined }
+        transition
+        disablePortal
+      >
+        {({ TransitionProps, placement }) => (
+          <Grow
+            { ...TransitionProps }
+            style={
+              { transformOrigin: placement === 'bottom'
+                ? 'center top' : 'center bottom' }
+            }
+          >
+            <Paper>
+              <ClickAwayListener onClickAway={ handleRedirect }>
+                <MenuList
+                  className="side-menu-container"
+                  autoFocusItem={ open }
+                  id="menu-list-grow"
+                  onKeyDown={ handleListKeyDown }
+                >
+
+                  <MenuItem
+                    data-testid="side-menu-item-products"
+                    onClick={ () => handleRedirect('Produtos') }
                   >
+                    Produtos
+                  </MenuItem>
 
-                    <MenuItem
-                      data-testid="side-menu-item-products"
-                      onClick={ () => handleRedirect('Produtos') }
-                    >
-                      Produtos
-                    </MenuItem>
+                  <MenuItem
+                    data-testid="side-menu-item-my-orders"
+                    onClick={ () => handleRedirect('Meus Pedidos') }
+                  >
+                    Meus Pedidos
+                  </MenuItem>
 
-                    <MenuItem
-                      data-testid="side-menu-item-my-orders"
-                      onClick={ () => handleRedirect('Meus Pedidos') }
-                    >
-                      Meus Pedidos
-                    </MenuItem>
+                  <MenuItem
+                    data-testid="side-menu-item-my-profile"
+                    onClick={ () => handleRedirect('Meu Perfil') }
+                  >
+                    Meu Perfil
+                  </MenuItem>
 
-                    <MenuItem
-                      data-testid="side-menu-item-my-profile"
-                      onClick={ () => handleRedirect('Meu Perfil') }
-                    >
-                      Meu Perfil
-                    </MenuItem>
-
-                    <MenuItem
-                      data-testid="side-menu-item-logout"
-                      onClick={ () => handleRedirect('Sair') }
-                    >
-                      Sair
-                    </MenuItem>
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
+                  <MenuItem
+                    data-testid="side-menu-item-logout"
+                    onClick={ () => handleRedirect('Sair') }
+                  >
+                    Sair
+                  </MenuItem>
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </Grow>
+        )}
+      </Popper>
     </div>
   );
 }

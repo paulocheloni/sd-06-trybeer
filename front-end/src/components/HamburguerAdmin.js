@@ -6,7 +6,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 
-
 // CSS - Material-Ui
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,17 +26,17 @@ export default function Hamburguer() {
   // Redirecionar
   const handleRedirect = (event) => {
     switch (event) {
-      case 'Pedidos':
-        history.push('/admin/orders');
-        break;
-      case 'Perfil':
-        history.push('/admin/profile');
-        break;
-      case 'Sair':
-        history.push('/login');
-        break;
-      default:
-        break;
+    case 'Pedidos':
+      history.push('/admin/orders');
+      break;
+    case 'Perfil':
+      history.push('/admin/profile');
+      break;
+    case 'Sair':
+      history.push('/login');
+      break;
+    default:
+      break;
     }
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
@@ -66,26 +65,26 @@ export default function Hamburguer() {
   return (
     <MenuList
       className="admin-side-bar-container"
-      autoFocusItem={open}
+      autoFocusItem={ open }
       id="menu-list-grow"
-      onKeyDown={handleListKeyDown}
+      onKeyDown={ handleListKeyDown }
     >
-      <div className={classes.root}>
+      <div className={ classes.root }>
         <MenuItem
           data-testid="side-menu-item-orders"
-          onClick={() => handleRedirect('Pedidos')}
+          onClick={ () => handleRedirect('Pedidos') }
         >
           Pedidos
         </MenuItem>
         <MenuItem
           data-testid="side-menu-item-profile"
-          onClick={() => handleRedirect('Perfil')}
+          onClick={ () => handleRedirect('Perfil') }
         >
           Perfil
         </MenuItem>
         <MenuItem
           data-testid="side-menu-item-logout"
-          onClick={() => handleRedirect('Sair')}
+          onClick={ () => handleRedirect('Sair') }
         >
           Sair
         </MenuItem>

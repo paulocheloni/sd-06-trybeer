@@ -26,10 +26,10 @@ const useStyles = makeStyles((theme) => ({
     margin: 'auto',
     marginTop: 15,
     minWidth: 1000,
-    "@media (max-width: 1250px)": {
+    '@media (max-width: 1250px)': {
       minWidth: 'auto',
       padding: 'none',
-    }
+    },
   },
   number: {
     width: 128,
@@ -86,13 +86,13 @@ function Admin() {
     if (order.status === 'Pendente') {
       return (
         <Button
-          style={{ margin: '15px' }}
-          className={classes.paper  }
+          style={ { margin: '15px' } }
+          className={ classes.paper }
           type="button"
           size="large"
           color="primary"
           data-testid="mark-as-delivered-btn"
-          onClick={sendProduct}
+          onClick={ sendProduct }
           variant="outlined"
         >
           Marcar como entregue
@@ -103,55 +103,55 @@ function Admin() {
 
   // Material-Iu Renderizacao
   setTimeout(() => {
-    setChecked(true)
-  }, 300)
+    setChecked(true);
+  }, 300);
 
   return (
     <div>
       <NavBarAdmin content="Trybeer" />
-      <div className={`${classes.root} marginTop`}>
-        <Grid container style={{ alignContent: 'center' }} direction="column" spacing={2}>
-          <Typography data-testid="order-status" style={{ textAlign: 'center' }} variant="h3" component="h2">
+      <div className={ `${classes.root} marginTop` }>
+        <Grid container style={ { alignContent: 'center' } } direction="column" spacing={ 2 }>
+          <Typography data-testid="order-status" style={ { textAlign: 'center' } } variant="h3" component="h2">
             {order.status}
           </Typography>
-          <Paper className={classes.paper} elevation={3}>
+          <Paper className={ classes.paper } elevation={ 3 }>
             {products.map((product, index) => (
-              <Grow in={checked}>
+              <Grow in={ checked }>
 
-                <Grid container spacing={0}>
-                  <Grid item style={{ maxHeight: 100 }}>
-                    <ButtonBase className={classes.number}>
+                <Grid container spacing={ 0 }>
+                  <Grid item style={ { maxHeight: 100 } }>
+                    <ButtonBase className={ classes.number }>
                       <img
-                        className={classes.image}
-                        src={product.imgUrl.replace(/ /g, '_')}
-                        data-testid={`${index}-product-img`}
-                        alt={product.name}
-                        style={{ maxHeight: 80 }}
+                        className={ classes.image }
+                        src={ product.imgUrl.replace(/ /g, '_') }
+                        data-testid={ `${index}-product-img` }
+                        alt={ product.name }
+                        style={ { maxHeight: 80 } }
                       />
                     </ButtonBase>
                   </Grid>
-                  <Grid item xs={12} sm container>
-                    <Grid item xs container direction="column" spacing={0}>
+                  <Grid item xs={ 12 } sm container>
+                    <Grid item xs container direction="column" spacing={ 0 }>
                       <Grid item xs>
                         <Typography
                           gutterBottom
                           variant="subtitle1"
-                          data-testid={`${index}-order-number`}
+                          data-testid={ `${index}-order-number` }
                         >
-                          <h3 data-testid={`${index}-product-qtd`}>
+                          <h3 data-testid={ `${index}-product-qtd` }>
                             {`${product.productQty}x - `}
-                            <span data-testid={`${index}-product-name`}>{product.name}</span>
+                            <span data-testid={ `${index}-product-name` }>{product.name}</span>
                           </h3>
                         </Typography>
                         <Typography
                           variant="body2"
                           gutterBottom
-                          data-testid={`${index}-order-address`}
+                          data-testid={ `${index}-order-address` }
                         >
-                          <h4 data-testid={`${index}-product-total-value`}>
+                          <h4 data-testid={ `${index}-product-total-value` }>
                             R$
                             {` ${product.totalPrice.toFixed(2)} `.replace('.', ',')}
-                            <span data-testid={`${index}-order-unit-price`}>
+                            <span data-testid={ `${index}-order-unit-price` }>
                               {`(R$ ${product.price})`.replace('.', ',')}
                             </span>
                           </h4>
@@ -163,7 +163,7 @@ function Admin() {
               </Grow>
             ))}
           </Paper>
-          <Typography data-testid="order-total-value" style={{ textAlign: 'center', margin: '20px' }} variant="h3" component="h2">
+          <Typography data-testid="order-total-value" style={ { textAlign: 'center', margin: '20px' } } variant="h3" component="h2">
             {`Total: R$ ${order.total_price}`.replace('.', ',')}
           </Typography>
 

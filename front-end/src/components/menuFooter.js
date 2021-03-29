@@ -80,30 +80,30 @@ export default function MenuFooter() {
     history.push('/checkout');
   };
 
-
   return (
     <div>
-      <Paper square className={classes.paper} />
-      <AppBar position="fixed" buttom='0' color="primary" className={`${classes.appBar} footerCliente`}>
+      <Paper square className={ classes.paper } />
+      <AppBar position="fixed" buttom="0" color="primary" className={ `${classes.appBar} footerCliente` }>
         <Toolbar>
           <HamburguerFooter />
           {/* <Fab color="secondary" aria-label="add" className={classes.fabButton}>
               <SearchProduct/>
           </Fab> */}
-          <div className={classes.grow} />
+          <div className={ classes.grow } />
           <IconButton
-            disabled={disabled}
+            disabled={ disabled }
             edge="start"
             color="inherit"
             aria-label="open drawer"
             data-testid="checkout-bottom-btn"
-            onClick={checkoutButton}
+            onClick={ checkoutButton }
           >
             <LocalGroceryStoreIcon />
             <span
               data-testid="checkout-bottom-btn-value"
             >
-              {' '}{` R$ ${totalSum.replace('.', ',')}`}
+              {' '}
+              {` R$ ${totalSum.replace('.', ',')}`}
             </span>
           </IconButton>
         </Toolbar>

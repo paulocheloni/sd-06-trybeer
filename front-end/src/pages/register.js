@@ -5,14 +5,14 @@ import { useHistory } from 'react-router';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import ErrorLogin from '../components/OpenSnackBar'
 import Grow from '@material-ui/core/Grow';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import ErrorLogin from '../components/OpenSnackBar';
 
 // Componentes
 import validateEmailAndPassword from '../resources/validateEmailAndPassword';
-import logoBeerIce from '../images/logo.png'
+import logoBeerIce from '../images/logo.png';
 
 // Servicos
 import { saveState } from '../services/localStorage';
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '5ch',
   },
   textInput: {
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 }));
 
@@ -66,8 +66,8 @@ function Register() {
 
   // Material-Iu Renderizacao
   setTimeout(() => {
-    setChecked(true)
-  }, 300)
+    setChecked(true);
+  }, 300);
 
   // Renderizacao
   useEffect(() => {
@@ -97,88 +97,93 @@ function Register() {
   return (
     <div>
       <form
-        style={{
+        style={ {
           position: 'absolute',
           left: '50%',
           top: '50%',
-          transform: 'translate(-50%, -50%)'
-        }}
-        className={classes.root} noValidate autoComplete="off">
-        {/* 
+          transform: 'translate(-50%, -50%)',
+        } }
+        className={ classes.root }
+        noValidate
+        autoComplete="off"
+      >
+        {/*
       <Fab  color="primary" aria-label="add">
         <AddIcon />
       </Fab> */}
 
-        <Grow in={checked}>
-          <img src={logoBeerIce} alt="LogoBeerIce" />
+        <Grow in={ checked }>
+          <img src={ logoBeerIce } alt="LogoBeerIce" />
         </Grow>
-        <Grow in={checked}>
+        <Grow in={ checked }>
           <p>Cadastre-se</p>
         </Grow>
 
-        <Grow in={checked}>
+        <Grow in={ checked }>
           <TextField
-            className={classes.textInput}
+            className={ classes.textInput }
             type="text"
             data-testid="signup-name"
             placeholder="digite seu nome"
-            onChange={(e) => setName(e.target.value)}
+            onChange={ (e) => setName(e.target.value) }
             id="standard-basic"
             label="Nome"
-            variant="outlined" />
+            variant="outlined"
+          />
         </Grow>
 
-        <Grow in={checked}>
+        <Grow in={ checked }>
           <TextField
-            className={classes.textInput}
+            className={ classes.textInput }
             type="text"
             data-testid="signup-email"
             placeholder="digite seu email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={ (e) => setEmail(e.target.value) }
             id="standard-basic"
             label="Email"
-            variant="outlined" />
+            variant="outlined"
+          />
         </Grow>
 
-        <Grow in={checked}>
+        <Grow in={ checked }>
           <TextField
-            className={classes.textInput}
+            className={ classes.textInput }
             type="password"
             data-testid="signup-password"
             placeholder="digite sua senha"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={ (e) => setPassword(e.target.value) }
             id="standard-basic"
             label="Senha"
-            variant="outlined" />
+            variant="outlined"
+          />
         </Grow>
 
-
-        <Grow in={checked}>
+        <Grow in={ checked }>
           <FormControlLabel
-            control={<Checkbox color="primary" value={checkbox} onChange={(e) => handleChange(e)} />}
-            style={{
+            control={ <Checkbox color="primary" value={ checkbox } onChange={ (e) => handleChange(e) } /> }
+            style={ {
               fontWeight: 'bold',
-            }}
+            } }
             label="Deseja vender produtos?"
           />
         </Grow>
 
-        <Grow in={checked}>
+        <Grow in={ checked }>
           <Button
-            className={classes.buttom}
+            className={ classes.buttom }
             type="button"
             size="large"
             color="primary"
             data-testid="signup-btn"
-            disabled={disabled}
-            onClick={registerUser}
+            disabled={ disabled }
+            onClick={ registerUser }
             variant="outlined"
-            style={{
+            style={ {
               left: '3%',
-            }}
+            } }
           >
             Cadastre-se
-      </Button>
+          </Button>
         </Grow>
       </form>
       {

@@ -34,9 +34,9 @@ function CheckoutButtonRemove({ productIndex, productId }) {
   };
 
   return (
-<IconButton data-testid="0-removal-button" onClick={ removeCheckout } color="primary" aria-label="upload picture" component="span">
-<RemoveShoppingCartIcon />
-</IconButton>
+    <IconButton data-testid="0-removal-button" onClick={ removeCheckout } color="primary" aria-label="upload picture" component="span">
+      <RemoveShoppingCartIcon />
+    </IconButton>
   );
 }
 export default CheckoutButtonRemove;

@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
 // CSS - Material-Ui
-export default function OpenSnackBar({data}) {
+export default function OpenSnackBar({ data }) {
   const [open, setOpen] = React.useState(true);
 
   const handleClose = (event, reason) => {
@@ -19,27 +19,25 @@ export default function OpenSnackBar({data}) {
   };
 
   return (
-    <>
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        message={data}
-        action={
-          <React.Fragment>
-            <Button color="secondary" size="small" onClick={handleClose}>
-              Fechar
-            </Button>
-            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </React.Fragment>
-        }
-      />
-    </>
+    <Snackbar
+      anchorOrigin={ {
+        vertical: 'bottom',
+        horizontal: 'left',
+      } }
+      open={ open }
+      autoHideDuration={ 6000 }
+      onClose={ handleClose }
+      message={ data }
+      action={
+        <>
+          <Button color="secondary" size="small" onClick={ handleClose }>
+            Fechar
+          </Button>
+          <IconButton size="small" aria-label="close" color="inherit" onClick={ handleClose }>
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </>
+      }
+    />
   );
 }

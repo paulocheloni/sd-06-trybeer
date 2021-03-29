@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   textInput: {
     width: '30ch',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 }));
 
@@ -49,29 +49,35 @@ function ProfileAdmin() {
 
   // Material-Iu Renderizacao
   setTimeout(() => {
-    setChecked(true)
-  }, 300)
+    setChecked(true);
+  }, 300);
 
   return (
     <div>
       <NavBarAdmin content="Meu perfil" />
-      <Grow in={checked}>
+      <Grow in={ checked }>
         <div>
           <form
-            style={{
+            style={ {
               position: 'absolute',
               left: '50%',
               top: '40%',
               transform: 'translate(-50%, -50%)',
               marginTop: '50px',
-            }}
-            className={classes.root} noValidate autoComplete="off">
-          </form>
-          <Typography data-testid="profile-name" style={{ textAlign: 'center' }} variant="h5" component="h2">
-            Nome:  {name}
+            } }
+            className={ classes.root }
+            noValidate
+            autoComplete="off"
+          />
+          <Typography data-testid="profile-name" style={ { textAlign: 'center' } } variant="h5" component="h2">
+            Nome:
+            {' '}
+            {name}
           </Typography>
-          <Typography data-testid="profile-email" style={{ textAlign: 'center' }} variant="h5" component="h2">
-            Email:  {email}
+          <Typography data-testid="profile-email" style={ { textAlign: 'center' } } variant="h5" component="h2">
+            Email:
+            {' '}
+            {email}
           </Typography>
         </div>
       </Grow>

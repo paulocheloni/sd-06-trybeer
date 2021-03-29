@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 20,
     margin: 'auto',
     maxWidth: 500,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   image: {
     width: 128,
@@ -42,11 +42,11 @@ const useStyles = makeStyles((theme) => ({
   },
   textInput: {
     width: '25ch',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
-  totalValue : {
+  totalValue: {
     marginTop: 30,
-  }
+  },
 }));
 
 function OrderDetails() {
@@ -58,8 +58,8 @@ function OrderDetails() {
 
   // Material-Iu Renderizacao
   setTimeout(() => {
-    setChecked(true)
-  }, 300)
+    setChecked(true);
+  }, 300);
 
   // Renderizacao
   useEffect(() => {
@@ -78,37 +78,40 @@ function OrderDetails() {
   }, [id]);
 
   return (
-    <div className={`marginTop`}>
+    <div className="marginTop">
       <NavBar data-testid="top-title" content="Detalhes" />
-      <Grow in={checked}>
-        <Paper elevation={0} className={`${classes.paper} marginTop`}>
-          <Typography className={classes.totalValue} align="center" data-testid="order-date" gutterBottom variant="h5">
-          {`Pedido ${id} - Data: ${moment(order.saleDate).format('DD/MM')}`}
+      <Grow in={ checked }>
+        <Paper elevation={ 0 } className={ `${classes.paper} marginTop` }>
+          <Typography className={ classes.totalValue } align="center" data-testid="order-date" gutterBottom variant="h5">
+            {`Pedido ${id} - Data: ${moment(order.saleDate).format('DD/MM')}`}
           </Typography>
         </Paper>
       </Grow>
       {order.map((product, index) => (
-        <Grow in={checked}>
-          <Paper elevation={3} className={classes.paper}>
-            <Grid container spacing={2}>
+        <Grow in={ checked }>
+          <Paper elevation={ 3 } className={ classes.paper }>
+            <Grid container spacing={ 2 }>
               <Grid item>
-                <ButtonBase className={classes.image}>
-                  <img className={classes.img} src={product.imgUrl.replace(/ /g, '_')} alt="imageProduct" />
+                <ButtonBase className={ classes.image }>
+                  <img className={ classes.img } src={ product.imgUrl.replace(/ /g, '_') } alt="imageProduct" />
                 </ButtonBase>
               </Grid>
-              <Grid item xs={12} sm container>
-                <Grid item xs container direction="column" spacing={2}>
+              <Grid item xs={ 12 } sm container>
+                <Grid item xs container direction="column" spacing={ 2 }>
                   <Grid item xs>
-                    <Typography data-testid={`${index}-product-name`} gutterBottom variant="h6">
+                    <Typography data-testid={ `${index}-product-name` } gutterBottom variant="h6">
                       {product.name}
                     </Typography>
                   </Grid>
                   <Grid item>
-                    <Typography data-testid={`${index}-product-total-value`} variant="h6">
+                    <Typography data-testid={ `${index}-product-total-value` } variant="h6">
                       {`R$ ${(product.totalPrice).toFixed(2).toString().replace('.', ',')}`}
                     </Typography>
-                    <Typography data-testid={`${index}-product-qtd`} variant="subtitle2">
-                      {product.productQty} x {`(R$ ${product.price.replace('.', ',')} un)`}
+                    <Typography data-testid={ `${index}-product-qtd` } variant="subtitle2">
+                      {product.productQty}
+                      {' '}
+                      x
+                      {`(R$ ${product.price.replace('.', ',')} un)`}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -117,12 +120,12 @@ function OrderDetails() {
           </Paper>
         </Grow>
       ))}
-      <Grow in={checked}>
-        <Paper elevation={0} className={classes.paper}>
-          <Typography className={classes.totalValue} align="center" data-testid="order-total-value" gutterBottom variant="h5">
+      <Grow in={ checked }>
+        <Paper elevation={ 0 } className={ classes.paper }>
+          <Typography className={ classes.totalValue } align="center" data-testid="order-total-value" gutterBottom variant="h5">
             {`Total: R$
             ${order.reduce((acc, value) => acc + value.totalPrice, 0)
-            .toFixed(2).replace('.', ',')}`}
+      .toFixed(2).replace('.', ',')}`}
           </Typography>
         </Paper>
       </Grow>

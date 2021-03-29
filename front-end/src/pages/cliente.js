@@ -8,16 +8,15 @@ import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 // Componentes
+import { useHistory } from 'react-router';
 import NavBar from '../components/menuNavBar';
 import context from '../Context/ContextAPI';
 import ButtonAdd from '../components/buttonAdd';
 import ButtonSub from '../components/buttonSub';
 import MenuFooter from '../components/menuFooter';
 
-
 // Servicos
 import api from '../services/api';
-import { useHistory } from 'react-router';
 import { loadState, saveState } from '../services/localStorage';
 
 // CSS - Material-Ui
@@ -29,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0),
     margin: 'auto',
     maxWidth: 500,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   image: {
     width: 128,
@@ -94,34 +93,37 @@ function Cliente() {
 
   return (
     <div>
-      <NavBar  content="BEER - ICE" />
-      <div className={`${classes.root} marginTop `}>
+      <NavBar content="BEER - ICE" />
+      <div className={ `${classes.root} marginTop ` }>
         {products.map((title, index) => (
-          <Paper key={index} elevation={3} className={classes.paper}>
-            <Grid container spacing={2}>
+          <Paper key={ index } elevation={ 3 } className={ classes.paper }>
+            <Grid container spacing={ 2 }>
               <Grid item>
-                <ButtonBase className={classes.image}>
-                  <img className={classes.img} src={title.url_image.replace(/ /g, '_')} alt="imageProduct" />
+                <ButtonBase className={ classes.image }>
+                  <img className={ classes.img } src={ title.url_image.replace(/ /g, '_') } alt="imageProduct" />
                 </ButtonBase>
               </Grid>
-              <Grid item xs={12} sm container>
-                <Grid item xs container direction="column" spacing={2}>
+              <Grid item xs={ 12 } sm container>
+                <Grid item xs container direction="column" spacing={ 2 }>
                   <Grid item xs>
                     <Typography gutterBottom variant="subtitle1">
                       {title.name}
                     </Typography>
                   </Grid>
                   <Grid item>
-                    <Typography variant="subtitle1">                R$
-                {' '}
-                      {title.price.replace('.', ',')}</Typography>
+                    <Typography variant="subtitle1">
+                      {' '}
+                      R$
+                      {' '}
+                      {title.price.replace('.', ',')}
+                    </Typography>
                   </Grid>
                   <Grid item>
-                    <ButtonSub product={title} dataIndex={index} />
-                    <span data-testid={`${index}-product-qtd`}>
+                    <ButtonSub product={ title } dataIndex={ index } />
+                    <span data-testid={ `${index}-product-qtd` }>
                       {prodQty(title)}
                     </span>
-                    <ButtonAdd product={title} dataIndex={index} />
+                    <ButtonAdd product={ title } dataIndex={ index } />
                   </Grid>
                 </Grid>
               </Grid>

@@ -5,11 +5,9 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grow from '@material-ui/core/Grow';
 
-
 // Service
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 
 const BootstrapButton = withStyles({
   root: {
@@ -50,13 +48,11 @@ const BootstrapButton = withStyles({
   },
 })(Button);
 
-
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
   },
 }));
-
 
 function RedirectPage({ rota, id, conteudo }) {
   const [checked, setChecked] = React.useState(false);
@@ -68,26 +64,26 @@ function RedirectPage({ rota, id, conteudo }) {
   }
 
   setTimeout(() => {
-    setChecked(true)
-  }, 1000)
+    setChecked(true);
+  }, 1000);
 
   return (
-    <Grow in={checked}>
-    <BootstrapButton
-    type="button"
-    data-testid={ id }
-    onClick={ handleClick }
-    variant="contained"
-    color="primary"
-    disableRipple
-    className={classes.margin}
-    // style={{
-    //   left: '3%',
-    // }}
-    >
-    { conteudo }
-  </BootstrapButton>
-  </Grow>
+    <Grow in={ checked }>
+      <BootstrapButton
+        type="button"
+        data-testid={ id }
+        onClick={ handleClick }
+        variant="contained"
+        color="primary"
+        disableRipple
+        className={ classes.margin }
+        // style={{
+        //   left: '3%',
+        // }}
+      >
+        { conteudo }
+      </BootstrapButton>
+    </Grow>
   );
 }
 

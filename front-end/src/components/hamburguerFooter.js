@@ -33,13 +33,13 @@ export default function HamburguerFooter() {
   const anchorRef = React.useRef(null);
   const history = useHistory();
 
-    // Renderizacao
+  // Renderizacao
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
   const prevOpen = React.useRef(open);
 
-    // Redirecionar
+  // Redirecionar
   const handleRedirect = (event) => {
     switch (event) {
     case 'Devs deste projeto':
@@ -54,7 +54,7 @@ export default function HamburguerFooter() {
     setOpen(false);
   };
 
-      // Open Hamburguer
+  // Open Hamburguer
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -62,7 +62,7 @@ export default function HamburguerFooter() {
     }
   }
 
-    // Material-Iu
+  // Material-Iu
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
@@ -70,7 +70,6 @@ export default function HamburguerFooter() {
     prevOpen.current = open;
   }, [open]);
 
-  
   return (
     <div className={ classes.root }>
       <div>

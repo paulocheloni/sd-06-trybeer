@@ -4,15 +4,15 @@ import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import OpenSnackBar from '../components/OpenSnackBar'
 import Grow from '@material-ui/core/Grow';
+import { useHistory } from 'react-router';
+import OpenSnackBar from '../components/OpenSnackBar';
 
 // Componentes
 import validateEmailAndPassword from '../resources/validateEmailAndPassword';
-import { useHistory } from 'react-router';
-import logoBeerIce from '../images/logo.png'
+import logoBeerIce from '../images/logo.png';
 
-// Servicos  
+// Servicos
 import { saveState } from '../services/localStorage';
 import api from '../services/api';
 import RedirectPage from '../components/redirectPage';
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     '& > *': {
       margin: theme.spacing(1),
       display: 'flex',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
     height: '100vh',
   },
@@ -34,12 +34,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   textInput: {
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 
 }));
-
-
 
 function Login() {
   const classes = useStyles();
@@ -58,15 +56,14 @@ function Login() {
     return setDisabled(true);
   };
 
-  // Material - IU Renderizacao 
+  // Material - IU Renderizacao
   setTimeout(() => {
-    setChecked(true)
-  }, 300)
+    setChecked(true);
+  }, 300);
 
   // Renderizacao
   useEffect(() => {
     validates(email, password);
-
   }, [email, password]);
 
   // Funcao de Redirecionamento
@@ -81,82 +78,86 @@ function Login() {
           history.push('/products');
         }
       }).catch((err) => {
-        setErrorLogin(true)
+        setErrorLogin(true);
         setTimeout(() => {
-          if (errorLogin) setErrorLogin(false)
-        }, 400)
+          if (errorLogin) setErrorLogin(false);
+        }, 400);
       });
   };
 
   return (
     <div>
       <form
-        style={{
+        style={ {
           position: 'absolute',
           left: '50%',
           top: '50%',
-          transform: 'translate(-50%, -50%)'
-        }}
-        className={classes.root} noValidate autoComplete="off">
-        <Grow in={checked}>
-          <img src={logoBeerIce} alt="LogoBeerIce" />
+          transform: 'translate(-50%, -50%)',
+        } }
+        className={ classes.root }
+        noValidate
+        autoComplete="off"
+      >
+        <Grow in={ checked }>
+          <img src={ logoBeerIce } alt="LogoBeerIce" />
         </Grow>
-        <Grow in={checked}>
+        <Grow in={ checked }>
           <p>Login</p>
         </Grow>
 
-        <Grow in={checked}>
+        <Grow in={ checked }>
           <TextField
-            className={classes.textInput}
+            className={ classes.textInput }
             type="text"
             data-testid="email-input"
             placeholder="digite seu Email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={ (e) => setEmail(e.target.value) }
             id="standard-basic"
             label="Email"
-            variant="outlined" />
+            variant="outlined"
+          />
         </Grow>
 
-        <Grow in={checked}>
+        <Grow in={ checked }>
           <TextField
             type="password"
             data-testid="password-input"
             placeholder="Digite sua Senha"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={ (e) => setPassword(e.target.value) }
             id="filled-basic"
             label="Senha"
-            variant="outlined" />
+            variant="outlined"
+          />
         </Grow>
 
-        <Grow in={checked}>
+        <Grow in={ checked }>
           <Button
-            className={classes.buttom}
+            className={ classes.buttom }
             type="button"
             size="large"
             color="primary"
             data-testid="signin-btn"
-            disabled={disabled}
-            onClick={InsertUserLocalStorage}
+            disabled={ disabled }
+            onClick={ InsertUserLocalStorage }
             variant="outlined"
           >
             Entrar
-      </Button>
+          </Button>
         </Grow>
-
 
         <RedirectPage
           rota="/register"
           id="no-account-btn"
           conteudo="Cadastre-se"
           data-testid="no-account-btn"
-          style={{
+          style={ {
             left: '5%',
-          }}
+          } }
         />
 
       </form>
       {
-        errorLogin && <OpenSnackBar data={'Usuario ou Senha invalidos'}/>
+        errorLogin && <OpenSnackBar data="Usuario ou Senha invalidos" />
       }
 
     </div>
