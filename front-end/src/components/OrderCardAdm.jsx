@@ -15,19 +15,29 @@ function OrderCardAdm({ orderInfo, index }) {
   const history = useHistory();
 
   return (
-    <button type="button" onClick={ () => history.push(`/admin/orders/${id}`) }>
+    <button
+      type="button"
+      onClick={ () => history.push(`/admin/orders/${id}`) }
+      className="card-order-adm"
+    >
       <div>
-        <h3 data-testid={ `${index}-order-number` }>
-          {' '}
+        <p className="order-number" data-testid={ `${index}-order-number` }>
+
           {`Pedido ${id}`}
-        </h3>
-        <h4 data-testid={ `${index}-order-address` }>
-          {' '}
+        </p>
+        <p className="shipping-adress" data-testid={ `${index}-order-address` }>
+
           {`${house}, ${numberHouse}`}
-        </h4>
+        </p>
       </div>
-      <div data-testid={ `${index}-order-total-value` }>{ParseCurrency(totalPrice)}</div>
-      <div data-testid={ `${index}-order-status` }>{status}</div>
+      <div className="price-status">
+        <div
+          data-testid={ `${index}-order-total-value` }
+        >
+          {ParseCurrency(totalPrice)}
+        </div>
+        <div data-testid={ `${index}-order-status` }>{status}</div>
+      </div>
     </button>
 
   );

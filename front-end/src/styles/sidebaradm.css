@@ -1,18 +1,15 @@
-.side-menu-container {
+.admin-side-bar-container {
+  top: 0;
   display: flex;
   flex-direction: column;
   width: 200px;
-  min-height: 50vh;
+  min-height: 100vh;
   background-color: #e9925c;
   border-radius: 0 0 5px 0;
   align-items: center;
   position: absolute;
   box-shadow: 0 2px 9px 0 black;
-}
-
-.alignsidebar {
-  margin-top: 100px;
-}
+};
 
 .buttonside {
   color: white;
@@ -26,15 +23,14 @@
   margin-bottom: 15px;
 }
 
-.buttonside:nth-of-type(1) {
-  margin-top: 100px;
+.title-adm-sidebar {
+  font-size: 3em;
+  font-weight: bold;
+  color: white;
+  margin-bottom: -50px;
 }
 
 .buttonside:nth-of-type(3) {
-  margin-top: 0;
-}
-
-.buttonside:nth-of-type(4) {
   margin: auto;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }

@@ -37,7 +37,7 @@ function CheckoutProducts() {
   useEffect(() => {
     const products = purchase();
     setCheckoutProducts(products);
-  }, []);
+  }, [setCheckoutProducts]);
 
   return !checkoutProducts ? <h1>Loading...</h1> : (
     <div className="checkoutproducts">

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import '../styles/sidebaradm.css';
 
 function SideBarAdm() {
   const history = useHistory();
@@ -11,9 +12,9 @@ function SideBarAdm() {
 
   return (
     <div className="admin-side-bar-container">
-      <h3> TryBeer </h3>
+      <h3 className="title-adm-sidebar"> TryBeer </h3>
       <button
-        // className="buttonside"
+        className="buttonside"
         type="button"
         data-testid="side-menu-item-orders"
         onClick={ () => history.push('/admin/orders') }
@@ -21,7 +22,7 @@ function SideBarAdm() {
         Pedidos
       </button>
       <button
-        // className="buttonside"
+        className="buttonside"
         type="button"
         data-testid="side-menu-item-profile"
         onClick={ () => history.push('/admin/profile') }
@@ -29,7 +30,7 @@ function SideBarAdm() {
         Perfil
       </button>
       <button
-        // className="buttonside"
+        className="buttonside"
         type="button"
         data-testid="side-menu-item-logout"
         onClick={ handleLogout }

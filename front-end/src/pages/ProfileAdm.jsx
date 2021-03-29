@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import SideBarAdm from '../components/SideBarAdm';
+import '../styles/profileadm.css';
 
 function ProfileAdm() {
   const [name, setName] = useState('');
@@ -18,17 +19,19 @@ function ProfileAdm() {
       setName(user.name);
       setEmail(user.email);
     }
-  }, []);
+  }, [history]);
 
   return (
     <div>
-      <h1> Perfil </h1>
       <SideBarAdm />
-      <div data-testid="profile-name">
-        {`Nome: ${name}`}
-      </div>
-      <div data-testid="profile-email">
-        {`Email: ${email}`}
+      <div className="profileContainer">
+        <h1> Perfil </h1>
+        <div className="text" data-testid="profile-name">
+          {`Nome: ${name}`}
+        </div>
+        <div className="text" data-testid="profile-email">
+          {`Email: ${email}`}
+        </div>
       </div>
     </div>
   );
