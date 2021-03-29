@@ -3,7 +3,6 @@ const LoginRoute = require('./LoginRoute');
 const OrderRoute = require('./OrderRoute');
 const UserRoute = require('./UserRoute');
 const SalesRoute = require('./SalesRoute');
-const AdminRoute = require('./AdminOrders');
 
 module.exports = {
   ProductsRoute,
@@ -11,5 +10,4 @@ module.exports = {
   OrderRoute,
   SalesRoute,
   UserRoute,
-  AdminRoute,
 };

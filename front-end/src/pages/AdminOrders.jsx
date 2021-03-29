@@ -12,7 +12,6 @@ const AdminOrders = ({ history }) => {
     async function fetchOrders() {
       const user = JSON.parse(localStorage.user);
       const response = await api.getAllOrders(user.token);
-      console.log(response);
       if (response.message) return history.push('/login');
       setOrders(response);
     }

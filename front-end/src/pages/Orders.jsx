@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import MenuTop from '../components/menuClient/MenuTop';
 import OrdersCard from '../components/orders/OrdersCard';
+import MenuTop from '../components/menuClient/MenuTop';
+
 import api from '../services/api';
 
 const Orders = ({ history }) => {
@@ -11,7 +12,7 @@ const Orders = ({ history }) => {
   useEffect(() => {
     async function fetchOrders() {
       const user = JSON.parse(localStorage.user);
-      const response = await api.getAllOrders(user.token);
+      const response = await api.getAllOrdersByUser(user.token);
       if (response.message) return history.push('/login');
       setOrders(response);
     }
