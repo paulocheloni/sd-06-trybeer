@@ -8,7 +8,7 @@ import Loader from '../../design-components/Loader';
 import registerValidation from '../../utils/registerValidation';
 
 function Register() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const STATUS_CONFLICT = 409;
   const history = useHistory();
   const [duplicated, setDuplicated] = useState('');
@@ -27,8 +27,8 @@ function Register() {
   const isChecked = () => (document.getElementById('wannasell').checked);
 
   const signUpOnClick = () => {
-    setLoading(true);
     const whatSTheRole = isChecked() ? 'administrator' : 'client';
+    setLoading(true);
     const token = api
       .post('/register', {
         name: registerName,
@@ -42,6 +42,7 @@ function Register() {
         if (response.data.role === 'client') history.push('/products');
       })
       .catch((err) => {
+        setLoading(false);
         if (err.response.status === STATUS_CONFLICT) {
           setDuplicated(err.response.data.message);
         }
