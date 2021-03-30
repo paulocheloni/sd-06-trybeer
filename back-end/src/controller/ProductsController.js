@@ -26,8 +26,8 @@ router.get('/', rescue(async (req, res) => {
 router.post('/new', upload.single('image'), rescue(async (req, res) => {
   const { name, price } = req.body;
   const { filename } = req.file;
-  const url_image = `http://localhost:3001/images/${filename}`;
-  await ProductService.create(name, price, url_image);
+  const urlImage = `http://localhost:3001/images/${filename}`;
+  await ProductService.create(name, price, urlImage);
   return res.status(OK).json({ message: 'Produto criado com sucesso' });
 }));
 

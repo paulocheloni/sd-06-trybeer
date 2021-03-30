@@ -10,13 +10,13 @@ exports.getByName = async (name) => (
     .then(([[product]]) => product || null)
 );
 
-exports.create = async (name, price, url_image) => (
+exports.create = async (name, price, urlImage) => (
   connection
     .execute('INSERT INTO products (name, price, url_image) VALUES (?, ?, ?)',
     [
       name,
       price,
-      url_image,
+      urlImage,
     ])
     .then(([result]) => ({ id: result.insertId }))
 );
