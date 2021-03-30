@@ -1,14 +1,14 @@
 import { saveSale } from './api';
 
 export function removeCheckoutItem(name, cart, setCart) {
+  console.log('Remove item do carrinho');
   const newCart = cart.filter((item) => item.name !== name);
+  console.log('Novo carrinho:', newCart);
   setCart(newCart);
-  localStorage.setItem('cart', JSON.stringify(newCart));
 }
 
 function clearCart(setCart) {
   setCart([]);
-  localStorage.removeItem('cart');
 }
 
 function redirectCart(history, setCart) {

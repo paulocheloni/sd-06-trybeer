@@ -1,19 +1,37 @@
 import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { handleQuantity, localStorageCart } from '../../services/ProductCardService';
+import {
+  decreaseQuantity,
+  increaseQuantity,
+} from '../../services/ProductCardService';
 import TrybeerContext from '../../context/TrybeerContext';
 
 function ProductCard({ name, price, urlImage, index }) {
   const { cart, setCart } = useContext(TrybeerContext);
   const [quantity, setQuantity] = useState(0);
-  const productInfo = { quantity, setQuantity, name, price, cart, setCart };
+  const [isMounted, setIsMounted] = useState(true);
+
   useEffect(() => {
-    if (localStorageCart) {
-      localStorageCart.forEach((element) => {
-        if (element.name === name) setQuantity(element.quantity);
-      });
-    }
+    cart.forEach((element) => {
+      if (element.name === name) setQuantity(element.quantity);
+    });
   }, []);
+
+  useEffect(() => {
+    if (isMounted) {
+      setIsMounted(false);
+      return;
+    }
+    if (quantity === 0) {
+      const cartWithoutProduct = cart.filter((element) => element.name !== name);
+      setCart(cartWithoutProduct);
+      return;
+    }
+
+    const preCart = cart.filter((element) => element.name !== name);
+    setCart([...preCart, { name, price, quantity }]);
+  }, [quantity]);
+
   return (
     <div>
       <p
@@ -37,7 +55,7 @@ function ProductCard({ name, price, urlImage, index }) {
         type="button"
         id={ `${index}-product-minus` }
         data-testid={ `${index}-product-minus` }
-        onClick={ (event) => handleQuantity(event, productInfo) }
+        onClick={ () => decreaseQuantity(quantity, setQuantity) }
       >
         -
       </button>
@@ -46,7 +64,7 @@ function ProductCard({ name, price, urlImage, index }) {
         type="button"
         id={ `${index}-product-plus` }
         data-testid={ `${index}-product-plus` }
-        onClick={ (event) => handleQuantity(event, productInfo) }
+        onClick={ () => increaseQuantity(quantity, setQuantity) }
       >
         +
       </button>
