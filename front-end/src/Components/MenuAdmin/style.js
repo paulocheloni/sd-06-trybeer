@@ -10,6 +10,7 @@ export const Container = styled.div`
   background-color: #3700B3;
   align-items: center;
   position: relative;
+  justify-content: space-between;
 `;
 
 export const Title = styled.h2`
@@ -19,7 +20,7 @@ export const Title = styled.h2`
 `;
 
 export const WrapperButtons = styled.div`
-  padding-bottom: 700px; 
+  margin-bottom: 70%; 
   justify-content: space-between;
   width: 100%;
   align-items: center;
@@ -33,4 +34,5 @@ export const ButtonLeave = styled.div`
   align-self: flex-end;
   align-items: center;
   margin: 5px;
+  margin-top: 70%; 
 `;
