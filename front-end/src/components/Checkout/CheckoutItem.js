@@ -14,7 +14,7 @@ function CheckoutItem({ name, price, quantity, index }) {
     <div className="divMain">
       <div className="divCartItem">
         <p data-testid={ `${index}-product-qtd-input` }>
-          {`Quantidade: ${quantity}`}
+          {`${quantity}`}
         </p>
         <div data-testid={ `${index}-product-name` }>
           { name }
