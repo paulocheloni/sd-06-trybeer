@@ -1,5 +1,5 @@
 .orderDetailsContainer {
-  width: 70vh;
+  width: 600px;
   margin: 40px auto;
 
   display: flex;
@@ -41,4 +41,10 @@
 .orderDetailsContainer > button:hover {
   background-color: rgba(0, 128, 128, 0.7);
   cursor: pointer;
+}
+
+@media(max-width: 680px) {
+  .orderDetailsContainer {
+    width: 95vw;
+  }
 }

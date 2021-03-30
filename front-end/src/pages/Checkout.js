@@ -78,17 +78,23 @@ function Checkout({ location: { pathname } }) {
                     <span data-testid={ `${index}-product-name` }>
                       { product.name }
                     </span>
-                    <span data-testid={ `${index}-product-unit-price` }>
+                    <span
+                      className="flexNone"
+                      data-testid={ `${index}-product-unit-price` }
+                    >
                       { `(R$ ${parseFloat(product.price / product.quantity)
                         .toFixed(2).replace('.', ',')} un)` }
                     </span>
-                    <span data-testid={ `${index}-product-total-value` }>
+                    <span
+                      className="flexNone"
+                      data-testid={ `${index}-product-total-value` }
+                    >
                       { `R$ ${parseFloat(product.price).toFixed(2).replace('.', ',')}` }
                     </span>
                     <div className="remove-btn-container">
                       <input
                         type="image"
-                        className="quantity-btn"
+                        // className="quantity-btn"
                         onClick={ () => deleteItem(product) }
                         data-testid={ `${index}-removal-button` }
                         src={ Remove }

@@ -51,7 +51,7 @@ function OrderDetails({ location: { pathname } }) {
     <div className={ isAdmin ? 'adminSideBarAdjust' : '' }>
       { (currentOrder.length > 0) && (
         <>
-          <MenuAndTopBar title="Cliente - Detalhes do Pedido" pathname={ pathname } />
+          <MenuAndTopBar title="Detalhes do Pedido" pathname={ pathname } />
           <div className="orderDetailsContainer">
             <div className="orderDetailsTitleContainer">
               <h2 data-testid="order-number">

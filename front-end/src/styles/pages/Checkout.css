@@ -18,6 +18,7 @@
 .checkoutContainer div > ul > li {
   margin-bottom: 10px;
   font-size: 1.2rem;
+  text-align: center;
 
   display: flex;
   justify-content: space-between;
@@ -91,10 +92,29 @@
   justify-content: center;
 }
 
-.remove-btn-container > .quantity-btn {
+.remove-btn-container > input {
   margin: 0;
+  filter: invert(29%) sepia(95%) saturate(1633%) hue-rotate(158deg) brightness(91%) contrast(101%);
+  margin: 0 5px;
+  transition: 288ms;
 }
 
-.remove-btn-container > .quantity-btn:hover {
+.remove-btn-container > input:hover {
   filter: invert(8%) sepia(66%) saturate(7240%) hue-rotate(2deg) brightness(112%) contrast(90%);
+}
+
+.flexNone {
+  flex: none;
+}
+
+@media(max-width: 570px) {
+  .checkoutContainer {
+    width: 100vw;
+  }
+  .checkoutContainer form, .cartContainer {
+    padding: 15px 10px 0;
+  }
+  .checkoutContainer div > ul > li {
+    font-size: 0.9rem;
+  }
 }
