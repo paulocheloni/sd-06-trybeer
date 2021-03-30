@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SideBarAdmin from '../components/SideBarAdmin';
-import './Admin.css';
+import { createNewProduct } from '../services/api';
+import './ProductAdminInsert.css';
 
 function ProductAdminInsert() {
   const [product, setProduct] = useState({
@@ -9,46 +10,64 @@ function ProductAdminInsert() {
   });
 
   function handleChange(event) {
-    console.log(event.target);
     setProduct({
       ...product,
       [event.target.name]: event.target.value,
     })
   }
 
+  async function hanldeRegisterProduct() {
+    let formData = new FormData();
+    let imageFile = document.getElementById("product-image");
+    console.log(imageFile);
+    formData.append('image', imageFile.files[0]);
+    formData.append('name', product.name);
+    formData.append('price', product.price);
+    await createNewProduct(formData);
+    setProduct({name: '', price: ''});
+    imageFile.value = [];
+  }
+
   return (
     <div className="div-main">
       <SideBarAdmin />
       <div className="div-filha">
-        <h1 className="title">Admin Orders</h1>
-        <label htmlFor="product-name">
-          Nome do produto
-          <input
-            id="product-name"
-            type="text"
-            name="name"
-            placeholder="Nome do produto"
-            onChange={ (event) => handleChange(event) }
-          />
-        </label>
-        <label htmlFor="product-name">
-          Preço
-          <input
-            id="product-price"
-            type="number"
-            name="price"
-            placeholder="Preço"
-            onChange={ (event) => handleChange(event) }
-          />
-        </label>
-        <label htmlFor="product-image">
-          Imagem do produto
-          <input
-            id="product-image"
-            type="file"
-            name="image"
-          />
-        </label>
+        <h1 className="title">Cadastra Produto</h1>
+          <label htmlFor="product-name">
+            Nome do produto
+            <input
+              id="product-name"
+              type="text"
+              value={ product.name }
+              name="name"
+              placeholder="Nome do produto"
+              onChange={ (event) => handleChange(event) }
+            />
+          </label>
+          <label htmlFor="product-name">
+            Preço
+            <input
+              id="product-price"
+              type="number"
+              name="price"
+              value={ product.price }
+              placeholder="Preço"
+              onChange={ (event) => handleChange(event) }
+            />
+          </label>
+          <label htmlFor="product-image">
+            Imagem do produto
+            <input
+              id="product-image"
+              type="file"
+              name="image"
+            />
+          </label>
+          <button
+            type="submit"
+            onClick={ hanldeRegisterProduct }>
+            Cadastrar
+          </button>
       </div>
     </div>
   );
