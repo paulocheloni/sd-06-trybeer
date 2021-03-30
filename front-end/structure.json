@@ -1,0 +1,29 @@
+{
+   "assets": {
+     "gifs": {},
+     "images": {},
+     "logos": {},
+     "scss": {
+       "mixins": "",
+       "reset": "",
+       "variables": "",
+     }
+   },
+   "components": {
+     "components_específicos": "",
+     "components_react": "",
+   },
+   "pages": {
+     "Login": "",
+     "Products": "",
+   },
+   "services": {
+     "comunicação_com_backend": "",
+   },
+   "store": {
+     "actions": "",
+     "provider": "",
+     
+   }
+
+}

@@ -8,7 +8,9 @@ const userModel = require('../models/UserModel');
 module.exports = async (req, _res, next) => {
   const token = req.headers.authorization;
   try {
+    
     if (!token) throw new ThrowError(status.UNAUTHORIZED, messages.UNAUTHORIZED);
+    
     const { userData } = jwt.verify(token, secret);
     const tokenUserEmail = userData[0].email;
     const user = await userModel.getEmail(tokenUserEmail);
