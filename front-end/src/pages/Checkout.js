@@ -64,12 +64,12 @@ function Checkout() {
               ))
             )
         }
-        <p data-testid="order-total-value" className='totalPrice'>
+        <p data-testid="order-total-value" className="totalPrice">
           {`Total: R$ ${totalCart.toFixed(2).replace('.', ',')}` }
         </p>
         <Address />
         <button
-          className='buttonCheckout'
+          className="buttonCheckout"
           type="button"
           disabled={ !enable }
           data-testid="checkout-finish-btn"

@@ -29,20 +29,20 @@ function Products() {
   return (
     loggedUser
       ? (
-        <div className='mainDivProducts'>
+        <div className="mainDivProducts">
           <TopBar title="TryBeer" />
-          <div className='divFilha'>
+          <div className="divFilha">
             { products.map((product, index) => {
               const { id, name, price, url_image: urlImage } = product;
               return (
-                <div className='divCards'>
-                <ProductCard
-                  key={ id }
-                  name={ name }
-                  price={ price }
-                  urlImage={ urlImage }
-                  index={ index }
-                />
+                <div className="divCards" key={ index }>
+                  <ProductCard
+                    key={ id }
+                    name={ name }
+                    price={ price }
+                    urlImage={ urlImage }
+                    index={ index }
+                  />
                 </div>
               );
             }) }

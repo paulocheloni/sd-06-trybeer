@@ -25,14 +25,16 @@ function OrderDetails(props) {
         !orders.length > 0
           ? <div>no orders</div>
           : (
-            <div className='divMain'>
+            <div className="divMain">
               <h2 data-testid="order-number">{`Pedido ${id}`}</h2>
               <h3 data-testid="order-date">
                 {`Data: ${moment(orders[0].sale_date).format('DD/MM')}`}
               </h3>
               {orders.map((order, index) => (
                 <div key={ index }>
-                  <h3 data-testid={ `${index}-product-qtd` }>{`Quantidade: ${order.quantity}`}</h3>
+                  <h3 data-testid={ `${index}-product-qtd` }>
+                    {`Quantidade: ${order.quantity}`}
+                  </h3>
                   <h3 data-testid={ `${index}-product-name` }>{order.name}</h3>
                   <h3 data-testid={ `${index}-product-total-value` }>
                     {`R$ ${(order.total).toFixed(2).replace('.', ',')}`}

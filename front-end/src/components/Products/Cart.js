@@ -18,7 +18,7 @@ function Cart() {
 
   return (
     <button
-      className='buttonCart'
+      className="buttonCart"
       disabled={ cart.length === 0 }
       type="button"
       data-testid="checkout-bottom-btn"

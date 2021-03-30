@@ -35,31 +35,31 @@ function ProductCard({ name, price, urlImage, index }) {
   }, [quantity]);
 
   return (
-    <div className='mainDivProductCard'>
-      <div className='productCard'>
+    <div className="mainDivProductCard">
+      <div className="productCard">
         <p
-          className='texto'
+          className="texto"
           id={ `${index}-product-name` }
           data-testid={ `${index}-product-name` }
         >
           { name }
         </p>
         <p
-          className='texto'
+          className="texto"
           id={ `${index}-product-price` }
           data-testid={ `${index}-product-price` }
         >
           { `R$ ${price.replace('.', ',')}` }
         </p>
         <img
-          className='imageCard'
+          className="imageCard"
           data-testid={ `${index}-product-img` }
           src={ urlImage }
           alt="product"
         />
-        <div className='divBotoesMaisMenos'>
+        <div className="divBotoesMaisMenos">
           <button
-            className='botoesMainMenos'
+            className="botoesMainMenos"
             type="button"
             id={ `${index}-product-minus` }
             data-testid={ `${index}-product-minus` }
@@ -67,9 +67,11 @@ function ProductCard({ name, price, urlImage, index }) {
           >
             -
           </button>
-          <span className='textoMaisMenos' data-testid={ `${index}-product-qtd` }>{quantity}</span>
+          <span className="textoMaisMenos" data-testid={ `${index}-product-qtd` }>
+            {quantity}
+          </span>
           <button
-            className='botoesMainMenos'
+            className="botoesMainMenos"
             type="button"
             id={ `${index}-product-plus` }
             data-testid={ `${index}-product-plus` }

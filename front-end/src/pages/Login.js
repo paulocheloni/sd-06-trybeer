@@ -15,12 +15,12 @@ function Login() {
 
   return (
     <form>
-      <div className='divTeste'>
+      <div className="divLogin">
         <label htmlFor="email-input">
           Email
           <br />
           <input
-            className='inputLogin'
+            className="inputLogin"
             id="email-input"
             type="email"
             name="email"
@@ -29,12 +29,12 @@ function Login() {
           />
         </label>
       </div>
-      <div className='divTeste'>
+      <div className="divTeste">
         <label htmlFor="password-input">
           Senha
           <br />
           <input
-            className='inputLogin'
+            className="inputLogin"
             id="password-input"
             type="password"
             data-testid="password-input"
@@ -44,7 +44,7 @@ function Login() {
       </div>
       <div>
         <button
-          className='buttonLogin'
+          className="buttonLogin"
           disabled={ enableButton }
           type="button"
           data-testid="signin-btn"
@@ -53,7 +53,7 @@ function Login() {
           Entrar
         </button>
         <button
-          className='buttonLogin'
+          className="buttonLogin"
           type="button"
           data-testid="no-account-btn"
           onClick={ () => handleUserNotRegistered(history) }

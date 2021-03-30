@@ -10,29 +10,29 @@ function Address() {
     <form>
       <fieldset>
         <legend>Endereço</legend>
-      <label htmlFor="checkout-street-input">
-        Rua
+        <label htmlFor="checkout-street-input">
+          Rua
+          <br />
+          <input
+            className="inputAddress"
+            id="rua"
+            data-testid="checkout-street-input"
+            type="text"
+            onChange={ () => handleAddressInput(address, setAddress) }
+          />
+        </label>
         <br />
-        <input
-          className='inputAddress'
-          id="rua"
-          data-testid="checkout-street-input"
-          type="text"
-          onChange={ () => handleAddressInput(address, setAddress) }
-        />
-      </label>
-      <br />
-      <label htmlFor="checkout-house-number-input">
-        Número da casa
-        <br />
-        <input
-          className='inputAddress'
-          id="numero"
-          data-testid="checkout-house-number-input"
-          type="text"
-          onChange={ () => handleAddressInput(address, setAddress) }
-        />
-      </label>
+        <label htmlFor="checkout-house-number-input">
+          Número da casa
+          <br />
+          <input
+            className="inputAddress"
+            id="numero"
+            data-testid="checkout-house-number-input"
+            type="text"
+            onChange={ () => handleAddressInput(address, setAddress) }
+          />
+        </label>
       </fieldset>
     </form>
   );

@@ -32,7 +32,11 @@ function Orders() {
       <TopBar title="Meus Pedidos" />
       { clientOrders.map((order, index) => (
         <div key={ index }>
-          <button className='divPedidos' type="button" onClick={ () => redirectDetails(order.id)}>
+          <button
+            className="divPedidos"
+            type="button"
+            onClick={ () => redirectDetails(order.id) }
+          >
             <OrdersCard
               index={ index }
               id={ order.id }

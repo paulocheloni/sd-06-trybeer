@@ -26,7 +26,7 @@ function ClientProfile() {
       <TopBar title="Meu perfil" />
       {existsLocal === true
         ? (
-          <form className='formClientProfile'>
+          <form className="formClientProfile">
             <InputProfile
               title="Name"
               id="profile-name-input"
@@ -47,7 +47,7 @@ function ClientProfile() {
             </label>
             <br />
             <button
-              className='buttonUpdate'
+              className="buttonUpdate"
               type="button"
               data-testid="profile-save-btn"
               disabled={ disableButton }

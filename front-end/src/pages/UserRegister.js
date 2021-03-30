@@ -17,9 +17,9 @@ function UserRegister() {
   const history = useHistory();
 
   return (
-    <div className='mainDiv'>
+    <div className="mainDiv">
       <div>
-        <h1 className='titleRegister'>User Register</h1>
+        <h1 className="titleRegister">User Register</h1>
       </div>
       <form>
         <Input
@@ -50,7 +50,7 @@ function UserRegister() {
           callback={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
         />
         <button
-          className='buttonRegisterUser'
+          className="buttonRegisterUser"
           disabled={ enableButton }
           type="button"
           data-testid="signup-btn"
