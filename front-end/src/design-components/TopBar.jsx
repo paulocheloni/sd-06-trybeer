@@ -7,19 +7,22 @@ function TopBar(props) {
   const { title } = props;
   const [sidebar, setSidebar] = useState(false);
   return (
-    <header className="relative w-full bg-black flex">
+    <header className="relative h-16 w-full bg-black flex">
       <SideBarMenu visible={ sidebar } />
       <button
         type="button"
         data-testid="top-hamburguer"
         onClick={ () => setSidebar(!sidebar) }
-        className="bg-gray-200 h-12 w-12 flex justify-center items-center"
+        className="absolute top-0 left-0 bg-gray-200
+        h-16 w-16 text-3xl flex justify-center items-center"
       >
         <FaIcons.FaBars />
       </button>
-      <h1 data-testid="top-title" className="text-center flex-grow text-white text-2xl">
-        {title}
-      </h1>
+      <div className="flex w-full justify-center items-center">
+        <h1 data-testid="top-title" className="flex-grow text-center text-white text-3xl">
+          {title}
+        </h1>
+      </div>
     </header>
   );
 }

@@ -14,16 +14,16 @@ function DetailAdminCard(props) {
   const formatedTotalPrice = `R$ ${sale[0].total_price.replace('.', ',')}`;
   return (
     <div
-      className="m-12"
+      className="m-2 sm:m-4 md:m-8 lg:m-12 xl:m-16 sm:text-xl md:texl-2xl lg:text-3xl"
     >
       <div>
         <div
-          className="text-2xl flex justify-between m-5"
+          className="flex justify-between m-5"
           data-testid={ `${sale[0].sale_id - 1}-order-card-container` }
         >
           <div
             data-testid="order-number"
-            className="text-4xl"
+            className="font-bold"
           >
             Pedido
             {' '}
@@ -39,10 +39,10 @@ function DetailAdminCard(props) {
             return (
               <div
                 key={ index }
-                className="flex justify-between text-2xl"
+                className="flex justify-between overflow-hidden rounded-lg shadow-lg"
               >
                 <div
-                  className="m-4"
+                  className="m-4 font-bold"
                   data-testid={ `${index}-product-qtd` }
                 >
                   {product.quantity}
@@ -60,17 +60,20 @@ function DetailAdminCard(props) {
                   {`R$ ${formatedProductPrice}`}
                 </div>
                 <div
-                  className="m-4"
+                  className="m-4 sm:m-4 md:m-6 lg:m-8 xl:m-10
+                    text-sm lg:text-base xl-text-lg"
                   data-testid={ `${index}-order-unit-price` }
                 >
                   {`(R$ ${product.price.replace('.', ',')})`}
+                  {' '}
+                  un.
                 </div>
               </div>
             );
           })
         }
         <div
-          className="flex justify-end mt-3 text-2xl"
+          className="flex justify-end mt-3 font-bold"
           data-testid="order-total-value"
         >
           Total:

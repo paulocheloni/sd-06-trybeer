@@ -20,7 +20,7 @@ function Products() {
   return (
     <div>
       <TopBar title="TryBeer" />
-      <div className="flex flex-wrap lg:p-32">
+      <div className="flex flex-wrap justify-center mb-40 lg:p-32">
         {
           sale && sale.map((product, index) => (
             <Card product={ product } testIdNumber={ index } key={ product.id } />

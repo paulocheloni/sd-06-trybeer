@@ -14,7 +14,7 @@ function LabeledInput({
 }) {
   return (
     <div>
-      <label htmlFor={ id }>{ label }</label>
+      <label className="text-xl" htmlFor={ id }>{ label }</label>
       <input
         readOnly={ readOnly }
         value={ value }
@@ -25,9 +25,9 @@ function LabeledInput({
         // autoComplete={ autoComplete }
         // required
         onChange={ ({ target }) => onChange(target.value) }
-        className="appearance-none rounded-none relative block w-full px-3 py-2 border
-          border-gray-300 placeholder-gray-500 text-gray-900 rounded-md
-          focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+        className="relative block h-12 w-full px-3 py-2 border
+          border-gray-300 text-gray-900 shadow-lg rounded-md
+          focus:outline-none focus:ring-yellow-500 focus:border-yellow-500
           focus:z-10 sm:text-sm"
       />
     </div>
