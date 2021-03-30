@@ -21,6 +21,14 @@ function SideBarAdmin() {
           Perfil
         </button>
       </Link>
+      <Link to="/admin/products">
+        <button
+          type="button"
+          className="botoes"
+        >
+          Inserir Produto
+        </button>
+      </Link>
       <Link to="/">
         <button
           type="button"
