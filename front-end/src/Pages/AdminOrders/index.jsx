@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import MenuAdmin from '../../Components/MenuAdmin';
 import CardOrdersAdmin from '../../Components/CardOrdersAdmin';
 import AppContext from '../../context/AppContext';
+import * as S from './style';
 
 const AdminOrders = () => {
   const history = useHistory();
@@ -18,9 +19,15 @@ const AdminOrders = () => {
 
   return (
     <div>
-      <MenuAdmin><p data-testid="top-title">Admin Pedido</p></MenuAdmin>
-      <h1>Pedidos</h1>
-      <CardOrdersAdmin />
+      <S.Container>
+        <S.SideBar>
+          <MenuAdmin><p data-testid="top-title">Admin Pedido</p></MenuAdmin>
+        </S.SideBar>
+        <S.CardsOrder>
+          <S.Title color="#3700B3">Pedidos</S.Title>
+          <CardOrdersAdmin />
+        </S.CardsOrder>
+      </S.Container>
     </div>
   );
 };
