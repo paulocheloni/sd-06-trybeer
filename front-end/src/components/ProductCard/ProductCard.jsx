@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -103,20 +102,20 @@ export default function ProductCard() {
                   title="Produto"
                   alt="Imagem do Produto"
                 />
-                <CardContent>
-                  <Typography
-                    className={ classes.titleContainer }
-                    data-testid={ `${index}-product-name` }
-                  >
-                    { product.name }
-                  </Typography>
-                  <Typography
-                    className={ classes.priceContainer }
-                    data-testid={ `${index}-product-price` }
-                  >
-                    { `R$ ${(product.price).replace('.', ',')}` }
-                  </Typography>
-                </CardContent>
+                {/* <CardContent> */}
+                <Typography
+                  className={ classes.titleContainer }
+                  data-testid={ `${index}-product-name` }
+                >
+                  { product.name }
+                </Typography>
+                <Typography
+                  className={ classes.priceContainer }
+                  data-testid={ `${index}-product-price` }
+                >
+                  { `R$ ${(product.price).replace('.', ',')}` }
+                </Typography>
+                {/* </CardContent> */}
                 <Grid container justify="center">
                   <CardActions>
                     <IconButton
@@ -149,7 +148,7 @@ export default function ProductCard() {
             </Grid>
           )) }
         </Grid>
-        <div>
+        <div style={ { display: 'flex', justifyContent: 'center' } }>
           <Button
             className={ classes.totalpriceButton }
             data-testid="checkout-bottom-btn"

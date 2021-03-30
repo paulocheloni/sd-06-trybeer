@@ -47,20 +47,20 @@ export default function TopMenu({ pageTitle }) {
       >
         <Toolbar className={ classes.toolBarMenu }>
           <IconButton
-            fontSize="large"
             color="inherit"
             // aria-label="open drawer"
             onClick={ handleDrawerOpen }
             // edge="start"
             className={ clsx(classes.menuButton, open && classes.hide) }
           >
-            <MenuIcon style={ { fontSize: '45px' } } data-testid="top-hamburguer" />
+            <MenuIcon style={ { fontSize: '50px' } } data-testid="top-hamburguer" />
           </IconButton>
           <Typography
             className={ classes.topMenuTitle }
             data-testid="top-title"
           >
-            { pageTitle }
+            {/* { pageTitle } */}
+            Let it Beer
           </Typography>
         </Toolbar>
       </AppBar>
@@ -70,7 +70,7 @@ export default function TopMenu({ pageTitle }) {
       >
         <div className={ classes.drawerContainer }>
           <IconButton onClick={ handleDrawerClose }>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon style={ { fontSize: '40px' } } />
+            {theme.direction === 'ltr' ? <ChevronLeftIcon style={ { fontSize: '60px' } } />
               : <ChevronRightIcon />}
           </IconButton>
           <Divider />
@@ -81,7 +81,7 @@ export default function TopMenu({ pageTitle }) {
               onClick={ () => history.push('/products') }
             >
               <ListItemIcon>
-                <ShoppingCartIcon style={ { fontSize: '40px' } } />
+                <ShoppingCartIcon style={ { fontSize: '50px' } } />
               </ListItemIcon>
               Produtos
             </ListItem>
@@ -91,7 +91,7 @@ export default function TopMenu({ pageTitle }) {
               onClick={ () => history.push('/orders') }
             >
               <ListItemIcon>
-                <LocalMallIcon style={ { fontSize: '40px' } } />
+                <LocalMallIcon style={ { fontSize: '50px' } } />
               </ListItemIcon>
               Meus Pedidos
             </ListItem>
@@ -101,7 +101,7 @@ export default function TopMenu({ pageTitle }) {
               onClick={ () => history.push('/profile') }
             >
               <ListItemIcon>
-                <PersonIcon style={ { fontSize: '40px' } } />
+                <PersonIcon style={ { fontSize: '50px' } } />
               </ListItemIcon>
               Meu Perfil
             </ListItem>
@@ -114,7 +114,7 @@ export default function TopMenu({ pageTitle }) {
               onClick={ () => history.push('/login') }
             >
               <ListItemIcon>
-                <ExitToAppIcon style={ { fontSize: '40px' } } />
+                <ExitToAppIcon style={ { fontSize: '50px' } } />
               </ListItemIcon>
               Sair
             </ListItem>

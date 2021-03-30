@@ -25,17 +25,17 @@ const useStyles = makeStyles(() => ({
     },
   },
   titleContainer: {
-    fontSize: '25px',
+    fontSize: '35px',
     fontWeight: '600',
     // justifyContent: 'flex-start',
   },
   dateContainer: {
-    fontSize: '25px',
+    fontSize: '35px',
     fontWeight: '600',
     // justifyContent: 'center',
   },
   priceContainer: {
-    fontSize: '25px',
+    fontSize: '35px',
     fontWeight: '600',
   },
 }));

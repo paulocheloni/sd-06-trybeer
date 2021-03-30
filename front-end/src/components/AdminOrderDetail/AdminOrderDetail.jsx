@@ -3,9 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
-import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { Container } from '@material-ui/core';
 import fetches from '../../services/fetches';
 import useStyles from './styles';
 
@@ -40,65 +38,73 @@ export default function AdminOrderDetail() {
   };
 
   return (
-    <main className={ classes.root }>
-      <Container className={ classes.cardGrid } maxWidth="md">
-        <Grid container spacing={ 4 }>
-          <Grid container className={ classes.orderContainer }>
+    <main className={ classes.mainContainer }>
+      <div className={ classes.cardGrid }>
+        <Card className={ classes.card }>
+          <div className={ classes.orderNumberContainer }>
             <Typography
               data-testid="order-number"
-              variant="h6"
-              component="h2"
+              className={ classes.orderFont }
             >
               {orderDetail.length && `Pedido ${orderDetail[0].sale_id}`}
             </Typography>
             <Typography
               data-testid="order-status"
-              variant="h6"
-              component="h2"
+              className={ classes.orderFont }
+              style={ (orderDetail.length && orderDetail[0].status === 'Pendente')
+                ? { color: 'red' } : { color: 'green' } }
             >
               { orderDetail.length && orderDetail[0].status }
             </Typography>
-          </Grid>
-          <Card className={ classes.card }>
-            <CardContent>
-              {orderDetail.length && orderDetail.map((order, index) => (
-                <Grid container key={ order.id } className={ classes.orderDetails }>
-                  <Typography data-testid={ `${index}-product-qtd` }>
-                    {order.quantity}
-                  </Typography>
-                  <Typography data-testid={ `${index}-product-name` }>
-                    {order.name}
-                  </Typography>
-                  <Typography data-testid={ `${index}-product-total-value` }>
-                    {`R$ ${(Number(order.quantity) * Number(order.price))
-                      .toFixed(2).replace('.', ',')}`}
-                  </Typography>
-                </Grid>)) }
-            </CardContent>
-            <Grid container justify="flex-end">
-              <Typography
-                data-testid="order-total-value"
-                variant="h6"
-                component="h2"
-              >
-                {`Total: R$ ${handletotalValue()}`}
-              </Typography>
-            </Grid>
-          </Card>
-        </Grid>
-      </Container>
-      <Grid container justify="center">
-        <Button
-          variant="outlined"
-          color="primary"
-          className={ orderDetail.length && orderDetail[0].status }
-          data-testid="mark-as-delivered-btn"
-          type="button"
-          onClick={ handleChangeStatusButton }
+          </div>
+          {orderDetail.length && orderDetail.map((order, index) => (
+            <Grid key={ order.id }>
+              <div className={ classes.productsContainer }>
+                <Typography
+                  data-testid={ `${index}-product-qtd` }
+                  className={ classes.productFont }
+                >
+                  {order.quantity}
+                </Typography>
+                <Typography
+                  data-testid={ `${index}-product-name` }
+                  className={ classes.productFont }
+                >
+                  {order.name}
+                </Typography>
+                <Typography
+                  data-testid={ `${index}-product-total-value` }
+                  className={ classes.productFont }
+                >
+                  {`R$ ${(Number(order.quantity) * Number(order.price))
+                    .toFixed(2).replace('.', ',')}`}
+                </Typography>
+              </div>
+            </Grid>)) }
+          <Typography
+            data-testid="order-total-value"
+            className={ classes.totalValue }
+          >
+            {`Total: R$ ${handletotalValue()}`}
+          </Typography>
+        </Card>
+        <div
+          style={ {
+            display: 'flex',
+            justifyContent: 'center',
+          } }
         >
-          Marcar como entregue
-        </Button>
-      </Grid>
+          <Button
+            className={ classes.buttonContainer }
+            variant="contained"
+            data-testid="mark-as-delivered-btn"
+            type="button"
+            onClick={ handleChangeStatusButton }
+          >
+            Marcar como entregue
+          </Button>
+        </div>
+      </div>
     </main>
   );
 }

@@ -5,7 +5,7 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     backgroundColor: '#fbb80f',
     paddingBottom: '100px',
-    height: '100vh',
+    height: '100%',
     justifyContent: 'center',
   },
   cardGrid: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
   card: {
     display: 'flex',
     flexDirection: 'column',
-    width: '400px',
+    width: '70vw',
     // Os 3 primeiros ajeitam o card com header/entre si
     padding: '0px 10px 0px 10px',
     margin: '20px 10px auto 10px',
@@ -27,22 +27,22 @@ const useStyles = makeStyles(() => ({
     },
   },
   titleContainer: {
-    fontSize: '25px',
+    fontSize: '35px',
     fontWeight: '600',
     textAlign: 'left',
   },
   priceContainer: {
-    fontSize: '20px',
+    fontSize: '40px',
     fontWeight: '600',
     textAlign: 'right',
   },
   adressContainer: {
-    fontSize: '20px',
+    fontSize: '40px',
     fontWeight: '600',
     textAlign: 'left',
   },
   statusContainer: {
-    fontSize: '25px',
+    fontSize: '35px',
     fontWeight: '600',
     textAlign: 'right',
   },

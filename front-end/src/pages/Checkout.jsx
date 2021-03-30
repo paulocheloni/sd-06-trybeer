@@ -22,7 +22,13 @@ export default function Checkout() {
   };
 
   return (
-    <div>
+    <div
+      style={ {
+        backgroundColor: '#fbb80f',
+        paddingBottom: '100px',
+        height: '100vh',
+      } }
+    >
       { handleRedirect(tokenFromLocalStorage) }
       <TopMenu data-testid="top-title" pageTitle="Finalizar Pedido" />
       <CheckoutProductsCard />

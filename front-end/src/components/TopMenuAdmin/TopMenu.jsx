@@ -54,13 +54,14 @@ export default function TopMenu({ pageTitle }) {
             // edge="start"
             className={ clsx(classes.menuButton, open && classes.hide) }
           >
-            <MenuIcon style={ { fontSize: '45px' } } data-testid="top-hamburguer" />
+            <MenuIcon style={ { fontSize: '50px' } } data-testid="top-hamburguer" />
           </IconButton>
           <Typography
             className={ classes.topMenuTitle }
             data-testid="top-menu"
           >
-            { pageTitle }
+            {/* { pageTitle } */}
+            Let it Beer
           </Typography>
         </Toolbar>
       </AppBar>
@@ -70,7 +71,7 @@ export default function TopMenu({ pageTitle }) {
       >
         <div className={ classes.drawerContainer }>
           <IconButton onClick={ handleDrawerClose }>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon style={ { fontSize: '40px' } } />
+            {theme.direction === 'ltr' ? <ChevronLeftIcon style={ { fontSize: '60px' } } />
               : <ChevronRightIcon />}
           </IconButton>
           <Divider />
@@ -82,7 +83,7 @@ export default function TopMenu({ pageTitle }) {
               onClick={ () => history.push('/admin/orders') }
             >
               <ListItemIcon>
-                <ShoppingCartIcon style={ { fontSize: '40px' } } />
+                <ShoppingCartIcon style={ { fontSize: '50px' } } />
               </ListItemIcon>
               Pedidos
             </ListItem>
@@ -92,7 +93,7 @@ export default function TopMenu({ pageTitle }) {
               onClick={ () => history.push('/admin/profile') }
             >
               <ListItemIcon>
-                <PersonIcon style={ { fontSize: '40px' } } />
+                <PersonIcon style={ { fontSize: '50px' } } />
               </ListItemIcon>
               Perfil
             </ListItem>
@@ -102,7 +103,7 @@ export default function TopMenu({ pageTitle }) {
               onClick={ () => history.push('/login') }
             >
               <ListItemIcon>
-                <ExitToAppIcon style={ { fontSize: '40px' } } />
+                <ExitToAppIcon style={ { fontSize: '50px' } } />
               </ListItemIcon>
               Sair
             </ListItem>

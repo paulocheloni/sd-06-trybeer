@@ -8,8 +8,8 @@
 }
 
 img {
-  border-radius: 80%;
-  width: 150px;
+  border-radius: 50%;
+  width: 350px;
   padding-top: 15px;
 }
 
@@ -27,7 +27,7 @@ img {
 }
 .form-control {
   background-color: #ffe28a;
-  font-size: 20px;
+  font-size: 30px;
 }
 .link-container {
   padding-top: 10px;
@@ -37,21 +37,22 @@ img {
   padding-top: 20px;
 }
 .link-content {
+  font-size: 25px;
   color: black;
   text-decoration: underline;
 }
 .form-group {
   color: black;
-  font-size: 20px;
+  font-size: 35px;
   font-weight: 600;
 }
 .btn:disabled {
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 600;
 }
 .btn {
   background-color: #32325b;
-  font-size: 20px;
+  font-size: 30px;
   color: white;
   font-weight: 600;
 }

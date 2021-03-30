@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
-import CardContent from '@material-ui/core/CardContent';
 import Card from '@material-ui/core/Card';
-import { Container } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import fetches from '../../services/fetches';
 import useStyles from './styles';
@@ -44,56 +42,60 @@ export default function SalesDetails() {
     }
   };
   return (
-    <main className={ classes.root }>
-      <Container className={ classes.cardGrid } maxWidth="md">
-        <Grid container spacing={ 4 }>
-          <Grid container direction="row">
-            <Typography data-testid="order-number">
+    <main className={ classes.mainContainer }>
+      <div className={ classes.cardGrid }>
+        <Card className={ classes.card }>
+          <div className={ classes.orderNumberContainer }>
+            <Typography
+              data-testid="order-number"
+              className={ classes.orderFont }
+            >
               {orderDetail.length && `Pedido ${orderDetail[0].sale_id}`}
             </Typography>
             <Typography
               data-testid="order-date"
+              className={ classes.orderFont }
             >
               {orderDetail.length && handleDate()}
             </Typography>
-          </Grid>
-          <Card className={ classes.card }>
-            <CardContent>
-              {orderDetail.length
+          </div>
+          {orderDetail.length
             && orderDetail.map((order, index) => (
-              <Grid item key={ order.id } className={ classes.SalesDetails }>
-                <Typography
-                  data-testid={ `${index}-product-qtd` }
-                >
-                  {order.quantity}
-                </Typography>
-                <Typography
-                  data-testid={ `${index}-product-name` }
-                >
-                  {order.name}
-                </Typography>
-                <Typography
-                  data-testid={ `${index}-product-total-value` }
-                >
-                  {`R$ ${(Number(order.quantity) * Number(order.price))
-                    .toFixed(2)
-                    .replace('.', ',')}`}
-                </Typography>
+              <Grid key={ order.id }>
+                <div className={ classes.productsContainer }>
+                  <Typography
+                    data-testid={ `${index}-product-qtd` }
+                    className={ classes.productFont }
+                  >
+                    {order.quantity}
+                  </Typography>
+                  <Typography
+                    data-testid={ `${index}-product-name` }
+                    className={ classes.productFont }
+                  >
+                    {order.name}
+                  </Typography>
+                  <Typography
+                    data-testid={ `${index}-product-total-value` }
+                    className={ classes.productFont }
+                  >
+                    {`R$ ${(Number(order.quantity) * Number(order.price))
+                      .toFixed(2)
+                      .replace('.', ',')}`}
+                  </Typography>
+                </div>
               </Grid>
             ))}
-            </CardContent>
-            <Grid container justify="flex-end">
-              <Typography
-                data-testid="order-total-value"
-                variant="h6"
-                component="h2"
-              >
-                {`Total: R$ ${handletotalValue()}`}
-              </Typography>
-            </Grid>
-          </Card>
-        </Grid>
-      </Container>
+          <Grid>
+            <Typography
+              data-testid="order-total-value"
+              className={ classes.totalValue }
+            >
+              {`Total: R$ ${handletotalValue()}`}
+            </Typography>
+          </Grid>
+        </Card>
+      </div>
     </main>
   );
 }

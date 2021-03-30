@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import Paper from '@material-ui/core/Paper';
+import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -28,54 +28,46 @@ export default function CheckoutProductsCard() {
   };
 
   return (
-    <div className={ classes.root }>
-      {
-        !cartProducts.length
+    <div className={ classes.mainContainer }>
+      <div className={ classes.cardGrid }>
+        { !cartProducts.length
           ? <Typography>Não há produtos no carrinho</Typography>
           : cartProducts.map((product, index) => (
-            <Paper key={ product.id } className={ classes.paper }>
-              <Grid container>
-                <Grid item xs container direction="column" spacing={ 2 }>
-                  <Grid item xs>
-                    <Typography
-                      gutterBottom
-                      variant="subtitle1"
-                      data-testid={ `${index}-product-qtd-input` }
-                    >
-                      { product.quantityItem }
-                    </Typography>
-                    <Typography
-                      data-testid={ `${index}-product-name` }
-                      variant="h6"
-                    >
-                      { product.name }
-                    </Typography>
-                    <Grid item container direction="row">
-                      <IconButton
-                        data-testid={ `${index}-removal-button` }
-                        type="submit"
-                        onClick={ (event) => removeProductFromCart(event) }
-                        id={ index }
-                      >
-                        <DeleteIcon />
-                        {' '}
-                        Deletar
-                      </IconButton>
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid item>
+            <Grid key={ product.id }>
+              <Card className={ classes.card }>
+                <Typography
+                  className={ classes.quantityContainer }
+                  data-testid={ `${index}-product-qtd-input` }
+                >
+                  { product.quantityItem }
+                </Typography>
+                <Typography
+                  className={ classes.nameContainer }
+                  data-testid={ `${index}-product-name` }
+                >
+                  { product.name }
+                </Typography>
+                <div className={ classes.priceContainer }>
                   <Typography
-                    variant="subtitle1"
+                    className={ classes.unityPrice }
                     data-testid={ `${index}-product-unit-price` }
                   >
                     { `(R$ ${(product.price).replace('.', ',')} un)` }
                   </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
-          ))
-      }
+                  <IconButton
+                    className={ classes.deleteContainer }
+                    data-testid={ `${index}-removal-button` }
+                    type="submit"
+                    onClick={ (event) => removeProductFromCart(event) }
+                    id={ index }
+                  >
+                    <DeleteIcon style={ { fontSize: '40px' } } />
+                  </IconButton>
+                </div>
+              </Card>
+            </Grid>
+          ))}
+      </div>
     </div>
   );
 }

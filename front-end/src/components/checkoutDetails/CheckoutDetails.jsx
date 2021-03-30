@@ -62,45 +62,35 @@ export default function CheckoutDetails() {
   };
 
   return (
-    <Container className={ classes.container }>
-      <Typography
-        data-testid="order-total-value"
-        variant="h5"
-        component="h4"
-      >
-        { `Total: R$ ${handleTotalPrice()}` }
-      </Typography>
-      <FormControl className={ classes.root } noValidate autoComplete="off">
+    <Container className={ classes.mainContainer }>
+      <div className={ classes.cardGrid }>
         <Typography
-          variant="h5"
-          component="h4"
+          className={ classes.totalValueContainer }
+          data-testid="order-total-value"
         >
-          Endereço
+          { `Total: R$ ${handleTotalPrice()}` }
         </Typography>
-        <div>
+        <FormControl className={ classes.formContainer }>
+          <Typography className={ classes.adressContainer }>
+            Endereço
+          </Typography>
           <TextField
             id="street-input"
-            size="medium"
             data-testid="checkout-street-input"
             label="Rua"
             value={ street }
             onChange={ (e) => setStreet(e.target.value) }
           />
-        </div>
-        <div>
           <TextField
             id="street-input"
-            size="medium"
             data-testid="checkout-house-number-input"
-            label="Número:"
+            label="Número"
             value={ houseNumber }
             onChange={ (e) => setHouseNumber(e.target.value) }
           />
-        </div>
-        <div>
           <Button
+            className={ classes.buttonContainer }
             variant="contained"
-            color="primary"
             data-testid="checkout-finish-btn"
             disabled={ !(isTotalNotPriceZero(totalPrice)
               && streetValidation(street)
@@ -109,9 +99,9 @@ export default function CheckoutDetails() {
           >
             Finalizar Pedido
           </Button>
-        </div>
-        <Typography>{ orderSuccess }</Typography>
-      </FormControl>
+          <Typography>{ orderSuccess }</Typography>
+        </FormControl>
+      </div>
     </Container>
   );
 }

@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
   toolBarMenu: {
     display: 'flex',
     backgroundColor: '#32325b',
-    height: '70px',
+    height: '80px',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   topMenuTitle: {
     display: 'flex',
-    fontSize: '30px',
+    fontSize: '50px',
     fontWeight: '700',
     position: 'absolute',
     zIndex: '2',
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     borderRight: '2px solid #32325b',
   },
   listContainer: {
-    fontSize: '20px',
+    fontSize: '35px',
     fontWeight: '800',
     color: 'white',
   },
