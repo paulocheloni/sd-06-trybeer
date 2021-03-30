@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  width: 25%;
-  height: 100%;
+  width: 100%;
+  height: 100vh;
   padding: 2%;
   flex-direction: column;
   align-content: center;
@@ -19,13 +19,18 @@ export const Title = styled.h2`
 `;
 
 export const WrapperButtons = styled.div`
+  padding-bottom: 700px; 
   justify-content: space-between;
   width: 100%;
   align-items: center;
 `;
 
 export const ButtonLeave = styled.div`
+  ${'' /* position: absolute;
+  bottom: 0px; */}
   display: flex;
   width: 100%;
-  margin-bottom: 5px;
+  align-self: flex-end;
+  align-items: center;
+  margin: 5px;
 `;
