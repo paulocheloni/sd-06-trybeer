@@ -1,0 +1,17 @@
+.divMain {
+  /* border: 3px solid orange; */
+  display: flex;
+}
+
+.divCartItem {
+  /* border: 1px solid orange; */
+  margin-left: 15px;
+  width: 90%;
+}
+
+.buttonRemoveItem {
+  /* border: 1px solid seagreen; */
+  height: 50px;
+  margin-top: auto;
+  margin-right: 15px;
+}

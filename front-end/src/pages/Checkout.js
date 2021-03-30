@@ -6,6 +6,8 @@ import TrybeerContext from '../context/TrybeerContext';
 import TopBar from '../components/TopBar';
 import { checkoutOrder } from '../services/checkoutService';
 
+import './Checkout.css';
+
 function Checkout() {
   const loggedUser = JSON.parse(localStorage.getItem('user'));
   const {
@@ -62,11 +64,12 @@ function Checkout() {
               ))
             )
         }
-        <span data-testid="order-total-value">
+        <p data-testid="order-total-value">
           {`Total: R$ ${totalCart.toFixed(2).replace('.', ',')}` }
-        </span>
+        </p>
         <Address />
         <button
+          className='buttonCheckout'
           type="button"
           disabled={ !enable }
           data-testid="checkout-finish-btn"

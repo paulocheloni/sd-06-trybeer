@@ -4,6 +4,8 @@ import TopBar from '../components/TopBar';
 import { getLocal, sendNewName } from '../services/ClientProfileService';
 import InputProfile from '../services/InputProfile';
 
+import './ClientProfile.css';
+
 function ClientProfile() {
   const history = useHistory();
   const [disableButton, setDisableButton] = useState(true);
@@ -24,7 +26,7 @@ function ClientProfile() {
       <TopBar title="Meu perfil" />
       {existsLocal === true
         ? (
-          <form>
+          <form className='formClientProfile'>
             <InputProfile
               title="Name"
               id="profile-name-input"
@@ -32,8 +34,10 @@ function ClientProfile() {
               value={ editedName }
               callback={ (e) => handleChangeName(e) }
             />
+            <br />
             <label htmlFor="profile-email-input">
               Email
+              <br />
               <input
                 type="email"
                 data-testid="profile-email-input"
@@ -41,6 +45,7 @@ function ClientProfile() {
                 readOnly
               />
             </label>
+            <br />
             <button
               type="button"
               data-testid="profile-save-btn"

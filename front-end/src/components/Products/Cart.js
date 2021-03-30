@@ -26,7 +26,7 @@ function Cart() {
     >
       Ver Carrinho
       <span data-testid="checkout-bottom-btn-value">
-        {`R$ ${totalCart.toFixed(2).replace('.', ',')}`}
+        {` R$ ${totalCart.toFixed(2).replace('.', ',')}`}
       </span>
     </button>
   );
