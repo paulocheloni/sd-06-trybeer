@@ -1,3 +1,5 @@
+// ProductCard Services
+
 export const localStorageCart = JSON.parse(localStorage.getItem('cart'));
 
 export function decreaseQuantity(quantity, setQuantity) {
