@@ -1,5 +1,6 @@
 .mainDiv {
   padding: 20px;
+  text-align: center;
 }
 
 .titleRegister {
@@ -11,9 +12,16 @@
   width: 90%;
   margin-top: 10px;
   margin-bottom: 10px;
+  border-radius: 5px;
+  border: rgb(196, 150, 33);
 }
 
 .buttonRegisterUser {
   padding: 10px;
   width: 98%;
+  background-color: rgb(196, 150, 33);
+  border: rgb(196, 150, 33);
+  border-radius: 5px;
+  font-family: 'Syne Mono';
+  margin-bottom: 10px;
 }

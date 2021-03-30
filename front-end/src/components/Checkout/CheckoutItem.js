@@ -25,7 +25,6 @@ function CheckoutItem({ name, price, quantity, index }) {
         <div data-testid={ `${index}-product-unit-price` }>
           { `(R$ ${price.replace('.', ',')} un)` }
         </div>
-      </div>
       <button
         className='buttonRemoveItem'
         type="button"
@@ -34,6 +33,7 @@ function CheckoutItem({ name, price, quantity, index }) {
       >
         <GoTrashcan size={ 20 } />
       </button>
+      </div>
     </div>
   );
 }

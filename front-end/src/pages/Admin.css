@@ -14,23 +14,30 @@
 
 .botoes {
   width: 100px;
-  /* margin-left: 5px; */
+  background-color: rgb(246, 202, 90);
+  border: rgb(196, 150, 33);
+  border-radius: 5px;
+  font-family: 'Syne Mono';
 }
 
 .logout {
   width: 100px;
-  /* margin-left: 5px; */
   margin-top: 200px;
   margin-bottom: 10px;
+  background-color: rgb(246, 202, 90);
+  border: rgb(196, 150, 33);
+  border-radius: 5px;
+  font-family: 'Syne Mono';
 }
 
 .divBotao {
-  border: 1px solid yellow;
+  border: rgb(196, 150, 33);
+  border-radius: 5px;
   width: 100%;
+  font-family: 'Syne Mono';
 }
 
 .divDetails {
-  /* margin: 5px; */
   margin-top: 0px;
   margin-bottom: 0px;
 }

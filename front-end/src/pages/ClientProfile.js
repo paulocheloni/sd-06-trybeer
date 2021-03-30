@@ -47,6 +47,7 @@ function ClientProfile() {
             </label>
             <br />
             <button
+              className='buttonUpdate'
               type="button"
               data-testid="profile-save-btn"
               disabled={ disableButton }

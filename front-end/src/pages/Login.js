@@ -20,6 +20,7 @@ function Login() {
           Email
           <br />
           <input
+            className='inputLogin'
             id="email-input"
             type="email"
             name="email"
@@ -33,6 +34,7 @@ function Login() {
           Senha
           <br />
           <input
+            className='inputLogin'
             id="password-input"
             type="password"
             data-testid="password-input"

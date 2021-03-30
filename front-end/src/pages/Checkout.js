@@ -64,7 +64,7 @@ function Checkout() {
               ))
             )
         }
-        <p data-testid="order-total-value">
+        <p data-testid="order-total-value" className='totalPrice'>
           {`Total: R$ ${totalCart.toFixed(2).replace('.', ',')}` }
         </p>
         <Address />
