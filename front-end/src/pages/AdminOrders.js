@@ -28,7 +28,7 @@ function AdminOrders() {
         <h1 className="title">Admin Orders</h1>
         { sales.map((sale, index) => (
           <div key={ index }>
-            <button type="button" onClick={ () => redirectDetails(sale.id) }>
+            <button type="button" onClick={ () => redirectDetails(sale.id) } className='divBotao'>
               <h2 data-testid={ `${index}-order-number` }>
                 {`Pedido ${sale.id}`}
               </h2>

@@ -26,21 +26,21 @@ function AdminOrdersDetails(props) {
           !orders.length > 0
             ? <div>no orders</div>
             : (
-              <div>
+              <div className='divDetails'>
                 <h2 data-testid="order-number">{`Pedido ${id} - `}</h2>
-                <h3 data-testid="order-status">
+                <h2 data-testid="order-status" className='pendente'>
                   {orders[0].status}
-                </h3>
+                </h2>
                 {orders.map((order, index) => (
                   <div key={ index }>
-                    <h2 data-testid={ `${index}-product-qtd` }>{order.quantity}</h2>
-                    <h2 data-testid={ `${index}-product-name` }>{order.name}</h2>
-                    <h2 data-testid={ `${index}-product-total-value` }>
+                    <h3 data-testid={ `${index}-product-qtd` }>{`Quantidade: ${order.quantity}`}</h3>
+                    <h3 data-testid={ `${index}-product-name` }>{order.name}</h3>
+                    <h3 data-testid={ `${index}-product-total-value` }>
                       {`R$ ${(order.total).toFixed(2).replace('.', ',')}`}
-                    </h2>
-                    <h2 data-testid={ `${index}-order-unit-price` }>
+                    </h3>
+                    <h3 data-testid={ `${index}-order-unit-price` }>
                       {`(R$ ${(order.price).toString().replace('.', ',')})`}
-                    </h2>
+                    </h3>
                   </div>
                 ))}
                 <h2 data-testid="order-total-value">
