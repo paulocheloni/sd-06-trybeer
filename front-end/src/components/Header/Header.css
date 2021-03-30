@@ -87,6 +87,7 @@
 .move-menu {
   transform: translateX(100vw);
   transition: 1s ease;
+  z-index: 5;
 }
 
 .isUser aside ul {
