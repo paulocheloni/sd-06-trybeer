@@ -48,7 +48,7 @@ function ProfileClient() {
       <ControllerHeader title="Meu perfil" />
       <section className="client-profile-content">
         <label htmlFor="name">
-          Nome: 
+          Nome:
           <input
             name="name"
             data-testid="profile-name-input"
@@ -57,7 +57,7 @@ function ProfileClient() {
           />
         </label>
         <label htmlFor="email">
-          Email: 
+          Email:
           <input
             name="email"
             value={ user.email }

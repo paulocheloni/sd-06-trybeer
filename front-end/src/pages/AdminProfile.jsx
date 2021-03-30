@@ -25,12 +25,12 @@ function AdminOrders() {
       <section className="admin-profile-container">
         <h1>Perfil de adminstrador</h1>
         <div>
-        <p data-testid="profile-name">
-          {`Nome: ${name} `}
-        </p>
-        <p data-testid="profile-email">
-          {`Email: ${email}`}
-        </p>
+          <p data-testid="profile-name">
+            {`Nome: ${name} `}
+          </p>
+          <p data-testid="profile-email">
+            {`Email: ${email}`}
+          </p>
         </div>
       </section>
     </div>
