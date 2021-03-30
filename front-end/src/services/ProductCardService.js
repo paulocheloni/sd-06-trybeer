@@ -1,4 +1,4 @@
-// ProductCard Services
+// ProductCard Services - fix cypress
 
 export const localStorageCart = JSON.parse(localStorage.getItem('cart'));
 
