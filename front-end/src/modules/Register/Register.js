@@ -8,7 +8,7 @@ import Loader from '../../design-components/Loader';
 import registerValidation from '../../utils/registerValidation';
 
 function Register() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const STATUS_CONFLICT = 409;
   const history = useHistory();
   const [duplicated, setDuplicated] = useState('');
