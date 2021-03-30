@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { Redirect } from 'react-router';
 import ProductCard from '../components/Products/ProductCard';
 import Cart from '../components/Products/Cart';
-import TopBar from '../components/TopBar';
+import TopBar from '../components/SideBarClient/TopBar';
 import { getAllProducts } from '../services/api';
 import TrybeerContext from '../context/TrybeerContext';
 

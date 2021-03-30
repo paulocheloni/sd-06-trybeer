@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
-import SideBarAdmin from '../components/SideBarAdmin';
+import SideBarAdmin from '../components/SideBarAdmin/SideBarAdmin';
 import { getOrder, updateStatus } from '../services/orderDetailsService';
 
 import './Admin.css';
@@ -28,7 +28,7 @@ function AdminOrdersDetails(props) {
             : (
               <div className="divDetails">
                 <h2 data-testid="order-number">{`Pedido ${id} - `}</h2>
-                <h2 data-testid="order-status" className="pendente">
+                <h2 data-testid="order-status" className={orders[0].status}>
                   {orders[0].status}
                 </h2>
                 {orders.map((order, index) => (
@@ -51,6 +51,7 @@ function AdminOrdersDetails(props) {
                 { orders[0].status === 'Pendente'
                   ? (
                     <button
+                      className="buttonEntregar"
                       type="button"
                       data-testid="mark-as-delivered-btn"
                       onClick={ () => updateStatus(id, setDelivered) }

@@ -29,7 +29,7 @@ function Login() {
           />
         </label>
       </div>
-      <div className="divTeste">
+      <div className="divLogin">
         <label htmlFor="password-input">
           Senha
           <br />

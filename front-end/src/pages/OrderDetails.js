@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import TopBar from '../components/TopBar';
+import TopBar from '../components/SideBarClient/TopBar';
 import { getOrder } from '../services/orderDetailsService';
 
 import './OrderDetails.css';
