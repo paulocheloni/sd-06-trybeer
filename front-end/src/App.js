@@ -8,6 +8,7 @@ import {
 
 import { NotFound, Login, Register, Profile, Products, Checkout, OrderDetails,
   AdminProfile, AdminOrders, AdminOrderDetails, Error, Orders } from './pages';
+import { ProtectedRoute } from './components';
 
 import './styles/App.css';
 
@@ -15,16 +16,16 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <ProtectedRoute path="/profile" component={ Profile } />
+        <ProtectedRoute path="/products" component={ Products } />
+        <ProtectedRoute path="/checkout" component={ Checkout } />
+        <ProtectedRoute path="/orders/:id" component={ OrderDetails } />
+        <ProtectedRoute path="/orders" component={ Orders } />
+        <ProtectedRoute path="/admin/orders/:id" component={ AdminOrderDetails } />
+        <ProtectedRoute path="/admin/orders" component={ AdminOrders } />
+        <ProtectedRoute path="/admin/profile" component={ AdminProfile } />
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />
-        <Route path="/products" component={ Products } />
-        <Route path="/checkout" component={ Checkout } />
-        <Route path="/profile" component={ Profile } />
-        <Route path="/orders/:id" component={ OrderDetails } />
-        <Route path="/orders" component={ Orders } />
-        <Route path="/admin/orders/:id" component={ AdminOrderDetails } />
-        <Route path="/admin/orders" component={ AdminOrders } />
-        <Route path="/admin/profile" component={ AdminProfile } />
         <Route exact path="/">
           <Redirect to="/login" />
         </Route>

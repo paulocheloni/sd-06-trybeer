@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Redirect, useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import AppContext from '../context/app.context';
 
 import { Topbar, Loading, AdminOrderDetails as OrderComponent } from '../components';
@@ -30,8 +30,6 @@ export default function AdminOrderDetails() {
     };
     fetchOrder();
   }, [setOrder, params, token, history]);
-
-  if (!token) return <Redirect to="/login" />;
 
   return (
     <section>

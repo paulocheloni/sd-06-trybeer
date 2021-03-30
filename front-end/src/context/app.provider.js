@@ -27,7 +27,7 @@ const AppProvider = ({ children }) => {
         setProducts(productsArray);
       } catch (error) {
         console.log('error caught:', error);
-        return null;
+        throw error;
       }
     };
     if (token && token.token) fetchProducts();

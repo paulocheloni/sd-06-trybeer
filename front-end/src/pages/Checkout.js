@@ -1,5 +1,5 @@
 import React, { useContext, useState, useMemo, useEffect, useCallback } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
 import { Topbar, Button, TextInput } from '../components';
@@ -79,8 +79,6 @@ export default function Checkout() {
       clearTimeout(timeOut);
     };
   }, [history, success]);
-
-  if (!token) return <Redirect to="/login" />;
 
   return (
     <section>

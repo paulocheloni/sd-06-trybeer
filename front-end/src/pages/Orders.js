@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
 import { Topbar, Loading } from '../components';
@@ -33,8 +33,6 @@ export default function Orders() {
   }, [setOrders, token, history]);
 
   const title = (token && token.role === 'administrator') ? 'Pedidos' : 'Meus Pedidos';
-
-  if (!token) return <Redirect to="/login" />;
 
   return (
     <section>
