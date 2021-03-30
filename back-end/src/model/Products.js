@@ -9,3 +9,14 @@ exports.getByName = async (name) => (
     .execute('SELECT * FROM products WHERE name = ?', [name])
     .then(([[product]]) => product || null)
 );
+
+exports.create = async (name, price, url_image) => (
+  connection
+    .execute('INSERT INTO products (name, price, url_image) VALUES (?, ?, ?)',
+    [
+      name,
+      price,
+      url_image,
+    ])
+    .then(([result]) => ({ id: result.insertId }))
+);
