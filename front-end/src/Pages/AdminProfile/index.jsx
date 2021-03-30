@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import Axios from 'axios';
 import MenuAdmin from '../../Components/MenuAdmin';
+import * as S from './style';
 
 const AdminProfile = () => {
   const history = useHistory();
@@ -24,20 +25,26 @@ const AdminProfile = () => {
     }
   });
   return (
-    <div>
-      <MenuAdmin />
-      Admin Profile
-      <h2 data-testid="profile-name">
-        Nome:
-        {' '}
-        { name }
-      </h2>
-      <h2 data-testid="profile-email">
-        Email:
-        {' '}
-        { email }
-      </h2>
-    </div>
+    <S.Container>
+      <S.WrapperMenu>
+        <MenuAdmin />
+      </S.WrapperMenu>
+      <S.WrapperProfile>
+        <S.Profile>
+          <h1>Admin Profile</h1>
+          <p data-testid="profile-name">
+            <span>Nome:</span>
+            {' '}
+            { name }
+          </p>
+          <p data-testid="profile-email">
+            <span>Email:</span>
+            {' '}
+            { email }
+          </p>
+        </S.Profile>
+      </S.WrapperProfile>
+    </S.Container>
   );
 };
 

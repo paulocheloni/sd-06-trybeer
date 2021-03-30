@@ -11,8 +11,8 @@ const MenuAdmin = () => {
   };
   return (
     <S.Container>
+      <S.Title data-testid="top-title">TryBeer</S.Title>
       <S.WrapperButtons>
-        <S.Title data-testid="top-title">TryBeer</S.Title>
         <Button
           dataTestId="side-menu-item-orders"
           onClick={ () => handleRoute('/admin/orders') }
@@ -28,13 +28,16 @@ const MenuAdmin = () => {
 
         </Button>
       </S.WrapperButtons>
-      <Button
-        dataTestId="side-menu-item-logout"
-        onClick={ () => handleRoute('/') }
-      >
-        Sair
+      <S.ButtonLeave>
+        <Button
+          color="#b5179e"
+          dataTestId="side-menu-item-logout"
+          onClick={ () => handleRoute('/') }
+        >
+          Sair
 
-      </Button>
+        </Button>
+      </S.ButtonLeave>
     </S.Container>
   );
 };
