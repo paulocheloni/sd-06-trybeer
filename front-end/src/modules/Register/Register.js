@@ -27,8 +27,8 @@ function Register() {
   const isChecked = () => (document.getElementById('wannasell').checked);
 
   const signUpOnClick = () => {
-    setLoading(true);
     const whatSTheRole = isChecked() ? 'administrator' : 'client';
+    setLoading(true);
     const token = api
       .post('/register', {
         name: registerName,
@@ -42,6 +42,7 @@ function Register() {
         if (response.data.role === 'client') history.push('/products');
       })
       .catch((err) => {
+        setLoading(false);
         if (err.response.status === STATUS_CONFLICT) {
           setDuplicated(err.response.data.message);
         }
