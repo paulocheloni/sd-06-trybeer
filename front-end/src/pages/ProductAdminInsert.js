@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SideBarAdmin from '../components/SideBarAdmin';
+import SideBarAdmin from '../components/SideBarAdmin/SideBarAdmin';
 import { createNewProduct } from '../services/api';
 import './ProductAdminInsert.css';
 
