@@ -23,7 +23,6 @@ function Login({ history }) {
   }, [user]);
 
   const handleChange = ({ target }) => {
-    console.log('iniciei');
     setUser({ ...user, [target.name]: target.value });
   };
 
@@ -32,6 +31,7 @@ function Login({ history }) {
     const userData = await api.generateToken(user.email, user.password);
 
     if (userData.result) {
+      // console.log(userData.response);
       const { role } = userData.response;
       setErrMsg(false);
       if (role === 'administrator') history.push('/admin/orders');

@@ -16,7 +16,7 @@ const OrdersCard = ({ orders }) => {
       key={ index }
       data-testid={ `${index}-order-card-container` }
     >
-      <Link to={ `/orders/${order.id}` }>
+      <Link data-testid={ `${index}-orders-details-link` } to={ `/orders/${order.id}` }>
         <div
           data-testid={ `${index}-order-number` }
         >
