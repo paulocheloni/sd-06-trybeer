@@ -31,9 +31,9 @@ function App() {
           <Route exact path="/orders" component={ Orders } />
           <Route path="/orders/:orderId" exact component={ OrderDetail } />
           <Route exact path="/admin/profile" component={ AdminProfile } />
-          <Route exact path= "/admin/orders/:id"component={ AdminOrdersDetail } />
+          <Route exact path="/admin/orders/:id" component={ AdminOrdersDetail } />
           <Route path="/admin/orders" component={ AdminOrders } />
-          
+
         </Switch>
       </BrowserRouter>
     </Provider>

@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div` 
-  display: inline-block;
+  display: flex;
   width: 100%;
+  flex-wrap: wrap;
   max-width: 100%;
 `;
 export const Buttons = styled.div`
@@ -12,4 +13,13 @@ export const Buttons = styled.div`
   width: 100%;
   max-width: 500px;
 
+`;
+
+export const WrapperMenu = styled.div`
+  width: 20%;
+`;
+
+export const WrapperOrders = styled.div`
+  width: 80%;
+  padding: 2%;
 `;

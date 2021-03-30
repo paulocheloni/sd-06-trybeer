@@ -31,6 +31,6 @@ export const Buttons = styled.div`
 
 `;
 export const Status = styled.span`
-  color: orange;
+  color: ${({ isDisable }) => (isDisable ? 'green' : 'orange')};
 
 `;
