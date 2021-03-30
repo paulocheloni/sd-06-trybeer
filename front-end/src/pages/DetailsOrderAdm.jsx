@@ -25,6 +25,13 @@ function DetailsOrderAdm({ match }) {
     setStatus('Entregue');
   };
 
+  useEffect(() => {
+    const statusOrder = orderDetails.map((order) => order.status)[0];
+    if (statusOrder === 'Entregue') {
+      setStatus('Entregue');
+    }
+  });
+
   return !orderDetails ? <h1>Loading...</h1> : (
     <div>
       <SideBarAdm />
