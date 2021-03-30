@@ -77,16 +77,28 @@ function Register() {
   // funcao de Registrar Usuario e Redirecionar
   const registerUser = () => api.createUser(name, email, password, checkbox)
     .then((response) => {
+      console.log(`Seu cadastro ${response.data} com o email ${email} foi criado com sucesso.`)
+    }).catch(() => {
+      setEmailExists(true);
+    });
+
+  const loginUser = () => api.listLogin(email, password)
+    .then((response) => {
       saveState('user', response.data);
+      console.log(response.data);
       if (checkbox === 'administrator') {
         history.push('/admin/orders');
       }
       if (checkbox === 'client') {
         history.push('/products');
       }
-    }).catch(() => {
-      setEmailExists(true);
-    });
+    })
+    .catch((err) => console.log(err));
+
+  const clickRegister = async () => {
+    await registerUser();
+    await loginUser();
+  }
 
   // Funcao de modificar cliente/admin
   const handleChange = () => {
@@ -176,7 +188,7 @@ function Register() {
             color="primary"
             data-testid="signup-btn"
             disabled={ disabled }
-            onClick={ registerUser }
+            onClick={ clickRegister }
             variant="outlined"
             style={ {
               left: '3%',
