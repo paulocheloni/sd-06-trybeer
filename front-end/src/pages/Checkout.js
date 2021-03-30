@@ -68,7 +68,7 @@ function Checkout() {
       <TopMenu titleMenu={ TITLE_MENU_CHECKOUT } />
       <br />
       <br />
-      <h2 className="titleProducts">Produtos</h2>
+      <h3 className="titleProducts">Produtos</h3>
       {cartHasProducts ? cart.map(({ id, name, quantity, price }, index) => (
         <ProductListItem
           key={ index }
@@ -90,7 +90,6 @@ function Checkout() {
         setNumber={ setNumber }
         setIsFormFilled={ setIsFormFilled }
       />
-      {/* <h3>{ purchaseMade ? 'Compra realizada com sucesso!' : ''}</h3> */}
       <button
         type="button"
         data-testid="checkout-finish-btn"

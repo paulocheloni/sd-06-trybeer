@@ -38,8 +38,9 @@ function Orders({ history }) {
                 <Link
                   to={ { pathname: `/orders/${id}`,
                     state: { id, saleDate, totalPrice } } }
+                    className="link"
                 >
-                  <div className="card-id-date">
+                  <div className="card-id-date title">
                     <div data-testid={ `${index}-order-number` }>
                       {`Pedido ${id}` }
                     </div>

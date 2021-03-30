@@ -5,6 +5,12 @@
   border-width:thin;
   border-radius: 20px;
   box-shadow: 2px 3px 11px 2px rgba(0,0,0,0.89);
+  display:flex;
+  flex-direction: column;
+}
+.addres-form {
+  display: flex;
+  flex-direction: column;
 }
 .inputAdress {
   margin: 200px;

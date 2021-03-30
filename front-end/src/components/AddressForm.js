@@ -18,7 +18,7 @@ const AddressForm = (props) => {
 
   return (
     <form className="addresForm">
-      <h3>Endereço:</h3>
+      <h4>Endereço</h4>
       <div className="addres-form">
         <div className="input-form">
           <label htmlFor="street">
