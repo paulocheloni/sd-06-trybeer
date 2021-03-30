@@ -11,7 +11,7 @@ import { postSale } from '../../../services/Sales';
 import CheckoutCard from '../../../components/checkoutCard/CheckoutCard';
 import AddressForm from './AddressForm';
 import { parseCartPrice } from '../../../utils/parseValues';
-import { TWO_THOUSAND, NINETEEN } from '../../../services/magicNumbers';
+import { CHECKOUT_CONFIRM_TIME, NINETEEN } from '../../../services/magicNumbers';
 import Loading from '../../../components/Loading/Loading'
 
 import './Checkout.css';
@@ -79,7 +79,7 @@ const Checkout = (props) => {
       setTimeout(() => {
         localStorage.setItem('cart', '[]');
         return history.push('/products');
-      }, TWO_THOUSAND);
+      }, CHECKOUT_CONFIRM_TIME);
     } else {
       console.log(saleResponse)
       setSaleDone(saleResponse);

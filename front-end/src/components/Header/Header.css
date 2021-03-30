@@ -48,6 +48,7 @@
 }
 
 .isAdmin aside button {
+  cursor: pointer;
   width: 100%;
   background-color: #488C18;
   border: 0;
@@ -107,6 +108,7 @@
 }
 
 .isUser aside button {
+  cursor: pointer;
   width: 100vw;
   background-color: #488C18;
   border: 0;
