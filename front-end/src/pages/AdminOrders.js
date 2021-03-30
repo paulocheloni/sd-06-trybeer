@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
 import { getAllSales } from '../services/api';
-import SideBarAdmin from '../components/SideBarAdmin';
+import SideBarAdmin from '../components/SideBarAdmin/SideBarAdmin';
 // import { Link } from 'react-router-dom';
 // import { Redirect } from 'react-router';
 
@@ -29,9 +29,9 @@ function AdminOrders() {
         { sales.map((sale, index) => (
           <div key={ index }>
             <button
+              className="buttonPedidos"
               type="button"
               onClick={ () => redirectDetails(sale.id) }
-              className="divBotao"
             >
               <h2 data-testid={ `${index}-order-number` }>
                 {`Pedido ${sale.id}`}

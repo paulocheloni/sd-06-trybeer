@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import OrdersCard from '../components/Orders/OrdersCard';
 import TrybeerContext from '../context/TrybeerContext';
-import TopBar from '../components/TopBar';
+import TopBar from '../components/SideBarClient/TopBar';
 import getOrders from '../services/ClientOrderService';
 
 import './Orders.css';
