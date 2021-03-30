@@ -3,6 +3,7 @@ import AdminSideBar from '../components/AdminSideBar';
 import { getOrders } from '../api/index';
 import OrderCardAdmin from '../components/OrderCardAdmin';
 import '../css/AdminOrders.css';
+import '../css/General.css';
 
 function AdminOrders() {
   const [orders, setOrders] = useState(false);

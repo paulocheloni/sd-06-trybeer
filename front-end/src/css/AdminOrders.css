@@ -9,10 +9,6 @@
   margin-left: 15%;
 }
 
-.larger-text {
-  font-size: x-large;
-}
-
 .admin-container-detail h1 {
   margin-top: 40px;
   text-align: center;
@@ -44,4 +40,8 @@
 
 .admin-container h1 {
   margin-left: 15%;
+}
+
+.admin-container-detail h1 {
+  margin-left: 0;
 }

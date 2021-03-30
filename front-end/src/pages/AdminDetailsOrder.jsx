@@ -4,6 +4,7 @@ import BeerContext from '../context/BeerContext';
 import ProductCardAdmin from '../components/ProductCardAdmin';
 import { getSalesProductsBySaleId } from '../api/index';
 import '../css/AdminOrders.css';
+import '../css/General.css';
 
 function AdminDetailsOrder() {
   const { saleDetail, setSaleDetail } = useContext(BeerContext);
