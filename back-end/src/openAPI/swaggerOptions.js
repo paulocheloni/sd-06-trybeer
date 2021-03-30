@@ -27,5 +27,5 @@ module.exports = swaggerOptions = {
       },
     ],
   },
-  apis: ['./src/routes/*.js'],
+  apis: ['./src/openAPI/*.js'],
 };
