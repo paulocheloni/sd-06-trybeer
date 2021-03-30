@@ -87,10 +87,12 @@ async function getproductsBySaleId(setProductsOrder, saleId) {
 async function getSalesProductsBySaleId(setSaleDetail, saleId) {
   const axios = buildAxiosHandler();
   const token = localStorage.getItem('token');
+  const status = 'Entregue';
   await axios.get(`/sales/products/${saleId}`, {
     headers: {
       authorization: token,
     } }).then((response) => setSaleDetail(response.data));
+  await axios.put(`/sales/status/${saleId}`, { status });
 }
 
 export {

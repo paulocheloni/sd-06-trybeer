@@ -1,46 +1,60 @@
 import React, { useContext } from 'react';
-// import { useHistory } from 'react-router-dom';
+import AdminSideBar from '../components/AdminSideBar';
 import BeerContext from '../context/BeerContext';
-// import CardClientDetailsOrder from '../components/ClientDetailsOrder/CardClientOrder';
-// import { tokenExists } from '../services/index';
 import ProductCardAdmin from '../components/ProductCardAdmin';
+import { getSalesProductsBySaleId } from '../api/index';
 
 function AdminDetailsOrder() {
-  // const history = useHistory();
-  const { saleDetail } = useContext(BeerContext);
+  const { saleDetail, setSaleDetail } = useContext(BeerContext);
   const { sale, products } = saleDetail;
-  // const total = sale.saleTotal.replace('.', ',');
 
-  // useEffect(() => {
-  //   tokenExists(history);
-  //   setProducts(productsOrder);
-  // }, [productsOrder, history]);
+  const handleClick = () => {
+    async function getSaleDetail() {
+      await getSalesProductsBySaleId(setSaleDetail, sale.saleId);
+    }
+    getSaleDetail();
+  };
 
   return (
-    <div>
-      <h1>Admin Detail</h1>
-      { !saleDetail ? <p>Loading</p> : (
+    <div className="admin-container">
+      <AdminSideBar />
+      <div className="admin-container-detail">
         <div>
-          <div>
-            <spam data-testid="order-number">{`Pedido ${sale.saleId}`}</spam>
-            <spam data-testid="order-status">{` - ${sale.saleStatus}`}</spam>
-          </div>
-          <section className="product-list">
-            { products && products
-              .map((prod, index) => (<ProductCardAdmin
-                key={ index }
-                product={ prod }
-                index={ index }
-              />
-              ))}
-          </section>
-          <p
-            data-testid="order-total-value"
-          >
-            {`Total: R$ ${sale.saleTotal.replace('.', ',')}`}
-          </p>
+          <h1>Admin Detail</h1>
         </div>
-      )}
+        { !saleDetail ? <p>Loading</p> : (
+          <div>
+            <div>
+              <spam data-testid="order-number">{`Pedido ${sale.saleId}`}</spam>
+              <spam data-testid="order-status">{` - ${sale.saleStatus}`}</spam>
+            </div>
+            <section className="orders-list">
+              { products && products
+                .map((prod, index) => (<ProductCardAdmin
+                  key={ index }
+                  product={ prod }
+                  index={ index }
+                />
+                ))}
+            </section>
+            <p
+              data-testid="order-total-value"
+            >
+              {`Total: R$ ${sale.saleTotal.replace('.', ',')}`}
+            </p>
+            { sale.saleStatus === 'Pendente' && (
+              <button
+                type="button"
+                onClick={ async () => handleClick() }
+                data-testid="mark-as-delivered-btn"
+                // className="button"
+              >
+                Marcar como entregue
+              </button>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

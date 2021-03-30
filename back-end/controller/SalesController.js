@@ -35,4 +35,13 @@ SalesController.post('/checkout', verifyLogin, async (req, res) => {
   res.status(OK).json({ saleId: insertId });
 });
 
+// Update
+SalesController.put('/status/:id', async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  await SalesService.updateStatus(id, status);  
+  res.status(OK).json({ Message: 'Updated status' });
+});
+
 module.exports = SalesController;

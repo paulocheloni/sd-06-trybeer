@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../css/ProductCard.css';
+// import '../css/ProductCardAdmin.css';
 
 function ProductCardAdmin(props) {
   const { product, index } = props;

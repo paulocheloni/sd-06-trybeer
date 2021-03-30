@@ -30,10 +30,17 @@ const storeSaleProducts = async (saleId, productId, quantity) => {
   return sales;
 };
 
+// Update status
+const updateStatus = async (id, status) => {
+  const sale = await salesModel.updateStatus(id, status);
+  return sale;
+};
+
 module.exports = {
   getAll,
   getByUserId,
   getSalesProductsBySaleId,
   storeRequest,
   storeSaleProducts,
+  updateStatus,
 };
