@@ -1,0 +1,19 @@
+.mainDiv {
+  padding: 20px;
+}
+
+.titleRegister {
+  text-align: center;
+}
+
+.inputRegister {
+  padding: 10px;
+  width: 90%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.buttonRegisterUser {
+  padding: 10px;
+  width: 98%;
+}

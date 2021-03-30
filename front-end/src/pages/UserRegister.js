@@ -8,6 +8,8 @@ import {
 import Input from '../components/Register/Input';
 import AlreadyRegisterdMessage from '../components/Register/AlreadyRegisterdMessage';
 
+import './UserRegister.css';
+
 function UserRegister() {
   const { newUser, setNewUser } = useContext(TrybeerContext);
   const [enableButton, setEnableButton] = useState(true);
@@ -15,9 +17,9 @@ function UserRegister() {
   const history = useHistory();
 
   return (
-    <div>
+    <div className='mainDiv'>
       <div>
-        <h1>User Register</h1>
+        <h1 className='titleRegister'>User Register</h1>
       </div>
       <form>
         <Input
@@ -26,18 +28,21 @@ function UserRegister() {
           type="text"
           callback={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
         />
+        <br />
         <Input
           title="Email"
           id="signup-email"
           type="email"
           callback={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
         />
+        <br />
         <Input
           title="Senha"
           id="signup-password"
           type="password"
           callback={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
         />
+        <br />
         <Input
           title="Quero vender"
           id="signup-seller"
@@ -45,6 +50,7 @@ function UserRegister() {
           callback={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
         />
         <button
+          className='buttonRegisterUser'
           disabled={ enableButton }
           type="button"
           data-testid="signup-btn"
