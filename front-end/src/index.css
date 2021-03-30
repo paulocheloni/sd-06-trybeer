@@ -72,7 +72,7 @@
     height: 350px;
     margin: 15px 15px;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-direction: column;
     align-items: center;
     color: black;
@@ -158,7 +158,6 @@
 
   .orders-container {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
     width: 80vh;
     padding-top: 130px;
@@ -183,15 +182,13 @@
 
   .salecard-card {
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
-    margin-left: 5vh;
-    width: 95%;
-    margin-bottom: 15px;
+    width: 45%;
     color: black;
-    padding: 14px 11px 0px 11px;
-    text-align: center;
-    border: 1px solid black;
+    padding: 20px 20px 0px 20px;
+    border: 3px solid black;
+    font-size: 1.5em;
+    margin: 15px;
   }
   
   .admin-orders-main {
@@ -223,6 +220,27 @@
     justify-content: space-between;
   }
 
+  .order-head-info {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .order-head-info p {
+    font-size: 2em;
+  }
+
+  .product-card-sale {
+    display: flex;
+    justify-content: space-between;
+    border: 3px solid black;
+    margin: 10px;
+  }
+
+  .product-card-sale p {
+    margin: 10px;
+    font-size: 1.5em;
+  }
+
   .checkout-container {
     display: flex;
     flex-direction: column;
@@ -244,8 +262,14 @@
 
   .total-checkout {
     text-align: right;
-    width: 95%;
+    margin-top: 10px;
     font-weight: bold;
+    font-size: 2em;
+  }
+
+  .product-name-size {
+    height: 20%;
+    vertical-align: middle;
   }
 
   .margin-top-big {
@@ -432,7 +456,7 @@
   
   .card {
     width: 180px;
-    height: 57%;
+    height: 45vh;
     margin: 5px 5px;
     display: flex;
     justify-content: center;

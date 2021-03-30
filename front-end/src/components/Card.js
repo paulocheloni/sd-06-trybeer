@@ -63,7 +63,7 @@ function Card(props) {
         src={ fixedUrl }
         alt="product"
       />
-      <h4 data-testid={ `${index}-product-name` }>{ name }</h4>
+      <h4 className="product-name-size" data-testid={ `${index}-product-name` }>{ name }</h4>
       <div className="button-value-card">
         <button
           className="btn-success btn-card"
