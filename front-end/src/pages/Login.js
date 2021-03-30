@@ -12,7 +12,7 @@ function Login() {
   const { user, setUser } = useContext(TrybeerContext);
   const [enableButton, setEnableButton] = useState(true);
   const history = useHistory();
-
+  localStorage.clear();
   return (
     <form>
       <div className="divLogin">

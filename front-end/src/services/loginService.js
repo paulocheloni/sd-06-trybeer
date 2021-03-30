@@ -31,6 +31,7 @@ export const routeByRole = (role, history) => {
 };
 
 function saveInLocalStorage(user) {
+  localStorage.clear();
   localStorage.setItem('user', JSON.stringify(user));
 }
 

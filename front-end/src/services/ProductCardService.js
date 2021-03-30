@@ -1,4 +1,4 @@
-// ProductCard Services
+// ProductCard Services - fix cypress requisito 5
 
 export const localStorageCart = JSON.parse(localStorage.getItem('cart'));
 
