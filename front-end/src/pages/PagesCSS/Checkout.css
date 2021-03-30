@@ -22,10 +22,11 @@
 
 .finalValue {
   color: black;
-  /* text-shadow: black 0.1em 0.1em 0.2em; */
-  margin-left: 15px;
+  margin-right: 25px;
   margin-top: 15px;
   font-size: 20px;
+  text-align: end;
+
 }
 
 .finalBuy {
