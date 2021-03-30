@@ -31,7 +31,6 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
   const { saleProducts, sale } = saleDetails;
 
   return (
-
     <div className="page-with-menu-admin">
       <Header title=".comCerveja" user="admin" />
       <div className="sale-details">
