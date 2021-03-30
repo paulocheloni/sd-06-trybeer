@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import ButtonCheckout from '../components/pageCheckout/ButtonCheckout';
 import FormCheckout from '../components/pageCheckout/FormCheckout';
 import ProductCard from '../components/pageCheckout/ProductCard';
+import MenuTop from '../components/menuClient/MenuTop';
 
 import CheckoutContext from '../context/CheckoutContext';
 import { checkoutUtils } from '../utils';
@@ -52,8 +53,8 @@ function Checkout() {
         sumTotal,
       } }
     >
-      <div className="main-content">
-        <h1 className="title" data-testid="top-title">Finalizar Pedido</h1>
+      <div className="">
+        <MenuTop name="Finalizar Pedido" />
         <div className="form-content">
           <ProductCard />
           <FormCheckout />

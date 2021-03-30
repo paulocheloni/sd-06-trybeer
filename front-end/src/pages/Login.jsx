@@ -45,7 +45,7 @@ function Login({ history }) {
 
   return (
     <LoginContext.Provider
-      value={ {
+      value={{
         dataUser: user,
         isDisabled: valid,
         handleIputs: handleChange,
@@ -53,7 +53,7 @@ function Login({ history }) {
         router: history,
         messageError: errMsg,
         displayError: displayErr,
-      } }
+      }}
     >
       <div className="main-content">
         <FormLogin />
