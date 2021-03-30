@@ -52,36 +52,38 @@ function Profile() {
         title="Meu perfil"
         data-testid="top-title"
       />
-      <LabeledInput
-        value={ profileName }
-        testId="profile-name-input"
-        label="Nome"
-        id="name"
-        name="name"
-        type="name"
-        onChange={ handleNameChange }
-        autoComplete="name"
-      />
-      <LabeledInput
-        value={ profileEmail }
-        testId="profile-email-input"
-        label="Email"
-        id="email-address"
-        name="email"
-        type="email"
-        autoComplete="email"
-        onChange={ profileEmail }
-        readOnly
-      />
-      <Button
-        onClick={ () => saveOnClick() }
-        isDisabled={ isDisabled }
-        bgColor="bg-green-600"
-        testId="profile-save-btn"
-      >
-        Salvar
-      </Button>
-      <span>{updatedMessage}</span>
+      <div className="sm:m-8 md:m-16 lg:m-24 xl:m-36 xl:m-48">
+        <LabeledInput
+          value={ profileName }
+          testId="profile-name-input"
+          label="Nome"
+          id="name"
+          name="name"
+          type="name"
+          onChange={ handleNameChange }
+          autoComplete="name"
+        />
+        <LabeledInput
+          value={ profileEmail }
+          testId="profile-email-input"
+          label="Email"
+          id="email-address"
+          name="email"
+          type="email"
+          autoComplete="email"
+          onChange={ profileEmail }
+          readOnly
+        />
+        <Button
+          onClick={ () => saveOnClick() }
+          isDisabled={ isDisabled }
+          bgColor="bg-green-600"
+          testId="profile-save-btn"
+        >
+          Salvar
+        </Button>
+        <span>{updatedMessage}</span>
+      </div>
     </div>
   );
 }

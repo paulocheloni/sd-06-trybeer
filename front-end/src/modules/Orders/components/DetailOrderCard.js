@@ -29,14 +29,14 @@ function DetailOrderCard(props) {
         >
           <div
             data-testid="order-number"
-            className="text-4xl"
+            className="sm:text-2xl md:texl-3xl lg:text-4xl"
           >
             Pedido
             {' '}
             {sale[0].sale_id}
           </div>
           <div
-            className="text-2xl"
+            className="sm:text-lg md:texl-xl lg:text-2xl"
             data-testid="order-date"
           >
             {formatDate}
@@ -47,8 +47,8 @@ function DetailOrderCard(props) {
           return (
             <div
               key={ index }
-              className="flex justify-between border-2
-        border-gray-800 text-2xl"
+              className="flex justify-between overflow-hidden
+                rounded-lg shadow-lg sm:text-xl md:texl-2xl lg:text-3xl"
             >
               <div
                 className="m-4"
@@ -73,7 +73,7 @@ function DetailOrderCard(props) {
           );
         })}
         <div
-          className="flex justify-end mt-3 text-2xl"
+          className="flex justify-end mt-3 sm:text-lg md:texl-xl lg:text-2xl"
           data-testid="order-total-value"
         >
           Total:

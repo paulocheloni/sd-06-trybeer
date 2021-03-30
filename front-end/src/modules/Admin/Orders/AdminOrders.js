@@ -19,11 +19,15 @@ function AdminOrders() {
   return (
     <div>
       <SideBarAdmin />
-      { sales.map((pedido, index) => (
-        <Link key={ pedido.id } to={ `/admin/orders/${pedido.id}` }>
-          <CardAdmin key={ pedido.id } pedido={ pedido } IndexId={ index } />
-        </Link>
-      ))}
+      <div className="container my-12 mx-auto px-4 md:px-12">
+        <div className="sm:flex sm:flex-wrap sm:items-center sm:justify-center">
+          { sales.map((pedido, index) => (
+            <Link key={ pedido.id } to={ `/admin/orders/${pedido.id}` }>
+              <CardAdmin key={ pedido.id } pedido={ pedido } IndexId={ index } />
+            </Link>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

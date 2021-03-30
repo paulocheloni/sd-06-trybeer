@@ -16,17 +16,24 @@ function AdminProfile() {
   }, [getUser, history]);
 
   return (
-    <div>
+    <div
+      className="text-center rounded-md shadow-sm
+    space-y-4 sm:text-xl md:texl-2xl lg:text-3xl"
+    >
       <SideBarAdmin />
-      <h1>Perfil</h1>
-      <p data-testid="profile-name">
-        Nome:
-        { getUser() && getUser().name }
-      </p>
-      <p data-testid="profile-email">
-        Email:
-        {getUser() && getUser().email}
-      </p>
+      <div className="p-10">
+        <h1 className="font-bold">Perfil</h1>
+        <p data-testid="profile-name" className="italic m-8">
+          Nome:
+          {' '}
+          { getUser() && getUser().name }
+        </p>
+        <p data-testid="profile-email" className="italic m-8">
+          Email:
+          {' '}
+          {getUser() && getUser().email}
+        </p>
+      </div>
     </div>
   );
 }

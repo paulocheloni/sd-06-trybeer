@@ -5,6 +5,8 @@ import SideBarAdmin from '../../../design-components/SideBarAdmin';
 import DetailAdminCard from './components/DetailAdminCard';
 import ButtonDelivered from './components/ButtonDelivered';
 
+const styling = 'text-sm md:text-base lg:text-lg text-green-500';
+
 function AdminOrderDetail() {
   const [loading, setLoading] = useState(true);
   const [sale, setSale] = useState({});
@@ -41,7 +43,7 @@ function AdminOrderDetail() {
           className="flex justify-center"
         >
           {(status === 'Entregue')
-            ? <span className="text-sm">Pedido Entregue!</span>
+            ? <span className={ styling }>Pedido Entregue!</span>
             : <ButtonDelivered handleClick={ handleClick } />}
         </div>
       </div>
