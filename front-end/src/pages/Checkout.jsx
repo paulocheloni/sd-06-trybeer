@@ -5,6 +5,8 @@ import TotalCheckout from '../components/Checkout/TotalCheckout';
 import FormsCheckout from '../components/Checkout/FormsCheckout';
 import CheckoutButton from '../components/Checkout/CheckoutButton';
 import { getItensStorage, calculateTotal } from '../services/index';
+import '../css/General.css';
+import '../css/Checkout.css';
 
 function Checkout() {
   const [items, setItems] = useState(Object.values(getItensStorage()));
@@ -14,17 +16,21 @@ function Checkout() {
   return (
     <div>
       <ControllerHeader />
-      { items.map((obj, index) => (<CheckoutCard
-        key={ index }
-        index={ index }
-        item={ obj }
-        items={ obj }
-        setTotal={ setTotal }
-        setItems={ setItems }
-      />)) }
-      <FormsCheckout setAddress={ setAddress } address={ address } />
-      <TotalCheckout total={ total } />
-      <CheckoutButton total={ total } address={ address } items={ items } />
+      <section className="list">
+        { items.map((obj, index) => (<CheckoutCard
+          key={ index }
+          index={ index }
+          item={ obj }
+          items={ obj }
+          setTotal={ setTotal }
+          setItems={ setItems }
+        />)) }
+      </section>
+      <section className="checkout-content">
+        <FormsCheckout setAddress={ setAddress } address={ address } />
+        <TotalCheckout total={ total } />
+        <CheckoutButton total={ total } address={ address } items={ items } />
+      </section>
     </div>
   );
 }

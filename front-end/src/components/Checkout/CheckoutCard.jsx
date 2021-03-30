@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { deleteItemCart } from '../../services/index';
+import '../../css/CheckoutCard.css';
 
 function CheckoutCard(props) {
   const { item, index, setTotal, setItems } = props;
@@ -12,16 +13,19 @@ function CheckoutCard(props) {
       <p data-testid={ `${index}-product-qtd-input` }>
         { `Quantidade: ${product.total}` }
       </p>
-      <p data-testid={ `${index}-product-name` }>{product.name}</p>
-      <p data-testid={ `${index}-product-unit-price` }>
-        {`(R$ ${product.price.replace('.', ',')} un)`}
-      </p>
+      <div>
+        <p data-testid={ `${index}-product-name` }>{product.name}</p>
+        <p data-testid={ `${index}-product-unit-price` }>
+          {`(R$ ${product.price.replace('.', ',')} un)`}
+        </p>
+      </div>
       <p data-testid={ `${index}-product-total-value` }>
         R$
         {` ${(parseFloat(product.price) * product.total).toFixed(2).replace('.', ',')}`}
       </p>
       <button
         data-testid={ `${index}-removal-button` }
+        className="removal-button"
         type="button"
         onClick={ () => deleteItemCart(params) }
       >

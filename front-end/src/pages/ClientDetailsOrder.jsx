@@ -4,6 +4,8 @@ import BeerContext from '../context/BeerContext';
 import ControllerHeader from '../components/Header-SideBar/ControllerHeader';
 import CardClientDetailsOrder from '../components/ClientDetailsOrder/CardClientOrder';
 import { tokenExists } from '../services/index';
+import '../css/General.css';
+import '../css/ClientDetailsOrder.css';
 
 function ClientDetailsOrder() {
   const history = useHistory();
@@ -23,13 +25,17 @@ function ClientDetailsOrder() {
   return (
     <div>
       <ControllerHeader />
-      <p data-testid="order-number">{`Pedido ${saleIdOrder}`}</p>
-      <p data-testid="order-date">{`Data: ${dateOrder}`}</p>
-      <p data-testid="order-total-value">{`Total: R$ ${totalPriceOrder}`}</p>
-      { products && products
-        .map((obj, index) => (
-          <CardClientDetailsOrder key={ index } product={ obj } index={ index } />
-        ))}
+      <section className="client-order-details-container">
+        <p data-testid="order-number">{`Pedido ${saleIdOrder}`}</p>
+        <p data-testid="order-date">{`Data: ${dateOrder}`}</p>
+        <p data-testid="order-total-value">{`Total: R$ ${totalPriceOrder}`}</p>
+        <section className="list">
+          { products && products
+            .map((obj, index) => (
+              <CardClientDetailsOrder key={ index } product={ obj } index={ index } />
+            ))}
+        </section>
+      </section>
     </div>
   );
 }

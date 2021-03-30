@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import '../css/ShowCart.css';
 
 export default function ShowCart(props) {
   const [activeBtn, setActiveBtn] = useState(false);
@@ -18,6 +19,7 @@ export default function ShowCart(props) {
     <div>
       <Link to="/checkout">
         <button
+          className="checkout-button"
           data-testid="checkout-bottom-btn"
           type="button"
           disabled={ !activeBtn }

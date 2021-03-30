@@ -1,13 +1,8 @@
 .admin-container {
-  background-color: #047575;
-  color: white;
+  color: #004370;
   display: flex;
   flex-flow: column;
   height: 100vh;
-}
-
-.admin-container > div {
-  display: flex;
 }
 
 .admin-container-detail {
@@ -22,7 +17,9 @@
   width: 85%;
 }
 
-.orders-list {
+.admin-orders-list {
+  display: flex;
+  flex-flow: row wrap;
   margin-left: 15%;
-  width: 75%;
+  width: 85%;
 }

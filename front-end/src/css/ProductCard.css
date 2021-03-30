@@ -26,6 +26,10 @@
   width: 30%;
 }
 
+.product-info {
+  color: #004370;
+}
+
 .product-info p {
   margin: 10px;
 }

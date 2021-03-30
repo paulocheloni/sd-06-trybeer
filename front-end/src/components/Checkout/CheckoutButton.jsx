@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { concludeOrder, tokenExists } from '../../services/index';
+import '../../css/CheckoutButton.css';
 
 function CheckoutButton(props) {
   const history = useHistory();
@@ -39,6 +40,7 @@ function CheckoutButton(props) {
     <div>
       <button
         data-testid="checkout-finish-btn"
+        className="checkout-finish-button"
         type="button"
         disabled={ !activeBtn }
         onClick={ () => concludeOrder(total, address, setShowSucessMessage, items) }
