@@ -36,65 +36,49 @@ function Login() {
   };
 
   return (
-    <section className="login-form Form">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-7 px-4 pt-5">
-            <h1>TryBeer</h1>
-            <h4>Encontre aqui a sua cerveja!</h4>
-            <form className="formContainer" onSubmit={ handleSignUp }>
-              <div className="form-row">
-                <div className="col-lg-7">
-                  <input
-                    type="text"
-                    placeholder="E-mail"
-                    name="email"
-                    value={ email }
-                    data-testid="email-input"
-                    className="form-control mt-0 y-3 p-4"
-                    onChange={ (e) => setEmail(e.target.value) }
-                  />
-                </div>
-              </div>
-              <div className="form-row">
-                <div className="col-lg-7">
-                  <input
-                    type="password"
-                    placeholder="Senha"
-                    name="password"
-                    value={ password }
-                    data-testid="password-input"
-                    className="form-control my-3 p-4"
-                    onChange={ (e) => setPassword(e.target.value) }
-                  />
-                </div>
-              </div>
-              <div className="form-row">
-                <div className="col-lg-7">
-                  <button
-                    type="submit"
-                    data-testid="signin-btn"
-                    disabled={ isDisabled }
-                    className="btn1 mt-3 mb-0"
-                  >
-                    Entrar
-                  </button>
-                  <button
-                    type="button"
-                    data-testid="no-account-btn"
-                    onClick={ handleRegister }
-                    className="btn1 mt-3 mb-5"
-                  >
-                    Ainda não tenho conta
-                  </button>
-                </div>
-              </div>
-              <p>
-                { isInvalidUser ? 'Invalid entries. Try again.' : '' }
-              </p>
-            </form>
-          </div>
-        </div>
+    <section className="my-container">
+      <div className="my-row">
+        <h1>TryBeer</h1>
+        <h4>Encontre aqui a sua cerveja!</h4>
+        <form onSubmit={ handleSignUp }>
+          <input
+            type="text"
+            placeholder="E-mail"
+            name="email"
+            value={email}
+            data-testid="email-input"
+            className="form-control mt-0 y-3 p-4"
+            onChange={ (e) => setEmail(e.target.value) }
+          />
+          <input
+            type="password"
+            placeholder="Senha"
+            name="password"
+            value={password}
+            data-testid="password-input"
+            className="form-control my-3 p-4"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            type="submit"
+            data-testid="signin-btn"
+            disabled={ isDisabled }
+            className="btn1 mt-3 mb-0"
+          >
+            Entrar
+                    </button>
+          <button
+            type="button"
+            data-testid="no-account-btn"
+            onClick={ handleRegister }
+            className="btn1 mt-3 mb-5"
+          >
+            Ainda não tenho conta
+                    </button>
+          <p>
+            { isInvalidUser ? 'Invalid entries. Try again.' : '' }
+          </p>
+        </form>
       </div>
     </section>
   );

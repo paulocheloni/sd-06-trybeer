@@ -33,57 +33,61 @@ function OrderDetails(props) {
   }, []);
 
   return (
-    <div className="container-detail">
-      <div className="order-card-detail-container panel-orders-detail">
-        <div className="title-card">
-          <div data-testid="order-number" className="title">
-            { `Pedido ${state.id}` }
+    <div>
+      <TopMenu titleMenu="Detalhes de Pedido" />
+      <div className="container-detail">
+        <div className="order-card-detail-container panel-orders-detail">
+          <div className="title-card">
+            <div data-testid="order-number" className="title">
+              { `Pedido ${state.id}` }
+            </div>
+            <div data-testid="order-date">
+              { formatedDate(state.saleDate) }
+            </div>
           </div>
-          <div data-testid="order-date">
-            { formatedDate(state.saleDate) }
-          </div>
-        </div>
-        {
-          hasState && (
-            <div>
-              <TopMenu titleMenu="Detalhes de Pedido" />
-              <div className="content-panel">
-                <div>
-                  {
-                    orderCart.map(({ quantity, name, price }, index) => (
-                      <div
-                        key={ index }
-                        className="order-card-container"
-                        data-testid={ `${index}-order-card-container` }
-                      >
-                        <div data-testid={ `${index}-product-qtd` }>
-                          {`${quantity}` }
-                        </div>
-                        <div data-testid={ `${index}-product-name` }>
-                          {`${name}` }
-                        </div>
+          {
+            hasState && (
+              <div>
+                <div className="content-panel">
+                  <div>
+                    {
+                      orderCart.map(({ quantity, name, price }, index) => (
                         <div
-                          data-testid={ `${index}-order-total-value` }
+                          key={ index }
+                          className="order-card-container"
+                          data-testid={ `${index}-order-card-container` }
                         >
-                          {`${formatedPrice(price)}` }
+                          <div data-testid={ `${index}-product-qtd` } className="quantity">
+                            {`${quantity}` }
+                          </div>
+                          <div data-testid={ `${index}-product-name` } className="name">
+                            {`${name}` }
+                          </div>
+                          <div
+                            data-testid={ `${index}-order-total-value` }
+                            className="price"
+                          >
+                            {`${formatedPrice(price)}` }
+                          </div>
+                          <div
+                            data-testid={ `${index}-product-total-value` }
+                            className="priceTotal"
+                          >
+                            { `
+                              ${formatedPrice((price * quantity).toFixed(2))}` }
+                          </div>
                         </div>
-                        <div
-                          data-testid={ `${index}-product-total-value` }
-                        >
-                          { `
-                            ${formatedPrice((price * quantity).toFixed(2))}` }
-                        </div>
-                      </div>
-                    ))
-                  }
-                </div>
-                <div data-testid="order-total-value" className="order-total-value">
-                  { formatedPrice(state.totalPrice) }
+                      ))
+                    }
+                  </div>
+                  <div data-testid="order-total-value" className="order-total-value">
+                    { formatedPrice(state.totalPrice) }
+                  </div>
                 </div>
               </div>
-            </div>
-          )
-        }
+            )
+          }
+        </div>
       </div>
     </div>
   );

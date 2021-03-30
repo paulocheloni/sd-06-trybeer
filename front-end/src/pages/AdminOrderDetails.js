@@ -74,19 +74,21 @@ function AdminOrderDetails(props) {
                           className="order-card-container"
                           data-testid={ `${index}-order-card-container` }
                         >
-                          <div data-testid={ `${index}-product-qtd` }>
+                          <div data-testid={ `${index}-product-qtd` } className="quantity">
                             {`${quantity}` }
                           </div>
-                          <div data-testid={ `${index}-product-name` }>
+                          <div data-testid={ `${index}-product-name` } className="name">
                             {`${name}` }
                           </div>
                           <div
                             data-testid={ `${index}-order-unit-price` }
+                            className="price"
                           >
                             {`(${formatedPrice(price)}) un` }
                           </div>
                           <div
                             data-testid={ `${index}-product-total-value` }
+                            className="priceTotal"
                           >
                             { `${formatedPrice((price * quantity).toFixed(2))}` }
                           </div>
@@ -115,7 +117,7 @@ function AdminOrderDetails(props) {
                   type="button"
                   data-testid="mark-as-delivered-btn"
                   onClick={ () => markAsDone('Entregue') }
-                  className="btn1 saveButton"
+                  className="btn saveButton btn-scs"
                 >
                   Marcar como entregue
                 </button>

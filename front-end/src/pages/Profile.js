@@ -45,28 +45,26 @@ function Profile(props) {
       <TopMenu
         titleMenu="Meu perfil"
       />
-      <form method="put" className="container">
+      <form method="put" className="my-container-profile">
         <div className="panel-profile">
-          <div className="form-row">
-            <label htmlFor="name">
-              Nome
-              <div className="col-lg-20">
-                <input
-                  data-testid="profile-name-input"
-                  type="text"
-                  name="name"
-                  placeholder="Nome"
-                  id="name"
-                  onChange={ onChangeName }
-                  className="form-control mt-0 y-3 p-4"
-                />
-              </div>
-            </label>
-          </div>
-          <div className="form-row">
+          <label htmlFor="name" className="col-lg-20">
+            Nome
+            <div className="">
+              <input
+                data-testid="profile-name-input"
+                type="text"
+                name="name"
+                placeholder="Nome"
+                id="name"
+                onChange={ onChangeName }
+                className="form-control mt-0 y-3 p-4"
+              />
+            </div>
+          </label>
+          <div className="">
             <label htmlFor="email">
               Email
-              <div className="col-lg-20">
+              <div className="">
                 <input
                   value={ email }
                   readOnly="readonly"
