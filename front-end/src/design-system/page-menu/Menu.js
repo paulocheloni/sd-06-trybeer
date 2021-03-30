@@ -85,7 +85,14 @@ function Menu(props) {
           md:bg-transparent absolute z-10 h-full md:relative md:flex
           md:justify-end md:px-2` }
       >
-        <div className={ `${classToTest} h-1 w-1 ${menuStatus ? '' : 'hidden'}` } />
+        <div
+          style={ {
+            visibility: menuStatus ? 'visible' : 'hidden',
+            width: '100px',
+            height: '100px',
+          } }
+          className={ `${classToTest} h-1 w-1 ${menuStatus ? '' : 'hidden'}` }
+        />
         { links.map((link, index) => (
           <Link
             key={ index }

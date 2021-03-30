@@ -18,9 +18,14 @@ function DetailedOrderCard(props) {
   let orderStatus = '';
   if (order && order.createdAt) {
     const { status, createdAt } = order;
-    date = new Date(createdAt).toLocaleDateString();
-    date = date.split('/');
-    date = `${date[0]}/${date[1]}`;
+    // date = new Date(createdAt).toLocaleDateString();
+    // date = date.split('/');
+    // date = `${date[0]}/${date[1]}`;
+
+    date = createdAt;
+    date = date.split('T');
+    date = date[0].split('-');
+    date = `${date[2]}/${date[1]}`;
     orderStatus = status;
   }
 
