@@ -46,3 +46,11 @@
   margin-top: 10px;
   align-self: flex-end;
 }
+
+.status {
+  color: #e9925c;
+}
+
+.status-entregue {
+  color: green;
+}

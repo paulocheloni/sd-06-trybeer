@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import ParseCurrency from '../utils/parseCurrencyToBRL';
@@ -13,6 +13,21 @@ function OrderCardAdm({ orderInfo, index }) {
   } = orderInfo;
 
   const history = useHistory();
+
+  useEffect(() => {
+    const testeStatus = document.getElementsByClassName('status');
+    const test = [testeStatus];
+    const tes = [test[0]];
+
+    for (const newClass of tes[0]) {
+      const nameStatus = newClass.innerHTML;
+      if (nameStatus === 'Entregue') {
+        newClass.className = 'status-entregue';
+      } else {
+        newClass.className = 'status';
+      }
+    }
+  });
 
   return (
     <button
@@ -36,7 +51,7 @@ function OrderCardAdm({ orderInfo, index }) {
         >
           {ParseCurrency(totalPrice)}
         </div>
-        <div data-testid={ `${index}-order-status` }>{status}</div>
+        <div data-testid={ `${index}-order-status` } className="status">{status}</div>
       </div>
     </button>
 

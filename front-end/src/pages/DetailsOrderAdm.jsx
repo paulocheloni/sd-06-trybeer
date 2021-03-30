@@ -29,7 +29,12 @@ function DetailsOrderAdm({ match }) {
     const statusOrder = orderDetails.map((order) => order.status)[0];
     if (statusOrder === 'Entregue') {
       setStatus('Entregue');
+    }  
+    const testeStatus = document.querySelector(".status");
+    if(testeStatus .innerHTML === 'Entregue'){
+       testeStatus.className = 'status-entregue';
     }
+    
   });
 
   return !orderDetails ? <h1>Loading...</h1> : (
@@ -41,7 +46,7 @@ function DetailsOrderAdm({ match }) {
             {`Pedido ${id}`}
           </span>
           <span>-</span>
-          <span data-testid="order-status">
+          <span data-testid="order-status" className="status">
             {status}
           </span>
         </div>
