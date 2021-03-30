@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  border: 1px solid black;
+  border: 2px groove #6665DD;
+  border-radius: 5px;
   margin: 3%; 
   display: inline-block;
   padding: 2%;
