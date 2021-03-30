@@ -14,22 +14,25 @@ function SaleCard(props) {
   return (
     <div className="salecard-card">
       <div
-        className=""
         data-testid={ `${index}-order-card-container` }
         onClick={ () => history.push(`/orders/${saleNumber}`) }
         aria-hidden="true"
       >
+        <div className="order-side-info">
+          <p
+            className="bold-font"
+            data-testid={ `${index}-order-number` }
+          >
+            { `Pedido ${saleNumber}` }
+          </p>
+          <p
+            data-testid={ `${index}-order-date` }
+          >
+            { correctDate }
+          </p>
+        </div>
         <p
-          data-testid={ `${index}-order-number` }
-        >
-          { `Pedido ${saleNumber}` }
-        </p>
-        <p
-          data-testid={ `${index}-order-date` }
-        >
-          { correctDate }
-        </p>
-        <p
+          className="bold-font"
           data-testid={ `${index}-order-total-value` }
         >
           { `R$ ${value.replace('.', ',')}` }

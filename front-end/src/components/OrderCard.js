@@ -15,12 +15,20 @@ function OrderCard(props) {
       >
         <p className="bold-font" data-testid={ `${index}-order-number` }>{ `Pedido ${saleId}` }</p>
         <p data-testid={ `${index}-order-address` }>{ `${street}, ${streetNR}` }</p>
-        <p
-          data-testid={ `${index}-order-total-value` }
-        >
-          { `R$ ${totalValue.replace('.', ',')}` }
-        </p>
-        <p className="bold-font" data-testid={ `${index}-order-status` }>{ status }</p>
+        <div className="order-side-info">
+          <p
+            data-testid={ `${index}-order-total-value` }
+            className="bold-font"
+          >
+            { `R$ ${totalValue.replace('.', ',')}` }
+          </p>
+          <p 
+            className={ status === 'Entregue' ? 'bold-font order-done' : 'bold-font order-notdone' }
+            data-testid={ `${index}-order-status` }
+          >
+            { status }
+          </p>
+        </div>
       </div>
     </div>
   );

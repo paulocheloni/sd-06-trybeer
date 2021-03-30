@@ -36,6 +36,7 @@ function ProductDetails({ match }) {
   const getSale = async () => {
     const result = await getSaleByID(id);
     setSale(result);
+    console.log(result);
   };
 
   useEffect(() => {
@@ -48,8 +49,10 @@ function ProductDetails({ match }) {
     <div>
       <MenuTop title="Detalhes de Pedido" />
       <div className="checkout-container">
-      <p className="order-date" data-testid="order-date">{date}</p>
-      <p className="order-number" data-testid="order-number">{`Pedido ${id}`}</p>
+        <div className="order-head-info">
+          <p className="order-number" data-testid="order-number">{`Pedido ${id}`}</p>
+          <p className="order-date" data-testid="order-date">{date}</p>
+        </div>
       { sale.map((prod, index) => (
         <DetailCard
           key={ index }

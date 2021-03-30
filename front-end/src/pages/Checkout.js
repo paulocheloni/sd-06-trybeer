@@ -98,6 +98,7 @@ function Checkout() {
               price={ item.price }
               unitPriceID="product-unit-price"
               qtdID="product-qtd-input"
+              removeButton={ true }
             />))}
         </div>
         <p

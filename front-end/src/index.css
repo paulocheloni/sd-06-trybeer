@@ -61,23 +61,27 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    min-width: 400px;
+    max-width: 70%;
     height: 100%;
-    padding: 15vh 30vh 20vh 30vh;
-  
+    /* padding: 15vh 30vh 20vh 30vh; */
+    margin: 10% 10%;
   }
   
   .card {
-    width: 180px;
-    height: 70%;
+    width: 220px;
+    height: 350px;
     margin: 15px 15px;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: row;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
     color: black;
     padding: 15px 11px 11px 11px;
     text-align: center;
+  }
+
+  .button-value-card {
+    display: flex;
   }
   
   .top-bar {
@@ -154,7 +158,7 @@
 
   .orders-container {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     width: 80vh;
     padding-top: 130px;
     margin: auto;
@@ -166,35 +170,75 @@
     margin-left: 5vh;
     width: 95%;
     margin: 15px 15px;
-    display: flex;
     color: black;
     padding: 14px 11px 0px 11px;
     text-align: center;
     border: 1px solid black;
   }
 
+  .product-name {
+    width: 25%;
+  }
+
   .salecard-card {
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
-    margin-left: 5vh;
-    width: 95%;
-    margin-bottom: 15px;
+    width: 45%;
     color: black;
-    padding: 14px 11px 0px 11px;
-    text-align: center;
-    border: 1px solid black;
+    padding: 20px 20px 0px 20px;
+    border: 3px solid black;
+    font-size: 1.5em;
+    margin: 15px;
+  }
+  
+  .admin-orders-main {
+    margin-left: 20%;
+    display: flex;
+    flex-wrap: wrap;
   }
   
   .order-card {
-    margin-left: 20%;
-    min-width: 40%;
-    width: 60%;
-    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
     color: black;
-    padding: 14px 11px 0px 11px;
-    text-align: center;
-    border: 1px solid black;
+    padding: 20px 20px 0px 20px;
+    border: 3px solid black;
+    font-size: 1.5em;
+  }
+
+  .order-done {
+    color: green;
+  }
+
+  .order-notdone {
+    color: red;
+  }
+
+  .order-side-info {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .order-head-info {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .order-head-info p {
+    font-size: 2em;
+  }
+
+  .product-card-sale {
+    display: flex;
+    justify-content: space-between;
+    border: 3px solid black;
+    margin: 10px;
+  }
+
+  .product-card-sale p {
+    margin: 10px;
+    font-size: 1.5em;
   }
 
   .checkout-container {
@@ -205,18 +249,27 @@
     margin: auto;
   }
 
-  .order-details-card-admin{
-    display: flex;
-    flex-direction: column;
+  .order-details-card-admin {
     width: 50%;
     padding-top: 30px;
-    margin: auto;
+  }
+
+  .order-details-card-admin-2 {
+    margin-left: 40vh;
+    width: 50%;
+    padding-top: 30px;
   }
 
   .total-checkout {
     text-align: right;
-    width: 95%;
+    margin-top: 10px;
     font-weight: bold;
+    font-size: 2em;
+  }
+
+  .product-name-size {
+    height: 20%;
+    vertical-align: middle;
   }
 
   .margin-top-big {
@@ -230,8 +283,12 @@
   .order-number {
     text-align: left;
     font-size: 20px;
-    margin-top: -10px;
+    margin-left: 15px;
     font-weight: bold;
+  }
+
+  .order-details-title {
+    display: flex;
   }
 
   .order-date {
@@ -243,6 +300,10 @@
   .checkout-form {
     width: 95%;
     margin: auto;
+  }
+
+  .checkout-form input {
+    margin: 10px;
   }
 
   .street-input {
@@ -395,7 +456,7 @@
   
   .card {
     width: 180px;
-    height: 57%;
+    height: 45vh;
     margin: 5px 5px;
     display: flex;
     justify-content: center;
