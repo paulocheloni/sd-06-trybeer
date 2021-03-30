@@ -13,8 +13,8 @@ function AdminOrders() {
 
   return (
     <div className="admin-container">
-      <h1>Pedidos</h1>
       <div>
+        <h1>Pedidos</h1>
         <AdminSideBar />
         <section className="admin-orders-list">
           { orders && orders.map((order, index) => (<OrderCardAdmin
