@@ -1,12 +1,15 @@
 .side-menu-container {
   display: flex;
   flex-direction: column;
-  width: 100px;
+  width: 250px;
   justify-content: space-between;
-  height: 600px;
+  height: 560px;
   border: 1px solid black;
 }
 
 .botao {
   margin-top: 30px;
+  width: 250px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }

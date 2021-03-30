@@ -1,0 +1,71 @@
+.mainDivProductCard {
+  /* display: flex; */
+  /* flex-direction: row; */
+  border: 5px solid purple;
+  height: 240px;
+  /* flex-direction: row; */
+  /* flex-direction: column; */
+  /* width: 50%; */
+}
+
+.productCard {
+  /* margin: auto; */
+  /* border: 1px solid black; */
+  border: 2px solid yellow;
+  height: inherit;
+  position: relative;
+  /* flex-direction: row; */
+  /* flex-flow: row wrap; */
+  /* flex: 0 1 calc(25% - 1em); */
+}
+
+.imageCard {
+  display: block;
+  margin: auto;
+  height: 50%;
+  /* position: absolute; */
+  margin-top: 5px;
+  /* margin-left: 30px; */
+  border-radius: 15px;
+}
+
+.divBotoesMaisMenos {
+  /* align-content: center; */
+  position: absolute;
+  bottom: 0;
+  margin-left: 8px;
+  border: 1px solid cornflowerblue;
+  margin-bottom: 10px;
+}
+
+.botoesMainMenos {
+  border: solid yellow;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 5pxpx;
+  font-size: 20px;
+}
+
+.texto {
+  font-size: 18px;
+  margin: 0px;
+  /* margin: auto; */
+  text-align: center;
+}
+
+.textoMaisMenos {
+  font-size: 20px;
+  margin: 10px;
+}
+
+
+/* @media screen and (min-width: 400px) {
+  .productCard {
+    border: 5px solid orange;
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 calc(25% - 1em);
+    height: 30%;
+    width: 80vh;
+  }
+} */
