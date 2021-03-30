@@ -349,7 +349,8 @@ code {
  * https://github.com/mozdevs/cssremedy/issues/14
  */
 
-img {
+img,
+svg {
   display: block;
   vertical-align: middle;
 }
@@ -400,6 +401,12 @@ img {
   }
 }
 
+.space-x-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.75rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
@@ -435,6 +442,11 @@ img {
   background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
 }
 
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+}
+
 .bg-gray-50 {
   --tw-bg-opacity: 1;
   background-color: rgba(249, 250, 251, var(--tw-bg-opacity));
@@ -463,6 +475,16 @@ img {
 .bg-yellow-200 {
   --tw-bg-opacity: 1;
   background-color: rgba(253, 230, 138, var(--tw-bg-opacity));
+}
+
+.bg-yellow-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(252, 211, 77, var(--tw-bg-opacity));
+}
+
+.bg-yellow-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(217, 119, 6, var(--tw-bg-opacity));
 }
 
 .bg-green-300 {
@@ -514,6 +536,10 @@ img {
 
 .rounded-xl {
   border-radius: 0.75rem;
+}
+
+.rounded-full {
+  border-radius: 9999px;
 }
 
 .border-2 {
@@ -586,6 +612,10 @@ img {
 
 .font-bold {
   font-weight: 700;
+}
+
+.h-5 {
+  height: 1.25rem;
 }
 
 .h-12 {
@@ -693,6 +723,10 @@ img {
   margin-top: 0.75rem;
 }
 
+.mr-3 {
+  margin-right: 0.75rem;
+}
+
 .mb-3 {
   margin-bottom: 0.75rem;
 }
@@ -740,6 +774,10 @@ img {
 
 .p-4 {
   padding: 1rem;
+}
+
+.p-5 {
+  padding: 1.25rem;
 }
 
 .p-10 {
@@ -908,6 +946,10 @@ img {
   visibility: hidden;
 }
 
+.w-5 {
+  width: 1.25rem;
+}
+
 .w-16 {
   width: 4rem;
 }
@@ -985,6 +1027,14 @@ img {
     transform: none;
     animation-timing-function: cubic-bezier(0,0,0.2,1);
   }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
 }
 
 /* 

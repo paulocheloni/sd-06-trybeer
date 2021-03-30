@@ -4,9 +4,11 @@ import api from '../../axios/api';
 import Button from '../../design-components/Button';
 import RegisterInputs from './components/RegisterInputs';
 import ContextBeer from '../../context/ContextBeer';
+import Loader from '../../design-components/Loader';
 import registerValidation from '../../utils/registerValidation';
 
 function Register() {
+  const [loading, setLoading] = useState(true);
   const STATUS_CONFLICT = 409;
   const history = useHistory();
   const [duplicated, setDuplicated] = useState('');
@@ -25,6 +27,7 @@ function Register() {
   const isChecked = () => (document.getElementById('wannasell').checked);
 
   const signUpOnClick = () => {
+    setLoading(true);
     const whatSTheRole = isChecked() ? 'administrator' : 'client';
     const token = api
       .post('/register', {
@@ -34,6 +37,7 @@ function Register() {
         role: whatSTheRole })
       .then((response) => {
         localStorage.setItem('user', JSON.stringify(response.data));
+        setLoading(false);
         if (response.data.role === 'administrator') history.push('/admin/orders');
         if (response.data.role === 'client') history.push('/products');
       })
@@ -46,39 +50,40 @@ function Register() {
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4
+    loading ? <Loader /> : (
+      <div
+        className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4
       sm:px-6 lg:px-8"
-    >
-      <div className="max-w-md w-full space-y-8">
-        <form className="mt-8 space-y-6" action="#" method="POST">
-          <input type="hidden" name="remember" value="true" />
-          <RegisterInputs />
-          <Button
-            onClick={ () => signUpOnClick() }
-            isDisabled={ isDisabled }
-            bgColor="bg-green-600"
-            testId="signup-btn"
-          >
-            Cadastrar
-          </Button>
-          {duplicated && <p className="my-10">{duplicated}</p>}
-          <label htmlFor="wannasell">
-            <input
-              className="mt-5"
-              name="wannasell"
-              type="checkbox"
-              data-testid="signup-seller"
-              id="wannasell"
-              label="Quero vender"
-              value="wannasell"
-            />
-            Quero vender
-          </label>
-        </form>
+      >
+        <div className="max-w-md w-full space-y-8">
+          <form className="mt-8 space-y-6" action="#" method="POST">
+            <input type="hidden" name="remember" value="true" />
+            <RegisterInputs />
+            <Button
+              onClick={ () => signUpOnClick() }
+              isDisabled={ isDisabled }
+              bgColor="bg-green-600"
+              testId="signup-btn"
+            >
+              Cadastrar
+            </Button>
+            {duplicated && <p className="my-10">{duplicated}</p>}
+            <label htmlFor="wannasell">
+              <input
+                className="mt-5"
+                name="wannasell"
+                type="checkbox"
+                data-testid="signup-seller"
+                id="wannasell"
+                label="Quero vender"
+                value="wannasell"
+              />
+              Quero vender
+            </label>
+          </form>
+        </div>
       </div>
-    </div>
-  );
+    ));
 }
 
 export default Register;

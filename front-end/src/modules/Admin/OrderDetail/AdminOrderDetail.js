@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import SideBarAdmin from '../../../design-components/SideBarAdmin';
+import Loader from '../../../design-components/Loader';
 import DetailAdminCard from './components/DetailAdminCard';
 import ButtonDelivered from './components/ButtonDelivered';
 
@@ -35,7 +36,7 @@ function AdminOrderDetail() {
   };
 
   return (
-    loading ? <p>Loading....</p> : (
+    loading ? <Loader /> : (
       <div>
         <SideBarAdmin />
         <DetailAdminCard sale={ sale } status={ status } />

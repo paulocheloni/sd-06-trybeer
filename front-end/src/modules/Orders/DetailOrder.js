@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import api from '../../axios/api';
 import TopBar from '../../design-components/TopBar';
+import Loader from '../../design-components/Loader';
 import DetailOrderCard from './components/DetailOrderCard';
 
 function DetailOrder() {
@@ -26,7 +27,7 @@ function DetailOrder() {
   }, [id]);
 
   return (
-    loading ? <p>Loading....</p> : (
+    loading ? <Loader /> : (
       <div>
         <TopBar title="Detalhes do Pedido" />
         <DetailOrderCard sale={ sale } />

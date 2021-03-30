@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import api from '../../axios/api';
 import TopBar from '../../design-components/TopBar';
+import Loader from '../../design-components/Loader';
 import CardClient from './components/CardClient';
 
 function Orders() {
@@ -26,7 +27,7 @@ function Orders() {
   }, []);
 
   return (
-    loading ? <p>Loading....</p> : (
+    loading ? <Loader /> : (
       <div>
         <TopBar title="Meus Pedidos" />
         <div className="container my-12 mx-auto px-4 md:px-12">
