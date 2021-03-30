@@ -28,7 +28,7 @@ function AdminOrdersDetails(props) {
             : (
               <div className="divDetails">
                 <h2 data-testid="order-number">{`Pedido ${id} - `}</h2>
-                <h2 data-testid="order-status" className={orders[0].status}>
+                <h2 data-testid="order-status" className={ orders[0].status }>
                   {orders[0].status}
                 </h2>
                 {orders.map((order, index) => (
