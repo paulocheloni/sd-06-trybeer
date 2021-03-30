@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import SideBarAdmin from '../components/SideBarAdmin';
+import SideBarAdmin from '../components/SideBarAdmin/SideBarAdmin';
 import getLocal from '../services/AdminProfileService';
 
 import './Admin.css';

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import CheckoutItem from '../components/Checkout/CheckoutItem';
 import Address from '../components/Checkout/Address';
 import TrybeerContext from '../context/TrybeerContext';
-import TopBar from '../components/TopBar';
+import TopBar from '../components/SideBarClient/TopBar';
 import { checkoutOrder } from '../services/checkoutService';
 
 import './Checkout.css';
