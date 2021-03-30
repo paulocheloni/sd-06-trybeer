@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import OrdersCard from '../components/Orders/OrdersCard';
 import TrybeerContext from '../context/TrybeerContext';
 import TopBar from '../components/TopBar';
 import getOrders from '../services/ClientOrderService';
+
+import './Orders.css';
 
 function Orders() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -21,18 +23,28 @@ function Orders() {
     fetchOrders();
   }, []);
 
+  function redirectDetails(id) {
+    history.push(`/orders/${id}`);
+  }
+
   return (
     <div>
       <TopBar title="Meus Pedidos" />
       { clientOrders.map((order, index) => (
-        <Link to={ `/orders/${order.id}` } key={ index }>
-          <OrdersCard
-            index={ index }
-            id={ order.id }
-            date={ order.sale_date }
-            total={ order.total_price }
-          />
-        </Link>
+        <div key={ index }>
+          <button
+            className="divPedidos"
+            type="button"
+            onClick={ () => redirectDetails(order.id) }
+          >
+            <OrdersCard
+              index={ index }
+              id={ order.id }
+              date={ order.sale_date }
+              total={ order.total_price }
+            />
+          </button>
+        </div>
       )) }
     </div>
   );

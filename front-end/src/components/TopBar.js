@@ -17,6 +17,7 @@ function TopBar({ title }) {
     <div className="top-bar">
       <header className="header">
         <button
+          className="buttonHamburguer"
           type="button"
           data-testid="top-hamburguer"
           onClick={ handleActive }

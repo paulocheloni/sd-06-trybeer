@@ -6,6 +6,8 @@ import {
 } from '../../services/ProductCardService';
 import TrybeerContext from '../../context/TrybeerContext';
 
+import './ProductCard.css';
+
 function ProductCard({ name, price, urlImage, index }) {
   const { cart, setCart } = useContext(TrybeerContext);
   const [quantity, setQuantity] = useState(0);
@@ -33,41 +35,52 @@ function ProductCard({ name, price, urlImage, index }) {
   }, [quantity]);
 
   return (
-    <div>
-      <p
-        id={ `${index}-product-name` }
-        data-testid={ `${index}-product-name` }
-      >
-        { name }
-      </p>
-      <p
-        id={ `${index}-product-price` }
-        data-testid={ `${index}-product-price` }
-      >
-        { `R$ ${price.replace('.', ',')}` }
-      </p>
-      <img
-        data-testid={ `${index}-product-img` }
-        src={ urlImage }
-        alt="product"
-      />
-      <button
-        type="button"
-        id={ `${index}-product-minus` }
-        data-testid={ `${index}-product-minus` }
-        onClick={ () => decreaseQuantity(quantity, setQuantity) }
-      >
-        -
-      </button>
-      <span data-testid={ `${index}-product-qtd` }>{quantity}</span>
-      <button
-        type="button"
-        id={ `${index}-product-plus` }
-        data-testid={ `${index}-product-plus` }
-        onClick={ () => increaseQuantity(quantity, setQuantity) }
-      >
-        +
-      </button>
+    <div className="mainDivProductCard">
+      <div className="productCard">
+        <p
+          className="texto"
+          id={ `${index}-product-name` }
+          data-testid={ `${index}-product-name` }
+        >
+          { name }
+        </p>
+        <p
+          className="texto"
+          id={ `${index}-product-price` }
+          data-testid={ `${index}-product-price` }
+        >
+          { `R$ ${price.replace('.', ',')}` }
+        </p>
+        <img
+          className="imageCard"
+          data-testid={ `${index}-product-img` }
+          src={ urlImage }
+          alt="product"
+        />
+        <div className="divBotoesMaisMenos">
+          <button
+            className="botoesMainMenos"
+            type="button"
+            id={ `${index}-product-minus` }
+            data-testid={ `${index}-product-minus` }
+            onClick={ () => decreaseQuantity(quantity, setQuantity) }
+          >
+            -
+          </button>
+          <span className="textoMaisMenos" data-testid={ `${index}-product-qtd` }>
+            {quantity}
+          </span>
+          <button
+            className="botoesMainMenos"
+            type="button"
+            id={ `${index}-product-plus` }
+            data-testid={ `${index}-product-plus` }
+            onClick={ () => increaseQuantity(quantity, setQuantity) }
+          >
+            +
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

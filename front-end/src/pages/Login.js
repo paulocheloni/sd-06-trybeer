@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
 
+import './Login.css';
+
 const {
   userValidation, redirectPath, handleUserNotRegistered,
 } = require('../services/loginService');
@@ -13,10 +15,12 @@ function Login() {
 
   return (
     <form>
-      <div>
+      <div className="divLogin">
         <label htmlFor="email-input">
           Email
+          <br />
           <input
+            className="inputLogin"
             id="email-input"
             type="email"
             name="email"
@@ -25,10 +29,12 @@ function Login() {
           />
         </label>
       </div>
-      <div>
+      <div className="divTeste">
         <label htmlFor="password-input">
           Senha
+          <br />
           <input
+            className="inputLogin"
             id="password-input"
             type="password"
             data-testid="password-input"
@@ -38,6 +44,7 @@ function Login() {
       </div>
       <div>
         <button
+          className="buttonLogin"
           disabled={ enableButton }
           type="button"
           data-testid="signin-btn"
@@ -46,6 +53,7 @@ function Login() {
           Entrar
         </button>
         <button
+          className="buttonLogin"
           type="button"
           data-testid="no-account-btn"
           onClick={ () => handleUserNotRegistered(history) }

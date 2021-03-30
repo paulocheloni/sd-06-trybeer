@@ -3,6 +3,6 @@
   flex-direction: column;
   width: 100px;
   justify-content: space-between;
-  height: 600px;
-  border: 1px solid black;
+  height: 640px;
+  background-color: rgb(255, 228, 163);
 }

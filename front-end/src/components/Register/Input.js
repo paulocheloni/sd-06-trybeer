@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import '../../pages/UserRegister.css';
+
 function Input({ title, id, type, callback }) {
   console.log(id, type, callback);
   return (
     <label htmlFor={ id }>
       { title }
+      <br />
       <input
+        className="inputRegister"
         id={ id }
         type={ type }
         data-testid={ id }
