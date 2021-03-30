@@ -1,11 +1,9 @@
 .mainDivProductCard {
-  /* border: 5px solid purple; */
   border-radius: 15px;
   height: 240px;
 }
 
 .productCard {
-  /* border: 1px solid black; */
   height: inherit;
   position: relative;
 }
@@ -26,7 +24,6 @@
 }
 
 .botoesMainMenos {
-  /* border: solid yellow; */
   border-radius: 5px;
   margin: 10px;
   padding: 5pxpx;
