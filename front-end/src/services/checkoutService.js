@@ -31,6 +31,6 @@ export async function checkoutOrder(history, setCart, sale) {
   sentOrderMessage.appendChild(orderMessage);
 
   parentDiv.replaceChild(sentOrderMessage, cartItens);
-
+  localStorage.setItem('cart', []);
   redirectCart(history, setCart);
 }
