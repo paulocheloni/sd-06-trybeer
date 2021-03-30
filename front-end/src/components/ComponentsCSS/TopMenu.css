@@ -67,6 +67,8 @@
 
 .side-menu-container button {
   width: 100%;
+  background-color: black;
+  color: white;
   border-right: none;
   border-left: none;
 }
