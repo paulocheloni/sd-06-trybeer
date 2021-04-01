@@ -14,11 +14,17 @@ const OrderDetailCard = ({ product, index, isAdmin }) => {
         { name }
       </h3>
       { isAdmin && (
-        <h3 data-testid={ `${index}-order-unit-price` }>
+        <h3
+          className="flexNone"
+          data-testid={ `${index}-order-unit-price` }
+        >
           { `(R$ ${parseFloat(+price).toFixed(2).replace('.', ',')})` }
         </h3>
       ) }
-      <h3 data-testid={ `${index}-product-total-value` }>
+      <h3
+        className="flexNone"
+        data-testid={ `${index}-product-total-value` }
+      >
         { `R$ ${parseFloat(+price * +quantity).toFixed(2).replace('.', ',')}` }
       </h3>
     </li>

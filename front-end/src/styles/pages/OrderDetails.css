@@ -15,6 +15,11 @@
   justify-content: space-between;
 }
 
+.orderDetailsContainer > ul > li > h3 {
+  text-align: center;
+  margin: 0 5px;
+}
+
 .orderDetailsTitleContainer {
   display: flex;
   justify-content: space-between;
@@ -32,8 +37,7 @@
   color: white;
   border: none;
   border-radius: 5px;
-  width: 60%;
-  height: 3rem;
+  padding: 10px;
   font-size: 1.5rem;
   transition: background-color 0.2s;
 }

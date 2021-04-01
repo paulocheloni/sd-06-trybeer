@@ -133,7 +133,11 @@ function Checkout({ location: { pathname } }) {
           disabled={ itemsInCart.length === 0 || !street || !houseNumber }
           id="checkout-finish-btn"
         />
-        { finished && <h1>Compra realizada com sucesso!</h1> }
+        { finished && (
+          <div className="modalContainer">
+            <h2>Compra realizada com sucesso!</h2>
+          </div>
+        ) }
       </div>
     </div>
   );

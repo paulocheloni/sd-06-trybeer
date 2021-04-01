@@ -57,12 +57,12 @@
   border-radius: 50%;
 }
 
-.userProfileContainer button:hover:not([disabled]) {
+.userProfileContainer > button:hover:not([disabled]) {
   background-color: rgba(0, 128, 128, 0.7);
   cursor: pointer;
 }
 
-.userProfileContainer button:disabled, .userProfileContainer button:disabled:hover {
+.userProfileContainer > button:disabled, .userProfileContainer button:disabled:hover {
   opacity: 0.2;
   cursor: auto;
 }

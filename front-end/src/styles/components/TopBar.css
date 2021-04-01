@@ -2,6 +2,7 @@
   width: 100vw;
   position: fixed;
   margin-top: 0;
+  padding: 0 60px;
   text-align: center;
   height: 70px;
   background-color: gray;
@@ -111,5 +112,16 @@
 
   .topTitleContainer > h1 {
     font-size: 1.8rem;
+  }
+}
+
+@media(max-width: 530px) {
+  .menuAdmin {
+    height: 10vh;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .menuAdmin a > div {
+    margin: 10px 0px;
   }
 }

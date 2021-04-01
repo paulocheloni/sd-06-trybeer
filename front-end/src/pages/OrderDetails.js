@@ -58,7 +58,11 @@ function OrderDetails({ location: { pathname } }) {
                 { `Pedido ${currentOrder[0].id}` }
               </h2>
               { isAdmin ? (
-                <h2 data-testid="order-status">
+                <h2
+                  className={ currentOrder[0].status === 'Entregue'
+                    ? 'statusDelivered' : 'statusNotDelivered' }
+                  data-testid="order-status"
+                >
                   { currentOrder[0].status }
                 </h2>
               ) : (
