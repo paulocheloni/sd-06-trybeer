@@ -1,16 +1,23 @@
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router';
 import { edit } from '../api/axiosApi';
 import TrybeerContext from '../context/TrybeerContext';
 
 export default function Profile() {
+  const history = useHistory();
+
   const { loginUser, setLoginUser } = useContext(TrybeerContext);
   // console.log(loginUser.name, "loginUser");
   const [confirmationMessage, setConfirmationMessage] = useState(false);
 
-  // const history = useHistory();
-
   const localStorageProfile = JSON.parse(localStorage.getItem('user'));
-  // console.log(localStorageProfile, "localStorage2");
+  // console.log(localStorageProfile, "localStorageProfile");
+
+  if (localStorageProfile === null) {
+    history.push('./login');
+    return null;
+  }
+
   const idProfile = localStorageProfile.id;
   // console.log(idProfile, "id");
   const nameProfile = localStorageProfile.name;
