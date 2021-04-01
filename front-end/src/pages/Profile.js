@@ -42,12 +42,13 @@ function Profile({ location: { pathname } }) {
   const isNameChanged = (actualName) => user.name !== actualName;
 
   const handleUpdateName = async () => {
-    const userUpdated = { ...user, name }
+    const userUpdated = { ...user, name };
     setUserData(userUpdated);
     setIsUpdated(true);
+    const MESSAGE_TIME = 1500;
 
     await API.updateUserName(name, email);
-    setTimeout(() => setIsUpdated(false), 1500);
+    setTimeout(() => setIsUpdated(false), MESSAGE_TIME);
   };
 
   return (
