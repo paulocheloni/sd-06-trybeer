@@ -1,13 +1,18 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
+// import TrybeerContext from '../context/TrybeerContext';
 import { signUp } from '../api/axiosApi';
-import TrybeerContext from '../context/TrybeerContext';
-import { validateEmail, validatePassword, validateName } from '../utilities/validations';
 
 export default function Register() {
-  const { loginUser, setLoginUser } = useContext(TrybeerContext);
-  const [badReq, setBadReq] = useState(false);
   const history = useHistory();
+  // const { loginUser, setLoginUser } = useContext(TrybeerContext);
+  const [badReq, setBadReq] = useState(false);
+  const [loginUserLocal, setLoginUserLocal] = useState({
+    name: '',
+    email: '',
+    password: '',
+    wantToSell: false,
+  });
 
   const handleRegisterUser = async (dataUser) => {
     const { name, email, password, wantToSell } = dataUser;
@@ -30,8 +35,17 @@ export default function Register() {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const { name } = target;
 
-    setLoginUser({ ...loginUser, [name]: value });
+    setLoginUserLocal({ ...loginUserLocal, [name]: value });
   };
+
+  const { name, email, password } = loginUserLocal;
+  const inputEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+  const PASSWORD_MIN_SIZE = 6;
+  const minLengthName = 11;
+  const regexName = /^[a-z ]+$/i;
+  const activeButton = inputEmail.test(email)
+    && password.length >= PASSWORD_MIN_SIZE
+    && regexName.test(name) && name.length > minLengthName;
 
   return (
     <div className="register-container">
@@ -74,12 +88,8 @@ export default function Register() {
       <button
         type="button"
         data-testid="signup-btn"
-        disabled={
-          !validateName(loginUser.name)
-          || !validateEmail(loginUser.email)
-          || !validatePassword(loginUser.password)
-        }
-        onClick={ () => handleRegisterUser(loginUser) }
+        disabled={ !activeButton }
+        onClick={ () => handleRegisterUser(loginUserLocal) }
       >
         Cadastrar
       </button>

@@ -1,21 +1,17 @@
-import React, { useContext } from 'react';
-// import PropTypes from 'prop-types';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import TrybeerContext from '../context/TrybeerContext';
 import { login } from '../api/axiosApi';
 
-// import ErroPage from './ErroPage';
-
-import { validateEmail, validatePassword } from '../utilities/validations';
-
 export default function Login() {
   const history = useHistory();
   const { loginUser, setLoginUser } = useContext(TrybeerContext);
+  const [loginUserLocal, setLoginUserLocal] = useState({ email: '', password: '' });
 
   const handleLogin = async (dataUser) => {
     const user = await login(dataUser);
     localStorage.setItem('user', JSON.stringify(user));
-    console.log(user.role);
+    setLoginUser({ ...loginUser, user });
 
     if (user.role === 'client') {
       history.push({ pathname: '/products' });
@@ -26,11 +22,15 @@ export default function Login() {
     }
   };
 
-  // if (loginUser.erro) {
-  //   return (
-  //     <ErroPage />
-  //   );
-  // }
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setLoginUserLocal({ ...loginUserLocal, [name]: value });
+  };
+
+  const { email, password } = loginUserLocal;
+  const inputEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+  const PASSWORD_MIN_SIZE = 6;
+  const activeButton = inputEmail.test(email) && password.length >= PASSWORD_MIN_SIZE;
 
   return (
     <section>
@@ -41,9 +41,7 @@ export default function Login() {
             type="email"
             data-testid="email-input"
             name="email"
-            onChange={ (event) => setLoginUser(
-              { ...loginUser, email: event.target.value },
-            ) }
+            onChange={ handleChange }
           />
         </label>
         <label htmlFor="password">
@@ -52,18 +50,14 @@ export default function Login() {
             type="password"
             data-testid="password-input"
             name="password"
-            onChange={ (event) => setLoginUser(
-              { ...loginUser, password: event.target.value },
-            ) }
+            onChange={ handleChange }
           />
         </label>
         <button
           type="button"
           data-testid="signin-btn"
-          disabled={
-            !validateEmail(loginUser.email) || !validatePassword(loginUser.password)
-          }
-          onClick={ () => handleLogin(loginUser) }
+          disabled={ !activeButton }
+          onClick={ () => handleLogin(loginUserLocal) }
         >
           Entrar
         </button>
@@ -78,7 +72,3 @@ export default function Login() {
     </section>
   );
 }
-
-// Login.propTypes = {
-//   history: PropTypes.shape().isRequired,
-// };
