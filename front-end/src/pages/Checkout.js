@@ -134,10 +134,8 @@ function Checkout({ location: { pathname } }) {
           id="checkout-finish-btn"
         />
         { finished && (
-          <div className="modalOverlay">
-            <div className="modalContainer">
-              <h2>Compra realizada com sucesso!</h2>
-            </div>
+          <div className="modalContainer">
+            <h2>Compra realizada com sucesso!</h2>
           </div>
         ) }
       </div>

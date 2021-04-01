@@ -28,6 +28,20 @@ body, input, button {
   outline: none;
 }
 
+.modalContainer {
+  background: rgba(40, 40, 40, 0.8);
+  color: white;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media(max-width: 530px) {
   .quantity-btn {
     width: 45px;
