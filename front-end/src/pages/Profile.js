@@ -1,6 +1,31 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { edit } from '../api/axiosApi';
+import TrybeerContext from '../context/TrybeerContext';
 
 export default function Profile() {
+  const { loginUser, setLoginUser } = useContext(TrybeerContext);
+  // console.log(loginUser.name, "loginUser");
+  const [confirmationMessage, setConfirmationMessage] = useState(false);
+
+  // const history = useHistory();
+
+  const localStorageProfile = JSON.parse(localStorage.getItem('user'));
+  // console.log(localStorageProfile, "localStorage2");
+  const idProfile = localStorageProfile.id;
+  // console.log(idProfile, "id");
+  const nameProfile = localStorageProfile.name;
+  // console.log(nameProfile, "NAME");
+  const emailProfile = localStorageProfile.email;
+  // console.log(emailProfile, "EMAIL");
+
+  const handleProfile = async (id, name, email) => {
+    id = idProfile;
+    name = loginUser.name;
+    email = emailProfile;
+    setConfirmationMessage(true);
+    await edit(id, name, email);
+  };
+
   return (
     <div>
       {/* <TopBar
@@ -13,26 +38,26 @@ export default function Profile() {
           <input
             name="name"
             data-testid="profile-name-input"
-            placeholder="Name"
-            // value={ prevName }
-            // onChange={ handleNameChange }
+            placeholder={ nameProfile }
+            onChange={ (event) => setLoginUser(
+              { ...loginUser, name: event.target.value },
+            ) }
           />
-          <span className="hidden-span">Atualização concluida com sucesso</span>
           <input
             placeholder="Email"
             readOnly
             data-testid="profile-email-input"
-            // value={ profileEmail }
-            // onChange={ profileEmail }
+            value={ emailProfile }
           />
           <button
             type="button"
             data-testid="profile-save-btn"
-            // onClick={ () => saveOnClick() }
-            // isDisabled={ isDisabled }
+            disabled={ loginUser.name === '' }
+            onClick={ () => handleProfile() }
           >
             Salvar
           </button>
+          {confirmationMessage && <p>Atualização concluída com sucesso</p>}
         </div>
       </div>
     </div>
