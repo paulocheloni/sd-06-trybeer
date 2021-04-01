@@ -21,3 +21,20 @@ export async function signUp(name, email, password, role) {
     });
   return registerUser;
 }
+
+export async function edit(id, name, email) {
+  try {
+    const response = await axios.put(`http://localhost:3001/profile/${id}`, {
+      id, name, email,
+    });
+    return response;
+  } catch (error) {
+    if (error.response) {
+      return {
+        status: error.response.status,
+        statusText: error.response.statusText,
+        message: error.response.data.message,
+      };
+    }
+  }
+}
