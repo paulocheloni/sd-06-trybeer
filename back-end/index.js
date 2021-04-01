@@ -9,6 +9,7 @@ require('dotenv').config();
 const error = require('./src/middlewares/error.js');
 const loginRouter = require('./src/controllers/loginController.js');
 const registerRouter = require('./src/controllers/registerController');
+const productsRouter = require('./src/controllers/productsController.js');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -25,7 +26,7 @@ app.use('/login', loginRouter);
 
 app.use('/register', registerRouter);
 
-// app.use('/products');
+app.use('/products', productsRouter);
 
 app.all('*', (_req, res) => {
   res
