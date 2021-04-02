@@ -13,6 +13,21 @@ const Provider = ({ children }) => {
     },
   );
 
+  // const getUser = () => {
+  //   const user = JSON.parse(localStorage.getItem('user'));
+  //   return user;
+  // };
+
+  // const setUser = (data) => {
+  //   const user = localStorage.setItem('user', JSON.stringify(data));
+  //   return user;
+  // };
+
+  // const contextConsts = {
+  //   loginUser,
+  //   setLoginUser,
+  // }
+
   return (
     <TrybeerContext.Provider value={ { loginUser, setLoginUser } }>
       {children}
