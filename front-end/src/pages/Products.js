@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { getProducts } from '../api/axiosApi';
+import Navbar from '../components/Navbar';
 
 export default function Products() {
   // const [productsAll, setproductsAll] = useState({});
@@ -33,6 +34,7 @@ export default function Products() {
   return (
     <div>
       <p>Your Code Here</p>
+      <Navbar />
       <ul>
         {localStorageProducts.map((localStorageProducts, _index) => {
           return (

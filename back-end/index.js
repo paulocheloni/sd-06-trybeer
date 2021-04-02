@@ -10,6 +10,7 @@ const error = require('./src/middlewares/error.js');
 const loginRouter = require('./src/controllers/loginController.js');
 const registerRouter = require('./src/controllers/registerController');
 const productsRouter = require('./src/controllers/productsController.js');
+const profileRouter = require('./src/controllers/profileController');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -22,11 +23,15 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));  
 app.use(morgan('dev'));
 
+app.use(bodyParser.json());
+
 app.use('/login', loginRouter);
 
 app.use('/register', registerRouter);
 
 app.use('/products', productsRouter);
+
+app.use('/profile', profileRouter);
 
 app.all('*', (_req, res) => {
   res

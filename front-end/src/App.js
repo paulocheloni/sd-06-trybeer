@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import './App.css';
 import AdminOrders from './pages/AdminOrders';
 import AdminProfile from './pages/AdminProfile';
 import Checkout from './pages/Checkout';
@@ -11,10 +10,6 @@ import Profile from './pages/Profile';
 import Register from './pages/Register';
 import history from './utilities/History';
 import Provider from './context/Provider';
-
-// import {
-//   Login, Register, Profile, Products, Orders, AdminOrders, Home, Checkout, AdminProfile,
-// } from './pages';
 
 function App() {
   return (

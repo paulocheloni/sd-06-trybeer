@@ -36,3 +36,19 @@ export async function getProducts() {
     });
   return products;
 }
+
+export async function edit(id, name, email) {
+  try {
+    const response = await axios.put(`http://localhost:3001/profile/${id}`, {
+      id, name, email,
+    });
+    return response;
+  } catch (error) {
+    if (error.response) {
+      return {
+        status: error.response.status,
+        statusText: error.response.statusText,
+        message: error.response.data.message,
+      };
+   }
+}
