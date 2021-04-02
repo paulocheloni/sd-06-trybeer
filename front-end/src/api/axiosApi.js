@@ -50,5 +50,6 @@ export async function edit(id, name, email) {
         statusText: error.response.statusText,
         message: error.response.data.message,
       };
-   }
+    }
+  }
 }
