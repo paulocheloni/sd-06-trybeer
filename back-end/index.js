@@ -33,6 +33,8 @@ app.use('/products', productsRouter);
 
 app.use('/profile', profileRouter);
 
+app.use('/images', express.static(`${__dirname}/images`));
+
 app.all('*', (_req, res) => {
   res
     .status(404)
