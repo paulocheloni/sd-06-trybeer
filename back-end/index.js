@@ -9,6 +9,7 @@ require('dotenv').config();
 const error = require('./src/middlewares/error.js');
 const loginRouter = require('./src/controllers/loginController.js');
 const registerRouter = require('./src/controllers/registerController');
+const productsRouter = require('./src/controllers/productsController.js');
 const profileRouter = require('./src/controllers/profileController');
 
 const app = express();
@@ -28,9 +29,11 @@ app.use('/login', loginRouter);
 
 app.use('/register', registerRouter);
 
+app.use('/products', productsRouter);
+
 app.use('/profile', profileRouter);
 
-// app.use('/products');
+app.use('/images', express.static(`${__dirname}/images`));
 
 app.all('*', (_req, res) => {
   res
