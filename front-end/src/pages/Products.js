@@ -15,7 +15,7 @@ export default function Products() {
       setProducts(JSON.parse(productsStored));
     } else {
       let productsDB = await getProducts();
-      productsDB = productsDB.map((product) => { return { ...product, quantity: 0 }; });
+      productsDB = productsDB.map((product) => ({ ...product, quantity: 0 }));
       setProducts(productsDB);
       localStorage.setItem('products', JSON.stringify(productsDB));
     }
@@ -72,45 +72,43 @@ export default function Products() {
         { `R$ ${totalPrice.toFixed(2).replace('.', ',')}` }
       </strong>
       <ul>
-        {products && products.map((product, index) => {
-          return (
-            <div key={ product.id }>
-              <img
-                alt="url_image"
-                data-testid={ `${index}-product-img` }
-                src={ product.url_image }
-                style={ { maxHeight: '100px' } }
-              />
-              <p data-testid={ `${index}-product-name` }>
-                { product.name }
-              </p>
-              <p data-testid={ `${index}-product-price` }>
-                { `R$ ${product.price.replace('.', ',')}` }
-              </p>
-              <button
-                type="button"
-                id="minusId"
-                className="minusClassName"
-                data-testid={ `${index}-product-minus` }
-                onClick={ () => handleClickMinus(product) }
-              >
-                -
-              </button>
-              <span data-testid={ `${index}-product-qtd` }>
-                { product.quantity }
-              </span>
-              <button
-                type="button"
-                id="plusId"
-                className="plusClassName"
-                data-testid={ `${index}-product-plus` }
-                onClick={ () => handleClickPlus(product) }
-              >
-                +
-              </button>
-            </div>
-          );
-        })}
+        {products && products.map((product, index) => (
+          <div key={ product.id }>
+            <img
+              alt="url_image"
+              data-testid={ `${index}-product-img` }
+              src={ product.url_image }
+              style={ { maxHeight: '100px' } }
+            />
+            <p data-testid={ `${index}-product-name` }>
+              { product.name }
+            </p>
+            <p data-testid={ `${index}-product-price` }>
+              { `R$ ${product.price.replace('.', ',')}` }
+            </p>
+            <button
+              type="button"
+              id="minusId"
+              className="minusClassName"
+              data-testid={ `${index}-product-minus` }
+              onClick={ () => handleClickMinus(product) }
+            >
+              -
+            </button>
+            <span data-testid={ `${index}-product-qtd` }>
+              { product.quantity }
+            </span>
+            <button
+              type="button"
+              id="plusId"
+              className="plusClassName"
+              data-testid={ `${index}-product-plus` }
+              onClick={ () => handleClickPlus(product) }
+            >
+              +
+            </button>
+          </div>
+        ))}
       </ul>
     </div>
   );
