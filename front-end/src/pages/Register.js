@@ -14,6 +14,8 @@ export default function Register() {
     wantToSell: false,
   });
 
+  const numberSetTime = 2300;
+
   const handleRegisterUser = async (dataUser) => {
     const { name, email, password, wantToSell } = dataUser;
     const role = wantToSell ? 'administrator' : 'client';
@@ -24,9 +26,13 @@ export default function Register() {
     if (user.status === statusConflict) {
       setBadReq(true);
     } else if (user.data.role === 'client') {
-      history.push('/products');
+      setTimeout(() => {
+        history.push('/products');
+      }, numberSetTime);
     } else if (user.data.role === 'administrator') {
-      history.push('/admin/orders');
+      setTimeout(() => {
+        history.push('/admin/orders');
+      }, numberSetTime);
     }
   };
 
