@@ -57,6 +57,7 @@ export default function Register() {
     <section>
       <Container>
         <Content>
+          <Title>Crie sua conta</Title>
           <Label>Nome</Label>
           <Input
             type="text"

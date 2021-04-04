@@ -56,5 +56,8 @@ export const Button = styled.button`
 `;
 
 export const Title = styled.h1`
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', Verdana, sans-serif
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  font-size: 3em;
 `;

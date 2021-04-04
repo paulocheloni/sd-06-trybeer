@@ -37,8 +37,8 @@ export default function Login() {
   return (
     <section>
       <Container>
-        <Title>Login</Title>
         <Content>
+          <Title>Login</Title>
           <Label>Email</Label>
           <Input
             type="email"
