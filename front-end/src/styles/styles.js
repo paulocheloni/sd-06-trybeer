@@ -17,7 +17,7 @@ export const Content = styled.div`
   padding: 20px;
 `;
 
-export const InputStyled = styled.input`
+export const Input = styled.input`
   background-image: ${(props) => props.image};
   border: 1px solid #08c;
   border-radius: 4px;
@@ -27,7 +27,7 @@ export const InputStyled = styled.input`
   font-size: 16px;
   margin: 6px 0px;
   padding: 14px 20px;
-  width: 100%;
+  width: ${(props) => (props.checkbox ? '20%' : '100%')};
   &:active,
   &:focus {
     background-color: lightblue;

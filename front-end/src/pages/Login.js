@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import TrybeerContext from '../context/TrybeerContext';
 import { login } from '../api/axiosApi';
 
-import { Button, Container, Content, InputStyled, Label, Title } from '../styles/styles';
+import { Button, Container, Content, Input, Label, Title } from '../styles/styles';
 
 export default function Login() {
   const history = useHistory();
@@ -40,14 +40,14 @@ export default function Login() {
         <Title>Login</Title>
         <Content>
           <Label>Email</Label>
-          <InputStyled
+          <Input
             type="email"
             data-testid="email-input"
             name="email"
             onChange={ handleChange }
           />
           <Label>Senha</Label>
-          <InputStyled
+          <Input
             type="password"
             data-testid="password-input"
             name="password"

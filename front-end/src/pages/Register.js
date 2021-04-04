@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-// import TrybeerContext from '../context/TrybeerContext';
+import { Button, Container, Content, Input, Label, Title } from '../styles/styles';
 import { signUp } from '../api/axiosApi';
 
 export default function Register() {
@@ -54,52 +54,48 @@ export default function Register() {
     && regexName.test(name) && name.length > minLengthName;
 
   return (
-    <div className="register-container">
-      <div className="register-form">
-        <span>Nome</span>
-        <input
-          name="name"
-          className="input"
-          data-testid="signup-name"
-          onChange={ handleChange }
-        />
-        <div className="email-div">
-          <span>Email</span>
-          <input
+    <section>
+      <Container>
+        <Content>
+          <Label>Nome</Label>
+          <Input
+            type="text"
+            name="name"
+            data-testid="signup-name"
+            onChange={ handleChange }
+          />
+          <Label>Email</Label>
+          <Input
+            type="email"
             name="email"
-            className="input"
             data-testid="signup-email"
             onChange={ handleChange }
           />
-          <span className="hidden-span" />
-        </div>
-        <span>Senha</span>
-        <input
-          name="password"
-          type="password"
-          className="input"
-          data-testid="signup-password"
-          onChange={ handleChange }
-        />
-        <label htmlFor="wantToSell">
-          Quero vender
-          <input
+          <Label>Senha</Label>
+          <Input
+            type="password"
+            name="password"
+            data-testid="signup-password"
+            onChange={ handleChange }
+          />
+          <Label>Quero vender</Label>
+          <Input
+            checkbox
             type="checkbox"
             name="wantToSell"
             data-testid="signup-seller"
             onChange={ handleChange }
           />
-        </label>
-      </div>
-      <button
-        type="button"
-        data-testid="signup-btn"
-        disabled={ !activeButton }
-        onClick={ () => handleRegisterUser(loginUserLocal) }
-      >
-        Cadastrar
-      </button>
+          <Button
+            data-testid="signup-btn"
+            disabled={ !activeButton }
+            onClick={ () => handleRegisterUser(loginUserLocal) }
+          >
+            Cadastrar
+          </Button>
+        </Content>
+      </Container>
       { badReq && <span> E-mail already in database. </span> }
-    </div>
+    </section>
   );
 }
