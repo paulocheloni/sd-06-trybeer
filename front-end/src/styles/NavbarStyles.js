@@ -9,31 +9,6 @@ export const DivNav = styled.div`
   top: 0;
   transition: 0.5s;
   z-index: 1;
-  a {
-    color: whitesmoke;
-    display: block;
-    font-size: 26px;
-    padding: 8px;
-    text-decoration: none;
-    transition: 0.3s;
-    &:focus,
-    &:hover {
-      color: #f1f1f1
-    }
-  }
-`;
-
-export const DivLink = styled.a`
-  color: whitesmoke;
-  display: block;
-  font-size: 26px;
-  padding: 8px;
-  text-decoration: none;
-  transition: 0.3s;
-  &:focus,
-  &:hover {
-    color: #f1f1f1
-  }
 `;
 
 export const DivNavContent = styled.div`
@@ -46,14 +21,12 @@ a {
     color: whitesmoke;
     display: block;
     font-size: 26px;
-    padding: 8px;
+    padding: 15px 20px;
     text-decoration: none;
     transition: 0.3s;
     &:focus,
     &:hover {
-      color: #f1f1f1
+      color: #ffc72c;
     }
   }
 `;
-
-export const nada = 'bullshit';

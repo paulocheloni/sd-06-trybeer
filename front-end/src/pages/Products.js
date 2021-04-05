@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import * as FaIcons from 'react-icons/fa';
 import { getProducts } from '../api/axiosApi';
 import Navbar from '../components/Navbar';
 import {
@@ -15,11 +14,9 @@ import {
   SpanTotalPrice,
 } from '../styles/ProductsStyles';
 import { Container } from '../styles/styles';
-import { HeaderStyled } from '../styles/HeaderStyles';
 import Header from '../components/Header';
 
-export default function Products(props) {
-  console.log(props)
+export default function Products() {
   const history = useHistory();
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -78,13 +75,10 @@ export default function Products(props) {
       <DivInfoCart>
         <ButtonCart
           type="button"
-          id="viewCart"
-          className="viewCart"
           data-testid="checkout-bottom-btn"
           disabled={ totalPrice === 0 }
           onClick={ () => history.push('./checkout') }
         >
-          <FaIcons.FaShoppingCart style={ { padding: '0 8px' } } />
           Ver Carrinho
         </ButtonCart>
         <SpanTotalPrice data-testid="checkout-bottom-btn-value">

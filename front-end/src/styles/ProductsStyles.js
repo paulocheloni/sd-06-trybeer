@@ -8,12 +8,6 @@ export const Card = styled.div`
   grid-template-rows: max-content 100px 1fr;
 `;
 
-export const Divimg = styled.img`
-  height: 50%;
-  object-fit: cover;
-  width: 100%;
-`;
-
 export const Title = styled.h3`
   font-size: 1.5em;
   margin-top: 22px;
@@ -26,7 +20,7 @@ export const SpanPrice = styled.p`
 `;
 
 export const SpanTotalPrice = styled.span`
-  font-size: 1.5em;
+  font-size: 1.75em;
   font-weight: 900;
   padding: 20px 12px;
 `;
@@ -80,8 +74,9 @@ export const ButtonCart = styled.button`
   border: none;
   color: white;
   cursor: pointer;
-  font-size: 16px;
-  padding: 12px 16px;
+  font-size: 1.25em;
+  font-weight: 800;
+  padding: 0 26px;
   &:hover {
     background-color: #d55000;
   }
