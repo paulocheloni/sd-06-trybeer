@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
 export const Card = styled.div`
-  /* background-image: linear-gradient(135deg, #ffc72c 0%, #ff992c 100%); */
-  background-image: linear-gradient(to bottom right, #ba0c2f 0%, #ff992c 100%);
-  /* background-color: red; */
+  background: linear-gradient(to bottom right, #ba0c2f 0%, #ff992c 100%);
   box-shadow: 0 4px 8px 0;
   display: grid;
   font-family: Arial, Helvetica, sans-serif;
@@ -18,8 +16,8 @@ export const Divimg = styled.img`
 
 export const Title = styled.h3`
   font-size: 1.5em;
+  margin-top: 22px;
   text-align: center;
-  height: 10%;
 `;
 
 export const SpanPrice = styled.p`
@@ -43,6 +41,7 @@ export const DivQuantity = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
+  margin-bottom: 22px;
 `;
 
 export const ListCardOfProducts = styled.div`
@@ -64,7 +63,6 @@ export const ButtonMinAndPlus = styled.button`
   }
   &:active {
   background-color: #ba0c2f;
-  box-shadow: 0 3px #666;
   transform: translateY(2px);
   }
 `;

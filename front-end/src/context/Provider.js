@@ -13,6 +13,7 @@ const Provider = ({ children }) => {
     },
   );
 
+  const [sidebar, setSidebar] = useState(false);
   // const getUser = () => {
   //   const user = JSON.parse(localStorage.getItem('user'));
   //   return user;
@@ -23,13 +24,15 @@ const Provider = ({ children }) => {
   //   return user;
   // };
 
-  // const contextConsts = {
-  //   loginUser,
-  //   setLoginUser,
-  // }
+  const contextConsts = {
+    loginUser,
+    setLoginUser,
+    sidebar,
+    setSidebar,
+  };
 
   return (
-    <TrybeerContext.Provider value={ { loginUser, setLoginUser } }>
+    <TrybeerContext.Provider value={ contextConsts }>
       {children}
     </TrybeerContext.Provider>
   );

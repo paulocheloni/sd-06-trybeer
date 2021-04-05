@@ -15,8 +15,11 @@ import {
   SpanTotalPrice,
 } from '../styles/ProductsStyles';
 import { Container } from '../styles/styles';
+import { HeaderStyled } from '../styles/HeaderStyles';
+import Header from '../components/Header';
 
-export default function Products() {
+export default function Products(props) {
+  console.log(props)
   const history = useHistory();
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -70,6 +73,7 @@ export default function Products() {
 
   return (
     <div>
+      <Header />
       <Navbar />
       <DivInfoCart>
         <ButtonCart
