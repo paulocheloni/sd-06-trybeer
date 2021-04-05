@@ -1,7 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import * as FaIcons from 'react-icons/fa';
 import { getProducts } from '../api/axiosApi';
 import Navbar from '../components/Navbar';
+import {
+  Content,
+  Card,
+  Title,
+  SpanPrice,
+  ButtonMinAndPlus,
+  DivQuantity,
+  DivInfoCart,
+  ButtonCart,
+  SpanTotalPrice,
+} from '../styles/ProductsStyles';
+import { Container } from '../styles/styles';
 
 export default function Products() {
   const history = useHistory();
@@ -27,7 +40,7 @@ export default function Products() {
       history.push('./login');
     }
     execute();
-  }, []);
+  }, [history]);
 
   const handleClickMinus = (product) => {
     product.quantity = product.quantity > 0 ? product.quantity - 1 : 0;
@@ -53,63 +66,71 @@ export default function Products() {
 
   useEffect(() => {
     updateTotalPrice();
-  }, [products]);
+  }, [products, updateTotalPrice]);
 
   return (
     <div>
       <Navbar />
-      <button
-        type="button"
-        id="viewCart"
-        className="viewCart"
-        data-testid="checkout-bottom-btn"
-        disabled={ totalPrice === 0 }
-        onClick={ () => history.push('./checkout') }
-      >
-        Ver Carrinho
-      </button>
-      <strong data-testid="checkout-bottom-btn-value">
-        { `R$ ${totalPrice.toFixed(2).replace('.', ',')}` }
-      </strong>
-      <ul>
-        {products && products.map((product, index) => (
-          <div key={ product.id }>
-            <img
-              alt="url_image"
-              data-testid={ `${index}-product-img` }
-              src={ product.url_image }
-              style={ { maxHeight: '100px' } }
-            />
-            <p data-testid={ `${index}-product-name` }>
-              { product.name }
-            </p>
-            <p data-testid={ `${index}-product-price` }>
-              { `R$ ${product.price.replace('.', ',')}` }
-            </p>
-            <button
-              type="button"
-              id="minusId"
-              className="minusClassName"
-              data-testid={ `${index}-product-minus` }
-              onClick={ () => handleClickMinus(product) }
-            >
-              -
-            </button>
-            <span data-testid={ `${index}-product-qtd` }>
-              { product.quantity }
-            </span>
-            <button
-              type="button"
-              id="plusId"
-              className="plusClassName"
-              data-testid={ `${index}-product-plus` }
-              onClick={ () => handleClickPlus(product) }
-            >
-              +
-            </button>
-          </div>
-        ))}
-      </ul>
+      <DivInfoCart>
+        <ButtonCart
+          type="button"
+          id="viewCart"
+          className="viewCart"
+          data-testid="checkout-bottom-btn"
+          disabled={ totalPrice === 0 }
+          onClick={ () => history.push('./checkout') }
+        >
+          <FaIcons.FaShoppingCart style={ { padding: '0 8px' } } />
+          Ver Carrinho
+        </ButtonCart>
+        <SpanTotalPrice data-testid="checkout-bottom-btn-value">
+          { `R$ ${totalPrice.toFixed(2).replace('.', ',')}` }
+        </SpanTotalPrice>
+
+      </DivInfoCart>
+      <Container>
+        <Content>
+          {products && products.map((product, index) => (
+            <Card key={ product.id }>
+              <img
+                alt={ product.url_image }
+                data-testid={ `${index}-product-img` }
+                src={ product.url_image }
+                style={ { objectFit: 'cover', width: '100%' } }
+              />
+              <Title data-testid={ `${index}-product-name` }>
+                { product.name }
+              </Title>
+              <SpanPrice data-testid={ `${index}-product-price` }>
+                { `R$ ${product.price.replace('.', ',')}` }
+              </SpanPrice>
+              <DivQuantity>
+                <ButtonMinAndPlus
+                  type="button"
+                  id="minusId"
+                  className="minusClassName"
+                  data-testid={ `${index}-product-minus` }
+                  onClick={ () => handleClickMinus(product) }
+                >
+                  -
+                </ButtonMinAndPlus>
+                <SpanPrice data-testid={ `${index}-product-qtd` }>
+                  { product.quantity }
+                </SpanPrice>
+                <ButtonMinAndPlus
+                  type="button"
+                  id="plusId"
+                  className="plusClassName"
+                  data-testid={ `${index}-product-plus` }
+                  onClick={ () => handleClickPlus(product) }
+                >
+                  +
+                </ButtonMinAndPlus>
+              </DivQuantity>
+            </Card>
+          ))}
+        </Content>
+      </Container>
     </div>
   );
 }
