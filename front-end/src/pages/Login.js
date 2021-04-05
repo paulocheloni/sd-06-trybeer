@@ -3,6 +3,8 @@ import { useHistory } from 'react-router';
 import TrybeerContext from '../context/TrybeerContext';
 import { login } from '../api/axiosApi';
 
+import { Button, Container, Content, Input, Label, Title } from '../styles/styles';
+
 export default function Login() {
   const history = useHistory();
   const { loginUser, setLoginUser } = useContext(TrybeerContext);
@@ -34,41 +36,40 @@ export default function Login() {
 
   return (
     <section>
-      <form>
-        <label htmlFor="email">
-          Email
-          <input
+      <Container>
+        <Content>
+          <Title>Login</Title>
+          <Label>Email</Label>
+          <Input
             type="email"
             data-testid="email-input"
             name="email"
             onChange={ handleChange }
           />
-        </label>
-        <label htmlFor="password">
-          Senha
-          <input
+          <Label>Senha</Label>
+          <Input
             type="password"
             data-testid="password-input"
             name="password"
             onChange={ handleChange }
           />
-        </label>
-        <button
-          type="button"
-          data-testid="signin-btn"
-          disabled={ !activeButton }
-          onClick={ () => handleLogin(loginUserLocal) }
-        >
-          Entrar
-        </button>
-        <button
-          type="button"
-          data-testid="no-account-btn"
-          onClick={ () => history.push('/register') }
-        >
-          Ainda não tenho conta
-        </button>
-      </form>
+          <Button
+            type="button"
+            data-testid="signin-btn"
+            disabled={ !activeButton }
+            onClick={ () => handleLogin(loginUserLocal) }
+          >
+            Entrar
+          </Button>
+          <Button
+            type="button"
+            data-testid="no-account-btn"
+            onClick={ () => history.push('/register') }
+          >
+            Ainda não tenho conta
+          </Button>
+        </Content>
+      </Container>
     </section>
   );
 }
