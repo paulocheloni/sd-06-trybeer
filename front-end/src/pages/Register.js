@@ -46,6 +46,7 @@ export default function Register() {
 
   const { name, email, password } = loginUserLocal;
   const inputEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+
   const PASSWORD_MIN_SIZE = 6;
   const minLengthName = 11;
   const regexName = /^[a-z ]+$/i;
