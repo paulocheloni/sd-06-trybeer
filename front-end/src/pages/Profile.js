@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import { edit } from '../api/axiosApi';
 import TrybeerContext from '../context/TrybeerContext';
 import Navbar from '../components/Navbar';
+import Header from '../components/Header';
 
 export default function Profile() {
   const history = useHistory();
@@ -36,11 +37,12 @@ export default function Profile() {
 
   return (
     <div>
+      {/* <Header />
       <Navbar
         title="Meu perfil"
         data-testid="top-title"
         className="top-title"
-      />
+      /> */}
       <div className="profile-container">
         <div>
           <img alt="profile" />

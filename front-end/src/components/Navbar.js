@@ -6,18 +6,42 @@ import {
 import TrybeerContext from '../context/TrybeerContext';
 
 function Navbar() {
-  const { sidebar } = useContext(TrybeerContext);
-
+  const { sidebar, setSidebar } = useContext(TrybeerContext);
+  const showSidebar = () => setSidebar(!sidebar);
   return (
     <div>
       <DivNav
         style={ sidebar ? { width: '100%' } : { width: '0%' } }
       >
         <DivNavContent className="side-menu-container">
-          <Link to="/products" data-testid="side-menu-item-products">Produtos</Link>
-          <Link to="/orders" data-testid="side-menu-item-my-orders">Meus pedidos</Link>
-          <Link to="/profile" data-testid="side-menu-item-my-profile">Meu Perfil</Link>
-          <Link to="/login" data-testid="side-menu-item-logout">Sair</Link>
+          <Link
+            to="/products"
+            data-testid="side-menu-item-products"
+            onClick={ showSidebar }
+          >
+            Produtos
+          </Link>
+          <Link
+            to="/orders"
+            data-testid="side-menu-item-my-orders"
+            onClick={ showSidebar }
+          >
+            Meus pedidos
+          </Link>
+          <Link
+            to="/profile"
+            data-testid="side-menu-item-my-profile"
+            onClick={ showSidebar }
+          >
+            Meu Perfil
+          </Link>
+          <Link
+            to="/login"
+            data-testid="side-menu-item-logout"
+            onClick={ showSidebar }
+          >
+            Sair
+          </Link>
         </DivNavContent>
       </DivNav>
     </div>
