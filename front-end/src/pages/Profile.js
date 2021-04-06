@@ -37,12 +37,12 @@ export default function Profile() {
 
   return (
     <div>
-      {/* <Header />
+      <Header />
       <Navbar
         title="Meu perfil"
         data-testid="top-title"
         className="top-title"
-      /> */}
+      />
       <div className="profile-container">
         <div>
           <img alt="profile" />
