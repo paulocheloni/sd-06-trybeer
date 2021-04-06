@@ -43,7 +43,7 @@ export const Label = styled.label`
 `;
 
 export const Button = styled.button`
-  background-color: #08c;
+  background: #ffc72c;
   border: none;
   color: white;
   display: inline-block;
@@ -53,6 +53,9 @@ export const Button = styled.button`
   text-align: center;
   text-decoration: none;
   width: 100%;
+  &:hover {
+    background: #441311;
+  }
 `;
 
 export const Title = styled.h1`
@@ -60,4 +63,10 @@ export const Title = styled.h1`
   display: flex;
   justify-content: center;
   font-size: 3em;
+`;
+
+export const Message = styled.p`
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', Verdana, sans-serif;
+  font-size: 1.5em;
+  font-weight: 900;
 `;

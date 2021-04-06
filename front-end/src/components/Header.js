@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
+import { useHistory } from 'react-router';
 import TrybeerContext from '../context/TrybeerContext';
 import { HeaderStyled, DivTitle, DivHamburger } from '../styles/HeaderStyles';
 
@@ -7,6 +8,30 @@ function Header() {
   const { sidebar, setSidebar } = useContext(TrybeerContext);
 
   const showSidebar = () => setSidebar(!sidebar);
+
+  const [pathnameTitle, setPathnamerTitle] = useState('TryBeer');
+  const history = useHistory();
+  const { pathname } = history.location;
+
+  useEffect(() => {
+    const header = document.getSelection('top-title');
+    if (pathname === '/profile') {
+      header.innerHTML = 'Meu perfil';
+      setPathnamerTitle(header.innerHTML);
+    }
+    if (pathname === '/admin/profile') {
+      header.innerHTML = 'Admin - Meu Perfil';
+      setPathnamerTitle(header.innerHTML);
+    }
+    if (pathname === '/checkout') {
+      header.innerHTML = 'Finalizar Pedido';
+      setPathnamerTitle(header.innerHTML);
+    }
+    if (pathname === '/orders') {
+      header.innerHTML = 'Meus Pedidos';
+      setPathnamerTitle(header.innerHTML);
+    }
+  }, [pathname]);
 
   return (
     <header>
@@ -19,7 +44,7 @@ function Header() {
           />
         </DivHamburger>
         <DivTitle>
-          <h1 data-testid="top-title">TryBeer</h1>
+          <h1 data-testid="top-title" className="top-title">{ pathnameTitle }</h1>
         </DivTitle>
       </HeaderStyled>
     </header>
