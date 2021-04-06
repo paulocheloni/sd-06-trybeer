@@ -4,6 +4,7 @@ import { edit } from '../api/axiosApi';
 import TrybeerContext from '../context/TrybeerContext';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
+import { Container, Content, Input, Button, Message } from '../styles/styles';
 
 export default function Profile() {
   const history = useHistory();
@@ -43,34 +44,37 @@ export default function Profile() {
         data-testid="top-title"
         className="top-title"
       />
-      <div className="profile-container">
-        <div>
-          <img alt="profile" />
-          <input
-            name="name"
-            data-testid="profile-name-input"
-            placeholder={ nameProfile }
-            onChange={ (event) => setLoginUser(
-              { ...loginUser, name: event.target.value },
-            ) }
-          />
-          <input
-            placeholder="Email"
-            readOnly
-            data-testid="profile-email-input"
-            value={ emailProfile }
-          />
-          <button
-            type="button"
-            data-testid="profile-save-btn"
-            disabled={ loginUser.name === '' }
-            onClick={ () => handleProfile() }
-          >
-            Salvar
-          </button>
-          {confirmationMessage && <p>Atualização concluída com sucesso</p>}
-        </div>
-      </div>
+      <Container>
+        <Content>
+          <div>
+            {/* <img alt="profile" /> */}
+            <Input
+              name="name"
+              data-testid="profile-name-input"
+              placeholder={ nameProfile }
+              onChange={ (event) => setLoginUser(
+                { ...loginUser, name: event.target.value },
+              ) }
+            />
+            <Input
+              placeholder="Email"
+              readOnly
+              data-testid="profile-email-input"
+              value={ emailProfile }
+            />
+            <Button
+              type="button"
+              data-testid="profile-save-btn"
+              disabled={ loginUser.name === '' }
+              onClick={ () => handleProfile() }
+            >
+              Salvar
+            </Button>
+            {confirmationMessage && <Message>Atualização concluída com sucesso</Message>}
+          </div>
+
+        </Content>
+      </Container>
     </div>
   );
 }

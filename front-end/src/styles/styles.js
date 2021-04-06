@@ -61,3 +61,9 @@ export const Title = styled.h1`
   justify-content: center;
   font-size: 3em;
 `;
+
+export const Message = styled.p`
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', Verdana, sans-serif;
+  font-size: 1.5em;
+  font-weight: 900;
+`;
