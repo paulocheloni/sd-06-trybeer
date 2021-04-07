@@ -35,6 +35,10 @@ app.use('/profile', profileRouter);
 
 app.use('/images', express.static(`${__dirname}/images`));
 
+app.get('/teste', (req, res) => {
+  res.json({ message: 'LEandro' });
+});
+
 app.all('*', (_req, res) => {
   res
     .status(404)

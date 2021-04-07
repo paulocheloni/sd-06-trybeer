@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router';
 import ProductsContext from '../context/ProductsContext';
 import { getProducts } from '../api/axiosApi';
@@ -19,30 +19,35 @@ import Header from '../components/Header';
 
 export default function Products() {
   const history = useHistory();
-  const { products, setProducts } = useContext(ProductsContext);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const {
+    products,
+    setProducts,
+    totalPrice,
+    setTotalPrice,
+  } = useContext(ProductsContext);
 
-  const execute = async () => {
-    const productsStored = localStorage.getItem('products');
+  useEffect(() => {
+    const execute = async () => {
+      const productsStored = localStorage.getItem('products');
 
-    if (productsStored) {
-      setProducts(JSON.parse(productsStored));
-    } else {
-      let productsDB = await getProducts();
-      productsDB = productsDB.map((product) => ({ ...product, quantity: 0 }));
-      setProducts(productsDB);
-      localStorage.setItem('products', JSON.stringify(productsDB));
-    }
-  };
+      if (productsStored) {
+        setProducts(JSON.parse(productsStored));
+      } else {
+        let productsDB = await getProducts();
+        productsDB = productsDB.map((product) => ({ ...product, quantity: 0 }));
+        setProducts(productsDB);
+        localStorage.setItem('products', JSON.stringify(productsDB));
+      }
+    };
+    execute();
+  }, [setProducts]);
 
   useEffect(() => {
     const localStorageProfile = JSON.parse(localStorage.getItem('user'));
     if (localStorageProfile === null) {
       history.push('./login');
     }
-    execute();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [history]);
 
   const handleClickMinus = (product) => {
     product.quantity = product.quantity > 0 ? product.quantity - 1 : 0;
@@ -58,17 +63,16 @@ export default function Products() {
     localStorage.setItem('products', JSON.stringify(cloneProducts));
   };
 
-  const updateTotalPrice = () => {
-    let updatePrice = 0;
-    products.forEach((product) => {
-      updatePrice += product.price * product.quantity;
-    });
-    setTotalPrice(updatePrice);
-  };
-
   useEffect(() => {
+    const updateTotalPrice = () => {
+      let updatePrice = 0;
+      products.forEach((product) => {
+        updatePrice += product.price * product.quantity;
+      });
+      setTotalPrice(updatePrice);
+    };
     updateTotalPrice();
-  }, [updateTotalPrice]);
+  }, [products, setTotalPrice]);
 
   return (
     <div>

@@ -5,15 +5,12 @@ import ProductsContext from './ProductsContext';
 function ProductsProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [productsInCart, setProductsInCart] = useState([]);
 
   const value = {
     products,
     setProducts,
     totalPrice,
     setTotalPrice,
-    productsInCart,
-    setProductsInCart,
   };
 
   return (
