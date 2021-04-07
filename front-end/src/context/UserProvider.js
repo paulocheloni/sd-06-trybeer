@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import TrybeerContext from './TrybeerContext';
+import UserContext from './UserContext';
 
-const Provider = ({ children }) => {
+function UserProvider({ children }) {
   const [loginUser, setLoginUser] = useState(
     {
       name: '',
@@ -32,14 +32,14 @@ const Provider = ({ children }) => {
   };
 
   return (
-    <TrybeerContext.Provider value={ contextConsts }>
+    <UserContext.Provider value={ contextConsts }>
       {children}
-    </TrybeerContext.Provider>
+    </UserContext.Provider>
   );
-};
+}
 
-Provider.propTypes = {
+UserProvider.propTypes = {
   children: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default Provider;
+export default UserProvider;

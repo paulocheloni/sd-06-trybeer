@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import ProductsContext from '../context/ProductsContext';
 import { getProducts } from '../api/axiosApi';
 import Navbar from '../components/Navbar';
 import {
@@ -18,7 +19,7 @@ import Header from '../components/Header';
 
 export default function Products() {
   const history = useHistory();
-  const [products, setProducts] = useState([]);
+  const { products, setProducts } = useContext(ProductsContext);
   const [totalPrice, setTotalPrice] = useState(0);
 
   const execute = async () => {
@@ -40,7 +41,8 @@ export default function Products() {
       history.push('./login');
     }
     execute();
-  }, [history]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleClickMinus = (product) => {
     product.quantity = product.quantity > 0 ? product.quantity - 1 : 0;
@@ -66,7 +68,7 @@ export default function Products() {
 
   useEffect(() => {
     updateTotalPrice();
-  }, [products, updateTotalPrice]);
+  }, [updateTotalPrice]);
 
   return (
     <div>

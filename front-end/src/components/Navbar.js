@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import {
   DivNav, DivNavContent,
 } from '../styles/NavbarStyles';
-import TrybeerContext from '../context/TrybeerContext';
+import UserContext from '../context/UserContext';
 
 function Navbar() {
-  const { sidebar, setSidebar } = useContext(TrybeerContext);
+  const { sidebar, setSidebar } = useContext(UserContext);
   const showSidebar = () => setSidebar(!sidebar);
   return (
     <div>

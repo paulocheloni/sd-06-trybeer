@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import { useHistory } from 'react-router';
-import TrybeerContext from '../context/TrybeerContext';
+import UserContext from '../context/UserContext';
 import { HeaderStyled, DivTitle, DivHamburger } from '../styles/HeaderStyles';
 
 function Header() {
-  const { sidebar, setSidebar } = useContext(TrybeerContext);
+  const { sidebar, setSidebar } = useContext(UserContext);
 
   const showSidebar = () => setSidebar(!sidebar);
 

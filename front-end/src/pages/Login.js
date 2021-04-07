@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
-import TrybeerContext from '../context/TrybeerContext';
+import UserContext from '../context/UserContext';
 import { login } from '../api/axiosApi';
 
 import { Button, Container, Content, Input, Label, Title } from '../styles/styles';
 
 export default function Login() {
   const history = useHistory();
-  const { loginUser, setLoginUser } = useContext(TrybeerContext);
+  const { loginUser, setLoginUser } = useContext(UserContext);
   const [loginUserLocal, setLoginUserLocal] = useState({ email: '', password: '' });
 
   const handleLogin = async (dataUser) => {

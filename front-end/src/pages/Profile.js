@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import { edit } from '../api/axiosApi';
-import TrybeerContext from '../context/TrybeerContext';
+import UserContext from '../context/UserContext';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import { Container, Content, Input, Button, Message } from '../styles/styles';
@@ -9,7 +9,7 @@ import { Container, Content, Input, Button, Message } from '../styles/styles';
 export default function Profile() {
   const history = useHistory();
 
-  const { loginUser, setLoginUser } = useContext(TrybeerContext);
+  const { loginUser, setLoginUser } = useContext(UserContext);
   // console.log(loginUser.name, "loginUser");
   const [confirmationMessage, setConfirmationMessage] = useState(false);
 
