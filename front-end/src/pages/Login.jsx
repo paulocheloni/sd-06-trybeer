@@ -11,7 +11,7 @@ export default function Login() {
   const [password, setPassword] = useInput('');
 
   const handleOnClik = async () => {
-    fetches.fetchUserByEmail(email, password)
+    await fetches.fetchUserByEmail(email, password)
       .then((response) => {
         if (!response) return;
         localStorage.setItem('token', response[1]);
