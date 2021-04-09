@@ -1,29 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-class Home extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
+export default function Home(props) {
+  const { history } = props;
 
-  componentDidMount() {
-    const { history } = this.props;
+  useEffect(() => {
     history.push('./login');
-  }
-
-  render() {
-    return (
-      <div>
-        <p>Your Code Here</p>
-      </div>
-    );
-  }
+  }, [history]);
+  return (
+    <div>
+      <p>Teste</p>
+    </div>
+  );
 }
 
 Home.propTypes = {
   history: PropTypes.shape().isRequired,
 };
-
-export default connect(null, null)(Home);

@@ -7,16 +7,15 @@
     "@testing-library/react": "9.5.0",
     "@testing-library/user-event": "7.2.1",
     "axios": "0.19.2",
+    "dotenv": "^8.2.0",
     "eslint-config-trybe-frontend": "1.2.0",
     "jquery": "1.9.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-redux": "^7.2.2",
+    "react-icons": "^4.2.0",
     "react-router-dom": "5.2.0",
     "react-scripts": "3.4.1",
-    "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.3.0"
+    "styled-components": "^5.2.3"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "2.34.0",
@@ -29,7 +28,6 @@
     "eslint-plugin-react": "7.20.0",
     "eslint-plugin-react-hooks": "2.3.0",
     "mocha": "7.0.1",
-    "node-sass": "^4.14.1",
     "typescript": "2.8.1"
   },
   "scripts": {
