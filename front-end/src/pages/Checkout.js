@@ -15,7 +15,6 @@ export default function Checkout() {
 
   const totalPrice = JSON.parse(localStorage.totalPrice);
 
-  console.log(filteredItens);
   return (
     <section>
       <Header />
