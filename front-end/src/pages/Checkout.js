@@ -44,7 +44,8 @@ export default function Checkout() {
                   <p
                     data-testid={ `${index}-product-total-value` }
                   >
-                    { `${(product.price * product.quantity).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}` }
+                    { `${(product.price * product.quantity)
+                      .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}`}
                   </p>
                   <button
                     type="button"
@@ -60,7 +61,8 @@ export default function Checkout() {
             data-testid="order-total-value"
           >
             {/* { `R$ ${(totalPrice).toFixed(2)}` } */}
-            { `${totalPrice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}` }
+            { `${totalPrice
+              .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}` }
           </h3>
           <form>
             <Label> Rua </Label>
