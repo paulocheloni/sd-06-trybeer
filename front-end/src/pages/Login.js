@@ -1,23 +1,75 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { LoginDiv } from '../components';
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router';
+import UserContext from '../context/UserContext';
+import { login } from '../api/axiosApi';
 
-class Login extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
+import { Button, Container, Content, Input, Label, Title } from '../styles/styles';
 
-  render() {
-    const { history } = this.props;
-    return (
-      <LoginDiv history={ history } />
-    );
-  }
+export default function Login() {
+  const history = useHistory();
+  const { loginUser, setLoginUser } = useContext(UserContext);
+  const [loginUserLocal, setLoginUserLocal] = useState({ email: '', password: '' });
+
+  const handleLogin = async (dataUser) => {
+    const user = await login(dataUser);
+    localStorage.setItem('user', JSON.stringify(user));
+    setLoginUser({ ...loginUser, user });
+
+    if (user.role === 'client') {
+      history.push({ pathname: '/products' });
+    } else if (user.role === 'administrator') {
+      history.push({ pathname: '/admin/orders' });
+    } else {
+      history.push({ pathname: '/register' });
+    }
+  };
+
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setLoginUserLocal({ ...loginUserLocal, [name]: value });
+  };
+
+  const { email, password } = loginUserLocal;
+  const inputEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+  const PASSWORD_MIN_SIZE = 6;
+  const activeButton = inputEmail.test(email) && password.length >= PASSWORD_MIN_SIZE;
+
+  return (
+    <section>
+      <Container>
+        <Content>
+          <Title>Login</Title>
+          <Label>Email</Label>
+          <Input
+            type="email"
+            data-testid="email-input"
+            name="email"
+            onChange={ handleChange }
+          />
+          <Label>Senha</Label>
+          <Input
+            type="password"
+            data-testid="password-input"
+            name="password"
+            onChange={ handleChange }
+          />
+          <Button
+            type="button"
+            data-testid="signin-btn"
+            disabled={ !activeButton }
+            onClick={ () => handleLogin(loginUserLocal) }
+          >
+            Entrar
+          </Button>
+          <Button
+            type="button"
+            data-testid="no-account-btn"
+            onClick={ () => history.push('/register') }
+          >
+            Ainda não tenho conta
+          </Button>
+        </Content>
+      </Container>
+    </section>
+  );
 }
-
-Login.propTypes = {
-  history: PropTypes.shape().isRequired,
-};
-
-export default Login;

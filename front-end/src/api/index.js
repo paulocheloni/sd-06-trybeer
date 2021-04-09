@@ -1,122 +1,19 @@
 import axios from 'axios';
 
-const URL_BASE = 'http://localhost:3001/';
+const api = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL || 'http://localhost:3000',
+});
 
-export async function getAll() {
-  const users = await axios.get(`${URL_BASE}register/get-all`)
-    .then((response) => response.data);
-  return users;
-}
-
-export async function create(name, email, password, role) {
+api.interceptors.request.use((config) => {
+  const user = JSON.parse(localStorage.getItem('user'));
   try {
-    const user = await axios.post(`${URL_BASE}register`,
-      { name, email, password, role })
-      .then((response) => response.data);
-    return user;
-  } catch (error) {
-    if (error.response) {
-      return {
-        status: error.response.status,
-        statusText: error.response.statusText,
-        message: error.response.data.message,
-      };
+    if (user) {
+      config.headers.Authorization = user.token;
     }
+    return config;
+  } catch (err) {
+    console.log('err', err);
   }
-}
+});
 
-export async function validate(email, password) {
-  const END_POINT = 'login';
-  try {
-    const result = await axios.post(`${URL_BASE}${END_POINT}`, {
-      email, password,
-    })
-      .then((response) => response.data);
-    localStorage.setItem('token', JSON.stringify(result.token));
-    // console.log(result);
-    return result;
-  } catch (error) {
-    if (error.response) {
-      return {
-        status: error.response.status,
-        statusText: error.response.statusText,
-        message: error.response.data.message,
-      };
-    }
-  }
-}
-
-export async function edit(prevName, nextName) {
-  try {
-    const response = await axios.put(`${URL_BASE}register/edit-user`, {
-      prevName, nextName,
-    });
-    return response;
-  } catch (error) {
-    if (error.response) {
-      return {
-        status: error.response.status,
-        statusText: error.response.statusText,
-        message: error.response.data.message,
-      };
-    }
-  }
-}
-
-export async function getProducts() {
-  const token = localStorage.getItem('token');
-  try {
-    const products = await axios
-      .get(
-        `${URL_BASE}products/get-all`,
-        { headers: {
-          authorization: JSON.parse(token),
-        },
-        },
-      )
-      .then((response) => response.data);
-    return products;
-  } catch (error) {
-    if (error.response) {
-      return {
-        status: error.response.status,
-        statusText: error.response.statusText,
-        message: error.response.data.message,
-      };
-    }
-  }
-}
-
-export async function finishOrders({ priceTotal, date, userID, address, number }) {
-  try {
-    await axios
-      .post(
-        `${URL_BASE}orders/create`,
-        { priceTotal, date, userID, address, number },
-      );
-    // .then((response) => console.log(response));
-  } catch (error) {
-    if (error.response) {
-      return {
-        status: error.response.status,
-        statusText: error.response.statusText,
-        message: error.response.data.message,
-      };
-    }
-  }
-}
-
-export async function getAllOrders() {
-  try {
-    return axios.get(`${URL_BASE}orders/get-all`)
-      .then((response) => response.data);
-  } catch (error) {
-    if (error.response) {
-      return {
-        status: error.response.status,
-        statusText: error.response.statusText,
-        message: error.response.data.message,
-      };
-    }
-  }
-}
+export default api;

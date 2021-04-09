@@ -1,94 +1,80 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { profileName } from '../actions';
-import { Header } from '../components';
-import defaultProfile from '../img/profile.png';
-import { edit } from '../api';
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router';
+import { edit } from '../api/axiosApi';
+import UserContext from '../context/UserContext';
+import Navbar from '../components/Navbar';
+import Header from '../components/Header';
+import { Container, Content, Input, Button, Message } from '../styles/styles';
 
-class Profile extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-    this.handleChange = this.handleChange.bind(this);
-    this.editUser = this.editUser.bind(this);
+export default function Profile() {
+  const history = useHistory();
+
+  const { loginUser, setLoginUser } = useContext(UserContext);
+  // console.log(loginUser.name, "loginUser");
+  const [confirmationMessage, setConfirmationMessage] = useState(false);
+
+  const localStorageProfile = JSON.parse(localStorage.getItem('user'));
+  // console.log(localStorageProfile, "localStorageProfile");
+
+  if (localStorageProfile === null) {
+    history.push('./login');
+    return null;
   }
 
-  handleChange({ target: { name, value } }) {
-    const { dispatchName } = this.props;
-    const maxLength = 6;
-    if (name === 'name') {
-      if (value.length >= maxLength) {
-        dispatchName(value);
-      } else {
-        dispatchName('');
-      }
-    }
-  }
+  const idProfile = localStorageProfile.id;
+  // console.log(idProfile, "id");
+  const nameProfile = localStorageProfile.name;
+  // console.log(nameProfile, "NAME");
+  const emailProfile = localStorageProfile.email;
+  // console.log(emailProfile, "EMAIL");
 
-  async editUser({ target }) {
-    const { stateActualUser } = this.props;
-    console.log(stateActualUser.name);
-    let nextName = target.parentNode.childNodes[1].value;
-    const response = await edit(stateActualUser.name, nextName);
-    if (response.data.message) {
-      nextName = '';
-      const spanMaxTime = 6000;
-      const hiddenSpan = document.querySelector('.hidden-span');
-      hiddenSpan.style.display = 'inline-block';
-      hiddenSpan.innerText = response.data.message;
-      setTimeout(() => {
-        document.querySelector('.hidden-span').style.display = 'none';
-      }, spanMaxTime);
-    } else {
-      return null;
-    }
-  }
+  const handleProfile = async (id, name, email) => {
+    id = idProfile;
+    name = loginUser.name;
+    email = emailProfile;
+    setConfirmationMessage(true);
+    await edit(id, name, email);
+  };
 
-  render() {
-    const { history, stateProfileName } = this.props;
-    const maxLength = 6;
-    return (
-      <div className="profile-container">
-        <Header history={ history } />
-        <div className="inputs-div">
-          <img src={ defaultProfile } alt="profile" />
-          <input
-            name="name"
-            data-testid="profile-name-input"
-            placeholder="Name"
-            onChange={ this.handleChange }
-          />
-          <span className="hidden-span">Atualização concluida com sucesso</span>
-          <input placeholder="Email" readOnly data-testid="profile-email-input" />
-          <button
-            type="button"
-            data-testid="profile-save-btn"
-            disabled={ stateProfileName.length >= maxLength ? null : true }
-            onClick={ this.editUser }
-          >
-            Salvar
-          </button>
-        </div>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Header />
+      <Navbar
+        title="Meu perfil"
+        data-testid="top-title"
+        className="top-title"
+      />
+      <Container>
+        <Content>
+          <div>
+            {/* <img alt="profile" /> */}
+            <Input
+              name="name"
+              data-testid="profile-name-input"
+              placeholder={ nameProfile }
+              onChange={ (event) => setLoginUser(
+                { ...loginUser, name: event.target.value },
+              ) }
+            />
+            <Input
+              placeholder="Email"
+              readOnly
+              data-testid="profile-email-input"
+              value={ emailProfile }
+            />
+            <Button
+              type="button"
+              data-testid="profile-save-btn"
+              disabled={ loginUser.name === '' }
+              onClick={ () => handleProfile() }
+            >
+              Salvar
+            </Button>
+            {confirmationMessage && <Message>Atualização concluída com sucesso</Message>}
+          </div>
+
+        </Content>
+      </Container>
+    </div>
+  );
 }
-
-const mapStateToProps = (state) => ({
-  stateProfileName: state.login.profileName,
-  stateActualUser: state.user.actualUser,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  dispatchName: (name) => dispatch(profileName(name)),
-});
-
-Profile.propTypes = {
-  history: PropTypes.shape().isRequired,
-  dispatchName: PropTypes.func.isRequired,
-  stateProfileName: PropTypes.string.isRequired,
-  stateActualUser: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);

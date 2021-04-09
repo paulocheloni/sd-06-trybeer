@@ -15,8 +15,7 @@
 /**
  * @type {Cypress.PluginConfig}
  */
-const path = require('path')
-require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+require('dotenv').config();
 const  my = require('mysql2');
 
 function queryTestDb(query, config) {
