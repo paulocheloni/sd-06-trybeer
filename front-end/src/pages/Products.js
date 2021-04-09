@@ -70,10 +70,10 @@ export default function Products() {
         updatePrice += product.price * product.quantity;
       });
       setTotalPrice(updatePrice);
+      localStorage.setItem('totalPrice', JSON.stringify(updatePrice));
     };
     updateTotalPrice();
   }, [products, setTotalPrice]);
-
   return (
     <div>
       <Header />
