@@ -1,19 +1,18 @@
 const connection = require('../database/connection');
 
-// Create a user
-const createSale = async ({ userID, totalPrice, deliveryAddress, deliveryNumber, saleDate }) => {
+const create = async ({ userID, value, street, number, date }) => {
   try {
-    const [sale] = await connection.execute(
+    await connection.execute(
       `INSERT INTO sales
         (user_id, total_price, delivery_address, delivery_number, sale_date, status)
         VALUES (?, ?, ?, ?, ?, ?)`,
-      [userID, totalPrice, deliveryAddress, deliveryNumber, saleDate, 'Pendente'],
+      [userID, value, street, number, date, 'Pendente'],
     );
-    return sale;
-  } catch (err) {
-    console.error(err);
-    return null;
+  } catch (error) {
+    console.error(error);
   }
 };
 
-module.exports = { createSale };
+module.exports = {
+  create,
+};
