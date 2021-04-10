@@ -67,4 +67,3 @@ export async function registerOrder({ value, date, userID, street, number }) {
     }
   }
 }
-
