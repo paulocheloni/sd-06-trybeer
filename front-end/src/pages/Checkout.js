@@ -39,7 +39,11 @@ export default function Checkout() {
     }
   }, [history]);
 
-  const cartValue = JSON.parse(localStorage.totalPrice);
+  let cartValue = 0;
+  const totalPriceLocalStorage = localStorage.totalPrice;
+  if (totalPriceLocalStorage) {
+    cartValue = JSON.parse(totalPriceLocalStorage);
+  }
 
   useEffect(() => {
     function setInitialState() {
@@ -48,7 +52,11 @@ export default function Checkout() {
       const productSelected = productsInStorage.filter((el) => el.quantity > 0);
       setCartList(productSelected);
     }
-    setInitialState();
+
+    const productsLocalStorage = localStorage.products;
+    if (productsLocalStorage) {
+      setInitialState();
+    }
   }, [setProducts]);
 
   function excludeItemAndUpdateValue(product) {
