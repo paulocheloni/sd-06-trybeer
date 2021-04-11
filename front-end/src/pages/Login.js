@@ -3,7 +3,8 @@ import { useHistory } from 'react-router';
 import UserContext from '../context/UserContext';
 import { login } from '../api/axiosApi';
 
-import { Button, Container, Content, Input, Label, Title } from '../styles/styles';
+import { Container, Content } from '../components/styled-components';
+import { Button, Input, Title, Label } from '../components';
 
 export default function Login() {
   const history = useHistory();
@@ -38,36 +39,34 @@ export default function Login() {
     <section>
       <Container>
         <Content>
-          <Title>Login</Title>
-          <Label>Email</Label>
+          <Title title="Login" />
+          <Label text="Email" />
           <Input
             type="email"
-            data-testid="email-input"
+            id="email-input"
             name="email"
             onChange={ handleChange }
           />
-          <Label>Senha</Label>
+          <Label text="Senha" />
           <Input
             type="password"
-            data-testid="password-input"
+            id="password-input"
             name="password"
             onChange={ handleChange }
           />
           <Button
             type="button"
-            data-testid="signin-btn"
+            id="signin-btn"
+            label="Entrar"
             disabled={ !activeButton }
             onClick={ () => handleLogin(loginUserLocal) }
-          >
-            Entrar
-          </Button>
+          />
           <Button
             type="button"
-            data-testid="no-account-btn"
+            id="no-account-btn"
+            label="Ainda não tenho conta"
             onClick={ () => history.push('/register') }
-          >
-            Ainda não tenho conta
-          </Button>
+          />
         </Content>
       </Container>
     </section>
