@@ -45,4 +45,4 @@ app.all('*', (_req, res) => {
 
 app.use(error);
 
-app.listen(PORT, () => console.log(`Server rodando na porta:  ${PORT}`));
+app.listen(PORT, () => console.log(`Servidor rodando na porta:  ${PORT}`));

@@ -10,6 +10,6 @@ productsRouter.get('/', async (_req, res) => {
     } catch (error) {
       return res.status(status.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });
     }
-  });
+});
 
 module.exports = productsRouter; 

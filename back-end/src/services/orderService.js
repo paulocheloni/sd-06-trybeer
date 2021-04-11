@@ -5,4 +5,17 @@ const create = async ({ userID, value, street, number, date }) => {
   return orders;
 };
 
-module.exports = { create };
+// Get all users
+const getAll = async () => Model.getSales();
+
+// Get id sale
+const getBySalesId = async (id) => {
+  const sale = await Model.getBySales(id);
+  return sale;
+};
+
+module.exports = { 
+  create,
+  getAll,
+  getBySalesId,
+};
