@@ -13,6 +13,22 @@ const create = async ({ userID, value, street, number, date }) => {
   }
 };
 
+const getSales = async () => {
+  const [sales] = await connection.execute(
+    'SELECT * FROM Trybeer.sales',
+  );
+  return sales;
+};
+
+const getBySales = async (id) => {
+  const [sales] = await connection.execute(
+    'SELECT * FROM Trybeer.sales WHERE id = (?)', [id],
+  );
+  return sales;
+};
+
 module.exports = {
   create,
+  getSales,
+  getBySales,
 };
