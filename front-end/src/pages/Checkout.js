@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import ProductsContext from '../context/ProductsContext';
+import { registerOrder } from '../api/axiosApi';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 // import { useHistory } from 'react-router';
@@ -12,7 +13,6 @@ import {
   Label,
   Button,
 } from '../styles/styles';
-import { registerOrder } from '../api/axiosApi';
 
 export default function Checkout() {
   const history = useHistory();
@@ -33,7 +33,7 @@ export default function Checkout() {
 
   useEffect(() => {
     const localStorageProfile = JSON.parse(localStorage.getItem('user'));
-    console.log(localStorageProfile);
+    // console.log(localStorageProfile);
     if (localStorageProfile === null) {
       history.push('./login');
     }
@@ -82,12 +82,12 @@ export default function Checkout() {
 
   const getDate = new Date();
   const year = getDate.getFullYear();
-  const month = getDate.getMonth();
-  const day = getDate.getDay();
+  const month = getDate.getMonth() + 1;
+  const day = getDate.getDate();
   const hour = getDate.getHours();
   const minutes = getDate.getMinutes();
   const seconds = getDate.getSeconds();
-  const date = (`${year}/${month}/${day} ${hour}:${minutes}:${seconds}`);
+  const date = (`${year}-${month}-${day} ${hour}:${minutes}:${seconds}`);
 
   function clear() {
     localStorage.setItem('products', []);
@@ -96,9 +96,9 @@ export default function Checkout() {
 
   async function handleCallApi() {
     const userStorage = JSON.parse(localStorage.user);
-    const TIMEOUT = 2000;
+    const TIMEOUT = 3000;
     const { id } = userStorage;
-    const value = JSON.stringify(totalPrice);
+    const value = totalPrice.toFixed(2);
     const userID = JSON.stringify(id);
     await registerOrder({ value, date, userID, street, number });
     setSuccess(true);
@@ -109,7 +109,6 @@ export default function Checkout() {
     }, TIMEOUT);
   }
 
-  console.log(totalPrice);
   return (
     <section>
       <Header />
@@ -152,9 +151,6 @@ export default function Checkout() {
               </ul>
             )) : <span> Não há produtos no carrinho  </span>
           }
-          {
-            success && <span>Compra realizada com sucesso!</span>
-          }
           <h3
             data-testid="order-total-value"
           >
@@ -183,6 +179,9 @@ export default function Checkout() {
             >
               Finalizar Pedido
             </Button>
+            {
+              success && <span>Compra realizada com sucesso!</span>
+            }
           </div>
         </Content>
       </Container>

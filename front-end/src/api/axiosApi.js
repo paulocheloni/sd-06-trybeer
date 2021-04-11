@@ -55,15 +55,44 @@ export async function edit(id, name, email) {
 }
 
 export async function registerOrder({ value, date, userID, street, number }) {
-  try {
-    await axios.post('http://localhost:3001/orders', { value, date, userID, street, number });
-  } catch (error) {
-    if (error.response) {
-      return {
-        status: error.response.status,
-        statusText: error.response.statusText,
-        message: error.response.data.message,
-      };
-    }
-  }
+  const orderDB = await axios.post('http://localhost:3001/orders', {
+    value, date, userID, street, number,
+  })
+    .then((resp) => resp)
+    .catch((err) => {
+      console.log(err.response);
+      return err.response;
+    });
+  return orderDB;
+}
+
+export async function getSales() {
+  const token = localStorage.getItem('token');
+  const sales = await axios.get('http://localhost:3001/orders', {
+    headers: {
+      authorization: JSON.parse(token),
+    },
+  })
+    .then((resp) => resp.data)
+    .catch((err) => {
+      console.log(err.response);
+      return err.response;
+    });
+  return sales;
+}
+
+export async function getByIdSales(id) {
+  const token = localStorage.getItem('token');
+  const sales = await axios.get(`http://localhost:3001/orders/${id}`, {
+    id,
+    headers: {
+      authorization: JSON.parse(token),
+    },
+  })
+    .then((resp) => resp.data)
+    .catch((err) => {
+      console.log(err.response);
+      return err.response;
+    });
+  return sales;
 }
