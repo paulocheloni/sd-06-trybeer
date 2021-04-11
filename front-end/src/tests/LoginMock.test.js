@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent } from '@testing-library/react';
+import { fireEvent, waitForElement } from '@testing-library/react';
 import renderWithRouter from './RenderWithRouter';
 import App from '../App';
 import axios from 'axios';
@@ -30,6 +30,7 @@ describe('1 - Teste tela de Login.', () => {
       writable: true
     });
   });
+
   it('Será testado que é redirecionado para a pagina de /products ao clicar no button Entrar e o role ser "client"', async () => {
     const mockOnClick = axios.post.mockImplementationOnce(() => Promise.resolve(data));
     
@@ -48,10 +49,10 @@ describe('1 - Teste tela de Login.', () => {
 
     expect(mockOnClick).toHaveBeenCalledTimes(1);
     // console.log('meu localsotrage', window.localStorage);
-    expect(window.localStorage.setItem).toHaveBeenCalledTimes(1);
+    // expect(window.localStorage.setItem).toHaveBeenCalledTimes(1);
 
-    // const { pathname } = history.location;
-    // await waitForElement(() => expect(pathname).toBe('/products')); 
+    const { pathname } = history.location;
+    await waitForElement(() => expect(pathname).toBe('/products')); 
   
   });
 });

@@ -10,7 +10,7 @@ export default function Login() {
   const [email, setEmail] = useInput('');
   const [password, setPassword] = useInput('');
 
-  const handleOnClik = async () => {
+  const handleOnClick = async () => {
     await fetches.fetchUserByEmail(email, password)
       .then((response) => {
         if (!response) return;
@@ -53,7 +53,7 @@ export default function Login() {
           className="btn btn-secondary"
           onClick={ (e) => {
             e.preventDefault();
-            handleOnClik();
+            handleOnClick();
           } }
           disabled={ !(emailValidation(email) && passwordValidation(password)) }
           data-testid="signin-btn"
