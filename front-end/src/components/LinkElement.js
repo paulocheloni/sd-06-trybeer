@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyledLink } from './styled-components';
 
-const Link = ({ id, label, to, onClick }) => (
+const LinkElement = ({ id, label, to, onClick }) => (
   <StyledLink
     data-testid={ id }
     label={ label }
@@ -15,11 +15,11 @@ const Link = ({ id, label, to, onClick }) => (
 
 const { string, func } = PropTypes;
 
-Link.propTypes = {
+LinkElement.propTypes = {
   id: string.isRequired,
   to: string.isRequired,
   onClick: func.isRequired,
   label: string.isRequired,
 };
 
-export default Link;
+export default LinkElement;

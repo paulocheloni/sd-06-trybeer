@@ -5,3 +5,5 @@ export { default as StyledLabel } from './StyledLabel';
 export { default as TitleHeadingOne } from './TitleHeadingOne';
 export { default as Container } from './Container';
 export { default as Content } from './Content';
+export { default as DivNavContainer } from './DivNavContainer';
+export { default as DivNavContent } from './DivNavContent';
