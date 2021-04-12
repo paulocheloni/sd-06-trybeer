@@ -5,31 +5,27 @@ import * as ImIcons from 'react-icons/im';
 
 const SidebarData = [
   {
-    title: 'Products',
+    label: 'Produtos',
     path: '/products',
     icon: <FaIcons.FaBeer />,
-    cName: 'nav-text',
     id: 'side-menu-item-products',
   },
   {
-    title: 'Meus Pedidos',
+    label: 'Meus Pedidos',
     path: '/orders',
     icon: <FaIcons.FaCartPlus />,
-    cName: 'nav-text',
     id: 'side-menu-item-my-orders',
   },
   {
-    title: 'Meu Perfil',
+    label: 'Meu Perfil',
     path: '/profile',
     icon: <ImIcons.ImProfile />,
-    cName: 'nav-text',
     id: 'side-menu-item-my-profile',
   },
   {
-    title: 'Sair',
+    label: 'Sair',
     path: '/login',
     icon: <AiIcons.AiOutlineLogout />,
-    cName: 'nav-text',
     id: 'side-menu-item-logout',
   },
 ];

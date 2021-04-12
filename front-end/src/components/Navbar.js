@@ -1,51 +1,31 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  DivNav, DivNavContent,
-} from '../styles/NavbarStyles';
 import UserContext from '../context/UserContext';
+import { LinkElement } from './index';
+import { DivNavContainer, DivNavContent } from './styled-components';
+import SidebarData from './SidebarData';
 
-function Navbar() {
+const Navbar = () => {
   const { sidebar, setSidebar } = useContext(UserContext);
   const showSidebar = () => setSidebar(!sidebar);
   return (
-    <div>
-      <DivNav
-        style={ sidebar ? { width: '100%' } : { width: '0%' } }
-      >
-        <DivNavContent className="side-menu-container">
-          <Link
-            to="/products"
-            data-testid="side-menu-item-products"
-            onClick={ showSidebar }
-          >
-            Produtos
-          </Link>
-          <Link
-            to="/orders"
-            data-testid="side-menu-item-my-orders"
-            onClick={ showSidebar }
-          >
-            Meus pedidos
-          </Link>
-          <Link
-            to="/profile"
-            data-testid="side-menu-item-my-profile"
-            onClick={ showSidebar }
-          >
-            Meu Perfil
-          </Link>
-          <Link
-            to="/login"
-            data-testid="side-menu-item-logout"
-            onClick={ showSidebar }
-          >
-            Sair
-          </Link>
-        </DivNavContent>
-      </DivNav>
-    </div>
+    <DivNavContainer
+      style={ sidebar ? { width: '100%' } : { width: '0%' } }
+    >
+      <DivNavContent className="side-menu-container">
+        {
+          SidebarData.map((link, index) => (
+            <LinkElement
+              key={ index }
+              id={ link.id }
+              label={ link.label }
+              to={ link.path }
+              onClick={ showSidebar }
+            />
+          ))
+        }
+      </DivNavContent>
+    </DivNavContainer>
   );
-}
+};
 
 export default Navbar;
