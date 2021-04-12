@@ -7,3 +7,6 @@ export { default as Container } from './Container';
 export { default as Content } from './Content';
 export { default as DivNavContainer } from './DivNavContainer';
 export { default as DivNavContent } from './DivNavContent';
+export { default as DivHeaderCenter } from './DivHeaderCenter';
+export { default as DivHeaderLeft } from './DivHeaderLeft';
+export { default as DivHeaderContainer } from './DivHeaderContainer';

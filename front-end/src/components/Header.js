@@ -2,52 +2,53 @@ import React, { useContext, useEffect, useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import { useHistory } from 'react-router';
 import UserContext from '../context/UserContext';
-import { HeaderStyled, DivTitle, DivHamburger } from '../styles/HeaderStyles';
+import {
+  TitleHeadingOne,
+  DivHeaderCenter,
+  DivHeaderLeft,
+  DivHeaderContainer,
+} from './styled-components';
 
 function Header() {
   const { sidebar, setSidebar } = useContext(UserContext);
-
   const showSidebar = () => setSidebar(!sidebar);
-
   const [pathnameTitle, setPathnamerTitle] = useState('TryBeer');
   const history = useHistory();
   const { pathname } = history.location;
 
   useEffect(() => {
-    const header = document.getSelection('top-title');
     if (pathname === '/profile') {
-      header.innerHTML = 'Meu perfil';
-      setPathnamerTitle(header.innerHTML);
+      setPathnamerTitle('Meu perfil');
     }
     if (pathname === '/admin/profile') {
-      header.innerHTML = 'Admin - Meu Perfil';
-      setPathnamerTitle(header.innerHTML);
+      setPathnamerTitle('Admin - Meu Perfil');
     }
     if (pathname === '/checkout') {
-      header.innerHTML = 'Finalizar Pedido';
-      setPathnamerTitle(header.innerHTML);
+      setPathnamerTitle('Finalizar Pedido');
     }
     if (pathname === '/orders') {
-      header.innerHTML = 'Meus Pedidos';
-      setPathnamerTitle(header.innerHTML);
+      setPathnamerTitle('Meus Pedidos');
     }
   }, [pathname]);
 
   return (
-    <header>
-      <HeaderStyled>
-        <DivHamburger>
-          <FaIcons.FaBars
-            className="menu-bars"
-            data-testid="top-hamburguer"
-            onClick={ showSidebar }
-          />
-        </DivHamburger>
-        <DivTitle>
-          <h1 data-testid="top-title" className="top-title">{ pathnameTitle }</h1>
-        </DivTitle>
-      </HeaderStyled>
-    </header>
+    <DivHeaderContainer>
+      <DivHeaderLeft>
+        <FaIcons.FaBars
+          className="menu-bars"
+          data-testid="top-hamburguer"
+          onClick={ showSidebar }
+        />
+      </DivHeaderLeft>
+      <DivHeaderCenter>
+        <TitleHeadingOne
+          data-testid="top-title"
+          className="top-title"
+        >
+          { pathnameTitle }
+        </TitleHeadingOne>
+      </DivHeaderCenter>
+    </DivHeaderContainer>
   );
 }
 
