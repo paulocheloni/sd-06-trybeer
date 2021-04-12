@@ -56,6 +56,7 @@ describe('1 - Teste tela de Login.', () => {
     
 
     // const { pathname } = history.location;
-    // await waitForElement(() => expect(pathname).toBe('/products'));
+    // waitForElement(() => expect(pathname).toBe('/products'));
+    // console.log('passou pelo teste de redirecionar a página')
   });
 });
