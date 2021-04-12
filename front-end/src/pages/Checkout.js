@@ -8,11 +8,19 @@ import Navbar from '../components/Navbar';
 
 import {
   Container,
-  Content,
+} from '../styles/styles';
+
+import {
+  Button,
   Input,
   Label,
-  Button,
-} from '../styles/styles';
+} from '../components';
+import {
+  Table,
+  ButtonExclude,
+  Message,
+  SpanTotalPrice,
+} from '../components/styled-components';
 
 export default function Checkout() {
   const history = useHistory();
@@ -33,7 +41,6 @@ export default function Checkout() {
 
   useEffect(() => {
     const localStorageProfile = JSON.parse(localStorage.getItem('user'));
-    // console.log(localStorageProfile);
     if (localStorageProfile === null) {
       history.push('./login');
     }
@@ -108,82 +115,97 @@ export default function Checkout() {
       clear();
     }, TIMEOUT);
   }
-
   return (
     <section>
       <Header />
       <Navbar />
       <Container>
-        <Content>
-          {
-            cartList.length ? cartList.map((product, index) => (
-              <ul key={ index }>
-                <li>
-                  <h4
-                    data-testid={ `${index}-product-name` }
-                  >
-                    { product.name }
-                  </h4>
-                  <p
-                    data-testid={ `${index}-product-qtd-input` }
-                  >
-                    { product.quantity }
-                  </p>
-                  <p
-                    data-testid={ `${index}-product-unit-price` }
-                  >
-                    { `(R$ ${product.price.replace('.', ',')} un)` }
-                  </p>
-                  <p
-                    data-testid={ `${index}-product-total-value` }
-                  >
-                    { `${(product.price * product.quantity)
-                      .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}`}
-                  </p>
-                  <button
-                    type="button"
-                    data-testid={ `${index}-removal-button` }
-                    onClick={ () => excludeItemAndUpdateValue(product) }
-                  >
-                    X
-                  </button>
-                </li>
-              </ul>
-            )) : <span> Não há produtos no carrinho  </span>
-          }
-          <h3
-            data-testid="order-total-value"
-          >
-            {/* { `R$ ${(totalPrice).toFixed(2)}` } */}
-            { `${cartValue
-              .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}` }
-          </h3>
-          <div>
-            <Label> Rua </Label>
-            <Input
-              name="street"
-              data-testid="checkout-street-input"
-              onChange={ handleChange }
-            />
-            <Label> Número da casa </Label>
-            <Input
-              name="number"
-              data-testid="checkout-house-number-input"
-              onChange={ handleChange }
-            />
-            <Button
-              type="button"
-              disabled={ !activeButton }
-              data-testid="checkout-finish-btn"
-              onClick={ () => handleCallApi() }
-            >
-              Finalizar Pedido
-            </Button>
+        <Table>
+          <tr>
+            <th>Quantidade</th>
+            <th>Produto</th>
+            <th>Valor</th>
+            <th>Valor unitário</th>
+            <th>Excluir Item</th>
+          </tr>
+          <tbody>
             {
-              success && <span>Compra realizada com sucesso!</span>
+              cartList.length ? cartList
+                .map((product, index) => (
+                  <tr key={ index }>
+                    <td
+                      data-testid={ `${index}-product-qtd-input` }
+                    >
+                      { product.quantity }
+                    </td>
+                    <td
+                      data-testid={ `${index}-product-name` }
+                    >
+                      { product.name }
+                    </td>
+                    <td
+                      data-testid={ `${index}-product-total-value` }
+                    >
+                      { `${(product.price * product.quantity)
+                        .toLocaleString(
+                          'pt-br', { style: 'currency', currency: 'BRL' },
+                        )}`}
+                    </td>
+                    <td
+                      data-testid={ `${index}-product-unit-price` }
+                    >
+                      { `(R$ ${product.price.replace('.', ',')} un)` }
+                    </td>
+
+                    <td>
+                      <ButtonExclude
+                        type="button"
+                        data-testid={ `${index}-removal-button` }
+                        onClick={ () => excludeItemAndUpdateValue(product) }
+                      >
+                        X
+                      </ButtonExclude>
+
+                    </td>
+                  </tr>
+                )) : <Message> Não há produtos no carrinho  </Message>
             }
-          </div>
-        </Content>
+          </tbody>
+        </Table>
+        <SpanTotalPrice
+          data-testid="order-total-value"
+        >
+          <span>Valor Total:</span>
+          { `${cartValue
+            .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}` }
+        </SpanTotalPrice>
+        <div>
+          <Label text="Rua" />
+          <Input
+            type="text"
+            name="street"
+            id="checkout-street-input"
+            onChange={ handleChange }
+          />
+          <Label text="Número da casa" />
+          <Input
+            type="text"
+            name="number"
+            id="checkout-house-number-input"
+            onChange={ handleChange }
+          />
+          <Button
+            type="button"
+            disabled={ !activeButton }
+            id="checkout-finish-btn"
+            label="Finalizar Pedido"
+            onClick={ () => handleCallApi() }
+          />
+          {
+            success && <span>Compra realizada com sucesso!</span>
+          }
+        </div>
+
       </Container>
     </section>
   );
