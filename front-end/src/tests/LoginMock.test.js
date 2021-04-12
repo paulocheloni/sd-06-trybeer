@@ -6,7 +6,7 @@ import axios from 'axios';
 
 jest.mock('axios');
 
-const data = [
+const response = {data: [
   { 
     name: 'testuser', 
     email: 'user@test.com',
@@ -17,8 +17,7 @@ const data = [
     + '.eyJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InVzZXJAdGVzdC5jb20iLCJyb2xlIjoiY2xpZW50IiwiaWF0IjoxNjE3NjI4Nzg3LCJleHAiOjE2MTgyMzM1ODd9'
     + '.dQbYd0nU9e0aq7YJ_rHUq-ChkSm5uBcFP2ir8WLGxVg',
   }
-]
-
+]}
 
 describe('1 - Teste tela de Login.', () => {
   beforeEach(() => {
@@ -31,9 +30,13 @@ describe('1 - Teste tela de Login.', () => {
     });
   });
 
-  it('Será testado que é redirecionado para a pagina de /products ao clicar no button Entrar e o role ser "client"', async () => {
-    const mockOnClick = axios.post.mockImplementationOnce(() => Promise.resolve(data));
-    
+  it('Será testado que é redirecionado para a pagina de /products ao clicar no button Entrar e o role ser "client"', () => {
+    const mockOnClick = axios.post.mockImplementationOnce(() => {
+      Promise.resolve(response);
+      // console.log('my data from mockOnClick', response);
+      return Promise.resolve(response);
+    });
+
     const { getByTestId, history } = renderWithRouter(<App />);
     
     const emailInput = getByTestId('email-input');
@@ -44,15 +47,15 @@ describe('1 - Teste tela de Login.', () => {
     fireEvent.change(passwordInput, { target: { value: 'test123' } });
     
     expect(buttonEntrar).toBeEnabled();
-    
-    fireEvent.click(buttonEntrar);
 
+    fireEvent.click(buttonEntrar);
+    
     expect(mockOnClick).toHaveBeenCalledTimes(1);
     // console.log('meu localsotrage', window.localStorage);
-    // expect(window.localStorage.setItem).toHaveBeenCalledTimes(1);
+    expect(window.localStorage.setItem).toHaveBeenCalledTimes(1);
+    
 
-    const { pathname } = history.location;
-    await waitForElement(() => expect(pathname).toBe('/products')); 
-  
+    // const { pathname } = history.location;
+    // await waitForElement(() => expect(pathname).toBe('/products'));
   });
 });
