@@ -28,7 +28,7 @@ orderRouter.get('/', async (_req, res) => {
 
 orderRouter.get('/:id', async (req, res) => {
   const { id } = req.params;
-  // console.log(id);
+  console.log(id);
   try {
     const Sale = await Service.getBySalesId(id);
 

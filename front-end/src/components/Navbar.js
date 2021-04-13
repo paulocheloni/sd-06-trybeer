@@ -7,6 +7,9 @@ import SidebarData from './SidebarData';
 const Navbar = () => {
   const { sidebar, setSidebar } = useContext(UserContext);
   const showSidebar = () => setSidebar(!sidebar);
+
+  const logout = () => localStorage.setItem('user', null)
+
   return (
     <DivNavContainer
       style={ sidebar ? { width: '100%' } : { width: '0%' } }
@@ -23,6 +26,12 @@ const Navbar = () => {
             />
           ))
         }
+        <LinkElement
+          id="side-menu-item-logout"
+          label="Sair"
+          to="/login"
+          onClick={ () => logout() }
+        />
       </DivNavContent>
     </DivNavContainer>
   );

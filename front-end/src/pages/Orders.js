@@ -49,6 +49,7 @@ export default function Order() {
                   type="button"
                   data-testid={ `${index}-order-number` }
                   onClick={ () => history.push(`/orders/${index + 1}`) }
+                  // onClick={ () => getByIdSales(index + 1) }
                 >
                   {`Pedido ${index + 1}`}
                 </button>

@@ -30,9 +30,20 @@ const createSaleProduct = async (saleId, productId, quantity) => {
     [saleId, productId, quantity]);
 };
 
+const getOrderByID = async (id) => {
+  const [sales] = await connection.execute(
+    `SELECT * FROM sales_products 
+    INNER JOIN products ON sales_products.product_id = products.id 
+    INNER JOIN sales ON sales_products.sale_id = sales.id WHERE sale_id = ?`, [id],
+  );
+  console.log(sales)
+  return sales;
+};
+
 module.exports = {
   create,
   getSales,
   getBySales,
   createSaleProduct,
+  getOrderByID,
 };

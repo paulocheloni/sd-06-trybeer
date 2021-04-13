@@ -22,12 +22,6 @@ const SidebarData = [
     icon: <ImIcons.ImProfile />,
     id: 'side-menu-item-my-profile',
   },
-  {
-    label: 'Sair',
-    path: '/login',
-    icon: <AiIcons.AiOutlineLogout />,
-    id: 'side-menu-item-logout',
-  },
 ];
 
 export default SidebarData;
