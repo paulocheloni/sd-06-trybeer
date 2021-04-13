@@ -8,8 +8,8 @@ const messageJson = { message: 'Internal Server Error' };
 
 orderRouter.post('/', async (req, res) => {
   try {
-    const { userID, value, street, number, date } = req.body;
-    await Service.create({ userID, value, street, number, date });
+    const { userID, value, street, number, date, saleProduct } = req.body;
+    await Service.create({ userID, value, street, number, date, saleProduct });
     res.status(200).json(userID, value, street, number, date);
   } catch (error) {
     return res.status(erroReturnCatch).json(messageJson);

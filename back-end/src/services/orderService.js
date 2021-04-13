@@ -1,7 +1,11 @@
 const Model = require('../models/orderModels');
 
-const create = async ({ userID, value, street, number, date }) => {
+const create = async ({ userID, value, street, number, date, saleProduct }) => {
   const orders = await Model.create({ userID, value, street, number, date });
+  const saleId = orders.insertId;
+  saleProduct.forEach((e) => {
+    Model.createSaleProduct(saleId, e.id, e.quantity);
+  });
   return orders;
 };
 

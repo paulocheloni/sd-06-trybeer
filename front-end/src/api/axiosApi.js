@@ -54,9 +54,11 @@ export async function edit(id, name, email) {
   }
 }
 
-export async function registerOrder({ value, date, userID, street, number }) {
+export async function registerOrder(
+  { value, date, userID, street, number, saleProduct },
+) {
   const orderDB = await axios.post('http://localhost:3001/orders', {
-    value, date, userID, street, number,
+    value, date, userID, street, number, saleProduct,
   })
     .then((resp) => resp)
     .catch((err) => {
