@@ -107,7 +107,10 @@ export default function Checkout() {
     const { id } = userStorage;
     const value = totalPrice.toFixed(2);
     const userID = JSON.stringify(id);
-    await registerOrder({ value, date, userID, street, number });
+    //
+    const saleProduct = cartList.map((el) => ({ id: el.id, quantity: el.quantity }));
+    //
+    await registerOrder({ value, date, userID, street, number, saleProduct });
     setSuccess(true);
 
     setTimeout(() => {
@@ -115,6 +118,7 @@ export default function Checkout() {
       clear();
     }, TIMEOUT);
   }
+
   return (
     <section>
       <Header />
