@@ -19,22 +19,50 @@ const response = {data: [
   }
 ]}
 
+const allProducts = { data: [
+  { 
+    id: 1,
+    name: "Skol Lata 250ml",
+    price: "2.20",
+    url_image: "http://localhost:3001/images/Skol Lata 350ml.jpg"
+  },
+  {
+    id: 2,
+    name: "Heineken 600ml",
+    price: "7.50",
+    url_image: "http://localhost:3001/images/Heineken 600ml.jpg"
+  },
+  {
+    id: 3,
+    name: "Antarctica Pilsen 300ml",
+    price: "2.49",
+    url_image: "http://localhost:3001/images/Antarctica Pilsen 300ml.jpg"
+  }
+]}
+
 describe('1 - Teste tela de Login.', () => {
   beforeEach(() => {
     Object.defineProperty(window, "localStorage", {
       value: {
         getItem: jest.fn(() => null),
-        setItem: jest.fn(() => null)
+        setItem: jest.fn((args1, args2) => console.log(args1, args2))
       },
       writable: true
     });
   });
 
   it('Será testado que é redirecionado para a pagina de /products ao clicar no button Entrar e o role ser "client"', () => {
-    const mockOnClick = axios.post.mockImplementationOnce(() => {
+    const mockOnClick = axios.post.mockImplementation(() => {
       Promise.resolve(response);
       // console.log('my data from mockOnClick', response);
       return Promise.resolve(response);
+    });
+
+    const mockOnAllProducts = axios.get.mockImplementation(() => {
+      Promise.resolve(allProducts);
+      console.log('entrei Aqui no mocl products')
+      // console.log('my data from mockOnClick', response);
+      return Promise.resolve(allProducts);
     });
 
     const { getByTestId, history } = renderWithRouter(<App />);
@@ -51,8 +79,10 @@ describe('1 - Teste tela de Login.', () => {
     fireEvent.click(buttonEntrar);
     
     expect(mockOnClick).toHaveBeenCalledTimes(1);
+
+
     // console.log('meu localsotrage', window.localStorage);
-    expect(window.localStorage.setItem).toHaveBeenCalledTimes(1);
+    // expect(window.localStorage.setItem).toHaveBeenCalledTimes(1);
     
 
     // const { pathname } = history.location;
