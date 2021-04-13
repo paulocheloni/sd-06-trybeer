@@ -36,7 +36,6 @@ const getOrderByID = async (id) => {
     INNER JOIN products ON sales_products.product_id = products.id 
     INNER JOIN sales ON sales_products.sale_id = sales.id WHERE sale_id = ?`, [id],
   );
-  console.log(sales)
   return sales;
 };
 

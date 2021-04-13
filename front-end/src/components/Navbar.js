@@ -8,7 +8,7 @@ const Navbar = () => {
   const { sidebar, setSidebar } = useContext(UserContext);
   const showSidebar = () => setSidebar(!sidebar);
 
-  const logout = () => localStorage.setItem('user', null)
+  const logout = () => localStorage.setItem('user', null);
 
   return (
     <DivNavContainer
