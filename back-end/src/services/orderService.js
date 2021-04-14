@@ -14,7 +14,7 @@ const getAll = async () => Model.getSales();
 
 // Get id sale
 const getBySalesId = async (id) => {
-  const sale = await Model.getBySales(id);
+  const sale = await Model.getOrderByID(id);
   return sale;
 };
 
