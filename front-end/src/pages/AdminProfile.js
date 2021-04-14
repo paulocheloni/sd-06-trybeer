@@ -1,25 +1,22 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router';
 import Header from '../components/Header';
 import NavbarAdmin from '../components/NavBarAdmin';
 
 import { Container, Content } from '../components/styled-components';
-// import { Input, Button, Message } from '../styles/styles';
-import Input from '../components/Input';
+
+const getUser = () => localStorage.getItem('user');
 
 export default function AdminProfile() {
-  const dataUserFromStorage = JSON.parse(localStorage.user);
-  const { name, email } = dataUserFromStorage;
+  const user = getUser();
   const history = useHistory();
 
-  console.log('sorto')
-  console.log(name)
-  if (dataUserFromStorage === null) {
-    history.push('./login');
-    return null;
+  if (!user) {
+    history.push('/login');
+    window.location.reload();
   }
 
-
+  const { name, email } = user;
 
   return (
     <div>

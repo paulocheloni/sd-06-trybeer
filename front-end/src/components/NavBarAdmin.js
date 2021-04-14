@@ -10,6 +10,8 @@ const NavbarAdmin = () => {
   const [data, setData] = useState([]);
   const showSidebar = () => setSidebar(!sidebar);
 
+  const logout = () => localStorage.setItem('user', null);
+
   useEffect(() => {
     const roleUser = JSON.parse(localStorage.user).role;
     if (roleUser === 'administrator' ? setData(SidebarAdminData) : setData(SidebarData));
@@ -35,7 +37,7 @@ const NavbarAdmin = () => {
           id="side-menu-item-logout"
           label="Sair"
           to="/login"
-          
+          onClick={ () => logout() }
         />
       </DivNavContent>
     </DivNavContainer>
