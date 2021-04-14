@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import Register from './pages/Register';
 import history from './utilities/History';
 import orders from './pages/Orders';
+import OrderDetail from './pages/OrderDetail';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/register" component={ Register } />
         <Route exact path="/profile" component={ Profile } />
         <Route exact path="/orders" component={ orders } />
+        <Route exact path="/orders/:id" component={ OrderDetail } />
         <Route exact path="/products" component={ Products } />
         <Route exact path="/checkout" component={ Checkout } />
         <Route exact path="/admin/profile" component={ AdminProfile } />
