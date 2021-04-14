@@ -41,7 +41,7 @@ router.post('/login', validatePassword, validateEmail, rescue(async (req, res) =
   };
 
   const userToken = createToken(userDataForFront);
-  console.log(userToken);
+  // console.log(userToken);
   return res.status(201).json({ userToken });
 }));
 

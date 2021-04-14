@@ -45,25 +45,25 @@ describe('1 - Teste tela de Login.', () => {
     Object.defineProperty(window, "localStorage", {
       value: {
         getItem: jest.fn(() => null),
-        setItem: jest.fn((args1, args2) => console.log(args1, args2))
+        setItem: jest.fn(() => null),
+        // setItem: jest.fn((args1, args2) => console.log('entrei aqui no localStorage', args1, args2))
       },
       writable: true
     });
   });
 
-  it('Será testado que é redirecionado para a pagina de /products ao clicar no button Entrar e o role ser "client"', () => {
+  it('Será testado que é redirecionado para a pagina de /products ao clicar no button Entrar e o role ser "client"', async () => {
     const mockOnClick = axios.post.mockImplementation(() => {
       Promise.resolve(response);
       // console.log('my data from mockOnClick', response);
       return Promise.resolve(response);
     });
 
-    const mockOnAllProducts = axios.get.mockImplementation(() => {
-      Promise.resolve(allProducts);
-      console.log('entrei Aqui no mocl products')
-      // console.log('my data from mockOnClick', response);
-      return Promise.resolve(allProducts);
-    });
+    // const mockOnAllProducts = axios.get.mockImplementation(() => {
+    //   Promise.resolve(allProducts);
+    //   console.log('entrei Aqui no mock products')
+    //   return Promise.resolve(allProducts);
+    // });
 
     const { getByTestId, history } = renderWithRouter(<App />);
     
@@ -80,13 +80,13 @@ describe('1 - Teste tela de Login.', () => {
     
     expect(mockOnClick).toHaveBeenCalledTimes(1);
 
-
     // console.log('meu localsotrage', window.localStorage);
-    // expect(window.localStorage.setItem).toHaveBeenCalledTimes(1);
+    await expect(window.localStorage.setItem).toHaveBeenCalled()
+    // await waitForElement(() => expect(window.localStorage.setItem).toHaveBeenCalled());
     
-
-    // const { pathname } = history.location;
-    // waitForElement(() => expect(pathname).toBe('/products'));
+    const { pathname } = history.location;
+    expect(pathname).toBe('/products')
+    // await waitForElement(() => expect(pathname).toBe('/products'));
     // console.log('passou pelo teste de redirecionar a página')
   });
 });

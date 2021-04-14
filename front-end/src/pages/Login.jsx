@@ -14,8 +14,8 @@ export default function Login() {
     fetches.fetchUserByEmail(email, password)
       .then((response) => {
         // console.log('my response', response);
-        // if (!response) return;
-        localStorage.setItem('token', response[1]);
+        if (!response) return;
+        window.localStorage.setItem('token', response[1]);
         if (response[0].role === 'client') history.push('/products');
         else history.push('/admin/orders');
       });
