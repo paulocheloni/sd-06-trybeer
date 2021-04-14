@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyledInput, StyledLabel } from './styled-components';
 
-const Input = ({ type, id, name, label, onChange }) => (
+const Input = ({ type, id, name, label, onChange, readOnly, value }) => (
 
   <StyledLabel>
     { label }
@@ -12,12 +12,14 @@ const Input = ({ type, id, name, label, onChange }) => (
       data-testid={ id }
       name={ name }
       onChange={ onChange }
+      readOnly={ readOnly }
+      value={ value }
     />
   </StyledLabel>
 
 );
 
-const { string, func } = PropTypes;
+const { string, func, bool } = PropTypes;
 
 Input.propTypes = {
   type: string.isRequired,
@@ -25,6 +27,8 @@ Input.propTypes = {
   name: string.isRequired,
   label: string.isRequired,
   onChange: func.isRequired,
+  readOnly: bool.isRequired,
+  value: string.isRequired,
 };
 
 export default Input;

@@ -16,12 +16,6 @@ const SidebarAdminData = [
     icon: <ImIcons.ImProfile />,
     id: 'side-menu-item-profile',
   },
-  {
-    label: 'Sair',
-    path: '/login',
-    icon: <AiIcons.AiOutlineLogout />,
-    id: 'side-menu-item-logout',
-  },
 ];
 
 export default SidebarAdminData;

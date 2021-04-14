@@ -31,6 +31,12 @@ const NavbarAdmin = () => {
             />
           ))
         }
+        <LinkElement
+          id="side-menu-item-logout"
+          label="Sair"
+          to="/login"
+          
+        />
       </DivNavContent>
     </DivNavContainer>
   );
