@@ -4,10 +4,15 @@ import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import { getByIdSales } from '../api/axiosApi';
 
+import CardOrder from '../components/CardOrder';
+import { Container } from '../styles/styles';
+
+import './OrderDetail.css';
+
 export default function OrderDetail() {
   const history = useHistory();
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
+  const [orders, setOrders] = useState(null);
 
   useEffect(() => {
     const localStorageProfile = JSON.parse(localStorage.getItem('user'));
@@ -19,7 +24,7 @@ export default function OrderDetail() {
   useEffect(() => {
     const findByID = async () => {
       const result = await getByIdSales(id);
-      setProduct(result);
+      setOrders(result);
     };
     findByID();
   }, [id]);
@@ -35,49 +40,49 @@ export default function OrderDetail() {
   }
 
   return (
-    <>
+    <section>
       <Header />
       <Navbar />
-      {
-        (product)
-          ? product.map((el, index) => (
-            <div key={ index }>
-              <h4
-                data-testid="order-number"
-              >
-                {`Pedido ${index + 1}`}
-              </h4>
-              <p
-                data-testid="order-date"
-              >
-                { formatDate(el.sale_date) }
-              </p>
-              <p
-                data-testid={ `${index}-product-qtd` }
-              >
-                { el.quantity }
-              </p>
-              <p
-                data-testid={ `${index}-product-name` }
-              >
-                { el.name }
-              </p>
-              <p
-                data-testid={ `${index}-product-total-value` }
-              >
-                {`R$ ${el.price.replace('.', ',')}`}
-              </p>
-              <p
+      <Container>
+        {
+          (orders && orders.length > 0) && (
+            <div className="content">
+              <div className="top-card title">
+                <h2
+                  className="order"
+                  data-testid="order-number"
+                >
+                  {`Pedido ${orders[0].id}`}
+                </h2>
+                <h2
+                  className="date"
+                  data-testid="order-date"
+                >
+                  { formatDate(orders[0].sale_date) }
+                </h2>
+              </div>
+              <ul className="middle-card">
+                { orders.map((product, index) => (
+                  <CardOrder
+                    key={ index }
+                    product={ product }
+                    index={ index }
+                  />
+                ))}
+              </ul>
+              <div
+                className="bottom-card total-value item-grid"
                 data-testid="order-total-value"
               >
-                {`R$ ${el.total_price.replace('.', ',')}`}
-              </p>
-
+                {` Valor total do pedido: R$ ${orders[0].total_price.replace('.', ',')}`}
+              </div>
             </div>
-          ))
+          )
+        }
 
-          : <h1> teste</h1>
-      }
-    </>
+        {console.log(orders) }
+      </Container>
+
+    </section>
   );
 }
