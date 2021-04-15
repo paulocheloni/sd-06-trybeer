@@ -1,39 +1,33 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { Redirect } from 'react-router';
 import Header from '../components/Header';
 import NavbarAdmin from '../components/NavBarAdmin';
 
-import { Container, Content } from '../components/styled-components';
-
-const getUser = () => localStorage.getItem('user');
+import { Container, Content, Message } from '../components/styled-components';
 
 export default function AdminProfile() {
-  const user = getUser();
-  const history = useHistory();
-
+  const user = JSON.parse(localStorage.getItem('user'));
   if (!user) {
-    history.push('/login');
-    window.location.reload();
+    return <Redirect to="/login" />;
   }
 
   const { name, email } = user;
-
   return (
     <div>
       <Header />
       <NavbarAdmin />
       <Container>
         <Content>
-          <span
+          <Message
             data-testid="profile-name"
           >
             { `Nome: ${name}` }
-          </span>
-          <span
+          </Message>
+          <Message
             data-testid="profile-email"
           >
             { `Email: ${email}` }
-          </span>
+          </Message>
         </Content>
       </Container>
     </div>

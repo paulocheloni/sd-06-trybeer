@@ -1,29 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+import React from 'react';
 import Header from '../components/Header';
 import NavbarAdmin from '../components/NavBarAdmin';
 
-const getUser = () => localStorage.getItem('user');
-
-console.log('numsei')
-
-const AdminOrders = () => {
-  const user = getUser();
-  const history = useHistory();
-
-  if (!user) {
-    history.push('/login');
-    window.location.reload();
-  }
+export default function AdminOrders() {
   return (
     <div>
-      <h1>
-        {' '}
-        { user }
-        {' '}
-      </h1>
+      <Header />
+      <NavbarAdmin />
     </div>
   );
-};
-
-export default AdminOrders;
+}

@@ -10,11 +10,14 @@ const NavbarAdmin = () => {
   const [data, setData] = useState([]);
   const showSidebar = () => setSidebar(!sidebar);
 
-  const logout = () => localStorage.setItem('user', null);
+  const logout = () => localStorage.clear();
 
   useEffect(() => {
-    const roleUser = JSON.parse(localStorage.user).role;
-    if (roleUser === 'administrator' ? setData(SidebarAdminData) : setData(SidebarData));
+    const user = JSON.parse(localStorage.user);
+
+    if (user && user.role === 'administrator'
+      ? setData(SidebarAdminData)
+      : setData(SidebarData));
   }, []);
 
   return (

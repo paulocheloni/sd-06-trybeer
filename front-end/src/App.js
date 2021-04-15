@@ -8,13 +8,13 @@ import Login from './pages/Login';
 import Products from './pages/Products';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
-import history from './utilities/History';
+
 import orders from './pages/Orders';
 import OrderDetail from './pages/OrderDetail';
 
 function App() {
   return (
-    <div className="App" history={ history }>
+    <div>
       <Switch>
         <Route exact path="/" component={ Home } />
         <Route exact path="/login" component={ Login } />
