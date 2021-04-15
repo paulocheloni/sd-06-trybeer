@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import NavbarAdmin from '../components/NavBarAdmin';
 import withAuth from '../components/withAuth';
 import { getSales } from '../api/axiosApi';
 import { Container } from '../styles/styles';
-import { Link } from 'react-router-dom';
 
 function AdminOrders() {
   const [orders, setOrders] = useState([]);
