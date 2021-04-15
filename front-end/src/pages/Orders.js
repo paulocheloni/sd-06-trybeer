@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import withAuth from '../components/withAuth';
 import { getSales } from '../api/axiosApi';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 
 import { Container } from '../styles/styles';
 
-export default function Order() {
+function Order() {
   const history = useHistory();
   const [saleList, setSaleList] = useState([]);
 
@@ -19,14 +20,6 @@ export default function Order() {
     };
     execute();
   }, [setSaleList]);
-
-  useEffect(() => {
-    const localStorageProfile = JSON.parse(localStorage.getItem('user'));
-    // console.log(localStorageProfile);
-    if (localStorageProfile === null) {
-      history.push('./login');
-    }
-  }, [history]);
 
   function formatDate(date) {
     const TEN = 10;
@@ -72,3 +65,5 @@ export default function Order() {
     </div>
   );
 }
+
+export default withAuth(Order);

@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router';
+import withAuth from '../components/withAuth';
 import ProductsContext from '../context/ProductsContext';
 import { getProducts } from '../api/axiosApi';
 import Navbar from '../components/Navbar';
@@ -17,7 +18,7 @@ import {
 import { Container } from '../styles/styles';
 import Header from '../components/Header';
 
-export default function Products() {
+function Products() {
   const history = useHistory();
   const {
     products,
@@ -41,13 +42,6 @@ export default function Products() {
     };
     execute();
   }, [setProducts]);
-
-  useEffect(() => {
-    const localStorageProfile = JSON.parse(localStorage.getItem('user'));
-    if (localStorageProfile === null) {
-      history.push('./login');
-    }
-  }, [history]);
 
   const handleClickMinus = (product) => {
     product.quantity = product.quantity > 0 ? product.quantity - 1 : 0;
@@ -138,3 +132,5 @@ export default function Products() {
     </div>
   );
 }
+
+export default withAuth(Products);

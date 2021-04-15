@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router';
+import { useParams } from 'react-router';
+import withAuth from '../components/withAuth';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import { getByIdSales } from '../api/axiosApi';
@@ -9,17 +10,9 @@ import { Container } from '../styles/styles';
 
 import './OrderDetail.css';
 
-export default function OrderDetail() {
-  const history = useHistory();
+function OrderDetail() {
   const { id } = useParams();
   const [orders, setOrders] = useState(null);
-
-  useEffect(() => {
-    const localStorageProfile = JSON.parse(localStorage.getItem('user'));
-    if (!localStorageProfile) {
-      history.push('/login');
-    }
-  }, [history]);
 
   useEffect(() => {
     const findByID = async () => {
@@ -86,3 +79,5 @@ export default function OrderDetail() {
     </section>
   );
 }
+
+export default withAuth(OrderDetail);
