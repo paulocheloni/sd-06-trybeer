@@ -15,6 +15,7 @@ function Order() {
     const execute = async () => {
       let salesDB = await getSales();
       salesDB = salesDB.map((sale) => (sale));
+      console.log(salesDB)
       setSaleList(salesDB);
       localStorage.setItem('sales', JSON.stringify(salesDB));
     };
