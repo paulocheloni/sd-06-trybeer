@@ -4,7 +4,6 @@ import ProductsContext from '../context/ProductsContext';
 import { registerOrder } from '../api/axiosApi';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
-// import { useHistory } from 'react-router';
 
 import {
   Container,
@@ -206,10 +205,9 @@ export default function Checkout() {
             onClick={ () => handleCallApi() }
           />
           {
-            success && <span>Compra realizada com sucesso!</span>
+            success && <Message success>Compra realizada com sucesso!</Message>
           }
         </div>
-
       </Container>
     </section>
   );
