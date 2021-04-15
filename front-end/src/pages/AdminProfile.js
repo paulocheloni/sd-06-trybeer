@@ -1,15 +1,12 @@
 import React from 'react';
-import { Redirect } from 'react-router';
+import withAuth from '../components/withAuth';
 import Header from '../components/Header';
 import NavbarAdmin from '../components/NavBarAdmin';
 
 import { Container, Content, Message } from '../components/styled-components';
 
-export default function AdminProfile() {
+function AdminProfile() {
   const user = JSON.parse(localStorage.getItem('user'));
-  if (!user) {
-    return <Redirect to="/login" />;
-  }
 
   const { name, email } = user;
   return (
@@ -33,3 +30,5 @@ export default function AdminProfile() {
     </div>
   );
 }
+
+export default withAuth(AdminProfile);

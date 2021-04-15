@@ -1,32 +1,19 @@
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router';
+import withAuth from '../components/withAuth';
 import { edit } from '../api/axiosApi';
 import UserContext from '../context/UserContext';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import { Container, Content, Input, Button, Message } from '../styles/styles';
 
-export default function Profile() {
-  const history = useHistory();
-
+function Profile() {
   const { loginUser, setLoginUser } = useContext(UserContext);
-  // console.log(loginUser.name, "loginUser");
   const [confirmationMessage, setConfirmationMessage] = useState(false);
-
   const localStorageProfile = JSON.parse(localStorage.getItem('user'));
-  // console.log(localStorageProfile, "localStorageProfile");
-
-  if (localStorageProfile === null) {
-    history.push('./login');
-    return null;
-  }
 
   const idProfile = localStorageProfile.id;
-  // console.log(idProfile, "id");
   const nameProfile = localStorageProfile.name;
-  // console.log(nameProfile, "NAME");
   const emailProfile = localStorageProfile.email;
-  // console.log(emailProfile, "EMAIL");
 
   const handleProfile = async (id, name, email) => {
     id = idProfile;
@@ -47,7 +34,6 @@ export default function Profile() {
       <Container>
         <Content>
           <div>
-            {/* <img alt="profile" /> */}
             <Input
               name="name"
               data-testid="profile-name-input"
@@ -78,3 +64,5 @@ export default function Profile() {
     </div>
   );
 }
+
+export default withAuth(Profile);

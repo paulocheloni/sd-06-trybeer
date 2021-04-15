@@ -5,7 +5,6 @@ import { signUp } from '../api/axiosApi';
 
 export default function Register() {
   const history = useHistory();
-  // const { loginUser, setLoginUser } = useContext(TrybeerContext);
   const [badReq, setBadReq] = useState(false);
   const [loginUserLocal, setLoginUserLocal] = useState({
     name: '',

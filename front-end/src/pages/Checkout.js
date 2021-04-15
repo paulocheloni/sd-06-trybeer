@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import withAuth from '../components/withAuth';
 import ProductsContext from '../context/ProductsContext';
 import { registerOrder } from '../api/axiosApi';
 import Header from '../components/Header';
@@ -21,7 +22,7 @@ import {
   SpanTotalPrice,
 } from '../components/styled-components';
 
-export default function Checkout() {
+function Checkout() {
   const history = useHistory();
   const {
     products,
@@ -37,13 +38,6 @@ export default function Checkout() {
     },
   );
   const [success, setSuccess] = useState(false);
-
-  useEffect(() => {
-    const localStorageProfile = JSON.parse(localStorage.getItem('user'));
-    if (localStorageProfile === null) {
-      history.push('./login');
-    }
-  }, [history]);
 
   let cartValue = 0;
   const totalPriceLocalStorage = localStorage.totalPrice;
@@ -212,3 +206,5 @@ export default function Checkout() {
     </section>
   );
 }
+
+export default withAuth(Checkout);
