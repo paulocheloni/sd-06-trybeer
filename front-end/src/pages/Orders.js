@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import withAuth from '../components/hocs/withAuth';
 import Api from '../api/axiosApi';
-import withOrders from '../components/hocs/withOrders';
+import withHandleApi from '../components/hocs/withHandleApi';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import { Container } from '../styles/styles';
@@ -27,7 +27,7 @@ function Order(orders) {
       <Container>
         <div data-testid="0-order-card-container">
           {
-            !orders.length && orders.data.map((e, index) => (
+            !orders.loading && orders.data.map((e, index) => (
               <ul key={ index }>
                 <li>
                   <div>
@@ -55,4 +55,4 @@ function Order(orders) {
   );
 }
 
-export default withAuth(withOrders(Order, Api.getSales));
+export default withAuth(withHandleApi(Order, Api.getSales));

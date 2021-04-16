@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-function withOrders(WrappedComponent, func) {
+function withHandleApi(WrappedComponent, func, param) {
   class HOC extends Component {
     constructor(props) {
       super(props);
@@ -15,7 +15,7 @@ function withOrders(WrappedComponent, func) {
     }
 
     async handleDataFromApi() {
-      const data = await func();
+      const data = await func(param);
       this.setState({ data, loading: false });
       JSON.stringify(sessionStorage.setItem('orders', data));
     }
@@ -29,4 +29,4 @@ function withOrders(WrappedComponent, func) {
   return HOC;
 }
 
-export default withOrders;
+export default withHandleApi;

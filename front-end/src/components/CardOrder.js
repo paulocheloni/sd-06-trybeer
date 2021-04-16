@@ -17,6 +17,11 @@ const CardOrder = ({ product, index }) => {
         { name }
       </div>
       <div
+        data-testid={ `${index}-order-unit-price` }
+      >
+        {`Valor do produto: R$ ${price.replace('.', ',')}`}
+      </div>
+      <div
         data-testid={ `${index}-product-total-value` }
       >
         {`Valor total do produto: R$ ${price.replace('.', ',')}`}

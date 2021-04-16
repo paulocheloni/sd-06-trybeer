@@ -5,12 +5,12 @@ import NavbarAdmin from '../components/NavBarAdmin';
 import withAuth from '../components/hocs/withAuth';
 import { Container } from '../styles/styles';
 import Api from '../api/axiosApi';
-import withOrders from '../components/hocs/withOrders';
+import withOrders from '../components/hocs/withHandleApi';
 
 function AdminOrders(orders) {
   return (
     <div>
-      <Header />
+      <Header isAdmin />
       <NavbarAdmin />
       <Container>
         {

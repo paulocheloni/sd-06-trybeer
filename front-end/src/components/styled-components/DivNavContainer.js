@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 const DivNavContainer = styled.div`
-  background: linear-gradient(135deg, #ba0c2f 0%, #89011d 100%);
+  background: ${(props) => (
+    props.isAdmin ? '#26547C' : 'linear-gradient(to right, #ba0c2f 0%, #451311 100%)')};
   height: 100%;
   left: 0;
   overflow-x: hidden;

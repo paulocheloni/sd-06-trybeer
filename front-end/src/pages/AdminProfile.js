@@ -11,7 +11,7 @@ function AdminProfile() {
   const { name, email } = user;
   return (
     <div>
-      <Header />
+      <Header isAdmin />
       <NavbarAdmin />
       <Container>
         <Content>
