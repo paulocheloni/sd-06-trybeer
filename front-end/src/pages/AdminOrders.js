@@ -1,31 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import NavbarAdmin from '../components/NavBarAdmin';
-import withAuth from '../components/withAuth';
-import { getSales } from '../api/axiosApi';
+import withAuth from '../components/hocs/withAuth';
 import { Container } from '../styles/styles';
+import Api from '../api/axiosApi';
+import withOrders from '../components/hocs/withOrders';
 
-function AdminOrders() {
-  const [orders, setOrders] = useState([]);
-
-  useEffect(() => {
-    const callApi = async () => {
-      const respOrders = await getSales();
-      console.log(respOrders);
-      setOrders(respOrders);
-      localStorage.setItem('sales', JSON.stringify(respOrders));
-    };
-    callApi();
-  }, []);
-
+function AdminOrders(orders) {
   return (
     <div>
       <Header />
       <NavbarAdmin />
       <Container>
         {
-          orders.length > 0 && orders.map((order, index) => (
+          !orders.loading && orders.data.map((order, index) => (
             <ul key="index">
               <Link to={ `/admin/orders/${index + 1}` }>
                 <button
@@ -59,4 +48,4 @@ function AdminOrders() {
   );
 }
 
-export default withAuth(AdminOrders);
+export default withAuth(withOrders(AdminOrders, Api.getSales));

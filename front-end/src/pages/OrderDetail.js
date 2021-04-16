@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import withAuth from '../components/withAuth';
+import withAuth from '../components/hocs/withAuth';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import { getByIdSales } from '../api/axiosApi';

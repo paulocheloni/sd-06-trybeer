@@ -68,7 +68,7 @@ export async function registerOrder(
   return orderDB;
 }
 
-export async function getSales() {
+async function getSales() {
   const token = localStorage.getItem('token');
   const sales = await axios.get('http://localhost:3001/orders', {
     headers: {
@@ -98,3 +98,8 @@ export async function getByIdSales(id) {
     });
   return sales;
 }
+
+export default {
+  getSales,
+};
+

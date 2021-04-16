@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import withAuth from '../components/withAuth';
+import withAuth from '../components/hocs/withAuth';
 import ProductsContext from '../context/ProductsContext';
 import { registerOrder } from '../api/axiosApi';
 import Header from '../components/Header';

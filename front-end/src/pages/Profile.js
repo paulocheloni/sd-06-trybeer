@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import withAuth from '../components/withAuth';
+import withAuth from '../components/hocs/withAuth';
 import { edit } from '../api/axiosApi';
 import UserContext from '../context/UserContext';
 import Navbar from '../components/Navbar';

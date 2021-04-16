@@ -1,5 +1,5 @@
 import React from 'react';
-import withAuth from '../components/withAuth';
+import withAuth from '../components/hocs/withAuth';
 import Header from '../components/Header';
 import NavbarAdmin from '../components/NavBarAdmin';
 
