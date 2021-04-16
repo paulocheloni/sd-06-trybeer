@@ -102,4 +102,3 @@ export async function getByIdSales(id) {
 export default {
   getSales,
 };
-
