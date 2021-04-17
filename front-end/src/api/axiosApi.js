@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const BASE_URL = 'http://localhost:3001/';
+
 export async function login(loginUser) {
   const user = await axios.post('http://localhost:3001/login', loginUser)
     .then((resp) => resp.data)
@@ -57,7 +59,7 @@ export async function edit(id, name, email) {
 export async function registerOrder(
   { value, date, userID, street, number, saleProduct },
 ) {
-  const orderDB = await axios.post('http://localhost:3001/orders', {
+  const orderDB = await axios.post(`${BASE_URL}orders`, {
     value, date, userID, street, number, saleProduct,
   })
     .then((resp) => resp)
@@ -99,7 +101,24 @@ async function getByIdSales(id) {
   return sales;
 }
 
+async function updateStatusOrder(id) {
+  const token = localStorage.getItem('token');
+  const order = await axios.put('http://localhost:3001/orders', {
+    id,
+    headers: {
+      authorization: JSON.parse(token),
+    },
+  })
+    .then((resp) => resp.data)
+    .catch((err) => {
+      console.log(err.response);
+      return err.response;
+    });
+  return order;
+}
+
 export default {
   getSales,
   getByIdSales,
+  updateStatusOrder,
 };

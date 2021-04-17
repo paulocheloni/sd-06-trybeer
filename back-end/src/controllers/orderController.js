@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const Service = require('../services/orderService');
+const Model = require('../models/orderModels');
 const status = require('../utils/httpStatusCode');
 
 const orderRouter = Router();
@@ -36,6 +37,12 @@ orderRouter.get('/:id', async (req, res) => {
   } catch (error) {
     return res.status(erroReturnCatch).json(messageJson);
   }
+});
+
+orderRouter.put('/', async (req, res) => {
+  const { id } = req.body;
+  await Model.updateStatusOrder(id);
+  res.status(200).json('atualizado');
 });
 
 module.exports = orderRouter;
