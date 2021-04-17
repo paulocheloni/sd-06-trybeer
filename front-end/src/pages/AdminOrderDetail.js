@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import Api from '../api/axiosApi';
-import Header from '../components/Header';
 import NavbarAdmin from '../components/NavBarAdmin';
+import Header from '../components/Header';
 import CardOrder from '../components/CardOrder';
 import { Container } from '../styles/styles';
 import './AdminOrderDetail.css';
