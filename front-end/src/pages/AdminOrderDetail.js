@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import Api from '../api/axiosApi';
 import NavbarAdmin from '../components/NavBarAdmin';
@@ -6,27 +6,22 @@ import Header from '../components/Header';
 import CardOrder from '../components/CardOrder';
 import { Container } from '../styles/styles';
 import './AdminOrderDetail.css';
+import useDataFetch from '../Hooks/useDataFetch';
 
 function AdminOrderDetail() {
   const { id } = useParams();
   const [status, setStatus] = useState(null);
-  const [orders, setOrders] = useState(null);
+  const { result } = useDataFetch(Api.getByIdSales, id);
 
-  useEffect(() => {
-    const findByID = async () => {
-      const result = await Api.getByIdSales(id);
-      setOrders(result);
-      console.log(result);
-      setStatus(result[0].status);
-    };
-    findByID();
-  }, [id]);
+  const totalValue = result.map((el) => el.total_price.replace('.', ','));
+  const orderNumber = result.map((el) => el.id);
+  const orderStatus = result.map((el) => el.status);
 
   const handleStatusOrder = async () => {
     await Api.updateStatusOrder(id);
     setStatus('Entregue');
   };
-  console.log(status);
+
   return (
     <section>
       <Header isAdmin />
@@ -34,21 +29,21 @@ function AdminOrderDetail() {
       <Container>
         <div>
           {
-            (orders && orders.length > 0) && (
+            result && (
               <div className="content">
                 <h2
                   className="order"
                   data-testid="order-number"
                 >
-                  {`Pedido ${orders[0].id}`}
+                  {`Pedido ${orderNumber[0]}`}
                 </h2>
                 <h2
                   data-testid="order-status"
                 >
-                  { status || orders[0].status}
+                  { status || orderStatus[0] }
                 </h2>
                 <ul className="middle-card">
-                  { orders.map((product, index) => (
+                  { result.map((product, index) => (
                     <CardOrder
                       key={ index }
                       product={ product }
@@ -60,10 +55,7 @@ function AdminOrderDetail() {
                   className="bottom-card total-value item-grid"
                   data-testid="order-total-value"
                 >
-                  {
-                    `Valor total do pedido:R$ ${orders[0]
-                      .total_price.replace('.', ',')}`
-                  }
+                  {`Valor total do pedido:R$ ${totalValue[0]}`}
                 </div>
                 {
                   status !== 'Entregue' && (
@@ -76,12 +68,10 @@ function AdminOrderDetail() {
                     </button>
                   )
                 }
-
               </div>
             )
           }
         </div>
-
       </Container>
     </section>
   );
