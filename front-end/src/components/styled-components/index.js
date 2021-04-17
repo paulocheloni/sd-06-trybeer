@@ -14,3 +14,5 @@ export { default as ButtonExclude } from './ButtonExclude';
 export { default as Message } from './Message';
 export { default as SpanTotalPrice } from './SpanTotalPrice';
 export { default as Table } from './Table';
+export { default as CardLine } from './CardLine';
+export { default as TitleHeadingThree } from './TitleHeadingThree';

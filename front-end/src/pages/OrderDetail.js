@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import withAuth from '../components/withAuth';
+import withAuth from '../components/hocs/withAuth';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
-import { getByIdSales } from '../api/axiosApi';
+import Api from '../api/axiosApi';
 
 import CardOrder from '../components/CardOrder';
 import { Container } from '../styles/styles';
@@ -16,7 +16,7 @@ function OrderDetail() {
 
   useEffect(() => {
     const findByID = async () => {
-      const result = await getByIdSales(id);
+      const result = await Api.getByIdSales(id);
       setOrders(result);
     };
     findByID();

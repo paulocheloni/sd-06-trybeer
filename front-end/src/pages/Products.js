@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router';
-import withAuth from '../components/withAuth';
+import withAuth from '../components/hocs/withAuth';
 import ProductsContext from '../context/ProductsContext';
 import { getProducts } from '../api/axiosApi';
 import Navbar from '../components/Navbar';

@@ -5,16 +5,20 @@ const CardOrder = ({ product, index }) => {
   const { quantity, price, name } = product;
   return (
     <li>
-      {/* <h2>{`Pedido ${index + 1}`}</h2> */}
-      <div
+      <span
         data-testid={ `${index}-product-qtd` }
       >
-        { `${quantity} -` }
-      </div>
-      <div
+        { `${quantity} - ` }
+      </span>
+      <span
         data-testid={ `${index}-product-name` }
       >
         { name }
+      </span>
+      <div
+        data-testid={ `${index}-order-unit-price` }
+      >
+        {`(R$ ${price.replace('.', ',')})un.`}
       </div>
       <div
         data-testid={ `${index}-product-total-value` }

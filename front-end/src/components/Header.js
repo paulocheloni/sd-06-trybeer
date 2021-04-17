@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import * as FaIcons from 'react-icons/fa';
 import { useHistory } from 'react-router';
 import UserContext from '../context/UserContext';
@@ -9,7 +10,7 @@ import {
   DivHeaderContainer,
 } from './styled-components';
 
-function Header() {
+function Header({ isAdmin }) {
   const { sidebar, setSidebar } = useContext(UserContext);
   const showSidebar = () => setSidebar(!sidebar);
   const [pathnameTitle, setPathnamerTitle] = useState('TryBeer');
@@ -32,7 +33,7 @@ function Header() {
   }, [pathname]);
 
   return (
-    <DivHeaderContainer>
+    <DivHeaderContainer admin={ isAdmin || false }>
       <DivHeaderLeft>
         <FaIcons.FaBars
           className="menu-bars"
@@ -51,5 +52,11 @@ function Header() {
     </DivHeaderContainer>
   );
 }
+
+const { string } = PropTypes;
+
+Header.propTypes = {
+  isAdmin: string.isRequired,
+};
 
 export default Header;
