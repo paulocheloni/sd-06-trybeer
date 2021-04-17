@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import NavbarAdmin from '../components/NavBarAdmin';
 import CardOrder from '../components/CardOrder';
 import { Container, Content } from '../styles/styles';
-import './OrderDetail.css';
+import './AdminOrderDetail.css';
 
 function AdminOrderDetail() {
   const { id } = useParams();
@@ -32,56 +32,56 @@ function AdminOrderDetail() {
       <Header isAdmin />
       <NavbarAdmin />
       <Container>
-        <Content>
-          <div>
-            {
-              (orders && orders.length > 0) && (
-                <div className="content">
-                  <h2
-                    className="order"
-                    data-testid="order-number"
-                  >
-                    {`Pedido ${orders[0].id}`}
-                  </h2>
-                  <h2
-                    data-testid="order-status"
-                  >
-                    { status || orders[0].status}
-                  </h2>
-                  <ul className="middle-card">
-                    { orders.map((product, index) => (
-                      <CardOrder
-                        key={ index }
-                        product={ product }
-                        index={ index }
-                      />
-                    ))}
-                  </ul>
-                  <div
-                    className="bottom-card total-value item-grid"
-                    data-testid="order-total-value"
-                  >
-                    {
-                      `Valor total do pedido:R$${orders[0].total_price.replace('.', ',')}`
-                    }
-                  </div>
+        <div>
+          {
+            (orders && orders.length > 0) && (
+              <div className="content">
+                <h2
+                  className="order"
+                  data-testid="order-number"
+                >
+                  {`Pedido ${orders[0].id}`}
+                </h2>
+                <h2
+                  data-testid="order-status"
+                >
+                  { status || orders[0].status}
+                </h2>
+                <ul className="middle-card">
+                  { orders.map((product, index) => (
+                    <CardOrder
+                      key={ index }
+                      product={ product }
+                      index={ index }
+                    />
+                  ))}
+                </ul>
+                <div
+                  className="bottom-card total-value item-grid"
+                  data-testid="order-total-value"
+                >
                   {
-                    status !== 'Entregue' && (
-                      <button
-                        type="button"
-                        data-testid="mark-as-delivered-btn"
-                        onClick={ () => handleStatusOrder() }
-                      >
-                        Marcar como entregue
-                      </button>
-                    )
+                    `Valor total do pedido:R$ ${orders[0]
+                      .total_price.replace('.', ',')}`
                   }
-
                 </div>
-              )
-            }
-          </div>
-        </Content>
+                {
+                  status !== 'Entregue' && (
+                    <button
+                      type="button"
+                      data-testid="mark-as-delivered-btn"
+                      onClick={ () => handleStatusOrder() }
+                    >
+                      Marcar como entregue
+                    </button>
+                  )
+                }
+
+              </div>
+            )
+          }
+        </div>
+
       </Container>
     </section>
   );
