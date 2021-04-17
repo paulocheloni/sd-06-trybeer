@@ -4,7 +4,7 @@ import Api from '../api/axiosApi';
 import Header from '../components/Header';
 import NavbarAdmin from '../components/NavBarAdmin';
 import CardOrder from '../components/CardOrder';
-import { Container, Content } from '../styles/styles';
+import { Container } from '../styles/styles';
 import './AdminOrderDetail.css';
 
 function AdminOrderDetail() {
