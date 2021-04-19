@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
 import { Topbar, Loading, Button, ProductCard } from '../components';
@@ -9,7 +9,6 @@ import '../styles/Products.css';
 export default function Products() {
   const {
     productsContext: { products },
-    tokenContext: { token },
     cartContext: { cart, setCart },
   } = useContext(AppContext);
 
@@ -19,8 +18,6 @@ export default function Products() {
 
   const disabled = useMemo(() => (Object.keys(cart).length === 0), [cart]);
 
-  if (!token) return <Redirect to="/login" />;
-
   return (
     <section>
       <Topbar />
@@ -29,7 +26,7 @@ export default function Products() {
         : (
           <>
             <section className="products-container">
-              { (products.length === 0)
+              { (products && products.length === 0)
                 ? 'Não há produtos no banco de dados.'
                 : products.map((product, index) => (
                   <ProductCard

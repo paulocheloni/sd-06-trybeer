@@ -3,13 +3,12 @@ import { useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
 import { Topbar, Loading } from '../components';
-import salesApi from '../services/api.sales';
 import adminApi from '../services/api.admin';
 
 import '../styles/Orders.css';
 import OrdersContainer from '../components/OrdersContainer';
 
-export default function Orders() {
+export default function AdminOrders() {
   const { tokenContext: { token } } = useContext(AppContext);
   const [orders, setOrders] = useState();
 
@@ -18,9 +17,7 @@ export default function Orders() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        let ordersArray;
-        if (token.role === 'administrator') ordersArray = await adminApi(token);
-        if (token.role === 'client') ordersArray = await salesApi(token);
+        const ordersArray = await adminApi(token);
         setOrders(ordersArray);
       } catch (error) {
         console.log(error);
@@ -32,11 +29,9 @@ export default function Orders() {
     fetchOrders();
   }, [setOrders, token, history]);
 
-  const title = (token && token.role === 'administrator') ? 'Pedidos' : 'Meus Pedidos';
-
   return (
     <section>
-      <Topbar title={ title } />
+      <Topbar title="Pedidos" />
       { (!orders)
         ? <Loading />
         : <OrdersContainer orders={ orders } /> }

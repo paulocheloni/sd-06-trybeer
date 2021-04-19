@@ -1,5 +1,5 @@
 import React, { useContext, useState, useMemo, useEffect, useCallback } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
 import { Topbar, Button, TextInput } from '../components';
@@ -33,9 +33,9 @@ export default function Checkout() {
 
   const updateAddress = (target) => {
     if (target.name === 'house-number') {
-      return setAddress({ ...address, number: target.value });
+      return setAddress((prevAdress) => ({ ...prevAdress, number: target.value }));
     }
-    setAddress({ ...address, [target.name]: target.value });
+    setAddress((prevAddress) => ({ ...prevAddress, [target.name]: target.value }));
   };
 
   const checkout = async () => {
@@ -79,8 +79,6 @@ export default function Checkout() {
       clearTimeout(timeOut);
     };
   }, [history, success]);
-
-  if (!token) return <Redirect to="/login" />;
 
   return (
     <section>

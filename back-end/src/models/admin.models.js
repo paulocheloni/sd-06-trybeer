@@ -21,10 +21,6 @@ const updateSaleStatus = async (status, saleId) => {
      return { status: 'OK',
     message: 'Status equals request. Not changed.' };
   }
-  if (result.affectedRows < 1) {
-      return { status: 'ERROR',
-     message: 'Sale not found.' };
-  }
 };
 
 module.exports = {

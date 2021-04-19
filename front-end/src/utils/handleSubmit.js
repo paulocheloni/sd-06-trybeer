@@ -1,12 +1,16 @@
 import userApi from '../services/api.user';
-import yupSchemas from './yupSchemas';
-import redirectUser from './redirectUser';
 
 const handleSubmit = async ({ action, login, setToken, history }) => {
-  const valid = await yupSchemas.login.isValid(login);
-  if (valid) {
-    const newUser = await userApi(action, login);
-    redirectUser(newUser, history, setToken);
+  const user = await userApi(action, login);
+  if (user.code) {
+    history.push({
+      pathname: '/error',
+      state: { ...user } });
+  }
+  if (user.role) {
+    setToken(user);
+    if (user.role === 'administrator') history.push('/admin/orders');
+    if (user.role === 'client') history.push('/products');
   }
 };
 

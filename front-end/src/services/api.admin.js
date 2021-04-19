@@ -14,7 +14,7 @@ const sales = async (payload) => {
     if (payload.saleId) request.url = `http://${localhost}:3001/admin/sales/${payload.saleId}`;
 
     if (payload.delivered) {
-      const delivered = (payload.delivered) ? 'true' : 'false';
+      const { delivered } = payload;
       request.method = 'put';
       request.url = `http://${localhost}:3001/admin/sales/${payload.saleId}`;
       request.data = { delivered };
