@@ -1,14 +1,24 @@
-const mysql = require('mysql2/promise');
+const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
-const config = {
-  user: process.env.MYSQL_USER,
-  host: process.env.HOSTNAME,
-  multipleStatements: true,
-  password: process.env.MYSQL_PASSWORD,
-  database: 'Trybeer',
-  };
-// console.log('user:', config.user, 'pw:', config.password, 'host', config.host);
-const connection = mysql.createPool(config);
+let schema = null;
 
-module.exports = connection; 
+async function connection() {
+  if (schema) return Promise.resolve(schema);
+  return MongoClient
+    .connect(process.env.DB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then((conn) => conn.db(process.env.DB_NAME))
+    .then((dbSchema) => {
+      schema = dbSchema;
+      return schema;
+    })
+    .catch((err) => {
+      console.error(err);
+      process.exit(1);
+    });
+}
+
+module.exports = connection;
