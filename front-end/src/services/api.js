@@ -73,3 +73,15 @@ export const updateOrderStatus = async (id) => {
 
   return requestResponse;
 };
+
+export const createNewProduct = async (product) => {
+  const requestResponse = await api.post(
+    'products/new',
+    product,
+    { headers: { 'Content-Type': 'multipart/form-data' } },
+  )
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+
+  return requestResponse;
+};

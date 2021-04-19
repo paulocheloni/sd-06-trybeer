@@ -11,6 +11,7 @@ import ClientProfile from './pages/ClientProfile';
 import Orders from './pages/Orders';
 import AdminOrdersDetails from './pages/AdminOrdersDetails';
 import OrderDetails from './pages/OrderDetails';
+import ProductAdminInsert from './pages/ProductAdminInsert';
 import './App.css';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route exact path="/checkout" component={ Checkout } />
           <Route exact path="/admin/profile" component={ AdminProfile } />
           <Route exact path="/admin/orders/:id" component={ AdminOrdersDetails } />
+          <Route exact path="/admin/products" component={ ProductAdminInsert } />
         </Switch>
       </BrowserRouter>
     </LoginProvider>
