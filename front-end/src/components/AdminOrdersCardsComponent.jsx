@@ -33,9 +33,13 @@ function AdminOrdersCardsComponent({ element, index }) {
         <h4 data-testid={ `${index}-order-total-value` }>
           { `R$ ${totalPrice.replace('.', ',')}` }
         </h4>
-        <h3 
+        <h3
           data-testid={ `${index}-order-status` }
-          className={(statusConvert() === 'Entregue') ? "greenStatusComponent" : "redStatusComponent"}
+          className={
+            (statusConvert() === 'Entregue')
+              ? 'greenStatusComponent'
+              : 'redStatusComponent'
+          }
         >
           { `${statusConvert()}` }
         </h3>
