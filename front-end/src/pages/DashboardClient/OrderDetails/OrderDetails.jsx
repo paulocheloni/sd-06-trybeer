@@ -8,6 +8,7 @@ import { correctDate, parseCartPrice } from '../../../utils/parseValues';
 import { verifyUser } from '../../../store/LocalStorage/actions';
 import dateIcon from './dateIcon.png';
 import totalPrice from './totalPrice.png';
+
 /**
  * Soma o total do pedido (quantidade * preco)
  * @param {String} products
@@ -50,6 +51,7 @@ export default function Orders({ match: { params: { id } } }) {
               <div className='div-date-details'>
                 <img className="calendario-details" src={dateIcon} alt="calendário" />
                 <h2 data-testid="order-date">{correctDate(details.dateSale)}</h2>
+
               </div>
             </div>
           )}
