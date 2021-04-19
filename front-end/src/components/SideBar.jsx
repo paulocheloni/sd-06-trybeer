@@ -34,7 +34,7 @@ function SideBar() {
         className="buttonside"
         type="button"
         data-testid="side-menu-item-my-profile"
-        onClick={ () => history.push('profile') }
+        onClick={ () => history.push('/profile') }
       >
         Meu Perfil
       </button>

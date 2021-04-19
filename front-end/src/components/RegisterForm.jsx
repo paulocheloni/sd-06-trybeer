@@ -49,7 +49,7 @@ function RegisterForm() {
 
   return (
     <div className="registercontainer">
-      <h1>Registre-se</h1>
+      <h1 className="titleregister">Registre-se</h1>
       <form className="registerinformations">
         <label htmlFor="nameInput" className="labelregister">
           Nome

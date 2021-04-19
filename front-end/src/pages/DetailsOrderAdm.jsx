@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { SideBarAdm } from '../components';
 import { markAsDelivered, getOrderDetails } from '../services/adm';
 import parseCurrency from '../utils/parseCurrencyToBRL';
+import '../styles/ordersadmdetails.css';
 
 function DetailsOrderAdm({ match }) {
   const [orderDetails, setOrderDetails] = useState([]);
@@ -17,56 +18,69 @@ function DetailsOrderAdm({ match }) {
     if (!user) history.push('/login');
 
     getOrderDetails(id).then((response) => { setOrderDetails(response); });
-  }, []);
+  }, [history, id]);
 
   const handleClick = async () => {
     await markAsDelivered(id);
     setStatus('Entregue');
   };
 
+  useEffect(() => {
+    const statusOrder = orderDetails.map((order) => order.status)[0];
+    if (statusOrder === 'Entregue') {
+      setStatus('Entregue');
+    }
+  });
+
   return !orderDetails ? <h1>Loading...</h1> : (
     <div>
       <SideBarAdm />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <span data-testid="order-number">
-        {`Pedido ${id}`}
-      </span>
-      <span data-testid="order-status">
-        {status}
-      </span>
-      <ul>
-        {(orderDetails.map((order, index) => (
-          <li key={ index }>
-            <span data-testid={ `${index}-product-qtd` }>
-              { `${order.quantity}  ` }
-            </span>
-            <span data-testid={ `${index}-product-name` }>
-              { ` ${order.name}  ` }
-            </span>
-            <span data-testid={ `${index}-product-total-value` }>
-              { parseCurrency(`${(order.price * order.quantity).toFixed(2)}`) }
-            </span>
-            <span data-testid={ `${index}-order-unit-price` }>
-              { `  (${parseCurrency(order.price)})` }
-            </span>
-          </li>)))}
-      </ul>
-      <span data-testid="order-total-value">
-        Total:
-        { orderDetails.map((order) => parseCurrency(order.total_price))[0] }
-      </span>
-      <button
-        type="button"
-        data-testid="mark-as-delivered-btn"
-        onClick={ handleClick }
-        hidden={ status === 'Entregue' }
-      >
-        Marcar como entregue
-      </button>
+      <div className="detail-order-adm">
+        <div className="order-status-adm">
+          <span data-testid="order-number">
+            {`Pedido ${id}`}
+          </span>
+          <span>-</span>
+          <span data-testid="order-status">
+            {status}
+          </span>
+        </div>
+        <div className="order-items-adm">
+          <ul>
+            {(orderDetails.map((order, index) => (
+              <li key={ index }>
+                <span data-testid={ `${index}-product-qtd` }>
+                  { `${order.quantity}  ` }
+                </span>
+                <span data-testid={ `${index}-product-name` }>
+                  { ` ${order.name}  ` }
+                </span>
+                <span data-testid={ `${index}-order-unit-price` }>
+                  { `  (${parseCurrency(order.price)})` }
+                </span>
+                <span
+                  className="total-item-price"
+                  data-testid={ `${index}-product-total-value` }
+                >
+                  { parseCurrency(`${(order.price * order.quantity).toFixed(2)}`) }
+                </span>
+              </li>)))}
+          </ul>
+          <span className="price-order" data-testid="order-total-value">
+            Total:
+            { orderDetails.map((order) => parseCurrency(order.total_price))[0] }
+          </span>
+        </div>
+        <button
+          type="button"
+          data-testid="mark-as-delivered-btn"
+          onClick={ handleClick }
+          hidden={ status === 'Entregue' }
+          className="delivered-button"
+        >
+          Marcar como entregue
+        </button>
+      </div>
     </div>
   );
 }

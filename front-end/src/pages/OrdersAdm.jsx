@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { SideBarAdm, OrderCardAdm } from '../components';
 import { getAllOrders } from '../services/adm';
+import '../styles/ordersadm.css';
 
 function OrderAdm() {
   const [allOrders, setAllOrders] = useState([]);
@@ -18,19 +19,18 @@ function OrderAdm() {
     if (!user) history.push('/login');
   }, [history]);
 
-  console.log(allOrders);
-
   return !allOrders ? <h1>Loading...</h1> : (
     <div>
-      <h1> Pedidos </h1>
       <SideBarAdm />
-      {allOrders.map((order, index) => (
-        <OrderCardAdm
-          key={ order.id }
-          orderInfo={ order }
-          index={ index }
-        />))}
-
+      <h1 className="title-order-adm"> Pedidos </h1>
+      <div className="orderadmcontainer">
+        {allOrders.map((order, index) => (
+          <OrderCardAdm
+            key={ order.id }
+            orderInfo={ order }
+            index={ index }
+          />))}
+      </div>
     </div>
   );
 }
