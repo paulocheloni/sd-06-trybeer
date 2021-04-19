@@ -5,7 +5,8 @@ const middlewares = require('../middlewares');
 
 const users = express.Router();
 
-users.put('/edit', middlewares.authToken, controllers.profile);
 users.post('/register', controllers.register);
+
+users.put('/edit', middlewares.authToken, controllers.profile);
 
 module.exports = users;

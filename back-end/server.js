@@ -1,11 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerOptions = require('./src/openAPI/swaggerOptions');
 require('dotenv/config');
 
 const routes = require('./src/main.routes');
 
+const specs = swaggerJsDoc(swaggerOptions);
+
 const app = express();
+
+app.use("/documentation", swaggerUI.serve, swaggerUI.setup(specs));
 
 const PORT = process.env.PORT || 3001;
 
