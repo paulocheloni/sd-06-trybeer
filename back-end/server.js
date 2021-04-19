@@ -12,7 +12,7 @@ const specs = swaggerJsDoc(swaggerOptions);
 
 const app = express();
 
-app.use("/documentation", swaggerUI.serve, swaggerUI.setup(specs));
+app.use('/documentation', swaggerUI.serve, swaggerUI.setup(specs));
 
 const PORT = process.env.PORT || 3001;
 
