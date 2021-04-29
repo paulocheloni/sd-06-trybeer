@@ -13,6 +13,7 @@ export default function Orders() {
   useEffect(() => {
     const fetchSales = async () => {
       const allSales = await getSales();
+      console.log(allSales)
       setSales(allSales);
     };
     fetchSales();
