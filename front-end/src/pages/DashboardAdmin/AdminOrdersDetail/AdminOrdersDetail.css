@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+@import '../../../assets/scss/variables.scss';
+
 .sale-details {
   width: 79%;
   margin-left: 17%;

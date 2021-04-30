@@ -1,0 +1,52 @@
+
+
+.messageBox {
+  margin: 0;
+  background-color: #dedede;
+  height: 560px;
+  overflow-y: scroll;
+  width: 100%;
+  color: #255923;
+}
+
+.clientMessage {
+  list-style-type: none;
+  background-color: #255923;
+  color: whitesmoke;
+  border-radius: 30px 0 30px 0;
+  padding: 15px 15px 1px 10px;
+  margin: 20px 0;
+  margin-left: 10%;
+  font-size: 20px;
+  width: 83%;
+  text-align: right;
+}
+
+.adminMessage {
+  list-style-type: none;
+  background-color: whitesmoke;
+  border-radius: 0 30px 0 30px;
+  padding: 15px 10px 5px 10px;
+  margin-right: 10%;
+  margin-left: -5%;
+  font-size: 20px;
+  width: 83%;
+}
+
+.chatForm {
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid;
+  
+  input {
+    font-size: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: #488C18;
+  }
+  
+  button {
+    width: 300px;
+    font-size: 20px;
+  }
+}
