@@ -1,0 +1,680 @@
+repo_name: paulocheloni/sd-06-trybeer
+report_id: dc6e4db38c090ac6ae1b8e1b17a3400c
+version: 0.1
+repo_type: Public
+timestamp: '2024-07-29T14:29:31+00:00'
+requested_by: renatosousafilho
+provider: github
+branch: master
+detected_tools_count: 44
+tools:
+- name: CSS 3
+  description: The latest evolution of the Cascading Style Sheets language
+  website_url: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/6727/css.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer
+  detection_source: Repo Metadata
+- name: JavaScript
+  description: Lightweight, interpreted, object-oriented language with first-class
+    functions
+  website_url: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer
+  detection_source: Repo Metadata
+- name: SQL
+  description: It is a domain-specific language used in programming
+  website_url: https://en.wikipedia.org/wiki/SQL
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/2271/default_068d33483bba6b81ee13fbd4dc7aab9780896a54.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/script.sql
+  detection_source: script.sql
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: TypeScript
+  description: A superset of JavaScript that compiles to clean JavaScript output
+  website_url: http://www.typescriptlang.org
+  version: 2.8.1
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1612/bynNY5dJ.jpg
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package-lock.json
+  detection_source: back-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: ExpressJS
+  description: Sinatra inspired web development framework for node.js -- insanely
+    fast, flexible, and simple
+  website_url: http://expressjs.com/
+  version: 4.17.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Microframeworks (Backend)
+  image_url: https://img.stackshare.io/service/1163/hashtag.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package-lock.json
+  detection_source: back-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: React
+  description: A JavaScript library for building user interfaces
+  website_url: https://reactjs.org/
+  version: 16.13.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Javascript UI Libraries
+  image_url: https://img.stackshare.io/service/1020/OYIaJ1KK.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/front-end/package-lock.json
+  detection_source: front-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: React Router
+  description: A complete routing solution for React.js
+  website_url: https://github.com/rackt/react-router
+  version: 5.2.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: JavaScript Framework Components
+  image_url: https://img.stackshare.io/service/3350/8261421.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/front-end/package-lock.json
+  detection_source: front-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: jQuery
+  description: The Write Less, Do More, JavaScript Library.
+  website_url: http://jquery.com/
+  version: 1.9.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Javascript UI Libraries
+  image_url: https://img.stackshare.io/service/1021/lxEKmMnB_400x400.jpg
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/front-end/package-lock.json
+  detection_source: front-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: MySQL
+  description: The world's most popular open source database
+  website_url: http://www.mysql.com
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Databases
+  image_url: https://img.stackshare.io/service/1025/logo-mysql-170x170.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/package.json
+  detection_source: package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: Sequelize
+  description: Easy-to-use multi SQL dialect ORM for Node.js
+  website_url: https://sequelize.org/
+  version: 6.3.4
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Object Relational Mapper (ORM)
+  image_url: https://img.stackshare.io/service/3211/3591786.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/package-lock.json
+  detection_source: package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: Cypress
+  description: When testing is easy, developers build better things faster and with
+    confidence.
+  website_url: https://www.cypress.io/
+  version: 5.0.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Javascript Testing Framework
+  image_url: https://img.stackshare.io/service/9231/default_66c5c1a197dcd0232e41e4ab6299d119b4e165b3.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/package-lock.json
+  detection_source: package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: Dotenv
+  description: Loads environment variables from .env for Nodejs projects
+  website_url: https://github.com/motdotla/dotenv
+  license: BSD-2-Clause
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Server Configuration and Automation
+  image_url: https://img.stackshare.io/service/8067/default_90dcb1286af7685c68df319c764b80704df1155b.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package.json
+  detection_source: back-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: ESLint
+  description: The fully pluggable JavaScript code quality tool
+  website_url: http://eslint.org/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Code Review
+  image_url: https://img.stackshare.io/service/3337/Q4L7Jncy.jpg
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package.json
+  detection_source: back-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer
+  detection_source: Repo Metadata
+- name: GitHub Actions
+  description: Automate your workflow from idea to production
+  website_url: https://github.com/features/actions
+  open_source: false
+  hosted_saas: true
+  category: Build, Test, Deploy
+  sub_category: Continuous Integration
+  image_url: https://img.stackshare.io/service/11563/actions.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/.github/workflows/main.yml
+  detection_source: ".github/workflows/main.yml"
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:10:00.000000000 Z
+- name: Jest
+  description: Painless JavaScript Unit Testing
+  website_url: http://facebook.github.io/jest/
+  version: 25.1.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Javascript Testing Framework
+  image_url: https://img.stackshare.io/service/830/jest.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package-lock.json
+  detection_source: back-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: Mocha
+  description: Simple, flexible, fun javascript test framework for node.js &amp; the
+    browser
+  website_url: http://mochajs.org/
+  version: 7.0.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Javascript Testing Framework
+  image_url: https://img.stackshare.io/service/832/mocha.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/front-end/package-lock.json
+  detection_source: front-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: nodemon
+  description: A simple monitor script for use during development of a node.js app
+  website_url: http://nodemon.io/
+  version: 2.0.4
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Monitoring
+  sub_category: node.js Application Monitoring
+  image_url: https://img.stackshare.io/service/5577/preview.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package-lock.json
+  detection_source: back-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: npm
+  description: The package manager for JavaScript.
+  website_url: https://www.npmjs.com/
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Front End Package Manager
+  image_url: https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/package.json
+  detection_source: package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: axios
+  description: Promise based HTTP client for the browser and node.js
+  website_url: https://github.com/mzabriskie/axios
+  version: 0.19.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Javascript Utilities & Libraries
+  image_url: https://img.stackshare.io/no-img-open-source.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/front-end/package-lock.json
+  detection_source: front-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: mysql2
+  description: Fast mysql driver
+  package_url: https://www.npmjs.com/mysql2
+  version: 2.1.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16671/default_4b738bf1758d38dddd276589bbea47fca5a990df.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/package-lock.json
+  detection_source: package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+  vulnerabilities:
+  - name: MySQL2 for Node Arbitrary Code Injection
+    cve_id: CVE-2024-21511
+    cve_url: https://github.com/advisories/GHSA-4rch-2fh8-94vw
+    detected_date: Apr 24
+    severity: critical
+    first_patched: 3.9.7
+  - name: mysql2 Remote Code Execution (RCE) via the readCodeFor function
+    cve_id: CVE-2024-21508
+    cve_url: https://github.com/advisories/GHSA-fpw7-j2hg-69v5
+    detected_date: Apr 13
+    severity: critical
+    first_patched: 3.9.4
+  - name: mysql2 vulnerable to Prototype Pollution
+    cve_id: CVE-2024-21512
+    cve_url: https://github.com/advisories/GHSA-pmh2-wpjm-fj45
+    detected_date: May 31
+    severity: high
+    first_patched: 3.9.8
+  - name: mysql2 cache poisoning vulnerability
+    cve_id: CVE-2024-21507
+    cve_url: https://github.com/advisories/GHSA-mqr2-w7wj-jjgr
+    detected_date: Apr 13
+    severity: moderate
+    first_patched: 3.9.3
+  - name: mysql2 vulnerable to Prototype Poisoning
+    cve_id: CVE-2024-21509
+    cve_url: https://github.com/advisories/GHSA-49j4-86m8-q2jw
+    detected_date: Apr 13
+    severity: moderate
+    first_patched: 3.9.4
+- name: express
+  description: Fast, unopinionated, minimalist web framework
+  package_url: https://www.npmjs.com/express
+  version: 4.17.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15818/default_db4a7791d2f1174547374b9b587bc10fec088a5a.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package-lock.json
+  detection_source: back-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+  vulnerabilities:
+  - name: qs vulnerable to Prototype Pollution
+    cve_id: CVE-2022-24999
+    cve_url: https://github.com/advisories/GHSA-hrpp-h998-j3pp
+    detected_date: Dec 7
+    severity: high
+    first_patched: 4.17.3
+  - name: Express.js Open Redirect in malformed URLs
+    cve_id: CVE-2024-29041
+    cve_url: https://github.com/advisories/GHSA-rv95-896h-c2vc
+    detected_date: Mar 26
+    severity: moderate
+    first_patched: 4.19.2
+- name: jsonwebtoken
+  description: JSON Web Token implementation
+  package_url: https://www.npmjs.com/jsonwebtoken
+  version: 8.5.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16155/default_77b54a203c743d16eddb6b6390cba17218454fa0.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package-lock.json
+  detection_source: back-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+  vulnerabilities:
+  - name: 'jsonwebtoken unrestricted key type could lead to legacy keys usage '
+    cve_id: CVE-2022-23539
+    cve_url: https://github.com/advisories/GHSA-8cf7-32gw-wr33
+    detected_date: Dec 22
+    severity: high
+    first_patched: 9.0.0
+  - name: jsonwebtoken has insecure input validation in jwt.verify function
+    cve_id: CVE-2022-23529
+    cve_url: https://github.com/advisories/GHSA-27h2-hvpr-p74q
+    detected_date: Dec 22
+    severity: high
+    first_patched: 9.0.0
+  - name: jsonwebtoken vulnerable to signature validation bypass due to insecure default
+      algorithm in jwt.verify()
+    cve_id: CVE-2022-23540
+    cve_url: https://github.com/advisories/GHSA-qwph-4952-7xr6
+    detected_date: Dec 22
+    severity: moderate
+    first_patched: 9.0.0
+  - name: jsonwebtoken's insecure implementation of key retrieval function could lead
+      to Forgeable Public/Private Tokens from RSA to HMAC
+    cve_id: CVE-2022-23541
+    cve_url: https://github.com/advisories/GHSA-hjrf-2m68-5959
+    detected_date: Dec 22
+    severity: moderate
+    first_patched: 9.0.0
+- name: "@hapi/joi"
+  description: Object schema validation
+  package_url: https://www.npmjs.com/@hapi/joi
+  version: 17.1.1
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17065/default_d17bbf7e4f3b102e29ff09c01b8165e7ba600319.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package-lock.json
+  detection_source: back-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: "@testing-library/jest-dom"
+  description: Custom jest matchers to test the state of the DOM
+  package_url: https://www.npmjs.com/@testing-library/jest-dom
+  version: 4.2.4
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17424/default_1cdcda15ebb7caed879f8340bc212b44c4ec9dac.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/front-end/package-lock.json
+  detection_source: front-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: "@testing-library/react"
+  description: Simple and complete React DOM testing utilities that encourage good
+    testing practices
+  package_url: https://www.npmjs.com/@testing-library/react
+  version: 9.5.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16549/default_d522554c6a41cb28d922d6d3ad32ad4afa0e3bb5.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/front-end/package-lock.json
+  detection_source: front-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: "@types/jest"
+  description: TypeScript definitions for Jest
+  package_url: https://www.npmjs.com/@types/jest
+  version: 25.1.4
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15840/default_004658cda9b38934f2871435e9dc15608c86e8be.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package-lock.json
+  detection_source: back-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: "@typescript-eslint/eslint-plugin"
+  description: TypeScript plugin for ESLint
+  package_url: https://www.npmjs.com/@typescript-eslint/eslint-plugin
+  version: 4.17.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15982/default_8b5680d4e916298d08363c291a0d6e34c07ceb15.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package-lock.json
+  detection_source: front-end/package.json
+  last_updated_by: Ícaro Harry
+  last_updated_on: 2021-03-12 22:49:24.000000000 Z
+- name: "@typescript-eslint/parser"
+  description: An ESLint custom parser which leverages TypeScript ESTree
+  package_url: https://www.npmjs.com/@typescript-eslint/parser
+  version: 2.34.0
+  license: BSD-2-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15980/default_732016a20524708efe7a4c77497fe9bfeea19ba6.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/front-end/package-lock.json
+  detection_source: front-end/package.json
+  last_updated_by: Ícaro Harry
+  last_updated_on: 2021-03-12 22:49:24.000000000 Z
+- name: body-parser
+  description: Node.js body parsing middleware
+  package_url: https://www.npmjs.com/body-parser
+  version: 1.19.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15906/default_7c39a83d4acd952df89b1ebfdb94c8646324fbf1.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package-lock.json
+  detection_source: back-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: cors
+  description: Node.js CORS middleware
+  package_url: https://www.npmjs.com/cors
+  version: 2.8.5
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16165/default_41f04716a804e853d5c38a5b81ee0ea8a842ad82.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package-lock.json
+  detection_source: back-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: eslint-config-airbnb
+  description: Airbnb's ESLint config, following our styleguide
+  package_url: https://www.npmjs.com/eslint-config-airbnb
+  version: 18.2.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15857/default_7c39a83d4acd952df89b1ebfdb94c8646324fbf1.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package-lock.json
+  detection_source: front-end/package.json
+  last_updated_by: Ícaro Harry
+  last_updated_on: 2021-03-12 22:49:24.000000000 Z
+- name: eslint-config-airbnb-base
+  description: Airbnb's base JS ESLint config, following our styleguide
+  package_url: https://www.npmjs.com/eslint-config-airbnb-base
+  version: 14.2.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15888/default_7c39a83d4acd952df89b1ebfdb94c8646324fbf1.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package-lock.json
+  detection_source: back-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: eslint-plugin-import
+  description: Import with sanity
+  package_url: https://www.npmjs.com/eslint-plugin-import
+  version: 2.22.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15806/default_98aa227f51aa9d787815ec3fd98d0ab2bfebbb91.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package-lock.json
+  detection_source: back-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: eslint-plugin-jsx-a11y
+  description: Static AST checker for accessibility rules on JSX elements
+  package_url: https://www.npmjs.com/eslint-plugin-jsx-a11y
+  version: 6.4.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15845/default_6743ba96cf149a3c3c68a185199f9705d6eff80e.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/front-end/package-lock.json
+  detection_source: front-end/package.json
+  last_updated_by: Ícaro Harry
+  last_updated_on: 2021-03-12 22:49:24.000000000 Z
+- name: eslint-plugin-react
+  description: React specific linting rules for ESLint
+  package_url: https://www.npmjs.com/eslint-plugin-react
+  version: 7.22.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15817/default_14fd11531839d935f920b6d55bd6f3528c890ad7.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/front-end/package-lock.json
+  detection_source: front-end/package.json
+  last_updated_by: Ícaro Harry
+  last_updated_on: 2021-03-12 22:49:24.000000000 Z
+- name: eslint-plugin-react-hooks
+  description: ESLint rules for React Hooks
+  package_url: https://www.npmjs.com/eslint-plugin-react-hooks
+  version: 1.7.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16149/default_1f3a2fc7d882e29a43394ecdf491b8989ea3f0fa.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/front-end/package-lock.json
+  detection_source: front-end/package.json
+  last_updated_by: Ícaro Harry
+  last_updated_on: 2021-03-12 22:49:24.000000000 Z
+- name: faker
+  description: Generate massive amounts of fake contextual data
+  package_url: https://www.npmjs.com/faker
+  version: 4.1.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16327/default_1baba0e6ece19a38adfb211f686c83c781ff703a.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/package-lock.json
+  detection_source: package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: mochawesome
+  description: A gorgeous reporter for Mocha.js
+  package_url: https://www.npmjs.com/mochawesome
+  version: 4.1.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17128/default_5b9eca95ab3651165eb280ed5e0bc9a9382ad24d.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/package-lock.json
+  detection_source: package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: multer
+  description: Middleware for handling `multipart/form-data`
+  package_url: https://www.npmjs.com/multer
+  version: 1.4.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16421/default_23e0dabcd0197f0c1f0a41268f8ca3f7e8b1f1e2.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/back-end/package-lock.json
+  detection_source: back-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: react-dom
+  description: React package for working with the DOM
+  package_url: https://www.npmjs.com/react-dom
+  version: 16.13.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15808/default_14fd11531839d935f920b6d55bd6f3528c890ad7.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/front-end/package-lock.json
+  detection_source: front-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: react-router-dom
+  description: DOM bindings for React Router
+  package_url: https://www.npmjs.com/react-router-dom
+  version: 5.2.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16025/default_e25d1fbb04a118c79fb444294461417342bd03bf.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/front-end/package-lock.json
+  detection_source: front-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: react-scripts
+  description: Configuration and scripts for Create React App
+  package_url: https://www.npmjs.com/react-scripts
+  version: 3.4.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15985/default_8b5680d4e916298d08363c291a0d6e34c07ceb15.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/front-end/package-lock.json
+  detection_source: front-end/package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
+- name: sequelize-cli
+  description: The Sequelize CLI
+  package_url: https://www.npmjs.com/sequelize-cli
+  version: 6.2.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/18714/default_5921235b47b1f6f3bd5aba9257245016601078bf.png
+  detection_source_url: https://github.com/paulocheloni/sd-06-trybeer/blob/master/package-lock.json
+  detection_source: package.json
+  last_updated_by: Jean Paulo Silva Vasconcelos
+  last_updated_on: 2021-03-11 15:09:59.000000000 Z
